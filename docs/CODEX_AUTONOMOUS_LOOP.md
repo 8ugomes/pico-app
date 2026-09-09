@@ -1,5 +1,9 @@
 # Pico — Ciclo Autônomo de Evolução
 
+## Cycle 3 — Real auth and profile · AUDIT / PLAN
+
+Auth já usa Supabase; perfil é somente leitura e falta onboarding. Implementar edição atômica por RPC com identidade de auth.uid(), formulário de nome/username/bio/local/esporte/nível/disponibilidade, retorno ao perfil após autenticação e descarte de dados após logout. Aceite: próprio perfil apenas, rollback em esporte/username inválidos, um esporte principal, sem e-mail no DTO. Validar migrations em PGlite, lint, typecheck e build. Supabase hospedado segue sem configuração disponível neste checkout.
+
 ## Contrato de execução
 
 Um avanço principal por ciclo: AUDIT → PLAN → IMPLEMENT → VERIFY → DOCUMENT → COMMIT → NEXT.
@@ -133,3 +137,8 @@ Próximo ciclo: Cycle 3 — Real Auth + Profile. Concluir onboarding/edição pr
 Prompt sugerido: “Execute Cycle 3 conforme CODEX_AUTONOMOUS_LOOP.md. Preserve a camada de leitura do Cycle 2, finalize autenticação/sessão/onboarding/edição do próprio perfil com RLS e validação de username/esporte/nível/cidade, sem e-mail público e sem confundir demo com conta real. Teste autorizações com duas identidades, rode lint/typecheck/build e testes, documente limites e faça commit Cycle 3: real auth and profile.”
 
 Configuração hospedada: o usuário informou que salvou .env.local, mas esse arquivo não foi encontrado em /Users/8ugo/Documents/picoapp durante a conferência. Pergunta sobre a localização enviada; nenhuma chave exibida ou procurada fora do escopo do projeto. A validação hospedada segue pendente dessa localização.
+
+
+## Cycle 3 · resultado
+
+Cycle 3 concluído: onboarding e edição atômica por save_profile, identidade verificada, autenticação retorna ao perfil, dados descartados após troca de sessão. 32 testes passaram; lint/typecheck/build passaram. Corrigidos parâmetro TS incompatível com strip-only e tipos gerados duplicados em .next. Auth/e-mail/refresh hospedados seguem pendentes. Próximo: Cycle 4, start_checkin/end_checkin e presença com prazo.

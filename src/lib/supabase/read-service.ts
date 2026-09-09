@@ -18,6 +18,7 @@ function arenaDto(row: ArenaResult): ReadArena {
 }
 export function parseReadRequest(params: URLSearchParams): ReadRequest {
   const resource = params.get('resource');
+  if (resource === 'sports') return { resource };
   if (resource === 'profile') return { resource };
   if (resource === 'arenas') {
     const value = params.get('offset') ?? '0';
@@ -32,6 +33,11 @@ export function parseReadRequest(params: URLSearchParams): ReadRequest {
   throw new ReadError('invalid_request', 400);
 }
 export async function readSocial(client: SupabaseClient<Database>, request: ReadRequest): Promise<ReadData> {
+  if (request.resource === 'sports') {
+    const { data, error } = await listSports(client);
+    if (error || !data) throw new ReadError('unavailable');
+    return { kind: 'sports', sports: data };
+  }
   if (request.resource === 'arenas') {
     const [arenas, sports] = await Promise.all([listPublicArenas(client, request.offset), listSports(client)]);
     if (arenas.error || sports.error || !arenas.data || !sports.data) throw new ReadError('unavailable');

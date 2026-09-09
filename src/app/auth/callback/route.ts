@@ -8,7 +8,7 @@ export async function GET(request: Request) {
   if (code && client) {
     try {
       const { error } = await client.auth.exchangeCodeForSession(code);
-      if (!error) return NextResponse.redirect(new URL("/login", url.origin), { headers: { "Cache-Control": "private, no-store" } });
+      if (!error) return NextResponse.redirect(new URL("/perfil", url.origin), { headers: { "Cache-Control": "private, no-store" } });
     } catch {
       // Render the recoverable error state without exposing tokens or provider details.
     }

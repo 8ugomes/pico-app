@@ -34,8 +34,9 @@ export type Database = {
       comments: Table<CommentRow, { post_id: string; author_id?: string; body: string }, Partial<Pick<CommentRow, 'body'>>, [ForeignKey<'comments_post_id_fkey', 'post_id', 'posts'>, ForeignKey<'comments_author_id_fkey', 'author_id', 'profiles'>]>;
     };
     Views: Record<never, never>;
-    // Trigger functions aren't callable RPCs. Check-in RPCs arrive in Cycle 4.
-    Functions: Record<never, never>;
+    Functions: {
+      save_profile: { Args: { p_name: string; p_username: string; p_bio: string; p_city: string; p_neighborhood: string; p_sport_id: string; p_level: Level; p_available: boolean }; Returns: undefined };
+    };
     Enums: { sport_slug: SportId; player_level: Level };
     CompositeTypes: Record<never, never>;
   };

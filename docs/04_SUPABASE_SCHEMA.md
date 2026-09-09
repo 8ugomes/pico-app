@@ -107,3 +107,8 @@ O contrato não exige modificar a migration do Cycle 1. Tipos permanecem manuais
 Verificação: nove testes adicionais com SDK e transporte controlado, somados aos 20 anteriores. Build sem env preserva demo. Build isolado com fixture REST/Auth sobre PGlite exercitou catálogo, slug, vazio, erro, login de teste, perfil e logout, além de configuração incompleta em servidor separado. Isso não valida JWT/e-mail/refresh/PostgREST reais. O usuário informou que configurou .env.local, mas o arquivo não foi encontrado no caminho do projeto na conferência; localização/configuração precisa ser resolvida para testar o serviço hospedado.
 
 Referências consultadas: [getUser](https://supabase.com/docs/reference/javascript/auth-getuser), [sessão no servidor e cache](https://supabase.com/docs/guides/auth/server-side/advanced-guide).
+
+
+## Cycle 3 · onboarding
+
+Migration 20260909030000_profile_onboarding.sql: save_profile com SECURITY INVOKER, RLS e lock no próprio perfil. Troca do esporte principal e campos sociais em uma transação. UUID do jogador vem exclusivamente de auth.uid(). API POST /api/social/mutate valida origem, tamanho, campos e getUser; erros do banco são normalizados. Leituras privadas permanecem em Route Handlers com renovação de cookies, sem Server Components privados.

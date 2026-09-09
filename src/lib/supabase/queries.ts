@@ -16,7 +16,7 @@ export function listPublicArenas(client: SupabaseClient<Database>, offset = 0) {
 export function getArenaBySlug(client: SupabaseClient<Database>, slug: string) {
   return client.from('arenas').select(arenaFields).eq('slug', slug).eq('is_public', true).maybeSingle();
 }
-export async function getOwnProfile(client: SupabaseClient<Database>) {
+export async function requireUser(client: SupabaseClient<Database>) {
   // Identity must come from Auth verification, never a query parameter or browser session object.
   const { data: identity, error } = await client.auth.getUser();
   if (error) {
@@ -24,7 +24,11 @@ export async function getOwnProfile(client: SupabaseClient<Database>) {
     throw new ReadError('unavailable');
   }
   if (!identity.user) throw new ReadError('authentication', 401);
-  return client.from('profiles').select(profileFields).eq('id', identity.user.id).maybeSingle();
+  return identity.user;
+}
+export async function getOwnProfile(client: SupabaseClient<Database>) {
+  const user = await requireUser(client);
+  return client.from('profiles').select(profileFields).eq('id', user.id).maybeSingle();
 }
 // Preserved for the future feed integration; not invoked by Cycle 2 screens.
 export function listArenaPosts(client: SupabaseClient<Database>, arenaId: string, offset = 0, limit = 20) {

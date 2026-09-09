@@ -10,10 +10,11 @@ export type ReadProfile = {
   neighborhood: string; available: boolean; isDemo: boolean; onboardingCompleted: boolean;
   sports: { sport: ReadSport; level: Level; isPrimary: boolean }[];
 };
-export type ReadRequest = { resource: 'arenas'; offset: number } | { resource: 'arena'; slug: string } | { resource: 'profile' };
+export type ReadRequest = { resource: 'arenas'; offset: number } | { resource: 'arena'; slug: string } | { resource: 'profile' } | { resource: 'sports' };
 export type ReadData =
   | { kind: 'arenas'; arenas: ReadArena[]; sports: ReadSport[]; hasMore: boolean; offset: number }
   | { kind: 'arena'; arena: ReadArena }
-  | { kind: 'profile'; profile: ReadProfile };
+  | { kind: 'profile'; profile: ReadProfile }
+  | { kind: 'sports'; sports: ReadSport[] };
 export type ReadErrorCode = 'configuration' | 'authentication' | 'profile_missing' | 'not_found' | 'unavailable' | 'invalid_request';
 export type ReadResponse = { status: 'success'; data: ReadData } | { status: 'demo' } | { status: 'error'; code: ReadErrorCode; message: string };

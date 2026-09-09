@@ -1,5 +1,9 @@
 # Pico — plano de produto
 
+## Cycle 3 — Real auth and profile · plano corrente
+
+Entregar onboarding e edição do próprio perfil. Reutilizar login/cadastro/logout existentes, preservar demo sem configuração. Persistência atômica de perfil + esporte principal; autorização no servidor e banco; erros recuperáveis sem limpar o formulário. Depois: check-in real.
+
 ## Cycle 2 · plano antes da implementação
 
 Conectar somente leituras de arenas, detalhe e perfil próprio. Endpoint com identidade getUser e sem cache, queries tipadas, UI distinta para loading/erro/vazio/sessão e dados conectados. Demo continua completo sem env; erro de configuração/serviço não aciona fallback. Shell conectado sem Rafa/atividade inventada. Preservar as ações do demo; writes reais entram nos ciclos 3–6. Atualizar metadados/slugs para não limitar arenas reais aos mocks.
@@ -106,3 +110,8 @@ Dez tabelas com RLS, grants mínimos, integridade, trigger/backfill e seeds vers
 ### Cycle 2 · fechamento
 
 Leituras de arenas/perfil conectadas por endpoint sem cache, identidade Auth verificada no servidor, DTOs públicos e estados completos. Demo permanece sem env; falhas não usam mock. Shell conectado separa conta real das pessoas fictícias. 29 testes, lint/typecheck/build e verificações de UI/HTTP passaram em ambiente local/controlado. Sem Supabase hospedado disponibilizado; essa integração ainda requer validação. Próximo: Cycle 3 onboarding/edição e sessão.
+
+
+## Cycle 3 · resultado
+
+Cycle 3 concluído: onboarding e edição atômica por save_profile, identidade verificada, autenticação retorna ao perfil, dados descartados após troca de sessão. 32 testes passaram; lint/typecheck/build passaram. Corrigidos parâmetro TS incompatível com strip-only e tipos gerados duplicados em .next. Auth/e-mail/refresh hospedados seguem pendentes. Próximo: Cycle 4, start_checkin/end_checkin e presença com prazo.

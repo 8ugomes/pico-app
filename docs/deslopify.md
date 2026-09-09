@@ -1,5 +1,9 @@
 # Pico — Deslopify
 
+## Cycle 3 — Real auth and profile · antes de implementar
+
+Uma ação principal: completar ou salvar perfil. Labels visíveis, formulário em coluna no celular, erro junto ao envio, nenhum retrato fictício em conta real. Confirmação somente após resposta do banco.
+
 ## Cycle 2 · critérios antes da implementação
 
 Comunicar origem com texto curto, sem transformar a tela em painel técnico. “Consultando…” antes de sucesso; “Dados conectados” depois; arena is_demo continua “Arena de demonstração”. Sem contagens inventadas, retrato de pessoa fictícia ou botão de ação local em tela de dados reais. Loading com estrutura reservada e reduced motion; erro com retry; vazio com orientação útil; perfil sem sessão leva ao login. Preservar carvão/verde-água e cinco destinos móveis.
@@ -73,3 +77,8 @@ Separar is_demo da persistência é necessário: uma arena fictícia pode estar 
 ## Cycle 2 · aprendizados e fechamento
 
 Origem e autenticidade são informações diferentes: “Dados conectados” confirma uma leitura bem-sucedida; “Arena de demonstração” continua visível quando is_demo é verdadeiro. Sem consultas bem-sucedidas, só loading/erro/sessão. O header conectado usa ícone neutro e a lateral omite atividade inventada. Não mostrar números de comunidade ou pessoas sem origem real. Fotos de demo ficam restritas às arenas fictícias. Campos longos podem vir do banco: nomes/descrições/username receberam quebra de linha. Navegador 390×844 confirmou catálogo, busca, detalhe e perfil sem overflow; estados vazio/erro/retry/sessão foram exercitados. O acabamento foi verificado com fixture local; não implica prontidão do backend hospedado.
+
+
+## Cycle 3 · resultado
+
+Cycle 3 concluído: onboarding e edição atômica por save_profile, identidade verificada, autenticação retorna ao perfil, dados descartados após troca de sessão. 32 testes passaram; lint/typecheck/build passaram. Corrigidos parâmetro TS incompatível com strip-only e tipos gerados duplicados em .next. Auth/e-mail/refresh hospedados seguem pendentes. Próximo: Cycle 4, start_checkin/end_checkin e presença com prazo.

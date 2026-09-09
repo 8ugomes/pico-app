@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { createClient } from '@/lib/supabase/client';
 import type { ReadResponse } from '@/types/read';
 
 type ReadState = ReadResponse | { status: 'loading' };
@@ -29,8 +30,12 @@ export function useRemoteRead(query: string) {
   useEffect(() => {
     // Private data is discarded before refreshing when returning from another tab.
     const refresh = () => { if (document.visibilityState === 'visible') setAttempt(value => value + 1); };
+    const client = createClient();
+    const subscription = client?.auth.onAuthStateChange((event) => {
+      if (event === 'SIGNED_OUT' || event === 'SIGNED_IN' || event === 'USER_UPDATED') setAttempt(value => value + 1);
+    }).data.subscription;
     window.addEventListener('focus', refresh);
-    return () => window.removeEventListener('focus', refresh);
+    return () => { window.removeEventListener('focus', refresh); subscription?.unsubscribe(); };
   }, []);
   const state: ReadState = result?.query === query && result.attempt === attempt ? result.state : { status: 'loading' };
   return { state, retry: () => setAttempt(value => value + 1) };
