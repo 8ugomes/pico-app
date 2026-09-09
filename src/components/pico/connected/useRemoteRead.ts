@@ -8,7 +8,7 @@ export function useRemoteRead(query: string) {
   const identity = useRef<string | null>(null);
   const [attempt, setAttempt] = useState(0);
   const [retain, setRetain] = useState(false);
-  const [result, setResult] = useState<{ query: string; attempt: number; state: ReadState } | null>(null);
+  const [result, setResult] = useState<{ query: string; attempt: number; state: ReadState; warning?: boolean } | null>(null);
   useEffect(() => {
     const controller = new AbortController();
     let active = true;
@@ -21,14 +21,14 @@ export function useRemoteRead(query: string) {
         const payload: ReadResponse = await response.json();
         if (!['success', 'error', 'demo'].includes(payload.status)) throw new Error('Invalid response');
         if (!response.ok && payload.status !== 'error') throw new Error('Invalid response status');
-        if (active) setResult({ query, attempt, state: payload });
+        if (active) setResult(previous => retain && payload.status === 'error' && payload.code === 'unavailable' && previous?.query === query && previous.state.status === 'success' ? {query,attempt,state:previous.state,warning:true} : { query, attempt, state: payload });
       } catch {
-        if (active) setResult({ query, attempt, state: { status: 'error', code: 'unavailable', message: 'Não foi possível carregar agora. Confira sua conexão e tente novamente.' } });
+        if (active) setResult(previous => retain && previous?.query === query && previous.state.status === 'success' ? {query,attempt,state:previous.state,warning:true} : { query, attempt, state: { status: 'error', code: 'unavailable', message: 'Não foi possível carregar agora. Confira sua conexão e tente novamente.' } });
       }
     }
     void load();
     return () => { active = false; controller.abort(); };
-  }, [query, attempt]);
+  }, [query, attempt, retain]);
   useEffect(() => {
     // Refresh on focus; account changes invalidate before loading any new private data.
     const refresh = () => { if (document.visibilityState === 'visible') { setRetain(true); setAttempt(value => value + 1); } };
@@ -44,5 +44,5 @@ export function useRemoteRead(query: string) {
   const state: ReadState = result?.query === query && (result.attempt === attempt || (retain && result.state.status === 'success')) ? result.state : { status: 'loading' };
   const retry = useCallback(() => { setRetain(false); setAttempt(value => value + 1); }, []);
   const refresh = useCallback(() => { setRetain(true); setAttempt(value => value + 1); }, []);
-  return { state, retry, refresh, refreshing: result?.attempt !== attempt };
+  return { state, retry, refresh, refreshError: Boolean(result?.warning), refreshing: result?.attempt !== attempt };
 }

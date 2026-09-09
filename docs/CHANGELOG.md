@@ -102,3 +102,8 @@ Ciclo 9.7: recorte reutilizável (react-easy-crop 6.2.3, MIT), preparação loca
 ## Ciclo 9.9
 
 9.9: /instalar, manifesto beta, versão compilada, atualização explícita, estado offline e retomada da sessão. Mantido PKCE padrão porque o Supabase Free recusou templates sem SMTP; alternativa entre contextos preparada e desativada.
+
+
+## Ciclo 9.10
+
+9.10: moderação de conteúdo e suspensão efetivas; custódia/arquivo de comunidades e arenas pela administração; backup cifrado com bytes e ensaio real de restauração local; logs mínimos, CI e wrapper de deploy interno. 71 testes locais, 170 checks hospedados, 21 UI móvel. Corrigidos submits ausentes e confirmação de avatar descartada por refresh.

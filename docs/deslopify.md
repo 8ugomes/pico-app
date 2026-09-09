@@ -175,3 +175,11 @@ Próximo avanço: validar o ambiente Supabase de desenvolvimento com duas contas
 ## Ciclo 9.9
 
 9.9: beta interno identificado, link de instalação dispensável, aviso de rede sem descartar rascunho. Atualização manual explica perda de edição não salva. Sessão revalidada ao foreground; troca de identidade descarta a árvore. Sem SW; nenhuma evidência física presumida.
+
+
+9.10: separar examinar denúncia, ocultar conteúdo e suspender acesso. A interface descreve efeitos e pede confirmação. Administração de grupos mostra cadastro mínimo e custódia, sem abrir conteúdos privados.
+
+
+## Ciclo 9.10
+
+9.10 aprendizado: testar pela interface foi necessário para detectar o tipo dos botões. Novo contrato automatizado exige submit explícito. Perfil preserva confirmação de foto e edição em falha de refresh. 320/390/430 px sem overflow nas telas verificadas; fotos e diálogos com ações acessíveis. Sem afirmação de aparelho físico.

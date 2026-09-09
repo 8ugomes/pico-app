@@ -247,3 +247,8 @@ Próximo avanço: validar o ambiente Supabase de desenvolvimento com duas contas
 ## Ciclo 9.9
 
 9.9 VERIFY / NEXT: lint/types/build aprovados; sem service worker ou fila offline. PWA emulada e interface completa seguem para 9.11. Próximo: 9.10 moderação operacional, backup/restauração e CI; não há autorização de lançamento.
+
+
+## Ciclo 9.10
+
+9.10 VERIFY / NEXT: operações entregues; backup/restauração efetivamente exercitados, sete identidades e três arquivos controlados, schema importado do dump. CLI aceita leitura Git mas recusa push; conector autenticado enviou 9.0–9.9 e cada árvore coincidiu com a local; histórico local original preservado em branch própria. Nenhuma promoção pública. Próximo 9.11: jornadas finais, limpar apenas IDs de teste, validar beta e publicar preview após checks.

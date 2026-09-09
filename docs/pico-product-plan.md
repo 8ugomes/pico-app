@@ -237,3 +237,11 @@ Próximo avanço: validar o ambiente Supabase de desenvolvimento com duas contas
 ## Ciclo 9.9
 
 9.9 VERIFY: instalação contextual, manifesto distinto e id estável, rede/versão/atualização explícita; retomada revalida identidade e admissão. Falha de rede mantém formulário e não enfileira envio. Lint/types/build aprovados; testes de navegador na regressão 9.11. Correção operacional 9.8: Free recusou templates sem SMTP, portanto PKCE continua padrão, custom templates só com flag após configuração real. Redirects exclusivos aplicados.
+
+
+9.10 PLAN: medidas de moderação reais e auditadas, custódia de grupos sem leitura privada geral, correção da paginação de conexões; logs mínimos e CI sem segredos. Backup protegido inclui Auth/banco/configuração/bytes e ensaio em ambiente local separado.
+
+
+## Ciclo 9.10
+
+9.10 VERIFY: moderação real e auditada, catálogo mínimo/custódia, paginação de conexões corrigida, CI sem segredos e deploy interno com guarda. 71 testes locais, 170 verificações remotas e 21 checks de UI móvel; lint/types/build passaram. Backup cifrado de beta criado; backup controlado de desenvolvimento restaurou schema real, sete logins/identidades e três arquivos em VM local, com RLS. Os testes UI encontraram botões que não enviavam formulários e feedback de foto perdido; corrigidos e retestados. Próximo 9.11: jornadas complementares, regressão final, aplicação pendente no beta e preview interno.

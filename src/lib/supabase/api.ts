@@ -1,3 +1,4 @@
+import { operationFailure } from '../operations';
 import { MutationError } from './mutations';
 import { ReadError } from './read-errors';
 export const privateHeaders = { 'Cache-Control': 'private, no-store, max-age=0', Vary: 'Cookie', 'X-Content-Type-Options': 'nosniff' };
@@ -30,5 +31,6 @@ export async function jsonBody(request: Request): Promise<Record<string, unknown
 }
 export function apiError(error: unknown) {
   const known = error instanceof MutationError || error instanceof ReadError;
+  operationFailure(known ? error.status : 503, known);
   return Response.json({ status: 'error', message: known ? error.message : 'Não foi possível concluir agora. Atualize para conferir antes de tentar novamente.' }, { status: known ? error.status : 503, headers: privateHeaders });
 }

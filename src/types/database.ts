@@ -362,6 +362,7 @@ export type Database = {
           body: string
           created_at: string
           id: string
+          moderated_at: string | null
           post_id: string
         }
         Insert: {
@@ -369,6 +370,7 @@ export type Database = {
           body: string
           created_at?: string
           id?: string
+          moderated_at?: string | null
           post_id: string
         }
         Update: {
@@ -376,6 +378,7 @@ export type Database = {
           body?: string
           created_at?: string
           id?: string
+          moderated_at?: string | null
           post_id?: string
         }
         Relationships: [
@@ -1145,6 +1148,10 @@ export type Database = {
         Returns: Json
       }
       management_context: { Args: never; Returns: Json }
+      moderate_report: {
+        Args: { p_action: string; p_report: string }
+        Returns: undefined
+      }
       operator_action: {
         Args: {
           p_action: string
@@ -1154,9 +1161,19 @@ export type Database = {
         }
         Returns: Json
       }
+      operator_catalog: { Args: never; Returns: Json }
       operator_read: {
         Args: { p_context: string; p_scope_id?: string }
         Returns: Json
+      }
+      operator_resource_action: {
+        Args: {
+          p_action: string
+          p_id: string
+          p_kind: string
+          p_target?: string
+        }
+        Returns: undefined
       }
       profile_places: { Args: { p_player?: string }; Returns: Json }
       publication_options: { Args: never; Returns: Json }
@@ -1209,6 +1226,7 @@ export type Database = {
         Args: { p_arena?: string; p_community?: string; p_post: string }
         Returns: undefined
       }
+      report_media: { Args: { p_report: string }; Returns: string }
       request_arena: {
         Args: { p_arena?: string; p_data?: Json; p_kind: string }
         Returns: string
