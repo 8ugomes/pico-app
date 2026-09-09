@@ -1,5 +1,9 @@
 # Pico — plano de produto
 
+## Cycle 2 · plano antes da implementação
+
+Conectar somente leituras de arenas, detalhe e perfil próprio. Endpoint com identidade getUser e sem cache, queries tipadas, UI distinta para loading/erro/vazio/sessão e dados conectados. Demo continua completo sem env; erro de configuração/serviço não aciona fallback. Shell conectado sem Rafa/atividade inventada. Preservar as ações do demo; writes reais entram nos ciclos 3–6. Atualizar metadados/slugs para não limitar arenas reais aos mocks.
+
 ## Ciclo autônomo · plano corrente
 
 Execução detalhada em CODEX_AUTONOMOUS_LOOP.md. Primeiro Cycle 0.5: base carvão/grafite, champagne pontual e verde-água consistente nas ações; nenhum recurso novo. Depois Cycle 1: migrations, constraints, RLS, trigger de perfil e seeds identificados, verificados em banco local antes de integrar as telas. Ciclos 2–7 cobrem leituras, Auth/perfil, check-in, feed, descoberta e consolidação, um avanço completo por commit.
@@ -98,3 +102,7 @@ Criar dez tabelas com RLS, grants mínimos, FK composta arena/modalidade, autori
 ### Cycle 1 concluído localmente
 
 Dez tabelas com RLS, grants mínimos, integridade, trigger/backfill e seeds versionados. Tipos correspondem ao SQL entregue; objetos futuros foram removidos do contrato executável. Lint/typecheck/build e 20 testes passaram. SQL aplicado em Postgres/PGlite descartável; sem alteração em Supabase hospedado. Auth/e-mail/PostgREST ainda dependem de configuração e testes reais. Próximo ciclo: leituras de arenas/perfil com origem explícita, sem alterar silenciosamente demo em erro de serviço.
+
+### Cycle 2 · fechamento
+
+Leituras de arenas/perfil conectadas por endpoint sem cache, identidade Auth verificada no servidor, DTOs públicos e estados completos. Demo permanece sem env; falhas não usam mock. Shell conectado separa conta real das pessoas fictícias. 29 testes, lint/typecheck/build e verificações de UI/HTTP passaram em ambiente local/controlado. Sem Supabase hospedado disponibilizado; essa integração ainda requer validação. Próximo: Cycle 3 onboarding/edição e sessão.

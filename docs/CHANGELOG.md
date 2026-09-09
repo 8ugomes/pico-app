@@ -32,3 +32,7 @@ Premium visual pass: superfícies carvão, champagne pontual, ação verde-água
 ## Cycle 1 · 2026-09-09
 
 Supabase foundation: migration atômica com dez tabelas, RLS/grants mínimos, enums/constraints/índices, trigger e backfill de perfil, seed de esportes/arenas fictícias e config local. Tipos cliente alinhados, test:db com PGlite, 20 testes totais aprovados. Lint/typecheck/build e smoke das rotas aprovados. Sem aplicação hospedada ou integração social no frontend.
+
+## Cycle 2 · 2026-09-09
+
+Real read layer: queries de perfil próprio/esportes/arenas, endpoint privado sem cache, config ausente/inválida/conectada, três jornadas integradas, loading/erro/retry/vazio/sessão, paginação e DTO sem e-mail. Shell conectado sem pessoas/atividades inventadas. Preservado demo nas rotas não integradas e na ausência de env. 29 testes e lint/typecheck/build aprovados; UI e HTTP exercitados com SQL local e Auth/REST controlados. Integração Supabase hospedada pendente.

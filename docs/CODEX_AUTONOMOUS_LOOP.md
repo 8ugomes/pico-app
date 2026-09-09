@@ -13,7 +13,7 @@ Escopo permanente: rede social mobile-first para esportes de areia. Sem reservas
 | --- | --- | --- |
 | 0.5 | Premium visual pass | Concluído |
 | 1 | Supabase foundation | Concluído localmente |
-| 2 | Real read layer | Planejado |
+| 2 | Real read layer | Implementado; integração hospedada pendente |
 | 3 | Real auth and profile | Planejado |
 | 4 | Real checkin | Planejado |
 | 5 | Real social feed | Planejado |
@@ -86,3 +86,50 @@ Concluído: fundação SQL reproduzível/testada e contratos do cliente. Ainda m
 Próximo ciclo recomendado: Cycle 2 — Real Read Layer. Helpers de perfil próprio, esportes, arenas e slug; integrar /arenas, /arenas/[slug], /perfil com loading/erro/vazio/autenticação e indicação de origem. Não misturar Rafa demo com usuário Auth. Banco configurado que falha deve apresentar erro; só ausência de configuração usa demo. Testar com e sem env, aplicar as migrations em ambiente de desenvolvimento e validar leituras com JWT real antes de declarar integração hospedada concluída.
 
 Prompt sugerido: “Leia AGENTS.md e docs/CODEX_AUTONOMOUS_LOOP.md. Execute o Cycle 2: camada real de leitura de perfil próprio, esportes e arenas, integrada a /arenas, /arenas/[slug] e /perfil, preservando demo explícito e distinguindo erro/vazio/loading/sessão. Use as migrations do Cycle 1; não finja sucesso de Supabase sem testar. Rode lint, typecheck, build e testes pertinentes, atualize os quatro documentos e faça commit Cycle 2: real read layer.”
+
+## Cycle 2 — Real read layer
+
+### AUDIT
+
+Base c0f2a91, árvore limpa. SQL/RLS versionado e 20 testes disponíveis. Queries existentes ainda não são chamadas; detalhe por slug só conhece mocks; shell sempre mostra Rafa/atividades fictícias. getSupabaseConfig retorna null tanto para ausência quanto erro de configuração. Perfil ainda não consulta identidade verificada. Não há projeto hospedado configurado neste início de ciclo.
+
+### PLAN — antes de implementar
+
+Avanço único: leitura real de catálogo, arenas e perfil próprio com demo explícito. Separar configuração ausente/inválida/válida; introduzir endpoint de leitura sem cache e DTOs públicos. Perfil usa getUser no Route Handler (pode renovar cookies), sem leitura privada em Server Component ou confiança em ID do cliente. Proxy SSR fica no ciclo de Auth.
+
+Queries tipadas: esportes, arenas públicas com modalidades, arena por slug, perfil próprio e esportes. Telas /arenas, /arenas/[slug], /perfil escolhem demo somente sem configuração. Componentes conectados exibem loading, erro com retry, vazio, sessão ausente e origem confirmada após sucesso. Shell não mistura retratos/atividades fictícias com dados conectados; seeds is_demo permanecem rotulados. Sem mutations novas e sem CTAs que escrevam localmente fingindo persistência real.
+
+Aceite: seis rotas continuam funcionando sem env; URL/config parcial ou inválida nunca cai silenciosamente no demo; catálogo vazio não vira mock; slug desconhecido tratado; perfil exige identidade verificada e nunca retorna e-mail; falhas de banco/Auth têm mensagem segura; resposta privada sem cache. Testes de queries/contratos e da UI para estados conectado/erro/vazio/sessão, além de lint/typecheck/build e suite SQL. Validar contra Supabase hospedado somente se configuração for disponibilizada; testes com transporte controlado serão identificados como tais. Commit: `Cycle 2: real read layer`.
+
+
+### IMPLEMENT
+
+Queries de esportes, arenas públicas com modalidades e paginação de 24 itens + lookahead, detalhe por slug e perfil próprio com modalidades. Endpoint GET /api/social/read valida recurso/slug/offset, usa getUser para obter o próprio ID e retorna DTOs sem e-mail, metadados Auth ou paths privados. Cache-Control private/no-store, Vary Cookie; SDK server por requisição, cookies renováveis no Route Handler, timeout e retry manual.
+
+/arenas, /arenas/[slug] e /perfil usam dados reais quando configurados. Sem env preservam todas as views anteriores. Config incompleta/inválida retorna erro, inclusive rejeitando secret keys/legacy service_role. Novas views possuem loading, retry, sessão ausente, perfil ausente, vazio, origem após sucesso e rotulagem is_demo. Dados anteriores são descartados ao trocar slug/página, atualizar ou voltar à aba. O shell conectado não mostra Rafa nem atividades fictícias; feed/descoberta/check-in e perfis públicos mock mantêm demonstração explícita.
+
+Detalhe conectado não restringe slug aos mocks. Metadados são genéricos até consulta no cliente. Busca/filtros atuam na página de 24 arenas e estão identificados como tal. Nenhuma mutation social adicionada; ações do demo foram preservadas somente em seu contexto. Fotos remotas/Storage ficam fora: imagem local apenas para arenas is_demo; arena real sem foto recebe placeholder neutro.
+
+### VERIFY
+
+Lint/typecheck/build e 29 testes aprovados (dez demo, dez SQL/RLS, nove de configuração/queries/contratos). SDK Supabase real com transporte controlado verificou filtros, paginação, erro sem fallback, identidade verificada e DTO sem e-mail. RLS continua testada no Postgres/PGlite do Cycle 1.
+
+Smoke de produção sem env: oito rotas 200, arena/perfil inexistentes 404, três endpoints retornando status demo sem dados inventados, recurso inválido 400 e cache privado/no-store. O primeiro assert de smoke esperava Vary exatamente Cookie; o Next acrescenta campos próprios. Corrigido o teste para verificar a presença de Cookie entre os valores, preservando os cabeçalhos corretos do framework; smoke passou depois. Após criar builds isolados, lint percorreu artefatos gerados .next-read-check/.next-invalid-check. Acrescentado ignore desses diretórios ao ESLint (sem reduzir regras do código-fonte), ajustada uma variável de teste para const e executada novamente a cadeia obrigatória. O aviso de scroll suave do Next foi resolvido declarando data-scroll-behavior no html.
+
+Build conectado isolado em .next-read-check, porta 3002, apontando exclusivamente à fixture loopback 54331: três arenas carregadas de SQL local, sessão ausente 401, arena inexistente 404, catálogo vazio permanece vazio, falha de serviço 503 sem detalhes internos. No navegador em 390×844: loading, sucesso, rótulos demo, busca por Moema, detalhe, vazio, falha/retry/recuperação, perfil sem sessão, login de teste, perfil Alice sem e-mail/Rafa e logout com retorno à exigência de login. Sem overflow horizontal nas leituras inspecionadas. Um servidor isolado com configuração incompleta também confirmou erro explícito na interface. Captura do catálogo revisada.
+
+Auth/REST da fixture são simulados; o SQL é executado em Postgres/PGlite. Não houve validação de JWT real, e-mail, refresh de sessão em Supabase hospedado ou teste em aparelho físico. A fixture não integra a aplicação nem é usada como fallback.
+
+### DOCUMENT / COMMIT
+
+Atualizados plano, Deslopify, schema, README e changelog. Configuração de build isolado documentada; fixture em tests/helpers/read-api-fixture.mjs, nunca importada no app. Commit: `Cycle 2: real read layer`.
+
+### NEXT
+
+Concluído: camada real de leitura e telas integradas, verificadas sem env e com transporte controlado. Ainda mock: feed, descoberta, check-ins, curtidas/comentários/conexões/acompanhamento e edição do personagem demo. Riscos: integração hospedada não exercitada; tipos manuais; busca por página; perfis públicos individuais ainda mock; falta de proxy SSR para futuras páginas privadas; sem edição real, Storage, moderação ou PWA offline completo.
+
+Próximo ciclo: Cycle 3 — Real Auth + Profile. Concluir onboarding/edição própria, username, bio, cidade/bairro, esporte principal/nível; manter login/signup/logout existentes e adicionar renovação SSR antes de páginas privadas. Aplicar migrations em projeto de desenvolvimento configurado e validar duas contas reais antes de considerar Auth hospedado pronto.
+
+Prompt sugerido: “Execute Cycle 3 conforme CODEX_AUTONOMOUS_LOOP.md. Preserve a camada de leitura do Cycle 2, finalize autenticação/sessão/onboarding/edição do próprio perfil com RLS e validação de username/esporte/nível/cidade, sem e-mail público e sem confundir demo com conta real. Teste autorizações com duas identidades, rode lint/typecheck/build e testes, documente limites e faça commit Cycle 3: real auth and profile.”
+
+Configuração hospedada: o usuário informou que salvou .env.local, mas esse arquivo não foi encontrado em /Users/8ugo/Documents/picoapp durante a conferência. Pergunta sobre a localização enviada; nenhuma chave exibida ou procurada fora do escopo do projeto. A validação hospedada segue pendente dessa localização.

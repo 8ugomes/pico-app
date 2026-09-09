@@ -2,7 +2,7 @@
 
 **O ponto de encontro da areia. Me acha no Pico.**
 
-Rede social mobile-first para futevôlei, beach tennis e vôlei de praia. A rodada 2 transforma a apresentação inicial em uma demonstração social utilizável.
+Rede social mobile-first para futevôlei, beach tennis e vôlei de praia. O Cycle 2 conecta leituras de arenas e perfil ao Supabase, preservando uma demonstração social utilizável sem configuração.
 
 ## Rodar
 
@@ -17,7 +17,7 @@ Abra [Pico local](http://localhost:3000). A entrada redireciona para /feed. Use 
 
 O cache npm fica em .npm-cache, definido em .npmrc e ignorado pelo Git, para contornar o EACCES do cache global do Mac. Não use sudo npm install.
 
-## O que funciona nesta rodada
+## Jornadas de demonstração
 
 | Tela | O que fazer |
 | --- | --- |
@@ -31,7 +31,7 @@ O cache npm fica em .npm-cache, definido em .npmrc e ignorado pelo Git, para con
 | /login, /signup | Autenticação real preparada; indisponível sem configuração |
 | /auth/callback | Confirmação PKCE com erro recuperável |
 
-Todas as telas sociais compartilham navegação inferior fixa em celular e navegação lateral em desktop. Detalhes desconhecidos retornam 404 com orientação.
+Todas as telas sociais compartilham navegação inferior fixa em celular e navegação lateral em desktop. No demo, detalhes desconhecidos retornam 404. Em leituras conectadas, a API retorna 404 e a tela mostra o estado de conteúdo indisponível.
 
 ## Modo de demonstração
 
@@ -39,28 +39,31 @@ Todas as telas sociais compartilham navegação inferior fixa em celular e naveg
 
 O jogador da demonstração é Rafa Costa. Ações vivem em memória enquanto você navega nas telas sociais: curtidas, comentários, conexões, arenas seguidas, posts, perfil e check-in. Recarregar ou sair desse conjunto de telas reinicia a demonstração.
 
-Nenhuma dessas ações é enviada a outra pessoa ou ao Supabase. A conta de Auth, quando configurada, permanece separada do jogador fictício. O aviso de demonstração aparece em todas as telas sociais.
+Nenhuma dessas ações é enviada a outra pessoa ou ao Supabase. A conta de Auth, quando configurada, permanece separada do jogador fictício. O aviso de demonstração identifica cada jornada ainda fictícia. Arenas/perfil conectados têm indicação própria de origem.
 
 Check-ins duram 2h e podem ser encerrados. A leitura local de presença é atualizada a cada 15 segundos; a expiração real será validada pelo servidor. Os tempos dos seeds são relativos ao início da sessão.
 
-## Supabase preparado, sem bloquear o app
+## Supabase e camada real de leitura
 
 A demonstração funciona sem qualquer variável.
 
-Para habilitar Auth:
+Para habilitar Auth e leituras:
 
 1. Crie/escolha um projeto Supabase.
 2. Copie .env.example para .env.local.
 3. Preencha NEXT_PUBLIC_SUPABASE_URL e NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY com os valores públicos do painel Connect.
 4. Habilite e-mail/senha e confirmação de e-mail. Use política mínima de senha compatível com os 8 caracteres do cadastro.
 5. Configure Site URL como http://localhost:3000 e permita http://localhost:3000/auth/callback nas Redirect URLs.
-6. Reinicie o dev. Em Vercel, configure as variáveis do ambiente e faça novo build.
+6. Aplique a migration do Cycle 1 em um projeto de desenvolvimento e cadastre esportes/arenas; o seed fictício é apenas para desenvolvimento.
+7. Reinicie o dev. Em Vercel, configure as variáveis do ambiente e faça novo build.
 
 O fluxo usa PKCE. Preserve o template padrão com {{ .ConfirmationURL }} e abra o link no mesmo navegador do cadastro. Nunca coloque service_role, secret key, senha ou token em Git ou NEXT_PUBLIC_*.
 
 O schema V1, integridade, RLS, índices, RPCs e Storage estão em [04_SUPABASE_SCHEMA.md](docs/04_SUPABASE_SCHEMA.md). A migration do Cycle 1 foi aplicada e testada em Postgres/PGlite local, sem aplicação em serviço hospedado. Os tipos são manuais e alinhados ao SQL; gerar pelo Supabase após configurar o projeto.
 
-As queries preparadas exigem um cliente explícito e não são chamadas pelas telas sociais. Configurar Auth não liga automaticamente o banco ao feed. Antes de páginas privadas SSR, adicionar renovação de sessão por proxy e validar identidade no servidor.
+Com URL e publishable key válidas, /arenas, /arenas/[slug] e /perfil consultam /api/social/read. Ausência das duas variáveis mantém demo; configuração incompleta/inválida e falha de serviço mostram erro, sem fallback silencioso. Feed, descoberta, check-in e perfis públicos individuais ainda usam mocks.
+
+O perfil próprio é verificado com getUser no Route Handler e nunca aceita ID do cliente nem retorna e-mail. O handler pode renovar cookies e todas as respostas usam private/no-store. Antes de páginas privadas SSR, adicionar o proxy de sessão no Cycle 3. As telas conectadas são somente leitura: edição/check-in/follow/post reais entram nos ciclos seguintes.
 
 Referências: [SSR Supabase](https://supabase.com/docs/guides/auth/server-side/creating-a-client), [RLS](https://supabase.com/docs/guides/database/postgres/row-level-security).
 
@@ -78,7 +81,7 @@ Para servir o build: npm run start. Com o dev aberto, use npm run start -- --por
 Verificado nesta rodada:
 
 - Lint, typecheck e build aprovados.
-- 20 testes aprovados: dez de regras sociais e dez grupos de integração SQL/RLS com PGlite.
+- 29 testes aprovados: dez de regras sociais, dez grupos SQL/RLS com PGlite e nove de configuração/queries/contratos.
 - 15 URLs sociais respondendo 200 no build de produção.
 - Home redirecionando para feed, navegação presente e arena do check-in pré-selecionada.
 - 404 para arena/perfil desconhecidos.
@@ -105,7 +108,10 @@ src/components/pico/            Telas, cards e DemoProvider
 src/components/ui/              Botões, inputs, modal e BottomNav
 src/data/mock.ts                Fonte única dos dados fictícios
 src/lib/demo-state.ts           Regras e transições locais
-src/lib/supabase/queries.ts      Consultas futuras, inativas no demo
+src/lib/supabase/queries.ts      Leituras tipadas de catálogo/arenas/perfil
+src/lib/supabase/read-service.ts DTOs públicos e identidade do perfil
+src/app/api/social/read/route.ts Endpoint sem cache
+src/components/pico/connected/  Views de leitura e estados remotos
 src/types/social.ts             Contrato do domínio
 src/types/database.ts           Contrato cliente alinhado às migrations locais
 tests/demo-state.test.mjs       Testes de comportamento
@@ -124,7 +130,7 @@ AGENTS.md exige plano e Deslopify antes de codar, verificações, atualização 
 
 ## Próximos passos
 
-1. Cycle 2: integrar leituras reais de perfil/arenas sobre a fundação SQL/RLS entregue, mantendo demo explícito.
+1. Cycle 3: concluir onboarding/edição de perfil e sessão, validando a integração com um Supabase de desenvolvimento.
 2. Ligar check-in e interações sociais ao backend, preservando os estados e a experiência.
 3. Validar PWA em dispositivos reais, preparar offline, moderação e piloto na Vercel.
 
@@ -132,7 +138,7 @@ Continuam fora do MVP: IA, voz, reservas, pagamentos, B2B, anúncios, ranking av
 
 ## Git e publicação
 
-Repositório privado: [8ugomes/pico-app](https://github.com/8ugomes/pico-app). Branch principal: main.
+Repositório: [8ugomes/pico-app](https://github.com/8ugomes/pico-app). Branch principal: main.
 
 ```bash
 git push origin main
@@ -164,3 +170,29 @@ O registro corrente está em [docs/CODEX_AUTONOMOUS_LOOP.md](docs/CODEX_AUTONOMO
 Nenhuma tabela foi aplicada em Supabase hospedado. O teste local usa uma fixture de identidade, não um servidor Auth: e-mail, JWT, refresh, PostgREST e Storage precisam de validação própria. Check-ins ainda não têm RPCs; escrita direta no banco está negada. Connections será adicionada no Cycle 6. As telas sociais continuam em memória, com aviso explícito de demonstração.
 
 Para a pilha local completa, usar Supabase CLI + Docker com `supabase start` e migrations locais. O [documento de schema](docs/04_SUPABASE_SCHEMA.md) detalha configuração, grants, limites e comandos. Não aplicar o seed fictício automaticamente em produção nem versionar `.env.local`, tokens ou chaves secretas.
+
+
+## Cycle 2: estados e limites
+
+- Loading com estrutura reservada; dados confirmados só após resposta bem-sucedida; erro com retry; catálogo vazio sem inventar arenas; sessão ausente exige login; perfil ausente tem mensagem própria.
+- Arenas em páginas de 24, com ordenação estável por nome/id. Busca/filtro são sobre a página atual, indicada na interface.
+- is_demo continua visível mesmo em dados salvos. Não atribuir imagens fictícias a arenas reais; imagens de Storage ainda não estão integradas.
+- Nenhuma contagem de comunidade, atividade fictícia ou ação local é apresentada como dado real nas views conectadas.
+- Leituras descartam dados anteriores ao atualizar, mudar contexto ou retomar a aba. Sem cache privado ou service worker.
+
+Verificação do Cycle 2: build sem env e build conectado isolado, 29 testes, HTTP e navegador em 390×844. A fixture usa SQL local real e Auth/REST simulados; isso **não comprova integração Supabase hospedada**.
+
+Para reproduzir a inspeção controlada, em um terminal:
+
+```sh
+node tests/helpers/read-api-fixture.mjs
+```
+
+Em outro terminal, executar separadamente:
+
+```sh
+PICO_BUILD_DIR=.next-read-check NEXT_PUBLIC_SUPABASE_URL=http://127.0.0.1:54331 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_fixture_only npm run build
+PICO_BUILD_DIR=.next-read-check NEXT_PUBLIC_SUPABASE_URL=http://127.0.0.1:54331 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_fixture_only npm run start -- --port 3002
+```
+
+A fixture aceita somente transporte local de teste, com usuário Alice e tokens inválidos fora dela. Não é fallback do produto e nunca deve ser publicada como servidor. Use apenas credenciais fictícias durante esse teste. Encerre os processos ao terminar; nenhuma credencial real é necessária. Builds isolados são ignorados pelo Git; o Next pode acrescentar seus caminhos ao tsconfig durante a verificação, removê-los depois.

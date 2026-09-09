@@ -15,7 +15,7 @@ export const viewport: Viewport = { themeColor: "#07080A", width: "device-width"
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="pt-BR" className={`${geistSans.variable} h-full antialiased`}>
+    <html lang="pt-BR" data-scroll-behavior="smooth" className={`${geistSans.variable} h-full antialiased`}>
       <body className="min-h-full">
         <a className="skip-link" href="#main-content">Pular para o conteúdo</a>
         {children}

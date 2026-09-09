@@ -11,6 +11,8 @@ export async function createClient() {
   const cookieStore = await cookies();
 
   return createServerClient<Database>(config.url, config.key, {
+    db: { timeout: 10000, retry: false },
+    global: { fetch: (input, init) => fetch(input, { ...init, cache: "no-store", signal: init?.signal ?? AbortSignal.timeout(10000) }) },
     cookies: {
       getAll: () => cookieStore.getAll(),
       setAll: (values) => values.forEach(({ name, value, options }) => cookieStore.set(name, value, options)),

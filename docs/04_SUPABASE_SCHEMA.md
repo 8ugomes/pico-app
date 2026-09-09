@@ -7,7 +7,7 @@ Seed de desenvolvimento: `supabase/seed.sql`. Configuração local: `supabase/co
 
 O SQL foi aplicado do zero em Postgres/PGlite com as migrations reais. Dez grupos de testes verificam grants, RLS, trigger, seeds e constraints com anônimo e identidades distintas. A fixture de `auth.users`/`auth.uid()` existe somente em `tests/helpers/database.mjs`; não substitui validação de JWT, Auth, e-mail ou PostgREST do Supabase. Nenhum projeto hospedado foi provisionado ou alterado.
 
-As telas continuam em DemoProvider/mock.ts, com interações em memória e aviso explícito. Configurar Auth ainda não muda a fonte social. O Cycle 2 integrará leituras; falha de banco configurado deverá produzir erro explícito, nunca mock silencioso.
+O Cycle 2 integrou leituras em /arenas, /arenas/[slug] e /perfil quando a configuração é válida. Sem variáveis, essas telas preservam DemoProvider/mock.ts; configuração inválida ou falha de banco retorna erro. As demais jornadas sociais ainda são demo.
 
 ## Modelo implementado
 
@@ -62,7 +62,7 @@ Sem contas Auth, posts, comentários, curtidas, presença ou métricas inventada
 
 `src/types/database.ts` agora corresponde às dez tabelas entregues: campos de perfil, flags demo, esporte principal, enums e FKs. Insert/Update foram reduzidos às colunas permitidas ao cliente. Objetos futuros (connections e RPCs) foram retirados do contrato executável até existir migration correspondente. Os tipos continuam manuais; gerar a partir do Supabase configurado antes da integração hospedada.
 
-`src/lib/supabase/queries.ts` permanece preparatório. Nenhuma rota social o chama neste ciclo. As consultas futuras deverão distinguir ausência de configuração, sessão ausente, vazio legítimo e falha de serviço.
+`src/lib/supabase/queries.ts` agora é chamado por read-service.ts e pelo GET /api/social/read. Há helpers de esportes, arenas/modalidades, arena por slug e perfil próprio/modalidades. Perfil usa getUser verificado e filtra o ID retornado pelo Auth; o endpoint não aceita escolha de identidade. DTOs excluem e-mail, metadata/role e caminhos privados. Catálogo público continua protegido pelas policies existentes.
 
 ## Execução local e verificação
 
@@ -89,8 +89,21 @@ Os dez testes existentes do demo também continuam passando. Não há afirmaçã
 
 ## Próximos ciclos
 
-Cycle 2: leituras reais de perfil/catálogo/arenas com loading/erro/vazio e demo explícito. Cycle 3: sessão SSR renovada, onboarding/edição e logout. Cycle 4: RPCs de presença. Cycle 5: mutations sociais. Cycle 6: connections com PK follower/following, check de diferença entre IDs e policies próprias. Cycle 7: jornada ponta a ponta, dispositivos e checklist beta.
+Cycle 2 implementado, com verificação hospedada ainda pendente. Cycle 3: sessão SSR renovada, onboarding/edição e logout. Cycle 4: RPCs de presença. Cycle 5: mutations sociais. Cycle 6: connections com PK follower/following, check de diferença entre IDs e policies próprias. Cycle 7: jornada ponta a ponta, dispositivos e checklist beta.
 
 Storage privado, limites de upload, moderação e testes de e-mail continuam pendentes; campos avatar_path/image_path não significam que upload esteja implementado.
 
 Referências: [Supabase RLS e grants](https://supabase.com/docs/guides/database/postgres/row-level-security), [perfil após signup](https://supabase.com/docs/guides/auth/managing-user-data), [PGlite](https://pglite.dev/docs/).
+
+
+## Cycle 2 · execução de leitura
+
+GET /api/social/read aceita resource=arenas (offset), arena (slug validado) ou profile (sem ID). Paginação de arenas de 24 com lookahead; modalidades são obtidas por FKs tipadas. Catálogo não exige login; perfil exige getUser no servidor. Cliente criado por requisição e cookies atualizados no Route Handler, sem estado global entre usuários. Nenhuma página privada lê sessão em Server Component neste ciclo; renovação por proxy SSR permanece no Cycle 3.
+
+Respostas usam Cache-Control private, no-store, max-age=0 e Vary Cookie (além dos campos adicionados pelo Next). Sem cache de perfil. Falhas são normalizadas para mensagens curtas sem SQL, URL, chave ou tokens. Configuração ausente responde status demo; parcial/inválida responde configuration/503; sessão ausente authentication/401; arena/perfil ausentes 404; consulta falha unavailable/503. SDK server tem timeout de 10s e retry manual; navegador limita a espera e cancela a leitura ao desmontar/trocar contexto.
+
+O contrato não exige modificar a migration do Cycle 1. Tipos permanecem manuais; gerar no ambiente hospedado antes do beta. Campos is_demo viajam até a UI; imagens locais de demonstração só aparecem para arenas is_demo. Sem endpoints de gravação novos.
+
+Verificação: nove testes adicionais com SDK e transporte controlado, somados aos 20 anteriores. Build sem env preserva demo. Build isolado com fixture REST/Auth sobre PGlite exercitou catálogo, slug, vazio, erro, login de teste, perfil e logout, além de configuração incompleta em servidor separado. Isso não valida JWT/e-mail/refresh/PostgREST reais. O usuário informou que configurou .env.local, mas o arquivo não foi encontrado no caminho do projeto na conferência; localização/configuração precisa ser resolvida para testar o serviço hospedado.
+
+Referências consultadas: [getUser](https://supabase.com/docs/reference/javascript/auth-getuser), [sessão no servidor e cache](https://supabase.com/docs/guides/auth/server-side/advanced-guide).
