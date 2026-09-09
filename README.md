@@ -4,7 +4,7 @@
 
 Rede social PWA mobile-first para futevôlei, beach tennis e vôlei de praia. O Ciclo 9 implementa comunidades próprias, gestão de arenas, papéis no banco, publicação com destinos, histórico privado e fotos recortadas. **Exclusivo para revisão interna; lançamento não autorizado.**
 
-O estado publicado, commits, evidências e pendências estão em [revisão interna](docs/INTERNAL_REVIEW.md). [Ambientes](docs/ENVIRONMENTS.md) é o mapa operacional; [contratos](docs/CYCLE9_CONTRACTS.md) define permissões e privacidade. O domínio histórico pico-app-sepia.vercel.app permanece no Ciclo 8 até decisão específica; push da branch de revisão não o atualiza.
+Revisão publicada: [Pico interno](https://pico-internal.vercel.app), versão `e891dca1e741`, com Supabase beta real e acesso por admissão. O estado publicado, commits, evidências e pendências estão em [revisão interna](docs/INTERNAL_REVIEW.md). [Ambientes](docs/ENVIRONMENTS.md) é o mapa operacional; [contratos](docs/CYCLE9_CONTRACTS.md) define permissões e privacidade. O domínio histórico pico-app-sepia.vercel.app permanece no Ciclo 8 até decisão específica; push da branch de revisão não o atualiza.
 
 ## Executar
 

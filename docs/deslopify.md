@@ -1,5 +1,8 @@
 # Pico — Deslopify
 
+> Estado final do Ciclo 9: PRONTO PARA REVISÃO INTERNA — NÃO LIBERADO. Preview `e891dca1e741`, 19 migrations em dev/beta e smoke 67/67. [URL, versão e evidências atuais](INTERNAL_REVIEW.md). Os registros abaixo preservam a sequência de auditoria, plano e execução.
+
+
 ## Ciclo 9 — critérios antes da implementação
 
 Preservar grafite, superfícies escuras, texto legível, acento verde-água e navegação enxuta. Comunidades aparecem como grupos de pessoas, arenas como locais; gestão contextual não vira aba principal de todos. Composer explicita audiência, marcação de local e distribuição. Entrada pendente não parece participação aprovada. Recorte confirma exatamente os pixels enviados; cancelar preserva a foto anterior. Sem métricas fictícias, sucesso parcial oculto, jargão de infraestrutura na jornada ou promessa de lançamento. Revisar 320/390/430 px, foco, teclado, zoom acessível, safe areas e reduced motion. Testes emulados não serão chamados de aparelhos reais.
@@ -189,3 +192,5 @@ Próximo avanço: validar o ambiente Supabase de desenvolvimento com duas contas
 Verificar nomes acessíveis de campos, feedback após salvar, ações de moderação e custódia e descarte de sessão. Documentação deve distinguir prova remota, emulação e pendências reais; nenhum texto de liberação externa.
 
 9.11 VERIFY: gestão autorizada, negação clara ao membro, histórico recente, denúncia com efeito e custódia foram exercitados na interface. Usar nomes acessíveis de controles nos testes evita depender do texto interno das opções. Nenhuma alteração visual adicional necessária após a regressão; README e guias deixam explícitos demo, beta privado e limites da emulação.
+
+9.11 entrega: login, perfil recarregado e feed foram exercitados no Preview real em 390px. Identificação de acesso por aprovação e nenhuma promessa de disponibilidade offline. Registros físicos/SMTP separados dos resultados remotos.

@@ -4,8 +4,8 @@ Ciclo 9 é revisão interna, sem lançamento. `config/environments.json` é a id
 
 | Finalidade | Supabase | Dados / acesso |
 | --- | --- | --- |
-| Desenvolvimento exclusivo | tsebpkfnxjvhntosbkdu, pico-development, Free São Paulo | Novo banco/Auth/Storage; apenas dados controlados. localhost 3000/3002. |
-| Beta interno | bxjhqxdfknspxezgftyz, nome histórico pico-dev | Conta/arquivo existentes preservados. Admissão no banco; @hugo confirmado pelo responsável como primeiro admin. |
+| Desenvolvimento exclusivo | tsebpkfnxjvhntosbkdu, pico-development, Free São Paulo | 19 migrations, banco/Auth/Storage próprios; dados controlados limpos. localhost 3000/3002. |
+| Beta interno | bxjhqxdfknspxezgftyz, nome histórico pico-dev | 19 migrations; conta/arquivo existentes preservados. [Preview interno](https://pico-internal.vercel.app), admissão no banco; @hugo confirmado pelo responsável como primeiro admin. |
 | Produção futura | Não provisionado | Sem URL, chaves, dados ou lançamento. Guard recusa. |
 
 Vercel `pico-app` mantém o deploy histórico do Ciclo 8; o rótulo Production serve ao beta interno e não significa liberação. Sem integração Git. Previews comuns ficam em demo explícito sem credenciais beta. A nova revisão usa projeto Vercel separado `pico-internal`, somente Preview via CLI. Push não faz deploy.
@@ -15,3 +15,5 @@ Vercel `pico-app` mantém o deploy histórico do Ciclo 8; o rótulo Production s
 `npm run env:check` valida configuração local. `node --env-file=.env.local --env-file=.env.hosted-admin scripts/database.mjs migrate` confere finalidade/ref/URL e a identidade devolvida pelo banco antes de aplicar pendências. `seed` e `test:hosted` só aceitam desenvolvimento exclusivo. Para beta, usar os dois arquivos beta e a mesma ferramenta; seed/teste destrutivo serão recusados. Migrations iniciais de provisionamento exigem conferir explicitamente a identidade antes de registrar environment_identity; já realizado no Ciclo 9.1.
 
 Tipos: `npm run db:types`, gerados do desenvolvimento com as mesmas migrations. Schema gerado não é editado manualmente. Nunca executar reset remoto. CI usa demo explícito sem segredos; contribuições não confiáveis não recebem secrets.
+
+Estado do Preview: `e891dca1e741`, READY, target Preview, smoke autenticado 67/67. Origem beta principal `https://pico-internal.vercel.app`; callback/confirm históricos preservados, localhost restrito ao desenvolvimento. URL/publishable key conferidas; secret sensitive Preview comprovado por Storage no servidor publicado. [Evidência final](INTERNAL_REVIEW.md).

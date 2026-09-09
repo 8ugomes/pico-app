@@ -1,5 +1,8 @@
 # Pico — Ciclo Autônomo de Evolução
 
+> Estado final do Ciclo 9: PRONTO PARA REVISÃO INTERNA — NÃO LIBERADO. Preview `e891dca1e741`, 19 migrations em dev/beta e smoke 67/67. [URL, versão e evidências atuais](INTERNAL_REVIEW.md). Os registros abaixo preservam a sequência de auditoria, plano e execução.
+
+
 ## Ciclo 9.6 — histórico e vínculos
 
 Migration 20260910095000 no desenvolvimento exclusivo. Histórico paginado deriva somente de auth.uid(), sem parâmetro de jogador; encerramento/expiração preservam registros e a exclusão pessoal os remove. Presença atual continua limitada a duas horas, separada das arenas recentes. Perfil exibe vínculos autorizados e resumo agregado apenas mediante opção explícita (sem timestamps); mudar preferência afeta a próxima leitura com a mesma sessão. Descoberta comum considera somente membros ativos/vínculos consultáveis, nunca histórico privado. Testes comprovam leitura própria, ID alheio recusado, resumo padrão privado, revogação e remoção por cascade. 63 testes locais, lint, typecheck e build isolado aprovados.
@@ -256,3 +259,5 @@ Próximo avanço: validar o ambiente Supabase de desenvolvimento com duas contas
 ## Ciclo 9.11 — regressão e preparação da revisão
 
 AUDIT/PLAN: concluir oito jornadas adicionais e confrontar documentação/infra com evidência. IMPLEMENT: corrigir portabilidade do teste de formulário, ref vazio do Preview CLI, wrapper hosted e cleanup idempotente; reescrever guias correntes. VERIFY: 72 testes locais + lint/types/build; 170 remotos e 21 + 8 de navegador; auditoria sem valores protegidos. CI inicial revelou falta de ripgrep no Linux, corrigida com leitura nativa do Node, nova execução necessária. DOCUMENT: INTERNAL_REVIEW centraliza URL/versão/provas. COMMIT: incremento de regressão pronto; NEXT: CI, migrations pendentes beta, Preview interno e smoke autenticado, sem promoção pública.
+
+9.11 VERIFY/DOCUMENT/COMMIT final: Preview dpl_DkEmaLHQypwfKb4zg8kwSXAvrEwv READY, commit e891dca1e741, CI 34417393958 success. Aplicadas apenas nove migrations beta pendentes; 19 conferidas em ambos os destinos. Teste publicado 67/67, Auth/perfil/feed/grupo/Storage/RLS reais. Cleanup preservou conta original e hash da foto. Credencial Vercel QA revogada, VM/servidor QA encerrados. Ciclos 9.0–9.11 concluídos para revisão, sem NEXT de lançamento; dependências externas registradas.

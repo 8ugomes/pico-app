@@ -2,7 +2,7 @@
 
 O ensaio de 9 de setembro de 2026 restaurou um backup de desenvolvimento em uma VM local exclusiva `pico-c9-restore`. O export incluiu schema da aplicação, schema gerenciado de referência, dados de Auth, dados sociais, configuração e bytes do Storage. O schema da aplicação foi de fato importado do dump; não foi apenas recriado por migrations.
 
-Foram recuperadas sete identidades controladas e três arquivos. Login com senha, UID original, admissão aprovada/negada, RLS, referência do avatar e igualdade SHA-256 dos bytes passaram. O Storage permaneceu privado e downloads diretos comuns foram recusados. Nenhuma conta pessoal foi copiada. Auth/Storage gerenciados usam as versões oficiais locais; SMTP, MFA, provedores externos e chaves de criptografia/Vault não foram ensaiados.
+Foram recuperadas sete identidades controladas e três arquivos. Dois logins com senha, UIDs originais, admissão aprovada/negada, RLS, referência do avatar e igualdade SHA-256 dos bytes passaram. O Storage permaneceu privado e downloads diretos comuns foram recusados. Nenhuma conta pessoal foi copiada. Auth/Storage gerenciados usam as versões oficiais locais; SMTP, MFA, provedores externos e chaves de criptografia/Vault não foram ensaiados.
 
 ## Backup protegido
 
@@ -20,10 +20,12 @@ O procedimento usa Supabase CLI 2.117.0, PostgreSQL 17 e serviços locais oficia
 
 ## Rollback e operação
 
-A versão pública histórica continua no projeto Vercel `pico-app`. A rodada usa preview do projeto `pico-internal`. Push não equivale a deploy: não há integração Git/Vercel. O wrapper `scripts/deploy-internal.mjs` aceita somente branch limpa `cycle-9-internal`, projeto interno, backend beta, identidade remota e migrations completas. Nenhuma promoção `--prod` é executada.
+A versão pública histórica continua no projeto Vercel `pico-app`. A rodada usa preview do projeto `pico-internal`. Push não equivale a deploy: não há integração Git/Vercel. O wrapper `scripts/deploy-internal.mjs` aceita somente branch limpa `cycle-9-internal`, projeto interno, backend beta, identidade remota e migrations completas. O comando exige `--target=preview` explicitamente. A primeira tentativa implícita foi cancelada em build, sem backend, ao receber alvo Production da Vercel. O primeiro Preview válido é e891dca1e741; não há Preview anterior validado para rollback nesta entrega.
 
-Para rollback do app, voltar ao preview interno anterior verificado, preservando o banco. Corrigir banco por migrations aditivas; não remover colunas/dados para acompanhar rollback de frontend. Antes de restaurar um banco, validar compatibilidade de Auth/Storage e a integridade do backup em isolamento.
+Em regressão essencial desta primeira revisão, suspender sua disponibilização até correção validada. Nas próximas versões, voltar somente a um Preview anterior compatível e verificado, preservando o banco. Corrigir banco por migrations aditivas; não remover colunas/dados para acompanhar rollback de frontend. Antes de restaurar um banco, validar compatibilidade de Auth/Storage e a integridade do backup em isolamento.
 
 Logs de falha têm apenas categoria, status, versão e identificador aleatório da ocorrência. Não incluem URL, UID, e-mail, senhas, tokens, post ou localização. A auditoria administrativa permanece em schema privado e é exibida apenas a operadores vigentes.
 
 Referências oficiais: [backup/restauração](https://supabase.com/docs/guides/platform/migrating-within-supabase/backup-restore), [limites dos backups do banco](https://supabase.com/docs/guides/platform/backups), [restauração local](https://supabase.com/docs/guides/local-development/restoring-downloaded-backup).
+
+Ao fim do ensaio, a VM e o servidor de QA foram encerrados, a extração temporária em claro foi removida e os backups cifrados foram preservados. O backup beta anterior às migrations contém a foto existente, cujo SHA-256 foi novamente conferido no Storage após migração e smoke.

@@ -10,9 +10,9 @@
 | Fotos | Recorte no navegador, bytes normalizados, três buckets privados e leitura vigente |
 | Histórico | Privado por padrão, presença expira sem apagar histórico, resumo opcional sem datas |
 | Operação | Moderação com efeito, custódia, auditoria mínima, exclusão com reautenticação |
-| Qualidade | 71 testes locais, 170 verificações remotas e 21 verificações móveis principais passaram; resultados finais na revisão |
+| Qualidade | 72 testes locais, 170 verificações remotas dev, 29 verificações de navegador e 67 no Preview/beta passaram |
 | Continuidade | Backup cifrado criado; restauração de Auth/schema/dados/3 arquivos controlados validada em VM isolada |
-| CI/deploy | Workflow sem segredos, publicação por CLI protegida; confirmar execução/artefato exatos no relatório |
+| CI/deploy | CI aprovada; Preview e891dca1e741 READY, versão/sessão/dados confirmados pela URL |
 | SMTP externo | Pendente por decisão do responsável; não houve teste de entrega em caixa |
 | Aparelhos físicos | Pendente; emulação não comprova instalação/câmera/retomada física |
 | Responsável/contato público | Conta admin confirmada; canal público e rotina humana ainda não definidos |

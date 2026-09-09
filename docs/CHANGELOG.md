@@ -117,3 +117,7 @@ Ciclo 9.7: recorte reutilizável (react-easy-crop 6.2.3, MIT), preparação loca
 - 72 testes locais, 170 checks remotos anteriores e 29 checks de navegador. Deploy interno e estado de CI registrados separadamente na revisão.
 
 9.11 ajuste de deploy: Vercel tratou o primeiro deploy de projeto vazio como Production mesmo sem --prod. Tentativa interrompida em build, sem beta nas variáveis Production; wrapper agora exige --target=preview explicitamente.
+
+## Ciclo 9 — entrega interna verificada
+
+Preview e891dca1e741 publicado em pico-internal.vercel.app; CI verde, migrations 19/19 em dev/beta e 67 checks na URL real. Conta/arenas/foto anteriores preservadas; fixtures por ID limpas. README, ambientes, schema, operação, PWA e checklist refletem o estado publicado. Produção futura e lançamento permanecem não autorizados.
