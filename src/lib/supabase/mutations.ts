@@ -9,7 +9,7 @@ export class MutationError extends Error {
 }
 export const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 export const levels: Level[] = ['Iniciante', 'Intermediário', 'Avançado'];
-export type Mutation = { action: 'save_profile'; name: string; username: string; bio: string; city: string; neighborhood: string; sportId: string; level: Level; available: boolean } | { action: 'start_checkin'; arenaId: string; sportId: string } | { action: 'end_checkin' } | { action: 'create_post'; arenaId: string; sportId: string; body: string } | { action: 'set_like'; postId: string; liked: boolean } | { action: 'create_comment'; postId: string; body: string };
+export type Mutation = { action: 'save_profile'; name: string; username: string; bio: string; city: string; neighborhood: string; sportId: string; level: Level; available: boolean } | { action: 'start_checkin'; arenaId: string; sportId: string } | { action: 'set_connection'; playerId: string; connected: boolean } | { action: 'end_checkin' } | { action: 'create_post'; arenaId: string; sportId: string; body: string } | { action: 'set_like'; postId: string; liked: boolean } | { action: 'create_comment'; postId: string; body: string };
 export function invalid(): never { throw new MutationError(400, 'Confira os campos e tente novamente.'); }
 export function textField(value: unknown, min: number, max: number): string {
   if (typeof value !== 'string') return invalid();
@@ -27,6 +27,11 @@ export function exactKeys(value: Record<string, unknown>, keys: string[]) {
 export function parseMutation(value: unknown): Mutation {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return invalid();
   const body = value as Record<string, unknown>;
+  if (body.action === 'set_connection') {
+    exactKeys(body, ['action', 'playerId', 'connected']);
+    if (typeof body.connected !== 'boolean') return invalid();
+    return { action: body.action, playerId: uuid(body.playerId), connected: body.connected };
+  }
   if (body.action === 'create_post') {
     exactKeys(body, ['action', 'arenaId', 'sportId', 'body']);
     return { action: body.action, arenaId: uuid(body.arenaId), sportId: uuid(body.sportId), body: textField(body.body, 1, 500) };
@@ -61,6 +66,11 @@ export function mutationFailure(error: { code?: string }) {
 }
 export async function mutateSocial(client: SupabaseClient<Database>, input: Mutation) {
   const user = await requireUser(client);
+  if (input.action === 'set_connection') {
+    if (input.playerId === user.id) throw new MutationError(400, 'Você já faz parte do seu próprio Pico. Escolha outro jogador.');
+    const { error } = input.connected ? await client.from('connections').insert({ followed_id: input.playerId }) : await client.from('connections').delete().eq('follower_id', user.id).eq('followed_id', input.playerId);
+    if (error && !(input.connected && error.code === '23505')) mutationFailure(error); return;
+  }
   if (input.action === 'create_post') {
     const { error } = await client.from('posts').insert({ arena_id: input.arenaId, sport_id: input.sportId, body: input.body });
     if (error) mutationFailure(error); return;

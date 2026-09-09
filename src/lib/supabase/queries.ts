@@ -36,5 +36,5 @@ export function listArenaPosts(client: SupabaseClient<Database>, arenaId: string
   return client.from('posts').select('id, author_id, arena_id, sport_id, body, image_path, created_at').eq('arena_id', arenaId).order('created_at', { ascending: false }).order('id', { ascending: false }).range(offset, offset + limit - 1);
 }
 export function getPublicProfile(client: SupabaseClient<Database>, username: string) {
-  return client.from('profiles').select('id, username, display_name, bio, neighborhood, avatar_path, available').eq('username', username).maybeSingle();
+  return client.from('profiles').select(profileFields).eq('username', username).maybeSingle();
 }

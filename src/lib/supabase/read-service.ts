@@ -1,7 +1,9 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 import type { Database } from '../../types/database';
-import type { ReadArena, ReadData, ReadRequest, ReadPresence } from '../../types/read';
-import { ARENA_PAGE_SIZE, getArenaBySlug, getOwnProfile, listPublicArenas, listSports, requireUser } from './queries.ts';
+import type { ReadArena, ReadData, ReadRequest, ReadPresence, ReadProfile } from '../../types/read';
+import { ARENA_PAGE_SIZE, getArenaBySlug, getOwnProfile, listPublicArenas, listSports, requireUser, getPublicProfile } from './queries.ts';
+import { levels, uuidPattern } from './mutations.ts';
+import type { Level } from '../../types/social';
 import { ReadError } from './read-errors.ts';
 
 type ArenaResult = NonNullable<Awaited<ReturnType<typeof getArenaBySlug>>['data']>;
@@ -18,6 +20,20 @@ function arenaDto(row: ArenaResult): ReadArena {
 }
 export function parseReadRequest(params: URLSearchParams): ReadRequest {
   const resource = params.get('resource');
+  if (resource === 'player') {
+    const username = params.get('username') ?? '';
+    if (!/^[a-z0-9_]{3,40}$/.test(username)) throw new ReadError('invalid_request', 400);
+    return { resource, username };
+  }
+  if (resource === 'discover') {
+    const offset = params.get('offset') ?? '0';
+    const sportId = params.get('sportId') ?? undefined;
+    const arenaId = params.get('arenaId') ?? undefined;
+    const level = params.get('level') as Level | null;
+    const active = params.get('active') ?? 'false';
+    if (!/^\d{1,5}$/.test(offset) || Number(offset) > 10000 || (sportId && !uuidPattern.test(sportId)) || (arenaId && !uuidPattern.test(arenaId)) || (level && !levels.includes(level)) || !['true', 'false'].includes(active)) throw new ReadError('invalid_request', 400);
+    return { resource, offset: Number(offset), sportId, arenaId, level: level ?? undefined, active: active === 'true' };
+  }
   if (resource === 'feed' || resource === 'comments') {
     const value = params.get('offset') ?? '0';
     if (!/^\d{1,5}$/.test(value) || Number(value) > 10000) throw new ReadError('invalid_request', 400);
@@ -45,6 +61,21 @@ export function parseReadRequest(params: URLSearchParams): ReadRequest {
   throw new ReadError('invalid_request', 400);
 }
 export async function readSocial(client: SupabaseClient<Database>, request: ReadRequest): Promise<ReadData> {
+  if (request.resource === 'discover') {
+    await requireUser(client);
+    const { data, error } = await client.rpc('discover_players', { p_offset: request.offset, p_active: request.active, ...(request.sportId ? { p_sport_id: request.sportId } : {}), ...(request.arenaId ? { p_arena_id: request.arenaId } : {}), ...(request.level ? { p_level: request.level } : {}) });
+    if (error || !data) throw new ReadError('unavailable');
+    return { kind: 'discover', players: data.slice(0, 24), hasMore: data.length > 24 };
+  }
+  if (request.resource === 'player') {
+    const user = await requireUser(client);
+    const { data, error } = await getPublicProfile(client, request.username);
+    if (error) throw new ReadError('unavailable');
+    if (!data) throw new ReadError('not_found', 404);
+    const connection = await client.from('connections').select('followed_id').eq('follower_id', user.id).eq('followed_id', data.id).maybeSingle();
+    if (connection.error) throw new ReadError('unavailable');
+    return { kind: 'player', profile: profileDto(data), own: user.id === data.id, connected: Boolean(connection.data) };
+  }
   if (request.resource === 'feed') {
     const user = await requireUser(client);
     const { data, error } = await client.rpc('read_feed', { p_offset: request.offset, ...(request.arenaId ? { p_arena_id: request.arenaId } : {}) });
@@ -87,10 +118,13 @@ export async function readSocial(client: SupabaseClient<Database>, request: Read
   const { data, error } = await getOwnProfile(client);
   if (error) throw new ReadError('unavailable');
   if (!data) throw new ReadError('profile_missing', 404);
-  return { kind: 'profile', profile: {
+  return { kind: 'profile', profile: profileDto(data) };
+}
+function profileDto(data: NonNullable<Awaited<ReturnType<typeof getOwnProfile>>['data']>): ReadProfile {
+  return {
     id: data.id, username: data.username, name: data.display_name, bio: data.bio,
     city: data.city, neighborhood: data.neighborhood, available: data.available,
     isDemo: data.is_demo, onboardingCompleted: data.onboarding_completed,
     sports: data.player_sports.flatMap(link => link.sports ? [{ sport: link.sports, level: link.level, isPrimary: link.is_primary }] : []),
-  } };
+  };
 }

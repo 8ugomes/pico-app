@@ -20,9 +20,11 @@ type ProfileEdit = Partial<Pick<ProfileRow, 'username' | 'display_name' | 'bio' 
 type ForeignKey<Name extends string, Column extends string, Relation extends string> = { foreignKeyName: Name; columns: [Column]; isOneToOne: false; referencedRelation: Relation; referencedColumns: ['id'] };
 
 export type FeedRow = { id: string; body: string; created_at: string; author_id: string; username: string; display_name: string; arena_id: string; arena_name: string; arena_slug: string; arena_is_demo: boolean; sport_id: string; sport_name: string; sport_slug: SportId; like_count: number; comment_count: number; liked: boolean };
+export type DiscoveryRow = { id: string; username: string; display_name: string; bio: string; city: string; neighborhood: string; available: boolean; is_demo: boolean; sport_name: string; sport_slug: SportId; level: Level; connected: boolean; arena_name: string | null; arena_slug: string | null; expires_at: string | null };
 export type Database = {
   public: {
     Tables: {
+      connections: Table<Audit & { follower_id: string; followed_id: string }, { follower_id?: string; followed_id: string }, never, [ForeignKey<'connections_follower_id_fkey', 'follower_id', 'profiles'>, ForeignKey<'connections_followed_id_fkey', 'followed_id', 'profiles'>]>;
       profiles: Table<ProfileRow, never, ProfileEdit>;
       sports: Table<SportRow, never, never>;
       arenas: Table<ArenaRow, never, never>;
@@ -36,6 +38,7 @@ export type Database = {
     };
     Views: Record<never, never>;
     Functions: {
+      discover_players: { Args: { p_offset?: number; p_sport_id?: string; p_arena_id?: string; p_level?: Level; p_active?: boolean }; Returns: DiscoveryRow[] };
       read_feed: { Args: { p_offset?: number; p_arena_id?: string }; Returns: FeedRow[] };
       start_checkin: { Args: { arena_id: string; sport_id: string }; Returns: string };
       end_checkin: { Args: Record<string, never>; Returns: undefined };

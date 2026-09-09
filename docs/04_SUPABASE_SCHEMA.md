@@ -122,3 +122,8 @@ Migration 20260909040000_checkin.sql cria start_checkin(arena_id,sport_id) e end
 ## Cycle 5 · feed real
 
 Migration 20260909050000_social_feed.sql cria read_feed(offset,arena), SECURITY INVOKER/RLS, com 21 registros de lookahead e contagens de curtidas/comentários. API usa insert sem author_id/player_id (defaults auth.uid()); descurtir filtra também identidade verificada. Curtida duplicada é idempotente. Comentários paginados por data/id, conteúdo limitado a 280; posts limitados a 500 e combinação arena/esporte válida. Sem Storage neste ciclo.
+
+
+## Cycle 6 · conexões e descoberta
+
+Migration 20260909060000_connections_discovery.sql: connections (follower_id default auth.uid(), followed_id, created_at), PK composta, FK para profiles, CHECK sem auto-conexão. SELECT/INSERT/DELETE somente do seguidor; sem UPDATE. discover_players é SECURITY INVOKER, usa RLS e retorna até 25 linhas (24 + lookahead), sem e-mail. Filtros de esporte/nível aplicam ao mesmo vínculo. Arena corresponde a membership visível ou check-in ativo; presença recente significa ativa dentro do prazo de duas horas, sem exposição do histórico encerrado. Onboarding completo é necessário para aparecer.
