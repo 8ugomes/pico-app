@@ -1,5 +1,30 @@
 # Pico — plano de produto
 
+## Ciclo 9 — AUDIT / PLAN (2026-09-09)
+
+Branch `cycle-9-internal`, baseline `7d6f288`. Rodada exclusiva de revisão interna; sem lançamento, convites externos, merge em main ou promoção pública.
+
+Auditoria real: Supabase bxjhqxdfknspxezgftyz contém nove migrations, 15 tabelas com RLS, 1 conta/perfil, 3 arenas demo, 1 arquivo, zero posts/check-ins. Contagens não identificam o responsável: bootstrap depende de UID verificado. Arenas concedem apenas SELECT a anon/authenticated; interface conectada não oferece edição. Classificação: funcionalidade ausente, sem evidência de vulnerabilidade. Posts exigem arena/esporte; arena_members representa participação sem gestão. Histórico fica limitado à presença ativa. Storage privado e bloqueios já funcionam. Configuração atual reutiliza beta em desenvolvimento/previews: deve ser separada antes de experimentos.
+
+48 testes baseline aprovados. Os 168 checks históricos do Ciclo 8 não são evidência do Ciclo 9. Baseline lint/types/build serão registrados no loop.
+
+Sequência e incrementos:
+1. 9.0 contratos e matriz em CYCLE9_CONTRACTS.md; expansão preserva schema/dados antigos.
+2. 9.1 desenvolvimento exclusivo, beta existente fechado, produção não provisionada; validação de destino em comandos; admissão em RLS/Auth.
+3. 9.2 papéis globais/escopados, auditoria, bootstrap por UID, administração e custódia.
+4. 9.3 perfil e edição transacional de arena, participação e convites de gestão.
+5. 9.4 comunidades, modos de entrada, audiência e participantes.
+6. 9.5 post canônico, destinos atômicos, idempotência e autorização transitiva de mídia/engajamento.
+7. 9.6 histórico privado paginado, arenas recentes e vínculos autorizados.
+8. 9.7 recorte reutilizável com pixels persistidos, zoom/rotação e limites antes do envio.
+9. 9.8 admissão administrativa e recuperação; SMTP/caixa dependem de acesso externo.
+10. 9.9 instalação/versionamento PWA sem cache privado; evidência física separada.
+11. 9.10 moderação, backup protegido, restauração isolada e CI sem segredos.
+12. 9.11 regressão por papéis, interface interna, limpeza rastreada, docs, push branch; deploy interno só após verificações essenciais.
+
+As migrations novas serão testadas primeiro em PostgreSQL descartável e desenvolvimento exclusivo. No beta, apenas incrementos compatíveis e verificados; nunca reaplicar as nove migrations históricas. Nenhuma cópia de contas/dados pessoais entre projetos. Incapacidade de SMTP, bootstrap ou dispositivo físico bloqueia apenas sua comprovação dependente.
+
+
 ## Ciclo 8 · AUDIT / PLAN · 9 de setembro de 2026
 
 Baseline confirmado: main 26619e7, Vercel publicada, Supabase bxjhqxdfknspxezgftyz, cinco migrations remotas, Auth e núcleo social reais. Não recriar infraestrutura. Lacunas: mídia, bloqueio/denúncia, recuperação, exclusão de conta, limites de abuso e privacidade.

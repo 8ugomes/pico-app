@@ -1,5 +1,11 @@
 # Pico — Deslopify
 
+## Ciclo 9 — critérios antes da implementação
+
+Preservar grafite, superfícies escuras, texto legível, acento verde-água e navegação enxuta. Comunidades aparecem como grupos de pessoas, arenas como locais; gestão contextual não vira aba principal de todos. Composer explicita audiência, marcação de local e distribuição. Entrada pendente não parece participação aprovada. Recorte confirma exatamente os pixels enviados; cancelar preserva a foto anterior. Sem métricas fictícias, sucesso parcial oculto, jargão de infraestrutura na jornada ou promessa de lançamento. Revisar 320/390/430 px, foco, teclado, zoom acessível, safe areas e reduced motion. Testes emulados não serão chamados de aparelhos reais.
+
+# Pico — Deslopify
+
 ## Ciclo 8 · critérios antes da implementação
 
 Preservar grafite, verde-água, navegação e layout social. Foto opcional no compositor e avatar editável no perfil; não inventar retratos. Ações de segurança ficam em detalhes do conteúdo/perfil e em Privacidade e conta. Explicar o efeito do bloqueio, manter desbloqueio acessível e confirmar exclusão definitiva com senha. Progresso e falha de upload devem manter o texto; falha de gravação não mostra sucesso. Nenhum dado pessoal em cache offline. Revisar 320/390 px, alvos de toque, labels, foco, estados vazios e troca de sessão na versão publicada.

@@ -17,7 +17,7 @@ Pico é uma rede social PWA mobile-first para futevôlei, beach tennis e vôlei 
 ## Prioridades
 
 Responder quem joga onde o usuário joga, quem está disponível e o que acontece nas suas arenas.
-Priorizar perfil, arenas, check-in, feed e descoberta. Comunidade simples significa mural da arena.
+Priorizar pessoas, perfis de arenas, comunidades próprias, check-in, feed e descoberta. Ciclo 9 amplia expressamente o escopo: comunidades independentes ou vinculadas a arenas, com papéis e audiência próprios.
 Manter fora do MVP: IA, voz, reservas, pagamentos, B2B, anúncios, ranking avançado, mapa em tempo real e app nativo.
 
 ## Leia antes de desenvolver
@@ -59,7 +59,7 @@ Tokens em src/app/globals.css. Reutilizar os componentes existentes.
 Mobile-first, dark mode, grafite e areia, cards arredondados, transparência discreta e movimento reduzível.
 Texto em pt-BR, curto, próximo e concreto. Uma ação principal por contexto.
 Dados ilustrativos precisam de rótulo; não fingir cadastro, presença, salvamento ou métricas.
-A experiência social é pública em modo de demonstração e a entrada abre o feed.
+Demonstração exige configuração explícita. Ambientes conectados negam acesso social sem admissão vigente. O Ciclo 9 é exclusivo para revisão interna: não promover produção, abrir inscrições ou enviar convites externos.
 Auth real e jogador fictício são estados distintos. Ações do demo ficam locais, identificadas e sem envio para outras pessoas.
 Rotas canônicas: /feed, /arenas, /arenas/[slug], /checkin, /descobrir, /perfil.
 Não implementar um recurso só porque apareceu como sugestão de rota no plano.

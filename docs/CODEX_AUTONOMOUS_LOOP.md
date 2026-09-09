@@ -1,5 +1,13 @@
 # Pico — Ciclo Autônomo de Evolução
 
+## Ciclo 9.0 — auditoria e contratos
+
+Baseline: 7d6f288; branch cycle-9-internal. Auditoria remota read-only confirmou nove migrations, 15 tabelas RLS, 1 conta/arquivo preservados e 3 arenas demo. Arenas têm apenas SELECT para clientes, sem edição conectada: recurso ausente, não vulnerabilidade demonstrada. Baseline: 48 testes, lint, typecheck e build isolado aprovados. Plano e Deslopify atualizados antes do código; matriz/expansão em CYCLE9_CONTRACTS.md. Evidências antigas abaixo são históricas e não aprovam esta rodada.
+
+Próximo: 9.1 isolamento e fechamento real do beta. Produção não será provisionada/promovida nesta rodada. Bootstrap depende de UID confirmado; SMTP/caixa e aparelhos físicos são dependências independentes.
+
+# Pico — Ciclo Autônomo de Evolução
+
 ## Integração hospedada · VERIFY / DOCUMENT
 
 Supabase pico-dev criado no Free em São Paulo, linked; cinco migrations e seed aplicados após dry-run. Onze tabelas com RLS, 27 policies e cinco RPCs autenticadas auditadas. Tipos gerados do banco substituem o contrato manual. Vercel Hobby: https://pico-app-sepia.vercel.app, duas variáveis públicas em todos os ambientes; deploy por CLI, sem alterar Samba.
@@ -19,7 +27,7 @@ Auth já usa Supabase; perfil é somente leitura e falta onboarding. Implementar
 Um avanço principal por ciclo: AUDIT → PLAN → IMPLEMENT → VERIFY → DOCUMENT → COMMIT → NEXT.
 Ler AGENTS.md, plano, Deslopify e schema antes da implementação. Rodar lint, typecheck e build em cada ciclo; corrigir falhas antes do commit. Registrar evidências e limitações sem confundir demonstração, banco local e serviço hospedado.
 
-Escopo permanente: rede social mobile-first para esportes de areia. Sem reservas, pagamentos, B2B, chat, ranking avançado, IA ou comunidades implementadas. Preservar todas as rotas canônicas e o funcionamento sem Supabase. Nunca versionar secrets; autoria de produção deriva de auth.uid().
+Escopo permanente: rede social mobile-first para esportes de areia. Sem reservas, pagamentos, B2B, chat, ranking avançado ou IA. Comunidades são autorizadas a partir do Ciclo 9. Preservar todas as rotas canônicas e o funcionamento sem Supabase. Nunca versionar secrets; autoria de produção deriva de auth.uid().
 
 ## Sequência
 
