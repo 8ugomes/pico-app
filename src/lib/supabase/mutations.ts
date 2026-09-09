@@ -9,7 +9,11 @@ export class MutationError extends Error {
 }
 export const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 export const levels: Level[] = ['Iniciante', 'Intermediário', 'Avançado'];
-export type Mutation = { action: 'save_profile'; name: string; username: string; bio: string; city: string; neighborhood: string; sportId: string; level: Level; available: boolean } | { action: 'start_checkin'; arenaId: string; sportId: string } | { action: 'set_connection'; playerId: string; connected: boolean } | { action: 'end_checkin' } | { action: 'create_post'; arenaId: string; sportId: string; body: string } | { action: 'set_like'; postId: string; liked: boolean } | { action: 'create_comment'; postId: string; body: string };
+export type Mutation = { action: 'save_profile'; name: string; username: string; bio: string; city: string; neighborhood: string; sportId: string; level: Level; available: boolean } | { action: 'start_checkin'; arenaId: string; sportId: string } | { action: 'set_connection'; playerId: string; connected: boolean } | { action: 'end_checkin' } | { action: 'create_post'; arenaId: string; sportId: string; body: string; imagePath?: string | null } | { action: 'set_like'; postId: string; liked: boolean } | { action: 'create_comment'; postId: string; body: string }
+  | { action: 'set_avatar'; path: string | null }
+  | { action: 'delete_post'; id: string } | { action: 'delete_comment'; id: string }
+  | { action: 'set_block'; playerId: string; blocked: boolean }
+  | { action: 'report'; target: 'player' | 'post' | 'comment'; id: string; reason: 'spam' | 'harassment' | 'unsafe' | 'other'; details: string };
 export function invalid(): never { throw new MutationError(400, 'Confira os campos e tente novamente.'); }
 export function textField(value: unknown, min: number, max: number): string {
   if (typeof value !== 'string') return invalid();
@@ -27,14 +31,33 @@ export function exactKeys(value: Record<string, unknown>, keys: string[]) {
 export function parseMutation(value: unknown): Mutation {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return invalid();
   const body = value as Record<string, unknown>;
+  if (body.action === 'set_avatar') {
+    exactKeys(body, ['action','path']);
+    if (body.path !== null && (typeof body.path !== 'string' || !/^[0-9a-f-]{36}\/[0-9a-f-]{36}\.webp$/.test(body.path))) return invalid();
+    return { action: body.action, path: body.path as string | null };
+  }
+  if (body.action === 'delete_post' || body.action === 'delete_comment') {
+    exactKeys(body, ['action','id']); return { action: body.action, id: uuid(body.id) };
+  }
+  if (body.action === 'set_block') {
+    exactKeys(body, ['action','playerId','blocked']);
+    if (typeof body.blocked !== 'boolean') return invalid();
+    return { action: body.action, playerId: uuid(body.playerId), blocked: body.blocked };
+  }
+  if (body.action === 'report') {
+    exactKeys(body, ['action','target','id','reason','details']);
+    if (!['player','post','comment'].includes(String(body.target)) || !['spam','harassment','unsafe','other'].includes(String(body.reason))) return invalid();
+    return { action: body.action, target: body.target as 'player' | 'post' | 'comment', id: uuid(body.id), reason: body.reason as 'spam' | 'harassment' | 'unsafe' | 'other', details: textField(body.details,0,500) };
+  }
   if (body.action === 'set_connection') {
     exactKeys(body, ['action', 'playerId', 'connected']);
     if (typeof body.connected !== 'boolean') return invalid();
     return { action: body.action, playerId: uuid(body.playerId), connected: body.connected };
   }
   if (body.action === 'create_post') {
-    exactKeys(body, ['action', 'arenaId', 'sportId', 'body']);
-    return { action: body.action, arenaId: uuid(body.arenaId), sportId: uuid(body.sportId), body: textField(body.body, 1, 500) };
+    exactKeys(body, ['action', 'arenaId', 'sportId', 'body', 'imagePath']);
+    if (body.imagePath != null && (typeof body.imagePath !== 'string' || !/^[0-9a-f-]{36}\/[0-9a-f-]{36}\.webp$/.test(body.imagePath))) return invalid();
+    return { action: body.action, arenaId: uuid(body.arenaId), sportId: uuid(body.sportId), body: textField(body.body, 1, 500), ...(body.imagePath !== undefined ? { imagePath: body.imagePath as string | null } : {}) };
   }
   if (body.action === 'set_like') {
     exactKeys(body, ['action', 'postId', 'liked']);
@@ -59,6 +82,7 @@ export function parseMutation(value: unknown): Mutation {
   return invalid();
 }
 export function mutationFailure(error: { code?: string }) {
+  if (error.code === 'P0429') throw new MutationError(429, 'Você chegou ao limite por agora. Aguarde antes de tentar novamente; para fotos, remova as que não usa em Privacidade e conta.');
   if (error.code === '23505') throw new MutationError(409, 'Esse nome de usuário já está em uso. Escolha outro.');
   if (['23503', '23514', '22P02', '23502'].includes(error.code ?? '')) throw new MutationError(400, 'Confira os campos. O conteúdo escolhido pode não estar mais disponível.');
   if (error.code === '42501') throw new MutationError(403, 'Você não tem acesso a essa ação. Entre novamente e confira o conteúdo.');
@@ -66,13 +90,38 @@ export function mutationFailure(error: { code?: string }) {
 }
 export async function mutateSocial(client: SupabaseClient<Database>, input: Mutation) {
   const user = await requireUser(client);
+  if (input.action === 'set_avatar') {
+    const { data, error } = await client.from('profiles').update({ avatar_path: input.path }).eq('id',user.id).select('id');
+    if (error) mutationFailure(error);
+    if (!data?.length) throw new MutationError(404,'Perfil indisponível.');
+    return;
+  }
+  if (input.action === 'delete_post' || input.action === 'delete_comment') {
+    const { data, error } = await client.from(input.action === 'delete_post' ? 'posts' : 'comments').delete().eq('id',input.id).eq('author_id',user.id).select('id');
+    if (error) mutationFailure(error);
+    if (!data?.length) throw new MutationError(404,'Esse conteúdo não está disponível na sua conta.');
+    return;
+  }
+  if (input.action === 'set_block') {
+    if (input.playerId === user.id) throw new MutationError(400,'Escolha outro jogador.');
+    const { error } = input.blocked ? await client.from('blocks').insert({ blocked_id: input.playerId }) : await client.from('blocks').delete().eq('blocker_id',user.id).eq('blocked_id',input.playerId);
+    if (error && !(input.blocked && error.code === '23505')) mutationFailure(error);
+    return;
+  }
+  if (input.action === 'report') {
+    const { error } = await client.from('reports').insert({ reason: input.reason, details: input.details,
+      ...(input.target === 'player' ? { player_id: input.id } : input.target === 'post' ? { post_id: input.id } : { comment_id: input.id }) });
+    if (error?.code === '23505') throw new MutationError(409,'Você já denunciou esse conteúdo. A denúncia está registrada.');
+    if (error) mutationFailure(error);
+    return;
+  }
   if (input.action === 'set_connection') {
     if (input.playerId === user.id) throw new MutationError(400, 'Você já faz parte do seu próprio Pico. Escolha outro jogador.');
     const { error } = input.connected ? await client.from('connections').insert({ followed_id: input.playerId }) : await client.from('connections').delete().eq('follower_id', user.id).eq('followed_id', input.playerId);
     if (error && !(input.connected && error.code === '23505')) mutationFailure(error); return;
   }
   if (input.action === 'create_post') {
-    const { error } = await client.from('posts').insert({ arena_id: input.arenaId, sport_id: input.sportId, body: input.body });
+    const { error } = await client.from('posts').insert({ arena_id: input.arenaId, sport_id: input.sportId, body: input.body, ...(input.imagePath ? { image_path: input.imagePath } : {}) });
     if (error) mutationFailure(error); return;
   }
   if (input.action === 'set_like') {

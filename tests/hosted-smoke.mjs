@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import { randomBytes, randomUUID } from 'node:crypto';
 import { createClient } from '@supabase/supabase-js';
 import { createServerClient } from '@supabase/ssr';
+import { hostedBeta } from './hosted-beta.mjs';
 
 const [projectRef, ...origins] = process.argv.slice(2);
 const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -162,10 +163,19 @@ try {
     }
     console.log(`Hosted social flow, ownership denials, concurrent checkins and session refresh passed: ${origin}`);
   }
+  const betaChecks = await hostedBeta({origin:origins.at(-1),a,b,guest,admin,anonymous,read,write,ok,denied,arenaId,sportId});
+  checks += betaChecks;
   console.log(`${checks} hosted checks passed. Disposable user cleanup follows.`);
 } finally {
   let failures = 0;
   for (const id of users) {
+    for (const bucket of ['avatars','post-media']) {
+      const files=await admin.storage.from(bucket).list(id,{limit:1000});
+      if(files.error){failures++;continue;}
+      if(files.data.length && (await admin.storage.from(bucket).remove(files.data.map(file=>`${id}/${file.name}`))).error) failures++;
+    }
+    const existing=await admin.auth.admin.getUserById(id);
+    if(existing.error?.status===404) continue; // Beta suite deleted it through the actual app.
     const result = await admin.auth.admin.deleteUser(id);
     if (result.error) { failures++; console.error(`Cleanup failed for disposable user ${id}: ${result.error.code ?? 'unknown'}`); }
   }

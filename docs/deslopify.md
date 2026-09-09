@@ -1,5 +1,15 @@
 # Pico — Deslopify
 
+## Ciclo 8 · critérios antes da implementação
+
+Preservar grafite, verde-água, navegação e layout social. Foto opcional no compositor e avatar editável no perfil; não inventar retratos. Ações de segurança ficam em detalhes do conteúdo/perfil e em Privacidade e conta. Explicar o efeito do bloqueio, manter desbloqueio acessível e confirmar exclusão definitiva com senha. Progresso e falha de upload devem manter o texto; falha de gravação não mostra sucesso. Nenhum dado pessoal em cache offline. Revisar 320/390 px, alvos de toque, labels, foco, estados vazios e troca de sessão na versão publicada.
+
+## Ciclo 8 · aprendizado e verificação
+
+Foto opcional ficou no compositor e avatar no perfil. Segurança aparece em opções do conteúdo/perfil e em Privacidade e conta; diálogo explica o efeito antes da exclusão. Preservado o layout, sem redesign. Upload e publicação mostraram progresso e confirmação real no navegador; avatar e foto carregaram após recarga. Perfil/feed em 390 px e conta em 320 px sem overflow. Diálogo nativo manteve foco, Escape e inputs de 16 px. Logout entre abas e troca de identidade descartaram os dados anteriores.
+
+O refresh por foco preserva formulários; mudanças de identidade são tratadas por invalidação e navegação completa. Recuperação externa e aparelhos físicos continuam explicitamente pendentes. A página de privacidade comunica controles existentes sem inventar um responsável ou prazo de resposta.
+
 ## Integração hospedada · critérios antes da execução
 
 Preservar a interface e o escopo dos Cycles 0.5–7. Com configuração real, todas as telas devem mostrar apenas leituras confirmadas, estados vazios ou erros recuperáveis. Nenhuma falha de Auth/PostgREST pode revelar o demo. Arenas fictícias persistidas continuam identificadas como demonstração; usuários descartáveis de validação devem ser removidos ao terminar. Confirmar sessão, recarga, callback e troca de conta sem expor tokens, dados anteriores ou mensagens internas do banco.

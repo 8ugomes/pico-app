@@ -210,3 +210,8 @@ fieldset:disabled .input { opacity: .5; cursor: not-allowed; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+.privacy-page { max-width: 720px; margin: 32px auto; padding: 20px; line-height: 1.7; overflow-wrap: anywhere; }
+.privacy-page h1 { font-size: 32px; font-weight: 650; margin-bottom: 20px; }
+.privacy-page h2 { font-size: 22px; font-weight: 600; margin: 28px 0 8px; }
+.privacy-page p { margin-bottom: 16px; color: #b9bcb9; }
+.privacy-page a { color: #4de1c1; text-decoration: underline; }

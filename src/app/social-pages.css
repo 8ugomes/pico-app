@@ -190,3 +190,15 @@
 
 .read-profile-identity > div, .post-person, .post-person > span { min-width: 0; }
 .read-profile-identity h2, .read-profile-identity p { overflow-wrap: anywhere; }
+.photo-upload { display: grid; gap: 12px; margin-block: 16px; }
+.photo-upload input[type=file] { width: 100%; min-width: 0; padding: 12px; }
+.upload-preview { width: 100%; height: auto; max-height: 300px; object-fit: contain; border-radius: 16px; background: var(--background); }
+.post-photo { width: 100%; height: auto; max-height: 560px; object-fit: contain; background: #07080a; }
+.read-profile-avatar { overflow: hidden; flex-shrink: 0; }
+.read-profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.safety-actions { padding: 8px 16px; }
+.safety-actions summary, .connected-panel > summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; color: var(--muted); font-size: 14px; }
+.safety-actions summary:focus-visible, .connected-panel > summary:focus-visible { outline: 2px solid #4de1c1; outline-offset: 4px; }
+.account-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.08); font-size: 14px; overflow-wrap: anywhere; }
+.account-row > span { min-width: 0; }
+.account-row button { flex-shrink: 0; }

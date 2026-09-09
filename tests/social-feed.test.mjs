@@ -24,8 +24,10 @@ test('feed uses RLS, accurate counts and current viewer like state', async () =>
   await asUser(db, null, async () => { await assert.rejects(db.query('select * from read_feed()'), e => e.code === '42501'); });
 });
 test('feed paginates with lookahead, filters arena and rejects invalid offset', async () => {
+  // Seed historical volume administratively; a user may no longer create 25
+  // posts in one instant. The separate abuse test covers that boundary.
+  for (let i = 0; i < 25; i++) await db.query('insert into posts(author_id,arena_id,sport_id,body) values($1,$2,$3,$4)', [ALICE, VILA, FUTEVOLEI, `Post ${i}`]);
   await asUser(db, ALICE, async () => {
-    for (let i = 0; i < 25; i++) await db.query('insert into posts(arena_id,sport_id,body) values($1,$2,$3)', [VILA, FUTEVOLEI, `Post ${i}`]);
     const first = (await db.query('select * from read_feed(0)')).rows;
     const next = (await db.query('select * from read_feed(20)')).rows;
     assert.equal(first.length, 21); assert.equal(next.length, 6);

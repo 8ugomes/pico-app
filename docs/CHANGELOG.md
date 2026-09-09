@@ -1,5 +1,16 @@
 # Changelog — Pico
 
+## Ciclo 8 · preparação do beta · 2026-09-09
+
+- Avatares e publicações com fotos reais, buckets privados, normalização sem metadados, limites de arquivo/quantidade e autoria validada no banco.
+- Bloqueio bilateral, denúncia privada, triagem administrativa, exclusão de conteúdo próprio e conta com reautenticação e limpeza de Storage.
+- Recuperação de senha e página de privacidade, gestão de bloqueios/denúncias/fotos em /conta; entrega externa de e-mail depende de SMTP.
+- Limites de escrita no banco, incluindo acesso direto ao PostgREST; reservas de mídia concorrentes respeitam a cota. Acesso direto e assinatura de arquivos do Storage negados.
+- Quatro migrations novas aplicadas após dry-run, sem recriar infraestrutura. Tipos regenerados do remoto.
+- Corrigidas duas falhas encontradas no serviço hospedado: relacionamento ambíguo de autor no feed e foto ainda acessível após bloqueio. A entrega agora consulta RLS antes de retornar cada imagem sem cache.
+- Lint/typecheck/build e 48 testes locais passaram. Suíte hospedada com duas identidades, mídia, moderação, recuperação por token e exclusão completa passou. UI móvel e troca de sessão entre abas verificadas; contas descartáveis limpas.
+- README/schema/runbook/checklist atualizados. BLOCKED para convites externos até fechar SMTP, contato/responsável e gates operacionais; nenhum plano pago ativado.
+
 ## Integração Supabase hospedada · 2026-09-09
 
 - Criado pico-dev no Supabase Free em São Paulo, com repo linked, cinco migrations e seed aplicados após dry-run; RLS das onze tabelas, 27 policies, grants e cinco RPCs auditados.

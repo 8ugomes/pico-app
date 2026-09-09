@@ -1,22 +1,28 @@
 # Pico — Supabase: schema e estado real
 
-## Estado atual · Cycles 1–7
+## Estado atual · Ciclo 8
 
-As onze tabelas e cinco RPCs estão versionadas. Todas as jornadas canônicas consultam/gravam Supabase quando configurado; sem configuração, o app continua demo. Perfil alheio é visível apenas a contas autenticadas e não inclui e-mail. O navegador não grava como outro jogador.
+Quinze tabelas públicas com RLS: as onze do núcleo social, mais blocks, reports, media_assets e account_deletions. Contadores transacionais de abuso ficam em pico_private.write_limits, sem acesso do cliente. Sete RPCs autenticadas: save_profile, start_checkin, end_checkin, read_feed, discover_players, reserve_media e can_read_media. Tipos gerados do remoto por npm run db:types; não editar manualmente.
 
-| Migration | Incremento |
+| Migration remota | Incremento |
 | --- | --- |
 | 20260909010000_social_foundation.sql | Dez tabelas, RLS/grants, trigger e integridade |
-| 20260909030000_profile_onboarding.sql | save_profile atômico, SECURITY INVOKER |
-| 20260909040000_checkin.sql | start_checkin/end_checkin, SECURITY DEFINER, auth.uid() e prazo do servidor |
-| 20260909050000_social_feed.sql | read_feed paginado, contagens, SECURITY INVOKER |
-| 20260909060000_connections_discovery.sql | connections com RLS e discover_players paginado |
+| 20260909030000_profile_onboarding.sql | Perfil e esporte principal atômicos |
+| 20260909040000_checkin.sql | Presença própria com prazo e concorrência |
+| 20260909050000_social_feed.sql | Feed paginado com contagens |
+| 20260909060000_connections_discovery.sql | Conexões e descoberta |
+| 20260909190000_beta_safety.sql | Bloqueio bilateral, denúncias privadas, limite de escrita e marcador de exclusão |
+| 20260909191000_private_media.sql | Buckets privados, reservas, limites e referências por proprietário |
+| 20260909192000_beta_contracts.sql | Default do campo preenchido pelo trigger e ocultação de exclusão pendente |
+| 20260909193000_media_delivery.sql | RLS para autorizar cada leitura de mídia e fechamento do acesso direto ao Storage |
 
-RPCs: save_profile, start_checkin, end_checkin, read_feed e discover_players. handle_new_user é trigger sem EXECUTE do cliente.
+Todas as nove migrations estão aplicadas em bxjhqxdfknspxezgftyz; apenas as quatro novas foram aplicadas nesta rodada, após dry-run. Nenhum projeto, seed ou migration anterior foi recriado.
 
-As cinco migrations estão aplicadas no Supabase pico-dev (`bxjhqxdfknspxezgftyz`), após dry-run e comparação do banco vazio. Auditoria remota: onze tabelas com RLS, 27 policies, grants mínimos e cinco RPCs autenticadas. Tipos gerados diretamente do banco; 149 checks hospedados em localhost/Vercel com duas identidades, autoria negada e check-ins concorrentes. [Evidências e manutenção](HOSTED_SUPABASE.md). Não há buckets/policies de Storage nem upload.
+Bloqueios ocultam perfis, esportes, vínculos, presença, publicações, comentários e curtidas nos dois sentidos. Conexões entre as pessoas são removidas; desbloqueio não as recria. Denúncias aceitam apenas conteúdo alheio visível, têm autoria/timestamp/status protegidos e são lidas apenas pelo autor ou pela operação. Um caso de moderação administrativa foi exercitado no remoto.
 
-As seções abaixo preservam o histórico de cada ciclo; planos de recursos posteriores já entregues são substituídos pelas seções Cycles 3–6 e pelo README atual.
+Storage: avatars e post-media privados, WebP até 3 MiB. Não há policies permitindo operações diretas dos clientes. /api/media verifica getUser e can_read_media (SECURITY INVOKER, RLS) antes de buscar bytes administrativamente. Apenas o servidor valida/normaliza upload e marca a reserva ready. Triggers/FKs impedem referências inválidas/alheias e índices limitam reutilização. Exclusão de post limpa sua imagem; exclusão de conta remove os arquivos antes da identidade. [Operação e limites](BETA_OPERATIONS.md).
+
+As seções seguintes são históricas; afirmações de recursos pendentes nelas não substituem este estado atual.
 
 ## Cycle 1 · fundação implementada
 

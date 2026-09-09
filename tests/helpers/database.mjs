@@ -15,6 +15,17 @@ export async function createTestDatabase() {
   await db.exec(`
     create role anon nologin;
     create role authenticated nologin;
+    create role service_role nologin bypassrls;
+    create schema storage;
+    create table storage.buckets(id text primary key,name text,public boolean,file_size_limit bigint,allowed_mime_types text[]);
+    create table storage.objects(id uuid primary key default gen_random_uuid(),bucket_id text,name text,owner_id text);
+    alter table storage.objects enable row level security;
+    grant usage on schema storage to authenticated;
+    grant select,insert,update,delete on storage.objects to authenticated;
+    -- Only the SQL policy boundary is emulated here. Real Storage HTTP behavior
+    -- is covered separately against the hosted project.
+    create function storage.allow_any_operation(operations text[]) returns boolean language sql stable as
+      $$ select coalesce(current_setting('storage.operation',true),'')=any(operations) $$;
     create schema auth;
     create table auth.users (id uuid primary key, email text, raw_user_meta_data jsonb default '{}');
     create function auth.uid() returns uuid language sql stable as

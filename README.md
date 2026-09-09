@@ -2,9 +2,9 @@
 
 **O ponto de encontro da areia. Me acha no Pico.**
 
-Rede social mobile-first para futevôlei, beach tennis e vôlei de praia. Cycles 0.5–7 implementam o núcleo social conectado ao Supabase e preservam uma demonstração utilizável sem configuração.
+Rede social mobile-first para futevôlei, beach tennis e vôlei de praia. O Ciclo 8 acrescenta fotos, bloqueios, denúncias, recuperação e exclusão de conta ao núcleo social conectado ao Supabase. A demonstração continua disponível sem configuração.
 
-Ambiente de desenvolvimento publicado: [Pico](https://pico-app-sepia.vercel.app). Supabase `pico-dev` em São Paulo, migrations aplicadas, tipos gerados e 149 verificações hospedadas aprovadas com duas contas. [Ambiente, Auth, deploy e comandos de manutenção](docs/HOSTED_SUPABASE.md).
+Ambiente de desenvolvimento publicado: [Pico](https://pico-app-sepia.vercel.app). Supabase `pico-dev` em São Paulo, nove migrations aplicadas e tipos gerados. O núcleo do Ciclo 8 foi validado com duas contas no app publicado; SMTP externo e requisitos operacionais ainda impedem declarar BETA READY. [Ambiente, Auth, deploy e comandos de manutenção](docs/HOSTED_SUPABASE.md).
 
 ## Rodar
 
@@ -22,13 +22,15 @@ Abra [Pico local](http://localhost:3000). A entrada abre /feed. O cache npm loca
 | Tela | Com Supabase configurado |
 | --- | --- |
 | /signup, /login | Cadastro por e-mail/senha, login e logout; callback PKCE quando confirmação estiver habilitada |
-| /perfil | Onboarding e edição de nome, username, bio, cidade/bairro, esporte principal, nível e disponibilidade |
+| /perfil | Onboarding, edição de perfil/esporte/disponibilidade e avatar persistido |
 | /arenas | Catálogo público com busca, filtros e paginação |
 | /arenas/[slug] | Arena, modalidades, início de check-in e mural de posts |
 | /checkin | Presença voluntária por até duas horas, substituição, saída e outros jogadores presentes |
-| /feed | Posts de texto, curtidas/descurtidas, comentários e paginação |
+| /feed | Posts com texto e foto, curtidas, comentários, exclusão própria e denúncia |
 | /descobrir | Jogadores por esporte, nível, arena e check-in ativo; conectar/desconectar |
-| /perfil/[username] | Perfil compartilhado entre contas autenticadas, sem e-mail ou edição alheia |
+| /perfil/[username] | Perfil entre contas autenticadas, conexão, bloqueio e denúncia; sem e-mail ou edição alheia |
+| /conta, /privacidade | Bloqueios, denúncias próprias, fotos sem uso, informações de privacidade e exclusão com senha |
+| /recuperar, /redefinir-senha | Pedido de recuperação e troca de senha; entrega externa depende de SMTP |
 
 Conexão é unilateral: você acompanha outro jogador. Só perfis com onboarding completo e esporte aparecem na descoberta. Filtro por arena considera vínculo em arena_members ou presença ativa; acompanhamento de arenas ainda não tem interface conectada. O mural da arena é a base social existente; grupos, convites recíprocos e comunidades futuras não estão implementados.
 
@@ -44,9 +46,9 @@ Configuração parcial/inválida ou serviço indisponível produz erro; nunca tr
 2. Aplique **todas** as migrations versionadas em ordem. Use o fluxo de migrations do Supabase; em projeto existente, não reaplique manualmente migrations já registradas. seed.sql é opcional e exclusivamente para desenvolvimento: três esportes e três arenas fictícias, sem usuários.
 3. Habilite e-mail/senha e configure as URLs permitidas. O pico-dev já permite localhost e Vercel e usa cadastro imediato. Para confirmação de e-mail a usuários externos, configure SMTP próprio antes de habilitá-la; o SMTP padrão aceita apenas membros da organização.
 4. Preserve o template PKCE com `{{ .ConfirmationURL }}`; abra a confirmação no mesmo navegador do cadastro. A confirmação e o login levam a /perfil.
-5. Reinicie npm run dev. Em hospedagem, configure as variáveis e gere um novo build.
+5. Configure `SUPABASE_SECRET_KEY` exclusivamente no servidor para uploads validados, entrega privada de mídia e exclusão de conta. Não use prefixo NEXT_PUBLIC_. Reinicie o dev ou gere um novo deploy. A chave não é usada nas consultas sociais comuns.
 
-Nunca use service_role, secret key, senha ou token em Git/NEXT_PUBLIC_*. O aplicativo usa somente publishable key e sessão do usuário. As onze tabelas expostas têm RLS e grants limitados. Criação de perfil usa trigger; save_profile e check-ins são transacionais; autorias derivam de auth.uid(). O servidor verifica getUser antes de leituras privadas e mutations. API de escrita valida origem, JSON de até 8 KiB, campos e limites; erros não retornam SQL ou tokens.
+Nunca use service_role, secret key, senha ou token em Git/NEXT_PUBLIC_*. As consultas sociais usam publishable key e sessão do usuário. Mídia e exclusão usam uma chave administrativa isolada **depois** de validar identidade e autorização. As quinze tabelas públicas têm RLS e grants limitados; contadores de abuso ficam no schema privado. Criação de perfil usa trigger; save_profile e check-ins são transacionais; autorias derivam de auth.uid(). O servidor verifica getUser antes de leituras privadas e mutations. API de escrita valida origem, JSON de até 8 KiB, campos e limites; erros não retornam SQL ou tokens.
 
 Leituras privadas ficam em Route Handlers que podem renovar cookies; as páginas entregam componentes clientes e não consultam dados privados no Server Component. Implementar proxy de renovação antes de adicionar SSR privado. APIs usam private/no-store; o foco atual é segurança da sessão, não cache de dados privados.
 
@@ -61,39 +63,30 @@ npm run typecheck
 npm run build
 ```
 
-Os 43 testes padrão executam migrations/seeds/RLS em PostgreSQL/PGlite descartável, regras demo, validação de entradas e SDK. Testes de duas identidades incluem tentativas de autoria forjada, edição alheia, rollback, auto-conexão, arena privada, combinação inválida, paginação e expiração. Essa suíte é independente do serviço remoto.
+Os 48 testes padrão executam migrations/seeds/RLS em PostgreSQL/PGlite descartável, regras demo, validação de entradas e SDK. Testes de duas identidades incluem tentativas de autoria forjada, edição alheia, rollback, auto-conexão, arena privada, combinação inválida, paginação e expiração. Essa suíte é independente do serviço remoto.
 
-Além da fixture local, `tests/hosted-smoke.mjs` passou em 149 checks pelos origins localhost e Vercel contra Auth/PostgREST reais: duas contas, jornada social, JWT, refresh, tentativas de autoria forjada e check-ins concorrentes. Callback PKCE local e remoto foi validado com tokens da conta descartável; entrega na caixa de e-mail e dispositivos físicos continuam pendentes. Veja [como reproduzir](docs/HOSTED_SUPABASE.md) e o [checklist beta](docs/BETA_CHECKLIST.md).
-
-## Reproduzir a integração local isolada
-
-Em três terminais, sem criar ou modificar .env.local:
+A suíte opt-in `tests/hosted-smoke.mjs` cria duas contas descartáveis e valida Auth/PostgREST/Storage reais no app publicado. Inclui leitura/escrita, sessão, mídia, bloqueios, denúncias, moderação administrativa, limites concorrentes e exclusão das contas. O teste de recuperação usa um token real gerado administrativamente; não comprova entrega de e-mail. [Evidência atual e limites](docs/BETA_CHECKLIST.md).
 
 ```bash
-# 1. Banco descartável e transporte de teste em loopback
-node tests/helpers/read-api-fixture.mjs
+# Requer .env.local e .env.hosted-admin protegidos; nunca comitar segredos.
+npm run test:hosted -- bxjhqxdfknspxezgftyz https://pico-app-sepia.vercel.app
 ```
 
-```bash
-# 2. Build conectado à fixture; não interfere no dev em 3000
-PICO_BUILD_DIR=.next-social-check NEXT_PUBLIC_SUPABASE_URL=http://127.0.0.1:54331 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_fixture_only npm run build
-PICO_BUILD_DIR=.next-social-check NEXT_PUBLIC_SUPABASE_URL=http://127.0.0.1:54331 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_fixture_only npm run start -- --port 3002
-```
+A suíte normal é independente da infraestrutura remota. A fixture legada em `tests/helpers/read-api-fixture.mjs` simula Auth/REST e serve para diagnóstico local do núcleo social; não substitui Storage hospedado nem comprova segurança de Auth. Testes e fixtures não são publicados na Vercel.
 
-```bash
-# 3. Verificações HTTP do aplicativo e cookies criados pelo SDK
-node tests/connected-http-smoke.mjs
-```
+## Fotos, bloqueio e operação
 
-Abra [fixture do Pico](http://localhost:3002/signup). Use somente endereço @example.invalid e senha de teste `PicoTeste123!`. Essa senha não é credencial real; vale exclusivamente para o transporte local. alice-ui@example.invalid e bruno-ui@example.invalid são contas descartáveis disponíveis. Reiniciar a fixture apaga seus dados. Nunca publique a fixture ou use suas chaves em ambiente real.
+Buckets `avatars` e `post-media` privados. O app aceita JPG, PNG e WebP de até 3 MiB e 25 megapixels, converte sem metadados e valida a propriedade no banco. Clientes não recebem acesso direto ou URLs assinadas do Storage. Cada imagem passa por identidade verificada e `can_read_media` com RLS antes da entrega sem cache. Bloqueios ocultam perfil, presença, conteúdo e fotos nos dois sentidos e desfazem conexões.
 
-Para estados de erro/vazio/lentidão: POST http://127.0.0.1:54331/fixture-mode?value=error, empty, slow ou success. Volte a success após o teste. Essa API existe somente na fixture e não entra no aplicativo. O Next pode acrescentar caminhos .next-social-check ao tsconfig durante esse build; remova esses includes temporários antes de commitar.
+Escritas têm limites por conta no banco, mesmo fora da interface. Denúncias são privadas e revisadas pelo operador; não há punição automática por quantidade. Exclusão de conta pede senha novamente, interrompe acesso social, remove arquivos e depois a identidade e dados vinculados. [Limites, moderação, falhas, limpeza e continuidade](docs/BETA_OPERATIONS.md).
 
-## Limites do MVP
+## Limites atuais
 
-Sem upload de fotos/Storage, recuperação de senha na interface, moderação/bloqueios, reservas, pagamentos, B2B, chat, IA, mapa ao vivo ou ranking avançado. Posts e comentários não têm edição/exclusão na interface conectada; o banco já protege essas operações por autoria. Planejar moderação e recuperação de acesso antes de abrir um beta público amplo.
+A liberação externa continua **BLOCKED** até configurar e testar SMTP, definir contato/responsável de privacidade e concluir a preparação operacional descrita no checklist. Arenas do seed são fictícias. Instalação/atualização em aparelhos físicos e restauração de backup não foram comprovadas.
 
-Manifesto, ícones e navegação estão preparados para PWA. Não existe service worker nem promessa de uso offline. [Roadmap PWA](docs/pwa-roadmap.md).
+Manifesto, ícones, safe areas e navegação estão preparados para PWA. Não há service worker nem uso offline de conteúdo privado. Logout/troca de conta descartam a tela anterior; restauração pelo histórico força nova leitura. [Roadmap PWA](docs/pwa-roadmap.md).
+
+Fora do MVP: reservas, pagamentos, B2B, chat, IA, mapa ao vivo e ranking. Acompanhamento de arenas e edição de posts/comentários não têm interface conectada; a exclusão própria está disponível.
 
 ## Desenvolvimento
 

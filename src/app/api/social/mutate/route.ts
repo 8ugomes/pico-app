@@ -2,6 +2,9 @@ import { createClient } from '@/lib/supabase/server';
 import { getSupabaseEnvironment } from '@/lib/supabase/config';
 import { MutationError, mutateSocial, parseMutation } from '@/lib/supabase/mutations';
 import { ReadError } from '@/lib/supabase/read-errors';
+import { requireUser } from '@/lib/supabase/queries';
+import { createAdminClient } from '@/lib/supabase/admin';
+import { removeUnusedMedia } from '@/lib/supabase/media';
 export const dynamic = 'force-dynamic';
 const headers = { 'Cache-Control': 'private, no-store, max-age=0', Vary: 'Cookie', 'X-Content-Type-Options': 'nosniff' };
 export async function POST(request: Request) {
@@ -28,7 +31,20 @@ export async function POST(request: Request) {
     if (getSupabaseEnvironment().status !== 'configured') throw new MutationError(503, 'O acesso às contas não está disponível agora.');
     const client = await createClient();
     if (!client) throw new MutationError(503, 'Não foi possível conectar agora.');
+    let photo: string | null = null;
+    let ownerId: string | null = null;
+    if (input.action === 'delete_post') {
+      const user = await requireUser(client); ownerId = user.id;
+      const post = await client.from('posts').select('image_path').eq('id',input.id).eq('author_id',user.id).maybeSingle();
+      if (post.error) throw new MutationError(503,'Não foi possível conferir a publicação.');
+      photo = post.data?.image_path ?? null;
+      if (photo) createAdminClient(); // Verify server configuration before deletion.
+    }
     await mutateSocial(client, input);
+    if (photo && ownerId) {
+      try { await removeUnusedMedia(client,createAdminClient(),ownerId,'post-media',photo); }
+      catch { throw new MutationError(503,'A publicação foi excluída. Remova a foto pendente em Privacidade e conta.'); }
+    }
     return Response.json({ status: 'success' }, { headers });
   } catch (error) {
     const known = error instanceof MutationError || error instanceof ReadError;

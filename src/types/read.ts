@@ -1,11 +1,11 @@
 import type { Database } from './database';
 import type { Level, SportId } from './social';
-export type FeedRow = Database['public']['Functions']['read_feed']['Returns'][number];
+export type FeedRow = Database['public']['Functions']['read_feed']['Returns'][number] & { image: string | null; avatar: string | null; imagePath: string | null };
 type DiscoveryResult = Database['public']['Functions']['discover_players']['Returns'][number];
 // Postgres does not expose RETURNS TABLE nullability to the type generator.
 // The optional presence comes from a LEFT JOIN in discover_players.
 export type DiscoveryRow = Omit<DiscoveryResult, 'arena_name' | 'arena_slug' | 'expires_at'> & {
-  arena_name: string | null; arena_slug: string | null; expires_at: string | null;
+  arena_name: string | null; arena_slug: string | null; expires_at: string | null; avatar: string | null;
 };
 export type ReadSport = { id: string; slug: SportId; name: string };
 export type ReadArena = {
@@ -14,21 +14,22 @@ export type ReadArena = {
   sports: ReadSport[];
 };
 export type ReadProfile = {
-  id: string; username: string; name: string; bio: string; city: string;
+  id: string; username: string; name: string; bio: string; city: string; avatar: string | null; avatarPath: string | null;
   neighborhood: string; available: boolean; isDemo: boolean; onboardingCompleted: boolean;
   sports: { sport: ReadSport; level: Level; isPrimary: boolean }[];
 };
 export type ReadPresence = { id: string; playerId: string; name: string; username: string; arena: { id: string; name: string; slug: string }; sport: ReadSport; expiresAt: string };
-export type ReadComment = { id: string; body: string; createdAt: string; name: string; username: string };
-export type ReadRequest = { resource: 'discover'; offset: number; sportId?: string; arenaId?: string; level?: Level; active: boolean } | { resource: 'player'; username: string } | { resource: 'arenas'; offset: number } | { resource: 'arena'; slug: string } | { resource: 'profile' } | { resource: 'sports' } | { resource: 'feed'; offset: number; arenaId?: string } | { resource: 'comments'; postId: string; offset: number } | { resource: 'checkin'; arenaId?: string };
+export type ReadComment = { id: string; authorId: string; body: string; createdAt: string; name: string; username: string };
+export type ReadRequest = { resource: 'discover'; offset: number; sportId?: string; arenaId?: string; level?: Level; active: boolean } | { resource: 'player'; username: string } | { resource: 'arenas'; offset: number } | { resource: 'arena'; slug: string } | { resource: 'profile' } | { resource: 'account' } | { resource: 'sports' } | { resource: 'feed'; offset: number; arenaId?: string } | { resource: 'comments'; postId: string; offset: number } | { resource: 'checkin'; arenaId?: string };
 export type ReadData =
   | { kind: 'arenas'; arenas: ReadArena[]; sports: ReadSport[]; hasMore: boolean; offset: number }
   | { kind: 'arena'; arena: ReadArena }
   | { kind: 'profile'; profile: ReadProfile }
+  | { kind: 'account'; viewerId: string; deletionPending: boolean; blocks: { blocked_id: string; blocked_name: string }[]; reports: { id: string; reason: string; status: string; created_at: string }[]; media: { path: string; bucket: string; ready: boolean; inUse: boolean }[] }
   | { kind: 'discover'; players: DiscoveryRow[]; hasMore: boolean }
   | { kind: 'player'; profile: ReadProfile; own: boolean; connected: boolean }
   | { kind: 'feed'; posts: FeedRow[]; hasMore: boolean; viewerId: string }
-  | { kind: 'comments'; comments: ReadComment[]; hasMore: boolean }
+  | { kind: 'comments'; comments: ReadComment[]; hasMore: boolean; viewerId: string }
   | { kind: 'sports'; sports: ReadSport[] }
   | { kind: 'checkin'; own: ReadPresence | null; presence: ReadPresence[] };
 export type ReadErrorCode = 'configuration' | 'authentication' | 'profile_missing' | 'not_found' | 'unavailable' | 'invalid_request';

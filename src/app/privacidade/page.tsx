@@ -1,0 +1,14 @@
+import Link from 'next/link';
+import { Brand } from '@/components/pico/Brand';
+export const metadata={title:'Privacidade'};
+export default function PrivacyPage(){
+  return <div className="landing-shell"><header className="site-header"><Brand /><Link href="/feed">Voltar ao Pico</Link></header><main id="main-content" className="privacy-page"><h1>Privacidade no Pico.</h1><p>Atualizado em 9 de setembro de 2026. Esta versão do Pico é um ambiente de desenvolvimento para um beta social de esportes de areia.</p>
+    <h2>O que fica na sua conta</h2><p>Usamos seu e-mail e senha para autenticar você. Nome, username, bio, cidade, bairro, esportes e disponibilidade compõem seu perfil. Fotos, publicações, curtidas, comentários e conexões ficam salvos quando você usa essas ações.</p>
+    <h2>Quem pode ver</h2><p>Outras pessoas autenticadas podem ver seu perfil e o conteúdo das arenas públicas. Seu e-mail não aparece no perfil. A lista de pessoas que você acompanha, seus bloqueios, denúncias e fotos ainda não publicadas ficam privados para você e para a operação do serviço. Pessoas bloqueadas deixam de ver seu perfil, conteúdo e fotos; o efeito é recíproco.</p>
+    <h2>Presença e fotos</h2><p>O check-in é voluntário, dura até duas horas e pode ser encerrado a qualquer momento. Não coletamos localização contínua. As fotos enviadas pelo aplicativo são reduzidas e convertidas, sem os metadados do arquivo original. Não publique informações sensíveis de outras pessoas. Quem consegue ver uma foto pode copiá-la; o bloqueio não apaga cópias feitas anteriormente.</p>
+    <h2>Armazenamento e sessão</h2><p>Supabase armazena as contas, dados e fotos; o banco está em São Paulo. Vercel hospeda o aplicativo. Esses fornecedores também processam informações técnicas de acesso e segurança. Cookies mantêm sua sessão. O Pico não usa anúncios, rastreamento publicitário nem cache offline de conteúdo privado. Depois de sair, entrar novamente é necessário para ler seus dados.</p>
+    <h2>Seu controle</h2><p>Você pode editar seu perfil, remover a foto, excluir suas publicações e comentários, desfazer conexões e encerrar check-ins. Em <Link href="/conta">Privacidade e conta</Link>, é possível desbloquear pessoas, acompanhar denúncias, remover fotos sem uso e excluir a conta com confirmação de senha.</p>
+    <h2>Exclusão e limites</h2><p>A exclusão remove a identidade, arquivos e dados sociais vinculados da base ativa. Registros técnicos mantidos pelos fornecedores seguem a retenção deles; o app não promete apagar imediatamente registros fora da base ativa ou cópias feitas por outras pessoas. Denúncias são analisadas pela operação, sem remoção automática por quantidade. Este beta ainda depende da definição de um canal externo de contato e de uma rotina operacional de retenção antes de convites públicos.</p>
+    <p><Link href="/conta">Gerenciar minha conta</Link> · <Link href="/recuperar">Recuperar acesso</Link></p>
+  </main></div>;
+}

@@ -3,7 +3,7 @@ import type { Database } from '../../types/database';
 import { ReadError } from './read-errors.ts';
 
 const arenaFields = 'id, slug, name, description, neighborhood, city, image_path, is_demo, arena_sports(sports(id, slug, name))' as const;
-const profileFields = 'id, username, display_name, bio, city, neighborhood, available, is_demo, onboarding_completed, player_sports(level, is_primary, sports(id, slug, name))' as const;
+const profileFields = 'id, username, display_name, bio, city, neighborhood, avatar_path, available, is_demo, onboarding_completed, player_sports(level, is_primary, sports(id, slug, name))' as const;
 export const ARENA_PAGE_SIZE = 24;
 
 export function listSports(client: SupabaseClient<Database>) {

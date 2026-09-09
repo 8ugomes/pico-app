@@ -1,5 +1,21 @@
 # Pico — plano de produto
 
+## Ciclo 8 · AUDIT / PLAN · 9 de setembro de 2026
+
+Baseline confirmado: main 26619e7, Vercel publicada, Supabase bxjhqxdfknspxezgftyz, cinco migrations remotas, Auth e núcleo social reais. Não recriar infraestrutura. Lacunas: mídia, bloqueio/denúncia, recuperação, exclusão de conta, limites de abuso e privacidade.
+
+Execução: migration aditiva para bloqueios bilaterais, denúncias privadas e limites transacionais; buckets privados e uploads normalizados no servidor; integrar avatar, mídia, exclusão de conteúdo próprio e segurança da conta; revisar sessão/mobile/PWA sem cache privado; aplicar apenas migrations novas, gerar tipos e testar duas contas no app publicado; documentar, commitar, publicar e conferir produção.
+
+Uploads e exclusão administrativa exigem SUPABASE_SECRET_KEY exclusivamente no servidor. Leitura de imagem usa sessão e RLS a cada acesso, sem URLs públicas ou assinadas. Arquivos são limitados por tamanho, quantidade e frequência; processamento remove metadados. Bloqueio oculta dados sociais nos dois sentidos, inclusive mídia. Denúncias ficam privadas para autor e operação, sem punição automática por contagem. Exclusão pede senha novamente e remove arquivos antes da identidade.
+
+Não contratar SMTP nem serviço pago. A entrega externa de recuperação/validação de e-mail e testes em aparelhos físicos continuam gates explícitos se não puderem ser comprovados. Implementar e validar todo o restante antes do fechamento.
+
+## Ciclo 8 · VERIFY / DOCUMENT
+
+Entregues avatar e posts com fotos privadas, bloqueio bilateral, denúncia/triagem, exclusão própria de conteúdo e conta, recuperação de acesso, limites transacionais e descarte de telas após troca de identidade. Aplicadas quatro migrations novas; nove no remoto. Nenhum projeto, seed ou migration anterior foi recriado. Tipos gerados do Supabase, 48 testes locais e validação hospedada com duas contas. Casos remotos revelaram ambiguidade de relacionamento no feed e entrega de foto após bloqueio; ambos foram corrigidos e retestados.
+
+A liberação externa continua BLOCKED por SMTP, contato/responsabilidade operacional e validações de continuidade/dispositivos. O checklist separa código entregue, serviço realmente testado e o que ainda exige o responsável. Não confundir URL pública com beta liberado.
+
 ## Integração hospedada · AUDIT / PLAN · 9 de setembro de 2026
 
 Objetivo autorizado: conectar o núcleo existente ao Supabase de desenvolvimento e ao projeto Vercel existente, sem ampliar o produto. Baseline: lint, typecheck, 43 testes e build aprovados; main inicialmente limpa em 47be8ae. Não há `.env.local`, vínculo de projeto ou credenciais de CLI disponíveis neste checkout. Autenticação das plataformas iniciada pelas páginas oficiais.

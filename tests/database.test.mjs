@@ -14,7 +14,7 @@ const invalid = (promise) => assert.rejects(promise, e => ['23503','23514','2350
 
 test('foundation applies with RLS on every exposed table and seed is idempotent', async () => {
   const tables = (await db.query(`select c.relname, c.relrowsecurity from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname='public' and c.relkind='r'`)).rows;
-  assert.equal(tables.length, 11);
+  assert.equal(tables.length, 15);
   assert.ok(tables.every(t => t.relrowsecurity));
   assert.equal((await db.query('select * from sports')).rows.length,3);
   const demo = (await db.query('select * from arenas where is_demo')).rows;

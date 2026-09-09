@@ -5,6 +5,7 @@ import { ARENA_PAGE_SIZE, getArenaBySlug, getOwnProfile, listPublicArenas, listS
 import { levels, uuidPattern } from './mutations.ts';
 import type { Level } from '../../types/social';
 import { ReadError } from './read-errors.ts';
+import { mediaUrl } from './media.ts';
 
 type ArenaResult = NonNullable<Awaited<ReturnType<typeof getArenaBySlug>>['data']>;
 // Only bundled illustration paths are ready; remote/private Storage images arrive later.
@@ -47,7 +48,7 @@ export function parseReadRequest(params: URLSearchParams): ReadRequest {
     return { resource, arenaId };
   }
   if (resource === 'sports') return { resource };
-  if (resource === 'profile') return { resource };
+  if (resource === 'profile' || resource === 'account') return { resource };
   if (resource === 'arenas') {
     const value = params.get('offset') ?? '0';
     if (!/^\d{1,5}$/.test(value) || Number(value) > 10000) throw new ReadError('invalid_request', 400);
@@ -61,11 +62,28 @@ export function parseReadRequest(params: URLSearchParams): ReadRequest {
   throw new ReadError('invalid_request', 400);
 }
 export async function readSocial(client: SupabaseClient<Database>, request: ReadRequest): Promise<ReadData> {
+  if (request.resource === 'account') {
+    const user = await requireUser(client);
+    const [blocks, reports, media, profile, posts, deletion] = await Promise.all([
+      client.from('blocks').select('blocked_id,blocked_name').eq('blocker_id',user.id).order('created_at',{ascending:false}).limit(500),
+      client.from('reports').select('id,reason,status,created_at').eq('reporter_id',user.id).order('created_at',{ascending:false}).limit(20),
+      client.from('media_assets').select('path,bucket,ready').eq('player_id',user.id).order('created_at',{ascending:false}).limit(50),
+      client.from('profiles').select('avatar_path').eq('id',user.id).maybeSingle(),
+      client.from('posts').select('image_path').eq('author_id',user.id).not('image_path','is',null).limit(50),
+      client.from('account_deletions').select('player_id').eq('player_id',user.id).maybeSingle(),
+    ]);
+    if (blocks.error || reports.error || media.error || profile.error || posts.error || deletion.error) throw new ReadError('unavailable');
+    const inUse = new Set([profile.data?.avatar_path,...(posts.data ?? []).map(p=>p.image_path)]);
+    return { kind: 'account', viewerId: user.id, deletionPending: Boolean(deletion.data), blocks: blocks.data ?? [], reports: reports.data ?? [], media: (media.data ?? []).map(m=>({...m,inUse:inUse.has(m.path)})) };
+  }
   if (request.resource === 'discover') {
     await requireUser(client);
     const { data, error } = await client.rpc('discover_players', { p_offset: request.offset, p_active: request.active, ...(request.sportId ? { p_sport_id: request.sportId } : {}), ...(request.arenaId ? { p_arena_id: request.arenaId } : {}), ...(request.level ? { p_level: request.level } : {}) });
     if (error || !data) throw new ReadError('unavailable');
-    return { kind: 'discover', players: data.slice(0, 24), hasMore: data.length > 24 };
+    const rows = data.slice(0,24);
+    const avatars = rows.length ? await client.from('profiles').select('id,avatar_path').in('id',rows.map(p=>p.id)) : { data: [], error: null };
+    if (avatars.error) throw new ReadError('unavailable');
+    return { kind: 'discover', players: rows.map(p=>({...p,avatar:mediaUrl('avatars',avatars.data?.find(a=>a.id===p.id)?.avatar_path ?? null)})), hasMore: data.length > 24 };
   }
   if (request.resource === 'player') {
     const user = await requireUser(client);
@@ -80,13 +98,16 @@ export async function readSocial(client: SupabaseClient<Database>, request: Read
     const user = await requireUser(client);
     const { data, error } = await client.rpc('read_feed', { p_offset: request.offset, ...(request.arenaId ? { p_arena_id: request.arenaId } : {}) });
     if (error || !data) throw new ReadError('unavailable');
-    return { kind: 'feed', posts: data.slice(0, 20), hasMore: data.length > 20, viewerId: user.id };
+    const rows = data.slice(0,20);
+    const media = rows.length ? await client.from('posts').select('id,image_path,profiles!posts_author_id_fkey(avatar_path)').in('id',rows.map(p=>p.id)) : { data: [], error: null };
+    if (media.error) throw new ReadError('unavailable');
+    return { kind: 'feed', posts: rows.map(p=>{ const m=media.data?.find(a=>a.id===p.id); return {...p,image:mediaUrl('post-media',m?.image_path ?? null),imagePath:m?.image_path ?? null,avatar:mediaUrl('avatars',m?.profiles?.avatar_path ?? null)}; }), hasMore: data.length > 20, viewerId: user.id };
   }
   if (request.resource === 'comments') {
-    await requireUser(client);
-    const { data, error } = await client.from('comments').select('id, body, created_at, profiles(display_name, username)').eq('post_id', request.postId).order('created_at').order('id').range(request.offset, request.offset + 20);
+    const user = await requireUser(client);
+    const { data, error } = await client.from('comments').select('id, author_id, body, created_at, profiles(display_name, username)').eq('post_id', request.postId).order('created_at').order('id').range(request.offset, request.offset + 20);
     if (error || !data) throw new ReadError('unavailable');
-    return { kind: 'comments', hasMore: data.length > 20, comments: data.slice(0, 20).flatMap(row => row.profiles ? [{ id: row.id, body: row.body, createdAt: row.created_at, name: row.profiles.display_name, username: row.profiles.username }] : []) };
+    return { kind: 'comments', viewerId: user.id, hasMore: data.length > 20, comments: data.slice(0, 20).flatMap(row => row.profiles ? [{ id: row.id, authorId: row.author_id, body: row.body, createdAt: row.created_at, name: row.profiles.display_name, username: row.profiles.username }] : []) };
   }
   if (request.resource === 'checkin') {
     const user = await requireUser(client);
@@ -123,7 +144,7 @@ export async function readSocial(client: SupabaseClient<Database>, request: Read
 function profileDto(data: NonNullable<Awaited<ReturnType<typeof getOwnProfile>>['data']>): ReadProfile {
   return {
     id: data.id, username: data.username, name: data.display_name, bio: data.bio,
-    city: data.city, neighborhood: data.neighborhood, available: data.available,
+    city: data.city, neighborhood: data.neighborhood, available: data.available, avatar: mediaUrl('avatars',data.avatar_path), avatarPath: data.avatar_path,
     isDemo: data.is_demo, onboardingCompleted: data.onboarding_completed,
     sports: data.player_sports.flatMap(link => link.sports ? [{ sport: link.sports, level: link.level, isPrimary: link.is_primary }] : []),
   };

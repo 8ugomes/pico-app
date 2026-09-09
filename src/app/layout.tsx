@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
+import { SessionGuard } from '@/components/pico/SessionGuard';
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 
@@ -17,6 +18,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="pt-BR" data-scroll-behavior="smooth" className={`${geistSans.variable} h-full antialiased`}>
       <body className="min-h-full">
+        <SessionGuard />
         <a className="skip-link" href="#main-content">Pular para o conteúdo</a>
         {children}
       </body>

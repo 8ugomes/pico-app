@@ -125,6 +125,8 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
         {notice && <p className={`auth-notice notice-${notice.kind}`} role={notice.kind === "error" ? "alert" : "status"}>{notice.text}</p>}
       </form>
       <p className="auth-switch">{signup ? "Já tá no Pico?" : "Ainda não tá no Pico?"} <Link href={signup ? "/login" : "/signup"}>{signup ? "Entrar" : "Criar conta"}</Link></p>
+      {!signup && <p className="auth-switch"><Link href="/recuperar">Esqueci minha senha</Link></p>}
+      <p className="auth-switch"><Link href="/privacidade">Privacidade no Pico</Link></p>
     </>
   );
 }

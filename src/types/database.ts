@@ -14,6 +14,29 @@ export type Database = {
   }
   public: {
     Tables: {
+      account_deletions: {
+        Row: {
+          player_id: string
+          requested_at: string
+        }
+        Insert: {
+          player_id: string
+          requested_at?: string
+        }
+        Update: {
+          player_id?: string
+          requested_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "account_deletions_player_id_fkey"
+            columns: ["player_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       arena_members: {
         Row: {
           arena_id: string
@@ -115,6 +138,42 @@ export type Database = {
           slug?: string
         }
         Relationships: []
+      }
+      blocks: {
+        Row: {
+          blocked_id: string
+          blocked_name: string
+          blocker_id: string
+          created_at: string
+        }
+        Insert: {
+          blocked_id: string
+          blocked_name?: string
+          blocker_id?: string
+          created_at?: string
+        }
+        Update: {
+          blocked_id?: string
+          blocked_name?: string
+          blocker_id?: string
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "blocks_blocked_id_fkey"
+            columns: ["blocked_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "blocks_blocker_id_fkey"
+            columns: ["blocker_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       checkins: {
         Row: {
@@ -233,6 +292,38 @@ export type Database = {
           },
         ]
       }
+      media_assets: {
+        Row: {
+          bucket: string
+          created_at: string
+          path: string
+          player_id: string
+          ready: boolean
+        }
+        Insert: {
+          bucket: string
+          created_at?: string
+          path: string
+          player_id: string
+          ready?: boolean
+        }
+        Update: {
+          bucket?: string
+          created_at?: string
+          path?: string
+          player_id?: string
+          ready?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "media_assets_player_id_fkey"
+            columns: ["player_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       player_sports: {
         Row: {
           is_primary: boolean
@@ -332,6 +423,13 @@ export type Database = {
         }
         Relationships: [
           {
+            foreignKeyName: "post_image_asset"
+            columns: ["image_path"]
+            isOneToOne: false
+            referencedRelation: "media_assets"
+            referencedColumns: ["path"]
+          },
+          {
             foreignKeyName: "posts_arena_id_sport_id_fkey"
             columns: ["arena_id", "sport_id"]
             isOneToOne: false
@@ -387,7 +485,83 @@ export type Database = {
           onboarding_completed?: boolean
           username?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "profile_avatar_asset"
+            columns: ["avatar_path"]
+            isOneToOne: false
+            referencedRelation: "media_assets"
+            referencedColumns: ["path"]
+          },
+        ]
+      }
+      reports: {
+        Row: {
+          comment_id: string | null
+          created_at: string
+          details: string
+          id: string
+          player_id: string | null
+          post_id: string | null
+          reason: string
+          reporter_id: string
+          reviewed_at: string | null
+          status: string
+        }
+        Insert: {
+          comment_id?: string | null
+          created_at?: string
+          details?: string
+          id?: string
+          player_id?: string | null
+          post_id?: string | null
+          reason: string
+          reporter_id?: string
+          reviewed_at?: string | null
+          status?: string
+        }
+        Update: {
+          comment_id?: string | null
+          created_at?: string
+          details?: string
+          id?: string
+          player_id?: string | null
+          post_id?: string | null
+          reason?: string
+          reporter_id?: string
+          reviewed_at?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reports_comment_id_fkey"
+            columns: ["comment_id"]
+            isOneToOne: false
+            referencedRelation: "comments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reports_player_id_fkey"
+            columns: ["player_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reports_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reports_reporter_id_fkey"
+            columns: ["reporter_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       sports: {
         Row: {
@@ -412,6 +586,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      can_read_media: {
+        Args: { p_bucket: string; p_path: string }
+        Returns: boolean
+      }
       discover_players: {
         Args: {
           p_active?: boolean
@@ -460,6 +638,7 @@ export type Database = {
           username: string
         }[]
       }
+      reserve_media: { Args: { p_bucket: string }; Returns: string }
       save_profile: {
         Args: {
           p_available: boolean

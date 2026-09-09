@@ -7,8 +7,10 @@ export async function GET(request: Request) {
   const client = await createClient();
   if (code && client) {
     try {
-      const { error } = await client.auth.exchangeCodeForSession(code);
-      if (!error) return NextResponse.redirect(new URL("/perfil", url.origin), { headers: { "Cache-Control": "private, no-store" } });
+      const { data, error } = await client.auth.exchangeCodeForSession(code);
+      // Auth's PKCE exchange returns the stored recovery redirect type at
+      // runtime; the public AuthTokenResponse type omits this extra field.
+      if (!error) return NextResponse.redirect(new URL('redirectType' in data && data.redirectType === 'recovery' ? '/redefinir-senha' : '/perfil', url.origin), { headers: { "Cache-Control": "private, no-store" } });
     } catch {
       // Render the recoverable error state without exposing tokens or provider details.
     }
