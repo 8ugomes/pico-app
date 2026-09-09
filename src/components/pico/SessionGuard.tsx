@@ -1,4 +1,5 @@
 'use client';
+import { clearInvitation } from '@/lib/auth/navigation';
 import { useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
 export function SessionGuard() {
@@ -11,6 +12,7 @@ export function SessionGuard() {
       if(initialized && identity && identity!==next){
         // Full navigation discards all account-scoped component drafts and
         // decoded photos, including across tabs and browser history restores.
+        clearInvitation();
         window.location.replace(next?'/perfil':'/login');
       }
       identity=next;

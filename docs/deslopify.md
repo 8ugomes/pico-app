@@ -159,3 +159,11 @@ Próximo avanço: validar o ambiente Supabase de desenvolvimento com duas contas
 ## Ciclo 9.7
 
 9.7: avatar circular com saída quadrada; capa 3:1; posts original/1:1/4:5/16:9. Zoom por toque/teclado/slider e rotação. Cancelamento/falha preserva referência. HEIC exige exportação explícita; sem promessa de suporte. Modal respeita cancelamento durante envio.
+
+
+9.8: explicar qual convite é aceito e qual conta está em uso; não perder destino ao entrar. E-mail aberto em outro contexto pede confirmação visível, sem consumir por GET.
+
+
+## Ciclo 9.8
+
+9.8: abrir link não consome convite, entrar não perde destino. Recuperação esclarece que navegador e PWA têm sessões diferentes. Sem declarar recebimento de e-mail sem caixa verificada.

@@ -92,3 +92,8 @@ Próximo avanço: validar o ambiente Supabase de desenvolvimento com duas contas
 ## Ciclo 9.7
 
 Ciclo 9.7: recorte reutilizável (react-easy-crop 6.2.3, MIT), preparação local limitada, autorização de fotos por recurso, proteção contra remoção concorrente de arquivos em uso. 66 testes locais aprovados.
+
+
+## Ciclo 9.8
+
+9.8: contexto seguro de convites por aba, revogação de convite de comunidade, confirmação/recovery explícitos entre contextos com templates versionados; nenhum envio externo. 68 testes.

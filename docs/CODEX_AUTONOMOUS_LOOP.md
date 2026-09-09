@@ -237,3 +237,8 @@ Próximo avanço: validar o ambiente Supabase de desenvolvimento com duas contas
 ## Ciclo 9.7
 
 9.7 VERIFY / DOCUMENT / NEXT: migrations 096000/096100 aplicadas somente em desenvolvimento; tipos gerados do remoto; 66 testes, lint/types/build aprovados. Nenhuma migração aplicada foi reescrita. Próximo 9.8: convites em navegação autenticada, recuperação entre contextos e pendência SMTP solicitada pelo responsável.
+
+
+## Ciclo 9.8
+
+9.8 VERIFY / NEXT: 68 testes, lint/types/build. Testes de convite errado/expirado/revogado/reutilizado e isolamento de destino. SMTP fica nos to-dos por solicitação do responsável. Próximo: 9.9 PWA, retomada, rede e atualização sem descarte silencioso de formulários.

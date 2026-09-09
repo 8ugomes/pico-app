@@ -221,3 +221,11 @@ Próximo avanço: validar o ambiente Supabase de desenvolvimento com duas contas
 ## Ciclo 9.7
 
 9.7 entregue: editor sob demanda, limites 20 MB/25 MP, pixels recortados com orientação, fotos privadas por arena/grupo, coleta de órfãos serializada. 66 testes, lint, types e build passaram. UI e Storage hospedado ficam para regressão integrada.
+
+
+9.8 PLAN: preservar contexto de convite por aba e prazo curto; aceite sempre explícito. Suportar confirmação/recovery por token oficial com POST, preservando PKCE. Templates e SMTP separados; nenhuma entrega externa será presumida.
+
+
+## Ciclo 9.8
+
+9.8 VERIFY: convites preservam destino na aba por 30 minutos, revogação disponível em gestão de grupos; confirmação/recovery usam verifyOtp em POST explícito; PKCE mantido para links existentes. 68 testes locais + lint/types/build aprovados. Templates/origins exclusivos configurados em desenvolvimento; beta depende do deploy interno. SMTP/entrega externa permanecem pendência do responsável.
