@@ -20,7 +20,7 @@ export function ConnectedProfile() {
     {state.status === 'loading' && <ReadLoading />}
     {(state.status === 'error' || state.status === 'demo') && <ReadFailure state={state} retry={retry} />}
     {profile && <>
-      <ConnectedSource />
+      <ConnectedSource /><p className="form-note"><Link href="/admin">Gerenciar meus Picos</Link></p>
       {savedId === profile.id && <p className="auth-notice notice-success" role="status">Perfil atualizado.</p>}
       {(editing || !profile.onboardingCompleted) && <ProfileEditor key={profile.id} profile={profile} done={(wasSaved) => { setEditing(false); setSavedId(wasSaved ? profile.id : null); if (wasSaved) retry(); }} />}
       {!editing && profile.onboardingCompleted && <><div className="read-profile-identity"><RemoteAvatar src={profile.avatar} name={profile.name} /><div><h2>{profile.name}</h2><p>@{profile.username}</p>{profile.isDemo && <span className="sport-label">Perfil de demonstração</span>}</div></div>

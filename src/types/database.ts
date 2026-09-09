@@ -42,16 +42,19 @@ export type Database = {
           arena_id: string
           created_at: string
           player_id: string
+          status: string
         }
         Insert: {
           arena_id: string
           created_at?: string
           player_id?: string
+          status?: string
         }
         Update: {
           arena_id?: string
           created_at?: string
           player_id?: string
+          status?: string
         }
         Relationships: [
           {
@@ -100,9 +103,44 @@ export type Database = {
           },
         ]
       }
+      arena_staff: {
+        Row: {
+          arena_id: string
+          player_id: string
+          role: string
+        }
+        Insert: {
+          arena_id: string
+          player_id: string
+          role: string
+        }
+        Update: {
+          arena_id?: string
+          player_id?: string
+          role?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "arena_staff_arena_id_fkey"
+            columns: ["arena_id"]
+            isOneToOne: false
+            referencedRelation: "arenas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "arena_staff_player_id_fkey"
+            columns: ["player_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       arenas: {
         Row: {
+          avatar_path: string | null
           city: string
+          cover_path: string | null
           created_at: string
           description: string
           id: string
@@ -111,10 +149,16 @@ export type Database = {
           is_public: boolean
           name: string
           neighborhood: string
+          owner_id: string | null
+          public_info: string
           slug: string
+          status: string
+          version: number
         }
         Insert: {
+          avatar_path?: string | null
           city: string
+          cover_path?: string | null
           created_at?: string
           description?: string
           id?: string
@@ -123,10 +167,16 @@ export type Database = {
           is_public?: boolean
           name: string
           neighborhood: string
+          owner_id?: string | null
+          public_info?: string
           slug: string
+          status?: string
+          version?: number
         }
         Update: {
+          avatar_path?: string | null
           city?: string
+          cover_path?: string | null
           created_at?: string
           description?: string
           id?: string
@@ -135,9 +185,21 @@ export type Database = {
           is_public?: boolean
           name?: string
           neighborhood?: string
+          owner_id?: string | null
+          public_info?: string
           slug?: string
+          status?: string
+          version?: number
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "arenas_owner_id_fkey"
+            columns: ["owner_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       blocks: {
         Row: {
@@ -622,6 +684,20 @@ export type Database = {
       }
       end_checkin: { Args: never; Returns: undefined }
       environment_identity: { Args: never; Returns: Json }
+      management_context: { Args: never; Returns: Json }
+      operator_action: {
+        Args: {
+          p_action: string
+          p_scope_id?: string
+          p_target_id?: string
+          p_value?: string
+        }
+        Returns: Json
+      }
+      operator_read: {
+        Args: { p_context: string; p_scope_id?: string }
+        Returns: Json
+      }
       read_feed: {
         Args: { p_arena_id?: string; p_offset?: number }
         Returns: {
@@ -655,6 +731,10 @@ export type Database = {
           p_sport_id: string
           p_username: string
         }
+        Returns: undefined
+      }
+      set_arena_membership: {
+        Args: { p_arena: string; p_join: boolean }
         Returns: undefined
       }
       start_checkin: {

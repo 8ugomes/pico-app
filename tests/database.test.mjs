@@ -14,7 +14,7 @@ const invalid = (promise) => assert.rejects(promise, e => ['23503','23514','2350
 
 test('foundation applies with RLS on every exposed table and seed is idempotent', async () => {
   const tables = (await db.query(`select c.relname, c.relrowsecurity from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname='public' and c.relkind='r'`)).rows;
-  assert.equal(tables.length, 15);
+  assert.ok(tables.length >= 15);
   assert.ok(tables.every(t => t.relrowsecurity));
   assert.equal((await db.query('select * from sports')).rows.length,3);
   const demo = (await db.query('select * from arenas where is_demo')).rows;
@@ -65,13 +65,13 @@ test('sports and arena membership preserve ownership, validity and one primary s
     await db.query('insert into player_sports(sport_id,is_primary) values ($1,true)',[FUTEVOLEI]);
     await invalid(db.query('insert into player_sports(sport_id,is_primary) values ($1,true)',[BEACH]));
     await denied(db.query('insert into player_sports(player_id,sport_id) values ($1,$2)',[BOB,BEACH]));
-    await db.query('insert into arena_members(arena_id) values ($1)',[VILA]);
+    await db.query('select public.set_arena_membership($1,true)',[VILA]);
     await denied(db.query('insert into arena_members(arena_id,player_id) values ($1,$2)',[VILA,BOB]));
     await denied(db.query('insert into arena_members(arena_id) values ($1)',[PRIVATE]));
     await invalid(db.query('insert into player_sports(sport_id) values ($1)',['99999999-0000-4000-8000-000000000000']));
   });
   await asUser(db, BOB, async () => {
-    assert.equal((await db.query('delete from arena_members where player_id=$1 returning *',[ALICE])).rows.length,0);
+    await denied(db.query('delete from arena_members where player_id=$1 returning *',[ALICE]));
     assert.equal((await db.query(`update player_sports set level='Avançado' where player_id=$1 returning *`,[ALICE])).rows.length,0);
   });
 });

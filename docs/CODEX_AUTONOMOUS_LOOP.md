@@ -1,5 +1,9 @@
 # Pico — Ciclo Autônomo de Evolução
 
+## Ciclo 9.2 — papéis e gestão
+
+Migration 20260910091000 aplicada somente no desenvolvimento exclusivo. Papéis globais privados e papéis escopados de arena, RPCs autorizadas, interface /admin, confirmação/reautenticação para ações sensíveis e auditoria mínima. Transferência bloqueia a arena na transação e exige participante aprovado; dono excluído deixa arena em custódia, sem apagar o local. Participação suspensa não pode ser recriada por escrita direta. 54 testes locais, lint, typecheck e build isolado aprovados; testes positivos/negativos de gestão e bootstrap em PostgreSQL descartável; regressão de interface hospedada ficará no 9.11. Membro não lê lista administrativa nem concede papel a si; dono de A não interfere em B.
+
 ## Ciclo 9.1 — isolamento e admissão
 
 Desenvolvimento exclusivo provisionado em tsebpkfnxjvhntosbkdu (Free), sem cópia de dados. Beta existente preservado e fechado por admissão no banco, inclusive JWT antigo; bootstrap executado somente no UID de @hugo confirmado pelo usuário. Migration aditiva 20260910090000 aplicada primeiro no desenvolvimento e depois no beta. Hook oficial Before User Created restringe cadastro direto por convite de e-mail exato; beta exige confirmação. SMTP permanece dependência operacional solicitada pelo usuário, sem convites externos.
