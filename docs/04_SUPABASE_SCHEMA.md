@@ -112,3 +112,8 @@ Referências consultadas: [getUser](https://supabase.com/docs/reference/javascri
 ## Cycle 3 · onboarding
 
 Migration 20260909030000_profile_onboarding.sql: save_profile com SECURITY INVOKER, RLS e lock no próprio perfil. Troca do esporte principal e campos sociais em uma transação. UUID do jogador vem exclusivamente de auth.uid(). API POST /api/social/mutate valida origem, tamanho, campos e getUser; erros do banco são normalizados. Leituras privadas permanecem em Route Handlers com renovação de cookies, sem Server Components privados.
+
+
+## Cycle 4 · check-in implementado
+
+Migration 20260909040000_checkin.sql cria start_checkin(arena_id,sport_id) e end_checkin(), SECURITY DEFINER com search_path vazio e EXECUTE somente authenticated. Ambas travam profiles.id = auth.uid(); start valida e trava arena pública/modalidade, encerra anterior e usa clock_timestamp + 2h. Não há grants de escrita direta. RLS continua ocultando presença expirada/encerrada e arena privada. API de leitura retorna presença própria separadamente e até 24 outras presenças.

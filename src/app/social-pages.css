@@ -169,7 +169,7 @@
 .arena-card-content h2, .arena-detail-header h1, .arena-about p { overflow-wrap: anywhere; }
 
 /* Connected forms share the social surfaces and remain readable with a mobile keyboard. */
-.connected-panel { padding: 22px; border: 1px solid var(--border); border-radius: 24px; background: var(--surface); margin: 20px 0; }
+.connected-panel { padding: 22px; border: 1px solid rgb(255 255 255 / 10%); border-radius: 24px; background: var(--graphite); margin: 20px 0; }
 .connected-panel h2 { margin-bottom: 10px; font-size: 22px; }
 .connected-form { margin-top: 20px; }
 .connected-form fieldset { border: 0; padding: 0; min-width: 0; display: grid; gap: 18px; }

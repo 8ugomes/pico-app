@@ -35,6 +35,8 @@ export type Database = {
     };
     Views: Record<never, never>;
     Functions: {
+      start_checkin: { Args: { arena_id: string; sport_id: string }; Returns: string };
+      end_checkin: { Args: Record<string, never>; Returns: undefined };
       save_profile: { Args: { p_name: string; p_username: string; p_bio: string; p_city: string; p_neighborhood: string; p_sport_id: string; p_level: Level; p_available: boolean }; Returns: undefined };
     };
     Enums: { sport_slug: SportId; player_level: Level };

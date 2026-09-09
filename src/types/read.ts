@@ -10,11 +10,13 @@ export type ReadProfile = {
   neighborhood: string; available: boolean; isDemo: boolean; onboardingCompleted: boolean;
   sports: { sport: ReadSport; level: Level; isPrimary: boolean }[];
 };
-export type ReadRequest = { resource: 'arenas'; offset: number } | { resource: 'arena'; slug: string } | { resource: 'profile' } | { resource: 'sports' };
+export type ReadPresence = { id: string; playerId: string; name: string; username: string; arena: { id: string; name: string; slug: string }; sport: ReadSport; expiresAt: string };
+export type ReadRequest = { resource: 'arenas'; offset: number } | { resource: 'arena'; slug: string } | { resource: 'profile' } | { resource: 'sports' } | { resource: 'checkin'; arenaId?: string };
 export type ReadData =
   | { kind: 'arenas'; arenas: ReadArena[]; sports: ReadSport[]; hasMore: boolean; offset: number }
   | { kind: 'arena'; arena: ReadArena }
   | { kind: 'profile'; profile: ReadProfile }
-  | { kind: 'sports'; sports: ReadSport[] };
+  | { kind: 'sports'; sports: ReadSport[] }
+  | { kind: 'checkin'; own: ReadPresence | null; presence: ReadPresence[] };
 export type ReadErrorCode = 'configuration' | 'authentication' | 'profile_missing' | 'not_found' | 'unavailable' | 'invalid_request';
 export type ReadResponse = { status: 'success'; data: ReadData } | { status: 'demo' } | { status: 'error'; code: ReadErrorCode; message: string };

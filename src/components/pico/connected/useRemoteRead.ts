@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import type { ReadResponse } from '@/types/read';
 
@@ -38,5 +38,6 @@ export function useRemoteRead(query: string) {
     return () => { window.removeEventListener('focus', refresh); subscription?.unsubscribe(); };
   }, []);
   const state: ReadState = result?.query === query && result.attempt === attempt ? result.state : { status: 'loading' };
-  return { state, retry: () => setAttempt(value => value + 1) };
+  const retry = useCallback(() => setAttempt(value => value + 1), []);
+  return { state, retry };
 }

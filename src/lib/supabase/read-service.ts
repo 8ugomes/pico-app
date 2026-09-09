@@ -1,7 +1,7 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 import type { Database } from '../../types/database';
-import type { ReadArena, ReadData, ReadRequest } from '../../types/read';
-import { ARENA_PAGE_SIZE, getArenaBySlug, getOwnProfile, listPublicArenas, listSports } from './queries.ts';
+import type { ReadArena, ReadData, ReadRequest, ReadPresence } from '../../types/read';
+import { ARENA_PAGE_SIZE, getArenaBySlug, getOwnProfile, listPublicArenas, listSports, requireUser } from './queries.ts';
 import { ReadError } from './read-errors.ts';
 
 type ArenaResult = NonNullable<Awaited<ReturnType<typeof getArenaBySlug>>['data']>;
@@ -18,6 +18,11 @@ function arenaDto(row: ArenaResult): ReadArena {
 }
 export function parseReadRequest(params: URLSearchParams): ReadRequest {
   const resource = params.get('resource');
+  if (resource === 'checkin') {
+    const arenaId = params.get('arenaId') ?? undefined;
+    if (arenaId && !/^[0-9a-f]{8}-[0-9a-f-]{27}$/i.test(arenaId)) throw new ReadError('invalid_request', 400);
+    return { resource, arenaId };
+  }
   if (resource === 'sports') return { resource };
   if (resource === 'profile') return { resource };
   if (resource === 'arenas') {
@@ -33,6 +38,17 @@ export function parseReadRequest(params: URLSearchParams): ReadRequest {
   throw new ReadError('invalid_request', 400);
 }
 export async function readSocial(client: SupabaseClient<Database>, request: ReadRequest): Promise<ReadData> {
+  if (request.resource === 'checkin') {
+    const user = await requireUser(client);
+    const fields = 'id, player_id, expires_at, profiles(username, display_name), arena_sports(arenas(id, slug, name), sports(id, slug, name))' as const;
+    const base = () => client.from('checkins').select(fields).is('ended_at', null).gt('expires_at', new Date().toISOString());
+    let nearby = base().neq('player_id', user.id).order('started_at', { ascending: false }).order('id').limit(24);
+    if (request.arenaId) nearby = nearby.eq('arena_id', request.arenaId);
+    const [own, presence] = await Promise.all([base().eq('player_id', user.id).maybeSingle(), nearby]);
+    if (own.error || presence.error || !presence.data) throw new ReadError('unavailable');
+    const dto = (row: NonNullable<typeof own.data>): ReadPresence | null => row.profiles && row.arena_sports?.arenas && row.arena_sports.sports ? { id: row.id, playerId: row.player_id, name: row.profiles.display_name, username: row.profiles.username, arena: row.arena_sports.arenas, sport: row.arena_sports.sports, expiresAt: row.expires_at } : null;
+    return { kind: 'checkin', own: own.data ? dto(own.data) : null, presence: presence.data.flatMap(row => { const value = dto(row); return value ? [value] : []; }) };
+  }
   if (request.resource === 'sports') {
     const { data, error } = await listSports(client);
     if (error || !data) throw new ReadError('unavailable');

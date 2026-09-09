@@ -102,7 +102,7 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
       <span className="success-icon"><Check size={24} aria-hidden="true" /></span>
       <h2>Você entrou no Pico.</h2>
       <p>Sessão iniciada com <strong>{email}</strong>.</p>
-      <p>Complete seu perfil e encontre seu esporte nas arenas. Feed, descoberta e check-in continuam em demonstração.</p>
+      <p>Complete seu perfil e encontre seu esporte nas arenas. Feed e descoberta continuam em demonstração.</p>
       <Link className={buttonVariants()} href="/perfil">Ver meu perfil <ArrowUpRight size={18} aria-hidden="true" /></Link>
       <Button variant="quiet" disabled={busy} onClick={signOut}>{busy ? "Saindo…" : "Sair da conta"}</Button>
       {notice && <p className="auth-notice notice-error" role="alert">{notice.text}</p>}
