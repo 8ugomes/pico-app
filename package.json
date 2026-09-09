@@ -9,7 +9,9 @@
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit",
     "test": "node --experimental-strip-types --test tests/*.test.mjs",
-    "test:db": "node --test tests/database.test.mjs"
+    "test:db": "node --test tests/database.test.mjs",
+    "test:hosted": "node --env-file=.env.local --env-file=.env.hosted-admin tests/hosted-smoke.mjs",
+    "db:types": "node scripts/generate-database-types.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",

@@ -4,6 +4,8 @@
 
 Rede social mobile-first para futevôlei, beach tennis e vôlei de praia. Cycles 0.5–7 implementam o núcleo social conectado ao Supabase e preservam uma demonstração utilizável sem configuração.
 
+Ambiente de desenvolvimento publicado: [Pico](https://pico-app-sepia.vercel.app). Supabase `pico-dev` em São Paulo, migrations aplicadas, tipos gerados e 149 verificações hospedadas aprovadas com duas contas. [Ambiente, Auth, deploy e comandos de manutenção](docs/HOSTED_SUPABASE.md).
+
 ## Rodar
 
 Node.js 24 e npm 11:
@@ -19,7 +21,7 @@ Abra [Pico local](http://localhost:3000). A entrada abre /feed. O cache npm loca
 
 | Tela | Com Supabase configurado |
 | --- | --- |
-| /signup, /login | Cadastro por e-mail/senha, confirmação PKCE, login e logout |
+| /signup, /login | Cadastro por e-mail/senha, login e logout; callback PKCE quando confirmação estiver habilitada |
 | /perfil | Onboarding e edição de nome, username, bio, cidade/bairro, esporte principal, nível e disponibilidade |
 | /arenas | Catálogo público com busca, filtros e paginação |
 | /arenas/[slug] | Arena, modalidades, início de check-in e mural de posts |
@@ -40,7 +42,7 @@ Configuração parcial/inválida ou serviço indisponível produz erro; nunca tr
 
 1. Copie .env.example para .env.local e preencha NEXT_PUBLIC_SUPABASE_URL e NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY com valores públicos do projeto.
 2. Aplique **todas** as migrations versionadas em ordem. Use o fluxo de migrations do Supabase; em projeto existente, não reaplique manualmente migrations já registradas. seed.sql é opcional e exclusivamente para desenvolvimento: três esportes e três arenas fictícias, sem usuários.
-3. Habilite e-mail/senha e confirmação de e-mail. Configure Site URL como http://localhost:3000 e permita http://localhost:3000/auth/callback nas Redirect URLs. Ajuste os dois endereços no ambiente de publicação.
+3. Habilite e-mail/senha e configure as URLs permitidas. O pico-dev já permite localhost e Vercel e usa cadastro imediato. Para confirmação de e-mail a usuários externos, configure SMTP próprio antes de habilitá-la; o SMTP padrão aceita apenas membros da organização.
 4. Preserve o template PKCE com `{{ .ConfirmationURL }}`; abra a confirmação no mesmo navegador do cadastro. A confirmação e o login levam a /perfil.
 5. Reinicie npm run dev. Em hospedagem, configure as variáveis e gere um novo build.
 
@@ -48,7 +50,7 @@ Nunca use service_role, secret key, senha ou token em Git/NEXT_PUBLIC_*. O aplic
 
 Leituras privadas ficam em Route Handlers que podem renovar cookies; as páginas entregam componentes clientes e não consultam dados privados no Server Component. Implementar proxy de renovação antes de adicionar SSR privado. APIs usam private/no-store; o foco atual é segurança da sessão, não cache de dados privados.
 
-[Schema, grants e RPCs](docs/04_SUPABASE_SCHEMA.md). Os tipos são manuais e alinhados às migrations; substitua por tipos gerados após aplicar o schema no projeto alvo.
+[Schema, grants e RPCs](docs/04_SUPABASE_SCHEMA.md). src/types/database.ts é gerado diretamente do banco hospedado por `npm run db:types`; não editar manualmente.
 
 ## Qualidade e evidência
 
@@ -59,9 +61,9 @@ npm run typecheck
 npm run build
 ```
 
-Testes automatizados executam migrations/seeds/RLS em PostgreSQL/PGlite descartável, regras demo, validação de entradas e SDK. Testes de duas identidades incluem tentativas de autoria forjada, edição alheia, rollback, auto-conexão, arena privada, combinação inválida, paginação e expiração. São evidência local, **não validação de Supabase hospedado**.
+Os 43 testes padrão executam migrations/seeds/RLS em PostgreSQL/PGlite descartável, regras demo, validação de entradas e SDK. Testes de duas identidades incluem tentativas de autoria forjada, edição alheia, rollback, auto-conexão, arena privada, combinação inválida, paginação e expiração. Essa suíte é independente do serviço remoto.
 
-A jornada cadastro → perfil → arena → check-in → feed → descoberta foi exercitada no navegador com SQL real local e transporte Auth/REST simulado. Não foram validados JWT real, entrega de e-mail, refresh de tokens hospedados, concorrência de múltiplas conexões PostgreSQL nem instalação em aparelho físico. Veja o [checklist beta](docs/BETA_CHECKLIST.md).
+Além da fixture local, `tests/hosted-smoke.mjs` passou em 149 checks pelos origins localhost e Vercel contra Auth/PostgREST reais: duas contas, jornada social, JWT, refresh, tentativas de autoria forjada e check-ins concorrentes. Callback PKCE local e remoto foi validado com tokens da conta descartável; entrega na caixa de e-mail e dispositivos físicos continuam pendentes. Veja [como reproduzir](docs/HOSTED_SUPABASE.md) e o [checklist beta](docs/BETA_CHECKLIST.md).
 
 ## Reproduzir a integração local isolada
 

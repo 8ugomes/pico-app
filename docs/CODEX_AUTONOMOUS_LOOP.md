@@ -1,8 +1,14 @@
 # Pico — Ciclo Autônomo de Evolução
 
-## Estado atual · Cycle 7
+## Integração hospedada · VERIFY / DOCUMENT
 
-Cycles 3–7 implementados. Núcleo social integrado em todas as rotas; jornada local validada, documentação e checklist beta atualizados. Supabase hospedado segue pendente; nenhum dado de teste foi enviado a um serviço externo. As seções de plano/auditoria abaixo são registros históricos.
+Supabase pico-dev criado no Free em São Paulo, linked; cinco migrations e seed aplicados após dry-run. Onze tabelas com RLS, 27 policies e cinco RPCs autenticadas auditadas. Tipos gerados do banco substituem o contrato manual. Vercel Hobby: https://pico-app-sepia.vercel.app, duas variáveis públicas em todos os ambientes; deploy por CLI, sem alterar Samba.
+
+Verificação: 43 testes locais, lint/typecheck/build, 149 checks hospedados com duas contas pelos origins local/Vercel, autoria negada, JWT/refresh reais e quatro check-ins simultâneos com um único ativo. Callback PKCE local/remoto validado antes de habilitar cadastro imediato no dev; SMTP padrão é restrito à equipe. Interface publicada exercitada com cadastro, onboarding, recarga, check-in, post, like e comentário. Evidências e limites em HOSTED_SUPABASE.md. Nenhuma feature ou redesign adicionado.
+
+## Cycles 0.5–7 · histórico da validação local
+
+Núcleo social implementado e validado localmente nos Cycles 3–7. As seções abaixo preservam as evidências e pendências da época; a integração hospedada atual está registrada acima.
 
 ## Cycle 3 — Real auth and profile · AUDIT / PLAN
 

@@ -1,0 +1,6 @@
+.env*
+.npm-cache
+.next*
+supabase/.temp
+tests
+docs

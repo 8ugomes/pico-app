@@ -88,7 +88,7 @@ export async function mutateSocial(client: SupabaseClient<Database>, input: Muta
     if (error) mutationFailure(error); return;
   }
   if (input.action === 'end_checkin') {
-    const { error } = await client.rpc('end_checkin', {});
+    const { error } = await client.rpc('end_checkin');
     if (error) mutationFailure(error); return;
   }
   const { error } = await client.rpc('save_profile', {

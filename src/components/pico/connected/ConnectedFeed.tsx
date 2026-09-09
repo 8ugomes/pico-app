@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Heart, MessageCircle, UserRound, Send } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import type { ReadArena } from '@/types/read';
-import type { FeedRow } from '@/types/database';
+import type { FeedRow } from '@/types/read';
 import { PageHeading, EmptyState, SportIcon } from '../SocialUI';
 import { useRemoteRead } from './useRemoteRead';
 import { ReadFailure, ReadLoading, ConnectedSource } from './ReadState';

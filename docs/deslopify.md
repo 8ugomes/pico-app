@@ -1,8 +1,14 @@
 # Pico — Deslopify
 
-## Estado atual · Cycle 7
+## Integração hospedada · critérios antes da execução
 
-Cycles 3–7 implementados. Núcleo social integrado em todas as rotas; jornada local validada, documentação e checklist beta atualizados. Supabase hospedado segue pendente; nenhum dado de teste foi enviado a um serviço externo. As seções de plano/auditoria abaixo são registros históricos.
+Preservar a interface e o escopo dos Cycles 0.5–7. Com configuração real, todas as telas devem mostrar apenas leituras confirmadas, estados vazios ou erros recuperáveis. Nenhuma falha de Auth/PostgREST pode revelar o demo. Arenas fictícias persistidas continuam identificadas como demonstração; usuários descartáveis de validação devem ser removidos ao terminar. Confirmar sessão, recarga, callback e troca de conta sem expor tokens, dados anteriores ou mensagens internas do banco.
+
+## Integração hospedada · aprendizado
+
+A interface existente funcionou com dados reais sem redesign. Perfil permanece após recarga; check-in recebe prazo do banco; publicação, like e comentário só confirmam após persistência. Feed vazio e ausência de outros jogadores orientam sem inventar atividade. Em 390px, feed conectado sem overflow; arenas seed seguem rotuladas Demo e contas não recebem foto fictícia. Os detalhes de CLI, RLS e plano SMTP ficaram na documentação técnica.
+
+As seções de Cycles 0.5–7 abaixo preservam o histórico anterior à validação hospedada.
 
 ## Cycle 3 — Real auth and profile · antes de implementar
 

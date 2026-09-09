@@ -1,5 +1,12 @@
-import type { FeedRow, DiscoveryRow } from './database';
+import type { Database } from './database';
 import type { Level, SportId } from './social';
+export type FeedRow = Database['public']['Functions']['read_feed']['Returns'][number];
+type DiscoveryResult = Database['public']['Functions']['discover_players']['Returns'][number];
+// Postgres does not expose RETURNS TABLE nullability to the type generator.
+// The optional presence comes from a LEFT JOIN in discover_players.
+export type DiscoveryRow = Omit<DiscoveryResult, 'arena_name' | 'arena_slug' | 'expires_at'> & {
+  arena_name: string | null; arena_slug: string | null; expires_at: string | null;
+};
 export type ReadSport = { id: string; slug: SportId; name: string };
 export type ReadArena = {
   id: string; slug: string; name: string; description: string;

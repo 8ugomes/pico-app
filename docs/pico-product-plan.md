@@ -1,8 +1,18 @@
 # Pico — plano de produto
 
-## Estado atual · Cycle 7
+## Integração hospedada · AUDIT / PLAN · 9 de setembro de 2026
 
-Cycles 3–7 implementados. Núcleo social integrado em todas as rotas; jornada local validada, documentação e checklist beta atualizados. Supabase hospedado segue pendente; nenhum dado de teste foi enviado a um serviço externo. As seções de plano/auditoria abaixo são registros históricos.
+Objetivo autorizado: conectar o núcleo existente ao Supabase de desenvolvimento e ao projeto Vercel existente, sem ampliar o produto. Baseline: lint, typecheck, 43 testes e build aprovados; main inicialmente limpa em 47be8ae. Não há `.env.local`, vínculo de projeto ou credenciais de CLI disponíveis neste checkout. Autenticação das plataformas iniciada pelas páginas oficiais.
+
+Sequência: identificar os projetos existentes; vincular a CLI; comparar schema/histórico e executar dry-run; aplicar apenas migrations ausentes; auditar grants/RLS/RPCs; configurar Auth e envs; gerar tipos do banco hospedado; validar duas identidades e limpar os dados descartáveis; verificar o deployment existente; atualizar evidências e publicar um commit sem force-push. Não declarar integração concluída com base nos testes locais.
+
+Antes de alterar o banco, executar uma auditoria somente de leitura. O teste hospedado deve validar tanto os Route Handlers reais quanto tentativas diretas de contornar autoria pelo PostgREST. Credenciais administrativas ficam restritas ao processo de preparação/limpeza, fora do app e do Git.
+
+## Integração hospedada · resultado
+
+Pico conectado ao projeto bxjhqxdfknspxezgftyz e publicado em https://pico-app-sepia.vercel.app. Dry-run, cinco migrations, seed, auditoria RLS/grants/RPCs e geração de tipos concluídos. Duas contas passaram por 149 checks hospedados em localhost/Vercel; callback PKCE, renovação de sessão e concorrência real validados. Lint/typecheck/43 testes/build local e remoto aprovados. Cadastro imediato é restrito à decisão do ambiente dev; SMTP público e requisitos do beta permanecem no checklist. Ver HOSTED_SUPABASE.md.
+
+As seções de Cycles 0.5–7 abaixo são históricas, anteriores à validação hospedada.
 
 ## Cycle 3 — Real auth and profile · plano corrente
 

@@ -1,6 +1,6 @@
 # Pico — checklist beta
 
-Estado: núcleo social implementado; validação em Supabase hospedado e publicação não concluídas.
+Estado: núcleo social integrado ao Supabase pico-dev e publicado na Vercel. Desenvolvimento funcional; liberação ampla ainda depende dos itens abaixo. Evidências em [HOSTED_SUPABASE.md](HOSTED_SUPABASE.md).
 
 ## Validado localmente
 
@@ -19,12 +19,16 @@ Estado: núcleo social implementado; validação em Supabase hospedado e publica
 
 ## Antes de convidar pessoas para o projeto hospedado
 
-- [ ] Aplicar migrations em Supabase de desenvolvimento, conferir grants/RLS e gerar tipos.
-- [ ] Testar com duas contas reais: cadastro, entrega/expiração de e-mail, callback PKCE, login, renovação de sessão, logout e troca entre abas.
-- [ ] Repetir a jornada contra Auth/PostgREST reais, incluindo desconexão de rede e erro após envio.
-- [ ] Disparar start/end concorrentes em múltiplas conexões PostgreSQL e confirmar um check-in ativo por jogador.
+- [x] Aplicar migrations em Supabase de desenvolvimento, conferir grants/RLS e gerar tipos.
+- [x] Duas contas reais: cadastro, login, renovação de sessão, logout, cookies e jornada social pelos origins local e Vercel; 149 checks e limpeza das contas.
+- [x] Callback PKCE local e Vercel com tokens reais da identidade descartável. Confirmação automatizada administrativamente; sem inspeção da caixa de e-mail.
+- [x] Interface publicada: cadastro, onboarding, recarga, check-in, post, curtida/comentário, encerramento, logout, erro de senha e novo login; conta limpa ao terminar.
+- [x] Quatro start_checkin concorrentes via PostgREST deixam um check-in ativo; end_checkin de B não encerra A.
+- [ ] Configurar SMTP próprio, reativar confirmação e validar entrega/expiração de e-mail antes de público externo com e-mail verificado. pico-dev usa cadastro imediato.
+- [ ] Exercitar perda de rede após envio e troca de conta entre abas no serviço hospedado; os cenários de falha controlada foram validados localmente.
 - [ ] Cadastrar arenas reais autorizadas; não apresentar seed/ilustração como local real.
-- [ ] Configurar HTTPS, URLs permitidas de Auth e variáveis do ambiente alvo; revisar backups e logs sem tokens.
+- [x] HTTPS na Vercel, URLs permitidas de Auth, variáveis públicas em Development/Preview/Production e proteção dos arquivos administrativos.
+- [ ] Definir backup/restauração e retenção de logs adequados ao beta; plano Free não equivale a estratégia de recuperação validada.
 - [ ] Definir moderação, bloqueio/denúncia, política de privacidade, exclusão de conta e recuperação de acesso para o tamanho do beta.
 - [ ] Validar iOS/Safari e Android/Chrome em aparelhos: teclado, safe area, zoom, foco, leitor de tela, retomada, instalação e atualização do manifesto.
 - [ ] Testar limites operacionais/rate limiting antes de tráfego público; contagem de testes local não comprova resistência a abuso.
@@ -33,4 +37,4 @@ Estado: núcleo social implementado; validação em Supabase hospedado e publica
 
 Nunca liberar com escrita anônima, RLS desativada, possibilidade de agir por outra pessoa, segredo no cliente ou aviso de sucesso em falha de gravação. Se surgir regressão, interromper convites e reverter o aplicativo para a última versão validada; não apagar tabelas de produção para contornar o problema.
 
-Prompt de continuidade: “Conecte o Supabase de desenvolvimento já configurado, execute os itens pendentes deste checklist com duas contas e registre evidências. Preserve os Cycles 0.5–7 e não amplie o escopo social.”
+Prompt de continuidade: “Leia HOSTED_SUPABASE.md e este checklist. Priorize os itens de preparação para beta ainda pendentes, preservando o ambiente de desenvolvimento e o núcleo social já validado.”

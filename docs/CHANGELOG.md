@@ -1,5 +1,14 @@
 # Changelog — Pico
 
+## Integração Supabase hospedada · 2026-09-09
+
+- Criado pico-dev no Supabase Free em São Paulo, com repo linked, cinco migrations e seed aplicados após dry-run; RLS das onze tabelas, 27 policies, grants e cinco RPCs auditados.
+- Configuradas envs públicas locais e Vercel Hobby; aplicação publicada em https://pico-app-sepia.vercel.app por CLI. Projetos Samba preservados; nenhuma assinatura paga.
+- Tipos gerados diretamente do banco, geração reproduzível com preservação do arquivo em falha; DTO de presença opcional separado do schema gerado. Ajustada chamada de end_checkin sem argumentos.
+- Auditoria SQL somente de leitura, teste hospedado opt-in com duas contas descartáveis e limpeza, e exclusões explícitas de credenciais/fixtures no upload Vercel.
+- 43 testes locais e 149 checks hospedados aprovados; lint/typecheck/build e smoke local/remoto passaram. Fluxo social, autoria negada, refresh, cookies e check-ins simultâneos comprovados. Callback PKCE validado localmente e na Vercel com tokens reais de conta descartável.
+- Dev usa cadastro imediato; SMTP padrão só aceita membros da equipe. Confirmação de e-mail para público externo, testes físicos e preparação de beta permanecem explícitos em HOSTED_SUPABASE.md e BETA_CHECKLIST.md.
+
 ## Rodada 2 · 2026-09-09
 
 Escopo registrado antes de implementar: revisão visual forte, seis telas sociais, estado de demonstração, navegação fixa, mocks de São Paulo, documentação Supabase e verificações completas.

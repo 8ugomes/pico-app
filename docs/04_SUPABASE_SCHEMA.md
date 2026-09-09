@@ -14,7 +14,7 @@ As onze tabelas e cinco RPCs estão versionadas. Todas as jornadas canônicas co
 
 RPCs: save_profile, start_checkin, end_checkin, read_feed e discover_players. handle_new_user é trigger sem EXECUTE do cliente.
 
-As migrations foram exercitadas em PGlite e a jornada foi integrada por uma fixture HTTP de Auth/REST. O projeto hospedado não foi alterado nem validado. Tipos manuais precisam ser regenerados após aplicar no alvo. Não há buckets/policies de Storage nem upload.
+As cinco migrations estão aplicadas no Supabase pico-dev (`bxjhqxdfknspxezgftyz`), após dry-run e comparação do banco vazio. Auditoria remota: onze tabelas com RLS, 27 policies, grants mínimos e cinco RPCs autenticadas. Tipos gerados diretamente do banco; 149 checks hospedados em localhost/Vercel com duas identidades, autoria negada e check-ins concorrentes. [Evidências e manutenção](HOSTED_SUPABASE.md). Não há buckets/policies de Storage nem upload.
 
 As seções abaixo preservam o histórico de cada ciclo; planos de recursos posteriores já entregues são substituídos pelas seções Cycles 3–6 e pelo README atual.
 
