@@ -1,40 +1,8 @@
 'use client';
-import Image from 'next/image';
-import { UserRound } from 'lucide-react';
-import { useState } from 'react';
-import { Button } from '@/components/ui/Button';
-import { mediaUrl, type MediaBucket } from '@/lib/supabase/media';
-
-export function RemoteAvatar({ src, name }: { src: string | null; name: string }) {
-  return <span className="read-profile-avatar">{src ? <Image unoptimized src={src} width={80} height={80} alt={`Foto de ${name}`} /> : <UserRound size={32} aria-label="Perfil sem foto" />}</span>;
-}
-export async function removePhoto(bucket: MediaBucket,path: string) {
-  const response=await fetch('/api/media',{method:'DELETE',headers:{'Content-Type':'application/json'},credentials:'same-origin',cache:'no-store',body:JSON.stringify({bucket,path}),signal:AbortSignal.timeout(30000)});
-  const body=await response.json();
-  if (!response.ok) throw new Error(body.message || 'Não foi possível remover a foto.');
-}
-export function PhotoUpload({ bucket, path, onChange, onBusy }: { bucket: MediaBucket; path: string | null; onChange:(path:string|null)=>void; onBusy?:(busy:boolean)=>void }) {
-  const [busy,setBusy]=useState(false), [error,setError]=useState<string|null>(null);
-  const source=mediaUrl(bucket,path);
-  return <div className="photo-upload"><label className="input-group">{bucket==='avatars'?'Foto de perfil':'Foto da publicação (opcional)'}
-    <input className="input" type="file" accept="image/jpeg,image/png,image/webp" disabled={busy || Boolean(path)} onChange={async e=>{
-      const file=e.target.files?.[0]; e.target.value=''; if (!file) return;
-      setError(null);
-      if (file.size > 3*1024*1024) { setError('Escolha uma foto de até 3 MB.'); return; }
-      setBusy(true); onBusy?.(true);
-      try {
-        const response=await fetch(`/api/media?bucket=${bucket}`,{method:'POST',headers:{'Content-Type':file.type},body:file,credentials:'same-origin',cache:'no-store',signal:AbortSignal.timeout(45000)});
-        const result=await response.json();
-        if (!response.ok || result.status!=='success') throw new Error(result.message || 'Não foi possível enviar a foto.');
-        onChange(result.data.path);
-      } catch (failure) { setError(failure instanceof Error && failure.name!=='TimeoutError'?failure.message:'Não foi possível confirmar o envio. Confira suas fotos em Privacidade e conta antes de tentar novamente.'); }
-      finally { setBusy(false); onBusy?.(false); }
-    }} /><span className="input-hint">JPG, PNG ou WebP, até 3 MB. Envie apenas fotos que você pode compartilhar.</span></label>
-    {busy && <p role="status" className="form-note">Enviando foto…</p>}
-    {source && <><Image className="upload-preview" unoptimized src={source} alt="Foto selecionada" width={400} height={300} /><Button type="button" variant="quiet" disabled={busy} onClick={async()=>{
-      if (!path) return; setBusy(true); onBusy?.(true); setError(null);
-      try { await removePhoto(bucket,path); onChange(null); } catch(failure) {setError(failure instanceof Error?failure.message:'Não foi possível remover.');} finally {setBusy(false);onBusy?.(false);}
-    }}>Remover foto selecionada</Button></>}
-    {error && <p role="alert" className="auth-notice notice-error">{error}</p>}
-  </div>;
+import Image from'next/image';import dynamic from'next/dynamic';import{UserRound}from'lucide-react';import{useEffect,useRef,useState}from'react';import{Button}from'@/components/ui/Button';import{mediaUrl,type MediaBucket}from'@/lib/supabase/media';
+const PhotoCropper=dynamic(()=>import('../photos/PhotoCropper'),{ssr:false,loading:()=> <p role="status">Abrindo editor de foto…</p>});
+export function RemoteAvatar({src,name}:{src:string|null;name:string}){return <span className="read-profile-avatar">{src?<Image unoptimized src={src} width={80} height={80} alt={`Foto de ${name}`}/>:<UserRound size={32} aria-label="Perfil sem foto"/>}</span>}
+export async function removePhoto(bucket:MediaBucket,path:string){const response=await fetch('/api/media',{method:'DELETE',headers:{'Content-Type':'application/json'},credentials:'same-origin',cache:'no-store',body:JSON.stringify({bucket,path}),signal:AbortSignal.timeout(30000)});const body=await response.json();if(!response.ok)throw Error(body.message||'Não foi possível remover a foto.')}
+export function PhotoUpload({bucket,path,onChange,onBusy,entity,mode}:{bucket:MediaBucket;path:string|null;onChange:(path:string|null)=>void;onBusy?:(busy:boolean)=>void;entity?:{kind:'arena'|'community';id:string;slot:'avatar'|'cover'};mode?:'avatar'|'cover'|'post'}){const[busy,setBusy]=useState(false),[error,setError]=useState<string|null>(null),[source,setSource]=useState<{url:string;width:number;height:number}|null>(null);const objectUrl=useRef<string|null>(null);useEffect(()=>()=>{if(objectUrl.current)URL.revokeObjectURL(objectUrl.current)},[]);const picture=mediaUrl(bucket,path);const cropMode=mode||(bucket==='avatars'?'avatar':'post');function close(){if(objectUrl.current)URL.revokeObjectURL(objectUrl.current);objectUrl.current=null;setSource(null);onBusy?.(false)}
+ return <div className="photo-upload"><label className="input-group">{cropMode==='avatar'?'Foto / avatar':cropMode==='cover'?'Foto de capa':'Foto da publicação (opcional)'}<input className="input" type="file" accept="image/jpeg,image/png,image/webp,.heic,.heif" disabled={busy||!!source} onChange={async e=>{const file=e.target.files?.[0];e.target.value='';if(!file)return;setBusy(true);onBusy?.(true);setError(null);try{const{preparePhoto}=await import('@/lib/photos/image');const next=await preparePhoto(file);if(objectUrl.current)URL.revokeObjectURL(objectUrl.current);objectUrl.current=next.url;setSource(next)}catch(e){setError(e instanceof Error?e.message:'Não foi possível abrir a foto.');onBusy?.(false)}finally{setBusy(false)}}}/><span className="input-hint">Original até 20 MB e 25 megapixels. O recorte é reduzido antes do envio. JPEG, PNG e WebP; HEIC precisa ser exportado.</span></label>{busy&&<p role="status">Preparando foto…</p>}{picture&&<><Image className={`upload-preview ${cropMode==='avatar'?'avatar-preview':''}`} unoptimized src={picture} alt="Foto selecionada" width={400} height={cropMode==='avatar'?400:300}/><Button type="button" variant="quiet" disabled={busy||!!source} onClick={async()=>{if(!path)return;setBusy(true);onBusy?.(true);try{await removePhoto(bucket,path);onChange(null)}catch(e){setError(e instanceof Error?e.message:'Não foi possível remover.')}finally{setBusy(false);onBusy?.(false)}}}>Remover foto selecionada</Button></>}{source&&<PhotoCropper source={source} mode={cropMode} onCancel={close} onConfirm={async blob=>{const params=new URLSearchParams({bucket,...(entity?{kind:entity.kind,id:entity.id,slot:entity.slot}:{})});const response=await fetch('/api/media?'+params,{method:'POST',headers:{'Content-Type':blob.type},body:blob,credentials:'same-origin',cache:'no-store',signal:AbortSignal.timeout(45000)});const result=await response.json();if(!response.ok||result.status!=='success')throw Error(result.message||'Não foi possível enviar a foto. Sua foto anterior foi preservada.');const previous=path;onChange(result.data.path);close();if(previous){try{await removePhoto(bucket,previous)}catch{setError('Foto selecionada. Há uma imagem anterior sem remoção confirmada; confira suas fotos em Privacidade e conta.')}}}}/>}{error&&<p role="alert" className="auth-notice notice-error">{error}</p>}</div>
 }

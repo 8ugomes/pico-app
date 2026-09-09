@@ -154,3 +154,8 @@ Verificação visual: 390×844 e desktop 1280; cinco destinos em 320px sem overf
 Ainda demo: todas as jornadas quando falta configuração; seeds continuam fictícios mesmo no banco conectado. Limites conectados: sem upload, acompanhamento de arenas na UI, edição/exclusão de posts/comentários na UI, recuperação de senha, bloqueios/moderação ou service worker. README e BETA_CHECKLIST.md documentam o que falta antes do beta hospedado.
 
 Próximo avanço: validar o ambiente Supabase de desenvolvimento com duas contas reais e executar os itens pendentes do checklist beta. Prompt: “Execute a validação hospedada do BETA_CHECKLIST.md com o projeto de desenvolvimento configurado, mantenha o escopo dos Cycles 0.5–7 e registre as evidências.”
+
+
+## Ciclo 9.7
+
+9.7: avatar circular com saída quadrada; capa 3:1; posts original/1:1/4:5/16:9. Zoom por toque/teclado/slider e rotação. Cancelamento/falha preserva referência. HEIC exige exportação explícita; sem promessa de suporte. Modal respeita cancelamento durante envio.

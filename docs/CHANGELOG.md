@@ -87,3 +87,8 @@ Verificação visual: 390×844 e desktop 1280; cinco destinos em 320px sem overf
 Ainda demo: todas as jornadas quando falta configuração; seeds continuam fictícios mesmo no banco conectado. Limites conectados: sem upload, acompanhamento de arenas na UI, edição/exclusão de posts/comentários na UI, recuperação de senha, bloqueios/moderação ou service worker. README e BETA_CHECKLIST.md documentam o que falta antes do beta hospedado.
 
 Próximo avanço: validar o ambiente Supabase de desenvolvimento com duas contas reais e executar os itens pendentes do checklist beta. Prompt: “Execute a validação hospedada do BETA_CHECKLIST.md com o projeto de desenvolvimento configurado, mantenha o escopo dos Cycles 0.5–7 e registre as evidências.”
+
+
+## Ciclo 9.7
+
+Ciclo 9.7: recorte reutilizável (react-easy-crop 6.2.3, MIT), preparação local limitada, autorização de fotos por recurso, proteção contra remoção concorrente de arquivos em uso. 66 testes locais aprovados.

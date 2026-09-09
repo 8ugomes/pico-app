@@ -253,6 +253,20 @@ export type Database = {
         }
         Relationships: [
           {
+            foreignKeyName: "arena_avatar_asset"
+            columns: ["avatar_path"]
+            isOneToOne: false
+            referencedRelation: "entity_media_assets"
+            referencedColumns: ["path"]
+          },
+          {
+            foreignKeyName: "arena_cover_asset"
+            columns: ["cover_path"]
+            isOneToOne: false
+            referencedRelation: "entity_media_assets"
+            referencedColumns: ["path"]
+          },
+          {
             foreignKeyName: "arenas_owner_id_fkey"
             columns: ["owner_id"]
             isOneToOne: false
@@ -435,6 +449,20 @@ export type Database = {
             referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "community_avatar_asset"
+            columns: ["avatar_path"]
+            isOneToOne: false
+            referencedRelation: "entity_media_assets"
+            referencedColumns: ["path"]
+          },
+          {
+            foreignKeyName: "community_cover_asset"
+            columns: ["cover_path"]
+            isOneToOne: false
+            referencedRelation: "entity_media_assets"
+            referencedColumns: ["path"]
+          },
         ]
       }
       community_arena_links: {
@@ -585,10 +613,66 @@ export type Database = {
           },
         ]
       }
+      entity_media_assets: {
+        Row: {
+          arena_id: string | null
+          community_id: string | null
+          created_at: string
+          deleting: boolean
+          path: string
+          ready: boolean
+          slot: string
+          uploaded_by: string | null
+        }
+        Insert: {
+          arena_id?: string | null
+          community_id?: string | null
+          created_at?: string
+          deleting?: boolean
+          path: string
+          ready?: boolean
+          slot: string
+          uploaded_by?: string | null
+        }
+        Update: {
+          arena_id?: string | null
+          community_id?: string | null
+          created_at?: string
+          deleting?: boolean
+          path?: string
+          ready?: boolean
+          slot?: string
+          uploaded_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "entity_media_assets_arena_id_fkey"
+            columns: ["arena_id"]
+            isOneToOne: false
+            referencedRelation: "arenas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "entity_media_assets_community_id_fkey"
+            columns: ["community_id"]
+            isOneToOne: false
+            referencedRelation: "communities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "entity_media_assets_uploaded_by_fkey"
+            columns: ["uploaded_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       media_assets: {
         Row: {
           bucket: string
           created_at: string
+          deleting: boolean
           path: string
           player_id: string
           ready: boolean
@@ -596,6 +680,7 @@ export type Database = {
         Insert: {
           bucket: string
           created_at?: string
+          deleting?: boolean
           path: string
           player_id: string
           ready?: boolean
@@ -603,6 +688,7 @@ export type Database = {
         Update: {
           bucket?: string
           created_at?: string
+          deleting?: boolean
           path?: string
           player_id?: string
           ready?: boolean
@@ -977,9 +1063,15 @@ export type Database = {
       beta_before_user_created: { Args: { event: Json }; Returns: Json }
       beta_status: { Args: never; Returns: Json }
       bootstrap_operator: { Args: { p_uid: string }; Returns: undefined }
+      can_read_entity_media: { Args: { p_path: string }; Returns: boolean }
       can_read_media: {
         Args: { p_bucket: string; p_path: string }
         Returns: boolean
+      }
+      claim_entity_media: { Args: { p_path: string }; Returns: undefined }
+      claim_unused_media: {
+        Args: { p_bucket: string; p_path: string }
+        Returns: undefined
       }
       community_directory: {
         Args: {
@@ -1121,6 +1213,10 @@ export type Database = {
         Args: { p_arena?: string; p_data?: Json; p_kind: string }
         Returns: string
       }
+      reserve_entity_media: {
+        Args: { p_id: string; p_kind: string; p_slot: string }
+        Returns: string
+      }
       reserve_media: { Args: { p_bucket: string }; Returns: string }
       review_arena_and_group: {
         Args: { p_approve: boolean; p_official?: boolean; p_request: string }
@@ -1154,6 +1250,10 @@ export type Database = {
       }
       set_arena_membership: {
         Args: { p_arena: string; p_join: boolean }
+        Returns: undefined
+      }
+      set_entity_photo: {
+        Args: { p_id: string; p_kind: string; p_path?: string; p_slot: string }
         Returns: undefined
       }
       start_checkin: {

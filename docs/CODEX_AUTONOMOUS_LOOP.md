@@ -232,3 +232,8 @@ Verificação visual: 390×844 e desktop 1280; cinco destinos em 320px sem overf
 Ainda demo: todas as jornadas quando falta configuração; seeds continuam fictícios mesmo no banco conectado. Limites conectados: sem upload, acompanhamento de arenas na UI, edição/exclusão de posts/comentários na UI, recuperação de senha, bloqueios/moderação ou service worker. README e BETA_CHECKLIST.md documentam o que falta antes do beta hospedado.
 
 Próximo avanço: validar o ambiente Supabase de desenvolvimento com duas contas reais e executar os itens pendentes do checklist beta. Prompt: “Execute a validação hospedada do BETA_CHECKLIST.md com o projeto de desenvolvimento configurado, mantenha o escopo dos Cycles 0.5–7 e registre as evidências.”
+
+
+## Ciclo 9.7
+
+9.7 VERIFY / DOCUMENT / NEXT: migrations 096000/096100 aplicadas somente em desenvolvimento; tipos gerados do remoto; 66 testes, lint/types/build aprovados. Nenhuma migração aplicada foi reescrita. Próximo 9.8: convites em navegação autenticada, recuperação entre contextos e pendência SMTP solicitada pelo responsável.
