@@ -6,6 +6,7 @@ import type { ReadResponse } from '@/types/read';
 type ReadState = ReadResponse | { status: 'loading' };
 export function useRemoteRead(query: string) {
   const [attempt, setAttempt] = useState(0);
+  const [retain, setRetain] = useState(false);
   const [result, setResult] = useState<{ query: string; attempt: number; state: ReadState } | null>(null);
   useEffect(() => {
     const controller = new AbortController();
@@ -29,15 +30,16 @@ export function useRemoteRead(query: string) {
   }, [query, attempt]);
   useEffect(() => {
     // Private data is discarded before refreshing when returning from another tab.
-    const refresh = () => { if (document.visibilityState === 'visible') setAttempt(value => value + 1); };
+    const refresh = () => { if (document.visibilityState === 'visible') { setRetain(false); setAttempt(value => value + 1); } };
     const client = createClient();
     const subscription = client?.auth.onAuthStateChange((event) => {
-      if (event === 'SIGNED_OUT' || event === 'SIGNED_IN' || event === 'USER_UPDATED') setAttempt(value => value + 1);
+      if (event === 'SIGNED_OUT' || event === 'SIGNED_IN' || event === 'USER_UPDATED') { setRetain(false); setAttempt(value => value + 1); }
     }).data.subscription;
     window.addEventListener('focus', refresh);
     return () => { window.removeEventListener('focus', refresh); subscription?.unsubscribe(); };
   }, []);
-  const state: ReadState = result?.query === query && result.attempt === attempt ? result.state : { status: 'loading' };
-  const retry = useCallback(() => setAttempt(value => value + 1), []);
-  return { state, retry };
+  const state: ReadState = result?.query === query && (result.attempt === attempt || (retain && result.state.status === 'success')) ? result.state : { status: 'loading' };
+  const retry = useCallback(() => { setRetain(false); setAttempt(value => value + 1); }, []);
+  const refresh = useCallback(() => { setRetain(true); setAttempt(value => value + 1); }, []);
+  return { state, retry, refresh, refreshing: result?.attempt !== attempt };
 }

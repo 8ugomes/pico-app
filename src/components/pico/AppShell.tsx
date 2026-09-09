@@ -11,7 +11,7 @@ import { PlayerAvatar } from "./PlayerAvatar";
 export function AppShell({ children, environment = 'demo' }: { children: ReactNode; environment?: 'demo' | 'configured' | 'invalid' }) {
   const { state, me } = useDemo();
   const pathname = usePathname();
-  const connected = environment !== 'demo' && (pathname === '/perfil' || pathname === '/checkin' || pathname === '/arenas' || pathname.startsWith('/arenas/'));
+  const connected = environment !== 'demo' && (pathname === '/perfil' || pathname === '/feed' || pathname === '/checkin' || pathname === '/arenas' || pathname.startsWith('/arenas/'));
   const profileIcon = <span className="read-account-icon"><UserRound size={20} aria-hidden="true" /></span>;
   return <div className="social-app">
     <aside className="app-sidebar"><Brand /><p className="sidebar-tagline">O ponto de encontro<br />da areia.</p><BottomNav desktop /><Link className="sidebar-profile" href="/perfil">{connected ? <>{profileIcon}<span><strong>Minha conta</strong><small>Seu perfil no Pico</small></span></> : <><PlayerAvatar player={me} /><span><strong>{me.name}</strong><small>Seu perfil de demonstração</small></span></>}</Link></aside>

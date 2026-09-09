@@ -18,6 +18,13 @@ function arenaDto(row: ArenaResult): ReadArena {
 }
 export function parseReadRequest(params: URLSearchParams): ReadRequest {
   const resource = params.get('resource');
+  if (resource === 'feed' || resource === 'comments') {
+    const value = params.get('offset') ?? '0';
+    if (!/^\d{1,5}$/.test(value) || Number(value) > 10000) throw new ReadError('invalid_request', 400);
+    const id = params.get(resource === 'feed' ? 'arenaId' : 'postId');
+    if ((resource === 'comments' && !id) || (id && !/^[0-9a-f]{8}-[0-9a-f-]{27}$/i.test(id))) throw new ReadError('invalid_request', 400);
+    return resource === 'feed' ? { resource, offset: Number(value), arenaId: id ?? undefined } : { resource, offset: Number(value), postId: id! };
+  }
   if (resource === 'checkin') {
     const arenaId = params.get('arenaId') ?? undefined;
     if (arenaId && !/^[0-9a-f]{8}-[0-9a-f-]{27}$/i.test(arenaId)) throw new ReadError('invalid_request', 400);
@@ -38,6 +45,18 @@ export function parseReadRequest(params: URLSearchParams): ReadRequest {
   throw new ReadError('invalid_request', 400);
 }
 export async function readSocial(client: SupabaseClient<Database>, request: ReadRequest): Promise<ReadData> {
+  if (request.resource === 'feed') {
+    const user = await requireUser(client);
+    const { data, error } = await client.rpc('read_feed', { p_offset: request.offset, ...(request.arenaId ? { p_arena_id: request.arenaId } : {}) });
+    if (error || !data) throw new ReadError('unavailable');
+    return { kind: 'feed', posts: data.slice(0, 20), hasMore: data.length > 20, viewerId: user.id };
+  }
+  if (request.resource === 'comments') {
+    await requireUser(client);
+    const { data, error } = await client.from('comments').select('id, body, created_at, profiles(display_name, username)').eq('post_id', request.postId).order('created_at').order('id').range(request.offset, request.offset + 20);
+    if (error || !data) throw new ReadError('unavailable');
+    return { kind: 'comments', hasMore: data.length > 20, comments: data.slice(0, 20).flatMap(row => row.profiles ? [{ id: row.id, body: row.body, createdAt: row.created_at, name: row.profiles.display_name, username: row.profiles.username }] : []) };
+  }
   if (request.resource === 'checkin') {
     const user = await requireUser(client);
     const fields = 'id, player_id, expires_at, profiles(username, display_name), arena_sports(arenas(id, slug, name), sports(id, slug, name))' as const;

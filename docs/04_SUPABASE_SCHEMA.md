@@ -117,3 +117,8 @@ Migration 20260909030000_profile_onboarding.sql: save_profile com SECURITY INVOK
 ## Cycle 4 · check-in implementado
 
 Migration 20260909040000_checkin.sql cria start_checkin(arena_id,sport_id) e end_checkin(), SECURITY DEFINER com search_path vazio e EXECUTE somente authenticated. Ambas travam profiles.id = auth.uid(); start valida e trava arena pública/modalidade, encerra anterior e usa clock_timestamp + 2h. Não há grants de escrita direta. RLS continua ocultando presença expirada/encerrada e arena privada. API de leitura retorna presença própria separadamente e até 24 outras presenças.
+
+
+## Cycle 5 · feed real
+
+Migration 20260909050000_social_feed.sql cria read_feed(offset,arena), SECURITY INVOKER/RLS, com 21 registros de lookahead e contagens de curtidas/comentários. API usa insert sem author_id/player_id (defaults auth.uid()); descurtir filtra também identidade verificada. Curtida duplicada é idempotente. Comentários paginados por data/id, conteúdo limitado a 280; posts limitados a 500 e combinação arena/esporte válida. Sem Storage neste ciclo.

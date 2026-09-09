@@ -9,7 +9,7 @@ export class MutationError extends Error {
 }
 export const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 export const levels: Level[] = ['Iniciante', 'Intermediário', 'Avançado'];
-export type Mutation = { action: 'save_profile'; name: string; username: string; bio: string; city: string; neighborhood: string; sportId: string; level: Level; available: boolean } | { action: 'start_checkin'; arenaId: string; sportId: string } | { action: 'end_checkin' };
+export type Mutation = { action: 'save_profile'; name: string; username: string; bio: string; city: string; neighborhood: string; sportId: string; level: Level; available: boolean } | { action: 'start_checkin'; arenaId: string; sportId: string } | { action: 'end_checkin' } | { action: 'create_post'; arenaId: string; sportId: string; body: string } | { action: 'set_like'; postId: string; liked: boolean } | { action: 'create_comment'; postId: string; body: string };
 export function invalid(): never { throw new MutationError(400, 'Confira os campos e tente novamente.'); }
 export function textField(value: unknown, min: number, max: number): string {
   if (typeof value !== 'string') return invalid();
@@ -27,6 +27,19 @@ export function exactKeys(value: Record<string, unknown>, keys: string[]) {
 export function parseMutation(value: unknown): Mutation {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return invalid();
   const body = value as Record<string, unknown>;
+  if (body.action === 'create_post') {
+    exactKeys(body, ['action', 'arenaId', 'sportId', 'body']);
+    return { action: body.action, arenaId: uuid(body.arenaId), sportId: uuid(body.sportId), body: textField(body.body, 1, 500) };
+  }
+  if (body.action === 'set_like') {
+    exactKeys(body, ['action', 'postId', 'liked']);
+    if (typeof body.liked !== 'boolean') return invalid();
+    return { action: body.action, postId: uuid(body.postId), liked: body.liked };
+  }
+  if (body.action === 'create_comment') {
+    exactKeys(body, ['action', 'postId', 'body']);
+    return { action: body.action, postId: uuid(body.postId), body: textField(body.body, 1, 280) };
+  }
   if (body.action === 'start_checkin') {
     exactKeys(body, ['action', 'arenaId', 'sportId']);
     return { action: body.action, arenaId: uuid(body.arenaId), sportId: uuid(body.sportId) };
@@ -47,7 +60,19 @@ export function mutationFailure(error: { code?: string }) {
   throw new MutationError(503, 'Não foi possível confirmar a alteração. Atualize para conferir antes de tentar de novo.');
 }
 export async function mutateSocial(client: SupabaseClient<Database>, input: Mutation) {
-  await requireUser(client);
+  const user = await requireUser(client);
+  if (input.action === 'create_post') {
+    const { error } = await client.from('posts').insert({ arena_id: input.arenaId, sport_id: input.sportId, body: input.body });
+    if (error) mutationFailure(error); return;
+  }
+  if (input.action === 'set_like') {
+    const { error } = input.liked ? await client.from('post_likes').insert({ post_id: input.postId }) : await client.from('post_likes').delete().eq('post_id', input.postId).eq('player_id', user.id);
+    if (error && !(input.liked && error.code === '23505')) mutationFailure(error); return;
+  }
+  if (input.action === 'create_comment') {
+    const { error } = await client.from('comments').insert({ post_id: input.postId, body: input.body });
+    if (error) mutationFailure(error); return;
+  }
   if (input.action === 'start_checkin') {
     const { error } = await client.rpc('start_checkin', { arena_id: input.arenaId, sport_id: input.sportId });
     if (error) mutationFailure(error); return;

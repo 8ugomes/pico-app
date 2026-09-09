@@ -10,12 +10,12 @@ import { ReadFailure, ReadLoading, ConnectedSource } from './ReadState';
 import { useMutation, MutationNotice } from './useMutation';
 import { ArenaSportPicker } from './ArenaSportPicker';
 export function ConnectedCheckin({ initialSlug }: { initialSlug?: string }) {
-  const { state, retry } = useRemoteRead('resource=checkin');
+  const { state, retry, refresh } = useRemoteRead('resource=checkin');
   const mutation = useMutation();
   const [selection, setSelection] = useState<{ arena: ReadArena; sportId: string } | null>(null);
   const [now, setNow] = useState(0);
   useEffect(() => { const timer = setInterval(() => setNow(Date.now()), 1000); return () => clearInterval(timer); }, []);
-  useEffect(() => { const timer = setInterval(() => { if (document.visibilityState === 'visible') retry(); }, 30000); return () => clearInterval(timer); }, [retry]);
+  useEffect(() => { const timer = setInterval(() => { if (document.visibilityState === 'visible') refresh(); }, 30000); return () => clearInterval(timer); }, [refresh]);
   const data = state.status === 'success' && state.data.kind === 'checkin' ? state.data : null;
   const own = data?.own && Date.parse(data.own.expiresAt) > now ? data.own : null;
   const presence = data?.presence.filter(p => Date.parse(p.expiresAt) > now) ?? [];
