@@ -1,4 +1,5 @@
 'use client';
+import { ArenaCommunities } from './ArenaCommunities';
 import { ArenaExtras, ArenaRequest } from './ArenaManagement';
 import { useState } from 'react';
 import Link from 'next/link';
@@ -54,6 +55,6 @@ export function ConnectedArena({ slug }: { slug: string }) {
     <Link href="/arenas" className="detail-back"><ArrowLeft size={17} aria-hidden="true" /> Arenas</Link>
     {state.status === 'loading' && <><PageHeading eyebrow="CONHEÇA O LUGAR" title="Sua próxima arena." /><ReadLoading /></>}
     {(state.status === 'error' || state.status === 'demo') && <><PageHeading eyebrow="CONHEÇA O LUGAR" title="Sua próxima arena." /><ReadFailure state={state} retry={retry} /></>}
-    {arena && <><ConnectedSource /><ArenaImage arena={arena} detail /><header className="arena-detail-header"><p className="location-line"><MapPin size={14} aria-hidden="true" />{arena.neighborhood} · {arena.city}</p><h1>{arena.name}</h1><ReadSports sports={arena.sports} /></header><section className="arena-about"><h2>Um pouco deste Pico</h2><p>{arena.description || 'A descrição deste lugar ainda não foi adicionada.'}</p>{!arena.sports.length && <p className="form-note">As modalidades ainda não foram informadas.</p>}{arena.isDemo && <p className="form-note">Arena fictícia, cadastrada para explorar o Pico.</p>}</section><div className="read-message-actions"><Link className={buttonVariants()} href={`/checkin?arena=${arena.slug}`}>Fazer check-in</Link></div><Button variant="secondary" onClick={retry}>Atualizar arena</Button><ArenaExtras slug={arena.slug} /><ConnectedFeed arenaId={arena.id} initialSlug={arena.slug} /></>}
+    {arena && <><ConnectedSource /><ArenaImage arena={arena} detail /><header className="arena-detail-header"><p className="location-line"><MapPin size={14} aria-hidden="true" />{arena.neighborhood} · {arena.city}</p><h1>{arena.name}</h1><ReadSports sports={arena.sports} /></header><section className="arena-about"><h2>Um pouco deste Pico</h2><p>{arena.description || 'A descrição deste lugar ainda não foi adicionada.'}</p>{!arena.sports.length && <p className="form-note">As modalidades ainda não foram informadas.</p>}{arena.isDemo && <p className="form-note">Arena fictícia, cadastrada para explorar o Pico.</p>}</section><div className="read-message-actions"><Link className={buttonVariants()} href={`/checkin?arena=${arena.slug}`}>Fazer check-in</Link></div><Button variant="secondary" onClick={retry}>Atualizar arena</Button><ArenaExtras slug={arena.slug} /><ArenaCommunities arenaId={arena.id} /><ConnectedFeed arenaId={arena.id} initialSlug={arena.slug} /></>}
   </>;
 }

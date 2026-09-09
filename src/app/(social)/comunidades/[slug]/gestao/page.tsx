@@ -1,0 +1,1 @@
+import{CommunityManagement}from'@/components/pico/connected/Communities';export default async function Page({params}:{params:Promise<{slug:string}>}){return <CommunityManagement slug={(await params).slug}/>}

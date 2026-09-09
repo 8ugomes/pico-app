@@ -1,5 +1,9 @@
 # Pico — Ciclo Autônomo de Evolução
 
+## Ciclo 9.4 — comunidades próprias
+
+Migration 20260910093000 no desenvolvimento exclusivo. Diretório, busca/minhas comunidades, página e gestão; grupos independentes ou com vínculo solicitado/aprovado; comunidade oficial única, criação idempotente e transacional com aprovação da arena. Visibilidade beta/privada separada de entrada aberta/aprovação/convite. Papéis e membros não são herdados da arena. Convite por e-mail confirmado, aceite atômico e revogação; remoção/suspensão impede leitura privada com sessão antiga. RLS executada com dono/membro e administrador Pico que não participa: este último não lê grupo privado. Conteúdo/membros privados não aparecem na ficha mínima do diretório. 60 testes locais, lint, typecheck e build isolado aprovados. Mural será integrado ao post canônico no 9.5; fotos/recorte no 9.7.
+
 ## Ciclo 9.3 — perfil e responsabilidade de arenas
 
 Migration 20260910092000 no desenvolvimento. Edição atômica com versão, slug/is_demo preservados, modalidades desativadas sem romper posts/check-ins antigos, perfil com responsáveis, participação persistida, pedidos de criação/reivindicação/correção e aprovação administrativa. Convites de gestão por e-mail exato, hash, validade, revogação e consumo único revalidam os poderes atuais do emissor. Não enviam e-mail. UI de gestão contextual e pedidos integrada ao /admin. Testes SQL comprovaram edição autorizada/negada, concorrência por versão, destinatário correto, repetição negada e aprovação idempotente. 57 testes locais, lint, typecheck e build isolado aprovados. Nenhuma arena real foi criada no beta.

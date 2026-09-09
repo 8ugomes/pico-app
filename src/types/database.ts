@@ -381,6 +381,177 @@ export type Database = {
           },
         ]
       }
+      communities: {
+        Row: {
+          avatar_path: string | null
+          cover_path: string | null
+          created_at: string
+          description: string
+          entry_mode: string
+          id: string
+          name: string
+          owner_id: string | null
+          rules: string
+          slug: string
+          status: string
+          version: number
+          visibility: string
+        }
+        Insert: {
+          avatar_path?: string | null
+          cover_path?: string | null
+          created_at?: string
+          description?: string
+          entry_mode: string
+          id?: string
+          name: string
+          owner_id?: string | null
+          rules?: string
+          slug: string
+          status?: string
+          version?: number
+          visibility: string
+        }
+        Update: {
+          avatar_path?: string | null
+          cover_path?: string | null
+          created_at?: string
+          description?: string
+          entry_mode?: string
+          id?: string
+          name?: string
+          owner_id?: string | null
+          rules?: string
+          slug?: string
+          status?: string
+          version?: number
+          visibility?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "communities_owner_id_fkey"
+            columns: ["owner_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      community_arena_links: {
+        Row: {
+          arena_id: string
+          community_id: string
+          is_official: boolean
+          requested_by: string | null
+          status: string
+        }
+        Insert: {
+          arena_id: string
+          community_id: string
+          is_official?: boolean
+          requested_by?: string | null
+          status?: string
+        }
+        Update: {
+          arena_id?: string
+          community_id?: string
+          is_official?: boolean
+          requested_by?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "community_arena_links_arena_id_fkey"
+            columns: ["arena_id"]
+            isOneToOne: false
+            referencedRelation: "arenas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "community_arena_links_community_id_fkey"
+            columns: ["community_id"]
+            isOneToOne: true
+            referencedRelation: "communities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "community_arena_links_requested_by_fkey"
+            columns: ["requested_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      community_members: {
+        Row: {
+          community_id: string
+          created_at: string
+          player_id: string
+          role: string
+          status: string
+        }
+        Insert: {
+          community_id: string
+          created_at?: string
+          player_id: string
+          role?: string
+          status: string
+        }
+        Update: {
+          community_id?: string
+          created_at?: string
+          player_id?: string
+          role?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "community_members_community_id_fkey"
+            columns: ["community_id"]
+            isOneToOne: false
+            referencedRelation: "communities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "community_members_player_id_fkey"
+            columns: ["player_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      community_sports: {
+        Row: {
+          community_id: string
+          sport_id: string
+        }
+        Insert: {
+          community_id: string
+          sport_id: string
+        }
+        Update: {
+          community_id?: string
+          sport_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "community_sports_community_id_fkey"
+            columns: ["community_id"]
+            isOneToOne: false
+            referencedRelation: "communities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "community_sports_sport_id_fkey"
+            columns: ["sport_id"]
+            isOneToOne: false
+            referencedRelation: "sports"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       connections: {
         Row: {
           created_at: string
@@ -710,7 +881,9 @@ export type Database = {
     Functions: {
       accept_arena_invite: { Args: { p_token: string }; Returns: string }
       accept_beta_invite: { Args: { p_token: string }; Returns: Json }
+      accept_community_invite: { Args: { p_token: string }; Returns: string }
       arena_invitations: { Args: { p_arena: string }; Returns: Json }
+      arena_link_requests: { Args: { p_arena: string }; Returns: Json }
       arena_profile: { Args: { p_slug: string }; Returns: Json }
       beta_before_user_created: { Args: { event: Json }; Returns: Json }
       beta_status: { Args: never; Returns: Json }
@@ -719,6 +892,40 @@ export type Database = {
         Args: { p_bucket: string; p_path: string }
         Returns: boolean
       }
+      community_directory: {
+        Args: {
+          p_arena?: string
+          p_mine?: boolean
+          p_offset?: number
+          p_search?: string
+        }
+        Returns: Json
+      }
+      community_invitations: {
+        Args: { p_id: string; p_revoke?: string }
+        Returns: Json
+      }
+      community_link: {
+        Args: {
+          p_action: string
+          p_arena: string
+          p_community: string
+          p_official?: boolean
+        }
+        Returns: undefined
+      }
+      community_membership: {
+        Args: {
+          p_action: string
+          p_id: string
+          p_role?: string
+          p_target?: string
+        }
+        Returns: undefined
+      }
+      community_page: { Args: { p_slug: string }; Returns: Json }
+      create_community: { Args: { p_data: Json }; Returns: Json }
+      create_official_community: { Args: { p_arena: string }; Returns: string }
       discover_players: {
         Args: {
           p_active?: boolean
@@ -749,6 +956,10 @@ export type Database = {
       environment_identity: { Args: never; Returns: Json }
       invite_arena_manager: {
         Args: { p_arena: string; p_email: string; p_role: string }
+        Returns: Json
+      }
+      invite_community_member: {
+        Args: { p_email: string; p_id: string }
         Returns: Json
       }
       management_context: { Args: never; Returns: Json }
@@ -791,6 +1002,10 @@ export type Database = {
         Returns: string
       }
       reserve_media: { Args: { p_bucket: string }; Returns: string }
+      review_arena_and_group: {
+        Args: { p_approve: boolean; p_official?: boolean; p_request: string }
+        Returns: string
+      }
       review_arena_request: {
         Args: { p_approve: boolean; p_request: string }
         Returns: string
@@ -799,6 +1014,10 @@ export type Database = {
       save_arena: {
         Args: { p_data: Json; p_id: string; p_version: number }
         Returns: Json
+      }
+      save_community: {
+        Args: { p_data: Json; p_id: string; p_version: number }
+        Returns: undefined
       }
       save_profile: {
         Args: {
