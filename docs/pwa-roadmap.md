@@ -1,27 +1,17 @@
-# Pico — roadmap PWA
+# Pico — PWA no Ciclo 9
 
-## Base existente
+Implementado: manifesto com id estável, identificação do beta, ícones 192/512/maskable/apple, standalone, safe areas, alvos de toque e navegação móvel. `/instalar` orienta Chrome/Android, Safari/iOS e saída de navegadores internos. O convite de instalação é dispensável e o prompt nativo só aparece quando disponível.
 
-- Next.js, manifesto, ícones 192/512/maskable e apple-icon.
-- display standalone, tema escuro e viewport com safe areas.
+Versão compilada é exposta por endpoint sem dados pessoais; foco/retomada verificam versão e sessão. Atualizar exige ação explícita e avisa sobre edição não salva. Identidade trocada/logout descartam a árvore anterior; bfcache recarrega. Falha temporária preserva rascunho e indica rede indisponível, sem anunciar sucesso nem agendar publicação.
 
-## Estado após o Ciclo 8
+Não há service worker, conteúdo privado offline, fila de escrita, background sync ou push notification. APIs e mídia respondem `private, no-store`. Instalação não significa suporte offline.
 
-- start_url apontando ao feed.
-- Navegação de cinco destinos, páginas sociais conectadas e demo explícito sem configuração.
-- Layout preparado para 390px, toque, teclado e movimento reduzido.
-- Sem service worker ou cache offline de conteúdo privado. APIs de dados e mídia usam private/no-store; logout/troca de identidade descartam a tela anterior, e restauração via bfcache recarrega a página.
+## Evidência
 
-Manifesto e arquivos de ícones verificados via HTTP no build de produção. Instalação, atualização e comportamento offline em aparelhos reais ainda não foram testados.
+Chromium móvel emulado em 320/390/430 px: login, grupos, feed/perfil/admin, recorte de imagem grande, rede offline, rascunho preservado, logout entre abas e manifesto/versão. Imagem EXIF usada no recorte é sintética. [Resultados](INTERNAL_REVIEW.md).
 
-## Próxima rodada
+## Pendências físicas
 
-- Validar instalação e atualização em iOS/Safari e Android/Chrome reais.
-- Estratégia de service worker versionado: assets públicos e fallback offline.
-- Nunca cachear Auth, callback, tokens, respostas privadas ou mutations.
-- HTTPS na Vercel e associação com o Supabase já validados. Preservar essa configuração.
-- Testar rede lenta, teclado aberto, modo standalone, safe areas, 200% de zoom e retomada de sessão.
+Validar em Android/Chrome e iPhone/Safari reais: instalação pela tela inicial, teclado/câmera/galeria, orientação EXIF real, safe areas, zoom, relançamento, retomada de sessão e atualização entre versões. Emulação não comprova estes itens. Navegador e PWA podem manter sessões distintas; links externos não transportam sessão entre eles.
 
-## Fora do escopo
-
-Push notifications, background sync de posts, geolocalização contínua e app nativo.
+Fora da rodada: app nativo, push, geolocalização contínua e estratégia de cache offline social. Avaliar service worker futuro somente com modelo explícito de privacidade e invalidação.

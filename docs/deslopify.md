@@ -183,3 +183,9 @@ Próximo avanço: validar o ambiente Supabase de desenvolvimento com duas contas
 ## Ciclo 9.10
 
 9.10 aprendizado: testar pela interface foi necessário para detectar o tipo dos botões. Novo contrato automatizado exige submit explícito. Perfil preserva confirmação de foto e edição em falha de refresh. 320/390/430 px sem overflow nas telas verificadas; fotos e diálogos com ações acessíveis. Sem afirmação de aparelho físico.
+
+## Ciclo 9.11 — PLAN
+
+Verificar nomes acessíveis de campos, feedback após salvar, ações de moderação e custódia e descarte de sessão. Documentação deve distinguir prova remota, emulação e pendências reais; nenhum texto de liberação externa.
+
+9.11 VERIFY: gestão autorizada, negação clara ao membro, histórico recente, denúncia com efeito e custódia foram exercitados na interface. Usar nomes acessíveis de controles nos testes evita depender do texto interno das opções. Nenhuma alteração visual adicional necessária após a regressão; README e guias deixam explícitos demo, beta privado e limites da emulação.

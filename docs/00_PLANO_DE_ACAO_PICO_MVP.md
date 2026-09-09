@@ -1,3 +1,5 @@
+> Referência histórica. O Ciclo 9 amplia o escopo para comunidades próprias e gestão de arenas. Para comportamento/configuração atuais, consulte README, CYCLE9_CONTRACTS e ENVIRONMENTS; preserve as regras de segurança deste documento.
+
 # Plano de ação — Pico MVP
 
 Atualizado em 9 de setembro de 2026.

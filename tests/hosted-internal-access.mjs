@@ -10,7 +10,8 @@ try{
  const boot=await admin.rpc('bootstrap_operator',{p_uid:users[0].id});assert.equal(boot.error,null);
  assert.equal((await users[0].client.rpc('beta_status')).data.admitted,true);assert.equal((await users[0].client.from('arenas').select('id')).data.length,3);
  assert.ok((await users[1].client.rpc('bootstrap_operator',{p_uid:users[1].id})).error);
- sql(`update pico_private.beta_admissions set status='revoked' where player_id='${users[0].id}'`);
- assert.equal((await users[0].client.from('arenas').select('id')).data.length,0);assert.equal((await users[0].client.rpc('beta_status')).data.admitted,false);
+ assert.equal((await users[0].client.rpc('operator_action',{p_action:'beta_status',p_target_id:users[1].id,p_value:'approved'})).error,null);
+ sql(`update pico_private.beta_admissions set status='revoked' where player_id='${users[1].id}'`);
+ assert.equal((await users[1].client.from('arenas').select('id')).data.length,0);assert.equal((await users[1].client.rpc('beta_status')).data.admitted,false);
  console.log('Hosted internal access: direct signup denied, 2 invited signups, admission, denied bootstrap and old-JWT revocation PASS',ref);
 }finally{for(const id of tracked){const r=await admin.auth.admin.deleteUser(id);if(r.error)throw Error('Tracked user cleanup failed')}for(const email of inviteEmails)sql(`delete from pico_private.invitations where email='${email}' and kind='beta'`);console.log('Controlled identities cleaned');}

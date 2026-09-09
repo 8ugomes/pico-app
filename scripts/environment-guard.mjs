@@ -12,7 +12,7 @@ export function assertEnvironment(env=process.env, action='build') {
   if(env.PICO_ENV && env.PICO_ENV!==purpose) throw Error('Server/client environment mismatch');
   if(purpose==='production') throw Error('Production is not authorized in this cycle');
   if(['seed','hosted-test'].includes(action) && purpose!=='development') throw Error('Destructive test/seed requires exclusive development');
-  if(env.VERCEL_ENV==='preview' && purpose==='beta' && (env.VERCEL_GIT_COMMIT_REF ?? env.PICO_REVIEW_BRANCH)!=='cycle-9-internal') throw Error('Beta credentials are restricted to the review branch');
+  if(env.VERCEL_ENV==='preview' && purpose==='beta' && (env.VERCEL_GIT_COMMIT_REF || env.PICO_REVIEW_BRANCH)!=='cycle-9-internal') throw Error('Beta credentials are restricted to the review branch');
   if(action==='deploy' && (purpose!=='beta' || env.PICO_DEPLOY_TARGET!=='preview')) throw Error('Only internal preview deploy is authorized');
   return {purpose,...expected};
 }

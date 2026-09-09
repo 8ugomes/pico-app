@@ -245,3 +245,9 @@ Próximo avanço: validar o ambiente Supabase de desenvolvimento com duas contas
 ## Ciclo 9.10
 
 9.10 VERIFY: moderação real e auditada, catálogo mínimo/custódia, paginação de conexões corrigida, CI sem segredos e deploy interno com guarda. 71 testes locais, 170 verificações remotas e 21 checks de UI móvel; lint/types/build passaram. Backup cifrado de beta criado; backup controlado de desenvolvimento restaurou schema real, sete logins/identidades e três arquivos em VM local, com RLS. Os testes UI encontraram botões que não enviavam formulários e feedback de foto perdido; corrigidos e retestados. Próximo 9.11: jornadas complementares, regressão final, aplicação pendente no beta e preview interno.
+
+## Ciclo 9.11 — PLAN
+
+Concluir jornadas de gestão, check-in, denúncia, exclusão/custódia e sessão inválida pela interface; corrigir causas observadas. Consolidar documentação corrente e comandos reproduzíveis, executar CI e regressão final, aplicar somente migrations pendentes no beta após backup. Publicar Preview interno com versão identificável, validar sessão e dados pela URL e remover somente fixtures controladas. Produção futura, SMTP e aparelhos físicos permanecem separados da revisão interna.
+
+9.11 VERIFY antes do deploy: 72 testes locais, lint, types e build aprovados. As oito jornadas complementares de navegador passaram (arena, negação, check-in/histórico, mural, denúncia/moderação, exclusão/custódia, encaminhamento e sessão inválida). Corrigida dependência do teste de formulários em ripgrep ausente no runner Linux e tratamento de ref Git vazio da Vercel CLI. Auditoria de 224 caminhos versionados e 49 bundles sem segredos. Dry-run beta encontrou exatamente nove migrations pendentes; backup e inventário de 1 conta/1 perfil/3 arenas/1 foto preservados. Próxima ação: CI verde, migrate beta, Preview protegido e smoke na URL efetiva.

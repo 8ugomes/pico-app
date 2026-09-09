@@ -1,3 +1,35 @@
+# Schema atual — Ciclo 9
+
+19 migrations aditivas em `supabase/migrations`; execução por destino está registrada em [revisão interna](INTERNAL_REVIEW.md). Tipos gerados em `src/types/database.ts`. Segurança e matriz de autoridade: [contratos atuais](CYCLE9_CONTRACTS.md). O bloco histórico abaixo descreve o ponto de partida, não o schema completo atual.
+
+Novos contratos: `pico_private` guarda admissão, papéis globais e convites; arenas têm proprietário/equipe/status/versão, pedidos e convites de gestão. Comunidades independentes têm membros/papéis/visibilidade/entrada e vínculos aprovados com arenas. `post_destinations` distribui um post canônico; arena/modalidade deixam de ser obrigatórias. Histórico detalhado fica em RPC própria; resumo depende de opt-in. `resource_media`/bucket `entity-media` pertencem ao recurso e usam remoção serializada. A última migration acrescenta medidas reais de moderação, catálogo/custódia e paginação filtrada.
+
+Toda tabela exposta tem RLS; RPCs validam admissão e concessões vigentes. Funções SECURITY DEFINER têm `search_path` restrito e EXECUTE delimitado. Cliente comum não grava papéis, não assume service role e não recebe acesso direto ao Storage. Não reescrever migrations aplicadas; corrigir por nova migration.
+
+## Migrations em ordem
+
+- `20260909010000_social_foundation.sql`
+- `20260909030000_profile_onboarding.sql`
+- `20260909040000_checkin.sql`
+- `20260909050000_social_feed.sql`
+- `20260909060000_connections_discovery.sql`
+- `20260909190000_beta_safety.sql`
+- `20260909191000_private_media.sql`
+- `20260909192000_beta_contracts.sql`
+- `20260909193000_media_delivery.sql`
+- `20260910090000_internal_access.sql`
+- `20260910091000_scoped_management.sql`
+- `20260910092000_arena_profiles.sql`
+- `20260910093000_communities.sql`
+- `20260910094000_canonical_posts.sql`
+- `20260910094100_post_visibility_contract.sql`
+- `20260910095000_private_history.sql`
+- `20260910096000_resource_photos.sql`
+- `20260910096100_photo_read_scope.sql`
+- `20260910100000_operator_measures.sql`
+
+## Referência histórica anterior ao Ciclo 9
+
 # Pico — Supabase: schema e estado real
 
 ## Estado atual · Ciclo 8

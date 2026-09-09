@@ -107,3 +107,11 @@ Ciclo 9.7: recorte reutilizável (react-easy-crop 6.2.3, MIT), preparação loca
 ## Ciclo 9.10
 
 9.10: moderação de conteúdo e suspensão efetivas; custódia/arquivo de comunidades e arenas pela administração; backup cifrado com bytes e ensaio real de restauração local; logs mínimos, CI e wrapper de deploy interno. 71 testes locais, 170 checks hospedados, 21 UI móvel. Corrigidos submits ausentes e confirmação de avatar descartada por refresh.
+
+## Ciclo 9.11 — regressão integrada
+
+- Jornadas complementares de gestão, histórico, moderação e custódia validadas com sessões reais.
+- Teste de formulários portátil entre macOS/Linux; guarda de Preview aceita ref vazio apenas com branch interna explícita.
+- Comando hosted aponta para a suíte C9 e limpeza tolera identidade já excluída pelo teste.
+- Auditoria reproduzível de segredos; documentação atual consolida ambientes, comunidades, permissões, operação e PWA.
+- 72 testes locais, 170 checks remotos anteriores e 29 checks de navegador. Deploy interno e estado de CI registrados separadamente na revisão.

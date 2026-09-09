@@ -1,5 +1,26 @@
 {
-  "development": {"projectRef":"tsebpkfnxjvhntosbkdu","url":"https://tsebpkfnxjvhntosbkdu.supabase.co","appOrigins":["http://localhost:3000","http://localhost:3002"],"provisioned":true},
-  "beta": {"projectRef":"bxjhqxdfknspxezgftyz","url":"https://bxjhqxdfknspxezgftyz.supabase.co","appOrigins":["https://pico-app-sepia.vercel.app"],"provisioned":true},
-  "production": {"projectRef":null,"url":null,"appOrigins":[],"provisioned":false}
+  "development": {
+    "projectRef": "tsebpkfnxjvhntosbkdu",
+    "url": "https://tsebpkfnxjvhntosbkdu.supabase.co",
+    "appOrigins": [
+      "http://localhost:3000",
+      "http://localhost:3002"
+    ],
+    "provisioned": true
+  },
+  "beta": {
+    "projectRef": "bxjhqxdfknspxezgftyz",
+    "url": "https://bxjhqxdfknspxezgftyz.supabase.co",
+    "appOrigins": [
+      "https://pico-internal.vercel.app",
+      "https://pico-app-sepia.vercel.app"
+    ],
+    "provisioned": true
+  },
+  "production": {
+    "projectRef": null,
+    "url": null,
+    "appOrigins": [],
+    "provisioned": false
+  }
 }

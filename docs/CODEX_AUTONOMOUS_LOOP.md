@@ -252,3 +252,7 @@ Próximo avanço: validar o ambiente Supabase de desenvolvimento com duas contas
 ## Ciclo 9.10
 
 9.10 VERIFY / NEXT: operações entregues; backup/restauração efetivamente exercitados, sete identidades e três arquivos controlados, schema importado do dump. CLI aceita leitura Git mas recusa push; conector autenticado enviou 9.0–9.9 e cada árvore coincidiu com a local; histórico local original preservado em branch própria. Nenhuma promoção pública. Próximo 9.11: jornadas finais, limpar apenas IDs de teste, validar beta e publicar preview após checks.
+
+## Ciclo 9.11 — regressão e preparação da revisão
+
+AUDIT/PLAN: concluir oito jornadas adicionais e confrontar documentação/infra com evidência. IMPLEMENT: corrigir portabilidade do teste de formulário, ref vazio do Preview CLI, wrapper hosted e cleanup idempotente; reescrever guias correntes. VERIFY: 72 testes locais + lint/types/build; 170 remotos e 21 + 8 de navegador; auditoria sem valores protegidos. CI inicial revelou falta de ripgrep no Linux, corrigida com leitura nativa do Node, nova execução necessária. DOCUMENT: INTERNAL_REVIEW centraliza URL/versão/provas. COMMIT: incremento de regressão pronto; NEXT: CI, migrations pendentes beta, Preview interno e smoke autenticado, sem promoção pública.
