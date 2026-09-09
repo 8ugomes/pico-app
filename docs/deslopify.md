@@ -1,5 +1,9 @@
 # Pico — Deslopify
 
+## Cycle 0.5 · direção antes da implementação
+
+Preto #07080A e carvão #111317 predominam. Champagne #C8A96A fica na assinatura e em pequenos detalhes. Verde-água #4DE1C1 identifica ação e presença; curtidas usam esse mesmo caminho. Eliminar amarelo de botões, grandes fundos, navegação e estados selecionados. Cards neutros, texto #F7F3EA, metadata #9B9B95, contraste, respiro e transições discretas. Sem novas funções. Preservar leitura de 16px, toque de 44px, foco visível, safe areas e reduced motion. Fotos contextualizam a areia sem colorir toda a interface.
+
 ## Rodada 2 · critérios registrados antes da UI
 
 A auditoria encontrou uma landing bem acabada, porém distante de um aplicativo social: o slogan ocupa mais espaço que pessoas e não há ação social utilizável.
@@ -49,3 +53,7 @@ A auditoria encontrou uma landing bem acabada, porém distante de um aplicativo 
 - Os testes de regras e HTTP passaram. Eles não comprovam acabamento visual em 390px, foco real, zoom ou instalação; esses cenários ainda requerem inspeção de navegador/dispositivo.
 
 Revisão final em código: sem reserva, pagamento, ranking, botão social vazio ou tentativa de usar banco não configurado. O estado de demo é explícito. Evitar ampliar a quantidade de ações até validar essa jornada com jogadores reais.
+
+## Cycle 0.5 · aprendizado e fechamento
+
+Separar ação e contexto reduziu a dominância de areia: champagne na marca, verde-água no gesto social e branco na seleção de conteúdo. Fundos de check-in e cards laterais agora são carvão. Inspeção em navegador 390×844 cobriu seis jornadas sem overflow horizontal; capturas de feed/check-in revisadas. Foco, safe areas, alvos de 44px e reduced motion preservados. Lint/typecheck/build aprovados.

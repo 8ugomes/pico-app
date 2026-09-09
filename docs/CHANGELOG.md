@@ -24,3 +24,7 @@ Escopo registrado antes de implementar: revisão visual forte, seis telas sociai
 - Componentes, identidade, manifesto e ícones.
 - Documentação do MVP.
 - Conteúdo publicado em 8ugomes/pico-app, main (9216df6).
+
+## Cycle 0.5 · 2026-09-09
+
+Premium visual pass: superfícies carvão, champagne pontual, ação verde-água, filtros neutros, estados de toque/hover, manifesto alinhado. Criado registro do ciclo autônomo. Lint/typecheck/build aprovados e seis jornadas inspecionadas em viewport móvel.

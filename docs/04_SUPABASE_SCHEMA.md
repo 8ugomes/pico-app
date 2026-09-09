@@ -98,3 +98,7 @@ Com anônimo e dois usuários distintos: autoria forjada, leitura de arena priva
 Os testes locais de reducer não substituem essa matriz. Não foi executada nesta rodada por ausência de backend configurado.
 
 Referências oficiais: [Supabase RLS](https://supabase.com/docs/guides/database/postgres/row-level-security), [Storage access control](https://supabase.com/docs/guides/storage/security/access-control), [clientes SSR](https://supabase.com/docs/guides/auth/server-side/creating-a-client).
+
+## Cycle 0.5
+
+Refinamento visual concluído; nenhuma mudança em persistência/Auth ou RLS. O Cycle 1 criará migrations e seeds testáveis.

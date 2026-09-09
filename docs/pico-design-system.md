@@ -8,18 +8,19 @@ Um app social de areia, escuro e próximo. Primeiro celular; desktop preserva o 
 
 | Token | Valor | Uso |
 | --- | --- | --- |
-| background | #070707 | fundo |
-| graphite | #111111 | superfícies |
+| background | #07080A | fundo |
+| graphite | #111317 | superfícies |
 | surface | rgba(255,255,255,.06) | cards |
 | surfaceStrong | rgba(255,255,255,.10) | estados ativos |
-| border | rgba(255,255,255,.12) | separadores |
-| primary | #FFFFFF | texto principal |
-| secondary | rgba(255,255,255,.72) | apoio |
-| muted | rgba(255,255,255,.54) | metadados |
-| sand | #D8B46A | ação principal |
-| coral | #FF6B4A | curtidas e erros |
+| border | rgba(255,255,255,.10) | separadores |
+| primary | #F7F3EA | texto principal |
+| secondary | #B9BCB9 | apoio |
+| muted | #9B9B95 | metadados |
+| champagne | #C8A96A | assinatura e detalhe contextual |
+| accent | #4DE1C1 | ação, presença e curtida |
+| coral | #FF6B4A | erros, sem competir com ações |
 | ocean | #67D4FF | esporte/contexto pontual |
-| green | #3FE29B | presença |
+| green | #4DE1C1 | presença |
 
 ## Tipografia e ritmo
 
@@ -50,3 +51,5 @@ Não usar grades de indicadores ou aparência de painel administrativo.
 Tokens globais em globals.css, base social em social.css e telas específicas em social-pages.css. Retratos em uma imagem 3×2 local, exibidos como avatares com dimensões fixas. Arena ilustrativa local com recorte por contexto.
 
 Referência mobile 390px; ajustes compactos abaixo de 360px; navegação lateral a partir de 800px e coluna secundária a partir de 1160px. Nenhuma captura visual foi usada como comprovação nesta rodada.
+
+Cycle 0.5: seis rotas inspecionadas em navegador com viewport 390×844; feed/check-in revisados em captura. Hover/tap de 180ms e seleção neutra preservam a hierarquia social.

@@ -1,5 +1,11 @@
 # Pico — plano de produto
 
+## Ciclo autônomo · plano corrente
+
+Execução detalhada em CODEX_AUTONOMOUS_LOOP.md. Primeiro Cycle 0.5: base carvão/grafite, champagne pontual e verde-água consistente nas ações; nenhum recurso novo. Depois Cycle 1: migrations, constraints, RLS, trigger de perfil e seeds identificados, verificados em banco local antes de integrar as telas. Ciclos 2–7 cobrem leituras, Auth/perfil, check-in, feed, descoberta e consolidação, um avanço completo por commit.
+
+Os relatos da rodada 2 abaixo são históricos. Ausência de serviço Supabase configurado não impede criar e testar SQL localmente, mas impede declarar validação do serviço hospedado.
+
 ## Rodada 2 · 9 de setembro de 2026
 
 Status: implementação e verificações concluídas. Plano registrado antes da UI e atualizado ao fechar a rodada.
@@ -80,3 +86,7 @@ Verificação: lint, typecheck e build aprovados; 10 testes de regras aprovados;
 PWA: manifesto agora abre /feed; ícones/safe areas/reduced motion preservados. Service worker permanece para a próxima rodada para evitar prometer cache de dados privados ou persistência inexistente.
 
 Próximos três passos: (1) Auth/perfil/arenas com RLS real; (2) check-in e interações persistentes; (3) validação em aparelhos, offline, moderação e piloto Vercel.
+
+### Cycle 0.5 concluído
+
+Sistema visual aplicado e verificado em navegador móvel simulado e build. Nenhuma funcionalidade alterada; demo continua em memória. Próximo avanço: fundação SQL com testes reais de políticas em Postgres local.
