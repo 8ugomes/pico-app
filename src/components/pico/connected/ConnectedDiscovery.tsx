@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { RemoteAvatar } from './Media';
+import{ConnectedFeed}from'./ConnectedFeed';
 import { SafetyActions } from './SafetyActions';
 import { Button } from '@/components/ui/Button';
 import { PageHeading, EmptyState, SportIcon } from '../SocialUI';
@@ -59,6 +60,6 @@ export function ConnectedPlayer({ username }: { username: string }) {
   return <><PageHeading eyebrow="ME ACHA NO PICO" title="Perfil do jogador." />
     {state.status === 'loading' && <ReadLoading />}
     {(state.status === 'error' || state.status === 'demo') && <ReadFailure state={state} retry={retry} />}
-    {data && <><ConnectedSource /><section className="connected-panel"><div className="read-profile-identity"><RemoteAvatar src={data.profile.avatar} name={data.profile.name} /><div><h2>{data.profile.name}</h2><p>@{data.profile.username}</p></div></div>{data.profile.isDemo && <p className="form-note">Jogador de demonstração</p>}<p className="location-line">{[data.profile.neighborhood, data.profile.city].filter(Boolean).join(' · ')}</p><p className="profile-bio">{data.profile.bio || 'A bio ainda não foi adicionada.'}</p><div className="profile-sports">{data.profile.sports.map(s => <p key={s.sport.id}><SportIcon sport={s.sport.slug} />{s.sport.name} · {s.level}{s.isPrimary ? ' · Principal' : ''}</p>)}</div><p className={`availability ${data.profile.available ? 'available' : ''}`}><span />{data.profile.available ? 'Disponível pra jogar' : 'Sem disponibilidade marcada'}</p>{data.own ? <Link href="/perfil">Editar meu perfil</Link> : <><ConnectionButton playerId={data.profile.id} connected={data.connected} refresh={refresh} /><SafetyActions target="player" id={data.profile.id} playerId={data.profile.id} onChange={retry} /></>}</section></>}
+    {data && <><ConnectedSource /><section className="connected-panel"><div className="read-profile-identity"><RemoteAvatar src={data.profile.avatar} name={data.profile.name} /><div><h2>{data.profile.name}</h2><p>@{data.profile.username}</p></div></div>{data.profile.isDemo && <p className="form-note">Jogador de demonstração</p>}<p className="location-line">{[data.profile.neighborhood, data.profile.city].filter(Boolean).join(' · ')}</p><p className="profile-bio">{data.profile.bio || 'A bio ainda não foi adicionada.'}</p><div className="profile-sports">{data.profile.sports.map(s => <p key={s.sport.id}><SportIcon sport={s.sport.slug} />{s.sport.name} · {s.level}{s.isPrimary ? ' · Principal' : ''}</p>)}</div><p className={`availability ${data.profile.available ? 'available' : ''}`}><span />{data.profile.available ? 'Disponível pra jogar' : 'Sem disponibilidade marcada'}</p>{data.own ? <Link href="/perfil">Editar meu perfil</Link> : <><ConnectionButton playerId={data.profile.id} connected={data.connected} refresh={refresh} /><SafetyActions target="player" id={data.profile.id} playerId={data.profile.id} onChange={retry} /></>}</section><ConnectedFeed authorId={data.profile.id} readOnly/></>}
   </>;
 }

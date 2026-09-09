@@ -1,5 +1,9 @@
 # Pico — Ciclo Autônomo de Evolução
 
+## Ciclo 9.5 — publicação canônica e audiência
+
+Migrations 20260910094000 e corretiva 20260910094100 no desenvolvimento. Posts pessoais aceitam local/modalidade opcionais; marcação de arena difere de distribuição. Composer mostra audiência e destinos autorizados; comunidades privadas rejeitam destino público. Publicação transacional com chave por autor evita duplicação em repetição; edição própria e remoção de distribuição preservam o post e engajamento. Feed/perfil/mural/URL direta compartilham autorização; fotos de post privado não ficam acessíveis ao antigo participante nem quando ele fez o upload. Correção aditiva evita rejeição indevida do SELECT policy durante INSERT RETURNING legado, mantendo a assinatura antiga de feed. 62 testes locais, lint, typecheck e build isolado aprovados, incluindo rollback de destino inválido, deduplicação e mídia após revogação. Não aplicado ao beta nesta etapa.
+
 ## Ciclo 9.4 — comunidades próprias
 
 Migration 20260910093000 no desenvolvimento exclusivo. Diretório, busca/minhas comunidades, página e gestão; grupos independentes ou com vínculo solicitado/aprovado; comunidade oficial única, criação idempotente e transacional com aprovação da arena. Visibilidade beta/privada separada de entrada aberta/aprovação/convite. Papéis e membros não são herdados da arena. Convite por e-mail confirmado, aceite atômico e revogação; remoção/suspensão impede leitura privada com sessão antiga. RLS executada com dono/membro e administrador Pico que não participa: este último não lê grupo privado. Conteúdo/membros privados não aparecem na ficha mínima do diretório. 60 testes locais, lint, typecheck e build isolado aprovados. Mural será integrado ao post canônico no 9.5; fotos/recorte no 9.7.

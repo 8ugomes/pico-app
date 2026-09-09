@@ -653,6 +653,52 @@ export type Database = {
           },
         ]
       }
+      post_destinations: {
+        Row: {
+          arena_id: string | null
+          community_id: string | null
+          created_at: string
+          id: string
+          post_id: string
+        }
+        Insert: {
+          arena_id?: string | null
+          community_id?: string | null
+          created_at?: string
+          id?: string
+          post_id: string
+        }
+        Update: {
+          arena_id?: string | null
+          community_id?: string | null
+          created_at?: string
+          id?: string
+          post_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "post_destinations_arena_id_fkey"
+            columns: ["arena_id"]
+            isOneToOne: false
+            referencedRelation: "arenas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "post_destinations_community_id_fkey"
+            columns: ["community_id"]
+            isOneToOne: false
+            referencedRelation: "communities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "post_destinations_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       post_likes: {
         Row: {
           created_at: string
@@ -688,31 +734,49 @@ export type Database = {
       }
       posts: {
         Row: {
-          arena_id: string
+          arena_id: string | null
+          audience: string
           author_id: string
           body: string
           created_at: string
+          distribution_explicit: boolean
           id: string
+          idempotency_key: string | null
           image_path: string | null
-          sport_id: string
+          moderated_at: string | null
+          private_community_id: string | null
+          request_digest: string | null
+          sport_id: string | null
         }
         Insert: {
-          arena_id: string
+          arena_id?: string | null
+          audience?: string
           author_id?: string
           body: string
           created_at?: string
+          distribution_explicit?: boolean
           id?: string
+          idempotency_key?: string | null
           image_path?: string | null
-          sport_id: string
+          moderated_at?: string | null
+          private_community_id?: string | null
+          request_digest?: string | null
+          sport_id?: string | null
         }
         Update: {
-          arena_id?: string
+          arena_id?: string | null
+          audience?: string
           author_id?: string
           body?: string
           created_at?: string
+          distribution_explicit?: boolean
           id?: string
+          idempotency_key?: string | null
           image_path?: string | null
-          sport_id?: string
+          moderated_at?: string | null
+          private_community_id?: string | null
+          request_digest?: string | null
+          sport_id?: string | null
         }
         Relationships: [
           {
@@ -730,10 +794,31 @@ export type Database = {
             referencedColumns: ["arena_id", "sport_id"]
           },
           {
+            foreignKeyName: "posts_arena_optional"
+            columns: ["arena_id"]
+            isOneToOne: false
+            referencedRelation: "arenas"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "posts_author_id_fkey"
             columns: ["author_id"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "posts_private_community_id_fkey"
+            columns: ["private_community_id"]
+            isOneToOne: false
+            referencedRelation: "communities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "posts_sport_optional"
+            columns: ["sport_id"]
+            isOneToOne: false
+            referencedRelation: "sports"
             referencedColumns: ["id"]
           },
         ]
@@ -976,6 +1061,20 @@ export type Database = {
         Args: { p_context: string; p_scope_id?: string }
         Returns: Json
       }
+      publication_options: { Args: never; Returns: Json }
+      publish_post: {
+        Args: {
+          p_arena?: string
+          p_audience?: string
+          p_body: string
+          p_groups?: string[]
+          p_image_path?: string
+          p_key: string
+          p_sport?: string
+          p_wall_arena?: string
+        }
+        Returns: string
+      }
       read_feed: {
         Args: { p_arena_id?: string; p_offset?: number }
         Returns: {
@@ -996,6 +1095,20 @@ export type Database = {
           sport_slug: Database["public"]["Enums"]["sport_slug"]
           username: string
         }[]
+      }
+      read_social_feed: {
+        Args: {
+          p_arena?: string
+          p_author?: string
+          p_community?: string
+          p_offset?: number
+          p_post?: string
+        }
+        Returns: Json
+      }
+      remove_distribution: {
+        Args: { p_arena?: string; p_community?: string; p_post: string }
+        Returns: undefined
       }
       request_arena: {
         Args: { p_arena?: string; p_data?: Json; p_kind: string }

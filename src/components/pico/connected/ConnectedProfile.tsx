@@ -1,4 +1,5 @@
 'use client';
+import{ConnectedFeed}from'./ConnectedFeed';
 import Link from 'next/link';
 import { useState } from 'react';
 import { ProfileEditor } from './ProfileEditor';
@@ -31,7 +32,7 @@ export function ConnectedProfile() {
       <p className={`availability profile-availability ${profile.available ? 'available' : ''}`}><span />{profile.available ? 'Disponível pra jogar' : 'Indisponível para jogar agora'}</p>
 
       <div className="read-message-actions"><Button variant="secondary" onClick={() => { setEditing(true); setSavedId(null); }}>Editar perfil</Button></div></>}
-      <AvatarEditor key={profile.id} currentPath={profile.avatarPath} onChange={retry} />
+      <ConnectedFeed authorId={profile.id} readOnly/><AvatarEditor key={profile.id} currentPath={profile.avatarPath} onChange={retry} />
       <div className="read-message-actions"><Link href="/conta" className={buttonVariants({ variant: 'quiet' })}>Privacidade e conta</Link><Link href="/login" className={buttonVariants({ variant: 'quiet' })}>Gerenciar acesso <ArrowUpRight size={16} aria-hidden="true" /></Link></div>
     </>}
   </>;

@@ -7,6 +7,7 @@ let db;
 let postId;
 before(async () => {
   db = await createTestDatabase();
+  await asUser(db,ALICE,()=>db.query('select public.set_arena_membership($1,true)',[VILA]));
   postId = (await asUser(db, ALICE, () => db.query('insert into posts(arena_id,sport_id,body) values($1,$2,$3) returning id', [VILA, FUTEVOLEI, 'Bora pra areia']))).rows[0].id;
   await db.query('insert into posts(author_id,arena_id,sport_id,body) values($1,$2,$3,$4)', [BOB, PRIVATE, FUTEVOLEI, 'Privado']);
 });

@@ -1,0 +1,4 @@
+import type{SportId}from'./social';
+export type PostRecord={id:string;body:string;created_at:string;author_id:string;username:string;display_name:string;arena_id:string|null;arena_name:string|null;arena_slug:string|null;arena_is_demo:boolean|null;sport_id:string|null;sport_name:string|null;sport_slug:SportId|null;like_count:number;comment_count:number;liked:boolean;image_path:string|null;avatar_path:string|null;audience:'beta'|'private';image:string|null;avatar:string|null;destinations:{arena_id:string|null;community_id:string|null}[]};
+export type FeedData={posts:PostRecord[];viewerId:string;hasMore:boolean};
+export type PublicationOptions={arenas:{id:string;slug:string;name:string}[];communities:{id:string;slug:string;name:string;visibility:'beta'|'private'}[]};
