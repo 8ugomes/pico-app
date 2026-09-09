@@ -242,3 +242,8 @@ Próximo avanço: validar o ambiente Supabase de desenvolvimento com duas contas
 ## Ciclo 9.8
 
 9.8 VERIFY / NEXT: 68 testes, lint/types/build. Testes de convite errado/expirado/revogado/reutilizado e isolamento de destino. SMTP fica nos to-dos por solicitação do responsável. Próximo: 9.9 PWA, retomada, rede e atualização sem descarte silencioso de formulários.
+
+
+## Ciclo 9.9
+
+9.9 VERIFY / NEXT: lint/types/build aprovados; sem service worker ou fila offline. PWA emulada e interface completa seguem para 9.11. Próximo: 9.10 moderação operacional, backup/restauração e CI; não há autorização de lançamento.

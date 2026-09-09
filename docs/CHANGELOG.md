@@ -97,3 +97,8 @@ Ciclo 9.7: recorte reutilizável (react-easy-crop 6.2.3, MIT), preparação loca
 ## Ciclo 9.8
 
 9.8: contexto seguro de convites por aba, revogação de convite de comunidade, confirmação/recovery explícitos entre contextos com templates versionados; nenhum envio externo. 68 testes.
+
+
+## Ciclo 9.9
+
+9.9: /instalar, manifesto beta, versão compilada, atualização explícita, estado offline e retomada da sessão. Mantido PKCE padrão porque o Supabase Free recusou templates sem SMTP; alternativa entre contextos preparada e desativada.

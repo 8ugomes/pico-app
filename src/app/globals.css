@@ -215,3 +215,9 @@ fieldset:disabled .input { opacity: .5; cursor: not-allowed; }
 .privacy-page h2 { font-size: 22px; font-weight: 600; margin: 28px 0 8px; }
 .privacy-page p { margin-bottom: 16px; color: #b9bcb9; }
 .privacy-page a { color: #4de1c1; text-decoration: underline; }
+
+.install-page { max-width: 620px; margin: 0 auto; padding: max(28px,env(safe-area-inset-top)) 20px max(32px,env(safe-area-inset-bottom)); display: grid; gap: 20px; }
+.install-page ol { padding-left: 22px; display: grid; gap: 14px; }
+.pwa-notice,.install-hint { padding: 12px 20px; background: #171c23; color: #e3e9f0; font-size: 14px; }
+.install-hint { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: transparent; }
+.pico-dialog { max-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 24px); overscroll-behavior: contain; }

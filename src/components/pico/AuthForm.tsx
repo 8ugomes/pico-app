@@ -67,7 +67,7 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
         ? await client.auth.signUp({
             email: address,
             password,
-            options: { data: { display_name: name }, emailRedirectTo: new URL("/auth/confirm", window.location.origin).href },
+            options: { data: { display_name: name }, emailRedirectTo: new URL(process.env.NEXT_PUBLIC_PICO_EMAIL_TEMPLATES === "custom" ? "/auth/confirm" : "/auth/callback", window.location.origin).href },
           })
         : await client.auth.signInWithPassword({ email: address, password });
       if (error) { setNotice({ kind: "error", text: authError(error.code) }); return; }
@@ -76,7 +76,7 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
         router.replace(afterLogin());
         router.refresh();
       } else {
-        setNotice({ kind: "success", text: "Confira seu e-mail para continuar. Se o cadastro puder ser concluído, você receberá um link de confirmação. Ao abrir o link, confirme para continuar." });
+        setNotice({ kind: "success", text: "Confira seu e-mail para continuar. Se o cadastro puder ser concluído, você receberá um link de confirmação. Abra o link no mesmo navegador em que você fez o pedido." });
       }
       form.reset();
     } catch {

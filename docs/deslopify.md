@@ -167,3 +167,11 @@ Próximo avanço: validar o ambiente Supabase de desenvolvimento com duas contas
 ## Ciclo 9.8
 
 9.8: abrir link não consome convite, entrar não perde destino. Recuperação esclarece que navegador e PWA têm sessões diferentes. Sem declarar recebimento de e-mail sem caixa verificada.
+
+
+9.9: instalação contextual, beta identificado, instruções honestas para iOS/navegadores internos. Atualizar só por ação consciente; safe areas e toques mínimos. Dispositivos físicos permanecem distintos de emulação.
+
+
+## Ciclo 9.9
+
+9.9: beta interno identificado, link de instalação dispensável, aviso de rede sem descartar rascunho. Atualização manual explica perda de edição não salva. Sessão revalidada ao foreground; troca de identidade descarta a árvore. Sem SW; nenhuma evidência física presumida.

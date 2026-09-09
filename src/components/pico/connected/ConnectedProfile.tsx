@@ -34,7 +34,7 @@ export function ConnectedProfile() {
 
       <div className="read-message-actions"><Button variant="secondary" onClick={() => { setEditing(true); setSavedId(null); }}>Editar perfil</Button></div></>}
       <ProfilePlaces playerId={profile.id}/><details className="arena-about"><summary>Meu histórico privado</summary><ActivityHistory/></details><ConnectedFeed authorId={profile.id} readOnly/><AvatarEditor key={profile.id} currentPath={profile.avatarPath} onChange={retry} />
-      <div className="read-message-actions"><Link href="/conta" className={buttonVariants({ variant: 'quiet' })}>Privacidade e conta</Link><Link href="/login" className={buttonVariants({ variant: 'quiet' })}>Gerenciar acesso <ArrowUpRight size={16} aria-hidden="true" /></Link></div>
+      <div className="read-message-actions"><Link href="/conta" className={buttonVariants({ variant: 'quiet' })}>Privacidade e conta</Link><Link href="/instalar" className={buttonVariants({variant:"quiet"})}>Instalar o Pico</Link><Link href="/login" className={buttonVariants({ variant: 'quiet' })}>Gerenciar acesso <ArrowUpRight size={16} aria-hidden="true" /></Link></div>
     </>}
   </>;
 }

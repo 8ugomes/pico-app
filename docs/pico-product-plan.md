@@ -228,4 +228,12 @@ Próximo avanço: validar o ambiente Supabase de desenvolvimento com duas contas
 
 ## Ciclo 9.8
 
-9.8 VERIFY: convites preservam destino na aba por 30 minutos, revogação disponível em gestão de grupos; confirmação/recovery usam verifyOtp em POST explícito; PKCE mantido para links existentes. 68 testes locais + lint/types/build aprovados. Templates/origins exclusivos configurados em desenvolvimento; beta depende do deploy interno. SMTP/entrega externa permanecem pendência do responsável.
+9.8 VERIFY: convites preservam destino na aba por 30 minutos, revogação disponível em gestão de grupos; confirmação/recovery usam verifyOtp em POST explícito; PKCE mantido para links existentes. 68 testes locais + lint/types/build aprovados. Templates preparados; provedor padrão Free recusou sua ativação sem SMTP. Fluxo PKCE permanece ativo; beta depende do deploy interno. SMTP/entrega externa permanecem pendência do responsável.
+
+
+9.9 PLAN: instalação por plataforma, versão compilada, aviso de atualização com decisão explícita, estados reais de rede e retomada da identidade. Preservar rascunhos em falha recuperável; sem service worker nem fila social.
+
+
+## Ciclo 9.9
+
+9.9 VERIFY: instalação contextual, manifesto distinto e id estável, rede/versão/atualização explícita; retomada revalida identidade e admissão. Falha de rede mantém formulário e não enfileira envio. Lint/types/build aprovados; testes de navegador na regressão 9.11. Correção operacional 9.8: Free recusou templates sem SMTP, portanto PKCE continua padrão, custom templates só com flag após configuração real. Redirects exclusivos aplicados.
