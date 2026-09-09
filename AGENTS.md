@@ -22,6 +22,24 @@ Manter fora do MVP: IA, voz, reservas, pagamentos, B2B, anúncios, ranking avan�
 
 ## Leia antes de desenvolver
 
+### Regra permanente por rodada
+
+1. Ler AGENTS.md.
+2. Ler os documentos em docs.
+3. Atualizar o plano de ação antes de codar.
+4. Atualizar o Deslopify antes de codar.
+5. Executar as mudanças.
+6. Rodar lint, typecheck e build.
+7. Atualizar o plano de ação depois de codar.
+8. Atualizar o Deslopify com aprendizados da rodada.
+9. Atualizar o changelog.
+10. Fazer commit.
+
+Decisões pequenas devem ser tomadas com bom senso, sem pedir confirmação.
+O plano corrente é docs/pico-product-plan.md; a revisão corrente é docs/deslopify.md.
+Consultar também docs/pico-design-system.md, docs/pwa-roadmap.md e docs/04_SUPABASE_SCHEMA.md.
+Os documentos numerados anteriores preservam a evolução histórica.
+
 - README.md: setup, comandos, configuração e limites atuais.
 - docs/00_PLANO_DE_ACAO_PICO_MVP.md: fases, modelo proposto e critérios de aceite.
 - docs/skill_pico_dev.md: fluxo técnico.
@@ -41,7 +59,9 @@ Tokens em src/app/globals.css. Reutilizar os componentes existentes.
 Mobile-first, dark mode, grafite e areia, cards arredondados, transparência discreta e movimento reduzível.
 Texto em pt-BR, curto, próximo e concreto. Uma ação principal por contexto.
 Dados ilustrativos precisam de rótulo; não fingir cadastro, presença, salvamento ou métricas.
-A home é pública. Criar conta e Entrar apontam às rotas existentes.
+A experiência social é pública em modo de demonstração e a entrada abre o feed.
+Auth real e jogador fictício são estados distintos. Ações do demo ficam locais, identificadas e sem envio para outras pessoas.
+Rotas canônicas: /feed, /arenas, /arenas/[slug], /checkin, /descobrir, /perfil.
 Não implementar um recurso só porque apareceu como sugestão de rota no plano.
 
 ## Backend e privacidade

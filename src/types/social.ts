@@ -1,0 +1,11 @@
+export type SportId = "futevolei" | "beach-tennis" | "volei-praia";
+export type Level = "Iniciante" | "Intermediário" | "Avançado";
+export type Sport = { id: SportId; name: string; shortName: string };
+export type Player = { id: string; username: string; name: string; bio: string; neighborhood: string; avatar: number; sports: { sportId: SportId; level: Level }[]; arenaIds: string[]; available: boolean };
+export type Arena = { id: string; slug: string; name: string; neighborhood: string; city: string; description: string; sports: SportId[]; members: number; image: string; imagePosition: string; amenities: string[] };
+export type Post = { id: string; authorId: string; arenaId: string; sportId: SportId; content: string; photo?: string; createdAt: number; likes: number };
+export type Comment = { id: string; postId: string; authorId: string; content: string; createdAt: number };
+export type Checkin = { id: string; playerId: string; arenaId: string; sportId: SportId; startedAt: number; expiresAt: number };
+export type Activity = { id: string; playerId: string; arenaId: string; text: string; minutesAgo: number };
+export type DemoSeed = { currentUserId: string; sports: Sport[]; players: Player[]; arenas: Arena[]; posts: Post[]; comments: Comment[]; checkins: Checkin[]; activities: Activity[] };
+export type DemoState = DemoSeed & { likedPostIds: string[]; connectedPlayerIds: string[]; followedArenaIds: string[] };

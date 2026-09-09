@@ -7,7 +7,7 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: "Pico",
     description: "Me acha no Pico. Encontre sua turma nos esportes de areia.",
     lang: "pt-BR",
-    start_url: "/",
+    start_url: "/feed",
     scope: "/",
     display: "standalone",
     background_color: "#070707",

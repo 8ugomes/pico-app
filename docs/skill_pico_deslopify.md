@@ -7,6 +7,9 @@ description: Revisar a interface e o texto do Pico para manter clareza, personal
 
 Use após implementar uma tela ou quando a interface perder identidade. Este guia complementa skill_pico_dev.md.
 
+A revisão agora também acontece antes de codar. Critérios e aprendizados por rodada ficam em [deslopify.md](deslopify.md).
+Na rodada 2, priorizar uso social em 390px, check-in central e pessoas reconhecíveis; substituir a apresentação institucional por acesso direto ao feed.
+
 ## Pergunta central
 
 Uma pessoa que joga na areia reconhece para quem é a tela e entende a próxima ação?

@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "./social.css";
+@import "./social-pages.css";
 
 :root {
   color-scheme: dark;
@@ -15,6 +17,7 @@
   --coral: #ff6b4a;
   --ocean: #67d4ff;
   --lime: #c7f464;
+  --green: #3fe29b;
 }
 
 @theme inline {

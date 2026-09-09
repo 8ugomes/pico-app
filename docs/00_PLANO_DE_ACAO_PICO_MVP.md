@@ -2,6 +2,10 @@
 
 Atualizado em 9 de setembro de 2026.
 
+Este documento preserva a fundação e a sequência de implementação real.
+O estado corrente e a rodada social com mocks estão em [pico-product-plan.md](pico-product-plan.md).
+As rotas canônicas da rodada 2 são /feed, /arenas/[slug], /checkin, /descobrir e /perfil; substituem as sugestões de nomes abaixo.
+
 ## Norte do produto
 
 **Pico. O ponto de encontro da areia. Me acha no Pico.**

@@ -7,6 +7,10 @@ description: Desenvolver o Pico em Next.js, TypeScript e Supabase mantendo o foc
 
 Use este guia nas próximas entregas do projeto. Leia primeiro AGENTS.md e o plano do MVP.
 
+Plano corrente: pico-product-plan.md. Antes de codar, atualizar também deslopify.md.
+Ao concluir: atualizar ambos com resultados, atualizar CHANGELOG.md e fazer commit.
+Na demonstração autorizada, ações em memória são permitidas com rótulo explícito; nunca confundir esse estado com dados salvos no Supabase.
+
 ## Antes de alterar
 
 1. Verifique git status, os arquivos envolvidos, package.json e o lockfile.
