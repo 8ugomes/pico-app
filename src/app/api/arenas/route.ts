@@ -1,0 +1,13 @@
+import{createClient}from'@/lib/supabase/server';import{requireUser}from'@/lib/supabase/queries';import{apiError,jsonBody,privateHeaders,sameOrigin}from'@/lib/supabase/api';import{exactKeys,MutationError,mutationFailure,uuid,textField}from'@/lib/supabase/mutations';import type{Json}from'@/types/database';
+export const dynamic='force-dynamic';
+export async function GET(request:Request){try{const q=new URL(request.url).searchParams,c=await createClient();if(!c)throw new MutationError(503,'Configuração indisponível.');await requireUser(c);const kind=q.get('kind')||'profile';const r=kind==='requests'?await c.from('arena_requests').select('*').order('created_at',{ascending:false}).limit(50):kind==='invites'?await c.rpc('arena_invitations',{p_arena:uuid(q.get('id'))}):kind==='team'?await c.rpc('operator_read',{p_context:'arena_team',p_scope_id:uuid(q.get('id'))}):await c.rpc('arena_profile',{p_slug:textField(q.get('slug'),1,80)});if(r.error)mutationFailure(r.error);return Response.json({data:r.data},{headers:privateHeaders});}catch(e){return apiError(e)}}
+export async function POST(request:Request){try{sameOrigin(request);const b=await jsonBody(request);exactKeys(b,['action','id','version','data','join','kind','approve','email','role','token']);const c=await createClient();if(!c)throw new MutationError(503,'Configuração indisponível.');await requireUser(c);let r;
+ switch(b.action){case'edit':if(!Number.isInteger(b.version)||!b.data||typeof b.data!=='object')throw new MutationError(400,'Confira os campos.');r=await c.rpc('save_arena',{p_id:uuid(b.id),p_version:b.version as number,p_data:b.data as Json});break;
+ case'follow':if(typeof b.join!=='boolean')throw new MutationError(400,'Ação inválida.');r=await c.rpc('set_arena_membership',{p_arena:uuid(b.id),p_join:b.join});break;
+ case'request':r=await c.rpc('request_arena',{p_kind:textField(b.kind,1,20),p_arena:b.id?uuid(b.id):undefined,p_data:b.data as Json});break;
+ case'review':if(typeof b.approve!=='boolean')throw new MutationError(400,'Confirme a decisão.');r=await c.rpc('review_arena_request',{p_request:uuid(b.id),p_approve:b.approve});break;
+ case'invite':r=await c.rpc('invite_arena_manager',{p_arena:uuid(b.id),p_email:textField(b.email,3,254),p_role:textField(b.role,1,20)});break;
+ case'accept':r=await c.rpc('accept_arena_invite',{p_token:textField(b.token,64,64)});break;
+ case'revoke':r=await c.rpc('revoke_arena_invite',{p_id:uuid(b.id)});break;
+ default:throw new MutationError(400,'Ação inválida.');}
+ if(r.error)mutationFailure(r.error);return Response.json({data:r.data},{headers:privateHeaders});}catch(e){return apiError(e)}}

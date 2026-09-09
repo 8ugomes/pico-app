@@ -73,17 +73,77 @@ export type Database = {
           },
         ]
       }
+      arena_requests: {
+        Row: {
+          arena_id: string | null
+          city: string
+          created_at: string
+          details: string
+          id: string
+          kind: string
+          name: string
+          neighborhood: string
+          requester_id: string
+          reviewed_at: string | null
+          status: string
+        }
+        Insert: {
+          arena_id?: string | null
+          city: string
+          created_at?: string
+          details: string
+          id?: string
+          kind: string
+          name: string
+          neighborhood: string
+          requester_id?: string
+          reviewed_at?: string | null
+          status?: string
+        }
+        Update: {
+          arena_id?: string | null
+          city?: string
+          created_at?: string
+          details?: string
+          id?: string
+          kind?: string
+          name?: string
+          neighborhood?: string
+          requester_id?: string
+          reviewed_at?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "arena_requests_arena_id_fkey"
+            columns: ["arena_id"]
+            isOneToOne: false
+            referencedRelation: "arenas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "arena_requests_requester_id_fkey"
+            columns: ["requester_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       arena_sports: {
         Row: {
           arena_id: string
+          enabled: boolean
           sport_id: string
         }
         Insert: {
           arena_id: string
+          enabled?: boolean
           sport_id: string
         }
         Update: {
           arena_id?: string
+          enabled?: boolean
           sport_id?: string
         }
         Relationships: [
@@ -648,7 +708,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      accept_arena_invite: { Args: { p_token: string }; Returns: string }
       accept_beta_invite: { Args: { p_token: string }; Returns: Json }
+      arena_invitations: { Args: { p_arena: string }; Returns: Json }
+      arena_profile: { Args: { p_slug: string }; Returns: Json }
       beta_before_user_created: { Args: { event: Json }; Returns: Json }
       beta_status: { Args: never; Returns: Json }
       bootstrap_operator: { Args: { p_uid: string }; Returns: undefined }
@@ -684,6 +747,10 @@ export type Database = {
       }
       end_checkin: { Args: never; Returns: undefined }
       environment_identity: { Args: never; Returns: Json }
+      invite_arena_manager: {
+        Args: { p_arena: string; p_email: string; p_role: string }
+        Returns: Json
+      }
       management_context: { Args: never; Returns: Json }
       operator_action: {
         Args: {
@@ -719,7 +786,20 @@ export type Database = {
           username: string
         }[]
       }
+      request_arena: {
+        Args: { p_arena?: string; p_data?: Json; p_kind: string }
+        Returns: string
+      }
       reserve_media: { Args: { p_bucket: string }; Returns: string }
+      review_arena_request: {
+        Args: { p_approve: boolean; p_request: string }
+        Returns: string
+      }
+      revoke_arena_invite: { Args: { p_id: string }; Returns: undefined }
+      save_arena: {
+        Args: { p_data: Json; p_id: string; p_version: number }
+        Returns: Json
+      }
       save_profile: {
         Args: {
           p_available: boolean

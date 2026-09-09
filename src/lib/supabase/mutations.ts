@@ -82,6 +82,7 @@ export function parseMutation(value: unknown): Mutation {
   return invalid();
 }
 export function mutationFailure(error: { code?: string }) {
+  if (error.code === 'P0409') throw new MutationError(409, 'Estas informações mudaram. Atualize antes de tentar novamente.');
   if (error.code === 'P0429') throw new MutationError(429, 'Você chegou ao limite por agora. Aguarde antes de tentar novamente; para fotos, remova as que não usa em Privacidade e conta.');
   if (error.code === '23505') throw new MutationError(409, 'Esse nome de usuário já está em uso. Escolha outro.');
   if (['23503', '23514', '22P02', '23502'].includes(error.code ?? '')) throw new MutationError(400, 'Confira os campos. O conteúdo escolhido pode não estar mais disponível.');

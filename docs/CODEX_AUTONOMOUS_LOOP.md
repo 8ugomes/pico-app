@@ -1,5 +1,9 @@
 # Pico — Ciclo Autônomo de Evolução
 
+## Ciclo 9.3 — perfil e responsabilidade de arenas
+
+Migration 20260910092000 no desenvolvimento. Edição atômica com versão, slug/is_demo preservados, modalidades desativadas sem romper posts/check-ins antigos, perfil com responsáveis, participação persistida, pedidos de criação/reivindicação/correção e aprovação administrativa. Convites de gestão por e-mail exato, hash, validade, revogação e consumo único revalidam os poderes atuais do emissor. Não enviam e-mail. UI de gestão contextual e pedidos integrada ao /admin. Testes SQL comprovaram edição autorizada/negada, concorrência por versão, destinatário correto, repetição negada e aprovação idempotente. 57 testes locais, lint, typecheck e build isolado aprovados. Nenhuma arena real foi criada no beta.
+
 ## Ciclo 9.2 — papéis e gestão
 
 Migration 20260910091000 aplicada somente no desenvolvimento exclusivo. Papéis globais privados e papéis escopados de arena, RPCs autorizadas, interface /admin, confirmação/reautenticação para ações sensíveis e auditoria mínima. Transferência bloqueia a arena na transação e exige participante aprovado; dono excluído deixa arena em custódia, sem apagar o local. Participação suspensa não pode ser recriada por escrita direta. 54 testes locais, lint, typecheck e build isolado aprovados; testes positivos/negativos de gestão e bootstrap em PostgreSQL descartável; regressão de interface hospedada ficará no 9.11. Membro não lê lista administrativa nem concede papel a si; dono de A não interfere em B.

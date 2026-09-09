@@ -1,0 +1,4 @@
+'use client';
+import{useEffect,useState}from'react';
+export function useEntity<T>(url:string){const[data,setData]=useState<T|null>(null),[error,setError]=useState(''),[revision,setRevision]=useState(0);useEffect(()=>{let live=true;fetch(url,{cache:'no-store'}).then(async r=>{const d=await r.json();if(!r.ok)throw Error(d.message||'Não foi possível carregar.');if(live){setData(d.data);setError('')}}).catch(e=>{if(live)setError(e instanceof Error?e.message:'Conexão indisponível.')});return()=>{live=false}},[url,revision]);return{data,error,reload:()=>setRevision(r=>r+1)}}
+export async function entityAction(url:string,body:Record<string,unknown>){const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},cache:'no-store',body:JSON.stringify(body)});const d=await r.json();if(!r.ok)throw Error(d.message||'Não foi possível confirmar.');return d.data;}
