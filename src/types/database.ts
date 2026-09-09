@@ -835,6 +835,7 @@ export type Database = {
           is_demo: boolean
           neighborhood: string
           onboarding_completed: boolean
+          share_activity_summary: boolean
           username: string
         }
         Insert: {
@@ -848,6 +849,7 @@ export type Database = {
           is_demo?: boolean
           neighborhood?: string
           onboarding_completed?: boolean
+          share_activity_summary?: boolean
           username: string
         }
         Update: {
@@ -861,6 +863,7 @@ export type Database = {
           is_demo?: boolean
           neighborhood?: string
           onboarding_completed?: boolean
+          share_activity_summary?: boolean
           username?: string
         }
         Relationships: [
@@ -967,6 +970,7 @@ export type Database = {
       accept_arena_invite: { Args: { p_token: string }; Returns: string }
       accept_beta_invite: { Args: { p_token: string }; Returns: Json }
       accept_community_invite: { Args: { p_token: string }; Returns: string }
+      activity_summary: { Args: { p_player: string }; Returns: Json }
       arena_invitations: { Args: { p_arena: string }; Returns: Json }
       arena_link_requests: { Args: { p_arena: string }; Returns: Json }
       arena_profile: { Args: { p_slug: string }; Returns: Json }
@@ -1011,6 +1015,7 @@ export type Database = {
       community_page: { Args: { p_slug: string }; Returns: Json }
       create_community: { Args: { p_data: Json }; Returns: Json }
       create_official_community: { Args: { p_arena: string }; Returns: string }
+      discover_common_players: { Args: { p_offset?: number }; Returns: Json }
       discover_players: {
         Args: {
           p_active?: boolean
@@ -1061,6 +1066,7 @@ export type Database = {
         Args: { p_context: string; p_scope_id?: string }
         Returns: Json
       }
+      profile_places: { Args: { p_player?: string }; Returns: Json }
       publication_options: { Args: never; Returns: Json }
       publish_post: {
         Args: {
@@ -1075,6 +1081,7 @@ export type Database = {
         }
         Returns: string
       }
+      read_checkin_history: { Args: { p_offset?: number }; Returns: Json }
       read_feed: {
         Args: { p_arena_id?: string; p_offset?: number }
         Returns: {

@@ -1,4 +1,5 @@
 'use client';
+import{ActivityHistory,RecentArenas}from'./ActivityHistory';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { MapPin } from 'lucide-react';
@@ -24,7 +25,7 @@ export function ConnectedCheckin({ initialSlug }: { initialSlug?: string }) {
     {state.status === 'loading' && <ReadLoading />}
     {(state.status === 'error' || state.status === 'demo') && <ReadFailure state={state} retry={retry} />}
     {data && <>
-      <ConnectedSource />
+      <ConnectedSource /><RecentArenas key={own?.id||'inactive'}/>
       {own && <section className="connected-panel"><p className="availability available"><span />Você está no Pico</p><h2>{own.arena.name}</h2><p>{own.sport.name} · Até {new Date(own.expiresAt).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}</p><Button variant="secondary" disabled={mutation.busy} onClick={async () => { if (await mutation.run({ action: 'end_checkin' }, 'Check-in encerrado.')) retry(); }}>Encerrar check-in</Button></section>}
       <section className="connected-panel"><h2>{own ? 'Mudou de arena?' : 'Conta onde você está.'}</h2><p className="muted-text">Seu check-in aparece para outros jogadores por até 2 horas. Você pode encerrar quando quiser.</p><form className="connected-form" onSubmit={async e => { e.preventDefault(); if (selection && await mutation.run({ action: 'start_checkin', arenaId: selection.arena.id, sportId: selection.sportId }, 'Check-in feito. Me acha no Pico!')) retry(); }}><fieldset disabled={mutation.busy}><ArenaSportPicker initialSlug={initialSlug} value={selection} onChange={setSelection} /><Button type="submit" disabled={!selection?.sportId}>{mutation.busy ? 'Salvando…' : own ? 'Trocar meu check-in' : 'Fazer check-in'}</Button></fieldset></form></section>
       <div className="list-heading"><h2>Na areia agora</h2><Button size="small" variant="quiet" onClick={retry}>Atualizar</Button></div>
@@ -32,6 +33,6 @@ export function ConnectedCheckin({ initialSlug }: { initialSlug?: string }) {
       {presence.map(p => <article className="connected-panel" key={p.id}><Link href={`/perfil/${p.username}`}><strong>{p.name}</strong></Link><p><MapPin size={14} aria-hidden="true" /> <Link href={`/arenas/${p.arena.slug}`}>{p.arena.name}</Link> · {p.sport.name}</p></article>)}
       {!presence.length && <EmptyState title="A roda pode começar com você.">Nenhum outro check-in ativo por aqui.</EmptyState>}
     </>}
-    <MutationNotice message={mutation.message} />
+    {data&&<details className="arena-about"><summary>Últimos check-ins e histórico privado</summary><ActivityHistory key={own?.id||'inactive'}/></details>}<MutationNotice message={mutation.message} />
   </>;
 }

@@ -1,5 +1,9 @@
 # Pico — Ciclo Autônomo de Evolução
 
+## Ciclo 9.6 — histórico e vínculos
+
+Migration 20260910095000 no desenvolvimento exclusivo. Histórico paginado deriva somente de auth.uid(), sem parâmetro de jogador; encerramento/expiração preservam registros e a exclusão pessoal os remove. Presença atual continua limitada a duas horas, separada das arenas recentes. Perfil exibe vínculos autorizados e resumo agregado apenas mediante opção explícita (sem timestamps); mudar preferência afeta a próxima leitura com a mesma sessão. Descoberta comum considera somente membros ativos/vínculos consultáveis, nunca histórico privado. Testes comprovam leitura própria, ID alheio recusado, resumo padrão privado, revogação e remoção por cascade. 63 testes locais, lint, typecheck e build isolado aprovados.
+
 ## Ciclo 9.5 — publicação canônica e audiência
 
 Migrations 20260910094000 e corretiva 20260910094100 no desenvolvimento. Posts pessoais aceitam local/modalidade opcionais; marcação de arena difere de distribuição. Composer mostra audiência e destinos autorizados; comunidades privadas rejeitam destino público. Publicação transacional com chave por autor evita duplicação em repetição; edição própria e remoção de distribuição preservam o post e engajamento. Feed/perfil/mural/URL direta compartilham autorização; fotos de post privado não ficam acessíveis ao antigo participante nem quando ele fez o upload. Correção aditiva evita rejeição indevida do SELECT policy durante INSERT RETURNING legado, mantendo a assinatura antiga de feed. 62 testes locais, lint, typecheck e build isolado aprovados, incluindo rollback de destino inválido, deduplicação e mídia após revogação. Não aplicado ao beta nesta etapa.
