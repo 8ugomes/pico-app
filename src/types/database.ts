@@ -1,36 +1,41 @@
-// Handwritten V1 contract for future integration. Replace with generated types
-// after applying reviewed migrations to Supabase; not evidence of a deployed schema.
-import type { SportId, Level } from "./social";
-type Table<Row, Insert> = { Row: Row; Insert: Insert; Update: Partial<Insert>; Relationships: [] };
+// Cycle 1: client contract aligned with versioned migrations, not a deployed schema.
+// Insert/Update intentionally narrow to columns granted to authenticated clients.
+// Replace with Supabase-generated types when connecting a configured project.
+import type { SportId, Level } from './social';
+type Relationship = { foreignKeyName: string; columns: string[]; isOneToOne: boolean; referencedRelation: string; referencedColumns: string[] };
+type Table<Row, Insert, Update = Partial<Insert>, Relations extends Relationship[] = []> = { Row: Row; Insert: Insert; Update: Update; Relationships: Relations };
 type Audit = { created_at: string };
-type Profile = Audit & { id: string; username: string; display_name: string; bio: string; neighborhood: string; avatar_path: string | null; available: boolean };
-type Sport = { id: string; slug: SportId; name: string };
-type Arena = Audit & { id: string; slug: string; name: string; description: string; neighborhood: string; city: string; image_path: string | null; is_public: boolean };
-type Post = Audit & { id: string; author_id: string; arena_id: string; sport_id: string; body: string; image_path: string | null };
-type Checkin = { id: string; player_id: string; arena_id: string; sport_id: string; started_at: string; expires_at: string; ended_at: string | null };
-type Connection = Audit & { follower_id: string; following_id: string };
-type Comment = Audit & { id: string; post_id: string; author_id: string; body: string };
+export type ProfileRow = Audit & {
+  id: string; username: string; display_name: string; bio: string; city: string;
+  neighborhood: string; avatar_path: string | null; available: boolean;
+  onboarding_completed: boolean; is_demo: boolean;
+};
+export type SportRow = { id: string; slug: SportId; name: string };
+export type ArenaRow = Audit & { id: string; slug: string; name: string; description: string; neighborhood: string; city: string; image_path: string | null; is_public: boolean; is_demo: boolean };
+export type PostRow = Audit & { id: string; author_id: string; arena_id: string; sport_id: string; body: string; image_path: string | null };
+export type CheckinRow = { id: string; player_id: string; arena_id: string; sport_id: string; started_at: string; expires_at: string; ended_at: string | null };
+export type CommentRow = Audit & { id: string; post_id: string; author_id: string; body: string };
+export type PlayerSportRow = { player_id: string; sport_id: string; level: Level; is_primary: boolean };
+type ProfileEdit = Partial<Pick<ProfileRow, 'username' | 'display_name' | 'bio' | 'city' | 'neighborhood' | 'avatar_path' | 'available' | 'onboarding_completed'>>;
+type ForeignKey<Name extends string, Column extends string, Relation extends string> = { foreignKeyName: Name; columns: [Column]; isOneToOne: false; referencedRelation: Relation; referencedColumns: ['id'] };
 
 export type Database = {
   public: {
     Tables: {
-      profiles: Table<Profile, Pick<Profile, "id" | "username" | "display_name"> & Partial<Omit<Profile, "id" | "username" | "display_name">>>;
-      sports: Table<Sport, Omit<Sport, "id"> & { id?: string }>;
-      arenas: Table<Arena, Pick<Arena, "slug" | "name" | "city" | "neighborhood"> & Partial<Omit<Arena, "slug" | "name" | "city" | "neighborhood">>>;
-      arena_sports: Table<{ arena_id: string; sport_id: string }, { arena_id: string; sport_id: string }>;
-      player_sports: Table<{ player_id: string; sport_id: string; level: Level }, { player_id: string; sport_id: string; level: Level }>;
-      arena_members: Table<Audit & { arena_id: string; player_id: string }, { arena_id: string; player_id: string }>;
-      posts: Table<Post, Pick<Post, "author_id" | "arena_id" | "sport_id" | "body"> & { image_path?: string | null }>;
-      checkins: Table<Checkin, never>;
-      connections: Table<Connection, Pick<Connection, "follower_id" | "following_id">>;
-      post_likes: Table<Audit & { post_id: string; player_id: string }, { post_id: string; player_id: string }>;
-      comments: Table<Comment, Pick<Comment, "post_id" | "author_id" | "body">>;
+      profiles: Table<ProfileRow, never, ProfileEdit>;
+      sports: Table<SportRow, never, never>;
+      arenas: Table<ArenaRow, never, never>;
+      arena_sports: Table<{ arena_id: string; sport_id: string }, never, never, [ForeignKey<'arena_sports_arena_id_fkey', 'arena_id', 'arenas'>, ForeignKey<'arena_sports_sport_id_fkey', 'sport_id', 'sports'>]>;
+      player_sports: Table<PlayerSportRow, { player_id?: string; sport_id: string; level?: Level; is_primary?: boolean }, Partial<Pick<PlayerSportRow, 'level' | 'is_primary'>>, [ForeignKey<'player_sports_player_id_fkey', 'player_id', 'profiles'>, ForeignKey<'player_sports_sport_id_fkey', 'sport_id', 'sports'>]>;
+      arena_members: Table<Audit & { arena_id: string; player_id: string }, { arena_id: string; player_id?: string }, never, [ForeignKey<'arena_members_arena_id_fkey', 'arena_id', 'arenas'>, ForeignKey<'arena_members_player_id_fkey', 'player_id', 'profiles'>]>;
+      posts: Table<PostRow, { author_id?: string; arena_id: string; sport_id: string; body: string; image_path?: string | null }, Partial<Pick<PostRow, 'body' | 'image_path'>>, [ForeignKey<'posts_author_id_fkey', 'author_id', 'profiles'>, { foreignKeyName: 'posts_arena_id_sport_id_fkey'; columns: ['arena_id', 'sport_id']; isOneToOne: false; referencedRelation: 'arena_sports'; referencedColumns: ['arena_id', 'sport_id'] }]>;
+      checkins: Table<CheckinRow, never, never, [ForeignKey<'checkins_player_id_fkey', 'player_id', 'profiles'>, { foreignKeyName: 'checkins_arena_id_sport_id_fkey'; columns: ['arena_id', 'sport_id']; isOneToOne: false; referencedRelation: 'arena_sports'; referencedColumns: ['arena_id', 'sport_id'] }]>;
+      post_likes: Table<Audit & { post_id: string; player_id: string }, { post_id: string; player_id?: string }, never, [ForeignKey<'post_likes_post_id_fkey', 'post_id', 'posts'>, ForeignKey<'post_likes_player_id_fkey', 'player_id', 'profiles'>]>;
+      comments: Table<CommentRow, { post_id: string; author_id?: string; body: string }, Partial<Pick<CommentRow, 'body'>>, [ForeignKey<'comments_post_id_fkey', 'post_id', 'posts'>, ForeignKey<'comments_author_id_fkey', 'author_id', 'profiles'>]>;
     };
     Views: Record<never, never>;
-    Functions: {
-      start_checkin: { Args: { arena_id: string; sport_id: string }; Returns: Checkin };
-      end_checkin: { Args: Record<never, never>; Returns: undefined };
-    };
+    // Trigger functions aren't callable RPCs. Check-in RPCs arrive in Cycle 4.
+    Functions: Record<never, never>;
     Enums: { sport_slug: SportId; player_level: Level };
     CompositeTypes: Record<never, never>;
   };

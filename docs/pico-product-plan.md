@@ -90,3 +90,11 @@ Próximos três passos: (1) Auth/perfil/arenas com RLS real; (2) check-in e inte
 ### Cycle 0.5 concluído
 
 Sistema visual aplicado e verificado em navegador móvel simulado e build. Nenhuma funcionalidade alterada; demo continua em memória. Próximo avanço: fundação SQL com testes reais de políticas em Postgres local.
+
+### Cycle 1 · plano antes da implementação
+
+Criar dez tabelas com RLS, grants mínimos, FK composta arena/modalidade, autoria protegida e trigger de perfil. Seed só de catálogo e arenas fictícias; não criar contas fictícias no Auth hospedado. Testar SQL localmente com anônimo e duas identidades. Não integrar telas neste ciclo nem liberar escrita direta em check-ins; RPCs e conexões permanecem nos ciclos próprios.
+
+### Cycle 1 concluído localmente
+
+Dez tabelas com RLS, grants mínimos, integridade, trigger/backfill e seeds versionados. Tipos correspondem ao SQL entregue; objetos futuros foram removidos do contrato executável. Lint/typecheck/build e 20 testes passaram. SQL aplicado em Postgres/PGlite descartável; sem alteração em Supabase hospedado. Auth/e-mail/PostgREST ainda dependem de configuração e testes reais. Próximo ciclo: leituras de arenas/perfil com origem explícita, sem alterar silenciosamente demo em erro de serviço.

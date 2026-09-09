@@ -1,104 +1,96 @@
-# Pico — schema Supabase V1
+# Pico — Supabase: schema e estado real
 
-Rodada 2, 9 de setembro de 2026. **Contrato proposto, não aplicado.** Nenhum projeto, usuário, bucket ou tabela foi criado por esta rodada.
+## Cycle 1 · fundação implementada
 
-## Separação entre demonstração e produção
+Migration versionada: `supabase/migrations/20260909010000_social_foundation.sql`.
+Seed de desenvolvimento: `supabase/seed.sql`. Configuração local: `supabase/config.toml`.
 
-As telas usam src/data/mock.ts e DemoProvider. Configurar Auth não muda a fonte dos dados sociais nem transforma Rafa em um usuário real. O estado do demo fica em memória e reinicia na recarga; o relógio e os IDs do demo não representam dados de produção.
+O SQL foi aplicado do zero em Postgres/PGlite com as migrations reais. Dez grupos de testes verificam grants, RLS, trigger, seeds e constraints com anônimo e identidades distintas. A fixture de `auth.users`/`auth.uid()` existe somente em `tests/helpers/database.mjs`; não substitui validação de JWT, Auth, e-mail ou PostgREST do Supabase. Nenhum projeto hospedado foi provisionado ou alterado.
 
-src/types/database.ts contém tipos escritos manualmente. src/lib/supabase/queries.ts contém consultas de leitura que exigem um cliente explícito; nenhuma tela social as chama. Depois de aplicar migrations revisadas, substituir o contrato por tipos gerados do Supabase.
+As telas continuam em DemoProvider/mock.ts, com interações em memória e aviso explícito. Configurar Auth ainda não muda a fonte social. O Cycle 2 integrará leituras; falha de banco configurado deverá produzir erro explícito, nunca mock silencioso.
 
-## Convenções
+## Modelo implementado
 
-UUID nas identidades; auth.users é a fonte de autenticação. Timestamps de produção usam timestamptz/default now(). Campos obrigatórios com NOT NULL, textos com comprimento limitado, FKs com comportamento de exclusão definido e índices nas consultas reais. IDs e tempos relativos dos mocks nunca são inseridos diretamente.
-
-| Tabela | Campos e relações principais | Regras |
+| Tabela | Campos e integridade | Visibilidade e escrita do cliente |
 | --- | --- | --- |
-| profiles | id → auth.users.id; username, display_name, bio, neighborhood, avatar_path, available, created_at | username único sem distinção de caixa, nome 2–60, bio até 160; sem e-mail/telefone no perfil público |
-| sports | id, slug, name | slugs únicos futevolei, beach-tennis, volei-praia; catálogo controlado |
-| arenas | id, slug, name, description, neighborhood, city, image_path, is_public, created_at | slug único; cadastro inicial administrativo; sem preços/reservas |
-| arena_sports | arena_id → arenas, sport_id → sports | PK composta, vínculo único |
-| posts | id, author_id → profiles, arena_id → arenas, sport_id → sports, body, image_path, created_at | body não vazio, até 500; esporte compatível com arena; exclusão pelo autor |
-| checkins | id, player_id → profiles, arena_id → arenas, sport_id → sports, started_at, expires_at, ended_at | no máximo um registro não encerrado por pessoa; duração máxima 2h; escrita por RPC |
-| connections | follower_id → profiles, following_id → profiles, created_at | PK composta, proibir conexão consigo; seguir é unilateral neste MVP |
-| post_likes | post_id → posts, player_id → profiles, created_at | PK composta; desfazer por delete |
-| comments | id, post_id → posts, author_id → profiles, body, created_at | body não vazio, até 280; excluir pelo autor |
+| profiles | PK em auth.users, username minúsculo único 3–40, nome 2–60, bio 160, cidade/bairro 80, avatar_path, available, onboarding_completed, is_demo, created_at | SELECT authenticated; UPDATE de colunas editáveis e apenas id = auth.uid(); sem INSERT/DELETE direto |
+| sports | UUID, slug enum único, nome | Catálogo público, sem escrita pelo cliente |
+| arenas | UUID, slug único, nome, descrição, bairro/cidade, image_path, is_public, is_demo | Somente arenas públicas; escrita administrativa fora do app |
+| arena_sports | PK arena_id/sport_id, FKs | Visibilidade da arena, sem escrita pelo cliente |
+| player_sports | PK player_id/sport_id, level enum, is_primary | Leitura autenticada; inserir/editar nível e principal/excluir apenas próprio vínculo; um esporte principal por jogador |
+| arena_members | PK arena_id/player_id, created_at | Leitura em arena pública; acompanhar como auth.uid() e arena pública; sair apenas do próprio vínculo |
+| posts | UUID, author_id, arena_id/sport_id com FK composta, body 1–500 e não só whitespace, image_path, created_at | Leitura em arena pública; autoria própria; editar só body/image_path; exclusão própria |
+| post_likes | PK post_id/player_id, created_at | Leitura/escrita herdam visibilidade do post; inserir/descurtir apenas como próprio player_id; sem UPDATE |
+| comments | UUID, post_id, author_id, body 1–280 e não só whitespace, created_at | Herda visibilidade do post; autoria própria; editar só body; exclusão própria |
+| checkins | UUID, player_id, arena_id/sport_id com FK composta, started_at, expires_at, ended_at | SELECT authenticated só em arena pública, não encerrado e não expirado; sem escrita direta |
 
-Tabelas auxiliares necessárias:
+Todos os dez objetos têm RLS explicitamente habilitada. A migration revoga grants potencialmente herdados de PUBLIC/anon/authenticated antes de conceder somente operações/colunas necessárias. O proprietário do banco continua administrativo; o aplicativo usa publishable key e JWT do usuário. Nenhum service_role no frontend.
 
-- player_sports: player_id, sport_id, level. PK composta, níveis Iniciante/Intermediário/Avançado.
-- arena_members: arena_id, player_id, created_at. PK composta; acompanhamento voluntário e reversível.
+`profiles` contém somente campos compartilháveis entre jogadores autenticados, sem e-mail, telefone, token ou papel administrativo. Ainda não existem perfis privados, bloqueios ou moderação. Esses recursos exigirão revisar também as leituras derivadas.
 
-O demo mantém contagens ilustrativas de comunidade em arenas.members; em produção, calcular a partir de arena_members, sem campo editável pelo cliente.
+## Identidade e criação de perfil
+
+`handle_new_user` roda como trigger AFTER INSERT em auth.users. É SECURITY DEFINER com search_path vazio, tabelas qualificadas e EXECUTE revogado do cliente/PUBLIC. Usa exclusivamente new.id para identidade, gera username `pico_` + UUID sem hífens e aceita apenas display_name textual, aparado e limitado. Não aceita username/id/role/is_demo dos metadados. Sem nome válido, usa “Novo jogador”.
+
+Contas que existiam antes da migration recebem perfil por backfill idempotente, sem copiar e-mail. O perfil inicia com disponibilidade e onboarding falsos, avatar ausente e is_demo falso. O usuário pode editar só seus campos sociais; id, created_at e is_demo não recebem grant de atualização.
 
 ## Integridade e índices
 
-- Índice único em lower(username) e em arenas.slug.
-- Índices em posts(arena_id, created_at DESC, id DESC) e posts(author_id, created_at DESC).
-- Índices em comments(post_id, created_at), connections(following_id) e arena_members(player_id).
-- Índices em checkins(arena_id, expires_at) e checkins(player_id).
-- Unique parcial em checkins(player_id) WHERE ended_at IS NULL. Não usar now() em predicado de índice parcial.
-- FK composta (arena_id, sport_id) dos posts/checkins para arena_sports.
-- Check de expires_at > started_at e expires_at <= started_at + interval '2 hours'.
-- Excluir post remove likes/comentários; exclusão de arena com atividade deve ser controlada ou arquivada.
-- Contagens devem acompanhar os dados e obedecer à visibilidade da entidade original.
+- Slugs e usernames únicos; username canônico minúsculo evita duplicação por caixa.
+- Sports: futevolei, beach-tennis, volei-praia; níveis Iniciante/Intermediário/Avançado.
+- Índice parcial de player_sports permite apenas um is_primary por jogador.
+- Posts/check-ins exigem combinação arena/modalidade presente em arena_sports.
+- Posts indexados por feed global, arena e autor com created_at/id para paginação estável.
+- Comentários indexados por post/data/id; likes e memberships por jogador.
+- Exclusão de post remove likes/comentários; exclusão de conta remove seu conteúdo. Arenas/modalidades com atividade têm exclusão restrita.
+- Check-in exige expires_at > started_at e duração <= 2h; ended_at não pode anteceder started_at.
+- Um check-in não encerrado por jogador via índice parcial; presença ativa indexada por arena/expiração. Sem now() em predicado do índice.
 
-## Check-in no servidor
+## Check-in: fronteira deste ciclo
 
-Implementar start_checkin(arena_id, sport_id) em transação. Derivar player_id de auth.uid(), validar autenticação, arena visível e modalidade. Serializar operações por jogador com lock transacional, encerrar o check-in anterior e inserir o novo com timestamps do servidor.
+A fundação não expõe `start_checkin`/`end_checkin` ainda. Toda escrita direta do cliente está negada. Não há policy provisória de INSERT que aceite player_id/timestamps arbitrários.
 
-RPC revisada com SECURITY DEFINER, search_path vazio, nomes de tabelas qualificados, EXECUTE somente para authenticated e verificação explícita de auth.uid(). Revogar escrita direta em checkins do cliente; end_checkin() só encerra o registro do autor. Não aceitar player_id, started_at ou expires_at arbitrários do navegador.
+No Cycle 4, criar RPCs com auth.uid(), timestamps do servidor e duração máxima de 2h. Serializar por jogador, validar arena pública e modalidade, encerrar registro anterior (inclusive expirado) e inserir o novo em transação. `end_checkin()` só altera a presença do chamador. SECURITY DEFINER, search_path vazio, EXECUTE só para authenticated. Testar identidade forjada, expiração e concorrência antes de integrar a tela.
 
-Expiração de leitura sempre usa expires_at > now() e ended_at IS NULL. O novo check-in encerra registros expirados ainda abertos antes de inserir; nenhuma tarefa periódica é necessária para liberar a constraint. Um job de limpeza pode ser adicionado depois.
+## Seeds
 
-## RLS: política inicial
+Três esportes e três arenas **fictícias** de São Paulo, com UUIDs estáveis, `is_demo = true` e descrição explícita. Os esportes são catálogo; a arena/atividade não representa local ou pessoa real. Inserções `ON CONFLICT DO NOTHING` preservam dados existentes; vínculos só são adicionados a arenas marcadas demo. O seed foi aplicado duas vezes sem duplicar dados.
 
-Habilitar RLS explicitamente antes de expor cada tabela. Ações administrativas ficam fora do cliente. A demonstração pública não exige liberar todos os dados reais anonimamente.
+Sem contas Auth, posts, comentários, curtidas, presença ou métricas inventadas no seed. A imagem local da quadra é ilustrativa. Usar esse seed apenas em desenvolvimento; ambientes beta/produção devem cadastrar seu catálogo de arenas revisado separadamente.
 
-| Tabela | SELECT | INSERT | UPDATE / DELETE |
-| --- | --- | --- | --- |
-| profiles | authenticated, apenas colunas públicas | id = auth.uid() ou trigger de cadastro revisada | apenas próprio id; impedir troca de id |
-| sports | catálogo público | administrativo | administrativo |
-| arenas / arena_sports | somente arenas is_public; privado apenas acesso autorizado futuro | administrativo | administrativo |
-| player_sports | authenticated, conforme perfil público | player_id = auth.uid() | próprio jogador |
-| arena_members | authenticated em arena pública | próprio player_id e arena pública | sair apenas do próprio vínculo |
-| posts | authenticated e arena visível | author_id = auth.uid(), arena visível e esporte permitido | próprio autor e validação de campos |
-| checkins | authenticated; arena visível; não encerrado e não expirado | somente RPC validada | somente RPC de encerramento |
-| connections | vínculos do próprio follower/following; contagens públicas via view específica revisada | follower_id = auth.uid() e alvo diferente | desfazer pelo follower; sem troca dos envolvidos |
-| post_likes | visibilidade herdada do post | próprio player_id e post visível | delete do próprio vínculo |
-| comments | visibilidade herdada do post | próprio author_id e post visível | apenas autor |
+## Tipos e consultas
 
-Combinar USING (linha existente) e WITH CHECK (linha resultante), com grants de colunas quando apropriado. RLS de autoria não substitui constraints de tamanho, compatibilidade e integridade. Não confiar em user_metadata como papel administrativo.
+`src/types/database.ts` agora corresponde às dez tabelas entregues: campos de perfil, flags demo, esporte principal, enums e FKs. Insert/Update foram reduzidos às colunas permitidas ao cliente. Objetos futuros (connections e RPCs) foram retirados do contrato executável até existir migration correspondente. Os tipos continuam manuais; gerar a partir do Supabase configurado antes da integração hospedada.
 
-Antes de permitir perfis privados ou bloqueios, adicionar a política correspondente em todas as leituras derivadas; o V1 propõe apenas campos compartilháveis para usuários autenticados.
+`src/lib/supabase/queries.ts` permanece preparatório. Nenhuma rota social o chama neste ciclo. As consultas futuras deverão distinguir ausência de configuração, sessão ausente, vazio legítimo e falha de serviço.
 
-## Storage
+## Execução local e verificação
 
-Buckets privados para avatars e post-images, caminhos iniciados por auth.uid(). Validar tamanho e MIME no servidor, limites de resolução e metadados antes de publicar. Permitir escrita/exclusão só pelo proprietário; leitura por URL assinada curta conforme visibilidade. Sem upload irrestrito ou permissão baseada somente no nome enviado pelo navegador.
+```sh
+npm ci
+npm run test:db
+npm test
+npm run lint
+npm run typecheck
+npm run build
+```
 
-## Configuração e autenticação
+`test:db` executa Postgres/WASM em memória, sem Docker, servidor externo ou secrets. Os testes simulam o limite de identidade com SET ROLE e request.jwt.claim.sub exclusivamente no banco descartável. Não usar essa fixture em migrations do produto.
 
-.env.example contém somente NEXT_PUBLIC_SUPABASE_URL e NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY vazias. Não incluir service_role/secret key ou tokens em Git, logs ou NEXT_PUBLIC_*.
+Para exercer a pilha completa, instalar Supabase CLI e Docker, rodar `supabase start` e `supabase migration up --local`; em um banco local descartável, `supabase db reset --local` aplica migrations e seed, **apagando os dados locais anteriores**. Copiar URL e publishable key para .env.local sem versionar. Nunca executar reset em banco que contenha trabalho a preservar.
 
-Os helpers atuais suportam Auth e callback PKCE. O helper de servidor escreve cookies em Route Handlers/Server Actions. Adicionar proxy de renovação antes de páginas privadas SSR e validar identidade com getClaims/getUser. Recovery, reenvio de confirmação e testes de e-mail continuam pendentes.
+Em projeto hospedado de desenvolvimento, usar migrations revisadas com `supabase db push --dry-run` antes da aplicação. Nenhum desses comandos hospedados foi executado nesta rodada. Testes de Auth/e-mail/PostgREST/RLS com JWTs reais permanecem obrigatórios antes do beta.
 
-## Sequência de integração real
+## Matriz exercitada
 
-1. Revisar migrations e RLS em ambiente de desenvolvimento.
-2. Aplicar schema, gerar tipos e inserir somente seeds identificados para teste.
-3. Criar adapter de leitura e tratar erro/vazio/loading sem retornar mock silenciosamente.
-4. Integrar perfil/arenas, depois check-in, depois posts/conexões.
-5. Validar gravações no servidor, permissões e idempotência.
-6. Remover rótulo de demo somente das jornadas realmente integradas.
+Dez grupos de teste: criação/RLS/seed repetido; trigger/backfill/metadata adversa; permissões anônimas; edição de perfil e colunas imutáveis; memberships/esportes e uma modalidade principal; autoria/tamanho/arena/modalidade dos posts; likes/comentários/duplicações; visibilidade herdada ao privatizar arena; bloqueio de escrita/check-in máximo/expiração/unicidade; cascata de exclusão do post.
 
-## Matriz de teste necessária no backend
+Os dez testes existentes do demo também continuam passando. Não há afirmação de que PGlite comprova refresh de sessão, envio de e-mail, PostgREST, Storage, concorrência entre conexões ou serviço Supabase hospedado.
 
-Com anônimo e dois usuários distintos: autoria forjada, leitura de arena privada, atualização de perfil alheio, self-connect, duplicação de like/conexão, comentário em post inacessível, modalidade inválida, dois check-ins simultâneos, expiração, encerramento de presença alheia e uploads fora do prefixo.
+## Próximos ciclos
 
-Os testes locais de reducer não substituem essa matriz. Não foi executada nesta rodada por ausência de backend configurado.
+Cycle 2: leituras reais de perfil/catálogo/arenas com loading/erro/vazio e demo explícito. Cycle 3: sessão SSR renovada, onboarding/edição e logout. Cycle 4: RPCs de presença. Cycle 5: mutations sociais. Cycle 6: connections com PK follower/following, check de diferença entre IDs e policies próprias. Cycle 7: jornada ponta a ponta, dispositivos e checklist beta.
 
-Referências oficiais: [Supabase RLS](https://supabase.com/docs/guides/database/postgres/row-level-security), [Storage access control](https://supabase.com/docs/guides/storage/security/access-control), [clientes SSR](https://supabase.com/docs/guides/auth/server-side/creating-a-client).
+Storage privado, limites de upload, moderação e testes de e-mail continuam pendentes; campos avatar_path/image_path não significam que upload esteja implementado.
 
-## Cycle 0.5
-
-Refinamento visual concluído; nenhuma mudança em persistência/Auth ou RLS. O Cycle 1 criará migrations e seeds testáveis.
+Referências: [Supabase RLS e grants](https://supabase.com/docs/guides/database/postgres/row-level-security), [perfil após signup](https://supabase.com/docs/guides/auth/managing-user-data), [PGlite](https://pglite.dev/docs/).

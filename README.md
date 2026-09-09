@@ -58,7 +58,7 @@ Para habilitar Auth:
 
 O fluxo usa PKCE. Preserve o template padrão com {{ .ConfirmationURL }} e abra o link no mesmo navegador do cadastro. Nunca coloque service_role, secret key, senha ou token em Git ou NEXT_PUBLIC_*.
 
-O schema V1, integridade, RLS, índices, RPCs e Storage estão em [04_SUPABASE_SCHEMA.md](docs/04_SUPABASE_SCHEMA.md). Nenhuma migration foi aplicada. Os tipos de banco são manuais e deverão ser gerados após a implantação do schema.
+O schema V1, integridade, RLS, índices, RPCs e Storage estão em [04_SUPABASE_SCHEMA.md](docs/04_SUPABASE_SCHEMA.md). A migration do Cycle 1 foi aplicada e testada em Postgres/PGlite local, sem aplicação em serviço hospedado. Os tipos são manuais e alinhados ao SQL; gerar pelo Supabase após configurar o projeto.
 
 As queries preparadas exigem um cliente explícito e não são chamadas pelas telas sociais. Configurar Auth não liga automaticamente o banco ao feed. Antes de páginas privadas SSR, adicionar renovação de sessão por proxy e validar identidade no servidor.
 
@@ -78,14 +78,14 @@ Para servir o build: npm run start. Com o dev aberto, use npm run start -- --por
 Verificado nesta rodada:
 
 - Lint, typecheck e build aprovados.
-- 10 testes de regras sociais aprovados usando o test runner do Node, sem biblioteca adicional.
+- 20 testes aprovados: dez de regras sociais e dez grupos de integração SQL/RLS com PGlite.
 - 15 URLs sociais respondendo 200 no build de produção.
 - Home redirecionando para feed, navegação presente e arena do check-in pré-selecionada.
 - 404 para arena/perfil desconhecidos.
 - Auth sem configuração e callback inválido com comportamento esperado.
 - Manifesto, imagens e ícones disponíveis.
 
-O Node pode emitir um aviso sobre inferência de módulo nos testes TypeScript; os testes passam. Não houve teste de backend Supabase, inspeção automatizada em navegador ou instalação em dispositivo físico nesta rodada.
+O Node pode emitir um aviso sobre inferência de módulo nos testes TypeScript; os testes passam. Cycles 0.5/1 acrescentaram inspeção das seis jornadas em navegador 390×844 e testes SQL/RLS locais. Auth/PostgREST hospedados e instalação em dispositivo físico permanecem sem validação.
 
 ## PWA e visual
 
@@ -107,7 +107,7 @@ src/data/mock.ts                Fonte única dos dados fictícios
 src/lib/demo-state.ts           Regras e transições locais
 src/lib/supabase/queries.ts      Consultas futuras, inativas no demo
 src/types/social.ts             Contrato do domínio
-src/types/database.ts           Contrato Supabase V1 ainda não aplicado
+src/types/database.ts           Contrato cliente alinhado às migrations locais
 tests/demo-state.test.mjs       Testes de comportamento
 ```
 
@@ -124,7 +124,7 @@ AGENTS.md exige plano e Deslopify antes de codar, verificações, atualização 
 
 ## Próximos passos
 
-1. Integrar perfil/arenas e Auth reais com migrations, RLS e testes entre usuários.
+1. Cycle 2: integrar leituras reais de perfil/arenas sobre a fundação SQL/RLS entregue, mantendo demo explícito.
 2. Ligar check-in e interações sociais ao backend, preservando os estados e a experiência.
 3. Validar PWA em dispositivos reais, preparar offline, moderação e piloto na Vercel.
 
@@ -149,3 +149,18 @@ git push origin main
 A publicação pela conexão GitHub pode gerar outro SHA com a identidade/horário do GitHub. Nesse caso, o conteúdo é conferido por hash, o histórico local é sincronizado e o commit local original é preservado em uma branch de backup.
 
 Deploy Vercel ainda não foi realizado. Ao fazê-lo, usar preset Next.js, npm run build, HTTPS e variáveis/URLs Supabase do ambiente.
+
+## Ciclo Autônomo de Evolução
+
+O registro corrente está em [docs/CODEX_AUTONOMOUS_LOOP.md](docs/CODEX_AUTONOMOUS_LOOP.md). Cada ciclo faz audit, plan, implement, verify, document, commit e next. Cycle 0.5 refinou o visual: carvão, champagne pontual e ações verde-água. Cycle 1 acrescentou fundação Supabase versionada sem mudar o modo demo.
+
+### Banco versionado
+
+- `supabase/migrations/20260909010000_social_foundation.sql`: dez tabelas com RLS, grants mínimos, FKs, constraints, índices e trigger de perfil após signup.
+- `supabase/seed.sql`: catálogo de três esportes e três arenas fictícias marcadas `is_demo`; idempotente, só para desenvolvimento.
+- `src/types/database.ts`: contrato do cliente alinhado ao SQL entregue, com operações restritas aos campos permitidos.
+- `npm run test:db`: dez grupos de testes executam as migrations reais em Postgres/PGlite descartável, sem precisar de Docker ou credenciais. `npm test` inclui esses testes e os dez testes do demo.
+
+Nenhuma tabela foi aplicada em Supabase hospedado. O teste local usa uma fixture de identidade, não um servidor Auth: e-mail, JWT, refresh, PostgREST e Storage precisam de validação própria. Check-ins ainda não têm RPCs; escrita direta no banco está negada. Connections será adicionada no Cycle 6. As telas sociais continuam em memória, com aviso explícito de demonstração.
+
+Para a pilha local completa, usar Supabase CLI + Docker com `supabase start` e migrations locais. O [documento de schema](docs/04_SUPABASE_SCHEMA.md) detalha configuração, grants, limites e comandos. Não aplicar o seed fictício automaticamente em produção nem versionar `.env.local`, tokens ou chaves secretas.

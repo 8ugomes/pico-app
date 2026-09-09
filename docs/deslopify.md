@@ -57,3 +57,11 @@ Revisão final em código: sem reserva, pagamento, ranking, botão social vazio 
 ## Cycle 0.5 · aprendizado e fechamento
 
 Separar ação e contexto reduziu a dominância de areia: champagne na marca, verde-água no gesto social e branco na seleção de conteúdo. Fundos de check-in e cards laterais agora são carvão. Inspeção em navegador 390×844 cobriu seis jornadas sem overflow horizontal; capturas de feed/check-in revisadas. Foco, safe areas, alvos de 44px e reduced motion preservados. Lint/typecheck/build aprovados.
+
+## Cycle 1 · critérios antes da implementação
+
+Sem alterações visuais. A existência de migrations não autoriza remover o aviso de demonstração. Seeds têm is_demo e descrição fictícia; nenhum número de atividade inventado entra no banco. Separar catálogo real (esportes) de arenas ilustrativas. Não usar fotos de demonstração como avatar padrão de contas reais; perfis futuros devem assumir ausência de retrato.
+
+## Cycle 1 · aprendizado e fechamento
+
+Separar is_demo da persistência é necessário: uma arena fictícia pode estar salva no banco e ainda requer rótulo. O trigger usa avatar ausente e disponibilidade falsa para contas novas, sem atribuir retrato ou presença inventados. A fundação não altera os avisos do frontend. SQL/RLS local validado não equivale a produto social persistente; a integração começa no Cycle 2.
