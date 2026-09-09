@@ -38,12 +38,12 @@ export function parseReadRequest(params: URLSearchParams): ReadRequest {
     const value = params.get('offset') ?? '0';
     if (!/^\d{1,5}$/.test(value) || Number(value) > 10000) throw new ReadError('invalid_request', 400);
     const id = params.get(resource === 'feed' ? 'arenaId' : 'postId');
-    if ((resource === 'comments' && !id) || (id && !/^[0-9a-f]{8}-[0-9a-f-]{27}$/i.test(id))) throw new ReadError('invalid_request', 400);
+    if ((resource === 'comments' && !id) || (id && !uuidPattern.test(id))) throw new ReadError('invalid_request', 400);
     return resource === 'feed' ? { resource, offset: Number(value), arenaId: id ?? undefined } : { resource, offset: Number(value), postId: id! };
   }
   if (resource === 'checkin') {
     const arenaId = params.get('arenaId') ?? undefined;
-    if (arenaId && !/^[0-9a-f]{8}-[0-9a-f-]{27}$/i.test(arenaId)) throw new ReadError('invalid_request', 400);
+    if (arenaId && !uuidPattern.test(arenaId)) throw new ReadError('invalid_request', 400);
     return { resource, arenaId };
   }
   if (resource === 'sports') return { resource };

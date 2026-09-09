@@ -19,6 +19,6 @@ export function useMutation() {
   }
   return { run, busy, message };
 }
-export function MutationNotice({ message }: { message: ReturnType<typeof useMutation>['message'] }) {
-  return message ? <p className={`auth-notice notice-${message.error ? 'error' : 'success'}`} role={message.error ? 'alert' : 'status'}>{message.text}</p> : null;
+export function MutationNotice({ message, compact = false }: { message: ReturnType<typeof useMutation>['message']; compact?: boolean }) {
+  return message ? <p className={compact && !message.error ? 'sr-only' : `auth-notice notice-${message.error ? 'error' : 'success'}`} role={message.error ? 'alert' : 'status'}>{message.text}</p> : null;
 }

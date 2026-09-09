@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { ReadArena } from '@/types/read';
 import { Button } from '@/components/ui/Button';
 import { useRemoteRead } from './useRemoteRead';
@@ -9,6 +9,9 @@ export function ArenaSportPicker({ initialSlug, value, onChange }: { initialSlug
   const [offset, setOffset] = useState(0);
   const { state, retry } = useRemoteRead(slug ? `resource=arena&slug=${encodeURIComponent(slug)}` : `resource=arenas&offset=${offset}`);
   const data = state.status === 'success' ? state.data : null;
+  useEffect(() => {
+    if (slug && data?.kind === 'arena' && !value) onChange({ arena: data.arena, sportId: data.arena.sports[0]?.id ?? '' });
+  }, [slug, data, value, onChange]);
   const arenas = data?.kind === 'arena' ? [data.arena] : data?.kind === 'arenas' ? data.arenas : [];
   return <>
     {state.status === 'loading' && <ReadLoading />}

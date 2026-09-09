@@ -1,10 +1,11 @@
 'use client';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import type { ReadResponse } from '@/types/read';
 
 type ReadState = ReadResponse | { status: 'loading' };
 export function useRemoteRead(query: string) {
+  const identity = useRef<string | null>(null);
   const [attempt, setAttempt] = useState(0);
   const [retain, setRetain] = useState(false);
   const [result, setResult] = useState<{ query: string; attempt: number; state: ReadState } | null>(null);
@@ -29,11 +30,13 @@ export function useRemoteRead(query: string) {
     return () => { active = false; controller.abort(); };
   }, [query, attempt]);
   useEffect(() => {
-    // Private data is discarded before refreshing when returning from another tab.
-    const refresh = () => { if (document.visibilityState === 'visible') { setRetain(false); setAttempt(value => value + 1); } };
+    // Refresh on focus; account changes invalidate before loading any new private data.
+    const refresh = () => { if (document.visibilityState === 'visible') { setRetain(true); setAttempt(value => value + 1); } };
     const client = createClient();
-    const subscription = client?.auth.onAuthStateChange((event) => {
-      if (event === 'SIGNED_OUT' || event === 'SIGNED_IN' || event === 'USER_UPDATED') { setRetain(false); setAttempt(value => value + 1); }
+    const subscription = client?.auth.onAuthStateChange((event, session) => {
+      const nextId = session?.user.id ?? null;
+      if (event === 'INITIAL_SESSION') { identity.current = nextId; return; }
+      if (event === 'SIGNED_OUT' || nextId !== identity.current || event === 'USER_UPDATED') { identity.current = nextId; setRetain(false); setAttempt(value => value + 1); }
     }).data.subscription;
     window.addEventListener('focus', refresh);
     return () => { window.removeEventListener('focus', refresh); subscription?.unsubscribe(); };

@@ -4,6 +4,7 @@ import { useEffect, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowUpRight, Check, LoaderCircle } from "lucide-react";
+import { getSupabaseEnvironment } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/client";
 import { Button, buttonVariants } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
@@ -111,7 +112,7 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
 
   return (
     <>
-      {!client && <p className="auth-notice" id="auth-availability" role="status">O Pico está chegando. {signup ? "A criação de contas" : "O acesso às contas"} ainda não está disponível nesta versão.</p>}
+      {!client && <p className="auth-notice" id="auth-availability" role="status">{getSupabaseEnvironment().status === "invalid" ? "O acesso às contas está indisponível agora. Tente novamente mais tarde." : `O Pico está em demonstração. ${signup ? "A criação de contas" : "O acesso às contas"} ainda não está disponível nesta versão.`}</p>}
       <form onSubmit={submit} className="auth-form" aria-describedby={!client ? "auth-availability" : undefined}>
         <fieldset disabled={!client || busy}>
           {signup && <Input id="name" name="name" label="Como você quer ser chamado?" placeholder="Seu nome" autoComplete="nickname" minLength={2} maxLength={60} required />}

@@ -181,3 +181,12 @@
 .connected-checkbox input { accent-color: var(--accent); width: 20px; height: 20px; }
 .connected-panel p, .connected-panel h2 { overflow-wrap: anywhere; }
 @media(min-width: 560px) { .connected-form-row { grid-template-columns: 1fr 1fr; } }
+
+.post-header .read-profile-avatar { width: 44px; height: 44px; flex: 0 0 44px; }
+.connected-panel .post-person { margin-bottom: 14px; }
+.connected-panel > .availability { margin: 16px 0; }
+.connected-panel > .button { margin-top: 14px; }
+.post-person strong, .post-arena-link { overflow-wrap: anywhere; }
+
+.read-profile-identity > div, .post-person, .post-person > span { min-width: 0; }
+.read-profile-identity h2, .read-profile-identity p { overflow-wrap: anywhere; }

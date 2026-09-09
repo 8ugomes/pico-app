@@ -1,5 +1,23 @@
 # Pico — Supabase: schema e estado real
 
+## Estado atual · Cycles 1–7
+
+As onze tabelas e cinco RPCs estão versionadas. Todas as jornadas canônicas consultam/gravam Supabase quando configurado; sem configuração, o app continua demo. Perfil alheio é visível apenas a contas autenticadas e não inclui e-mail. O navegador não grava como outro jogador.
+
+| Migration | Incremento |
+| --- | --- |
+| 20260909010000_social_foundation.sql | Dez tabelas, RLS/grants, trigger e integridade |
+| 20260909030000_profile_onboarding.sql | save_profile atômico, SECURITY INVOKER |
+| 20260909040000_checkin.sql | start_checkin/end_checkin, SECURITY DEFINER, auth.uid() e prazo do servidor |
+| 20260909050000_social_feed.sql | read_feed paginado, contagens, SECURITY INVOKER |
+| 20260909060000_connections_discovery.sql | connections com RLS e discover_players paginado |
+
+RPCs: save_profile, start_checkin, end_checkin, read_feed e discover_players. handle_new_user é trigger sem EXECUTE do cliente.
+
+As migrations foram exercitadas em PGlite e a jornada foi integrada por uma fixture HTTP de Auth/REST. O projeto hospedado não foi alterado nem validado. Tipos manuais precisam ser regenerados após aplicar no alvo. Não há buckets/policies de Storage nem upload.
+
+As seções abaixo preservam o histórico de cada ciclo; planos de recursos posteriores já entregues são substituídos pelas seções Cycles 3–6 e pelo README atual.
+
 ## Cycle 1 · fundação implementada
 
 Migration versionada: `supabase/migrations/20260909010000_social_foundation.sql`.
@@ -127,3 +145,8 @@ Migration 20260909050000_social_feed.sql cria read_feed(offset,arena), SECURITY 
 ## Cycle 6 · conexões e descoberta
 
 Migration 20260909060000_connections_discovery.sql: connections (follower_id default auth.uid(), followed_id, created_at), PK composta, FK para profiles, CHECK sem auto-conexão. SELECT/INSERT/DELETE somente do seguidor; sem UPDATE. discover_players é SECURITY INVOKER, usa RLS e retorna até 25 linhas (24 + lookahead), sem e-mail. Filtros de esporte/nível aplicam ao mesmo vínculo. Arena corresponde a membership visível ou check-in ativo; presença recente significa ativa dentro do prazo de duas horas, sem exposição do histórico encerrado. Onboarding completo é necessário para aparecer.
+
+
+## Cycle 7 · verificação integrada
+
+A fixture de testes executa as mesmas migrations e RPCs em PGlite, com roles anon/authenticated e identidades distintas; Auth/REST são simulados em loopback. O smoke HTTP cria cookies pelo SDK SSR e testa 39 respostas dos Route Handlers: autenticação, autoria, limites, origem, onboarding, feed, presença, conexões, erro/vazio e logout. Nenhum projeto hospedado foi alterado. O catálogo pode ser lido sem sessão; ações e perfis exigem getUser. Consulte BETA_CHECKLIST.md antes de validar/publicar no ambiente alvo.

@@ -14,9 +14,11 @@ export function ConnectedFeed({ initialSlug, arenaId }: { initialSlug?: string; 
   const [offset, setOffset] = useState(0);
   const { state, retry, refresh, refreshing } = useRemoteRead(`resource=feed&offset=${offset}${arenaId ? `&arenaId=${arenaId}` : ''}`);
   const [selection, setSelection] = useState<{ arena: ReadArena; sportId: string } | null>(null);
-  const [body, setBody] = useState('');
+  const [draft, setDraft] = useState({ viewerId: '', body: '' });
   const mutation = useMutation();
   const data = state.status === 'success' && state.data.kind === 'feed' ? state.data : null;
+  const body = draft.viewerId === data?.viewerId ? draft.body : '';
+  const setBody = (value: string) => setDraft({ viewerId: data?.viewerId ?? '', body: value });
   return <>
     {!arenaId && <PageHeading eyebrow="A RESENHA COMEÇA AQUI" title="Seu feed." />}
     {state.status === 'loading' && <ReadLoading />}
@@ -43,7 +45,7 @@ function ConnectedPost({ post, refresh }: { post: FeedRow; refresh: () => void }
     <header className="post-header"><Link href={`/perfil/${post.username}`} className="post-person"><span className="read-profile-avatar"><UserRound size={24} aria-hidden="true" /></span><span><strong>{post.display_name}</strong><small><time dateTime={post.created_at}>{new Date(post.created_at).toLocaleString('pt-BR', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })}</time></small></span></Link><span className="sport-label"><SportIcon sport={post.sport_slug} />{post.sport_name}</span></header>
     <p className="post-copy">{post.body}</p>
     <footer className="post-actions"><div><button className={`post-action ${post.liked ? 'is-liked' : ''}`} disabled={mutation.busy} aria-label={`${post.liked ? 'Descurtir' : 'Curtir'} post de ${post.display_name}`} aria-pressed={post.liked} onClick={async () => { if (await mutation.run({ action: 'set_like', postId: post.id, liked: !post.liked }, post.liked ? 'Curtida removida.' : 'Post curtido.')) refresh(); }}><Heart size={21} fill={post.liked ? 'currentColor' : 'none'} aria-hidden="true" /><span>{post.like_count}</span></button><button className="post-action" aria-expanded={expanded} aria-label={`Comentários do post de ${post.display_name}`} onClick={() => setExpanded(!expanded)}><MessageCircle size={21} aria-hidden="true" /><span>{post.comment_count}</span></button></div><Link className="post-arena-link" href={`/arenas/${post.arena_slug}`}>{post.arena_name}{post.arena_is_demo ? ' · Demo' : ''}</Link></footer>
-    <MutationNotice message={mutation.message} />
+    <MutationNotice compact message={mutation.message} />
     {expanded && <ConnectedComments postId={post.id} onChange={refresh} />}
   </article>;
 }
@@ -58,6 +60,6 @@ function ConnectedComments({ postId, onChange }: { postId: string; onChange: () 
     {(state.status === 'error' || state.status === 'demo') && <ReadFailure state={state} retry={retry} />}
     {data && <><div className="comment-list">{data.comments.map(c => <div key={c.id} className="comment"><div><strong>{c.name}</strong><p>{c.body}</p></div></div>)}{!data.comments.length && <p className="muted-text">Puxe a primeira resenha.</p>}</div>{(offset > 0 || data.hasMore) && <nav className="read-pagination" aria-label="Páginas de comentários"><Button size="small" variant="quiet" disabled={!offset} onClick={() => setOffset(offset - 20)}>Anterior</Button><Button size="small" variant="quiet" disabled={!data.hasMore} onClick={() => setOffset(offset + 20)}>Próxima</Button></nav>}</>}
     <form className="comment-form" onSubmit={async e => { e.preventDefault(); if (await mutation.run({ action: 'create_comment', postId, body }, 'Comentário enviado.')) { setBody(''); refresh(); onChange(); } }}><label className="sr-only" htmlFor={`real-comment-${postId}`}>Escrever comentário</label><input id={`real-comment-${postId}`} placeholder="Entre na resenha…" value={body} onChange={e => setBody(e.target.value)} maxLength={280} required disabled={mutation.busy} /><button className="icon-button" type="submit" aria-label="Enviar comentário" disabled={mutation.busy || !body.trim()}><Send size={19} aria-hidden="true" /></button></form>
-    <MutationNotice message={mutation.message} />
+    <MutationNotice compact message={mutation.message} />
   </section>;
 }
