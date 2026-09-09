@@ -1,0 +1,8 @@
+'use client';
+import {useEffect,useState,type ReactNode}from'react';import Link from'next/link';import{buttonVariants,Button}from'@/components/ui/Button';
+export function AccessGate({children}:{children:ReactNode}){
+ const[state,setState]=useState<'loading'|'allowed'|'login'|'denied'|'error'>('loading');
+ useEffect(()=>{let live=true;async function read(){try{const r=await fetch('/api/access',{cache:'no-store'});const d=await r.json();if(live)setState(r.status===401?'login':r.ok?(d.admitted?'allowed':'denied'):'error');}catch{if(live)setState('error')}}void read();const focus=()=>{void read()};window.addEventListener('focus',focus);return()=>{live=false;window.removeEventListener('focus',focus)}},[]);
+ if(state==='allowed')return children;
+ return <section className="read-message" role="status"><h1>{state==='loading'?'Conferindo seu acesso…':state==='login'?'Seu Pico começa aqui.':state==='denied'?'Revisão interna do Pico.':'Não foi possível conferir o acesso.'}</h1><p>{state==='denied'?'Esta conta ainda não tem acesso aprovado. Seus dados permanecem preservados.':state==='login'?'Entre com a conta aprovada para continuar.':'O acesso depende de uma conexão disponível.'}</p>{state!=='loading'&&<div className="read-message-actions"><Link href={state==='login'?'/login':'/acesso'} className={buttonVariants()}>{state==='login'?'Entrar':'Acesso e minha conta'}</Link><Button variant="quiet" onClick={()=>location.reload()}>Tentar novamente</Button></div>}</section>
+}

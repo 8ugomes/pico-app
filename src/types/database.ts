@@ -586,6 +586,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      accept_beta_invite: { Args: { p_token: string }; Returns: Json }
+      beta_before_user_created: { Args: { event: Json }; Returns: Json }
+      beta_status: { Args: never; Returns: Json }
+      bootstrap_operator: { Args: { p_uid: string }; Returns: undefined }
       can_read_media: {
         Args: { p_bucket: string; p_path: string }
         Returns: boolean
@@ -617,6 +621,7 @@ export type Database = {
         }[]
       }
       end_checkin: { Args: never; Returns: undefined }
+      environment_identity: { Args: never; Returns: Json }
       read_feed: {
         Args: { p_arena_id?: string; p_offset?: number }
         Returns: {

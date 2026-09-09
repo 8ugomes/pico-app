@@ -1,8 +1,10 @@
 import { spawnSync } from 'node:child_process';
 import { readFileSync, renameSync, writeFileSync } from 'node:fs';
 
+import { assertEnvironment } from './environment-guard.mjs';
+const expected = assertEnvironment();
 const projectRef = readFileSync('supabase/.temp/project-ref', 'utf8').trim();
-if (!/^[a-z]{20}$/.test(projectRef)) throw new Error('Link a Supabase project before generating types.');
+if (projectRef !== expected.projectRef || !/^[a-z]{20}$/.test(projectRef)) throw new Error('Link a Supabase project before generating types.');
 const result = spawnSync('npx', ['--yes', 'supabase@2.117.0', 'gen', 'types', 'typescript', '--project-id', projectRef, '--schema', 'public'], {
   encoding: 'utf8', timeout: 120000, maxBuffer: 4 * 1024 * 1024,
 });

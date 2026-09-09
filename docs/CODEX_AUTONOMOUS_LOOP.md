@@ -1,5 +1,11 @@
 # Pico — Ciclo Autônomo de Evolução
 
+## Ciclo 9.1 — isolamento e admissão
+
+Desenvolvimento exclusivo provisionado em tsebpkfnxjvhntosbkdu (Free), sem cópia de dados. Beta existente preservado e fechado por admissão no banco, inclusive JWT antigo; bootstrap executado somente no UID de @hugo confirmado pelo usuário. Migration aditiva 20260910090000 aplicada primeiro no desenvolvimento e depois no beta. Hook oficial Before User Created restringe cadastro direto por convite de e-mail exato; beta exige confirmação. SMTP permanece dependência operacional solicitada pelo usuário, sem convites externos.
+
+51 testes locais, lint, typecheck e build isolado aprovados. Teste real no desenvolvimento: cadastro direto não convidado negado, dois cadastros com convite, acesso social negado antes da admissão, bootstrap por membro negado e revogação com JWT antigo efetiva; IDs criados limpos. Scripts recusam URL/ref cruzados, seed/teste destrutivo beta, configuração ausente e promoção produtiva. Vercel não permite env de branch sem Git conectado: projeto separado pico-internal criado para Preview; previews comuns sem credenciais beta. Nenhum deploy novo nesta etapa.
+
 ## Ciclo 9.0 — auditoria e contratos
 
 Baseline: 7d6f288; branch cycle-9-internal. Auditoria remota read-only confirmou nove migrations, 15 tabelas RLS, 1 conta/arquivo preservados e 3 arenas demo. Arenas têm apenas SELECT para clientes, sem edição conectada: recurso ausente, não vulnerabilidade demonstrada. Baseline: 48 testes, lint, typecheck e build isolado aprovados. Plano e Deslopify atualizados antes do código; matriz/expansão em CYCLE9_CONTRACTS.md. Evidências antigas abaixo são históricas e não aprovam esta rodada.

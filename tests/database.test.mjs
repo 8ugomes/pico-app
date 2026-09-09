@@ -37,10 +37,10 @@ test('signup trigger uses auth identity, ignores role/username claims and backfi
   await asUser(db, ALICE, async () => { await denied(db.query('select public.handle_new_user()')); });
 });
 
-test('anonymous reads only public catalog, with no social data or writes', async () => {
+test('anonymous cannot read the internal catalog or social data', async () => {
   await asUser(db, null, async () => {
-    assert.equal((await db.query('select * from arenas')).rows.length,3);
-    assert.equal((await db.query('select * from arena_sports')).rows.length,7);
+    assert.equal((await db.query('select * from arenas')).rows.length,0);
+    assert.equal((await db.query('select * from arena_sports')).rows.length,0);
     for (const table of ['profiles','posts','post_likes','comments','checkins','player_sports','arena_members']) await denied(db.query(`select * from ${table}`));
     await denied(db.query(`insert into sports(slug,name) values ('futevolei','Fake')`));
     await denied(db.query('insert into posts (author_id,arena_id,sport_id,body) values ($1,$2,$3,$4)',[ALICE,VILA,FUTEVOLEI,'Forged']));
