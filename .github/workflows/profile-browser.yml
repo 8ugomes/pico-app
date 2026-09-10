@@ -1,0 +1,42 @@
+name: Profile and HEIC browser checks
+on:
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'tests/browser-profile-cycle10.mjs'
+      - 'tests/heif-header.test.mjs'
+      - 'package*.json'
+      - '.github/workflows/profile-browser.yml'
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - name: Install isolated test-only tools
+        run: npm install --prefix .vercel/cycle10-test-tools --no-package-lock --ignore-scripts esbuild@0.25.12 playwright@1.58.2
+      - name: Install Chromium
+        run: node .vercel/cycle10-test-tools/node_modules/playwright/cli.js install --with-deps chromium
+      - name: Fetch a public libheif sample, never real user media
+        run: |
+          mkdir -p .vercel/cycle10-browser
+          curl --fail --location --retry 2 https://raw.githubusercontent.com/strukturag/libheif/v1.20.2/examples/example.heic --output .vercel/cycle10-browser/fixture.heic
+          sha256sum .vercel/cycle10-browser/fixture.heic
+      - name: Exercise real UI components and real HEIC decoder in isolated harness
+        run: node tests/browser-profile-cycle10.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cycle10-profile-preview
+          path: .vercel/cycle10-browser/*.png
+          retention-days: 7
+          if-no-files-found: ignore
