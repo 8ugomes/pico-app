@@ -57,7 +57,7 @@ test('arena list uses public filter, stable pagination, sports join and carries 
   assert.equal(query.get('is_public'),'eq.true');
   assert.equal(query.get('order'),'name.asc,id.asc');
   assert.equal(query.get('offset'),'24'); assert.equal(Number(query.get('limit')),ARENA_PAGE_SIZE+1);
-  assert.match(query.get('select'),/arena_sports\(sports\(id,slug,name\)\)/);
+  assert.match(query.get('select'),/arena_sports\(enabled,sports\(id,slug,name\)\)/);
   assert.equal(data.offset,24); assert.equal(data.hasMore,false);
   assert.throws(()=>listPublicArenas(client,-1), e=>e.code==='invalid_request');
 });

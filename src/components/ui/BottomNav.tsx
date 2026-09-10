@@ -1,11 +1,11 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { House, MapPin, Compass, UserRound, Plus } from "lucide-react";
+import { House, UsersRound, Compass, UserRound, Plus } from "lucide-react";
 
 export const socialLinks = [
   { href: "/feed", label: "Feed", icon: House },
-  { href: "/arenas", label: "Arenas", icon: MapPin },
+  { href: "/comunidades", label: "Turmas", icon: UsersRound },
   { href: "/checkin", label: "Check-in", icon: Plus },
   { href: "/descobrir", label: "Descobrir", icon: Compass },
   { href: "/perfil", label: "Perfil", icon: UserRound },

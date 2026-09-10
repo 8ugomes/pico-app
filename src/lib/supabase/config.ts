@@ -1,3 +1,4 @@
+import environments from '../../../config/environments.json' with { type: 'json' };
 export type SupabaseEnvironment =
   | { status: 'demo' }
   | { status: 'invalid' }
@@ -22,7 +23,13 @@ export function resolveSupabaseEnvironment(rawUrl?: string, rawKey?: string): Su
 }
 
 export function getSupabaseEnvironment() {
-  return resolveSupabaseEnvironment(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY);
+  const purpose = process.env.NEXT_PUBLIC_PICO_ENV;
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+  if (purpose === 'demo') return !url && !key ? { status: 'demo' } as const : { status: 'invalid' } as const;
+  if (purpose !== 'development' && purpose !== 'beta') return { status: 'invalid' } as const;
+  if (environments[purpose].url !== url) return { status: 'invalid' } as const;
+  return resolveSupabaseEnvironment(url, key);
 }
 
 export function getSupabaseConfig() {

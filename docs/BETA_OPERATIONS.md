@@ -1,65 +1,35 @@
-# Pico — operação do beta
+# Pico — operação da revisão interna
 
-Este guia descreve os controles implementados no Ciclo 8. Não substitui a definição de responsáveis, contato público e rotina de resposta antes de convidar jogadores externos.
+Ciclo 9, sem liberação externa. Configuração e destinos: [ambientes](ENVIRONMENTS.md). Evidência de publicação: [revisão interna](INTERNAL_REVIEW.md). Permissões: [contratos](CYCLE9_CONTRACTS.md).
 
-## Acesso e fotos
+## Operação pela interface
 
-Supabase `bxjhqxdfknspxezgftyz`, Vercel `pico-app-sepia.vercel.app`. Não usar outro projeto sem revalidar envs, migrations e testes. Não habilitar bucket público.
+Entrar com a conta autorizada e abrir `/admin`. O UID de @hugo foi confirmado pelo responsável e recebeu bootstrap idempotente no beta. A área oferece admissão/suspensão, papéis globais, convites individuais, pedidos de arena e catálogo. Atribuir custódia ou transferir responsabilidade exige reautenticação; nenhuma função deriva de nome/e-mail adivinhado ou metadados do perfil.
 
-`avatars` e `post-media` são privados. Clientes não recebem permissões de upload, download, exclusão ou assinatura diretamente no Storage. O servidor valida a identidade; a RPC `can_read_media` usa SECURITY INVOKER e RLS para conferir a visibilidade atual antes de entregar uma imagem. Só depois usa o cliente administrativo para obter os bytes. `/api/media` responde `private, no-store`, sem URL de Storage exposta.
+`/arenas/[slug]/gestao` permite identidade/modalidades/fotos para dono/admin, participantes/mural conforme escopo e convites direcionados. Dono pode transferir a participante ativo; admin só concede moderador. Comunidades usam sua própria gestão e não herdam papéis da arena. Um membro não edita cadastros oficiais; pode enviar pedido de correção/criação/reivindicação.
 
-Uploads: JPG/PNG/WebP, 3 MiB, até 25 megapixels, sem animação. Sharp decodifica, orienta, reduz a 512 px (avatar) ou 1600 px (post) e converte para WebP sem metadados. Apenas o servidor marca a reserva como pronta. O banco impede anexar arquivo alheio, incompleto ou inexistente; uma imagem de post tem um único vínculo. Arquivos sem uso podem ser removidos em `/conta`.
+O moderador Pico acessa denúncias e pode examinar o alvo exato, dispensar, ocultar conteúdo ou suspender acesso com efeito real. Ações ficam auditadas. Sem acesso geral a grupos privados; denúncias não geram punição automática por volume. Definir frequência de triagem e contato público antes de convites externos; não há equipe/SLA implícitos.
 
-Limites por conta no banco, inclusive em chamadas diretas: 10 gravações de posts/10 min; 30 comentários/10 min; 120 likes/min; 60 conexões/h; 30 bloqueios/h; 5 denúncias/dia; 30 gravações de check-in/h; 120 alterações de perfil/esporte/vínculo/h; 20 reservas de mídia/h. Janelas fixas; transações concorrentes serializam o contador. Cada reserva conta, mesmo se o arquivo for inválido. Máximo de 3 avatares e 40 fotos de posts por conta, incluindo reservas incompletas. Isso é proteção básica, não teste de carga ou defesa contra contas coordenadas.
+## Mídia e exclusão
 
-## Denúncias e moderação
+Três buckets privados: `avatars`, `post-media`, `entity-media`. Servidor verifica identidade e autorização vigente antes de usar Storage administrativo. Imagens passam novamente por normalização sem metadados; resposta sem cache/URL assinada. Remoção em duas fases bloqueia anexação concorrente. Arquivo de recurso continua pertencendo à arena/grupo após saída do uploader.
 
-O autor acompanha suas 20 denúncias mais recentes em `/conta`. Outra pessoa não pode lê-las, mudar autoria ou decidir o status. Motivos: spam, assédio, conteúdo indevido e outro. Não há punição automática por volume.
+`DELETE /api/account` aceita somente senha e confirmação `EXCLUIR`. Verifica senha num cliente isolado, marca exclusão, remove arquivos pessoais e então Auth/dados pessoais. Operação interrompida é repetível. Arenas e comunidades preservam recursos e conteúdo de terceiros em custódia. O último admin ativo deve encaminhar a responsabilidade antes da saída; o mecanismo não transforma exclusão pessoal em apagamento da entidade.
 
-A triagem inicial usa o SQL Editor do projeto, com acesso administrativo do operador. Nunca disponibilizar essa chave ou uma rota de moderação irrestrita no navegador. Consultar a fila:
+Nunca limpar todos os usuários/buckets. A suíte registra IDs/caminhos e remove apenas fixtures controladas do desenvolvimento. Usar Storage API para bytes, nunca apagar linhas `storage.objects` por SQL. Não registrar token, senha, conteúdo de post ou foto em logs.
 
-```sql
-select id, player_id, post_id, comment_id, reason, details, created_at
-from public.reports where status = 'pending'
-order by created_at limit 20;
-```
+## Limites e observabilidade
 
-Investigar somente o conteúdo ligado à denúncia. Para concluir sem remoção, atualizar o ID exato após análise:
+Limites transacionais no banco continuam vigentes: posts 10/10min, comentários 30/10min, likes 120/min, conexões 60/h, bloqueios 30/h, denúncias 5/dia, check-ins 30/h, mudanças de perfil/vínculos 120/h, reservas de mídia 20/h. Comunidades, convites e operações de recurso têm limites adicionais nas migrations. Reserva inválida também conta. Isto não equivale a teste de carga pública.
 
-```sql
-update public.reports
-set status = 'dismissed', reviewed_at = now()
-where id = '<ID revisado>' and status = 'pending';
-```
+Falhas de API produzem evento estruturado mínimo: identificador aleatório, categoria/status e versão. Sem serializar request, URL, corpo, SQL ou erro bruto. Eventos de auditoria registram ação/alvo necessários; acesso restrito. CI executa lint, types, testes e build em demo, sem segredos do Supabase.
 
-Se houver medida externa à remoção do conteúdo, registrar `action_taken` e `reviewed_at`. Para remover um post/comentário confirmado como abusivo, o operador deve conferir o ID, guardar apenas a anotação operacional necessária e excluir o conteúdo correspondente. Remover arquivos pelo Storage API/painel, nunca apagando linhas de `storage.objects` por SQL. As denúncias vinculadas são removidas por cascade quando o conteúdo ou a conta é removido; o app não promete um arquivo permanente de denúncias.
+## Auth, continuidade e rollback
 
-Definir quem acompanha a fila e com qual frequência antes dos convites. O código fornece controle e fila; não fornece uma equipe humana ou prazo de resposta.
+Cadastro público está fechado pelo Before User Created Hook, baseado em convite individual pendente ao e-mail exato. Cadastro não admite automaticamente. No beta a confirmação de e-mail está habilitada; desenvolvimento exclusivo permite confirmação imediata só para identidades controladas. Nenhum convite externo enviado.
 
-## Exclusão de conta e falhas
+PKCE continua padrão. Templates por token foram preparados, mas o provedor Free/default recusou personalização sem SMTP; não ativar `NEXT_PUBLIC_PICO_EMAIL_TEMPLATES=custom` antes de configurar e testar templates/remetente/caixa. SMTP foi adiado pelo responsável, sem compra ou mudança de plano.
 
-`DELETE /api/account` aceita somente senha e a confirmação `EXCLUIR`. A identidade e o e-mail vêm de `getUser`, e a senha é verificada em um cliente isolado. Um marcador persistente bloqueia novos acessos sociais/escritas, arquivos são removidos via Storage e só depois a identidade é excluída. FKs removem dados sociais, reservas e contadores. O usuário pode repetir a operação se ela tiver sido interrompida.
+Backup cifrado, restauração comprovada e limites: [continuidade](CONTINUITY.md). Definir retenção, custódia separada de chave/cópia e destino externo antes da liberação. A restauração validada usou dados controlados de desenvolvimento; dados pessoais do beta não foram copiados para outro ambiente.
 
-Fila administrativa de operações incompletas:
-
-```sql
-select player_id, requested_at from public.account_deletions order by requested_at;
-select player_id, bucket, path, created_at from public.media_assets
-where not ready and created_at < now() - interval '1 hour';
-```
-
-Não excluir todas as contas ou esvaziar buckets para limpar um teste. Os scripts rastreiam os IDs descartáveis criados e limpam apenas essas identidades e seus diretórios. Não registrar senha, token, código de recuperação ou conteúdo pessoal nos logs de diagnóstico.
-
-## Auth e liberação externa
-
-O ambiente mantém cadastro imediato. O SMTP padrão do Supabase entrega apenas para membros da organização e limita envio. A interface de recuperação está implementada, mas a entrega para jogadores externos depende de SMTP configurado e testado pelo responsável. Não habilitar confirmação antes de validar envio, callback, expiração e recuperação em um endereço externo. Não contratar serviço ou trocar de plano automaticamente.
-
-Referências: [SMTP](https://supabase.com/docs/guides/auth/auth-smtp), [recuperação](https://supabase.com/docs/guides/auth/passwords), [buckets privados](https://supabase.com/docs/guides/storage/buckets/fundamentals), [CDN](https://supabase.com/docs/guides/storage/cdn/fundamentals).
-
-## Continuidade, backup e rollback
-
-Supabase Free e Vercel Hobby foram preservados. Não há compra de backup, monitoramento ou SMTP. Antes de convites externos, definir exportação protegida do banco e dos arquivos, retenção e um ensaio de restauração em ambiente isolado. Migrations/seeds testados em PGlite comprovam reprodução do schema, não restauração de Auth e Storage de produção.
-
-Em regressão de segurança, pausar convites e reverter o deploy para a última versão compatível e validada. Não reabrir download direto do Storage nem remover RLS para contornar uma falha. As migrations são aditivas e permanecem no remoto; corrigir por migration nova. A versão anterior ao Ciclo 8 não oferece controles de privacidade suficientes para operar o beta.
-
-Não existe service worker nem cache offline de dados privados. O manifesto permite instalação pelos navegadores compatíveis. Instalação, retomada e atualização em iOS/Safari e Android/Chrome físicos ainda exigem aparelhos; viewport simulado não comprova esses comportamentos.
+Publicação é por CLI protegida em `scripts/deploy-internal.mjs`, Preview do projeto `pico-internal`. GitHub não está integrado ao deploy: push executa CI, não publica. Não usar `--prod`. Em falha essencial, retirar a revisão de circulação/pausar convites e escolher somente artefato compatível previamente validado. Não apontar a revisão para Cycle 8 sem revalidar os novos contratos. Banco recebe correção aditiva, nunca reset, downgrade destrutivo ou remoção de RLS. O domínio histórico tem deploy independente.

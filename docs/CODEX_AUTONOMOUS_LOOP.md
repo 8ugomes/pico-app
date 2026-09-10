@@ -1,5 +1,42 @@
 # Pico — Ciclo Autônomo de Evolução
 
+> Estado final do Ciclo 9: PRONTO PARA REVISÃO INTERNA — NÃO LIBERADO. Preview `e891dca1e741`, 19 migrations em dev/beta e smoke 67/67. [URL, versão e evidências atuais](INTERNAL_REVIEW.md). Os registros abaixo preservam a sequência de auditoria, plano e execução.
+
+
+## Ciclo 9.6 — histórico e vínculos
+
+Migration 20260910095000 no desenvolvimento exclusivo. Histórico paginado deriva somente de auth.uid(), sem parâmetro de jogador; encerramento/expiração preservam registros e a exclusão pessoal os remove. Presença atual continua limitada a duas horas, separada das arenas recentes. Perfil exibe vínculos autorizados e resumo agregado apenas mediante opção explícita (sem timestamps); mudar preferência afeta a próxima leitura com a mesma sessão. Descoberta comum considera somente membros ativos/vínculos consultáveis, nunca histórico privado. Testes comprovam leitura própria, ID alheio recusado, resumo padrão privado, revogação e remoção por cascade. 63 testes locais, lint, typecheck e build isolado aprovados.
+
+## Ciclo 9.5 — publicação canônica e audiência
+
+Migrations 20260910094000 e corretiva 20260910094100 no desenvolvimento. Posts pessoais aceitam local/modalidade opcionais; marcação de arena difere de distribuição. Composer mostra audiência e destinos autorizados; comunidades privadas rejeitam destino público. Publicação transacional com chave por autor evita duplicação em repetição; edição própria e remoção de distribuição preservam o post e engajamento. Feed/perfil/mural/URL direta compartilham autorização; fotos de post privado não ficam acessíveis ao antigo participante nem quando ele fez o upload. Correção aditiva evita rejeição indevida do SELECT policy durante INSERT RETURNING legado, mantendo a assinatura antiga de feed. 62 testes locais, lint, typecheck e build isolado aprovados, incluindo rollback de destino inválido, deduplicação e mídia após revogação. Não aplicado ao beta nesta etapa.
+
+## Ciclo 9.4 — comunidades próprias
+
+Migration 20260910093000 no desenvolvimento exclusivo. Diretório, busca/minhas comunidades, página e gestão; grupos independentes ou com vínculo solicitado/aprovado; comunidade oficial única, criação idempotente e transacional com aprovação da arena. Visibilidade beta/privada separada de entrada aberta/aprovação/convite. Papéis e membros não são herdados da arena. Convite por e-mail confirmado, aceite atômico e revogação; remoção/suspensão impede leitura privada com sessão antiga. RLS executada com dono/membro e administrador Pico que não participa: este último não lê grupo privado. Conteúdo/membros privados não aparecem na ficha mínima do diretório. 60 testes locais, lint, typecheck e build isolado aprovados. Mural será integrado ao post canônico no 9.5; fotos/recorte no 9.7.
+
+## Ciclo 9.3 — perfil e responsabilidade de arenas
+
+Migration 20260910092000 no desenvolvimento. Edição atômica com versão, slug/is_demo preservados, modalidades desativadas sem romper posts/check-ins antigos, perfil com responsáveis, participação persistida, pedidos de criação/reivindicação/correção e aprovação administrativa. Convites de gestão por e-mail exato, hash, validade, revogação e consumo único revalidam os poderes atuais do emissor. Não enviam e-mail. UI de gestão contextual e pedidos integrada ao /admin. Testes SQL comprovaram edição autorizada/negada, concorrência por versão, destinatário correto, repetição negada e aprovação idempotente. 57 testes locais, lint, typecheck e build isolado aprovados. Nenhuma arena real foi criada no beta.
+
+## Ciclo 9.2 — papéis e gestão
+
+Migration 20260910091000 aplicada somente no desenvolvimento exclusivo. Papéis globais privados e papéis escopados de arena, RPCs autorizadas, interface /admin, confirmação/reautenticação para ações sensíveis e auditoria mínima. Transferência bloqueia a arena na transação e exige participante aprovado; dono excluído deixa arena em custódia, sem apagar o local. Participação suspensa não pode ser recriada por escrita direta. 54 testes locais, lint, typecheck e build isolado aprovados; testes positivos/negativos de gestão e bootstrap em PostgreSQL descartável; regressão de interface hospedada ficará no 9.11. Membro não lê lista administrativa nem concede papel a si; dono de A não interfere em B.
+
+## Ciclo 9.1 — isolamento e admissão
+
+Desenvolvimento exclusivo provisionado em tsebpkfnxjvhntosbkdu (Free), sem cópia de dados. Beta existente preservado e fechado por admissão no banco, inclusive JWT antigo; bootstrap executado somente no UID de @hugo confirmado pelo usuário. Migration aditiva 20260910090000 aplicada primeiro no desenvolvimento e depois no beta. Hook oficial Before User Created restringe cadastro direto por convite de e-mail exato; beta exige confirmação. SMTP permanece dependência operacional solicitada pelo usuário, sem convites externos.
+
+51 testes locais, lint, typecheck e build isolado aprovados. Teste real no desenvolvimento: cadastro direto não convidado negado, dois cadastros com convite, acesso social negado antes da admissão, bootstrap por membro negado e revogação com JWT antigo efetiva; IDs criados limpos. Scripts recusam URL/ref cruzados, seed/teste destrutivo beta, configuração ausente e promoção produtiva. Vercel não permite env de branch sem Git conectado: projeto separado pico-internal criado para Preview; previews comuns sem credenciais beta. Nenhum deploy novo nesta etapa.
+
+## Ciclo 9.0 — auditoria e contratos
+
+Baseline: 7d6f288; branch cycle-9-internal. Auditoria remota read-only confirmou nove migrations, 15 tabelas RLS, 1 conta/arquivo preservados e 3 arenas demo. Arenas têm apenas SELECT para clientes, sem edição conectada: recurso ausente, não vulnerabilidade demonstrada. Baseline: 48 testes, lint, typecheck e build isolado aprovados. Plano e Deslopify atualizados antes do código; matriz/expansão em CYCLE9_CONTRACTS.md. Evidências antigas abaixo são históricas e não aprovam esta rodada.
+
+Próximo: 9.1 isolamento e fechamento real do beta. Produção não será provisionada/promovida nesta rodada. Bootstrap depende de UID confirmado; SMTP/caixa e aparelhos físicos são dependências independentes.
+
+# Pico — Ciclo Autônomo de Evolução
+
 ## Integração hospedada · VERIFY / DOCUMENT
 
 Supabase pico-dev criado no Free em São Paulo, linked; cinco migrations e seed aplicados após dry-run. Onze tabelas com RLS, 27 policies e cinco RPCs autenticadas auditadas. Tipos gerados do banco substituem o contrato manual. Vercel Hobby: https://pico-app-sepia.vercel.app, duas variáveis públicas em todos os ambientes; deploy por CLI, sem alterar Samba.
@@ -19,7 +56,7 @@ Auth já usa Supabase; perfil é somente leitura e falta onboarding. Implementar
 Um avanço principal por ciclo: AUDIT → PLAN → IMPLEMENT → VERIFY → DOCUMENT → COMMIT → NEXT.
 Ler AGENTS.md, plano, Deslopify e schema antes da implementação. Rodar lint, typecheck e build em cada ciclo; corrigir falhas antes do commit. Registrar evidências e limitações sem confundir demonstração, banco local e serviço hospedado.
 
-Escopo permanente: rede social mobile-first para esportes de areia. Sem reservas, pagamentos, B2B, chat, ranking avançado, IA ou comunidades implementadas. Preservar todas as rotas canônicas e o funcionamento sem Supabase. Nunca versionar secrets; autoria de produção deriva de auth.uid().
+Escopo permanente: rede social mobile-first para esportes de areia. Sem reservas, pagamentos, B2B, chat, ranking avançado ou IA. Comunidades são autorizadas a partir do Ciclo 9. Preservar todas as rotas canônicas e o funcionamento sem Supabase. Nunca versionar secrets; autoria de produção deriva de auth.uid().
 
 ## Sequência
 
@@ -198,3 +235,29 @@ Verificação visual: 390×844 e desktop 1280; cinco destinos em 320px sem overf
 Ainda demo: todas as jornadas quando falta configuração; seeds continuam fictícios mesmo no banco conectado. Limites conectados: sem upload, acompanhamento de arenas na UI, edição/exclusão de posts/comentários na UI, recuperação de senha, bloqueios/moderação ou service worker. README e BETA_CHECKLIST.md documentam o que falta antes do beta hospedado.
 
 Próximo avanço: validar o ambiente Supabase de desenvolvimento com duas contas reais e executar os itens pendentes do checklist beta. Prompt: “Execute a validação hospedada do BETA_CHECKLIST.md com o projeto de desenvolvimento configurado, mantenha o escopo dos Cycles 0.5–7 e registre as evidências.”
+
+
+## Ciclo 9.7
+
+9.7 VERIFY / DOCUMENT / NEXT: migrations 096000/096100 aplicadas somente em desenvolvimento; tipos gerados do remoto; 66 testes, lint/types/build aprovados. Nenhuma migração aplicada foi reescrita. Próximo 9.8: convites em navegação autenticada, recuperação entre contextos e pendência SMTP solicitada pelo responsável.
+
+
+## Ciclo 9.8
+
+9.8 VERIFY / NEXT: 68 testes, lint/types/build. Testes de convite errado/expirado/revogado/reutilizado e isolamento de destino. SMTP fica nos to-dos por solicitação do responsável. Próximo: 9.9 PWA, retomada, rede e atualização sem descarte silencioso de formulários.
+
+
+## Ciclo 9.9
+
+9.9 VERIFY / NEXT: lint/types/build aprovados; sem service worker ou fila offline. PWA emulada e interface completa seguem para 9.11. Próximo: 9.10 moderação operacional, backup/restauração e CI; não há autorização de lançamento.
+
+
+## Ciclo 9.10
+
+9.10 VERIFY / NEXT: operações entregues; backup/restauração efetivamente exercitados, sete identidades e três arquivos controlados, schema importado do dump. CLI aceita leitura Git mas recusa push; conector autenticado enviou 9.0–9.9 e cada árvore coincidiu com a local; histórico local original preservado em branch própria. Nenhuma promoção pública. Próximo 9.11: jornadas finais, limpar apenas IDs de teste, validar beta e publicar preview após checks.
+
+## Ciclo 9.11 — regressão e preparação da revisão
+
+AUDIT/PLAN: concluir oito jornadas adicionais e confrontar documentação/infra com evidência. IMPLEMENT: corrigir portabilidade do teste de formulário, ref vazio do Preview CLI, wrapper hosted e cleanup idempotente; reescrever guias correntes. VERIFY: 72 testes locais + lint/types/build; 170 remotos e 21 + 8 de navegador; auditoria sem valores protegidos. CI inicial revelou falta de ripgrep no Linux, corrigida com leitura nativa do Node, nova execução necessária. DOCUMENT: INTERNAL_REVIEW centraliza URL/versão/provas. COMMIT: incremento de regressão pronto; NEXT: CI, migrations pendentes beta, Preview interno e smoke autenticado, sem promoção pública.
+
+9.11 VERIFY/DOCUMENT/COMMIT final: Preview dpl_DkEmaLHQypwfKb4zg8kwSXAvrEwv READY, commit e891dca1e741, CI 34417393958 success. Aplicadas apenas nove migrations beta pendentes; 19 conferidas em ambos os destinos. Teste publicado 67/67, Auth/perfil/feed/grupo/Storage/RLS reais. Cleanup preservou conta original e hash da foto. Credencial Vercel QA revogada, VM/servidor QA encerrados. Ciclos 9.0–9.11 concluídos para revisão, sem NEXT de lançamento; dependências externas registradas.

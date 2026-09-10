@@ -1,5 +1,33 @@
 # Pico — plano de produto
 
+> Estado final do Ciclo 9: PRONTO PARA REVISÃO INTERNA — NÃO LIBERADO. Preview `e891dca1e741`, 19 migrations em dev/beta e smoke 67/67. [URL, versão e evidências atuais](INTERNAL_REVIEW.md). Os registros abaixo preservam a sequência de auditoria, plano e execução.
+
+
+## Ciclo 9 — AUDIT / PLAN (2026-09-09)
+
+Branch `cycle-9-internal`, baseline `7d6f288`. Rodada exclusiva de revisão interna; sem lançamento, convites externos, merge em main ou promoção pública.
+
+Auditoria real: Supabase bxjhqxdfknspxezgftyz contém nove migrations, 15 tabelas com RLS, 1 conta/perfil, 3 arenas demo, 1 arquivo, zero posts/check-ins. Contagens não identificam o responsável: bootstrap depende de UID verificado. Arenas concedem apenas SELECT a anon/authenticated; interface conectada não oferece edição. Classificação: funcionalidade ausente, sem evidência de vulnerabilidade. Posts exigem arena/esporte; arena_members representa participação sem gestão. Histórico fica limitado à presença ativa. Storage privado e bloqueios já funcionam. Configuração atual reutiliza beta em desenvolvimento/previews: deve ser separada antes de experimentos.
+
+48 testes baseline aprovados. Os 168 checks históricos do Ciclo 8 não são evidência do Ciclo 9. Baseline lint/types/build serão registrados no loop.
+
+Sequência e incrementos:
+1. 9.0 contratos e matriz em CYCLE9_CONTRACTS.md; expansão preserva schema/dados antigos.
+2. 9.1 desenvolvimento exclusivo, beta existente fechado, produção não provisionada; validação de destino em comandos; admissão em RLS/Auth.
+3. 9.2 papéis globais/escopados, auditoria, bootstrap por UID, administração e custódia.
+4. 9.3 perfil e edição transacional de arena, participação e convites de gestão.
+5. 9.4 comunidades, modos de entrada, audiência e participantes.
+6. 9.5 post canônico, destinos atômicos, idempotência e autorização transitiva de mídia/engajamento.
+7. 9.6 histórico privado paginado, arenas recentes e vínculos autorizados.
+8. 9.7 recorte reutilizável com pixels persistidos, zoom/rotação e limites antes do envio.
+9. 9.8 admissão administrativa e recuperação; SMTP/caixa dependem de acesso externo.
+10. 9.9 instalação/versionamento PWA sem cache privado; evidência física separada.
+11. 9.10 moderação, backup protegido, restauração isolada e CI sem segredos.
+12. 9.11 regressão por papéis, interface interna, limpeza rastreada, docs, push branch; deploy interno só após verificações essenciais.
+
+As migrations novas serão testadas primeiro em PostgreSQL descartável e desenvolvimento exclusivo. No beta, apenas incrementos compatíveis e verificados; nunca reaplicar as nove migrations históricas. Nenhuma cópia de contas/dados pessoais entre projetos. Incapacidade de SMTP, bootstrap ou dispositivo físico bloqueia apenas sua comprovação dependente.
+
+
 ## Ciclo 8 · AUDIT / PLAN · 9 de setembro de 2026
 
 Baseline confirmado: main 26619e7, Vercel publicada, Supabase bxjhqxdfknspxezgftyz, cinco migrations remotas, Auth e núcleo social reais. Não recriar infraestrutura. Lacunas: mídia, bloqueio/denúncia, recuperação, exclusão de conta, limites de abuso e privacidade.
@@ -191,3 +219,48 @@ Verificação visual: 390×844 e desktop 1280; cinco destinos em 320px sem overf
 Ainda demo: todas as jornadas quando falta configuração; seeds continuam fictícios mesmo no banco conectado. Limites conectados: sem upload, acompanhamento de arenas na UI, edição/exclusão de posts/comentários na UI, recuperação de senha, bloqueios/moderação ou service worker. README e BETA_CHECKLIST.md documentam o que falta antes do beta hospedado.
 
 Próximo avanço: validar o ambiente Supabase de desenvolvimento com duas contas reais e executar os itens pendentes do checklist beta. Prompt: “Execute a validação hospedada do BETA_CHECKLIST.md com o projeto de desenvolvimento configurado, mantenha o escopo dos Cycles 0.5–7 e registre as evidências.”
+
+
+## Ciclo 9.7
+
+9.7 entregue: editor sob demanda, limites 20 MB/25 MP, pixels recortados com orientação, fotos privadas por arena/grupo, coleta de órfãos serializada. 66 testes, lint, types e build passaram. UI e Storage hospedado ficam para regressão integrada.
+
+
+9.8 PLAN: preservar contexto de convite por aba e prazo curto; aceite sempre explícito. Suportar confirmação/recovery por token oficial com POST, preservando PKCE. Templates e SMTP separados; nenhuma entrega externa será presumida.
+
+
+## Ciclo 9.8
+
+9.8 VERIFY: convites preservam destino na aba por 30 minutos, revogação disponível em gestão de grupos; confirmação/recovery usam verifyOtp em POST explícito; PKCE mantido para links existentes. 68 testes locais + lint/types/build aprovados. Templates preparados; provedor padrão Free recusou sua ativação sem SMTP. Fluxo PKCE permanece ativo; beta depende do deploy interno. SMTP/entrega externa permanecem pendência do responsável.
+
+
+9.9 PLAN: instalação por plataforma, versão compilada, aviso de atualização com decisão explícita, estados reais de rede e retomada da identidade. Preservar rascunhos em falha recuperável; sem service worker nem fila social.
+
+
+## Ciclo 9.9
+
+9.9 VERIFY: instalação contextual, manifesto distinto e id estável, rede/versão/atualização explícita; retomada revalida identidade e admissão. Falha de rede mantém formulário e não enfileira envio. Lint/types/build aprovados; testes de navegador na regressão 9.11. Correção operacional 9.8: Free recusou templates sem SMTP, portanto PKCE continua padrão, custom templates só com flag após configuração real. Redirects exclusivos aplicados.
+
+
+9.10 PLAN: medidas de moderação reais e auditadas, custódia de grupos sem leitura privada geral, correção da paginação de conexões; logs mínimos e CI sem segredos. Backup protegido inclui Auth/banco/configuração/bytes e ensaio em ambiente local separado.
+
+
+## Ciclo 9.10
+
+9.10 VERIFY: moderação real e auditada, catálogo mínimo/custódia, paginação de conexões corrigida, CI sem segredos e deploy interno com guarda. 71 testes locais, 170 verificações remotas e 21 checks de UI móvel; lint/types/build passaram. Backup cifrado de beta criado; backup controlado de desenvolvimento restaurou schema real, sete identidades e dois logins exercitados e três arquivos em VM local, com RLS. Os testes UI encontraram botões que não enviavam formulários e feedback de foto perdido; corrigidos e retestados. Próximo 9.11: jornadas complementares, regressão final, aplicação pendente no beta e preview interno.
+
+## Ciclo 9.11 — PLAN
+
+Concluir jornadas de gestão, check-in, denúncia, exclusão/custódia e sessão inválida pela interface; corrigir causas observadas. Consolidar documentação corrente e comandos reproduzíveis, executar CI e regressão final, aplicar somente migrations pendentes no beta após backup. Publicar Preview interno com versão identificável, validar sessão e dados pela URL e remover somente fixtures controladas. Produção futura, SMTP e aparelhos físicos permanecem separados da revisão interna.
+
+9.11 VERIFY antes do deploy: 72 testes locais, lint, types e build aprovados. As oito jornadas complementares de navegador passaram (arena, negação, check-in/histórico, mural, denúncia/moderação, exclusão/custódia, encaminhamento e sessão inválida). Corrigida dependência do teste de formulários em ripgrep ausente no runner Linux e tratamento de ref Git vazio da Vercel CLI. Auditoria de 224 caminhos versionados e 49 bundles sem segredos. Dry-run beta encontrou exatamente nove migrations pendentes; backup e inventário de 1 conta/1 perfil/3 arenas/1 foto preservados. Próxima ação: CI verde, migrate beta, Preview protegido e smoke na URL efetiva.
+
+9.11 CONCLUÍDO: 19 migrations conferidas em dev/beta, dados anteriores preservados, CI aprovada e Preview e891dca1e741 READY. Smoke autenticado na URL estável: 67 checks aprovados. Fixtures limpas por ID; nenhum merge/main, convite externo ou lançamento. SMTP, aparelhos físicos e operação externa ficam no relatório final.
+
+## Proteção do GitHub — PLAN
+
+Ativar rulesets remotos para a branch padrão (`main`) e `cycle-9-internal`. Na main, exigir PR, check `verify` originado do GitHub Actions, teste contra a base atual e resolução das discussões. Em ambas, impedir exclusão e force push, sem atores de bypass. Não exigir uma segunda aprovação nos PRs atuais criados pela conta do próprio responsável; não há autoaprovação no GitHub. Preservar PR em rascunho, commits e deploy. Verificar aplicação efetiva pela API e interface; não confundir configuração preenchida com regra ativa.
+
+VERIFY parcial: CI remota atual aprovada; lint, typecheck e build locais passaram novamente. Os dois formulários de ruleset estão preparados. Salvamento da main interrompido por confirmação de identidade do GitHub; solicitação Mobile expirou. API continua sem rulesets, portanto proteção ainda pendente. Diagnóstico, configuração pretendida e retomada em [GITHUB_GOVERNANCE.md](GITHUB_GOVERNANCE.md).
+
+CONCLUÍDO após autenticação do responsável: rulesets 22706380 e 22706456 ativos; alvos e regras conferidos pela API. Ambas as branches retornam `protected: true`, com zero bypass. Main exige PR, `verify`/GitHub Actions, base atualizada e discussões resolvidas. PR #1 em rascunho, main e Preview preservados. A CI do registro anterior 27c7623 passou; documentação corrente atualizada em GITHUB_GOVERNANCE.md.

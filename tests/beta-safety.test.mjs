@@ -6,6 +6,7 @@ const invalid = promise => assert.rejects(promise,e=>e.code==='23514');
 
 test('blocking is bilateral across profiles, posts, presence and interactions; unblocking does not reconnect', async () => {
   const db=await createTestDatabase();
+  for(const uid of [ALICE,BOB]) await asUser(db,uid,()=>db.query('select public.set_arena_membership($1,true)',[VILA]));
   try {
     const post=await asUser(db,ALICE,async()=>{
       await db.query('insert into connections(followed_id) values ($1)',[BOB]);
@@ -38,6 +39,7 @@ test('blocking is bilateral across profiles, posts, presence and interactions; u
 
 test('reports stay private, require visible third-party content, and cannot be forged or moderated by clients', async()=>{
   const db=await createTestDatabase();
+  for(const uid of [ALICE,BOB]) await asUser(db,uid,()=>db.query('select public.set_arena_membership($1,true)',[VILA]));
   try {
     await asUser(db,BOB,async()=>{
       await db.query('insert into reports(player_id,reason,details) values ($1,$2,$3)',[ALICE,'spam','Teste']);
@@ -54,6 +56,7 @@ test('reports stay private, require visible third-party content, and cannot be f
 
 test('write limits are enforced in the database even when bypassing the app',async()=>{
   const db=await createTestDatabase();
+  for(const uid of [ALICE,BOB]) await asUser(db,uid,()=>db.query('select public.set_arena_membership($1,true)',[VILA]));
   try {
     await asUser(db,ALICE,async()=>{
       for(let i=0;i<10;i++) await db.query('insert into posts(arena_id,sport_id,body) values ($1,$2,$3)',[VILA,FUTEVOLEI,`Post ${i}`]);
@@ -67,6 +70,7 @@ test('write limits are enforced in the database even when bypassing the app',asy
 
 test('private media requires a ready own reservation; blocks revoke reads and signing is denied',async()=>{
   const db=await createTestDatabase();
+  for(const uid of [ALICE,BOB]) await asUser(db,uid,()=>db.query('select public.set_arena_membership($1,true)',[VILA]));
   try {
     const path=(await asUser(db,ALICE,()=>db.query("select reserve_media('avatars') as path"))).rows[0].path;
     await asUser(db,ALICE,()=>invalid(db.query('update profiles set avatar_path=$1 where id=$2',[path,ALICE])));
@@ -97,6 +101,7 @@ test('private media requires a ready own reservation; blocks revoke reads and si
 
 test('pending account deletion denies social reads and writes including definer RPCs',async()=>{
   const db=await createTestDatabase();
+  for(const uid of [ALICE,BOB]) await asUser(db,uid,()=>db.query('select public.set_arena_membership($1,true)',[VILA]));
   try {
     await db.query('insert into account_deletions(player_id) values ($1)',[ALICE]);
     await asUser(db,ALICE,async()=>{

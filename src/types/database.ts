@@ -42,16 +42,19 @@ export type Database = {
           arena_id: string
           created_at: string
           player_id: string
+          status: string
         }
         Insert: {
           arena_id: string
           created_at?: string
           player_id?: string
+          status?: string
         }
         Update: {
           arena_id?: string
           created_at?: string
           player_id?: string
+          status?: string
         }
         Relationships: [
           {
@@ -70,17 +73,77 @@ export type Database = {
           },
         ]
       }
+      arena_requests: {
+        Row: {
+          arena_id: string | null
+          city: string
+          created_at: string
+          details: string
+          id: string
+          kind: string
+          name: string
+          neighborhood: string
+          requester_id: string
+          reviewed_at: string | null
+          status: string
+        }
+        Insert: {
+          arena_id?: string | null
+          city: string
+          created_at?: string
+          details: string
+          id?: string
+          kind: string
+          name: string
+          neighborhood: string
+          requester_id?: string
+          reviewed_at?: string | null
+          status?: string
+        }
+        Update: {
+          arena_id?: string | null
+          city?: string
+          created_at?: string
+          details?: string
+          id?: string
+          kind?: string
+          name?: string
+          neighborhood?: string
+          requester_id?: string
+          reviewed_at?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "arena_requests_arena_id_fkey"
+            columns: ["arena_id"]
+            isOneToOne: false
+            referencedRelation: "arenas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "arena_requests_requester_id_fkey"
+            columns: ["requester_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       arena_sports: {
         Row: {
           arena_id: string
+          enabled: boolean
           sport_id: string
         }
         Insert: {
           arena_id: string
+          enabled?: boolean
           sport_id: string
         }
         Update: {
           arena_id?: string
+          enabled?: boolean
           sport_id?: string
         }
         Relationships: [
@@ -100,9 +163,44 @@ export type Database = {
           },
         ]
       }
+      arena_staff: {
+        Row: {
+          arena_id: string
+          player_id: string
+          role: string
+        }
+        Insert: {
+          arena_id: string
+          player_id: string
+          role: string
+        }
+        Update: {
+          arena_id?: string
+          player_id?: string
+          role?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "arena_staff_arena_id_fkey"
+            columns: ["arena_id"]
+            isOneToOne: false
+            referencedRelation: "arenas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "arena_staff_player_id_fkey"
+            columns: ["player_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       arenas: {
         Row: {
+          avatar_path: string | null
           city: string
+          cover_path: string | null
           created_at: string
           description: string
           id: string
@@ -111,10 +209,16 @@ export type Database = {
           is_public: boolean
           name: string
           neighborhood: string
+          owner_id: string | null
+          public_info: string
           slug: string
+          status: string
+          version: number
         }
         Insert: {
+          avatar_path?: string | null
           city: string
+          cover_path?: string | null
           created_at?: string
           description?: string
           id?: string
@@ -123,10 +227,16 @@ export type Database = {
           is_public?: boolean
           name: string
           neighborhood: string
+          owner_id?: string | null
+          public_info?: string
           slug: string
+          status?: string
+          version?: number
         }
         Update: {
+          avatar_path?: string | null
           city?: string
+          cover_path?: string | null
           created_at?: string
           description?: string
           id?: string
@@ -135,9 +245,35 @@ export type Database = {
           is_public?: boolean
           name?: string
           neighborhood?: string
+          owner_id?: string | null
+          public_info?: string
           slug?: string
+          status?: string
+          version?: number
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "arena_avatar_asset"
+            columns: ["avatar_path"]
+            isOneToOne: false
+            referencedRelation: "entity_media_assets"
+            referencedColumns: ["path"]
+          },
+          {
+            foreignKeyName: "arena_cover_asset"
+            columns: ["cover_path"]
+            isOneToOne: false
+            referencedRelation: "entity_media_assets"
+            referencedColumns: ["path"]
+          },
+          {
+            foreignKeyName: "arenas_owner_id_fkey"
+            columns: ["owner_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       blocks: {
         Row: {
@@ -226,6 +362,7 @@ export type Database = {
           body: string
           created_at: string
           id: string
+          moderated_at: string | null
           post_id: string
         }
         Insert: {
@@ -233,6 +370,7 @@ export type Database = {
           body: string
           created_at?: string
           id?: string
+          moderated_at?: string | null
           post_id: string
         }
         Update: {
@@ -240,6 +378,7 @@ export type Database = {
           body?: string
           created_at?: string
           id?: string
+          moderated_at?: string | null
           post_id?: string
         }
         Relationships: [
@@ -255,6 +394,191 @@ export type Database = {
             columns: ["post_id"]
             isOneToOne: false
             referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      communities: {
+        Row: {
+          avatar_path: string | null
+          cover_path: string | null
+          created_at: string
+          description: string
+          entry_mode: string
+          id: string
+          name: string
+          owner_id: string | null
+          rules: string
+          slug: string
+          status: string
+          version: number
+          visibility: string
+        }
+        Insert: {
+          avatar_path?: string | null
+          cover_path?: string | null
+          created_at?: string
+          description?: string
+          entry_mode: string
+          id?: string
+          name: string
+          owner_id?: string | null
+          rules?: string
+          slug: string
+          status?: string
+          version?: number
+          visibility: string
+        }
+        Update: {
+          avatar_path?: string | null
+          cover_path?: string | null
+          created_at?: string
+          description?: string
+          entry_mode?: string
+          id?: string
+          name?: string
+          owner_id?: string | null
+          rules?: string
+          slug?: string
+          status?: string
+          version?: number
+          visibility?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "communities_owner_id_fkey"
+            columns: ["owner_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "community_avatar_asset"
+            columns: ["avatar_path"]
+            isOneToOne: false
+            referencedRelation: "entity_media_assets"
+            referencedColumns: ["path"]
+          },
+          {
+            foreignKeyName: "community_cover_asset"
+            columns: ["cover_path"]
+            isOneToOne: false
+            referencedRelation: "entity_media_assets"
+            referencedColumns: ["path"]
+          },
+        ]
+      }
+      community_arena_links: {
+        Row: {
+          arena_id: string
+          community_id: string
+          is_official: boolean
+          requested_by: string | null
+          status: string
+        }
+        Insert: {
+          arena_id: string
+          community_id: string
+          is_official?: boolean
+          requested_by?: string | null
+          status?: string
+        }
+        Update: {
+          arena_id?: string
+          community_id?: string
+          is_official?: boolean
+          requested_by?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "community_arena_links_arena_id_fkey"
+            columns: ["arena_id"]
+            isOneToOne: false
+            referencedRelation: "arenas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "community_arena_links_community_id_fkey"
+            columns: ["community_id"]
+            isOneToOne: true
+            referencedRelation: "communities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "community_arena_links_requested_by_fkey"
+            columns: ["requested_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      community_members: {
+        Row: {
+          community_id: string
+          created_at: string
+          player_id: string
+          role: string
+          status: string
+        }
+        Insert: {
+          community_id: string
+          created_at?: string
+          player_id: string
+          role?: string
+          status: string
+        }
+        Update: {
+          community_id?: string
+          created_at?: string
+          player_id?: string
+          role?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "community_members_community_id_fkey"
+            columns: ["community_id"]
+            isOneToOne: false
+            referencedRelation: "communities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "community_members_player_id_fkey"
+            columns: ["player_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      community_sports: {
+        Row: {
+          community_id: string
+          sport_id: string
+        }
+        Insert: {
+          community_id: string
+          sport_id: string
+        }
+        Update: {
+          community_id?: string
+          sport_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "community_sports_community_id_fkey"
+            columns: ["community_id"]
+            isOneToOne: false
+            referencedRelation: "communities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "community_sports_sport_id_fkey"
+            columns: ["sport_id"]
+            isOneToOne: false
+            referencedRelation: "sports"
             referencedColumns: ["id"]
           },
         ]
@@ -292,10 +616,66 @@ export type Database = {
           },
         ]
       }
+      entity_media_assets: {
+        Row: {
+          arena_id: string | null
+          community_id: string | null
+          created_at: string
+          deleting: boolean
+          path: string
+          ready: boolean
+          slot: string
+          uploaded_by: string | null
+        }
+        Insert: {
+          arena_id?: string | null
+          community_id?: string | null
+          created_at?: string
+          deleting?: boolean
+          path: string
+          ready?: boolean
+          slot: string
+          uploaded_by?: string | null
+        }
+        Update: {
+          arena_id?: string | null
+          community_id?: string | null
+          created_at?: string
+          deleting?: boolean
+          path?: string
+          ready?: boolean
+          slot?: string
+          uploaded_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "entity_media_assets_arena_id_fkey"
+            columns: ["arena_id"]
+            isOneToOne: false
+            referencedRelation: "arenas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "entity_media_assets_community_id_fkey"
+            columns: ["community_id"]
+            isOneToOne: false
+            referencedRelation: "communities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "entity_media_assets_uploaded_by_fkey"
+            columns: ["uploaded_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       media_assets: {
         Row: {
           bucket: string
           created_at: string
+          deleting: boolean
           path: string
           player_id: string
           ready: boolean
@@ -303,6 +683,7 @@ export type Database = {
         Insert: {
           bucket: string
           created_at?: string
+          deleting?: boolean
           path: string
           player_id: string
           ready?: boolean
@@ -310,6 +691,7 @@ export type Database = {
         Update: {
           bucket?: string
           created_at?: string
+          deleting?: boolean
           path?: string
           player_id?: string
           ready?: boolean
@@ -360,6 +742,52 @@ export type Database = {
           },
         ]
       }
+      post_destinations: {
+        Row: {
+          arena_id: string | null
+          community_id: string | null
+          created_at: string
+          id: string
+          post_id: string
+        }
+        Insert: {
+          arena_id?: string | null
+          community_id?: string | null
+          created_at?: string
+          id?: string
+          post_id: string
+        }
+        Update: {
+          arena_id?: string | null
+          community_id?: string | null
+          created_at?: string
+          id?: string
+          post_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "post_destinations_arena_id_fkey"
+            columns: ["arena_id"]
+            isOneToOne: false
+            referencedRelation: "arenas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "post_destinations_community_id_fkey"
+            columns: ["community_id"]
+            isOneToOne: false
+            referencedRelation: "communities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "post_destinations_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       post_likes: {
         Row: {
           created_at: string
@@ -395,31 +823,49 @@ export type Database = {
       }
       posts: {
         Row: {
-          arena_id: string
+          arena_id: string | null
+          audience: string
           author_id: string
           body: string
           created_at: string
+          distribution_explicit: boolean
           id: string
+          idempotency_key: string | null
           image_path: string | null
-          sport_id: string
+          moderated_at: string | null
+          private_community_id: string | null
+          request_digest: string | null
+          sport_id: string | null
         }
         Insert: {
-          arena_id: string
+          arena_id?: string | null
+          audience?: string
           author_id?: string
           body: string
           created_at?: string
+          distribution_explicit?: boolean
           id?: string
+          idempotency_key?: string | null
           image_path?: string | null
-          sport_id: string
+          moderated_at?: string | null
+          private_community_id?: string | null
+          request_digest?: string | null
+          sport_id?: string | null
         }
         Update: {
-          arena_id?: string
+          arena_id?: string | null
+          audience?: string
           author_id?: string
           body?: string
           created_at?: string
+          distribution_explicit?: boolean
           id?: string
+          idempotency_key?: string | null
           image_path?: string | null
-          sport_id?: string
+          moderated_at?: string | null
+          private_community_id?: string | null
+          request_digest?: string | null
+          sport_id?: string | null
         }
         Relationships: [
           {
@@ -437,10 +883,31 @@ export type Database = {
             referencedColumns: ["arena_id", "sport_id"]
           },
           {
+            foreignKeyName: "posts_arena_optional"
+            columns: ["arena_id"]
+            isOneToOne: false
+            referencedRelation: "arenas"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "posts_author_id_fkey"
             columns: ["author_id"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "posts_private_community_id_fkey"
+            columns: ["private_community_id"]
+            isOneToOne: false
+            referencedRelation: "communities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "posts_sport_optional"
+            columns: ["sport_id"]
+            isOneToOne: false
+            referencedRelation: "sports"
             referencedColumns: ["id"]
           },
         ]
@@ -457,6 +924,7 @@ export type Database = {
           is_demo: boolean
           neighborhood: string
           onboarding_completed: boolean
+          share_activity_summary: boolean
           username: string
         }
         Insert: {
@@ -470,6 +938,7 @@ export type Database = {
           is_demo?: boolean
           neighborhood?: string
           onboarding_completed?: boolean
+          share_activity_summary?: boolean
           username: string
         }
         Update: {
@@ -483,6 +952,7 @@ export type Database = {
           is_demo?: boolean
           neighborhood?: string
           onboarding_completed?: boolean
+          share_activity_summary?: boolean
           username?: string
         }
         Relationships: [
@@ -586,10 +1056,61 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      accept_arena_invite: { Args: { p_token: string }; Returns: string }
+      accept_beta_invite: { Args: { p_token: string }; Returns: Json }
+      accept_community_invite: { Args: { p_token: string }; Returns: string }
+      activity_summary: { Args: { p_player: string }; Returns: Json }
+      arena_invitations: { Args: { p_arena: string }; Returns: Json }
+      arena_link_requests: { Args: { p_arena: string }; Returns: Json }
+      arena_profile: { Args: { p_slug: string }; Returns: Json }
+      beta_before_user_created: { Args: { event: Json }; Returns: Json }
+      beta_status: { Args: never; Returns: Json }
+      bootstrap_operator: { Args: { p_uid: string }; Returns: undefined }
+      can_read_entity_media: { Args: { p_path: string }; Returns: boolean }
       can_read_media: {
         Args: { p_bucket: string; p_path: string }
         Returns: boolean
       }
+      claim_entity_media: { Args: { p_path: string }; Returns: undefined }
+      claim_unused_media: {
+        Args: { p_bucket: string; p_path: string }
+        Returns: undefined
+      }
+      community_directory: {
+        Args: {
+          p_arena?: string
+          p_mine?: boolean
+          p_offset?: number
+          p_search?: string
+        }
+        Returns: Json
+      }
+      community_invitations: {
+        Args: { p_id: string; p_revoke?: string }
+        Returns: Json
+      }
+      community_link: {
+        Args: {
+          p_action: string
+          p_arena: string
+          p_community: string
+          p_official?: boolean
+        }
+        Returns: undefined
+      }
+      community_membership: {
+        Args: {
+          p_action: string
+          p_id: string
+          p_role?: string
+          p_target?: string
+        }
+        Returns: undefined
+      }
+      community_page: { Args: { p_slug: string }; Returns: Json }
+      create_community: { Args: { p_data: Json }; Returns: Json }
+      create_official_community: { Args: { p_arena: string }; Returns: string }
+      discover_common_players: { Args: { p_offset?: number }; Returns: Json }
       discover_players: {
         Args: {
           p_active?: boolean
@@ -617,6 +1138,59 @@ export type Database = {
         }[]
       }
       end_checkin: { Args: never; Returns: undefined }
+      environment_identity: { Args: never; Returns: Json }
+      invite_arena_manager: {
+        Args: { p_arena: string; p_email: string; p_role: string }
+        Returns: Json
+      }
+      invite_community_member: {
+        Args: { p_email: string; p_id: string }
+        Returns: Json
+      }
+      management_context: { Args: never; Returns: Json }
+      moderate_report: {
+        Args: { p_action: string; p_report: string }
+        Returns: undefined
+      }
+      operator_action: {
+        Args: {
+          p_action: string
+          p_scope_id?: string
+          p_target_id?: string
+          p_value?: string
+        }
+        Returns: Json
+      }
+      operator_catalog: { Args: never; Returns: Json }
+      operator_read: {
+        Args: { p_context: string; p_scope_id?: string }
+        Returns: Json
+      }
+      operator_resource_action: {
+        Args: {
+          p_action: string
+          p_id: string
+          p_kind: string
+          p_target?: string
+        }
+        Returns: undefined
+      }
+      profile_places: { Args: { p_player?: string }; Returns: Json }
+      publication_options: { Args: never; Returns: Json }
+      publish_post: {
+        Args: {
+          p_arena?: string
+          p_audience?: string
+          p_body: string
+          p_groups?: string[]
+          p_image_path?: string
+          p_key: string
+          p_sport?: string
+          p_wall_arena?: string
+        }
+        Returns: string
+      }
+      read_checkin_history: { Args: { p_offset?: number }; Returns: Json }
       read_feed: {
         Args: { p_arena_id?: string; p_offset?: number }
         Returns: {
@@ -638,7 +1212,47 @@ export type Database = {
           username: string
         }[]
       }
+      read_social_feed: {
+        Args: {
+          p_arena?: string
+          p_author?: string
+          p_community?: string
+          p_offset?: number
+          p_post?: string
+        }
+        Returns: Json
+      }
+      remove_distribution: {
+        Args: { p_arena?: string; p_community?: string; p_post: string }
+        Returns: undefined
+      }
+      report_media: { Args: { p_report: string }; Returns: string }
+      request_arena: {
+        Args: { p_arena?: string; p_data?: Json; p_kind: string }
+        Returns: string
+      }
+      reserve_entity_media: {
+        Args: { p_id: string; p_kind: string; p_slot: string }
+        Returns: string
+      }
       reserve_media: { Args: { p_bucket: string }; Returns: string }
+      review_arena_and_group: {
+        Args: { p_approve: boolean; p_official?: boolean; p_request: string }
+        Returns: string
+      }
+      review_arena_request: {
+        Args: { p_approve: boolean; p_request: string }
+        Returns: string
+      }
+      revoke_arena_invite: { Args: { p_id: string }; Returns: undefined }
+      save_arena: {
+        Args: { p_data: Json; p_id: string; p_version: number }
+        Returns: Json
+      }
+      save_community: {
+        Args: { p_data: Json; p_id: string; p_version: number }
+        Returns: undefined
+      }
       save_profile: {
         Args: {
           p_available: boolean
@@ -650,6 +1264,14 @@ export type Database = {
           p_sport_id: string
           p_username: string
         }
+        Returns: undefined
+      }
+      set_arena_membership: {
+        Args: { p_arena: string; p_join: boolean }
+        Returns: undefined
+      }
+      set_entity_photo: {
+        Args: { p_id: string; p_kind: string; p_path?: string; p_slot: string }
         Returns: undefined
       }
       start_checkin: {

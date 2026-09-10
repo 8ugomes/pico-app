@@ -87,3 +87,45 @@ Verificação visual: 390×844 e desktop 1280; cinco destinos em 320px sem overf
 Ainda demo: todas as jornadas quando falta configuração; seeds continuam fictícios mesmo no banco conectado. Limites conectados: sem upload, acompanhamento de arenas na UI, edição/exclusão de posts/comentários na UI, recuperação de senha, bloqueios/moderação ou service worker. README e BETA_CHECKLIST.md documentam o que falta antes do beta hospedado.
 
 Próximo avanço: validar o ambiente Supabase de desenvolvimento com duas contas reais e executar os itens pendentes do checklist beta. Prompt: “Execute a validação hospedada do BETA_CHECKLIST.md com o projeto de desenvolvimento configurado, mantenha o escopo dos Cycles 0.5–7 e registre as evidências.”
+
+
+## Ciclo 9.7
+
+Ciclo 9.7: recorte reutilizável (react-easy-crop 6.2.3, MIT), preparação local limitada, autorização de fotos por recurso, proteção contra remoção concorrente de arquivos em uso. 66 testes locais aprovados.
+
+
+## Ciclo 9.8
+
+9.8: contexto seguro de convites por aba, revogação de convite de comunidade, confirmação/recovery explícitos entre contextos com templates versionados; nenhum envio externo. 68 testes.
+
+
+## Ciclo 9.9
+
+9.9: /instalar, manifesto beta, versão compilada, atualização explícita, estado offline e retomada da sessão. Mantido PKCE padrão porque o Supabase Free recusou templates sem SMTP; alternativa entre contextos preparada e desativada.
+
+
+## Ciclo 9.10
+
+9.10: moderação de conteúdo e suspensão efetivas; custódia/arquivo de comunidades e arenas pela administração; backup cifrado com bytes e ensaio real de restauração local; logs mínimos, CI e wrapper de deploy interno. 71 testes locais, 170 checks hospedados, 21 UI móvel. Corrigidos submits ausentes e confirmação de avatar descartada por refresh.
+
+## Ciclo 9.11 — regressão integrada
+
+- Jornadas complementares de gestão, histórico, moderação e custódia validadas com sessões reais.
+- Teste de formulários portátil entre macOS/Linux; guarda de Preview aceita ref vazio apenas com branch interna explícita.
+- Comando hosted aponta para a suíte C9 e limpeza tolera identidade já excluída pelo teste.
+- Auditoria reproduzível de segredos; documentação atual consolida ambientes, comunidades, permissões, operação e PWA.
+- 72 testes locais, 170 checks remotos anteriores e 29 checks de navegador. Deploy interno e estado de CI registrados separadamente na revisão.
+
+9.11 ajuste de deploy: Vercel tratou o primeiro deploy de projeto vazio como Production mesmo sem --prod. Tentativa interrompida em build, sem beta nas variáveis Production; wrapper agora exige --target=preview explicitamente.
+
+## Ciclo 9 — entrega interna verificada
+
+Preview e891dca1e741 publicado em pico-internal.vercel.app; CI verde, migrations 19/19 em dev/beta e 67 checks na URL real. Conta/arenas/foto anteriores preservadas; fixtures por ID limpas. README, ambientes, schema, operação, PWA e checklist refletem o estado publicado. Produção futura e lançamento permanecem não autorizados.
+
+## GitHub — diagnóstico e preparação da proteção
+
+Documentada a causa da CI antiga (ripgrep ausente), a correção já existente e a CI atual aprovada. Preparados rulesets de PR/checks para main e preservação de histórico nas duas branches; aplicação remota ainda depende da confirmação de identidade exigida pelo GitHub. Lint, typecheck e build locais passaram. Sem mudança de código, merge, deploy ou plano.
+
+## GitHub — proteção ativada e verificada
+
+Após autenticação do responsável, rulesets 22706380 e 22706456 salvos como ativos. Main exige PR, check verify do GitHub Actions, base atualizada e discussões resolvidas. Main e cycle-9-internal impedem force push e exclusão, sem bypass; API confirmou ambas protegidas. PR continua em rascunho, main e Preview preservados. Documentação atualizada com evidência remota.

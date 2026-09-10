@@ -23,9 +23,9 @@ export function RecoveryForm({ reset = false }: { reset?: boolean }) {
         await client.auth.signOut();
         window.location.replace('/login?password=updated');
       } else {
-        const result=await client.auth.resetPasswordForEmail(String(data.get('email')).trim(),{redirectTo:new URL('/auth/callback',location.origin).href});
+        const result=await client.auth.resetPasswordForEmail(String(data.get('email')).trim(),{redirectTo:new URL(process.env.NEXT_PUBLIC_PICO_EMAIL_TEMPLATES === 'custom' ? '/auth/confirm' : '/auth/callback',location.origin).href});
         if (result.error) { setNotice({error:true,text:'Não foi possível enviar agora. Aguarde alguns minutos e tente novamente.'}); return; }
-        setNotice({error:false,text:'Se houver uma conta para esse e-mail, você receberá um link. Abra-o neste mesmo navegador. Confira também o spam.'});
+        setNotice({error:false,text:'Se houver uma conta para esse e-mail, você receberá um link. Abra o link no mesmo navegador em que você fez o pedido. Confira também o spam.'});
         form.reset();
       }
     } catch { setNotice({error:true,text:'Confira sua conexão e tente novamente.'}); }

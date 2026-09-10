@@ -8,6 +8,7 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 export const metadata: Metadata = {
   title: { default: "Pico — O ponto de encontro da areia.", template: "%s | Pico" },
   description: "Me acha no Pico. Descubra quem joga onde você joga, acompanhe suas arenas e encontre sua próxima dupla.",
+  robots: { index: false, follow: false },
   applicationName: "Pico",
   appleWebApp: { capable: true, statusBarStyle: "black-translucent", title: "Pico" },
 };

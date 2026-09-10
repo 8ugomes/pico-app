@@ -1,5 +1,6 @@
 "use client";
 
+import { afterLogin } from '@/lib/auth/navigation';
 import { useEffect, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -14,6 +15,8 @@ type AuthMode = "login" | "signup";
 
 function authError(code?: string) {
   switch (code) {
+    case "hook_error":
+    case "hook_payload_invalid_content_type": return "O cadastro depende de convite individual para este e-mail.";
     case "invalid_credentials": return "E-mail ou senha incorretos. Confira e tente novamente.";
     case "email_not_confirmed": return "Confirme seu e-mail antes de entrar. Confira também a caixa de spam.";
     case "over_request_rate_limit":
@@ -64,16 +67,16 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
         ? await client.auth.signUp({
             email: address,
             password,
-            options: { data: { display_name: name }, emailRedirectTo: new URL("/auth/callback", window.location.origin).href },
+            options: { data: { display_name: name }, emailRedirectTo: new URL(process.env.NEXT_PUBLIC_PICO_EMAIL_TEMPLATES === "custom" ? "/auth/confirm" : "/auth/callback", window.location.origin).href },
           })
         : await client.auth.signInWithPassword({ email: address, password });
       if (error) { setNotice({ kind: "error", text: authError(error.code) }); return; }
       if (result.session) {
         setEmail(result.user?.email ?? address);
-        router.replace("/perfil");
+        router.replace(afterLogin());
         router.refresh();
       } else {
-        setNotice({ kind: "success", text: "Confira seu e-mail para continuar. Se o cadastro puder ser concluído, você receberá um link de confirmação. Abra-o neste mesmo navegador." });
+        setNotice({ kind: "success", text: "Confira seu e-mail para continuar. Se o cadastro puder ser concluído, você receberá um link de confirmação. Abra o link no mesmo navegador em que você fez o pedido." });
       }
       form.reset();
     } catch {

@@ -1,0 +1,1 @@
+import{ConnectedFeed}from'@/components/pico/connected/ConnectedFeed';export default async function Page({params}:{params:Promise<{id:string}>}){return <ConnectedFeed postId={(await params).id} readOnly/>}

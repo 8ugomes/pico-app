@@ -16,7 +16,7 @@ function arenaDto(row: ArenaResult): ReadArena {
   return {
     id: row.id, slug: row.slug, name: row.name, description: row.description,
     neighborhood: row.neighborhood, city: row.city, image: safeArenaImage(row.image_path, row.is_demo), isDemo: row.is_demo,
-    sports: row.arena_sports.flatMap(link => link.sports ? [link.sports] : []),
+    sports: row.arena_sports.flatMap(link => link.enabled !== false && link.sports ? [link.sports] : []),
   };
 }
 export function parseReadRequest(params: URLSearchParams): ReadRequest {

@@ -1,5 +1,14 @@
 # Pico — Deslopify
 
+> Estado final do Ciclo 9: PRONTO PARA REVISÃO INTERNA — NÃO LIBERADO. Preview `e891dca1e741`, 19 migrations em dev/beta e smoke 67/67. [URL, versão e evidências atuais](INTERNAL_REVIEW.md). Os registros abaixo preservam a sequência de auditoria, plano e execução.
+
+
+## Ciclo 9 — critérios antes da implementação
+
+Preservar grafite, superfícies escuras, texto legível, acento verde-água e navegação enxuta. Comunidades aparecem como grupos de pessoas, arenas como locais; gestão contextual não vira aba principal de todos. Composer explicita audiência, marcação de local e distribuição. Entrada pendente não parece participação aprovada. Recorte confirma exatamente os pixels enviados; cancelar preserva a foto anterior. Sem métricas fictícias, sucesso parcial oculto, jargão de infraestrutura na jornada ou promessa de lançamento. Revisar 320/390/430 px, foco, teclado, zoom acessível, safe areas e reduced motion. Testes emulados não serão chamados de aparelhos reais.
+
+# Pico — Deslopify
+
 ## Ciclo 8 · critérios antes da implementação
 
 Preservar grafite, verde-água, navegação e layout social. Foto opcional no compositor e avatar editável no perfil; não inventar retratos. Ações de segurança ficam em detalhes do conteúdo/perfil e em Privacidade e conta. Explicar o efeito do bloqueio, manter desbloqueio acessível e confirmar exclusão definitiva com senha. Progresso e falha de upload devem manter o texto; falha de gravação não mostra sucesso. Nenhum dado pessoal em cache offline. Revisar 320/390 px, alvos de toque, labels, foco, estados vazios e troca de sessão na versão publicada.
@@ -148,3 +157,48 @@ Verificação visual: 390×844 e desktop 1280; cinco destinos em 320px sem overf
 Ainda demo: todas as jornadas quando falta configuração; seeds continuam fictícios mesmo no banco conectado. Limites conectados: sem upload, acompanhamento de arenas na UI, edição/exclusão de posts/comentários na UI, recuperação de senha, bloqueios/moderação ou service worker. README e BETA_CHECKLIST.md documentam o que falta antes do beta hospedado.
 
 Próximo avanço: validar o ambiente Supabase de desenvolvimento com duas contas reais e executar os itens pendentes do checklist beta. Prompt: “Execute a validação hospedada do BETA_CHECKLIST.md com o projeto de desenvolvimento configurado, mantenha o escopo dos Cycles 0.5–7 e registre as evidências.”
+
+
+## Ciclo 9.7
+
+9.7: avatar circular com saída quadrada; capa 3:1; posts original/1:1/4:5/16:9. Zoom por toque/teclado/slider e rotação. Cancelamento/falha preserva referência. HEIC exige exportação explícita; sem promessa de suporte. Modal respeita cancelamento durante envio.
+
+
+9.8: explicar qual convite é aceito e qual conta está em uso; não perder destino ao entrar. E-mail aberto em outro contexto pede confirmação visível, sem consumir por GET.
+
+
+## Ciclo 9.8
+
+9.8: abrir link não consome convite, entrar não perde destino. Recuperação esclarece que navegador e PWA têm sessões diferentes. Sem declarar recebimento de e-mail sem caixa verificada.
+
+
+9.9: instalação contextual, beta identificado, instruções honestas para iOS/navegadores internos. Atualizar só por ação consciente; safe areas e toques mínimos. Dispositivos físicos permanecem distintos de emulação.
+
+
+## Ciclo 9.9
+
+9.9: beta interno identificado, link de instalação dispensável, aviso de rede sem descartar rascunho. Atualização manual explica perda de edição não salva. Sessão revalidada ao foreground; troca de identidade descarta a árvore. Sem SW; nenhuma evidência física presumida.
+
+
+9.10: separar examinar denúncia, ocultar conteúdo e suspender acesso. A interface descreve efeitos e pede confirmação. Administração de grupos mostra cadastro mínimo e custódia, sem abrir conteúdos privados.
+
+
+## Ciclo 9.10
+
+9.10 aprendizado: testar pela interface foi necessário para detectar o tipo dos botões. Novo contrato automatizado exige submit explícito. Perfil preserva confirmação de foto e edição em falha de refresh. 320/390/430 px sem overflow nas telas verificadas; fotos e diálogos com ações acessíveis. Sem afirmação de aparelho físico.
+
+## Ciclo 9.11 — PLAN
+
+Verificar nomes acessíveis de campos, feedback após salvar, ações de moderação e custódia e descarte de sessão. Documentação deve distinguir prova remota, emulação e pendências reais; nenhum texto de liberação externa.
+
+9.11 VERIFY: gestão autorizada, negação clara ao membro, histórico recente, denúncia com efeito e custódia foram exercitados na interface. Usar nomes acessíveis de controles nos testes evita depender do texto interno das opções. Nenhuma alteração visual adicional necessária após a regressão; README e guias deixam explícitos demo, beta privado e limites da emulação.
+
+9.11 entrega: login, perfil recarregado e feed foram exercitados no Preview real em 390px. Identificação de acesso por aprovação e nenhuma promessa de disponibilidade offline. Registros físicos/SMTP separados dos resultados remotos.
+
+## Proteção do GitHub — PLAN
+
+Explicar separadamente: execução da CI, exigência de CI para merge e bloqueio de alteração destrutiva da branch. Mostrar regras e estado efetivo, incluindo eventual reautenticação ou limitação de plano do GitHub, sem declarar proteção antes de validar a aplicação remota.
+
+VERIFY parcial: a falha histórica foi atribuída à dependência de ripgrep no teste, já corrigida. A diferença entre branches preserva a revisão interna. A configuração de proteção permanece explicitamente pendente de autenticação; preencher o formulário não comprova enforcement. Nenhuma mudança visual ou funcional no app.
+
+CONCLUÍDO: confirmação de identidade feita pelo responsável; salvamento e enforcement remoto comprovados. README e diagnóstico substituem a pendência pelo estado ativo, com IDs e links dos rulesets. Nenhum teste destrutivo foi usado para provar proteção; papéis e exceções não foram concedidos a terceiros.
