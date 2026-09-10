@@ -125,3 +125,7 @@ Preview e891dca1e741 publicado em pico-internal.vercel.app; CI verde, migrations
 ## GitHub — diagnóstico e preparação da proteção
 
 Documentada a causa da CI antiga (ripgrep ausente), a correção já existente e a CI atual aprovada. Preparados rulesets de PR/checks para main e preservação de histórico nas duas branches; aplicação remota ainda depende da confirmação de identidade exigida pelo GitHub. Lint, typecheck e build locais passaram. Sem mudança de código, merge, deploy ou plano.
+
+## GitHub — proteção ativada e verificada
+
+Após autenticação do responsável, rulesets 22706380 e 22706456 salvos como ativos. Main exige PR, check verify do GitHub Actions, base atualizada e discussões resolvidas. Main e cycle-9-internal impedem force push e exclusão, sem bypass; API confirmou ambas protegidas. PR continua em rascunho, main e Preview preservados. Documentação atualizada com evidência remota.

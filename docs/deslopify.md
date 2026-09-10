@@ -200,3 +200,5 @@ Verificar nomes acessíveis de campos, feedback após salvar, ações de modera�
 Explicar separadamente: execução da CI, exigência de CI para merge e bloqueio de alteração destrutiva da branch. Mostrar regras e estado efetivo, incluindo eventual reautenticação ou limitação de plano do GitHub, sem declarar proteção antes de validar a aplicação remota.
 
 VERIFY parcial: a falha histórica foi atribuída à dependência de ripgrep no teste, já corrigida. A diferença entre branches preserva a revisão interna. A configuração de proteção permanece explicitamente pendente de autenticação; preencher o formulário não comprova enforcement. Nenhuma mudança visual ou funcional no app.
+
+CONCLUÍDO: confirmação de identidade feita pelo responsável; salvamento e enforcement remoto comprovados. README e diagnóstico substituem a pendência pelo estado ativo, com IDs e links dos rulesets. Nenhum teste destrutivo foi usado para provar proteção; papéis e exceções não foram concedidos a terceiros.

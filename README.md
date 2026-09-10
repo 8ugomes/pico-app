@@ -76,4 +76,4 @@ Buckets privados: `avatars`, `post-media`, `entity-media`. Sem download direto o
 
 Leia [AGENTS.md](AGENTS.md), [plano](docs/pico-product-plan.md), [Deslopify](docs/deslopify.md), [changelog](docs/CHANGELOG.md) e [loop](docs/CODEX_AUTONOMOUS_LOOP.md). Documentos numerados antigos preservam a evolução; requisitos atuais do Ciclo 9 prevalecem sobre as antigas restrições a comunidades.
 
-[Diagnóstico da CI e proteção do GitHub](docs/GITHUB_GOVERNANCE.md): a CI atual passou; a ativação dos rulesets está pendente da confirmação de identidade do responsável no GitHub.
+[Diagnóstico da CI e proteção do GitHub](docs/GITHUB_GOVERNANCE.md): CI aprovada e rulesets ativos, verificados remotamente. `main` exige PR e check `verify`; ambas as branches bloqueiam force push e exclusão, sem bypass.
