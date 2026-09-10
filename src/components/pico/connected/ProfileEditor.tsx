@@ -71,7 +71,7 @@ export function ProfileEditor({ profile, done, onAvatarChange = () => {} }: {
           <h2 id={`${prefix}-about`}><UserRound size={18} aria-hidden="true" />Sobre você</h2>
           <Input id={`${prefix}-name`} name="name" label="Nome" value={draft.name} onChange={e => field('name', e.target.value)} minLength={2} maxLength={60} autoComplete="nickname" required />
           <Input id={`${prefix}-username`} name="username" label="Nome de usuário" value={draft.username} onChange={e => field('username', e.target.value.toLowerCase())} minLength={3} maxLength={40} pattern="[a-z0-9_]{3,40}" autoCapitalize="none" spellCheck={false} hint="É como sua turma encontra você. Use letras, números ou _." required />
-          <label className="input-group" htmlFor={`${prefix}-bio`}>Bio<textarea className="input" id={`${prefix}-bio`} name="bio" value={draft.bio} onChange={e => field('bio', e.target.value)} maxLength={160} rows={3} placeholder="Seu esporte, seu ritmo, sua resenha…" /></label>
+          <div className="input-group"><label htmlFor={`${prefix}-bio`}>Bio</label><textarea className="input" id={`${prefix}-bio`} name="bio" value={draft.bio} onChange={e => field('bio', e.target.value)} maxLength={160} rows={3} placeholder="Seu esporte, seu ritmo, sua resenha…" /></div>
           <span className="profile-editor-v2-count">{draft.bio.length}/160</span>
         </section>
         <section className="profile-editor-v2-section" aria-labelledby={`${prefix}-sport`}>
