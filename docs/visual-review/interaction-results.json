@@ -1,0 +1,81 @@
+{
+  "mode": "local API fixture, not remote Supabase",
+  "assertions": 10,
+  "writes": [
+    {
+      "path": "/api/communities",
+      "body": {
+        "action": "create",
+        "data": {
+          "name": "Turma do teste visual",
+          "description": "Comunidade temporária da revisão visual, sem dados reais.",
+          "rules": "Combine com antecedência e respeite a turma.",
+          "entry_mode": "approval",
+          "visibility": "beta",
+          "sports": [
+            "10000000-0000-4000-8000-000000000002",
+            "10000000-0000-4000-8000-000000000001"
+          ]
+        }
+      }
+    },
+    {
+      "path": "/api/communities",
+      "body": {
+        "action": "edit",
+        "id": "40000000-0000-4000-8000-000000000002",
+        "version": 1,
+        "data": {
+          "name": "Turma do teste visual",
+          "description": "Comunidade temporária da revisão visual, sem dados reais.",
+          "rules": "Combine com antecedência e respeite a turma.",
+          "entry_mode": "approval",
+          "visibility": "beta",
+          "sports": [
+            "10000000-0000-4000-8000-000000000002",
+            "10000000-0000-4000-8000-000000000001",
+            "10000000-0000-4000-8000-000000000003"
+          ]
+        }
+      }
+    },
+    {
+      "path": "/api/posts",
+      "body": {
+        "action": "publish",
+        "body": "Publicação da revisão visual, somente na fixture local.",
+        "imagePath": null,
+        "audience": "beta",
+        "wallArena": "20000000-0000-4000-8000-000000000001",
+        "groups": [
+          "40000000-0000-4000-8000-000000000002"
+        ],
+        "key": "bf02027f-29cb-4eaf-9320-cef74558cb6b"
+      }
+    },
+    {
+      "path": "/api/social/mutate",
+      "body": {
+        "action": "save_profile",
+        "name": "Alice Teste",
+        "username": "alice_teste",
+        "bio": "Bio de teste visual. Rascunho preservado.",
+        "city": "São Paulo",
+        "neighborhood": "Vila Madalena",
+        "sportId": "10000000-0000-4000-8000-000000000002",
+        "level": "Intermediário",
+        "available": true
+      }
+    }
+  ],
+  "uiChecks": [
+    "503 keeps community fields and selections",
+    "audience disabled during edit",
+    "nested photo Escape closes one dialog",
+    "focus returns to file input then composer trigger",
+    "Shift+Tab cycles within dialog",
+    "profile discard dialog keeps draft",
+    "profile tabs ArrowRight",
+    "viewport 390x430 submit remains reachable"
+  ]
+}

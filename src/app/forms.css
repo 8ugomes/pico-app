@@ -1,0 +1,96 @@
+/* Shared form controls. Surface, scale and geometry are defined once in globals.css. */
+.input-group { display: flex; flex-direction: column; min-width: 0; gap: var(--space-2); color: var(--text-secondary); font-size: var(--text-label); line-height: 1.45; }
+.input-group label { color: var(--text-secondary); font-size: var(--text-label); }
+.input, .social-form input, .social-form select, .social-form textarea { width: 100%; min-width: 0; min-height: 50px; border-radius: var(--radius-control); border: 1px solid var(--border-control); background: var(--surface-input); color: var(--foreground); padding: .75rem var(--space-4); font-size: var(--text-body); line-height: 1.5; transition: border-color var(--motion-fast), background var(--motion-fast); }
+.input::placeholder { color: var(--text-muted); opacity: 1; }
+.input:focus, .social-form :is(input,select,textarea):focus { border-color: var(--accent); background: rgb(255 255 255 / 7%); }
+.input[aria-invalid=true] { border-color: var(--error); }
+.input:disabled, fieldset:disabled .input { color: var(--text-muted); background: rgb(255 255 255 / 3%); cursor: not-allowed; }
+.input[readonly] { color: var(--text-secondary); }
+textarea.input, .social-form textarea { resize: vertical; min-height: 6rem; max-width: 100%; }
+select.input { color-scheme: dark; padding-right: var(--space-4); text-overflow: ellipsis; }
+select.input option { background: var(--surface-overlay); color: var(--foreground); }
+.input-hint { color: var(--text-muted); font-size: var(--text-caption); line-height: 1.5; }
+.connected-panel { padding: var(--space-5); border: 1px solid var(--border-subtle); border-radius: var(--radius-card); background: var(--graphite); margin: var(--space-5) 0; }
+.connected-panel h2 { margin: 0 0 var(--space-3); font-size: var(--text-dialog); line-height: 1.3; font-weight: 600; letter-spacing: -.02em; }
+.connected-panel :is(p,h2) { overflow-wrap: anywhere; }
+.connected-panel:has(.connected-form) { background: var(--surface-overlay); box-shadow: var(--shadow-elevated); border-radius: var(--radius-panel); }
+.connected-form, .social-form { display: grid; gap: var(--space-5); margin-top: var(--space-5); min-width: 0; }
+.connected-form fieldset { border: 0; padding: 0; margin: 0; min-width: 0; display: grid; gap: var(--space-4); }
+.connected-form legend { font-size: var(--text-label); font-weight: 600; color: var(--foreground); padding: 0 0 var(--space-3); }
+.connected-form-row { display: grid; gap: var(--space-4); }
+.connected-form .read-message-actions { margin-top: 0; }
+.social-form label { display: flex; flex-direction: column; gap: var(--space-2); color: var(--text-secondary); font-size: var(--text-label); }
+.connected-form p { margin: 0; font-size: var(--text-label); line-height: 1.6; color: var(--text-secondary); }
+.connected-form p:empty, .dialog-body > p:empty { display: none; }
+.connected-form .form-note { font-size: var(--text-caption); color: var(--text-muted); }
+.connected-form .form-section + .form-section { padding-top: var(--space-2); }
+.connected-form .form-section + .form-section > legend { padding-top: var(--space-2); }
+.connected-form .form-section { gap: var(--space-4); }
+.connected-form .form-section + .form-section { border-top: 1px solid var(--border-subtle); }
+.form-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+.form-actions > .button { flex: 1; }
+.checkbox-row, .connected-checkbox { position: relative; display: flex; align-items: center; gap: var(--space-3); min-height: 44px; color: var(--text-secondary); font-size: var(--text-label); line-height: 1.5; cursor: pointer; }
+.checkbox-row input, .connected-checkbox input { width: 20px; height: 20px; flex-shrink: 0; accent-color: var(--accent); }
+.choice-chips { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.choice-chip { max-width: 100%; min-width: 0; overflow-wrap: anywhere; position: relative; display: inline-flex; align-items: center; gap: var(--space-2); min-height: 44px; padding: .625rem .875rem; border: 1px solid var(--border-control); border-radius: var(--radius-pill); background: var(--surface-input); color: var(--text-secondary); font-size: var(--text-label); line-height: 1.35; cursor: pointer; }
+.choice-chip input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.choice-chip > svg { flex-shrink: 0; visibility: hidden; }
+.choice-chip:has(input:checked) { background: var(--accent-soft); color: var(--accent); border-color: rgb(77 225 193 / 32%); }
+.choice-chip:has(input:checked) > svg { visibility: visible; }
+.choice-chip:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 3px; }
+.choice-chip:has(input:disabled) { color: var(--text-muted); cursor: not-allowed; }
+.connected-form details { border-block: 1px solid var(--border-subtle); padding-block: var(--space-2); }
+.connected-form details[open] > :not(summary) { margin-top: var(--space-3); }
+.photo-upload { margin: 0; }
+.photo-upload input[type=file] { padding: var(--space-2); font-size: var(--text-label); min-height: 50px; }
+.photo-upload input::file-selector-button { min-height: 36px; margin-right: var(--space-3); padding: .375rem .75rem; border: 0; border-radius: .625rem; background: var(--glass-strong); color: var(--foreground); font: inherit; cursor: pointer; }
+
+/* Native dialog supplies the focus trap and Escape handling. Only the body scrolls. */
+.pico-dialog { position: fixed; inset: 0; margin: auto; width: calc(100% - 1.5rem); max-width: 32rem; max-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 1.5rem); padding: 0; border: 1px solid var(--border-control); border-radius: var(--radius-panel); color: var(--foreground); background: var(--surface-overlay); overflow: hidden; box-shadow: var(--shadow-elevated); }
+.pico-dialog[open] { display: flex; flex-direction: column; }
+.pico-dialog::backdrop { background: rgb(0 0 0 / 64%); }
+.dialog-heading { display: flex; flex-shrink: 0; align-items: center; justify-content: space-between; gap: var(--space-3); padding: var(--space-4) var(--space-5) var(--space-3) var(--space-6); }
+.dialog-heading h2 { font-size: var(--text-dialog); line-height: 1.3; letter-spacing: -.02em; font-weight: 600; margin: 0; overflow-wrap: anywhere; }
+.dialog-heading .icon-button { background: var(--glass); }
+.dialog-body { min-height: 0; padding: var(--space-2) var(--space-6) var(--space-6); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: rgb(255 255 255 / 24%) transparent; scroll-padding-block: var(--space-4); }
+.dialog-body > .connected-form, .dialog-body > .social-form { margin-top: 0; }
+.dialog-body > form:not(.connected-form):not(.social-form) { display: grid; gap: var(--space-4); }
+.dialog-body > p { color: var(--text-secondary); line-height: 1.6; margin: 0 0 var(--space-5); font-size: var(--text-body); }
+.dialog-body > .input-group { margin-bottom: var(--space-5); }
+.dialog-body > .button { margin-block: var(--space-3); }
+.dialog-body .photo-upload { margin-block: var(--space-2); }
+.dialog-body [role=alert] { color: var(--error); }
+.publication-composer { margin: 0 0 var(--space-6); }
+.publication-composer .composer-trigger { min-height: 76px; background: var(--graphite); border-radius: var(--radius-card); padding: var(--space-4); }
+.publication-composer .composer-trigger > span { font-size: var(--text-body); flex: 1; }
+.publication-composer .composer-trigger > .composer-symbol { display: grid; place-items: center; flex: 0 0 40px; width: 40px; height: 40px; border-radius: 50%; background: var(--glass); color: var(--text-secondary); }
+@supports (backdrop-filter: blur(1px)) {
+  .pico-dialog, .connected-panel:has(.connected-form) { background: rgb(28 32 38 / 92%); backdrop-filter: blur(18px); }
+  .pico-dialog::backdrop { backdrop-filter: blur(4px); }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .pico-dialog, .connected-panel:has(.connected-form) { background: var(--surface-overlay); backdrop-filter: none; }
+  .pico-dialog::backdrop { backdrop-filter: none; }
+}
+@media (min-width: 560px) { .connected-form-row { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 359px) {
+  .dialog-heading { padding-inline: var(--space-4); }
+  .dialog-body { padding-inline: var(--space-4); }
+  .connected-panel { padding: var(--space-4); }
+  .auth-panel { padding: var(--space-5); }
+}
+
+.community-form textarea { min-height: 5rem; }
+.community-form, .community-form .form-section { gap: var(--space-3); }
+.connected-form .form-error { color: var(--error); }
+.standalone-panel { width: calc(100% - 2rem); max-width: 34rem; margin: max(2rem, env(safe-area-inset-top)) auto max(2rem, env(safe-area-inset-bottom)); }
+.standalone-panel > p { margin-block: var(--space-5); color: var(--text-secondary); line-height: 1.65; overflow-wrap: anywhere; }
+.standalone-panel > p a { display: inline-flex; align-items: center; min-height: 44px; color: var(--accent); font-size: var(--text-label); }
+.standalone-panel > details { border-top: 1px solid var(--border-subtle); margin-top: var(--space-5); padding-top: var(--space-3); }
+.install-page h1 { font-size: var(--text-title); line-height: 1.2; font-weight: 600; letter-spacing: -.025em; }
+.install-page h2 { font-size: var(--text-section); font-weight: 600; }
+.install-page > p, .install-page li { color: var(--text-secondary); line-height: 1.65; }
+.discovery-filters > summary { color: var(--foreground); font-weight: 500; }
+
+.form-note > a, .auth-footnote > a { display: inline-flex; align-items: center; min-height: 44px; }

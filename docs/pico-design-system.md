@@ -1,55 +1,47 @@
 # Pico — design system
 
-## Direção
+O Pico mantém preto e carvão, acento verde-água e conteúdo social em primeiro plano. O refino de setembro de 2026 aplica o mesmo sistema à interface conectada e aos componentes existentes de demonstração. Não altera audiência, admissão ou regras de dados.
 
-Um app social de areia, escuro e próximo. Primeiro celular; desktop preserva o ritmo do feed.
+## Tokens canônicos
 
-## Tokens
+`src/app/globals.css` define as cores, escala e geometria. `forms.css` centraliza controles e diálogos; `social.css`, `social-pages.css` e `profile.css` aplicam suas variantes. Não duplicar regras de input nas telas.
 
 | Token | Valor | Uso |
 | --- | --- | --- |
-| background | #07080A | fundo |
-| graphite | #111317 | superfícies |
-| surface | rgba(255,255,255,.06) | cards |
-| surfaceStrong | rgba(255,255,255,.10) | estados ativos |
-| border | rgba(255,255,255,.10) | separadores |
-| primary | #F7F3EA | texto principal |
-| secondary | #B9BCB9 | apoio |
-| muted | #9B9B95 | metadados |
-| champagne | #C8A96A | assinatura e detalhe contextual |
-| accent | #4DE1C1 | ação, presença e curtida |
-| coral | #FF6B4A | erros, sem competir com ações |
-| ocean | #67D4FF | esporte/contexto pontual |
-| green | #4DE1C1 | presença |
+| `--background` | `#07080a` | Fundo |
+| `--graphite` | `#111317` | Cards de leitura |
+| `--surface-overlay` | `#1c2026` | Elevação e fallback opaco |
+| `--surface-input` | Branco a 5% | Campos integrados |
+| `--foreground` | `#f2f3f4` | Texto principal |
+| `--text-secondary` | `#c2c6cb` | Labels e apoio |
+| `--text-muted` | `#b4bac3` | Metadados |
+| `--accent` | `#4de1c1` | Ação principal, seleção e foco |
+| `--accent-ink` | `#08221e` | Texto da ação principal |
+| `--sand` | `#c8a96a` | Champagne restrito à assinatura da marca |
+| `--error` | `#ffb5a7` | Erro |
+| `--radius-control` | `1rem` | Campos e botões |
+| `--radius-card` | `1.375rem` | Cards |
+| `--radius-panel` | `1.875rem` | Diálogos e painéis elevados |
+| `--radius-pill` | `999px` | Seleções compactas |
 
-## Tipografia e ritmo
+Fonte única: `-apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif`. Controles, menus e diálogos herdam a mesma família. Não há download ou distribuição da SF Pro nem carregamento da Geist.
 
-Geist. Corpo 16px; controles 14–16px; metadata 12–13px; títulos 26–32px. Evitar títulos de landing.
-Espaçamento baseado em 4px. Margens laterais 20px no celular. Raio 20–26px nos cards, 14px nos inputs e 999px em chips.
-Alvos mínimos 44px. Separar label visual de área de toque quando necessário.
+Corpo e texto digitado: `1rem`; metadados: `.8125rem`; labels: `.875rem`; seções: `1.25rem`; diálogos: `1.375rem`; títulos principais: `1.75–2rem`. Pesos 400, 500 e 600. A navegação compacta usa `.75rem`. Os tokens de espaço vão de `.25rem` a `2rem`, em passos de quatro pixels na escala padrão.
 
-## Componentes implementados
+## Materiais e interação
 
-AppShell, BottomNav, PageHeading, PlayerAvatar, SportFilter, PostCard, ArenaCard, PlayerCard, Modal, EmptyState, DemoProvider, PostComposer e as views de cada rota.
-Reaproveitar Button, Input, Brand e utilitário cn.
+Cards de publicações e pessoas usam fundo estável. Formulários elevados e diálogos usam carvão com preenchimento a 92%, blur de 18px, borda neutra e sombra discreta. A regra base é opaca; `@supports` habilita translucidez, e `prefers-reduced-transparency` retorna ao opaco. Campos não recebem outro blur.
 
-## Comportamento
+O diálogo nativo mantém cabeçalho e fechamento de 44px fora da única área de rolagem. A ação permanece no fluxo, sem cobrir conteúdo ou teclado. Escape e eventos de fechamento não se propagam ao diálogo pai; o foco retorna ao acionador. Tab/Shift+Tab permanecem entre controles visíveis e habilitados. O recorte de foto devolve o foco ao seletor de arquivo.
 
-Navegação com aria-current; filtros com aria-pressed; labels explícitos; status com aria-live.
-Dialog nativo com showModal e fechamento por Escape.
-Transições de 150–220ms, sem movimento contínuo; respeitar prefers-reduced-motion.
-Foto com dimensões reservadas e alternativa textual. Sem dependência de imagens remotas em runtime.
+`ChoiceChip` mantém um checkbox nativo, teclado e checkmark além da mudança de cor. Formulários de comunidade preservam campos, validações, seleção múltipla e as opções exatas de audiência. O compositor de publicação usa um acionador compacto e abre os mesmos campos em diálogo; o rascunho fica preservado ao fechar e reabrir.
 
-## Layout
+Transições curtas, sem animação de blur. `prefers-reduced-motion` desliga movimento. Controles menores têm alvo de 44px; texto pode crescer e quebrar sem cortar conteúdo.
 
-Em telas estreitas: uma coluna, header compacto e barra inferior fixa com safe area.
-Em desktop: navegação lateral e conteúdo social com largura de leitura limitada; informações de comunidade secundárias.
-Não usar grades de indicadores ou aparência de painel administrativo.
+## Referências e evidência
 
-## Aplicação na rodada 2
+Não foram encontrados prints originais do Yankee ou um anexo de imagem do formulário. Na [página pública do Yankee](https://play.google.com/store/apps/details?id=com.yankee.foretheist), foi observado um feed escuro com foto dominante, recortes arredondados e controles discretos. É apoio de composição, sem copiar pessoas, marca ou funcionalidades.
 
-Tokens globais em globals.css, base social em social.css e telas específicas em social-pages.css. Retratos em uma imagem 3×2 local, exibidos como avatares com dimensões fixas. Arena ilustrativa local com recorte por contexto.
+A stack de sistema e a separação entre conteúdo e superfícies elevadas seguem a direção das referências oficiais: [Apple Design](https://developer.apple.com/design/human-interface-guidelines/), [fontes Apple](https://developer.apple.com/fonts/) e [Meet Liquid Glass](https://developer.apple.com/videos/play/wwdc2025/219/). A simplicidade solicitada a partir do ChatGPT orienta agrupamento e discrição dos controles, sem prometer reprodução de um material nativo em CSS.
 
-Referência mobile 390px; ajustes compactos abaixo de 360px; navegação lateral a partir de 800px e coluna secundária a partir de 1160px. Nenhuma captura visual foi usada como comprovação nesta rodada.
-
-Cycle 0.5: seis rotas inspecionadas em navegador com viewport 390×844; feed/check-in revisados em captura. Hover/tap de 180ms e seleção neutra preservam a hierarquia social.
+Capturas reais, cobertura e limites da validação estão em [visual-review/README.md](visual-review/README.md). A fixture local renderiza o app real e simula apenas APIs; não comprova infraestrutura ou persistência remota.

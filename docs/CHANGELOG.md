@@ -1,5 +1,13 @@
 # Changelog — Pico
 
+## Refino visual global · 2026-09-09
+
+- Fonte nativa única, escala relativa, superfícies carvão, controles e raios consistentes; acento verde-água e vidro restrito a elevações.
+- Comunidades com grupos claros e seleção múltipla acessível; feed com compositor em diálogo e rascunho preservado; perfil do Ciclo 10 harmonizado, incluindo HEIC existente.
+- Correções de foco, Tab e Escape em diálogos aninhados, uma área de rolagem e ações acessíveis em altura reduzida.
+- 50 medições responsivas, capturas reais antes/depois, testes de interação com dados locais, 76 testes, lint, tipagem e build aprovados. Contraste do texto discreto corrigido; regressão Chromium/WebKit ampliada.
+- Sem alterações de API, Supabase, permissões, serviços ou dependências nesta rodada. [Relatório visual](visual-review/README.md).
+
 ## Ciclo 8 · preparação do beta · 2026-09-09
 
 - Avatares e publicações com fotos reais, buckets privados, normalização sem metadados, limites de arquivo/quantidade e autoria validada no banco.

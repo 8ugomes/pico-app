@@ -1,6 +1,6 @@
 # Pico — plano de produto
 
-> Estado final do Ciclo 9: PRONTO PARA REVISÃO INTERNA — NÃO LIBERADO. Preview `e891dca1e741`, 19 migrations em dev/beta e smoke 67/67. [URL, versão e evidências atuais](INTERNAL_REVIEW.md). Os registros abaixo preservam a sequência de auditoria, plano e execução.
+> Registro histórico do Ciclo 9: PRONTO PARA REVISÃO INTERNA — NÃO LIBERADO. Preview `e891dca1e741`, 19 migrations em dev/beta e smoke 67/67. [URL, versão e evidências atuais](INTERNAL_REVIEW.md). Os registros abaixo preservam a sequência de auditoria, plano e execução.
 
 
 ## Ciclo 9 — AUDIT / PLAN (2026-09-09)
@@ -270,3 +270,12 @@ CONCLUÍDO após autenticação do responsável: rulesets 22706380 e 22706456 at
 O responsável corrigiu a orientação de revisão interna e autorizou reunir a publicação no projeto principal. Publicar o Ciclo 9 de main no Vercel pico-app, domínio pico-app-sepia.vercel.app, preservando o Supabase bxjhqxdfknspxezgftyz e os dados existentes. Substituir deploy-internal pelo deploy principal, atualizar manifesto/textos/origem Auth e documentação. Manter desenvolvimento como destino dos testes destrutivos, autenticação, admissão, RLS e proteções Git. Não recriar/apagar projetos nem copiar dados. Validar projeto/envs/migrations, lint/types/testes/build, CI, publicação e smoke real antes de encerrar. O PR #1 já foi integrado em fee5b0c.
 
 VERIFY implementação: 73 testes, lint, TypeScript e build aprovados. Vercel pico-app conferido e relinkado; envs Production usam o mesmo Supabase e public key, propósito beta e main. As 19 migrations remotas estão aplicadas; não foi necessário SQL novo. Site URL Auth principal aplicado e diff posterior sem mudanças pendentes; confirmação/hook/MFA preservados. Foram encontradas 26 cópias locais com sufixo 2, idênticas ao conteúdo atual ou HEAD; preservadas em .vercel/unify-local-copies, fora da execução de migrations/testes. Publicação e evidência remota constarão no PR desta unificação.
+
+
+## Refino visual completo — PLAN (2026-09-09)
+
+Refinar a main existente, começando por Criar comunidade: fonte nativa única, escala relativa, geometria e espaçamentos consistentes, superfícies carvão estáveis e vidro escuro nas elevações, verde-água reservado a ações/seleção/foco. Consolidar campos, botões, diálogos e seleções acessíveis e aplicar a acesso, feed, perfil, comunidades, descoberta, arenas, conta e gestão. Preservar todos os campos, audiência, integrações e permissões; nenhuma mudança de infraestrutura, dependências ou SQL. Registrar antes/depois com conteúdo e viewport comparáveis, validar 320/390/430/tablet/desktop e fluxos em fixtures locais, executar lint/types/testes/build. Prints originais do Yankee e do formulário não vieram com o texto; a captura da aplicação atual será a referência de diagnóstico. Trabalhar em main e respeitar sua proteção por PR usando o fluxo existente, sem criar branch ou force-push.
+
+## Refino visual completo — VERIFY
+
+Implementação na main atualizada com o perfil/HEIC do Ciclo 10, preservado durante a rodada. Fonte nativa, tokens, controles, listas, perfil, compositor compacto e diálogos unificados; nenhuma alteração de API, credenciais, configuração de serviços ou banco. Dez telas em cinco larguras (50 medições sem overflow), quinze rotas auxiliares/detalhes em 390 px e fluxos locais de criar/editar comunidade, publicar com dois destinos e salvar perfil. Dez asserções dos quatro envios controlados passaram. Lint, tipagem, 76 testes e build aprovados; contraste mínimo 4,67:1 entre os pares ativos avaliados. CI de Chromium/WebKit ampliada para texto a 200%, movimento reduzido e foco em diálogos aninhados; a integração depende de seu resultado remoto. [Evidências e limites](visual-review/README.md). Envio pelo transporte já existente `unify-primary`, PR para main, sem nova branch ou bypass.
