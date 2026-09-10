@@ -1,6 +1,6 @@
-# Pico — operação da revisão interna
+# Pico — operação do ambiente principal
 
-Ciclo 9, sem liberação externa. Configuração e destinos: [ambientes](ENVIRONMENTS.md). Evidência de publicação: [revisão interna](INTERNAL_REVIEW.md). Permissões: [contratos](CYCLE9_CONTRACTS.md).
+Ciclo 9 na main, com publicação unificada no projeto principal. Configuração e destinos: [ambientes](ENVIRONMENTS.md). Evidência histórica anterior à unificação: [revisão interna](INTERNAL_REVIEW.md). Permissões: [contratos](CYCLE9_CONTRACTS.md).
 
 ## Operação pela interface
 
@@ -32,4 +32,16 @@ PKCE continua padrão. Templates por token foram preparados, mas o provedor Free
 
 Backup cifrado, restauração comprovada e limites: [continuidade](CONTINUITY.md). Definir retenção, custódia separada de chave/cópia e destino externo antes da liberação. A restauração validada usou dados controlados de desenvolvimento; dados pessoais do beta não foram copiados para outro ambiente.
 
-Publicação é por CLI protegida em `scripts/deploy-internal.mjs`, Preview do projeto `pico-internal`. GitHub não está integrado ao deploy: push executa CI, não publica. Não usar `--prod`. Em falha essencial, retirar a revisão de circulação/pausar convites e escolher somente artefato compatível previamente validado. Não apontar a revisão para Cycle 8 sem revalidar os novos contratos. Banco recebe correção aditiva, nunca reset, downgrade destrutivo ou remoção de RLS. O domínio histórico tem deploy independente.
+Publicação usa `npm run deploy`, com `scripts/deploy.mjs`, target Production do projeto `pico-app` e branch main limpa/sincronizada. A identidade técnica do Supabase segue `beta`. Não usar o projeto ou wrapper antigos como destino. GitHub executa CI; push não publica automaticamente.
+
+Para verificar antes da troca do domínio:
+
+```bash
+npm run deploy -- --stage
+# Conferir artefato, versão, login e manifesto; depois promover a URL retornada:
+npx vercel@59.14.0 promote <url-do-artefato> --yes
+```
+
+O deploy normal inclui a promoção. Quando usar stage, conferir a identidade do projeto retornado antes de promover. Após publicação, testar o endereço principal, Auth/sessão, leitura/escrita com contas controladas, mídia, permissões e limpeza dos próprios IDs. Conferir que o endereço antigo encaminha ao principal. Artefatos protegidos podem ser inspecionados com `vercel curl` na sessão autenticada, sem desativar a proteção Vercel.
+
+Em falha essencial, interromper a promoção ou voltar ao último artefato compatível validado do mesmo projeto. Se a versão histórica for Ciclo 8, não presumir compatibilidade com os contratos atuais: preferir correção/reversão por PR e novo deploy. Banco recebe correção aditiva, nunca reset, downgrade destrutivo ou remoção de RLS. Manter artefatos anteriores e inventário protegido como evidência.

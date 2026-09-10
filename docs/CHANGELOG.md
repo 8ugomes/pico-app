@@ -129,3 +129,11 @@ Documentada a causa da CI antiga (ripgrep ausente), a correção já existente e
 ## GitHub — proteção ativada e verificada
 
 Após autenticação do responsável, rulesets 22706380 e 22706456 salvos como ativos. Main exige PR, check verify do GitHub Actions, base atualizada e discussões resolvidas. Main e cycle-9-internal impedem force push e exclusão, sem bypass; API confirmou ambas protegidas. PR continua em rascunho, main e Preview preservados. Documentação atualizada com evidência remota.
+
+## Publicação unificada no principal
+
+- Orientação de ambiente interno substituída pela autorização do responsável: main publica no projeto Vercel pico-app e domínio pico-app-sepia.vercel.app.
+- npm run deploy substitui deploy-internal; confere main limpa, origem sincronizada, projeto, identidade remota e migrations. Stage opcional antes de promover.
+- Nome Pico na instalação, textos de acesso atualizados, encaminhamento do endereço antigo e Site URL Auth principal.
+- Mesmo Supabase e dados existentes; sem migrations novas, mudança de RLS/admissão ou compra. Desenvolvimento segue exclusivo dos testes destrutivos.
+- 73 testes locais, lint, types e build aprovados; variáveis Production e 19 migrations conferidas. Evidência da publicação registrada no PR da alteração.

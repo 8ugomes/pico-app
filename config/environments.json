@@ -12,15 +12,15 @@
     "projectRef": "bxjhqxdfknspxezgftyz",
     "url": "https://bxjhqxdfknspxezgftyz.supabase.co",
     "appOrigins": [
-      "https://pico-internal.vercel.app",
-      "https://pico-app-sepia.vercel.app"
+      "https://pico-app-sepia.vercel.app",
+      "https://pico-internal.vercel.app"
     ],
-    "provisioned": true
-  },
-  "production": {
-    "projectRef": null,
-    "url": null,
-    "appOrigins": [],
-    "provisioned": false
+    "provisioned": true,
+    "deployment": {
+      "projectId": "prj_0vpAtATOxFKniX5GSPgi1V72tI5Z",
+      "projectName": "pico-app",
+      "branch": "main",
+      "target": "production"
+    }
   }
 }

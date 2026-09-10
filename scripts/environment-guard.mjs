@@ -10,10 +10,14 @@ export function assertEnvironment(env=process.env, action='build') {
   const expected=environments[purpose];
   if(!expected?.provisioned || !expected.url || env.NEXT_PUBLIC_SUPABASE_URL!==expected.url || env.PICO_PROJECT_REF!==expected.projectRef || !env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY) throw Error('Environment identity mismatch; operation refused');
   if(env.PICO_ENV && env.PICO_ENV!==purpose) throw Error('Server/client environment mismatch');
-  if(purpose==='production') throw Error('Production is not authorized in this cycle');
   if(['seed','hosted-test'].includes(action) && purpose!=='development') throw Error('Destructive test/seed requires exclusive development');
-  if(env.VERCEL_ENV==='preview' && purpose==='beta' && (env.VERCEL_GIT_COMMIT_REF || env.PICO_REVIEW_BRANCH)!=='cycle-9-internal') throw Error('Beta credentials are restricted to the review branch');
-  if(action==='deploy' && (purpose!=='beta' || env.PICO_DEPLOY_TARGET!=='preview')) throw Error('Only internal preview deploy is authorized');
+  const deployment=expected.deployment;
+  if(env.VERCEL_ENV && env.VERCEL_ENV!=='development') {
+    if(!deployment || env.VERCEL_ENV!==deployment.target) throw Error('Connected builds require the primary deployment target');
+    if((env.VERCEL_GIT_COMMIT_REF || env.PICO_DEPLOY_BRANCH)!==deployment.branch) throw Error('Connected builds require the main branch');
+    if(env.VERCEL_PROJECT_ID && env.VERCEL_PROJECT_ID!==deployment.projectId) throw Error('Vercel project mismatch');
+  }
+  if(action==='deploy' && (!deployment || env.PICO_DEPLOY_TARGET!==deployment.target || env.PICO_DEPLOY_BRANCH!==deployment.branch)) throw Error('Deploy requires the primary project, production target and main branch');
   return {purpose,...expected};
 }
 export async function assertRemoteIdentity(env=process.env,action='migration') {
