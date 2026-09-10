@@ -2,9 +2,9 @@
 
 **O ponto de encontro da areia. Me acha no Pico.**
 
-Rede social PWA mobile-first para futevôlei, beach tennis e vôlei de praia. O Ciclo 9 implementa comunidades próprias, gestão de arenas, papéis no banco, publicação com destinos, histórico privado e fotos recortadas. **Exclusivo para revisão interna; lançamento não autorizado.**
+Rede social PWA mobile-first para futevôlei, beach tennis e vôlei de praia. O Ciclo 9 implementa comunidades próprias, gestão de arenas, papéis no banco, publicação com destinos, histórico privado e fotos recortadas. A publicação usa o ambiente principal, com acesso às contas por aprovação.
 
-Revisão publicada: [Pico interno](https://pico-internal.vercel.app), versão `e891dca1e741`, com Supabase beta real e acesso por admissão. O estado publicado, commits, evidências e pendências estão em [revisão interna](docs/INTERNAL_REVIEW.md). [Ambientes](docs/ENVIRONMENTS.md) é o mapa operacional; [contratos](docs/CYCLE9_CONTRACTS.md) define permissões e privacidade. O domínio histórico pico-app-sepia.vercel.app permanece no Ciclo 8 até decisão específica; push da branch de revisão não o atualiza.
+Endereço principal: [Pico](https://pico-app-sepia.vercel.app). O Ciclo 9 está integrado à `main`; publicação por `npm run deploy` no projeto Vercel `pico-app`. O endereço antigo `pico-internal.vercel.app` encaminha ao principal. [Ambientes](docs/ENVIRONMENTS.md) descreve a configuração, [operação](docs/BETA_OPERATIONS.md) explica publicação e rollback e [contratos](docs/CYCLE9_CONTRACTS.md) define permissões. A versão efetivamente servida pode ser consultada em [/api/version](https://pico-app-sepia.vercel.app/api/version). O relatório [INTERNAL_REVIEW.md](docs/INTERNAL_REVIEW.md) preserva a validação anterior à unificação.
 
 ## Executar
 

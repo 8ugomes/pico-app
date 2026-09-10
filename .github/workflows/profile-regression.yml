@@ -49,4 +49,5 @@ jobs:
             .vercel/profile-browser/*.png
             .vercel/profile-browser/*.json
             .vercel/profile-browser/*.txt
+          include-hidden-files: true
           retention-days: 3

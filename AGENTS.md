@@ -59,7 +59,7 @@ Tokens em src/app/globals.css. Reutilizar os componentes existentes.
 Mobile-first, dark mode, grafite e areia, cards arredondados, transparência discreta e movimento reduzível.
 Texto em pt-BR, curto, próximo e concreto. Uma ação principal por contexto.
 Dados ilustrativos precisam de rótulo; não fingir cadastro, presença, salvamento ou métricas.
-Demonstração exige configuração explícita. Ambientes conectados negam acesso social sem admissão vigente. O Ciclo 9 é exclusivo para revisão interna: não promover produção, abrir inscrições ou enviar convites externos.
+Demonstração exige configuração explícita. Ambientes conectados negam acesso social sem admissão vigente. O responsável corrigiu a separação interna: publicar a main no projeto Vercel pico-app, em pico-app-sepia.vercel.app. Usar scripts/deploy.mjs; não exigir cycle-9-internal ou projeto separado. O Supabase existente (identidade técnica beta) preserva contas e dados. Unificar a publicação não altera admissão, RLS, convites ou escopo de acesso.
 Auth real e jogador fictício são estados distintos. Ações do demo ficam locais, identificadas e sem envio para outras pessoas.
 Rotas canônicas: /feed, /arenas, /arenas/[slug], /checkin, /descobrir, /perfil.
 Não implementar um recurso só porque apareceu como sugestão de rota no plano.

@@ -23,7 +23,14 @@ const plugins=[{name:'browser-framework-fixtures',setup(api){
  api.onResolve({filter:/^next\/(link|image|dynamic|navigation)$/},args=>({path:args.path,namespace:'framework'}));
  api.onLoad({filter:/.*/,namespace:'framework'},args=>({contents:nextStubs[args.path],loader:'tsx',resolveDir:root}));
  api.onResolve({filter:/(^@\/lib\/supabase\/client$|\/lib\/supabase\/client$)/},()=>({path:'auth',namespace:'framework-auth'}));
- api.onLoad({filter:/.*/,namespace:'framework-auth'},()=>({contents:`export function createClient(){return {auth:{onAuthStateChange(callback){const listener=e=>callback(e.detail.event,e.detail.session);window.addEventListener('fixture-auth',listener);queueMicrotask(()=>callback('INITIAL_SESSION',{user:{id:'11111111-1111-4111-8111-111111111111'}}));return{data:{subscription:{unsubscribe:()=>window.removeEventListener('fixture-auth',listener)}}}}}}`,loader:'ts'}));
+ api.onLoad({filter:/.*/,namespace:'framework-auth'},()=>({contents:`export function createClient() {
+ return { auth: { onAuthStateChange(callback) {
+   const listener = e => callback(e.detail.event, e.detail.session);
+   window.addEventListener('fixture-auth', listener);
+   queueMicrotask(() => callback('INITIAL_SESSION', {user:{id:'11111111-1111-4111-8111-111111111111'}}));
+   return { data: { subscription: { unsubscribe() { window.removeEventListener('fixture-auth', listener); } } } };
+ } } };
+}`,loader:'ts'}));
 }}];
 await build({stdin:{contents:shell,loader:'tsx',resolveDir:root},outdir:join(output,'app'),entryNames:'app',bundle:true,splitting:true,format:'esm',jsx:'automatic',platform:'browser',target:'es2022',plugins,alias:{'@':join(root,'src')},define:{'process.env.NODE_ENV':'"development"','process.env.NEXT_PUBLIC_PICO_ENV':'"demo"','process.env.NEXT_PUBLIC_PICO_VERSION':'"test"','process.env.NEXT_PUBLIC_SUPABASE_URL':'undefined','process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY':'undefined'}});
 const styles=['globals.css','social.css','social-pages.css','profile.css'].map(file=>readFileSync(join(root,'src/app',file),'utf8').replace(/^@import.*$/gm,'').replace(/@theme inline\s*\{[^}]*\}/g,'')).join('\n');

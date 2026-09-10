@@ -1,6 +1,6 @@
-# Pico — checklist de revisão interna
+# Pico — checklist operacional
 
-**Lançamento externo não autorizado.** O status consolidado, URL e versão estão em [INTERNAL_REVIEW.md](INTERNAL_REVIEW.md). Este checklist não representa aprovação do responsável.
+A publicação no projeto principal foi autorizada pelo responsável. Destinos e comandos em [ENVIRONMENTS.md](ENVIRONMENTS.md); [INTERNAL_REVIEW.md](INTERNAL_REVIEW.md) é o registro anterior à unificação. Autenticação e admissão continuam vigentes.
 
 | Controle | Evidência atual |
 | --- | --- |
@@ -12,10 +12,10 @@
 | Operação | Moderação com efeito, custódia, auditoria mínima, exclusão com reautenticação |
 | Qualidade | 72 testes locais, 170 verificações remotas dev, 29 verificações de navegador e 67 no Preview/beta passaram |
 | Continuidade | Backup cifrado criado; restauração de Auth/schema/dados/3 arquivos controlados validada em VM isolada |
-| CI/deploy | CI aprovada; Preview e891dca1e741 READY, versão/sessão/dados confirmados pela URL |
+| CI/deploy | Main com CI; deploy principal Production por CLI. Versão efetiva em /api/version; Preview e891dca1e741 é histórico |
 | SMTP externo | Pendente por decisão do responsável; não houve teste de entrega em caixa |
 | Aparelhos físicos | Pendente; emulação não comprova instalação/câmera/retomada física |
 | Responsável/contato público | Conta admin confirmada; canal público e rotina humana ainda não definidos |
 | Backup fora do computador | Definir custódia/retenção/separação da chave antes da liberação |
 
-Inscrições públicas, convites a jogadores/donos reais e lançamento de produção permanecem fechados. SMTP, aparelhos e operação externa impedem declarar beta liberado; não impedem avaliar a revisão internamente com a conta existente autorizada.
+A unificação do endereço não abre inscrições nem envia convites. SMTP, aparelhos e operação externa permanecem pendências de validação, sem impedir a publicação principal autorizada e o acesso da conta existente.

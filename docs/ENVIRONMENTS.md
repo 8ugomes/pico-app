@@ -1,19 +1,18 @@
 # Ambientes do Pico
 
-Ciclo 9 é revisão interna, sem lançamento. `config/environments.json` é a identidade esperada pelos comandos.
+Por orientação corrigida do responsável, o Pico usa um endereço principal: [pico-app-sepia.vercel.app](https://pico-app-sepia.vercel.app). Não é necessário projeto de revisão interna nem argumento `--internal`. `config/environments.json` registra os destinos permitidos.
 
-| Finalidade | Supabase | Dados / acesso |
+| Finalidade | Supabase | Aplicação |
 | --- | --- | --- |
-| Desenvolvimento exclusivo | tsebpkfnxjvhntosbkdu, pico-development, Free São Paulo | 19 migrations, banco/Auth/Storage próprios; dados controlados limpos. localhost 3000/3002. |
-| Beta interno | bxjhqxdfknspxezgftyz, nome histórico pico-dev | 19 migrations; conta/arquivo existentes preservados. [Preview interno](https://pico-internal.vercel.app), admissão no banco; @hugo confirmado pelo responsável como primeiro admin. |
-| Produção futura | Não provisionado | Sem URL, chaves, dados ou lançamento. Guard recusa. |
+| Principal | `bxjhqxdfknspxezgftyz`, nome histórico pico-dev, identidade técnica `beta` | Vercel `pico-app` (`prj_0vpAtATOxFKniX5GSPgi1V72tI5Z`), target Production, branch main |
+| Desenvolvimento e testes | `tsebpkfnxjvhntosbkdu`, pico-development, identidade `development` | localhost 3000/3002; testes destrutivos exclusivamente aqui |
 
-Vercel `pico-app` mantém o deploy histórico do Ciclo 8; o rótulo Production serve ao beta interno e não significa liberação. Sem integração Git. Previews comuns ficam em demo explícito sem credenciais beta. A nova revisão usa projeto Vercel separado `pico-internal`, somente Preview via CLI. Push não faz deploy.
+Ambos têm 19 migrations. A unificação preserva o banco principal, contas, fotos, arenas, comunidades, papéis e admissão. O identificador técnico `beta` permanece para manter a identidade já gravada no banco; ele não exige outro site. Nenhum banco de produção adicional é criado. O projeto Vercel antigo não é mais destino de publicação; seus artefatos anteriores ficam preservados, e o endereço estável antigo encaminha ao principal.
 
-`.env.local` e `.env.hosted-admin` são exclusivamente desenvolvimento. `.env.beta.local` e `.env.beta-admin` preservam a configuração beta fora do Git, modo 0600. Nunca copiar esses arquivos para preview comum. Cada projeto usa seu próprio Auth, URL, chaves, buckets e redirects; não houve cópia de conta ou arquivo entre projetos. A produção futura não compartilha nenhum segredo.
+`.env.local` e `.env.hosted-admin` usam somente desenvolvimento. `.env.beta.local` e `.env.beta-admin` continuam sendo os arquivos protegidos da conta/banco principal. Não são versionados ou enviados no deploy. Vercel Production recebe URL/public key do principal, secret apenas no servidor, `NEXT_PUBLIC_PICO_ENV=beta`, `PICO_ENV=beta`, `PICO_PROJECT_REF=bxjhqxdfknspxezgftyz` e `PICO_DEPLOY_BRANCH=main`. Previews comuns usam demo sem backend; não recebem credenciais do principal.
 
-`npm run env:check` valida configuração local. `node --env-file=.env.local --env-file=.env.hosted-admin scripts/database.mjs migrate` confere finalidade/ref/URL e a identidade devolvida pelo banco antes de aplicar pendências. `seed` e `test:hosted` só aceitam desenvolvimento exclusivo. Para beta, usar os dois arquivos beta e a mesma ferramenta; seed/teste destrutivo serão recusados. Migrations iniciais de provisionamento exigem conferir explicitamente a identidade antes de registrar environment_identity; já realizado no Ciclo 9.1.
+Site URL do Auth: `https://pico-app-sepia.vercel.app`. Redirects exatos callback/confirm do principal e do endereço antigo são preservados; localhost continua exclusivo do desenvolvimento. Confirmação de e-mail, hook de convite, admissão, MFA e RLS não são removidos pela troca de publicação. SMTP continua pendente.
 
-Tipos: `npm run db:types`, gerados do desenvolvimento com as mesmas migrations. Schema gerado não é editado manualmente. Nunca executar reset remoto. CI usa demo explícito sem segredos; contribuições não confiáveis não recebem secrets.
+O guard confere finalidade, URL, ref, identidade remota, projeto Vercel, target Production e main. `seed` e `test:hosted` recusam o banco principal. `npm run deploy` exige main limpa e sincronizada com origin/main, link no projeto existente e migrations remotas completas. `npm run deploy -- --stage` prepara um artefato Production sem trocar o domínio; promover após verificar. Publicação por CLI: push no GitHub executa CI, sem integração Git de deploy.
 
-Estado do Preview: `e891dca1e741`, READY, target Preview, smoke autenticado 67/67. Origem beta principal `https://pico-internal.vercel.app`; callback/confirm históricos preservados, localhost restrito ao desenvolvimento. URL/publishable key conferidas; secret sensitive Preview comprovado por Storage no servidor publicado. [Evidência final](INTERNAL_REVIEW.md).
+A versão atual está em [/api/version](https://pico-app-sepia.vercel.app/api/version). [Operação e rollback](BETA_OPERATIONS.md), [backup](CONTINUITY.md), [evidência histórica do Ciclo 9](INTERNAL_REVIEW.md).
