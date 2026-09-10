@@ -1,0 +1,32 @@
+name: Prepare profile review
+on:
+  push:
+    branches: [fix/profile-premium-heic]
+    paths: [.github/workflows/profile-prepare.yml]
+permissions:
+  contents: read
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Prepare pinned decoder lock and local documentation
+        run: |
+          npm install --package-lock-only --ignore-scripts --save-exact heic-to@1.5.2
+          mkdir -p /tmp/pico-review/next-docs /tmp/pico-review/decoder
+          cp -R node_modules/next/dist/docs/. /tmp/pico-review/next-docs/
+          npm pack heic-to@1.5.2 --pack-destination /tmp/pico-review/decoder
+          git ls-files -z | tar --null -T - -czf /tmp/pico-review/source.tar.gz
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pico-profile-review-inputs
+          path: /tmp/pico-review
+          retention-days: 1
