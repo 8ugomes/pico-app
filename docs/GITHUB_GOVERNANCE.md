@@ -2,11 +2,11 @@
 
 ## Estado verificado em 2026-09-09
 
-O [PR #1](https://github.com/8ugomes/pico-app/pull/1) está aberto, em rascunho e sem merge. `main` permanece no Ciclo 8 (`7d6f288`); `cycle-9-internal` contém o Ciclo 9. Essa separação preserva a revisão interna e não representa perda ou divergência acidental de código. O Preview interno usa o código de `e891dca`; commits posteriores de documentação não alteram esse artefato.
+O [PR #1](https://github.com/8ugomes/pico-app/pull/1) foi integrado à main em `fee5b0c`, com CI aprovada. A branch `cycle-9-internal` preserva o histórico dessa revisão. O responsável autorizou em seguida unificar a publicação no projeto principal; configuração corrente em [ENVIRONMENTS.md](ENVIRONMENTS.md).
 
 A [execução antiga que falhou](https://github.com/8ugomes/pico-app/actions/runs/34416746882) encontrou `spawnSync rg ENOENT`: o teste de contrato de formulários dependia de ripgrep, ausente no runner Linux. O commit `1d43037` substituiu essa dependência pela leitura de arquivos com Node. A [CI do PR em 2098fb0](https://github.com/8ugomes/pico-app/actions/runs/34417821167) passou, incluindo lint, TypeScript, 72 testes e build. A falha antiga permanece no histórico; ela não descreve o resultado atual.
 
-O aviso de branch desprotegida era independente da execução da CI. Após o responsável concluir a confirmação de identidade do GitHub, os dois rulesets foram salvos e verificados pela API: enforcement `active`, nenhuma exceção e `protected: true` para ambas as branches. Nenhum plano foi contratado e nenhum merge foi feito. A [CI do diagnóstico em 27c7623](https://github.com/8ugomes/pico-app/actions/runs/34420925485) também passou, incluindo os 72 testes.
+O aviso de branch desprotegida era independente da execução da CI. Após o responsável concluir a confirmação de identidade do GitHub, os dois rulesets foram salvos e verificados pela API: enforcement `active`, nenhuma exceção e `protected: true` para ambas as branches. Nenhum plano foi contratado para ativar as proteções. A [CI do diagnóstico em 27c7623](https://github.com/8ugomes/pico-app/actions/runs/34420925485) também passou, incluindo os 72 testes.
 
 ## Configuração aplicada
 
@@ -34,4 +34,4 @@ Os PRs atuais são criados pela conta do responsável, que não pode aprovar o p
 
 O ruleset da main registra `verify` com `integration_id: 15368` (GitHub Actions), `strict_required_status_checks_policy: true`, `required_review_thread_resolution: true` e zero aprovações obrigatórias. Ambos retornaram `bypass_actors: []` e `current_user_can_bypass: never`. Os endpoints de branches retornaram `protected: true`.
 
-O PR #1 continua aberto e em rascunho, sem merge. A main mantém `7d6f288d080a7b69bdebce15af33ea7f88da0acb`. A ativação não mudou o deploy interno nem dados do Supabase. A verificação leu as regras efetivamente persistidas; não tentou apagar ou sobrescrever branches reais. A proteção está concluída e não depende mais de autenticação ou decisão de plano.
+O PR #1 foi integrado somente após as verificações exigidas; a CI do merge fee5b0c passou. As proteções continuam aplicadas, e novas mudanças na main passam por PR. A ativação das regras não mudou dados do Supabase. A verificação leu as regras efetivamente persistidas; não tentou apagar ou sobrescrever branches reais. A proteção está concluída e não depende mais de autenticação ou decisão de plano.

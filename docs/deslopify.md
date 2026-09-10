@@ -202,3 +202,9 @@ Explicar separadamente: execução da CI, exigência de CI para merge e bloqueio
 VERIFY parcial: a falha histórica foi atribuída à dependência de ripgrep no teste, já corrigida. A diferença entre branches preserva a revisão interna. A configuração de proteção permanece explicitamente pendente de autenticação; preencher o formulário não comprova enforcement. Nenhuma mudança visual ou funcional no app.
 
 CONCLUÍDO: confirmação de identidade feita pelo responsável; salvamento e enforcement remoto comprovados. README e diagnóstico substituem a pendência pelo estado ativo, com IDs e links dos rulesets. Nenhum teste destrutivo foi usado para provar proteção; papéis e exceções não foram concedidos a terceiros.
+
+## Unificação no ambiente principal — PLAN
+
+Usar um endereço principal e o nome Pico nas telas e na instalação. Retirar a linguagem de revisão interna e comandos específicos dessa separação; conservar mensagens precisas sobre login e aprovação. Distinguir a unificação de publicação da autorização de dados: preservar conta, privacidade e papéis. O estado corrente dos documentos deve substituir a restrição anterior conforme a correção expressa do responsável.
+
+VERIFY implementação: manifesto principal usa Pico; instalação, privacidade e acesso explicam aprovação sem rotular o app como revisão interna. O host antigo encaminha ao principal preservando caminho e query. README e guias correntes refletem a orientação corrigida; o relatório de QA antigo passa a ser identificado como histórico. Nenhum papel, regra de acesso ou dado de usuário foi alterado.

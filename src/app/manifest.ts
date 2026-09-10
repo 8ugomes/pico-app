@@ -3,8 +3,8 @@ import type { MetadataRoute } from "next";
 export default function manifest(): MetadataRoute.Manifest {
   return {
     id: "/",
-    name: process.env.NEXT_PUBLIC_PICO_ENV === "beta" ? "Pico Beta — Revisão interna" : "Pico Desenvolvimento",
-    short_name: process.env.NEXT_PUBLIC_PICO_ENV === "beta" ? "Pico Beta" : "Pico Dev",
+    name: process.env.NEXT_PUBLIC_PICO_ENV === "beta" ? "Pico" : "Pico Desenvolvimento",
+    short_name: process.env.NEXT_PUBLIC_PICO_ENV === "beta" ? "Pico" : "Pico Dev",
     description: "Me acha no Pico. Encontre sua turma nos esportes de areia.",
     lang: "pt-BR",
     start_url: "/feed",

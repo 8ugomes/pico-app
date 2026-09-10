@@ -1,6 +1,8 @@
-# Pico — revisão interna do Ciclo 9
+# Pico — registro histórico da revisão do Ciclo 9
 
-**PRONTO PARA REVISÃO INTERNA — NÃO LIBERADO.** Verificado em 9 de setembro de 2026, 23:35 UTC (20:35 de Brasília). Nenhum lançamento externo aprovado.
+> Registro anterior à unificação. O PR #1 foi integrado à main em `fee5b0c`; o responsável corrigiu a separação interna e autorizou a publicação principal. Para endereço, configuração e comandos correntes, consulte [ENVIRONMENTS.md](ENVIRONMENTS.md). Os estados abaixo descrevem o momento original do teste.
+
+**REVISÃO INTERNA ORIGINAL CONCLUÍDA.** Verificado em 9 de setembro de 2026, 23:35 UTC (20:35 de Brasília). Nenhum lançamento externo aprovado.
 
 ## Versão realmente publicada
 
