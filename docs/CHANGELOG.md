@@ -121,3 +121,7 @@ Ciclo 9.7: recorte reutilizável (react-easy-crop 6.2.3, MIT), preparação loca
 ## Ciclo 9 — entrega interna verificada
 
 Preview e891dca1e741 publicado em pico-internal.vercel.app; CI verde, migrations 19/19 em dev/beta e 67 checks na URL real. Conta/arenas/foto anteriores preservadas; fixtures por ID limpas. README, ambientes, schema, operação, PWA e checklist refletem o estado publicado. Produção futura e lançamento permanecem não autorizados.
+
+## GitHub — diagnóstico e preparação da proteção
+
+Documentada a causa da CI antiga (ripgrep ausente), a correção já existente e a CI atual aprovada. Preparados rulesets de PR/checks para main e preservação de histórico nas duas branches; aplicação remota ainda depende da confirmação de identidade exigida pelo GitHub. Lint, typecheck e build locais passaram. Sem mudança de código, merge, deploy ou plano.

@@ -194,3 +194,9 @@ Verificar nomes acessíveis de campos, feedback após salvar, ações de modera�
 9.11 VERIFY: gestão autorizada, negação clara ao membro, histórico recente, denúncia com efeito e custódia foram exercitados na interface. Usar nomes acessíveis de controles nos testes evita depender do texto interno das opções. Nenhuma alteração visual adicional necessária após a regressão; README e guias deixam explícitos demo, beta privado e limites da emulação.
 
 9.11 entrega: login, perfil recarregado e feed foram exercitados no Preview real em 390px. Identificação de acesso por aprovação e nenhuma promessa de disponibilidade offline. Registros físicos/SMTP separados dos resultados remotos.
+
+## Proteção do GitHub — PLAN
+
+Explicar separadamente: execução da CI, exigência de CI para merge e bloqueio de alteração destrutiva da branch. Mostrar regras e estado efetivo, incluindo eventual reautenticação ou limitação de plano do GitHub, sem declarar proteção antes de validar a aplicação remota.
+
+VERIFY parcial: a falha histórica foi atribuída à dependência de ripgrep no teste, já corrigida. A diferença entre branches preserva a revisão interna. A configuração de proteção permanece explicitamente pendente de autenticação; preencher o formulário não comprova enforcement. Nenhuma mudança visual ou funcional no app.

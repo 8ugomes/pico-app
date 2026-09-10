@@ -75,3 +75,5 @@ Buckets privados: `avatars`, `post-media`, `entity-media`. Sem download direto o
 [Operação](docs/BETA_OPERATIONS.md), [schema](docs/04_SUPABASE_SCHEMA.md), [backup/restauração](docs/CONTINUITY.md), [PWA](docs/pwa-roadmap.md) e [checklist](docs/BETA_CHECKLIST.md). SMTP/caixa de teste, contato público e aparelhos físicos ainda exigem trabalho externo. Não há service worker, fila de posts offline, chat, reservas, pagamentos, anúncios, IA, ranking ou app nativo.
 
 Leia [AGENTS.md](AGENTS.md), [plano](docs/pico-product-plan.md), [Deslopify](docs/deslopify.md), [changelog](docs/CHANGELOG.md) e [loop](docs/CODEX_AUTONOMOUS_LOOP.md). Documentos numerados antigos preservam a evolução; requisitos atuais do Ciclo 9 prevalecem sobre as antigas restrições a comunidades.
+
+[Diagnóstico da CI e proteção do GitHub](docs/GITHUB_GOVERNANCE.md): a CI atual passou; a ativação dos rulesets está pendente da confirmação de identidade do responsável no GitHub.
