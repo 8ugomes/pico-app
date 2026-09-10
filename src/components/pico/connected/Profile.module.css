@@ -1,0 +1,83 @@
+.page {
+  width: 100%;
+  min-width: 0;
+  color: #f7f3ea;
+}
+.hero {
+  padding: clamp(20px, 4vw, 32px);
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 28px;
+  background: radial-gradient(ellipse at 100% 0, rgba(77, 225, 193, .055), transparent 60%), #111317;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, .12);
+}
+.topline, .identity, .heroActions, .photoIdentity, .privateNote, .location {
+  display: flex;
+  align-items: center;
+}
+.topline { justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+.eyebrow { display: block; font-size: 11px; font-weight: 650; letter-spacing: .15em; color: #b9bcb9; }
+.settingsLink { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 14px; color: #b9bcb9; background: rgba(255,255,255,.04); }
+.identity { gap: 18px; }
+.identityText { min-width: 0; }
+.identityText h1 { margin: 0 0 6px; font-size: clamp(24px, 5vw, 32px); line-height: 1.15; letter-spacing: -.04em; overflow-wrap: anywhere; }
+.username { margin: 0; color: #b9bcb9; font-size: 14px; overflow-wrap: anywhere; }
+.avatar { flex: 0 0 auto; width: 88px; height: 88px; }
+.avatar > span { width: 100%; height: 100%; border-radius: 50%; overflow: hidden; border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.04); }
+.avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+.demo { display: inline-block; margin-top: 8px; font-size: 12px; color: #c8a96a; }
+.location { gap: 7px; margin: 22px 0 0; color: #b9bcb9; font-size: 13px; flex-wrap: wrap; }
+.bio, .placeholder { margin: 16px 0 20px; font-size: 15px; line-height: 1.65; overflow-wrap: anywhere; white-space: pre-wrap; }
+.placeholder { color: #9b9b95; }
+.sports { display: flex; gap: 10px; flex-wrap: wrap; }
+.sport { display: flex; gap: 10px; align-items: center; padding: 11px 13px; border: 1px solid rgba(255,255,255,.08); border-radius: 15px; background: rgba(255,255,255,.025); }
+.sport span { display: grid; gap: 3px; }
+.sport strong { font-size: 13px; font-weight: 550; }
+.sport small { color: #9b9b95; font-size: 11px; }
+.heroActions { margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.08); justify-content: space-between; gap: 14px; flex-wrap: wrap; }
+.availability { display: flex; align-items: center; gap: 8px; font-size: 12px; margin: 0; color: #b9bcb9; }
+.availability span { width: 6px; height: 6px; border-radius: 50%; background: #9b9b95; }
+.availability[data-available='true'] span { background: #4de1c1; box-shadow: 0 0 0 4px rgba(77,225,193,.06); }
+.tabs { display: flex; gap: 4px; padding: 5px; border-radius: 16px; margin: 24px 0; background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.06); }
+.tabs button { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; min-width: 0; min-height: 44px; border: 0; border-radius: 11px; background: transparent; color: #b9bcb9; font: inherit; font-size: 13px; cursor: pointer; }
+.tabs button[aria-selected='true'] { color: #f7f3ea; background: rgba(255,255,255,.09); box-shadow: 0 2px 8px rgba(0,0,0,.12); }
+.content { min-width: 0; padding-bottom: 8px; }
+.privateNote { gap: 8px; font-size: 13px; color: #b9bcb9; line-height: 1.5; }
+.secondaryLinks { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 20px; margin: 24px 0; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.08); }
+.secondaryLinks a { min-height: 44px; display: flex; align-items: center; font-size: 12px; color: #b9bcb9; }
+.notice { margin: 12px 0; border: 1px solid rgba(77,225,193,.15); border-radius: 14px; background: rgba(77,225,193,.04); padding: 12px 16px; color: #c7d9d5; font-size: 14px; line-height: 1.5; }
+.editor { min-width: 0; }
+.editorHeading { margin: 0 0 24px; }
+.editorHeading > button { margin: 0 0 16px; }
+.editorHeading h1 { margin: 10px 0; font-size: 28px; letter-spacing: -.04em; }
+.editorHeading p { margin: 0; color: #b9bcb9; line-height: 1.6; font-size: 14px; }
+.form { display: grid; gap: 18px; }
+.editSection { min-width: 0; margin: 0 0 18px; padding: 22px; border: 1px solid rgba(255,255,255,.09); border-radius: 24px; background: #111317; display: grid; gap: 16px; }
+.form .editSection { margin-bottom: 0; }
+.editSection h2, .editSection legend { display: flex; align-items: center; gap: 10px; margin: 0; color: #f7f3ea; font-size: 16px; font-weight: 600; }
+.editSection legend { padding: 0 8px; }
+.editSection legend svg, .editSection h2 svg { color: #b9bcb9; }
+.photoIdentity { gap: 16px; align-items: flex-start; }
+.photoIdentity .avatar { width: 64px; height: 64px; }
+.photoIdentity p { margin: 0; color: #b9bcb9; font-size: 13px; line-height: 1.6; }
+.fieldGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.fieldHint { font-size: 12px; line-height: 1.6; margin: 0; color: #9b9b95; }
+.toggle { display: flex; gap: 18px; align-items: center; justify-content: space-between; min-height: 56px; padding-top: 16px; margin-top: 4px; border-top: 1px solid rgba(255,255,255,.08); cursor: pointer; }
+.toggle span { display: grid; gap: 5px; }
+.toggle strong { font-size: 14px; font-weight: 550; }
+.toggle small { color: #9b9b95; font-size: 12px; line-height: 1.5; }
+.toggle input { flex: 0 0 auto; width: 24px; height: 24px; accent-color: #4de1c1; }
+.savebar { position: sticky; bottom: calc(82px + env(safe-area-inset-bottom, 0px)); z-index: 5; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; border: 1px solid rgba(255,255,255,.12); padding: 14px 16px; border-radius: 18px; background: rgba(17,19,23,.96); box-shadow: 0 8px 30px rgba(0,0,0,.25); backdrop-filter: blur(12px); }
+.savebar > span { font-size: 12px; line-height: 1.5; color: #b9bcb9; }
+.savebar > div { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+.page button:focus-visible, .page a:focus-visible, .content:focus-visible { outline: 2px solid #4de1c1; outline-offset: 4px; }
+@media (min-width: 800px) { .savebar { bottom: 20px; } }
+@media (max-width: 480px) {
+  .fieldGrid { grid-template-columns: 1fr; }
+  .editSection { padding: 18px 16px; border-radius: 20px; }
+  .hero { padding: 20px; border-radius: 24px; }
+  .avatar { width: 76px; height: 76px; }
+  .savebar > span { flex-basis: 100%; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .tabs button, .settingsLink { transition: background 160ms ease, color 160ms ease; }
+}
