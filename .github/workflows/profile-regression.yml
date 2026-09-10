@@ -1,0 +1,52 @@
+name: Profile browser regression
+on:
+  push:
+    branches: [fix/profile-premium-heic]
+  pull_request:
+    paths:
+      - 'src/components/pico/connected/**'
+      - 'src/components/pico/photos/**'
+      - 'src/lib/photos/**'
+      - 'src/app/profile.css'
+      - 'tests/browser-profile.mjs'
+      - 'tests/helpers/make-heic.py'
+      - 'package-lock.json'
+      - '.github/workflows/profile-regression.yml'
+permissions:
+  contents: read
+concurrency:
+  group: profile-browser-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      NEXT_PUBLIC_PICO_ENV: demo
+      PICO_ENV: demo
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci
+      - run: npm install --no-save --package-lock=false esbuild@0.25.12 @playwright/test@1.58.2
+      - run: npx playwright install --with-deps chromium webkit
+      - run: pip install pillow-heif==1.1.1
+      - run: python tests/helpers/make-heic.py
+      - run: node tests/browser-profile.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: profile-browser-results
+          path: |
+            .vercel/profile-browser/*.png
+            .vercel/profile-browser/*.json
+            .vercel/profile-browser/*.txt
+          retention-days: 3
