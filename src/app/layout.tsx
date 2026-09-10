@@ -1,9 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { Geist } from "next/font/google";
 import "./globals.css";
 import { SessionGuard } from '@/components/pico/SessionGuard';
 
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: { default: "Pico — O ponto de encontro da areia.", template: "%s | Pico" },
@@ -17,7 +15,7 @@ export const viewport: Viewport = { themeColor: "#07080A", width: "device-width"
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="pt-BR" data-scroll-behavior="smooth" className={`${geistSans.variable} h-full antialiased`}>
+    <html lang="pt-BR" data-scroll-behavior="smooth" className="h-full antialiased">
       <body className="min-h-full">
         <SessionGuard />
         <a className="skip-link" href="#main-content">Pular para o conteúdo</a>

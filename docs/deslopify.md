@@ -208,3 +208,14 @@ CONCLUÍDO: confirmação de identidade feita pelo responsável; salvamento e en
 Usar um endereço principal e o nome Pico nas telas e na instalação. Retirar a linguagem de revisão interna e comandos específicos dessa separação; conservar mensagens precisas sobre login e aprovação. Distinguir a unificação de publicação da autorização de dados: preservar conta, privacidade e papéis. O estado corrente dos documentos deve substituir a restrição anterior conforme a correção expressa do responsável.
 
 VERIFY implementação: manifesto principal usa Pico; instalação, privacidade e acesso explicam aprovação sem rotular o app como revisão interna. O host antigo encaminha ao principal preservando caminho e query. README e guias correntes refletem a orientação corrigida; o relatório de QA antigo passa a ser identificado como histórico. Nenhum papel, regra de acesso ou dado de usuário foi alterado.
+
+
+## Refino visual completo — PLAN (2026-09-09)
+
+Refinar a main existente, começando por Criar comunidade: fonte nativa única, escala relativa, geometria e espaçamentos consistentes, superfícies carvão estáveis e vidro escuro nas elevações, verde-água reservado a ações/seleção/foco. Consolidar campos, botões, diálogos e seleções acessíveis e aplicar a acesso, feed, perfil, comunidades, descoberta, arenas, conta e gestão. Preservar todos os campos, audiência, integrações e permissões; nenhuma mudança de infraestrutura, dependências ou SQL. Registrar antes/depois com conteúdo e viewport comparáveis, validar 320/390/430/tablet/desktop e fluxos em fixtures locais, executar lint/types/testes/build. Prints originais do Yankee e do formulário não vieram com o texto; a captura da aplicação atual será a referência de diagnóstico. Trabalhar em main e respeitar sua proteção por PR usando o fluxo existente, sem criar branch ou force-push.
+
+## Refino visual completo — VERIFY e aprendizados
+
+O conteúdo do feed aparece antes do formulário extenso: um acionador discreto abre os mesmos campos e preserva o rascunho. Comunidades agrupam informações, acesso e modalidades; os chips mantêm checkboxes e marca de seleção. Vidro fica em elevações, cartões de leitura permanecem estáveis. O contorno do diálogo é neutro; o foco verde-água permanece acessível. O cinza secundário foi clareado após medir o pior caso de vidro sobre branco.
+
+Inspeção real encontrou e corrigiu foco escapando com Shift+Tab e Escape de recorte fechando também a publicação. O retorno ao arquivo e o rascunho foram exercitados no navegador. Perfil/HEIC recebidos da main foram preservados e harmonizados. Capturas de viewport substituem a captura longa com costura defeituosa da ferramenta; não houve edição de imagens. 50 verificações de largura e checagem de altura reduzida passaram. Testes são emulados e usam APIs simuladas; não representam aparelho físico, autenticação ou persistência remota. Prints originais das referências não estavam disponíveis.

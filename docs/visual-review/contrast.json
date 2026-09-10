@@ -1,0 +1,80 @@
+{
+  "method": "WCAG relative luminance; worst case white backdrop, 88% charcoal glass, 7% white focused input. Not a full WCAG certification.",
+  "checks": [
+    {
+      "name": "Texto principal / carvão",
+      "foreground": [
+        242,
+        243,
+        244
+      ],
+      "background": [
+        17,
+        19,
+        23
+      ],
+      "ratio": 16.74,
+      "passed": true
+    },
+    {
+      "name": "Texto secundário / vidro sobre branco",
+      "foreground": [
+        194,
+        198,
+        203
+      ],
+      "background": [
+        55.239999999999995,
+        58.76,
+        64.03999999999999
+      ],
+      "ratio": 6.58,
+      "passed": true
+    },
+    {
+      "name": "Texto discreto / campo em foco sobre vidro e branco",
+      "foreground": [
+        180,
+        186,
+        195
+      ],
+      "background": [
+        69.22319999999999,
+        72.4968,
+        77.40719999999999
+      ],
+      "ratio": 4.67,
+      "passed": true
+    },
+    {
+      "name": "Acento / vidro sobre branco",
+      "foreground": [
+        77,
+        225,
+        193
+      ],
+      "background": [
+        55.239999999999995,
+        58.76,
+        64.03999999999999
+      ],
+      "ratio": 6.92,
+      "passed": true
+    },
+    {
+      "name": "Texto do botão principal",
+      "foreground": [
+        8,
+        34,
+        30
+      ],
+      "background": [
+        77,
+        225,
+        193
+      ],
+      "ratio": 10.22,
+      "passed": true
+    }
+  ]
+}

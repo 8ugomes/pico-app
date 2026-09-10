@@ -1,0 +1,402 @@
+[
+  {
+    "route": "feed",
+    "width": 320,
+    "actualWidth": 320,
+    "client": 305,
+    "overflow": false,
+    "scroll": 305
+  },
+  {
+    "route": "perfil",
+    "width": 320,
+    "actualWidth": 320,
+    "client": 305,
+    "overflow": false,
+    "scroll": 305
+  },
+  {
+    "route": "comunidades",
+    "width": 320,
+    "actualWidth": 320,
+    "client": 305,
+    "overflow": false,
+    "scroll": 305
+  },
+  {
+    "route": "arenas",
+    "width": 320,
+    "actualWidth": 320,
+    "client": 305,
+    "overflow": false,
+    "scroll": 305
+  },
+  {
+    "route": "descobrir",
+    "width": 320,
+    "actualWidth": 320,
+    "client": 305,
+    "overflow": false,
+    "scroll": 305
+  },
+  {
+    "route": "checkin",
+    "width": 320,
+    "actualWidth": 320,
+    "client": 305,
+    "overflow": false,
+    "scroll": 305
+  },
+  {
+    "route": "conta",
+    "width": 320,
+    "actualWidth": 320,
+    "client": 305,
+    "overflow": false,
+    "scroll": 305
+  },
+  {
+    "route": "admin",
+    "width": 320,
+    "actualWidth": 320,
+    "client": 305,
+    "overflow": false,
+    "scroll": 305
+  },
+  {
+    "route": "login",
+    "width": 320,
+    "actualWidth": 320,
+    "client": 305,
+    "overflow": false,
+    "scroll": 305
+  },
+  {
+    "route": "signup",
+    "width": 320,
+    "actualWidth": 320,
+    "client": 305,
+    "overflow": false,
+    "scroll": 305
+  },
+  {
+    "route": "feed",
+    "width": 390,
+    "actualWidth": 390,
+    "client": 375,
+    "overflow": false,
+    "scroll": 375
+  },
+  {
+    "route": "perfil",
+    "width": 390,
+    "actualWidth": 390,
+    "client": 375,
+    "overflow": false,
+    "scroll": 375
+  },
+  {
+    "route": "comunidades",
+    "width": 390,
+    "actualWidth": 390,
+    "client": 375,
+    "overflow": false,
+    "scroll": 375
+  },
+  {
+    "route": "arenas",
+    "width": 390,
+    "actualWidth": 390,
+    "client": 375,
+    "overflow": false,
+    "scroll": 375
+  },
+  {
+    "route": "descobrir",
+    "width": 390,
+    "actualWidth": 390,
+    "client": 375,
+    "overflow": false,
+    "scroll": 375
+  },
+  {
+    "route": "checkin",
+    "width": 390,
+    "actualWidth": 390,
+    "client": 375,
+    "overflow": false,
+    "scroll": 375
+  },
+  {
+    "route": "conta",
+    "width": 390,
+    "actualWidth": 390,
+    "client": 375,
+    "overflow": false,
+    "scroll": 375
+  },
+  {
+    "route": "admin",
+    "width": 390,
+    "actualWidth": 390,
+    "client": 375,
+    "overflow": false,
+    "scroll": 375
+  },
+  {
+    "route": "login",
+    "width": 390,
+    "actualWidth": 390,
+    "client": 375,
+    "overflow": false,
+    "scroll": 375
+  },
+  {
+    "route": "signup",
+    "width": 390,
+    "actualWidth": 390,
+    "client": 375,
+    "overflow": false,
+    "scroll": 375
+  },
+  {
+    "route": "feed",
+    "width": 430,
+    "actualWidth": 430,
+    "client": 415,
+    "overflow": false,
+    "scroll": 415
+  },
+  {
+    "route": "perfil",
+    "width": 430,
+    "actualWidth": 430,
+    "client": 415,
+    "overflow": false,
+    "scroll": 415
+  },
+  {
+    "route": "comunidades",
+    "width": 430,
+    "actualWidth": 430,
+    "client": 430,
+    "overflow": false,
+    "scroll": 430
+  },
+  {
+    "route": "arenas",
+    "width": 430,
+    "actualWidth": 430,
+    "client": 415,
+    "overflow": false,
+    "scroll": 415
+  },
+  {
+    "route": "descobrir",
+    "width": 430,
+    "actualWidth": 430,
+    "client": 415,
+    "overflow": false,
+    "scroll": 415
+  },
+  {
+    "route": "checkin",
+    "width": 430,
+    "actualWidth": 430,
+    "client": 415,
+    "overflow": false,
+    "scroll": 415
+  },
+  {
+    "route": "conta",
+    "width": 430,
+    "actualWidth": 430,
+    "client": 415,
+    "overflow": false,
+    "scroll": 415
+  },
+  {
+    "route": "admin",
+    "width": 430,
+    "actualWidth": 430,
+    "client": 415,
+    "overflow": false,
+    "scroll": 415
+  },
+  {
+    "route": "login",
+    "width": 430,
+    "actualWidth": 430,
+    "client": 415,
+    "overflow": false,
+    "scroll": 415
+  },
+  {
+    "route": "signup",
+    "width": 430,
+    "actualWidth": 430,
+    "client": 415,
+    "overflow": false,
+    "scroll": 415
+  },
+  {
+    "route": "feed",
+    "width": 768,
+    "actualWidth": 768,
+    "client": 753,
+    "overflow": false,
+    "scroll": 753
+  },
+  {
+    "route": "perfil",
+    "width": 768,
+    "actualWidth": 768,
+    "client": 753,
+    "overflow": false,
+    "scroll": 753
+  },
+  {
+    "route": "comunidades",
+    "width": 768,
+    "actualWidth": 768,
+    "client": 768,
+    "overflow": false,
+    "scroll": 768
+  },
+  {
+    "route": "arenas",
+    "width": 768,
+    "actualWidth": 768,
+    "client": 753,
+    "overflow": false,
+    "scroll": 753
+  },
+  {
+    "route": "descobrir",
+    "width": 768,
+    "actualWidth": 768,
+    "client": 753,
+    "overflow": false,
+    "scroll": 753
+  },
+  {
+    "route": "checkin",
+    "width": 768,
+    "actualWidth": 768,
+    "client": 753,
+    "overflow": false,
+    "scroll": 753
+  },
+  {
+    "route": "conta",
+    "width": 768,
+    "actualWidth": 768,
+    "client": 753,
+    "overflow": false,
+    "scroll": 753
+  },
+  {
+    "route": "admin",
+    "width": 768,
+    "actualWidth": 768,
+    "client": 753,
+    "overflow": false,
+    "scroll": 753
+  },
+  {
+    "route": "login",
+    "width": 768,
+    "actualWidth": 768,
+    "client": 753,
+    "overflow": false,
+    "scroll": 753
+  },
+  {
+    "route": "signup",
+    "width": 768,
+    "actualWidth": 768,
+    "client": 753,
+    "overflow": false,
+    "scroll": 753
+  },
+  {
+    "route": "feed",
+    "width": 1280,
+    "actualWidth": 1280,
+    "client": 1265,
+    "overflow": false,
+    "scroll": 1265
+  },
+  {
+    "route": "perfil",
+    "width": 1280,
+    "actualWidth": 1280,
+    "client": 1265,
+    "overflow": false,
+    "scroll": 1265
+  },
+  {
+    "route": "comunidades",
+    "width": 1280,
+    "actualWidth": 1280,
+    "client": 1280,
+    "overflow": false,
+    "scroll": 1280
+  },
+  {
+    "route": "arenas",
+    "width": 1280,
+    "actualWidth": 1280,
+    "client": 1265,
+    "overflow": false,
+    "scroll": 1265
+  },
+  {
+    "route": "descobrir",
+    "width": 1280,
+    "actualWidth": 1280,
+    "client": 1265,
+    "overflow": false,
+    "scroll": 1265
+  },
+  {
+    "route": "checkin",
+    "width": 1280,
+    "actualWidth": 1280,
+    "client": 1265,
+    "overflow": false,
+    "scroll": 1265
+  },
+  {
+    "route": "conta",
+    "width": 1280,
+    "actualWidth": 1280,
+    "client": 1265,
+    "overflow": false,
+    "scroll": 1265
+  },
+  {
+    "route": "admin",
+    "width": 1280,
+    "actualWidth": 1280,
+    "client": 1265,
+    "overflow": false,
+    "scroll": 1265
+  },
+  {
+    "route": "login",
+    "width": 1280,
+    "actualWidth": 1280,
+    "client": 1265,
+    "overflow": false,
+    "scroll": 1265
+  },
+  {
+    "route": "signup",
+    "width": 1280,
+    "actualWidth": 1280,
+    "client": 1265,
+    "overflow": false,
+    "scroll": 1265
+  }
+]

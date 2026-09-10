@@ -1,0 +1,178 @@
+[
+  {
+    "route": "/",
+    "alerts": [],
+    "headings": [
+      "Atualizar o Pico",
+      "Seu feed.",
+      "Compartilhe com sua turma",
+      "Pela comunidade",
+      "Excluir conteúdo?",
+      "Tem lugar pra vocêna nossa roda."
+    ],
+    "overflow": false
+  },
+  {
+    "route": "acesso",
+    "alerts": [],
+    "headings": [
+      "Acesso ao Pico"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "auth/confirm",
+    "alerts": [
+      "Link inválido. Abra o e-mail mais recente ou peça outro."
+    ],
+    "headings": [
+      "Confirmar meu e-mail"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "recuperar",
+    "alerts": [],
+    "headings": [
+      "Volte pro Pico."
+    ],
+    "overflow": false
+  },
+  {
+    "route": "redefinir-senha",
+    "alerts": [],
+    "headings": [
+      "Uma nova senha."
+    ],
+    "overflow": false
+  },
+  {
+    "route": "convite/comunidade",
+    "alerts": [],
+    "headings": [
+      "Convite de comunidade"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "convite/arena",
+    "alerts": [],
+    "headings": [
+      "Convite de gestão"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "instalar",
+    "alerts": [],
+    "headings": [
+      "Instalar o Pico"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "privacidade",
+    "alerts": [],
+    "headings": [
+      "Privacidade no Pico.",
+      "O que fica na sua conta",
+      "Quem pode ver",
+      "Presença e fotos",
+      "Gestão e moderação",
+      "Armazenamento e sessão",
+      "Seu controle",
+      "Exclusão e limites"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "arenas/areia-da-vila",
+    "alerts": [],
+    "headings": [
+      "Atualizar o Pico",
+      "Areia da Vila",
+      "Um pouco deste Pico",
+      "Faça parte deste Pico",
+      "Turmas deste Pico",
+      "Turma do fim de tarde",
+      "Criar comunidade",
+      "Compartilhe com sua turma",
+      "Mural",
+      "Excluir conteúdo?",
+      "Tem lugar pra vocêna nossa roda."
+    ],
+    "overflow": false
+  },
+  {
+    "route": "arenas/areia-da-vila/gestao",
+    "alerts": [],
+    "headings": [
+      "Atualizar o Pico",
+      "Areia da Vila",
+      "Fotos do local",
+      "Equipe e participantes",
+      "Mural",
+      "Excluir conteúdo?",
+      "Retirar deste mural",
+      "Comunidades da arena",
+      "Tem lugar pra vocêna nossa roda."
+    ],
+    "overflow": false
+  },
+  {
+    "route": "comunidades/turma-do-fim-de-tarde",
+    "alerts": [],
+    "headings": [
+      "Atualizar o Pico",
+      "Turma do fim de tarde",
+      "Sobre a comunidade",
+      "Participantes",
+      "Compartilhe com sua turma",
+      "Mural",
+      "Excluir conteúdo?",
+      "Retirar deste mural",
+      "Tem lugar pra vocêna nossa roda."
+    ],
+    "overflow": false
+  },
+  {
+    "route": "comunidades/turma-do-fim-de-tarde/gestao",
+    "alerts": [],
+    "headings": [
+      "Atualizar o Pico",
+      "Turma do fim de tarde",
+      "Fotos do grupo",
+      "Participação",
+      "Convidar participante",
+      "Vincular a uma arena",
+      "Tem lugar pra vocêna nossa roda."
+    ],
+    "overflow": false
+  },
+  {
+    "route": "perfil/bruno_teste",
+    "alerts": [],
+    "headings": [
+      "Atualizar o Pico",
+      "Perfil do jogador.",
+      "Bruno Teste",
+      "Excluir conteúdo?",
+      "Picos e comunidades",
+      "Publicações",
+      "Excluir conteúdo?",
+      "Tem lugar pra vocêna nossa roda."
+    ],
+    "overflow": false
+  },
+  {
+    "route": "publicacoes/50000000-0000-4000-8000-000000000001",
+    "alerts": [],
+    "headings": [
+      "Atualizar o Pico",
+      "Pela comunidade",
+      "Excluir conteúdo?",
+      "Tem lugar pra vocêna nossa roda."
+    ],
+    "overflow": false
+  }
+]

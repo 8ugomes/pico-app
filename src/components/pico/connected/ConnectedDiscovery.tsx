@@ -38,14 +38,14 @@ export function ConnectedDiscovery() {
     <p className="page-intro">Descubra quem joga no seu ritmo. Conecte para acompanhar um jogador.</p>
     {catalog.state.status === 'loading' && <ReadLoading />}
     {(catalog.state.status === 'error' || catalog.state.status === 'demo') && <ReadFailure state={catalog.state} retry={catalog.retry} />}
-    {options && <section className="connected-panel"><div className="connected-form"><fieldset>
+    {options && <details className="connected-panel discovery-filters" open><summary>Filtrar jogadores</summary><div className="connected-form"><fieldset>
       <label className="input-group">Esporte<select className="input" value={sport} onChange={e => { setSport(e.target.value); setOffset(0); }}><option value="">Todos os esportes</option>{options.sports.map(s => <option value={s.id} key={s.id}>{s.name}</option>)}</select></label>
       <label className="input-group">Arena<select className="input" value={arena} onChange={e => { setArena(e.target.value); setOffset(0); }}><option value="">Todas as arenas</option>{options.arenas.map(a => <option value={a.id} key={a.id}>{a.name}{a.isDemo ? ' · Demo' : ''}</option>)}</select></label>
       {(arenaOffset > 0 || options.hasMore) && <nav className="read-pagination" aria-label="Catálogo de arenas"><Button variant="quiet" size="small" disabled={!arenaOffset} onClick={() => { setArenaOffset(arenaOffset - 24); setArena(''); setOffset(0); }}>Arenas anteriores</Button><Button variant="quiet" size="small" disabled={!options.hasMore} onClick={() => { setArenaOffset(arenaOffset + 24); setArena(''); setOffset(0); }}>Mais arenas</Button></nav>}
       <label className="input-group">Nível<select className="input" value={level} onChange={e => { setLevel(e.target.value); setOffset(0); }}><option value="">Todos os níveis</option>{['Iniciante', 'Intermediário', 'Avançado'].map(l => <option key={l}>{l}</option>)}</select></label>
       <label className="connected-checkbox"><input type="checkbox" checked={active} onChange={e => { setActive(e.target.checked); setOffset(0); }} />Na areia agora · check-in ativo</label>
       {(sport || arena || level || active) && <Button variant="quiet" size="small" onClick={() => { setSport(''); setArena(''); setLevel(''); setActive(false); setOffset(0); }}>Limpar filtros</Button>}
-    </fieldset></div></section>}
+    </fieldset></div></details>}
     {state.status === 'loading' && <ReadLoading />}
     {(state.status === 'error' || state.status === 'demo') && <ReadFailure state={state} retry={retry} />}
     {data && <><ConnectedSource /><CommonPlayers/><div className="list-heading"><span>{players.length} {players.length === 1 ? 'jogador' : 'jogadores'} nesta página</span><Button size="small" variant="quiet" disabled={refreshing} onClick={refresh}>{refreshing ? 'Atualizando…' : 'Atualizar'}</Button></div>
