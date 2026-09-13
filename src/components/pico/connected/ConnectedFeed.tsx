@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { RepostAttribution, RepostControl } from '../RepostControl';
 import { RemoteAvatar } from './Media';
 import { SafetyActions } from './SafetyActions';
 import { Heart, MessageCircle, Send } from 'lucide-react';
@@ -38,13 +39,14 @@ function ConnectedPost({ post, viewerId, refresh, moderate }: { post: PostRecord
   const [expanded, setExpanded] = useState(false);
   const mutation = useMutation();
   return <article className="post-card">
+    {post.repost && <RepostAttribution name={post.repost.player_id === viewerId ? "Você" : post.repost.display_name} href={`/perfil/${post.repost.username}`} createdAt={post.repost.created_at} />}
     <header className="post-header"><Link href={`/perfil/${post.username}`} className="post-person"><RemoteAvatar src={post.avatar} name={post.display_name} /><span><strong>{post.display_name}</strong><small><time dateTime={post.created_at} title="Data da publicação">Publicado em {new Date(post.created_at).toLocaleString('pt-BR', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })}</time></small></span></Link>{post.sport_slug&&<span className="sport-label"><SportIcon sport={post.sport_slug} />{post.sport_name}</span>}</header>
     <p className="form-note">{post.audience==='private'?'Participantes do grupo privado':'Pessoas do Pico'} · <Link href={`/publicacoes/${post.id}`}>Abrir publicação</Link></p>
     {post.game_played_on && <p className="post-game-date">Jogado em <time dateTime={post.game_played_on}>{formatGameDate(post.game_played_on)}</time> · relato de quem publicou</p>}
     <p className="post-copy">{post.body}</p>
     {post.destinations.some(d => d.community_slug) && <div className="post-context-links">{post.destinations.filter(d => d.community_slug).map(d => <Link key={d.community_id} href={`/comunidades/${d.community_slug}`}>{d.community_name}</Link>)}</div>}
     {post.image && <Image className="post-photo" unoptimized src={post.image} width={800} height={600} alt={`Foto da publicação de ${post.display_name}`} />}
-    <footer className="post-actions"><div><button className={`post-action ${post.liked ? 'is-liked' : ''}`} disabled={mutation.busy} aria-label={`${post.liked ? 'Descurtir' : 'Curtir'} post de ${post.display_name}`} aria-pressed={post.liked} onClick={async () => { if (await mutation.run({ action: 'set_like', postId: post.id, liked: !post.liked }, post.liked ? 'Curtida removida.' : 'Post curtido.')) refresh(); }}><Heart size={21} fill={post.liked ? 'currentColor' : 'none'} aria-hidden="true" /><span>{post.like_count}</span></button><button className="post-action" aria-expanded={expanded} aria-label={`Comentários do post de ${post.display_name}`} onClick={() => setExpanded(!expanded)}><MessageCircle size={21} aria-hidden="true" /><span>{post.comment_count}</span></button></div>{post.arena_slug&&<Link className="post-arena-link" href={`/arenas/${post.arena_slug}`}>{post.arena_name}{post.arena_is_demo ? ' · Demo' : ''}</Link>}</footer>
+    <footer className="post-actions"><div><button className={`post-action ${post.liked ? 'is-liked' : ''}`} disabled={mutation.busy} aria-label={`${post.liked ? 'Descurtir' : 'Curtir'} post de ${post.display_name}`} aria-pressed={post.liked} onClick={async () => { if (await mutation.run({ action: 'set_like', postId: post.id, liked: !post.liked }, post.liked ? 'Curtida removida.' : 'Post curtido.')) refresh(); }}><Heart size={21} fill={post.liked ? 'currentColor' : 'none'} aria-hidden="true" /><span>{post.like_count}</span></button><button className="post-action" aria-expanded={expanded} aria-label={`Comentários do post de ${post.display_name}`} onClick={() => setExpanded(!expanded)}><MessageCircle size={21} aria-hidden="true" /><span>{post.comment_count}</span></button>{(post.can_repost || post.reposted) && <RepostControl reposted={post.reposted} author={post.display_name} audience={post.audience} onChange={async reposted => { await entityAction("/api/posts", { action: "repost", id: post.id, reposted }, AbortSignal.timeout(15000)).catch(e => { if (e instanceof TypeError || e?.name === "TimeoutError" || e?.name === "AbortError") throw Error("Não foi possível confirmar. Atualize a publicação para conferir antes de tentar de novo."); throw e; }); refresh(); }} />}</div>{post.arena_slug&&<Link className="post-arena-link" href={`/arenas/${post.arena_slug}`}>{post.arena_name}{post.arena_is_demo ? ' · Demo' : ''}</Link>}</footer>
     <MutationNotice compact message={mutation.message} />
     <SafetyActions target="post" id={post.id} own={viewerId===post.author_id} playerId={post.author_id} onChange={refresh} />
     {viewerId===post.author_id&&<EditPost post={post} onDone={refresh}/>}

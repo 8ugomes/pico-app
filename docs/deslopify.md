@@ -1,5 +1,17 @@
 # Pico — Deslopify
 
+## Republicações — critérios antes de codar · 13/09/2026
+
+Adicionar “Republicar” junto de curtir/comentar, com ícone Lucide, estado textual e `aria-pressed`; desfazer pela mesma ação. Explicar a audiência antes do envio, especialmente em grupo privado. Acima do autor original, atribuição curta “Nome republicou” com link ao perfil. Não criar cópia visual encaixada, métrica inventada ou novo compositor. O original mantém sua data e autoria.
+
+Preservar alvos de 44px, quebra das ações/arena em 320px, nomes longos, teclado e temas Aura. Confirmar envio antes de anunciar sucesso; falha deve permitir conferir/repetir sem alternância acidental. Demo declara simulação local. Revisar feed/perfil/mural em amostra mobile clara/escura e texto ampliado; testar funcionalmente privacidade, remoção e efeitos sobre seguidores.
+
+### Fechamento de republicações
+
+Atribuição acima do autor e ação com nome persistente, sem contador ou cópia de card. Modal explica perfil/seguidores e restrição privada antes do envio; cancelar e Escape não escrevem, foco retorna ao controle. Sucesso depende da resposta confirmada, clique duplo envia uma vez e desfazer mantém o original.
+
+Texto a 200% revelou mínimos de conteúdo no cabeçalho, compositor e título. Corrigidos com coluna flexível, quebra do texto e linhas de ações; botões podem ocupar linhas próprias sem partir o verbo em largura comum. Revisão final de estilo com fixtures locais, sem repetir a suíte remota a cada ajuste. Temas, 320/390/1280px, alvos de toque e rolagem conferidos. [Capturas e limites](reposts-review/README.md). Não equivale a ensaio em aparelho físico.
+
 ## Redesign integral Aura Manteiga — critérios antes de codar · 13/09/2026
 
 Substituir a fundação escura/verde por Papel/Cacau e escuro quente; aplicar logo em contornos e Syne/Manrope sem transformar operação em campanha. Curvas contidas em aberturas e lugares; pessoas, comunidades, publicações e diário com composição própria. Remover caixas, slogans e sombras repetidos. Entrada editorial manteiga constante; estados e controles usam pares semânticos, inclusive borda elevada.
