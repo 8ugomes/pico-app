@@ -1,0 +1,22 @@
+[
+  {
+    "font": "manrope",
+    "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/manrope/",
+    "file": "manrope.ttf",
+    "license": "OFL-1.1",
+    "sha256": "d0639be45d0af36e798172419d7bd173c4bd4f29e2b76cbb69db1d11bf8b0a40",
+    "downloaded_at": "2026-09-13",
+    "font_version": "Version 4.504",
+    "woff2_sha256": "bdba01fe2dee470c1cd07e08a5836efdff032f7356a45063be5c213f93c1c8b9"
+  },
+  {
+    "font": "syne",
+    "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/syne/",
+    "file": "syne.ttf",
+    "license": "OFL-1.1",
+    "sha256": "ce5ac77142a65cab2248a1a2ebb740b1d4d9c20b52488877d3ff664d1356104a",
+    "downloaded_at": "2026-09-13",
+    "font_version": "Version 2.200",
+    "woff2_sha256": "4a47c00c32a9531c52eaf993855b41f9b6c5caa75becc2102f87883af8969955"
+  }
+]

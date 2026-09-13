@@ -8,6 +8,8 @@ const eslintConfig = defineConfig([
   // Override default ignores of eslint-config-next.
   globalIgnores([
     ".vercel/**",
+    // Vendored, pinned agent skills are third-party tooling, not application code.
+    ".agents/skills/**",
     // Default ignores of eslint-config-next:
     ".next/**",
     ".next-*/**",

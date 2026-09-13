@@ -1,5 +1,52 @@
 # Changelog — Pico
 
+## 2026-09-13 — redesign integral Aura Manteiga no aplicativo
+
+- Aplicada a identidade aprovada ao app real: temas pelo dispositivo, dois WOFF2 locais/OFL, SVG original em contornos e todos os ícones PWA. Sete folhas CSS migradas a papéis semânticos, incluindo estados, bordas elevadas e controles nativos.
+- Entrada editorial, autenticação, Início compacto e perfil aberto; estilos e composição propagados a pessoas, arenas, comunidades, gestão, posts, jogos, conta, convites, privacidade e instalação. Nenhuma nova rota, migration ou dependência.
+- Perfil inicial com progresso de dados essenciais e opcionais separados; guia com texto curto, ajuda/pausa visíveis, tratamento de altura curta e navegação ampliada. Mesmas seis etapas, preferências locais por conta/demo e aviso institucional confirmado no servidor.
+- Lint, typecheck, builds conectado/demo e 87 testes aprovados; onboarding e jogos em fixtures isoladas, 39 verificações visuais e 50 pares de contraste do CSS compilado. Ajustados os roteiros existentes para URLs/canal de navegador e seletores inequívocos, preservando os checks. [Cobertura, capturas e limites](aura-redesign-review/README.md).
+- Publicação autorizada pelo pedido, condicionada ao fluxo PR/CI/main e script existente; recibo local de release registra artefato anterior e revisão servida. SMTP e instalação física permanecem sem nova validação.
+
+## 2026-09-13 — contexto Aura Manteiga e skill principal de redesign
+
+- Atualizadas as oito skills de branding/design com a direção escolhida, contexto Pico e validação proporcional. Preservados corpos de origem, referências e licenças; hashes locais e origem registrados separadamente. Campos de catálogo Ramp movidos para `metadata` compatível.
+- Criadas cinco skills: `pico-context`, `pico-product-plan`, `pico-dev`, `pico-deslopify` e **`pico-redesign`**. [Catálogo de 13 skills](pico-skills.md).
+- Criados [contexto de empresa/produto/marca](pico-company-context.md), [mapa de domínios](pico-domains.md) e entradas PRODUCT/BRIEF/DESIGN. Atualizados AGENTS, README, plano, Deslopify, guias do Pico, design system e direção futura de onboarding/PWA.
+- [Prompt principal](brand-exploration/aura-manteiga/PROMPT-PRODUCAO.md) ampliado para redesign integral e onboarding assistido, exigindo manual completo e contratos dos domínios. Menos testes repetitivos durante criação; checks obrigatórios e testes dos comportamentos alterados preservados. ZIP da marca atualizado; PDF/ativos visuais mantidos.
+- 13 skills passaram no validador; referências locais, procedência e preservação upstream conferidas. Lint, typecheck e build aprovados. Sem alteração de código do app, banco, dependências, push ou deploy.
+
+## 2026-09-13 — manual Aura Manteiga e prompt de produção
+
+- Consolidada a escolha do responsável: estética Aura com paleta Manteiga. [Manual](brand-exploration/aura-manteiga/README.md) de 32 páginas, incluindo 32 telas em cada modo, marca, logo, cores, tipografia, arte, voz, movimento e aplicações.
+- SVGs recoloridos preservando contornos; fontes Syne/Manrope locais licenciadas; ícones PNG/ICO/Apple/maskable, tokens semânticos, exemplos sociais e pacote de entrega com 58 arquivos.
+- [Prompt de implementação/publicação](brand-exploration/aura-manteiga/PROMPT-PRODUCAO.md) baseado no código real e no pipeline existente; inclui preservação dos contratos e QA de todas as superfícies.
+- 50 pares sólidos de contraste, dimensões, margem maskable, geometria vetorial e PDF renderizado/verificado. Corrigidas paginação e origem de carregamento das fontes nas exportações. Lint, typecheck e build passaram.
+- Identidade e documentação entregues; nenhuma aplicação ao frontend publicado, alteração de backend, push ou deploy nesta rodada.
+
+## 2026-09-13 — Aura em seis paletas
+
+- O responsável escolheu Aura e pediu somente novas cores. Preservados logo, Syne/Manrope, fotos, formas, composição, conteúdo e navegação.
+- [Galeria cromática](brand-exploration/aura-cores.html?screen=profile&palette=all&mode=light): lavanda original, Pistache, Azul névoa, Rosa mineral, Maré e Manteiga nas mesmas 32 telas, claro/escuro. [Guia](brand-exploration/AURA-CORES.md), tokens e pranchas comparativas incluídos.
+- 384 combinações e 30.156 verificações de estilo sem diferenças estruturais/tipográficas; 156 pares sólidos de texto aprovados. Conferência responsiva de 60 telefones, navegação, foco, imagens e download passou. Lint, typecheck e build aprovados.
+- Recomendação cromática: Pistache, seguida de Azul névoa. Paleta final ainda não escolhida. Estudo inicial preservado como histórico; nenhum deploy ou alteração do aplicativo publicado.
+
+## 2026-09-13 — três propostas de identidade do Pico Social
+
+- Instaladas oito skills selecionadas em `.agents/skills`, com revisões, hashes e licenças. Nenhum hook instalado; ESLint ignora somente o código de terceiros dessas skills.
+- Criadas Ritual, Pulso e Aura: conceito de marca, voz, wordmarks/lockups/símbolos/ícones em SVG, paletas, fontes locais licenciadas e direção de fotografia, composição e movimento.
+- [Galeria](brand-exploration/index.html) com 32 telas/estados em três identidades e dois modos; [relatório de 47 páginas](brand-exploration/Pico-Social-Identidade.pdf), campanhas ilustrativas, pranchas e fotografias sintéticas com prompts/procedência.
+- Navegação canônica preservada no estudo; registros de jogo privados e compartilhamento separado. Corrigidos contraste e herança tipográfica na exportação do relatório.
+- Lint, typecheck e build passaram. 960 verificações responsivas, 82 pares de contraste e paridade tipográfica de 108 telefones/531 elementos aprovados; PDF renderizado e revisado. Revisor independente: correções pontuadas resolvidas, disposition ship no escopo da revisão.
+- Nenhuma direção adotada em produção, nenhuma alteração de dados/Supabase, push ou deploy. [Guia e limites](brand-exploration/README.md).
+
+## 2026-09-12 — pesquisa de skills para identidade do Pico Social
+
+- Pesquisa pública com triagem de 16 repositórios e seleção de oito skills para branding, direção editorial, propostas visuais e aplicação ao produto. Preferência confirmada: editorial de moda, jovem, expressiva e refinada.
+- [Relatório](PICO_BRANDING_SKILLS_RESEARCH.md) com análise das candidatas, fontes primárias, limites e sequência de desenvolvimento. [Manifesto](branding-skills-sources.json) com revisões, caminhos, licenças e hashes para futura instalação por projeto.
+- Plano e Deslopify atualizados antes e depois da entrega. Lint, typecheck e build locais aprovados; revisão documental e dos links locais realizada.
+- Pesquisa documental: nenhuma skill instalada, nenhum script de terceiro executado, nenhuma alteração de UI, banco ou publicação. Resultados de design das candidatas não foram comparados por execução.
+
 ## 2026-09-13 — publicação coordenada autorizada
 
 - Tutorial, comunidade oficial e ajustes de cadastro/autenticação preparados para main e produção pelo fluxo PR/CI/deploy. Backup cifrado e comparação preservaram dados/arquivos existentes.

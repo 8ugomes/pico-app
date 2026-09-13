@@ -1,67 +1,113 @@
-# Pico — design system
+# Pico Social — design system Aura Manteiga
 
-O Pico mantém preto e carvão, acento verde-água e conteúdo social em primeiro plano. O refino de setembro de 2026 aplica o mesmo sistema à interface conectada e aos componentes existentes de demonstração. Não altera audiência, admissão ou regras de dados.
+**Aura Manteiga está implementada no aplicativo em 13/09/2026.** Este documento traduz a identidade escolhida em decisões presentes no código. A [cobertura](aura-redesign-review/coverage.md) e a [revisão local](aura-redesign-review/README.md) registram superfícies e evidências. Publicação e CI remota não são comprovadas por esta consolidação.
 
-## Tokens canônicos
+## Autoridade e manutenção
 
-`src/app/globals.css` define as cores, escala e geometria. `forms.css` centraliza controles e diálogos; `social.css`, `social-pages.css` e `profile.css` aplicam suas variantes. Não duplicar regras de input nas telas.
+O [contexto institucional](pico-company-context.md) e o [brief](../BRIEF.md) definem direção e limites. O [manual completo](brand-exploration/aura-manteiga/MANUAL.md), [tokens.json](brand-exploration/aura-manteiga/tokens.json), mestres em `logo/` e fontes em `fonts/` são a referência canônica de identidade. O [mapa de domínios](pico-domains.md) define contratos funcionais.
 
-| Token | Valor | Uso |
-| --- | --- | --- |
-| `--background` | `#07080a` | Fundo |
-| `--graphite` | `#111317` | Cards de leitura |
-| `--surface-overlay` | `#1c2026` | Elevação e fallback opaco |
-| `--surface-input` | Branco a 5% | Campos integrados |
-| `--foreground` | `#f2f3f4` | Texto principal |
-| `--text-secondary` | `#c2c6cb` | Labels e apoio |
-| `--text-muted` | `#b4bac3` | Metadados |
-| `--accent` | `#4de1c1` | Ação principal, seleção e foco |
-| `--accent-ink` | `#08221e` | Texto da ação principal |
-| `--sand` | `#c8a96a` | Champagne restrito à assinatura da marca |
-| `--error` | `#ffb5a7` | Erro |
-| `--radius-control` | `1rem` | Campos e botões |
-| `--radius-card` | `1.375rem` | Cards |
-| `--radius-panel` | `1.875rem` | Diálogos e painéis elevados |
-| `--radius-pill` | `999px` | Seleções compactas |
+[globals.css](../src/app/globals.css) aplica valores e aliases ao produto; as folhas de composição e os componentes resolvem cada contexto. [DESIGN.md](../DESIGN.md) é a entrada portátil e sintética para agentes. O [sidecar Impeccable](../.impeccable/design.json) contém extensões e exemplos derivados para ferramentas, vinculados às variáveis do CSS. Não introduz outra paleta ou escala normativa. O estado “referência para implementação” do manual registra a edição dos ativos; o estado do app deve ser lido aqui, no código e nas evidências da rodada.
 
-Fonte única: `-apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif`. Controles, menus e diálogos herdam a mesma família. Não há download ou distribuição da SF Pro nem carregamento da Geist.
+Ao evoluir o sistema, atualizar a decisão pertinente e sua origem canônica, a implementação, estas referências e o espelho derivado. Não reconstruir cores por capturas nem usar estudos anteriores para reabrir a identidade sem pedido.
 
-Corpo e texto digitado: `1rem`; metadados: `.8125rem`; labels: `.875rem`; seções: `1.25rem`; diálogos: `1.375rem`; títulos principais: `1.75–2rem`. Pesos 400, 500 e 600. A navegação compacta usa `.75rem`. Os tokens de espaço vão de `.25rem` a `2rem`, em passos de quatro pixels na escala padrão.
+## Fundação implementada
 
-## Materiais e interação
+| Responsabilidade | Código vigente |
+| --- | --- |
+| Temas, tokens, tipografia base, botões, entrada e avisos institucionais | [globals.css](../src/app/globals.css) |
+| Shell, navegação, post, busca, filtros e responsividade social | [social.css](../src/app/social.css) |
+| Arenas, pessoas, comunidades, estados conectados, jogos e conta | [social-pages.css](../src/app/social-pages.css) |
+| Campos, escolhas, formulários, diálogos e compositor | [forms.css](../src/app/forms.css) |
+| Contexto do Início, linhas pessoais, participação e audiência | [journey.css](../src/app/journey.css) |
+| Perfil, editor e progresso da configuração inicial | [profile.css](../src/app/profile.css) |
+| Convite, guia, foco contextual e altura curta | [onboarding.css](../src/app/onboarding.css) |
 
-Publicações usam fundo estável; pessoas usam linhas abertas, com identidade e esporte. Formulários elevados e diálogos usam carvão com preenchimento a 92%, blur de 18px, borda neutra e sombra discreta. A regra base é opaca; `@supports` habilita translucidez, e `prefers-reduced-transparency` retorna ao opaco. Campos não recebem outro blur.
+As sete folhas recebem a mesma fundação sem alterar APIs, permissões ou dados. Os nomes de compatibilidade `graphite`, `glass`, `glass-strong` e `glass-border` apontam para superfícies e bordas semânticas atuais. `sand` aponta para Manteiga da marca; não é alias de ação. Classes históricas não autorizam retomar a identidade anterior ou implementar recursos ausentes do produto.
 
-O diálogo nativo mantém cabeçalho e fechamento de 44px fora da única área de rolagem. A ação permanece no fluxo, sem cobrir conteúdo ou teclado. Escape e eventos de fechamento não se propagam ao diálogo pai; o foco retorna ao acionador. Tab/Shift+Tab permanecem entre controles visíveis e habilitados. O recorte de foto devolve o foco ao seletor de arquivo.
+## Cor e temas
 
-`ChoiceChip` mantém um checkbox nativo, teclado e checkmark além da mudança de cor. Formulários de comunidade preservam campos, validações, seleção múltipla e as opções exatas de audiência. O compositor de publicação usa um acionador compacto e abre os mesmos campos em diálogo; o rascunho fica preservado ao fechar e reabrir.
+Manteiga dá reconhecimento; Cacau estrutura; Papel sustenta leitura; Lavanda é apoio pontual. O conjunto completo de valores e medidas permanece em [tokens.json](brand-exploration/aura-manteiga/tokens.json), com implementação correspondente em `:root`, na media query escura e no `@theme inline`.
 
-Transições curtas, sem animação de blur. `prefers-reduced-motion` desliga movimento. Controles menores têm alvo de 44px; texto pode crescer e quebrar sem cortar conteúdo.
+| Papel implementado | Aplicação |
+| --- | --- |
+| `background`, `surface`, `surface-raised`, `surface-overlay`, `surface-input` | Fundo, leitura, camadas elevadas, diálogos e campos sólidos |
+| `foreground`, `text-secondary`, `text-muted` | Texto principal, apoio e metadados com contraste |
+| `accent`, `accent-ink`, `accent-hover`, `accent-active` | Ação Cacau/Papel no claro e Manteiga/Cacau no escuro |
+| `accent-soft` | Seleções discretas, contextos e convites editoriais |
+| `border-subtle` | Separação de conteúdo, sem substituir limite funcional |
+| `border-control`, `border-control-raised` | Controles sobre superfícies padrão e sobre elevada/suave |
+| `focus`, `selection-bg`, `selection-ink` | Teclado e seleção de texto |
+| `disabled-bg`, `disabled-ink` | Controles realmente desabilitados, sem opacidade sobre todo o bloco |
+| `success`, `warning`, `error`, `info` e respectivos fundos | Feedback associado a texto e semântica |
 
-## Referências e evidência
+O modo acompanha `prefers-color-scheme`; não há nova preferência remota de conta. `color-scheme`, seleção, campos nativos e cores do viewport acompanham o modo. A entrada editorial mantém Manteiga/Cacau em ambos. Fotografias e identidades de pessoas, comunidades e arenas conservam suas cores.
 
-Não foram encontrados prints originais do Yankee ou um anexo de imagem do formulário. Na [página pública do Yankee](https://play.google.com/store/apps/details?id=com.yankee.foretheist), foi observado um feed escuro com foto dominante, recortes arredondados e controles discretos. É apoio de composição, sem copiar pessoas, marca ou funcionalidades.
+Diálogos, avisos institucionais, convite do tutorial e resumo de audiência usam a borda funcional reforçada quando necessária. O foco global tem contorno de 2px e afastamento de 3px. Não usar Lavanda/Papel, Manteiga/Papel ou branco/Manteiga como pares de texto comum.
 
-A stack de sistema e a separação entre conteúdo e superfícies elevadas seguem a direção das referências oficiais: [Apple Design](https://developer.apple.com/design/human-interface-guidelines/), [fontes Apple](https://developer.apple.com/fonts/) e [Meet Liquid Glass](https://developer.apple.com/videos/play/wwdc2025/219/). A simplicidade solicitada a partir do ChatGPT orienta agrupamento e discrição dos controles, sem prometer reprodução de um material nativo em CSS.
+## Tipografia, marca e ativos
 
-Capturas reais, cobertura e limites da validação estão em [visual-review/README.md](visual-review/README.md). A fixture local renderiza o app real e simula apenas APIs; não comprova infraestrutura ou persistência remota.
+[layout.tsx](../src/app/layout.tsx) carrega Syne e Manrope WOFF2 locais com `next/font/local`, `display: swap` e fallbacks declarados. Syne expressa títulos e aberturas; Manrope opera corpo, campos, navegação e ações. [Brand.tsx](../src/components/pico/Brand.tsx) usa os contornos exatos do wordmark Aura, com `currentColor` e nome acessível; não depende da fonte para compor o logo. O cabeçalho usa largura de 100px e a lateral 120px.
 
-## Registro depois do jogo
+| Papel no app | Escala aplicada |
+| --- | --- |
+| Abertura | `--text-hero`: clamp de 2rem a 4rem; peso 700, entrelinha 1,08 |
+| Título de página | `--text-title`: clamp de 1,75rem a 2,25rem; geralmente peso 600 e entrelinha 1,15–1,2 |
+| Seção | `--text-section`: 1,5rem, peso 600; seções operacionais compactas têm hierarquia própria |
+| Diálogo | `--text-dialog`: 1,375rem, peso 600, entrelinha 1,3 |
+| Corpo/campo | `--text-body`: 1rem; corpo com entrelinha 1,6 e campo com 1,5 |
+| Label | `--text-label`: .875rem, geralmente peso 600 |
+| Metadado | `--text-caption`: .8125rem |
+| Navegação móvel | .75rem; destino ativo com peso 700; ícone de 22px |
 
-`GameJournal` apresenta arena, modalidade e data declarada em linhas abertas, com ícone de calendário e assinatura areia discreta. Não usa bolinhas de presença, prazo, estado ativo ou contador. `Meus jogos` fica no perfil e `Joguei aqui` na arena; a navegação fixa mantém Início, Pessoas, Comunidades, Arenas e Perfil, sem botão central de mais.
+Esses valores descrevem o código. A escala nominal do manual continua sendo a referência de identidade; os pesos e entrelinhas acima documentam sua adaptação às telas operacionais. Títulos usam tracking próximo de −.02em e quebra equilibrada. Texto digitado permanece em 16px na escala padrão. Evitar rótulos decorativos que repetem título e abreviações que apagam a consequência de uma ação.
 
-## Composição por conteúdo · jornada de 12/09/2026
+Logo, favicon, Apple, ícones 192/512 e maskable usam os ativos entregues. O [relatório de assets](aura-redesign-review/assets-contrast.json) registra dez arquivos idênticos aos mestres, contornos preservados e maskable opaco. As licenças OFL acompanham as duas famílias locais. Não há nova imagem sintética publicada como dado social.
 
-Direção “Editorial de quadra”: o início apresenta relações próprias; pessoas são linhas de identidade; comunidades mostram propósito e condições; arenas priorizam o lugar; posts priorizam conteúdo; jogos ficam em cronologia privada. A composição usa `journey.css` e componentes dedicados, mantendo tokens e controles compartilhados. Evitar capas universais, métricas artificiais e caixas repetidas.
+## Layout, superfícies e movimento
 
-Filtros de pessoas e informações complementares de arena/grupo ficam em disclosures; audiência de publicação e condições de participação permanecem visíveis. “Comunidades” é o nome do destino; “turma” aparece como linguagem contextual. Acompanhar é unilateral e não envia convite. “Joguei aqui” registra o passado; “Compartilhar jogo” publica somente após outra confirmação.
+O shell social tem máximo de 1260px; no mobile, o miolo chega a 680px e usa margem de 20px, reduzida a 16px abaixo de 360px. Em 800px, entra a navegação lateral de 215px. Em 1160px, o miolo chega a 620px e surge a coluna contextual de 280px. Autenticação tem composição independente: formulário de até 500px e coluna editorial a partir de 1000px. Campos em pares se reorganizam nos breakpoints próprios do formulário/editor.
 
-[Comparação das alternativas](JOURNEY_REFINEMENT.md) e [capturas locais](journey-review/README.md). A direção e os rótulos ainda precisam de avaliação com jogadores; não há resultado de pesquisa declarado.
+A navegação inferior usa largura intrínseca de cada rótulo e pode se reorganizar em linhas com texto ampliado. Não hifeniza os destinos. `BottomNav` mede sua altura e reserva o espaço inferior correspondente no conteúdo; não fixar esse espaço presumindo uma única linha. Nomes e ações longos podem quebrar, sem truncar audiência, condições de participação ou privacidade.
 
-## Tutorial guiado
+O ritmo usa base de 4px; os tokens reutilizados cobrem 4/8/12/16/20/24/32px. Espaços maiores aparecem na composição editorial. Controles usam raio de 16px, cards 22px, painéis 30px, pílulas 999px e avatares circulares. O destaque assimétrico de 24/24/70/24px atende entrada, convites, vazios e fotografia de arena. Cards não recebem essa forma automaticamente.
 
-`GuidedOnboarding` apresenta convite editorial no Início e um guia opcional em `onboarding.css`. Destaque areia conecta dica e controle real; a tela continua interativa. “Mostrar onde” recolhe a dica antes de focar o controle. O painel acompanha a rolagem, respeita a navegação e pode ser expandido/pausado; corpo rola em altura curta/texto ampliado, ações ficam acessíveis. Diálogos nativos o ocultam e editores de perfil suspendem o avanço. Não confundir progresso do passeio com ações sociais concluídas. [Escopo e evidências](ONBOARDING.md).
+Fundos são sólidos. Posts não usam sombra; perfis e pessoas usam espaço e divisórias. Diálogos e guia sobreposto usam `shadow-elevated`, com backdrop escuro no diálogo. Não há blur obrigatório ou material de vidro por causa dos nomes legados das classes.
 
-## Boas-vindas institucionais
+Estados de toque e seleção usam 160ms; transições de superfície/fotografia usam 220ms; o token de marca prevê 280ms. A curva compartilhada é `cubic-bezier(.22, 1, .36, 1)`. O CSS global remove animações e transições com movimento reduzido. Tempos definidos não são medição de fluidez em aparelho físico.
 
-Aviso em superfície editorial, título focável e rolagem após salvar o formulário. Uma ação principal para conhecer a comunidade, alternativa discreta para reconhecer. As mensagens fixas identificam autoria Pico e não exibem engajamento fictício. [Evidências](official-review/README.md).
+## Componentes e jornadas
+
+Reutilizar [Button](../src/components/ui/Button.tsx), [Input](../src/components/ui/Input.tsx), [ChoiceChip](../src/components/ui/ChoiceChip.tsx) e [Modal](../src/components/ui/Modal.tsx). Botões têm primary/secondary/quiet e mínimos de 44/48/52px conforme tamanho. Campos têm label persistente, superfície sólida, borda funcional, altura mínima de 50px, ajuda associada e erro próximo. `ChoiceChip` conserva checkbox nativo, check visível e foco, além da cor selecionada.
+
+Diálogos preservam Escape, foco contido, retorno ao acionador e fechamento de 44px fora da área rolável. O corpo rola; ações ficam no fluxo. O compositor abre os campos existentes em diálogo, preserva rascunho ao fechar e mantém audiência/destinos explícitos. Feedback de sucesso depende da confirmação real.
+
+| Conteúdo | Composição e informação preservada |
+| --- | --- |
+| Início | Contextos próprios compactos; entrada editorial quando cabível; conteúdo social em primeiro plano |
+| Pessoas | Linhas de identidade, modalidade, lugar e ação de acompanhar |
+| Comunidades | Propósito, vínculo opcional com arena, condição de entrada e participação |
+| Arenas | Fotografia/lugar, modalidades e comunidade; informações complementares em disclosures |
+| Publicações | Autor, conteúdo, audiência, mídia e ações; foto e texto reais preservados |
+| Jogos | Cronologia retrospectiva privada; arena, modalidade e data declarada; compartilhar exige outra ação |
+| Perfil e editor | Identidade aberta, modalidades, seções de edição e feedback real; configuração inicial destaca três dados essenciais e separa opcionais |
+| Conta, gestão, convites e exceções | Mesmos controles e estados; papéis, validações e limites existentes |
+
+Registro de jogo não indica presença ou disponibilidade. Compartilhamento preserva audiência e snapshot; editar/excluir o jogo não altera a publicação. `/checkin` continua apenas redirecionamento. O redesign não altera admissão, sessão, papéis ou RLS.
+
+## Assistência e estados
+
+Configuração inicial, aviso institucional e tutorial continuam separados. O progresso do perfil mostra preenchimento real; o aviso institucional mantém reconhecimento por conta no servidor. O tutorial tem seis etapas, convite curto e retomada voluntária, com persistência isolada por conta/demo. “Mostrar onde” recolhe a dica antes de focar o controle; “Pausar” permanece visível. Nenhuma gravação social é executada pelo passeio.
+
+O guia acompanha a rolagem, tem corpo rolável em sua composição padrão e se torna relativo em altura curta. Diálogos abertos o ocultam; editores suspendem avanço. Foco contextual usa o token de foco. [ONBOARDING.md](ONBOARDING.md) conserva o contrato completo.
+
+Vazio, carregando, erro, sucesso, indisponível, selecionado e disabled combinam hierarquia visual e texto honesto. Demonstração permanece identificada e local. Não reduzir densidade removendo autoria, audiência, condição de entrada ou aviso de privacidade; remover repetições que não acrescentam informação.
+
+## Evidências, histórico e limites
+
+A [revisão da implementação](aura-redesign-review/README.md) registra lint/typecheck/build, 87 testes, regressões locais de onboarding e jogos e amostra visual de 39 verificações. [Contraste e assets](aura-redesign-review/assets-contrast.json) cobrem 50 pares sólidos do CSS final; [contraste renderizado](aura-redesign-review/rendered-contrast.json) cobre textos sólidos da amostra. As fontes renderizadas são as duas famílias locais e o fallback foi observado sem overflow a 320px.
+
+As capturas usam o app Next compilado com fixtures locais e rede externa bloqueada. A amostra visual inclui 320/390/1280px e os dois temas; a regressão do guia amplia para 430/768px, altura curta, texto a 200%, teclado/foco, redução de movimento e estados de armazenamento. A cobertura de implementação não significa captura ou teste independente de toda combinação de rota e permissão. A [revisão final](aura-redesign-review/finish-review.md) registra a resolução dos rótulos redundantes e da quebra da navegação.
+
+O sistema anterior permanece no histórico Git e nas capturas `before-*` da revisão Aura, além de [visual-review](visual-review/README.md) e [journey-review](journey-review/README.md). A antiga paleta, a fonte única e o material anterior não são especificação vigente. Os contratos funcionais preservados continuam descritos nos documentos de domínio.
+
+Esta consolidação não comprova Supabase real, entrega de e-mail, instalação PWA em aparelho físico, teclado/safe areas de hardware ou pesquisa com jogadores. O check remoto de perfil e a publicação dependem do PR/CI e do recibo operacional; não foram comprovados nesta etapa. Verificar a revisão pública em `/api/version` após a publicação autorizada; não inferir deploy de documentação ou screenshot.

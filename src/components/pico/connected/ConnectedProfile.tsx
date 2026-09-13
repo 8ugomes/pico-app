@@ -67,7 +67,7 @@ function ProfileWorkspace({ profile, refresh }: { profile: ReadProfile; refresh:
 
   return <div className="profile-v2" data-testid="profile-view">
     <header className="profile-v2-toolbar">
-      <p className="profile-v2-kicker">ME ACHA NO PICO</p>
+      <p className="profile-v2-kicker">Meu perfil</p>
       <Link href="/conta" className="icon-button" aria-label="Privacidade e configurações"><Settings2 size={20} aria-hidden="true" /></Link>
     </header>
     <section className="profile-v2-hero" aria-labelledby="profile-name-heading">

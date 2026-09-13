@@ -1,0 +1,4 @@
+# Regenerable review screenshots; the delivered previews and PDF are versioned.
+.impeccable/review/*.png
+.impeccable/review/pdf-pages/
+Pico-Social-Assets.zip

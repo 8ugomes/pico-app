@@ -1,5 +1,81 @@
 # Pico — plano de produto
 
+## Redesign integral Aura Manteiga — PLAN · 13/09/2026
+
+Pedido vigente autoriza implementação e publicação no pico-app após PR/CI. Branch `codex/aura-manteiga-redesign`, base `3bd6dc4`, árvore inicialmente limpa. Migrar fundação (tokens semânticos, Syne/Manrope locais, SVG e PWA), entrada/auth, navegação, conteúdo por domínio, todos os formulários/gestão e estados. Refinar perfil inicial, aviso oficial e tutorial mantendo persistências e contratos. Não há mudança de banco ou APIs.
+
+Inventário e cobertura em [aura-redesign-review/coverage.md](aura-redesign-review/coverage.md). Começar por entrada, Início, perfil e compositor; propagar o sistema às demais superfícies. Revisão conjunta 320/390/desktop, claro/escuro, texto 200%, foco/diálogos e estados. No fechamento: lint, typecheck, testes existentes pertinentes e build; PR, CI exigida, main sincronizada, deploy pelo script existente e conferência pública de versão/manifesto/assets. Preservar o artefato estável anterior como rollback. SMTP e aparelho físico continuam limites reais, sem necessidade de migrations visuais.
+
+### Implementação e verificação do conjunto
+
+Fundação e todas as superfícies visuais migradas: sete folhas CSS, SVG em contornos, Syne/Manrope locais com OFL, ícones PWA, entrada/auth, Início compacto, perfil/editor, guias e demais domínios por componentes compartilhados. API, auth, RLS, migrations, audiência e dados preservados. [Inventário final por domínio e rota](aura-redesign-review/coverage.md).
+
+Build conectado e demo, lint/typecheck e 87 testes passaram. Regressões de onboarding conectado/demo e jogos privados executadas em fixtures; 39 verificações de tela nos dois temas sem overflow/erros de JS/imagens visíveis quebradas ou contraste textual insuficiente. 50 pares do CSS compilado auditados; fontes, contornos e arquivos de ícone conferidos. Estado desta documentação: preparação local do PR. CI, merge protegido e publicação serão registrados no PR e no recibo operacional local `.vercel/aura-redesign-release.json`, com referência anterior de rollback e SHA servido, sem alterar dados.
+
+## Contexto vigente e próximas tarefas
+
+**Identidade escolhida: Pico Social / Aura Manteiga.** [Contexto institucional](pico-company-context.md), [design system](pico-design-system.md), [domínios](pico-domains.md) e [catálogo de skills](pico-skills.md) orientam novas tarefas. As entradas anteriores registram decisões de cada etapa; Ritual, Pistache e a lavanda original são alternativas históricas. A identidade está implementada no app; [cobertura e evidências](aura-redesign-review/README.md). A revisão publicada é verificável por `/api/version`.
+
+## Skills e redesign integral — plano antes de desenvolver · 13/09/2026
+
+Atualizar as oito skills locais com a identidade escolhida e criar skills próprias de contexto, planejamento, desenvolvimento, revisão e redesign integral. Centralizar empresa/produto, fontes da marca e mapa de domínios. Atualizar o prompt de implementação para cobrir toda a jornada, incluindo onboarding assistido opcional e retomável. Diminuir testes repetitivos durante criação: revisão visual por amostragem e testes orientados a risco, mantendo lint/typecheck/build e regressões críticas no fechamento. Entrega desta rodada é documental; não executar o redesign nem publicar. Validar referências, formato/procedência das skills, atualizar changelog e fazer commit local.
+
+### Fechamento
+
+Oito skills contextualizadas e cinco skills próprias criadas: `pico-context`, `pico-product-plan`, `pico-dev`, `pico-deslopify` e **`pico-redesign`**. Contexto institucional, PRODUCT/BRIEF/DESIGN, mapa de domínios, catálogo, guias técnicos/visuais, AGENTS e plano agora compartilham Aura Manteiga como direção. O design system diferencia alvo aprovado e baseline legado; a pesquisa e os briefs de exploração permanecem históricos.
+
+O prompt principal exige o manual completo, leitura das skills pertinentes e contratos dos domínios. Inclui refinamento de perfil inicial, boas-vindas e tutorial opcional, com continuidade e autonomia preservadas. Verificação durante criação usa amostra representativa, correções em lote e ampliação por risco; não remove checks obrigatórios ou regressões críticas. Pacote ZIP atualizado com o prompt e o mapa de implementação revisados.
+
+Verificação: 13 skills válidas no validador de formato; referências locais adicionadas conferidas; oito corpos upstream preservados e hashes de origem/local distintos; cinco hashes das skills próprias registrados. Lint, typecheck e build aprovados. Nenhum arquivo de app, banco, dependência ou teste foi alterado. Sem teste funcional/remoto novo, push ou deploy; o redesign permanece como próxima execução mediante o pedido correspondente.
+
+## Aura Manteiga — identidade consolidada e prompt entregues · 13/09/2026
+
+Consolidada a escolha do responsável em [manual exclusivo](brand-exploration/aura-manteiga/README.md), com 32 páginas e 64 vistas de tela (32 claras/32 escuras). Entrega inclui narrativa, logo/lockup/símbolo com geometria Aura preservada, paleta Manteiga/Cacau/Papel/Lavanda, tokens semânticos, Syne/Manrope, direção de arte, voz, movimento, aplicações, fontes/licenças e ícones SVG/PNG/ICO com maskable específico. [Prompt completo](brand-exploration/aura-manteiga/PROMPT-PRODUCAO.md) e [mapa do código](brand-exploration/aura-manteiga/IMPLEMENTACAO.md) orientam futura implementação e publicação pelo destino existente.
+
+PDF renderizado e inspecionado; 32 páginas e rodapés conferidos, 64 telefones sem falha de imagem/overflow editorial ou erro JS. 50 pares sólidos de contraste passaram; contornos vetoriais comparados aos originais, PNGs/ICO e margem do maskable verificados. Exportações de campanha usam fontes locais carregadas na mesma origem. Pacote ZIP com 58 arquivos verificado. Lint, typecheck e build aprovados. Nenhum código de produção, dado, serviço ou deploy foi alterado; a próxima rodada executa o prompt autorizado pelo responsável quando for enviado.
+
+## Aura Manteiga — consolidação da identidade · plano antes de desenvolver · 13/09/2026
+
+O responsável escolheu a paleta Manteiga na estética Aura e pediu identidade completa baseada no PDF anterior, acompanhada de prompt para futura atualização do aplicativo em produção. Consolidar manual exclusivo, logos recoloridos, ícones PWA, fontes, tokens semânticos claros/escuros, aplicações e telas existentes. Distinguir medidas de miniatura e parâmetros de implementação. Ler o código atual para mapear migração de tokens, fontes, marca, CSS e manifesto no prompt. A entrega presente é de identidade e instrução; implementação/publicação serão executadas quando o prompt for usado. Validar artefatos, atualizar documentação, executar lint/typecheck/build e fazer commit local.
+
+## Aura — variações de cor entregues · 13/09/2026
+
+Mantida a linha Aura escolhida pelo responsável. Criadas cinco alternativas — Pistache, Azul névoa, Rosa mineral, Maré e Manteiga — para comparar com a lavanda original. [Galeria de cores](brand-exploration/aura-cores.html?screen=profile&palette=all&mode=light) com as mesmas 32 telas/estados, seis paletas e dois modos; [guia](brand-exploration/AURA-CORES.md) e tokens separados. Logo, tipografia, fotos, conteúdo e composição preservados. Pistache é a recomendação cromática autoral, seguida de Azul névoa; a paleta final ainda não foi escolhida.
+
+Conferidas 384 combinações e 30.156 propriedades de estilo sem diferenças estruturais/tipográficas entre paletas. 156 pares sólidos de texto passaram no contraste adotado; 60 telefones no perfil em cinco larguras/modos sem overflow, imagens faltantes ou erros de JavaScript. Filtro de paleta, navegação, foco e download aprovados. Lint, typecheck e build passaram. O relatório inicial foi preservado como histórico; a preferência posterior por Aura orienta a continuidade. Nenhuma aplicação ao produto, push ou deploy.
+
+## Aura — exploração apenas de cores · plano antes de desenvolver · 13/09/2026
+
+O responsável escolheu a linha Aura e solicitou mais opções de cor. Preservar integralmente logo, tipografia, fotos, estrutura e conteúdo das telas. Comparar a paleta original com cinco alternativas cromáticas no mesmo perfil e permitir navegação pelas telas já desenhadas. Criar galeria separada para manter o estudo inicial disponível; a cor final ainda não foi escolhida. Verificar contraste, invariância tipográfica/estrutural e responsividade. Nenhuma aplicação ao produto publicado.
+
+## Identidade Pico Social — fechamento · 13/09/2026
+
+Oito skills instaladas por projeto com revisões fixadas, hashes e licenças. Criadas três propostas completas — Ritual, Pulso e Aura — com estratégia, logos vetoriais, cores, fontes locais, fotografia sintética, direção de arte e aplicações. Entrega em [galeria comparativa](brand-exploration/index.html), [relatório de 47 páginas](brand-exploration/Pico-Social-Identidade.pdf) e [guia dos arquivos](brand-exploration/README.md).
+
+A galeria cobre 32 telas/estados, três identidades e dois modos (192 combinações). Preserva Início/Pessoas/Comunidades/Arenas/Perfil; jogos continuam privados, acessíveis pelo perfil/conta. Produto publicado, Supabase e contratos de audiência não foram modificados. Ritual é recomendação autoral, não identidade aprovada.
+
+Lint, typecheck e build aprovados. QA da proposta: 960 verificações em cinco larguras, imagens carregadas, navegação local, nenhum overflow; 82 pares sólidos de texto com contraste aprovado; 108 telefones/531 elementos com paridade tipográfica entre galeria e relatório. PDF com 47 páginas, texto extraível, rodapés conferidos e inspeção das páginas renderizadas. Revisão independente marcou como resolvidas as correções de navegação, contrato e tipografia; veredito ship limitado a esses itens. Sem validação com público, fluxo real de Supabase, push ou deploy.
+
+Próxima etapa de produto: selecionar uma direção, fazer refinamento óptico e validação qualitativa e então aplicar o sistema escolhido aos componentes reais. Os arquivos deste estudo não devem ser tratados como uma decisão de marca já aprovada.
+
+## Identidade Pico Social — plano antes de desenvolver · 13/09/2026
+
+Instalar as oito skills selecionadas nas revisões registradas e desenvolver três propostas completas de identidade, com linguagem editorial de moda, jovem, expressiva e refinada. Criar conceitos distintos de marca, logos, cores, tipografia, direção de fotografia/grafismo e aplicações comparáveis nas telas do produto. Entregar relatório visual completo, galeria navegável de propostas e arquivos de identidade para avaliação.
+
+As três alternativas são estudos de marca; nenhuma substitui automaticamente a identidade publicada. Usar dados explicitamente ilustrativos e respeitar os contratos sociais atuais. Conferir fontes/licenças, legibilidade e contraste, renderizar os artefatos, executar lint/typecheck/build, atualizar documentação e fazer commit local. Sem publicação remota nesta rodada.
+
+## Pesquisa de skills para branding — plano da rodada
+
+Pesquisar fontes públicas e inspecionar os arquivos originais de skills para preparar a identidade do Pico Social. Direção escolhida pelo responsável: editorial de moda, jovem, expressiva e refinada. Comparar estratégia, exploração visual, sistema de identidade, direção de arte, documentação e aplicação ao produto; conferir autoria, revisão, licença, dependências e conflitos com os padrões locais.
+
+Entrega desta rodada: relatório de pesquisa com seleção justificada, fontes verificáveis e proposta de instalação por projeto. Instalação e desenvolvimento da nova identidade são etapas posteriores ao levantamento solicitado. A pesquisa não altera a UI nem configurações do aplicativo. Registrar conclusão, verificações e aprendizados na documentação e fazer commit local.
+
+### Fechamento da pesquisa
+
+Triados 16 repositórios públicos e selecionadas oito skills: seis da Ramp para descoberta, ideação, direção criativa, identidade, direção de arte e manual; Brandkit para propostas visuais; Impeccable para aplicação futura ao app. Relatório registra critérios, alternativas, limitações, adaptações e fluxo de entrega. Manifesto registra revisões confirmadas, caminhos, licenças e hashes dos arquivos principais. [Pesquisa completa](PICO_BRANDING_SKILLS_RESEARCH.md) · [Manifesto](branding-skills-sources.json).
+
+Lint, typecheck e build locais aprovados. Nenhuma skill instalada, nenhum script de terceiro executado, sem alteração de UI ou infraestrutura. Próxima etapa: instalar o conjunto selecionado no escopo do projeto e desenvolver três direções visuais equivalentes para o Pico Social, usando a preferência editorial de moda já confirmada. Não há benchmark de resultados gerados nem validação com jogadores nesta pesquisa.
+
 ## Comunidade oficial e autenticação — fechamento de 13/09/2026
 
 Implementados cadastro aberto após confirmação do e-mail, comunidade institucional geral, três publicações editoriais, inclusão transacional após formulário e aviso reconhecido por conta. Saída, suspensão e edição de modalidade não causam nova inclusão. Textos de acesso/audiência atualizados. Corrigida diferença entre mínimo do frontend (8) e do provedor (6): novas senhas exigem 12; reforço de reautenticação, cookies, recuperação, reenvio e exclusão com senha legada.

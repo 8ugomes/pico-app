@@ -1,0 +1,1315 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-13T03:32:51.424180+00:00",
+  "title": "Design System: Pico Social — estudo de três alternativas",
+  "extensions": {
+    "scope": {
+      "status": "exploratory-alternatives-not-approved",
+      "artifact": "docs/brand-exploration",
+      "productionAuthority": false,
+      "alternatives": [
+        "ritual",
+        "pulso",
+        "aura"
+      ],
+      "sourceFiles": [
+        "tokens.json",
+        "gallery.css",
+        "gallery.js",
+        "report.css"
+      ],
+      "reviewDisposition": "ship only for navigation, contract/FORM and PDF typography corrections; not brand approval",
+      "ramps": "Tonal ramps are generated OKLCH panel previews only; they are not additional palette tokens or approved color pairs.",
+      "snippetFonts": "The artifact loads local WOFF2 fonts. Snippets use the same family stacks; a host must load those fonts to reproduce exact typography.",
+      "snippetStateLimits": "Hover is included where authored. Fields, nav and chips have focus/selected states but no authored hover or pressed transform in source; none has been invented.",
+      "notCanonized": [
+        "Phone frame border plus shadow belongs to presentation, not app cards.",
+        "8–10px miniature labels are not approved production reading sizes.",
+        "Earlier Aura light muted declaration is overridden by the final light-mode rule."
+      ],
+      "subsequentPreference": {
+        "direction": "aura",
+        "purpose": "Additional palette exploration only, keeping typography, logo, photographs and layout fixed.",
+        "finalPaletteApproved": true,
+        "additionalPaletteArtifact": "aura-cores.html",
+        "documentedHere": false,
+        "paletteGuide": "AURA-CORES.md",
+        "paletteTokens": "aura-palettes.json",
+        "paletteCount": 6,
+        "selectedPalette": "manteiga",
+        "selectedIdentityGuide": "aura-manteiga/MANUAL.md",
+        "selectedIdentityTokens": "aura-manteiga/tokens.json",
+        "productionApplied": false
+      }
+    },
+    "colorMeta": {
+      "ritual-light-bg": {
+        "role": "neutral",
+        "displayName": "ritual light bg",
+        "tonalRamp": [
+          "oklch(15% 0.02217 80.69)",
+          "oklch(26.43% 0.02217 80.69)",
+          "oklch(37.86% 0.02217 80.69)",
+          "oklch(49.29% 0.02217 80.69)",
+          "oklch(60.71% 0.02217 80.69)",
+          "oklch(72.14% 0.02217 80.69)",
+          "oklch(83.57% 0.02217 80.69)",
+          "oklch(95% 0.02217 80.69)"
+        ]
+      },
+      "ritual-light-surface": {
+        "role": "neutral",
+        "displayName": "ritual light surface",
+        "tonalRamp": [
+          "oklch(15% 0.00901 78.28)",
+          "oklch(26.43% 0.00901 78.28)",
+          "oklch(37.86% 0.00901 78.28)",
+          "oklch(49.29% 0.00901 78.28)",
+          "oklch(60.71% 0.00901 78.28)",
+          "oklch(72.14% 0.00901 78.28)",
+          "oklch(83.57% 0.00901 78.28)",
+          "oklch(95% 0.00901 78.28)"
+        ]
+      },
+      "ritual-light-ink": {
+        "role": "neutral",
+        "displayName": "ritual light ink",
+        "tonalRamp": [
+          "oklch(15% 0.03873 352.22)",
+          "oklch(26.43% 0.03873 352.22)",
+          "oklch(37.86% 0.03873 352.22)",
+          "oklch(49.29% 0.03873 352.22)",
+          "oklch(60.71% 0.03873 352.22)",
+          "oklch(72.14% 0.03873 352.22)",
+          "oklch(83.57% 0.03873 352.22)",
+          "oklch(95% 0.03873 352.22)"
+        ]
+      },
+      "ritual-light-muted": {
+        "role": "neutral",
+        "displayName": "ritual light muted",
+        "tonalRamp": [
+          "oklch(15% 0.03703 1.35)",
+          "oklch(26.43% 0.03703 1.35)",
+          "oklch(37.86% 0.03703 1.35)",
+          "oklch(49.29% 0.03703 1.35)",
+          "oklch(60.71% 0.03703 1.35)",
+          "oklch(72.14% 0.03703 1.35)",
+          "oklch(83.57% 0.03703 1.35)",
+          "oklch(95% 0.03703 1.35)"
+        ]
+      },
+      "ritual-light-soft": {
+        "role": "neutral",
+        "displayName": "ritual light soft",
+        "tonalRamp": [
+          "oklch(15% 0.02771 63.92)",
+          "oklch(26.43% 0.02771 63.92)",
+          "oklch(37.86% 0.02771 63.92)",
+          "oklch(49.29% 0.02771 63.92)",
+          "oklch(60.71% 0.02771 63.92)",
+          "oklch(72.14% 0.02771 63.92)",
+          "oklch(83.57% 0.02771 63.92)",
+          "oklch(95% 0.02771 63.92)"
+        ]
+      },
+      "ritual-light-line": {
+        "role": "neutral",
+        "displayName": "ritual light line",
+        "tonalRamp": [
+          "oklch(15% 0.03128 30.69)",
+          "oklch(26.43% 0.03128 30.69)",
+          "oklch(37.86% 0.03128 30.69)",
+          "oklch(49.29% 0.03128 30.69)",
+          "oklch(60.71% 0.03128 30.69)",
+          "oklch(72.14% 0.03128 30.69)",
+          "oklch(83.57% 0.03128 30.69)",
+          "oklch(95% 0.03128 30.69)"
+        ]
+      },
+      "ritual-light-brand": {
+        "role": "primary",
+        "displayName": "ritual light brand",
+        "tonalRamp": [
+          "oklch(15% 0.08078 355.61)",
+          "oklch(26.43% 0.08078 355.61)",
+          "oklch(37.86% 0.08078 355.61)",
+          "oklch(49.29% 0.08078 355.61)",
+          "oklch(60.71% 0.08078 355.61)",
+          "oklch(72.14% 0.08078 355.61)",
+          "oklch(83.57% 0.08078 355.61)",
+          "oklch(95% 0.08078 355.61)"
+        ]
+      },
+      "ritual-light-onbrand": {
+        "role": "neutral",
+        "displayName": "ritual light onbrand",
+        "tonalRamp": [
+          "oklch(15% 0.02217 80.69)",
+          "oklch(26.43% 0.02217 80.69)",
+          "oklch(37.86% 0.02217 80.69)",
+          "oklch(49.29% 0.02217 80.69)",
+          "oklch(60.71% 0.02217 80.69)",
+          "oklch(72.14% 0.02217 80.69)",
+          "oklch(83.57% 0.02217 80.69)",
+          "oklch(95% 0.02217 80.69)"
+        ]
+      },
+      "ritual-light-focus": {
+        "role": "neutral",
+        "displayName": "ritual light focus",
+        "tonalRamp": [
+          "oklch(15% 0.08078 355.61)",
+          "oklch(26.43% 0.08078 355.61)",
+          "oklch(37.86% 0.08078 355.61)",
+          "oklch(49.29% 0.08078 355.61)",
+          "oklch(60.71% 0.08078 355.61)",
+          "oklch(72.14% 0.08078 355.61)",
+          "oklch(83.57% 0.08078 355.61)",
+          "oklch(95% 0.08078 355.61)"
+        ]
+      },
+      "ritual-light-error": {
+        "role": "neutral",
+        "displayName": "ritual light error",
+        "tonalRamp": [
+          "oklch(15% 0.16141 24.11)",
+          "oklch(26.43% 0.16141 24.11)",
+          "oklch(37.86% 0.16141 24.11)",
+          "oklch(49.29% 0.16141 24.11)",
+          "oklch(60.71% 0.16141 24.11)",
+          "oklch(72.14% 0.16141 24.11)",
+          "oklch(83.57% 0.16141 24.11)",
+          "oklch(95% 0.16141 24.11)"
+        ]
+      },
+      "ritual-dark-bg": {
+        "role": "neutral",
+        "displayName": "ritual dark bg",
+        "tonalRamp": [
+          "oklch(15% 0.01812 338.86)",
+          "oklch(26.43% 0.01812 338.86)",
+          "oklch(37.86% 0.01812 338.86)",
+          "oklch(49.29% 0.01812 338.86)",
+          "oklch(60.71% 0.01812 338.86)",
+          "oklch(72.14% 0.01812 338.86)",
+          "oklch(83.57% 0.01812 338.86)",
+          "oklch(95% 0.01812 338.86)"
+        ]
+      },
+      "ritual-dark-surface": {
+        "role": "neutral",
+        "displayName": "ritual dark surface",
+        "tonalRamp": [
+          "oklch(15% 0.02209 342.89)",
+          "oklch(26.43% 0.02209 342.89)",
+          "oklch(37.86% 0.02209 342.89)",
+          "oklch(49.29% 0.02209 342.89)",
+          "oklch(60.71% 0.02209 342.89)",
+          "oklch(72.14% 0.02209 342.89)",
+          "oklch(83.57% 0.02209 342.89)",
+          "oklch(95% 0.02209 342.89)"
+        ]
+      },
+      "ritual-dark-ink": {
+        "role": "neutral",
+        "displayName": "ritual dark ink",
+        "tonalRamp": [
+          "oklch(15% 0.02217 80.69)",
+          "oklch(26.43% 0.02217 80.69)",
+          "oklch(37.86% 0.02217 80.69)",
+          "oklch(49.29% 0.02217 80.69)",
+          "oklch(60.71% 0.02217 80.69)",
+          "oklch(72.14% 0.02217 80.69)",
+          "oklch(83.57% 0.02217 80.69)",
+          "oklch(95% 0.02217 80.69)"
+        ]
+      },
+      "ritual-dark-muted": {
+        "role": "neutral",
+        "displayName": "ritual dark muted",
+        "tonalRamp": [
+          "oklch(15% 0.02731 353.72)",
+          "oklch(26.43% 0.02731 353.72)",
+          "oklch(37.86% 0.02731 353.72)",
+          "oklch(49.29% 0.02731 353.72)",
+          "oklch(60.71% 0.02731 353.72)",
+          "oklch(72.14% 0.02731 353.72)",
+          "oklch(83.57% 0.02731 353.72)",
+          "oklch(95% 0.02731 353.72)"
+        ]
+      },
+      "ritual-dark-soft": {
+        "role": "neutral",
+        "displayName": "ritual dark soft",
+        "tonalRamp": [
+          "oklch(15% 0.04272 353.47)",
+          "oklch(26.43% 0.04272 353.47)",
+          "oklch(37.86% 0.04272 353.47)",
+          "oklch(49.29% 0.04272 353.47)",
+          "oklch(60.71% 0.04272 353.47)",
+          "oklch(72.14% 0.04272 353.47)",
+          "oklch(83.57% 0.04272 353.47)",
+          "oklch(95% 0.04272 353.47)"
+        ]
+      },
+      "ritual-dark-line": {
+        "role": "neutral",
+        "displayName": "ritual dark line",
+        "tonalRamp": [
+          "oklch(15% 0.04769 349.29)",
+          "oklch(26.43% 0.04769 349.29)",
+          "oklch(37.86% 0.04769 349.29)",
+          "oklch(49.29% 0.04769 349.29)",
+          "oklch(60.71% 0.04769 349.29)",
+          "oklch(72.14% 0.04769 349.29)",
+          "oklch(83.57% 0.04769 349.29)",
+          "oklch(95% 0.04769 349.29)"
+        ]
+      },
+      "ritual-dark-brand": {
+        "role": "primary",
+        "displayName": "ritual dark brand",
+        "tonalRamp": [
+          "oklch(15% 0.06207 34.70)",
+          "oklch(26.43% 0.06207 34.70)",
+          "oklch(37.86% 0.06207 34.70)",
+          "oklch(49.29% 0.06207 34.70)",
+          "oklch(60.71% 0.06207 34.70)",
+          "oklch(72.14% 0.06207 34.70)",
+          "oklch(83.57% 0.06207 34.70)",
+          "oklch(95% 0.06207 34.70)"
+        ]
+      },
+      "ritual-dark-onbrand": {
+        "role": "neutral",
+        "displayName": "ritual dark onbrand",
+        "tonalRamp": [
+          "oklch(15% 0.03873 352.22)",
+          "oklch(26.43% 0.03873 352.22)",
+          "oklch(37.86% 0.03873 352.22)",
+          "oklch(49.29% 0.03873 352.22)",
+          "oklch(60.71% 0.03873 352.22)",
+          "oklch(72.14% 0.03873 352.22)",
+          "oklch(83.57% 0.03873 352.22)",
+          "oklch(95% 0.03873 352.22)"
+        ]
+      },
+      "ritual-dark-focus": {
+        "role": "neutral",
+        "displayName": "ritual dark focus",
+        "tonalRamp": [
+          "oklch(15% 0.06207 34.70)",
+          "oklch(26.43% 0.06207 34.70)",
+          "oklch(37.86% 0.06207 34.70)",
+          "oklch(49.29% 0.06207 34.70)",
+          "oklch(60.71% 0.06207 34.70)",
+          "oklch(72.14% 0.06207 34.70)",
+          "oklch(83.57% 0.06207 34.70)",
+          "oklch(95% 0.06207 34.70)"
+        ]
+      },
+      "ritual-dark-error": {
+        "role": "neutral",
+        "displayName": "ritual dark error",
+        "tonalRamp": [
+          "oklch(15% 0.09289 19.22)",
+          "oklch(26.43% 0.09289 19.22)",
+          "oklch(37.86% 0.09289 19.22)",
+          "oklch(49.29% 0.09289 19.22)",
+          "oklch(60.71% 0.09289 19.22)",
+          "oklch(72.14% 0.09289 19.22)",
+          "oklch(83.57% 0.09289 19.22)",
+          "oklch(95% 0.09289 19.22)"
+        ]
+      },
+      "pulso-light-bg": {
+        "role": "neutral",
+        "displayName": "pulso light bg",
+        "tonalRamp": [
+          "oklch(15% 0.01199 259.82)",
+          "oklch(26.43% 0.01199 259.82)",
+          "oklch(37.86% 0.01199 259.82)",
+          "oklch(49.29% 0.01199 259.82)",
+          "oklch(60.71% 0.01199 259.82)",
+          "oklch(72.14% 0.01199 259.82)",
+          "oklch(83.57% 0.01199 259.82)",
+          "oklch(95% 0.01199 259.82)"
+        ]
+      },
+      "pulso-light-surface": {
+        "role": "neutral",
+        "displayName": "pulso light surface",
+        "tonalRamp": [
+          "oklch(15% 0.00000 89.88)",
+          "oklch(26.43% 0.00000 89.88)",
+          "oklch(37.86% 0.00000 89.88)",
+          "oklch(49.29% 0.00000 89.88)",
+          "oklch(60.71% 0.00000 89.88)",
+          "oklch(72.14% 0.00000 89.88)",
+          "oklch(83.57% 0.00000 89.88)",
+          "oklch(95% 0.00000 89.88)"
+        ]
+      },
+      "pulso-light-ink": {
+        "role": "neutral",
+        "displayName": "pulso light ink",
+        "tonalRamp": [
+          "oklch(15% 0.05933 270.86)",
+          "oklch(26.43% 0.05933 270.86)",
+          "oklch(37.86% 0.05933 270.86)",
+          "oklch(49.29% 0.05933 270.86)",
+          "oklch(60.71% 0.05933 270.86)",
+          "oklch(72.14% 0.05933 270.86)",
+          "oklch(83.57% 0.05933 270.86)",
+          "oklch(95% 0.05933 270.86)"
+        ]
+      },
+      "pulso-light-muted": {
+        "role": "neutral",
+        "displayName": "pulso light muted",
+        "tonalRamp": [
+          "oklch(15% 0.04985 265.79)",
+          "oklch(26.43% 0.04985 265.79)",
+          "oklch(37.86% 0.04985 265.79)",
+          "oklch(49.29% 0.04985 265.79)",
+          "oklch(60.71% 0.04985 265.79)",
+          "oklch(72.14% 0.04985 265.79)",
+          "oklch(83.57% 0.04985 265.79)",
+          "oklch(95% 0.04985 265.79)"
+        ]
+      },
+      "pulso-light-soft": {
+        "role": "neutral",
+        "displayName": "pulso light soft",
+        "tonalRamp": [
+          "oklch(15% 0.03392 271.02)",
+          "oklch(26.43% 0.03392 271.02)",
+          "oklch(37.86% 0.03392 271.02)",
+          "oklch(49.29% 0.03392 271.02)",
+          "oklch(60.71% 0.03392 271.02)",
+          "oklch(72.14% 0.03392 271.02)",
+          "oklch(83.57% 0.03392 271.02)",
+          "oklch(95% 0.03392 271.02)"
+        ]
+      },
+      "pulso-light-line": {
+        "role": "neutral",
+        "displayName": "pulso light line",
+        "tonalRamp": [
+          "oklch(15% 0.05338 267.94)",
+          "oklch(26.43% 0.05338 267.94)",
+          "oklch(37.86% 0.05338 267.94)",
+          "oklch(49.29% 0.05338 267.94)",
+          "oklch(60.71% 0.05338 267.94)",
+          "oklch(72.14% 0.05338 267.94)",
+          "oklch(83.57% 0.05338 267.94)",
+          "oklch(95% 0.05338 267.94)"
+        ]
+      },
+      "pulso-light-brand": {
+        "role": "primary",
+        "displayName": "pulso light brand",
+        "tonalRamp": [
+          "oklch(15% 0.24812 266.14)",
+          "oklch(26.43% 0.24812 266.14)",
+          "oklch(37.86% 0.24812 266.14)",
+          "oklch(49.29% 0.24812 266.14)",
+          "oklch(60.71% 0.24812 266.14)",
+          "oklch(72.14% 0.24812 266.14)",
+          "oklch(83.57% 0.24812 266.14)",
+          "oklch(95% 0.24812 266.14)"
+        ]
+      },
+      "pulso-light-onbrand": {
+        "role": "neutral",
+        "displayName": "pulso light onbrand",
+        "tonalRamp": [
+          "oklch(15% 0.00000 89.88)",
+          "oklch(26.43% 0.00000 89.88)",
+          "oklch(37.86% 0.00000 89.88)",
+          "oklch(49.29% 0.00000 89.88)",
+          "oklch(60.71% 0.00000 89.88)",
+          "oklch(72.14% 0.00000 89.88)",
+          "oklch(83.57% 0.00000 89.88)",
+          "oklch(95% 0.00000 89.88)"
+        ]
+      },
+      "pulso-light-focus": {
+        "role": "neutral",
+        "displayName": "pulso light focus",
+        "tonalRamp": [
+          "oklch(15% 0.24812 266.14)",
+          "oklch(26.43% 0.24812 266.14)",
+          "oklch(37.86% 0.24812 266.14)",
+          "oklch(49.29% 0.24812 266.14)",
+          "oklch(60.71% 0.24812 266.14)",
+          "oklch(72.14% 0.24812 266.14)",
+          "oklch(83.57% 0.24812 266.14)",
+          "oklch(95% 0.24812 266.14)"
+        ]
+      },
+      "pulso-light-error": {
+        "role": "neutral",
+        "displayName": "pulso light error",
+        "tonalRamp": [
+          "oklch(15% 0.16887 20.34)",
+          "oklch(26.43% 0.16887 20.34)",
+          "oklch(37.86% 0.16887 20.34)",
+          "oklch(49.29% 0.16887 20.34)",
+          "oklch(60.71% 0.16887 20.34)",
+          "oklch(72.14% 0.16887 20.34)",
+          "oklch(83.57% 0.16887 20.34)",
+          "oklch(95% 0.16887 20.34)"
+        ]
+      },
+      "pulso-dark-bg": {
+        "role": "neutral",
+        "displayName": "pulso dark bg",
+        "tonalRamp": [
+          "oklch(15% 0.05933 270.86)",
+          "oklch(26.43% 0.05933 270.86)",
+          "oklch(37.86% 0.05933 270.86)",
+          "oklch(49.29% 0.05933 270.86)",
+          "oklch(60.71% 0.05933 270.86)",
+          "oklch(72.14% 0.05933 270.86)",
+          "oklch(83.57% 0.05933 270.86)",
+          "oklch(95% 0.05933 270.86)"
+        ]
+      },
+      "pulso-dark-surface": {
+        "role": "neutral",
+        "displayName": "pulso dark surface",
+        "tonalRamp": [
+          "oklch(15% 0.06355 268.02)",
+          "oklch(26.43% 0.06355 268.02)",
+          "oklch(37.86% 0.06355 268.02)",
+          "oklch(49.29% 0.06355 268.02)",
+          "oklch(60.71% 0.06355 268.02)",
+          "oklch(72.14% 0.06355 268.02)",
+          "oklch(83.57% 0.06355 268.02)",
+          "oklch(95% 0.06355 268.02)"
+        ]
+      },
+      "pulso-dark-ink": {
+        "role": "neutral",
+        "displayName": "pulso dark ink",
+        "tonalRamp": [
+          "oklch(15% 0.01199 259.82)",
+          "oklch(26.43% 0.01199 259.82)",
+          "oklch(37.86% 0.01199 259.82)",
+          "oklch(49.29% 0.01199 259.82)",
+          "oklch(60.71% 0.01199 259.82)",
+          "oklch(72.14% 0.01199 259.82)",
+          "oklch(83.57% 0.01199 259.82)",
+          "oklch(95% 0.01199 259.82)"
+        ]
+      },
+      "pulso-dark-muted": {
+        "role": "neutral",
+        "displayName": "pulso dark muted",
+        "tonalRamp": [
+          "oklch(15% 0.04860 268.33)",
+          "oklch(26.43% 0.04860 268.33)",
+          "oklch(37.86% 0.04860 268.33)",
+          "oklch(49.29% 0.04860 268.33)",
+          "oklch(60.71% 0.04860 268.33)",
+          "oklch(72.14% 0.04860 268.33)",
+          "oklch(83.57% 0.04860 268.33)",
+          "oklch(95% 0.04860 268.33)"
+        ]
+      },
+      "pulso-dark-soft": {
+        "role": "neutral",
+        "displayName": "pulso dark soft",
+        "tonalRamp": [
+          "oklch(15% 0.08246 268.36)",
+          "oklch(26.43% 0.08246 268.36)",
+          "oklch(37.86% 0.08246 268.36)",
+          "oklch(49.29% 0.08246 268.36)",
+          "oklch(60.71% 0.08246 268.36)",
+          "oklch(72.14% 0.08246 268.36)",
+          "oklch(83.57% 0.08246 268.36)",
+          "oklch(95% 0.08246 268.36)"
+        ]
+      },
+      "pulso-dark-line": {
+        "role": "neutral",
+        "displayName": "pulso dark line",
+        "tonalRamp": [
+          "oklch(15% 0.07779 268.10)",
+          "oklch(26.43% 0.07779 268.10)",
+          "oklch(37.86% 0.07779 268.10)",
+          "oklch(49.29% 0.07779 268.10)",
+          "oklch(60.71% 0.07779 268.10)",
+          "oklch(72.14% 0.07779 268.10)",
+          "oklch(83.57% 0.07779 268.10)",
+          "oklch(95% 0.07779 268.10)"
+        ]
+      },
+      "pulso-dark-brand": {
+        "role": "primary",
+        "displayName": "pulso dark brand",
+        "tonalRamp": [
+          "oklch(15% 0.16319 119.50)",
+          "oklch(26.43% 0.16319 119.50)",
+          "oklch(37.86% 0.16319 119.50)",
+          "oklch(49.29% 0.16319 119.50)",
+          "oklch(60.71% 0.16319 119.50)",
+          "oklch(72.14% 0.16319 119.50)",
+          "oklch(83.57% 0.16319 119.50)",
+          "oklch(95% 0.16319 119.50)"
+        ]
+      },
+      "pulso-dark-onbrand": {
+        "role": "neutral",
+        "displayName": "pulso dark onbrand",
+        "tonalRamp": [
+          "oklch(15% 0.05933 270.86)",
+          "oklch(26.43% 0.05933 270.86)",
+          "oklch(37.86% 0.05933 270.86)",
+          "oklch(49.29% 0.05933 270.86)",
+          "oklch(60.71% 0.05933 270.86)",
+          "oklch(72.14% 0.05933 270.86)",
+          "oklch(83.57% 0.05933 270.86)",
+          "oklch(95% 0.05933 270.86)"
+        ]
+      },
+      "pulso-dark-focus": {
+        "role": "neutral",
+        "displayName": "pulso dark focus",
+        "tonalRamp": [
+          "oklch(15% 0.16319 119.50)",
+          "oklch(26.43% 0.16319 119.50)",
+          "oklch(37.86% 0.16319 119.50)",
+          "oklch(49.29% 0.16319 119.50)",
+          "oklch(60.71% 0.16319 119.50)",
+          "oklch(72.14% 0.16319 119.50)",
+          "oklch(83.57% 0.16319 119.50)",
+          "oklch(95% 0.16319 119.50)"
+        ]
+      },
+      "pulso-dark-error": {
+        "role": "neutral",
+        "displayName": "pulso dark error",
+        "tonalRamp": [
+          "oklch(15% 0.09063 10.63)",
+          "oklch(26.43% 0.09063 10.63)",
+          "oklch(37.86% 0.09063 10.63)",
+          "oklch(49.29% 0.09063 10.63)",
+          "oklch(60.71% 0.09063 10.63)",
+          "oklch(72.14% 0.09063 10.63)",
+          "oklch(83.57% 0.09063 10.63)",
+          "oklch(95% 0.09063 10.63)"
+        ]
+      },
+      "aura-light-bg": {
+        "role": "neutral",
+        "displayName": "aura light bg",
+        "tonalRamp": [
+          "oklch(15% 0.01192 79.78)",
+          "oklch(26.43% 0.01192 79.78)",
+          "oklch(37.86% 0.01192 79.78)",
+          "oklch(49.29% 0.01192 79.78)",
+          "oklch(60.71% 0.01192 79.78)",
+          "oklch(72.14% 0.01192 79.78)",
+          "oklch(83.57% 0.01192 79.78)",
+          "oklch(95% 0.01192 79.78)"
+        ]
+      },
+      "aura-light-surface": {
+        "role": "neutral",
+        "displayName": "aura light surface",
+        "tonalRamp": [
+          "oklch(15% 0.00958 72.66)",
+          "oklch(26.43% 0.00958 72.66)",
+          "oklch(37.86% 0.00958 72.66)",
+          "oklch(49.29% 0.00958 72.66)",
+          "oklch(60.71% 0.00958 72.66)",
+          "oklch(72.14% 0.00958 72.66)",
+          "oklch(83.57% 0.00958 72.66)",
+          "oklch(95% 0.00958 72.66)"
+        ]
+      },
+      "aura-light-ink": {
+        "role": "neutral",
+        "displayName": "aura light ink",
+        "tonalRamp": [
+          "oklch(15% 0.04378 312.74)",
+          "oklch(26.43% 0.04378 312.74)",
+          "oklch(37.86% 0.04378 312.74)",
+          "oklch(49.29% 0.04378 312.74)",
+          "oklch(60.71% 0.04378 312.74)",
+          "oklch(72.14% 0.04378 312.74)",
+          "oklch(83.57% 0.04378 312.74)",
+          "oklch(95% 0.04378 312.74)"
+        ]
+      },
+      "aura-light-muted": {
+        "role": "neutral",
+        "displayName": "aura light muted",
+        "tonalRamp": [
+          "oklch(15% 0.05263 320.26)",
+          "oklch(26.43% 0.05263 320.26)",
+          "oklch(37.86% 0.05263 320.26)",
+          "oklch(49.29% 0.05263 320.26)",
+          "oklch(60.71% 0.05263 320.26)",
+          "oklch(72.14% 0.05263 320.26)",
+          "oklch(83.57% 0.05263 320.26)",
+          "oklch(95% 0.05263 320.26)"
+        ]
+      },
+      "aura-light-soft": {
+        "role": "neutral",
+        "displayName": "aura light soft",
+        "tonalRamp": [
+          "oklch(15% 0.04162 305.76)",
+          "oklch(26.43% 0.04162 305.76)",
+          "oklch(37.86% 0.04162 305.76)",
+          "oklch(49.29% 0.04162 305.76)",
+          "oklch(60.71% 0.04162 305.76)",
+          "oklch(72.14% 0.04162 305.76)",
+          "oklch(83.57% 0.04162 305.76)",
+          "oklch(95% 0.04162 305.76)"
+        ]
+      },
+      "aura-light-line": {
+        "role": "neutral",
+        "displayName": "aura light line",
+        "tonalRamp": [
+          "oklch(15% 0.04815 315.80)",
+          "oklch(26.43% 0.04815 315.80)",
+          "oklch(37.86% 0.04815 315.80)",
+          "oklch(49.29% 0.04815 315.80)",
+          "oklch(60.71% 0.04815 315.80)",
+          "oklch(72.14% 0.04815 315.80)",
+          "oklch(83.57% 0.04815 315.80)",
+          "oklch(95% 0.04815 315.80)"
+        ]
+      },
+      "aura-light-brand": {
+        "role": "primary",
+        "displayName": "aura light brand",
+        "tonalRamp": [
+          "oklch(15% 0.04378 312.74)",
+          "oklch(26.43% 0.04378 312.74)",
+          "oklch(37.86% 0.04378 312.74)",
+          "oklch(49.29% 0.04378 312.74)",
+          "oklch(60.71% 0.04378 312.74)",
+          "oklch(72.14% 0.04378 312.74)",
+          "oklch(83.57% 0.04378 312.74)",
+          "oklch(95% 0.04378 312.74)"
+        ]
+      },
+      "aura-light-onbrand": {
+        "role": "neutral",
+        "displayName": "aura light onbrand",
+        "tonalRamp": [
+          "oklch(15% 0.01192 79.78)",
+          "oklch(26.43% 0.01192 79.78)",
+          "oklch(37.86% 0.01192 79.78)",
+          "oklch(49.29% 0.01192 79.78)",
+          "oklch(60.71% 0.01192 79.78)",
+          "oklch(72.14% 0.01192 79.78)",
+          "oklch(83.57% 0.01192 79.78)",
+          "oklch(95% 0.01192 79.78)"
+        ]
+      },
+      "aura-light-focus": {
+        "role": "neutral",
+        "displayName": "aura light focus",
+        "tonalRamp": [
+          "oklch(15% 0.11735 303.97)",
+          "oklch(26.43% 0.11735 303.97)",
+          "oklch(37.86% 0.11735 303.97)",
+          "oklch(49.29% 0.11735 303.97)",
+          "oklch(60.71% 0.11735 303.97)",
+          "oklch(72.14% 0.11735 303.97)",
+          "oklch(83.57% 0.11735 303.97)",
+          "oklch(95% 0.11735 303.97)"
+        ]
+      },
+      "aura-light-error": {
+        "role": "neutral",
+        "displayName": "aura light error",
+        "tonalRamp": [
+          "oklch(15% 0.16149 14.84)",
+          "oklch(26.43% 0.16149 14.84)",
+          "oklch(37.86% 0.16149 14.84)",
+          "oklch(49.29% 0.16149 14.84)",
+          "oklch(60.71% 0.16149 14.84)",
+          "oklch(72.14% 0.16149 14.84)",
+          "oklch(83.57% 0.16149 14.84)",
+          "oklch(95% 0.16149 14.84)"
+        ]
+      },
+      "aura-dark-bg": {
+        "role": "neutral",
+        "displayName": "aura dark bg",
+        "tonalRamp": [
+          "oklch(15% 0.03527 304.29)",
+          "oklch(26.43% 0.03527 304.29)",
+          "oklch(37.86% 0.03527 304.29)",
+          "oklch(49.29% 0.03527 304.29)",
+          "oklch(60.71% 0.03527 304.29)",
+          "oklch(72.14% 0.03527 304.29)",
+          "oklch(83.57% 0.03527 304.29)",
+          "oklch(95% 0.03527 304.29)"
+        ]
+      },
+      "aura-dark-surface": {
+        "role": "neutral",
+        "displayName": "aura dark surface",
+        "tonalRamp": [
+          "oklch(15% 0.04701 305.72)",
+          "oklch(26.43% 0.04701 305.72)",
+          "oklch(37.86% 0.04701 305.72)",
+          "oklch(49.29% 0.04701 305.72)",
+          "oklch(60.71% 0.04701 305.72)",
+          "oklch(72.14% 0.04701 305.72)",
+          "oklch(83.57% 0.04701 305.72)",
+          "oklch(95% 0.04701 305.72)"
+        ]
+      },
+      "aura-dark-ink": {
+        "role": "neutral",
+        "displayName": "aura dark ink",
+        "tonalRamp": [
+          "oklch(15% 0.01192 79.78)",
+          "oklch(26.43% 0.01192 79.78)",
+          "oklch(37.86% 0.01192 79.78)",
+          "oklch(49.29% 0.01192 79.78)",
+          "oklch(60.71% 0.01192 79.78)",
+          "oklch(72.14% 0.01192 79.78)",
+          "oklch(83.57% 0.01192 79.78)",
+          "oklch(95% 0.01192 79.78)"
+        ]
+      },
+      "aura-dark-muted": {
+        "role": "neutral",
+        "displayName": "aura dark muted",
+        "tonalRamp": [
+          "oklch(15% 0.04143 307.91)",
+          "oklch(26.43% 0.04143 307.91)",
+          "oklch(37.86% 0.04143 307.91)",
+          "oklch(49.29% 0.04143 307.91)",
+          "oklch(60.71% 0.04143 307.91)",
+          "oklch(72.14% 0.04143 307.91)",
+          "oklch(83.57% 0.04143 307.91)",
+          "oklch(95% 0.04143 307.91)"
+        ]
+      },
+      "aura-dark-soft": {
+        "role": "neutral",
+        "displayName": "aura dark soft",
+        "tonalRamp": [
+          "oklch(15% 0.05433 313.60)",
+          "oklch(26.43% 0.05433 313.60)",
+          "oklch(37.86% 0.05433 313.60)",
+          "oklch(49.29% 0.05433 313.60)",
+          "oklch(60.71% 0.05433 313.60)",
+          "oklch(72.14% 0.05433 313.60)",
+          "oklch(83.57% 0.05433 313.60)",
+          "oklch(95% 0.05433 313.60)"
+        ]
+      },
+      "aura-dark-line": {
+        "role": "neutral",
+        "displayName": "aura dark line",
+        "tonalRamp": [
+          "oklch(15% 0.06002 310.84)",
+          "oklch(26.43% 0.06002 310.84)",
+          "oklch(37.86% 0.06002 310.84)",
+          "oklch(49.29% 0.06002 310.84)",
+          "oklch(60.71% 0.06002 310.84)",
+          "oklch(72.14% 0.06002 310.84)",
+          "oklch(83.57% 0.06002 310.84)",
+          "oklch(95% 0.06002 310.84)"
+        ]
+      },
+      "aura-dark-brand": {
+        "role": "primary",
+        "displayName": "aura dark brand",
+        "tonalRamp": [
+          "oklch(15% 0.07340 300.90)",
+          "oklch(26.43% 0.07340 300.90)",
+          "oklch(37.86% 0.07340 300.90)",
+          "oklch(49.29% 0.07340 300.90)",
+          "oklch(60.71% 0.07340 300.90)",
+          "oklch(72.14% 0.07340 300.90)",
+          "oklch(83.57% 0.07340 300.90)",
+          "oklch(95% 0.07340 300.90)"
+        ]
+      },
+      "aura-dark-onbrand": {
+        "role": "neutral",
+        "displayName": "aura dark onbrand",
+        "tonalRamp": [
+          "oklch(15% 0.04378 312.74)",
+          "oklch(26.43% 0.04378 312.74)",
+          "oklch(37.86% 0.04378 312.74)",
+          "oklch(49.29% 0.04378 312.74)",
+          "oklch(60.71% 0.04378 312.74)",
+          "oklch(72.14% 0.04378 312.74)",
+          "oklch(83.57% 0.04378 312.74)",
+          "oklch(95% 0.04378 312.74)"
+        ]
+      },
+      "aura-dark-focus": {
+        "role": "neutral",
+        "displayName": "aura dark focus",
+        "tonalRamp": [
+          "oklch(15% 0.07340 300.90)",
+          "oklch(26.43% 0.07340 300.90)",
+          "oklch(37.86% 0.07340 300.90)",
+          "oklch(49.29% 0.07340 300.90)",
+          "oklch(60.71% 0.07340 300.90)",
+          "oklch(72.14% 0.07340 300.90)",
+          "oklch(83.57% 0.07340 300.90)",
+          "oklch(95% 0.07340 300.90)"
+        ]
+      },
+      "aura-dark-error": {
+        "role": "neutral",
+        "displayName": "aura dark error",
+        "tonalRamp": [
+          "oklch(15% 0.09271 6.61)",
+          "oklch(26.43% 0.09271 6.61)",
+          "oklch(37.86% 0.09271 6.61)",
+          "oklch(49.29% 0.09271 6.61)",
+          "oklch(60.71% 0.09271 6.61)",
+          "oklch(72.14% 0.09271 6.61)",
+          "oklch(83.57% 0.09271 6.61)",
+          "oklch(95% 0.09271 6.61)"
+        ]
+      },
+      "ritual-art-terracota": {
+        "role": "secondary",
+        "displayName": "ritual art terracota",
+        "tonalRamp": [
+          "oklch(15% 0.16599 38.03)",
+          "oklch(26.43% 0.16599 38.03)",
+          "oklch(37.86% 0.16599 38.03)",
+          "oklch(49.29% 0.16599 38.03)",
+          "oklch(60.71% 0.16599 38.03)",
+          "oklch(72.14% 0.16599 38.03)",
+          "oklch(83.57% 0.16599 38.03)",
+          "oklch(95% 0.16599 38.03)"
+        ]
+      },
+      "ritual-art-oliva": {
+        "role": "secondary",
+        "displayName": "ritual art oliva",
+        "tonalRamp": [
+          "oklch(15% 0.06498 122.30)",
+          "oklch(26.43% 0.06498 122.30)",
+          "oklch(37.86% 0.06498 122.30)",
+          "oklch(49.29% 0.06498 122.30)",
+          "oklch(60.71% 0.06498 122.30)",
+          "oklch(72.14% 0.06498 122.30)",
+          "oklch(83.57% 0.06498 122.30)",
+          "oklch(95% 0.06498 122.30)"
+        ]
+      },
+      "aura-art-coral": {
+        "role": "secondary",
+        "displayName": "aura art coral",
+        "tonalRamp": [
+          "oklch(15% 0.13201 38.03)",
+          "oklch(26.43% 0.13201 38.03)",
+          "oklch(37.86% 0.13201 38.03)",
+          "oklch(49.29% 0.13201 38.03)",
+          "oklch(60.71% 0.13201 38.03)",
+          "oklch(72.14% 0.13201 38.03)",
+          "oklch(83.57% 0.13201 38.03)",
+          "oklch(95% 0.13201 38.03)"
+        ]
+      },
+      "studio-bg": {
+        "role": "neutral",
+        "displayName": "studio bg",
+        "tonalRamp": [
+          "oklch(15% 0.00696 88.64)",
+          "oklch(26.43% 0.00696 88.64)",
+          "oklch(37.86% 0.00696 88.64)",
+          "oklch(49.29% 0.00696 88.64)",
+          "oklch(60.71% 0.00696 88.64)",
+          "oklch(72.14% 0.00696 88.64)",
+          "oklch(83.57% 0.00696 88.64)",
+          "oklch(95% 0.00696 88.64)"
+        ]
+      },
+      "studio-ink": {
+        "role": "neutral",
+        "displayName": "studio ink",
+        "tonalRamp": [
+          "oklch(15% 0.00957 303.84)",
+          "oklch(26.43% 0.00957 303.84)",
+          "oklch(37.86% 0.00957 303.84)",
+          "oklch(49.29% 0.00957 303.84)",
+          "oklch(60.71% 0.00957 303.84)",
+          "oklch(72.14% 0.00957 303.84)",
+          "oklch(83.57% 0.00957 303.84)",
+          "oklch(95% 0.00957 303.84)"
+        ]
+      },
+      "studio-surface": {
+        "role": "neutral",
+        "displayName": "studio surface",
+        "tonalRamp": [
+          "oklch(15% 0.00000 89.88)",
+          "oklch(26.43% 0.00000 89.88)",
+          "oklch(37.86% 0.00000 89.88)",
+          "oklch(49.29% 0.00000 89.88)",
+          "oklch(60.71% 0.00000 89.88)",
+          "oklch(72.14% 0.00000 89.88)",
+          "oklch(83.57% 0.00000 89.88)",
+          "oklch(95% 0.00000 89.88)"
+        ]
+      },
+      "studio-muted": {
+        "role": "neutral",
+        "displayName": "studio muted",
+        "tonalRamp": [
+          "oklch(15% 0.01798 315.89)",
+          "oklch(26.43% 0.01798 315.89)",
+          "oklch(37.86% 0.01798 315.89)",
+          "oklch(49.29% 0.01798 315.89)",
+          "oklch(60.71% 0.01798 315.89)",
+          "oklch(72.14% 0.01798 315.89)",
+          "oklch(83.57% 0.01798 315.89)",
+          "oklch(95% 0.01798 315.89)"
+        ]
+      },
+      "studio-soft": {
+        "role": "neutral",
+        "displayName": "studio soft",
+        "tonalRamp": [
+          "oklch(15% 0.01035 81.79)",
+          "oklch(26.43% 0.01035 81.79)",
+          "oklch(37.86% 0.01035 81.79)",
+          "oklch(49.29% 0.01035 81.79)",
+          "oklch(60.71% 0.01035 81.79)",
+          "oklch(72.14% 0.01035 81.79)",
+          "oklch(83.57% 0.01035 81.79)",
+          "oklch(95% 0.01035 81.79)"
+        ]
+      },
+      "studio-line": {
+        "role": "neutral",
+        "displayName": "studio line",
+        "tonalRamp": [
+          "oklch(15% 0.01411 78.25)",
+          "oklch(26.43% 0.01411 78.25)",
+          "oklch(37.86% 0.01411 78.25)",
+          "oklch(49.29% 0.01411 78.25)",
+          "oklch(60.71% 0.01411 78.25)",
+          "oklch(72.14% 0.01411 78.25)",
+          "oklch(83.57% 0.01411 78.25)",
+          "oklch(95% 0.01411 78.25)"
+        ]
+      },
+      "studio-input-line": {
+        "role": "neutral",
+        "displayName": "studio input line",
+        "tonalRamp": [
+          "oklch(15% 0.01392 329.67)",
+          "oklch(26.43% 0.01392 329.67)",
+          "oklch(37.86% 0.01392 329.67)",
+          "oklch(49.29% 0.01392 329.67)",
+          "oklch(60.71% 0.01392 329.67)",
+          "oklch(72.14% 0.01392 329.67)",
+          "oklch(83.57% 0.01392 329.67)",
+          "oklch(95% 0.01392 329.67)"
+        ]
+      },
+      "studio-focus": {
+        "role": "neutral",
+        "displayName": "studio focus",
+        "tonalRamp": [
+          "oklch(15% 0.13149 36.13)",
+          "oklch(26.43% 0.13149 36.13)",
+          "oklch(37.86% 0.13149 36.13)",
+          "oklch(49.29% 0.13149 36.13)",
+          "oklch(60.71% 0.13149 36.13)",
+          "oklch(72.14% 0.13149 36.13)",
+          "oklch(83.57% 0.13149 36.13)",
+          "oklch(95% 0.13149 36.13)"
+        ]
+      },
+      "studio-emphasis": {
+        "role": "neutral",
+        "displayName": "studio emphasis",
+        "tonalRamp": [
+          "oklch(15% 0.08858 0.81)",
+          "oklch(26.43% 0.08858 0.81)",
+          "oklch(37.86% 0.08858 0.81)",
+          "oklch(49.29% 0.08858 0.81)",
+          "oklch(60.71% 0.08858 0.81)",
+          "oklch(72.14% 0.08858 0.81)",
+          "oklch(83.57% 0.08858 0.81)",
+          "oklch(95% 0.08858 0.81)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "studio-display": {
+        "displayName": "studio display",
+        "purpose": "Contêiner de apresentação."
+      },
+      "studio-title": {
+        "displayName": "studio title",
+        "purpose": "Contêiner de apresentação."
+      },
+      "studio-body": {
+        "displayName": "studio body",
+        "purpose": "Contêiner de apresentação."
+      },
+      "studio-intro": {
+        "displayName": "studio intro",
+        "purpose": "Contêiner de apresentação."
+      },
+      "ui-base": {
+        "displayName": "ui base",
+        "purpose": "Papel operacional comum às alternativas."
+      },
+      "ui-body": {
+        "displayName": "ui body",
+        "purpose": "Papel operacional comum às alternativas."
+      },
+      "ui-label": {
+        "displayName": "ui label",
+        "purpose": "Papel operacional comum às alternativas."
+      },
+      "ui-button": {
+        "displayName": "ui button",
+        "purpose": "Papel operacional comum às alternativas."
+      },
+      "ui-input": {
+        "displayName": "ui input",
+        "purpose": "Papel operacional comum às alternativas."
+      },
+      "ui-caption": {
+        "displayName": "ui caption",
+        "purpose": "Papel operacional comum às alternativas."
+      },
+      "ritual-title": {
+        "displayName": "ritual title",
+        "purpose": "Papel específico da alternativa; não é identidade aprovada."
+      },
+      "pulso-title": {
+        "displayName": "pulso title",
+        "purpose": "Papel específico da alternativa; não é identidade aprovada."
+      },
+      "aura-title": {
+        "displayName": "aura title",
+        "purpose": "Papel específico da alternativa; não é identidade aprovada."
+      },
+      "ritual-section": {
+        "displayName": "ritual section",
+        "purpose": "Papel específico da alternativa; não é identidade aprovada."
+      },
+      "pulso-section": {
+        "displayName": "pulso section",
+        "purpose": "Papel específico da alternativa; não é identidade aprovada."
+      },
+      "aura-section": {
+        "displayName": "aura section",
+        "purpose": "Papel específico da alternativa; não é identidade aprovada."
+      },
+      "ritual-feed": {
+        "displayName": "ritual feed",
+        "purpose": "Papel específico da alternativa; não é identidade aprovada."
+      },
+      "pulso-feed": {
+        "displayName": "pulso feed",
+        "purpose": "Papel específico da alternativa; não é identidade aprovada."
+      },
+      "aura-feed": {
+        "displayName": "aura feed",
+        "purpose": "Papel específico da alternativa; não é identidade aprovada."
+      }
+    },
+    "shadows": [
+      {
+        "name": "phone-presentation-only",
+        "value": "0 18px 36px -24px #18141e55",
+        "purpose": "Moldura externa da comparação; não herdar em componentes de produto."
+      },
+      {
+        "name": "notice",
+        "value": "0 8px 24px #0002",
+        "purpose": "Aviso flutuante externo da demonstração."
+      }
+    ],
+    "motion": [
+      {
+        "name": "notice-opacity",
+        "value": "opacity .2s",
+        "purpose": "Entrada e saída do aviso local."
+      },
+      {
+        "name": "notice-duration",
+        "value": "4200ms",
+        "purpose": "Tempo até ocultar o aviso, conforme gallery.js."
+      },
+      {
+        "name": "scroll",
+        "value": "smooth",
+        "purpose": "Rolagem da galeria; auto quando a pessoa prefere movimento reduzido."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "animation:none!important;transition:none!important",
+        "purpose": "Remoção global sob prefers-reduced-motion: reduce."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "wide-gallery",
+        "value": "min-width:1450px"
+      },
+      {
+        "name": "compact-comparison",
+        "value": "max-width:1050px"
+      },
+      {
+        "name": "stacked-comparison",
+        "value": "max-width:780px"
+      }
+    ],
+    "focus": {
+      "value": "outline:3px solid var(--focus);outline-offset:4px",
+      "purpose": "Use the alternative focus token internally, studio-focus externally."
+    },
+    "verification": {
+      "qa": "QA.json",
+      "contrast": "contrast-audit.json",
+      "typographyParity": "typography-parity.json",
+      "review": ".impeccable/review/finish-review.md",
+      "scope": "Existing artifacts read, not independently rerun by this documentation pass."
+    }
+  },
+  "components": [
+    {
+      "name": "Ritual — ação clara",
+      "kind": "button",
+      "refersTo": "ritual-light-primary",
+      "description": "Botão da alternativa em modo claro. Prévia CSS; não envia dados.",
+      "html": "<button type=\"button\" class=\"ds-ritual-primary\">Encontrar minha turma</button>",
+      "css": ".ds-ritual-primary{font:750 13px/1.5 Manrope,sans-serif;min-height:46px;width:100%;padding:12px 17px;border:0;border-radius:12px;background:#521f35;color:#f5ecdd;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;}.ds-ritual-primary:hover{filter:brightness(1.07)}.ds-ritual-primary:focus-visible{outline:3px solid #521f35;outline-offset:4px;}.ds-ritual-primary:disabled{opacity:.6;cursor:default}"
+    },
+    {
+      "name": "Pulso — ação clara",
+      "kind": "button",
+      "refersTo": "pulso-light-primary",
+      "description": "Botão da alternativa em modo claro. Prévia CSS; não envia dados.",
+      "html": "<button type=\"button\" class=\"ds-pulso-primary\">Encontrar minha turma</button>",
+      "css": ".ds-pulso-primary{font:750 13px/1.5 Manrope,sans-serif;min-height:46px;width:100%;padding:12px 17px;border:0;border-radius:12px;background:#254cf1;color:#ffffff;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;}.ds-pulso-primary:hover{filter:brightness(1.07)}.ds-pulso-primary:focus-visible{outline:3px solid #254cf1;outline-offset:4px;}.ds-pulso-primary:disabled{opacity:.6;cursor:default}"
+    },
+    {
+      "name": "Aura — ação clara",
+      "kind": "button",
+      "refersTo": "aura-light-primary",
+      "description": "Botão da alternativa em modo claro. Prévia CSS; não envia dados.",
+      "html": "<button type=\"button\" class=\"ds-aura-primary\">Encontrar minha turma</button>",
+      "css": ".ds-aura-primary{font:750 13px/1.5 Manrope,sans-serif;min-height:46px;width:100%;padding:12px 17px;border:0;border-radius:16px;background:#302238;color:#f6f1e9;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;}.ds-aura-primary:hover{filter:brightness(1.07)}.ds-aura-primary:focus-visible{outline:3px solid #725099;outline-offset:4px;}.ds-aura-primary:disabled{opacity:.6;cursor:default}"
+    },
+    {
+      "name": "Ritual — ação secundária clara",
+      "kind": "button",
+      "refersTo": "ritual-light-secondary",
+      "description": "Ação com borda; hover troca apenas o fundo.",
+      "html": "<button type=\"button\" class=\"ds-ritual-secondary\">Ver pessoas</button>",
+      "css": ".ds-ritual-secondary{font:750 13px/1.5 Manrope,sans-serif;min-height:46px;width:100%;padding:12px 17px;border:1px solid #c4aaa5;border-radius:12px;background:#fffbf5;color:#38212b;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer}.ds-ritual-secondary:hover{background:#e7d6c7}.ds-ritual-secondary:focus-visible{outline:3px solid #521f35;outline-offset:4px}.ds-ritual-secondary:disabled{opacity:.6;cursor:default}"
+    },
+    {
+      "name": "Aura — campo claro",
+      "kind": "input",
+      "refersTo": "aura-light-input",
+      "description": "Rótulo explícito, placeholder e cursor tematizados. Sem validação ou envio.",
+      "html": "<label class=\"ds-aura-field\"><span>E-mail</span><input type=\"email\" placeholder=\"voce@exemplo.com\" autocomplete=\"off\"></label>",
+      "css": ".ds-aura-field{display:block;margin:18px 0;color:#302238;font:400 14px/1.5 Manrope,sans-serif}.ds-aura-field>span{display:block;font-size:12px;font-weight:700;margin-bottom:7px}.ds-aura-field input{font:400 13px/1.5 Manrope,sans-serif;width:100%;border:1px solid #bda8c6;color:#302238;background:#fffaf4;min-height:47px;border-radius:16px;padding:12px;caret-color:#725099}.ds-aura-field input::placeholder{color:#68516d;opacity:1}.ds-aura-field input:focus-visible{outline:3px solid #725099;outline-offset:4px}"
+    },
+    {
+      "name": "Pulso — navegação escura",
+      "kind": "nav",
+      "refersTo": "pulso-dark-navigation",
+      "description": "Cinco destinos do estudo, Perfil selecionado. Rótulos reduzidos da miniatura não são padrão aprovado para produção.",
+      "html": "<nav class=\"ds-pulso-nav\" aria-label=\"Navegação da proposta Pulso\"><button type=\"button\" ><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"ds-icon\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8\"></path><path d=\"M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\"></path></svg><span>Início</span></button><button type=\"button\" ><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"ds-icon\" aria-hidden=\"true\" focusable=\"false\"><circle cx=\"12\" cy=\"8\" r=\"5\"></circle><path d=\"M20 21a8 8 0 0 0-16 0\"></path></svg><span>Pessoas</span></button><button type=\"button\" ><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"ds-icon\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2\"></path><path d=\"M16 3.128a4 4 0 0 1 0 7.744\"></path><path d=\"M22 21v-2a4 4 0 0 0-3-3.87\"></path><circle cx=\"9\" cy=\"7\" r=\"4\"></circle></svg><span>Comunidades</span></button><button type=\"button\" ><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"ds-icon\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0\"></path><circle cx=\"12\" cy=\"10\" r=\"3\"></circle></svg><span>Arenas</span></button><button type=\"button\" aria-current=\"page\" ><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"ds-icon\" aria-hidden=\"true\" focusable=\"false\"><circle cx=\"12\" cy=\"8\" r=\"5\"></circle><path d=\"M20 21a8 8 0 0 0-16 0\"></path></svg><span>Perfil</span></button></nav>",
+      "css": ".ds-pulso-nav{height:71px;min-height:71px;padding:6px 9px 8px;border-top:1px solid #6274a4;background:#101735;display:grid;grid-template-columns:repeat(5,1fr)}.ds-pulso-nav button{font:700 9px/1.5 Manrope,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#b8c5e6;background:none;border:0;padding:0;border-radius:10px;min-height:50px;cursor:pointer}.ds-pulso-nav button[aria-current=page]{color:#edf2fa;background:#293866}.ds-pulso-nav .ds-icon{display:block;width:20px;height:20px;stroke-width:1.7}.ds-pulso-nav button:focus-visible{outline:3px solid #d9f56e;outline-offset:4px}"
+    },
+    {
+      "name": "Ritual — filtro claro",
+      "kind": "chip",
+      "refersTo": "ritual-light-chip",
+      "description": "Estado selecionado expresso por aria-pressed; snippet não troca estado sem interação do host.",
+      "html": "<div class=\"ds-ritual-chips\"><button type=\"button\" aria-pressed=\"true\">Pessoas</button><button type=\"button\" aria-pressed=\"false\">Arenas</button></div>",
+      "css": ".ds-ritual-chips{display:flex;flex-wrap:wrap;gap:7px;margin:17px 0}.ds-ritual-chips button{font:700 11px/1.5 Manrope,sans-serif;border:1px solid #c4aaa5;border-radius:999px;padding:8px 13px;min-height:36px;background:none;color:#38212b;cursor:pointer}.ds-ritual-chips button[aria-pressed=true]{background:#38212b;border-color:#38212b;color:#f5ecdd}.ds-ritual-chips button:focus-visible{outline:3px solid #521f35;outline-offset:4px}"
+    },
+    {
+      "name": "Aura — destaque claro",
+      "kind": "card",
+      "refersTo": "aura-light-feature",
+      "description": "Curva editorial da alternativa; o texto ilustrativo pertence ao estudo.",
+      "html": "<section class=\"ds-aura-feature\"><h2>Tem uma turma para você.</h2><p>Comunidades para continuar a conversa depois do jogo.</p><button type=\"button\">Ver comunidades</button></section>",
+      "css": ".ds-aura-feature{padding:28px 23px;margin:20px 0;border-radius:45px 16px 16px 16px;background:#302238;color:#f6f1e9;position:relative;overflow:hidden;font:400 14px/1.5 Manrope,sans-serif}.ds-aura-feature h2{font:700 26px/1.1 Syne,sans-serif;max-width:9ch;margin:0;text-wrap:balance}.ds-aura-feature p{font-size:12px;margin:10px 0 0;max-width:28ch;line-height:1.65}.ds-aura-feature button{margin-top:18px;font:750 13px/1.5 Manrope,sans-serif;min-height:46px;width:100%;padding:12px 17px;border:0;border-radius:16px;background:#f6f1e9;color:#302238;cursor:pointer}.ds-aura-feature button:hover{filter:brightness(1.07)}.ds-aura-feature button:focus-visible{outline:3px solid #725099;outline-offset:4px}.ds-aura-feature button:disabled{opacity:.6;cursor:default}"
+    },
+    {
+      "name": "Contêiner — seletor de alternativa",
+      "kind": "button",
+      "refersTo": "studio-tab-selected",
+      "description": "Controle da apresentação, sem eleger uma marca. O host é responsável por trocar aria-pressed.",
+      "html": "<div class=\"ds-studio-tabs\"><button type=\"button\" aria-pressed=\"true\">As três</button><button type=\"button\" aria-pressed=\"false\">Ritual</button><button type=\"button\" aria-pressed=\"false\">Pulso</button><button type=\"button\" aria-pressed=\"false\">Aura</button></div>",
+      "css": ".ds-studio-tabs{display:flex;gap:4px;border-bottom:1px solid #cbc5bc;padding-bottom:12px;flex-wrap:wrap;color:#27252a}.ds-studio-tabs button{font:700 15px/1.5 Manrope,sans-serif;color:inherit;border:0;background:none;padding:12px 20px;border-radius:6px;min-height:46px;cursor:pointer}.ds-studio-tabs button[aria-pressed=true]{background:#27252a;color:#ffffff}.ds-studio-tabs button:hover:not([aria-pressed=true]){background:#e9e5de}.ds-studio-tabs button:focus-visible{outline:3px solid #b35339;outline-offset:4px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "O esporte como cultura vivida — três alternativas editoriais",
+    "overview": "Este documento descreve a galeria local de Pico Social e seus três sistemas comparáveis: Ritual, Pulso e Aura. A direção editorial de moda, jovem, premium, artística e refinada foi solicitada; nenhuma das alternativas foi aprovada como identidade final. Os tokens são referências precisas exclusivamente deste estudo, não autorização para alterar a interface publicada.\n\nRitual combina vinho, areia, contraste serifado e luz quente; Pulso combina cobalto, noite, cor inteira e ação; Aura combina figo, lavanda, curvas amplas e encontros em luz difusa. Manrope sustenta a operação comum. O contêiner de apresentação usa papel claro, tinta escura e Bodoni Moda: sua tipografia não é uma escolha de Ritual para o produto.",
+    "keyCharacteristics": [
+      "Três identidades completas comparadas com as mesmas telas e conteúdo ilustrativo.",
+      "Expressão em aberturas, fotografia e marca; leitura estável nos controles e formulários.",
+      "Modos claros e escuros explícitos por alternativa, com exceções editoriais de boas-vindas.",
+      "Galeria local sem backend, persistência, analytics ou envio de ações sociais."
+    ],
+    "rules": [
+      {
+        "name": "Alternativas preservadas",
+        "body": "Reutilizar um sistema completo dentro da sua alternativa; não combinar sua fonte, cor ou forma com as de outra como se existisse uma identidade final aprovada.",
+        "section": "colors"
+      },
+      {
+        "name": "Pares explícitos",
+        "body": "Aplicar os pares de cada modo e contexto. Boas-vindas mantém sua combinação editorial própria; inverter todas as cores não reproduz o estudo.",
+        "section": "colors"
+      },
+      {
+        "name": "Expressão e operação",
+        "body": "Usar a fonte de cada alternativa nos títulos previstos e Manrope em operação. As regras do relatório não podem substituir a tipografia dos telefones que ele incorpora.",
+        "section": "typography"
+      },
+      {
+        "name": "Moldura não é componente",
+        "body": "A sombra e a borda simultâneas do telefone pertencem à apresentação. Não transportar esse enquadramento para cards ou superfícies do aplicativo.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do preservar a indicação de estudo visual, os dados ilustrativos e a origem sintética das fotografias.",
+      "Do usar SVGs, tokens e HTML como referências precisas; usar as pranchas geradas como atmosfera.",
+      "Do preservar Início/Pessoas/Comunidades/Arenas/Perfil, com Meus jogos no perfil/conta.",
+      "Do manter jogos retrospectivos privados e compartilhamento separado, com audiência e destino explícitos.",
+      "Do reutilizar os pares de texto/fundo, as fontes locais e os estados de foco da mesma alternativa.",
+      "Do conferir novamente contraste, leitura e interação quando mudar pares, texto, tamanho ou contexto."
+    ],
+    "donts": [
+      "Don't tratar a recomendação autoral de Ritual ou a disposição ship da revisão como aprovação de identidade.",
+      "Don't transportar este estudo para produção, alterar permissões ou inventar rotas a partir dos estados ilustrados.",
+      "Don't usar cores de apoio das peças como novas cores semânticas de formulário sem uma definição e verificação próprias.",
+      "Don't herdar a tipografia reduzida dos rótulos de miniatura como padrão de leitura do produto.",
+      "Don't apresentar navegação ou filtros locais como autenticação, salvamento, envio ou publicação reais.",
+      "Don't interpretar a auditoria de pares sólidos como certificação completa de acessibilidade."
+    ]
+  }
+}

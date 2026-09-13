@@ -1,11 +1,11 @@
 .tour-boundary { min-width: 0; }
-.tour-welcome { margin: .5rem 0 1.5rem; padding: 1.5rem 0; border-bottom: 1px solid var(--border-subtle); }
-.tour-eyebrow { display: flex; align-items: center; gap: .5rem; color: var(--sand); font-size: var(--text-caption); font-weight: 650; letter-spacing: .055em; margin: 0; }
+.tour-welcome { margin: .5rem 0 1.5rem; padding: 1.5rem; border-radius: var(--radius-feature); background: var(--accent-soft); }
+.tour-eyebrow { display: flex; align-items: center; gap: .5rem; color: var(--accent); font-size: var(--text-caption); font-weight: 600; letter-spacing: .055em; margin: 0; }
 .tour-welcome h2 { font-size: clamp(1.6rem, 6vw, 2rem); max-width: 22ch; line-height: 1.16; letter-spacing: -.035em; margin: .8rem 0; }
 .tour-welcome > p:not(.tour-eyebrow) { max-width: 54ch; color: var(--text-secondary); line-height: 1.65; }
 .tour-welcome-actions { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.1rem 0 .7rem; }
 .tour-welcome small { display: block; color: var(--text-muted); font-size: var(--text-caption); }
-.tour-guide { position: sticky; top: .5rem; z-index: 15; display: flex; flex-direction: column; max-height: 55svh; padding: .5rem .75rem .75rem; margin: .5rem 0 1.4rem; border: 1px solid rgb(200 169 106 / 50%); border-radius: var(--radius-card); background: var(--surface-overlay); box-shadow: var(--shadow-elevated); }
+.tour-guide { position: sticky; top: .5rem; z-index: 15; display: flex; flex-direction: column; max-height: 55svh; padding: .5rem .75rem .75rem; margin: .5rem 0 1.4rem; border: 1px solid var(--border-control-raised); border-radius: var(--radius-card); background: var(--surface-overlay); box-shadow: var(--shadow-elevated); }
 .tour-guide-header { display: flex; align-items: center; justify-content: space-between; gap: .25rem; flex-shrink: 0; }
 .tour-guide-header > div { display: flex; }
 .tour-guide-header .tour-eyebrow { letter-spacing: .015em; }
@@ -13,16 +13,19 @@
 .tour-guide h2:focus { outline: none; }
 .tour-guide-copy { min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
 .tour-guide-copy > p { color: var(--text-secondary); font-size: var(--text-label); line-height: 1.5; margin: .45rem 0 .65rem; }
-.tour-guide-copy .tour-instruction { color: var(--foreground); border-left: 2px solid var(--sand); padding-left: .7rem; }
+.tour-guide-copy .tour-instruction { color: var(--foreground); padding: .75rem; background: var(--accent-soft); border-radius: var(--radius-control); }
 .tour-guide-copy .tour-demo-note, .tour-guide-copy .tour-fallback { font-size: var(--text-caption); color: var(--text-muted); }
 .tour-point { color: var(--accent); margin-right: auto; }
+.tour-guide-header .tour-pause { padding-inline: .5rem; white-space: nowrap; }
+.tour-guide-header { flex-wrap: wrap; }
+.tour-guide-header > div { margin-left: auto; }
 .tour-guide-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: .35rem; padding-top: .55rem; flex-shrink: 0; }
 .tour-guide-actions > .button { padding-inline: .5rem; }
 .tour-guide-actions > .button-primary { flex: 1; min-width: min(100%, 10rem); }
 .tour-launcher { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem; margin-block: .5rem; }
 .tour-chevron-up { transform: rotate(180deg); }
-[data-tour-highlight] { outline: 2px solid var(--sand); outline-offset: 5px; scroll-margin-top: var(--tour-height, 2rem); scroll-margin-bottom: 7rem; }
+[data-tour-highlight] { outline: 2px solid var(--focus); outline-offset: 5px; scroll-margin-top: var(--tour-height, 2rem); scroll-margin-bottom: 7rem; }
 body:has(dialog[open]) .tour-guide { display: none; }
 @media (min-width: 800px) { .tour-guide { top: 1rem; max-height: 52svh; } .tour-guide-actions > .button-primary { flex: 0 1 auto; } }
-@media (max-height: 560px) { .tour-guide { max-height: 62svh; } }
+@media (max-height: 560px) { .tour-guide { position: relative; top: auto; max-height: none; } .tour-guide-copy { overflow: visible; } }
 @media (prefers-reduced-motion: reduce) { .tour-boundary * { scroll-behavior: auto; } }

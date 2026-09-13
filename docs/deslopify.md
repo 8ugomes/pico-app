@@ -1,5 +1,77 @@
 # Pico — Deslopify
 
+## Redesign integral Aura Manteiga — critérios antes de codar · 13/09/2026
+
+Substituir a fundação escura/verde por Papel/Cacau e escuro quente; aplicar logo em contornos e Syne/Manrope sem transformar operação em campanha. Curvas contidas em aberturas e lugares; pessoas, comunidades, publicações e diário com composição própria. Remover caixas, slogans e sombras repetidos. Entrada editorial manteiga constante; estados e controles usam pares semânticos, inclusive borda elevada.
+
+Perfil inicial deve explicar dados necessários/opcionais e progresso sem etapa decorativa. Guia curto, opcional e contextual, com “Mostrar onde” legível, pausa e retomada; aviso oficial continua confirmado no servidor. Rever alvos ausentes, altura curta, foco e ausência de ações sociais automáticas. QA representativo e correções em lote; registrar cobertura e limites em aura-redesign-review.
+
+### Fechamento e aprendizados desta implementação
+
+Entrada manteiga constante, operação em Papel/Cacau ou escuro quente, curvas nas capas e identidade em SVG/Syne. Removidos banner duplicado no conectado, slogans auxiliares, caixas e material translúcido repetido. Início reúne vínculos em um conjunto compacto; perfil tem identidade aberta, dados essenciais e detalhes opcionais distintos. Guia mais curto, com rótulos de ajuda/pausa e as mesmas preferências.
+
+A revisão em lote identificou badge usando borda decorativa como fundo e falta de espaço para navegação ampliada: corrigidos com `accent-soft` e altura real do rodapé. Em altura curta, o guia rola com a página. Aprendizado: área reservada ao rodapé deve acompanhar o texto, e borda funcional elevada não pode herdar o par do fundo comum. Revisão independente: os dois ajustes pedidos (rótulos redundantes e hifenização da navegação) foram resolvidos; `ship` nesse escopo. [Evidências](aura-redesign-review/README.md). Amostra e regressões locais não equivalem a teste com jogadores, instalação física ou nova certificação de Supabase.
+
+## Critério vigente
+
+**Aura Manteiga** é a direção aprovada: editorial de moda jovem, expressivo, premium e refinado. Usar o [manual](brand-exploration/aura-manteiga/MANUAL.md) e o [design system](pico-design-system.md); não recuperar escolhas históricas como orientação atual. O alvo do redesign é o aplicativo inteiro, com composição própria por conteúdo e onboarding assistido que preserve autonomia.
+
+## Skills e redesign — critérios antes da atualização · 13/09/2026
+
+Dar às skills uma referência institucional comum, distinguir marca aprovada de código ainda legado e ligar decisões visuais aos domínios reais. O prompt deve exigir leitura de todo o manual e acesso às referências pertinentes de cada skill, sem copiar miniaturas ou transformar o app em apresentação de marca. Reduzir carga visual e repetição de testes durante a criação; manter proteção de autenticação, audiência, jogos privados e preferências de onboarding. Não inventar estrutura societária, resultados de pesquisa ou funcionalidades.
+
+### Fechamento e aprendizados
+
+Treze skills conectadas ao contexto institucional e aos domínios. Oito referências externas receberam adaptação curta antes do corpo original; cinco skills próprias oferecem contexto, planejamento, desenvolvimento, revisão e redesign. Briefs antigos foram sinalizados como históricos, e o design system separa alvo aprovado de implementação legada. Dados de empresa ausentes continuam explícitos, sem biografia ou números inventados.
+
+O prompt integral agora trata assistência como orientação opcional de interface: perfil inicial, aviso institucional e tutorial têm contratos distintos. Simplificar texto e apresentação não autoriza ocultar audiência, converter progresso em atividade social ou reiniciar preferências dispensadas. Cobertura integral de design não exige matriz exaustiva de testes durante cada ajuste; a regra comum é amostra representativa, correção em lote e verificação proporcional do conjunto final. Formato/referências/procedência e lint/typecheck/build passaram; não houve nova implementação visual a inspecionar nesta rodada.
+
+## Aura Manteiga — fechamento do manual · 13/09/2026
+
+Identidade fechada sobre a escolha Aura + Manteiga, com diferenciação clara entre miniaturas de apresentação e escala real de leitura. Mantidas curvas, contornos e fontes da Aura; complementados pares semânticos, estados, ícones e aplicações. A orientação atual substitui as recomendações históricas de Ritual/Pistache, preservadas como registro de exploração.
+
+Revisão corrigiu a densidade da página de temas, exportação de PNG com dimensão fracionária e fallback tipográfico em documento de origem opaca. Aprendizados: isolar a peça na origem local antes de rasterizar, aguardar/verificar Syne/Manrope e conferir dimensões exatas; bordas funcionais em superfície elevada precisam de par próprio, mesmo quando a borda padrão passa no fundo comum. 50 pares aprovados, 32 páginas revisadas, SVGs preservados e máscara PWA verificada. Não confundir validação dos arquivos com teste do app real. [Manual e limites](brand-exploration/aura-manteiga/README.md).
+
+## Aura Manteiga — critérios de consolidação · 13/09/2026
+
+Preservar a linha escolhida: curvas amplas, assinatura Syne e interface Manrope. Fixar Manteiga/Cacau/Papel/Lavanda e retirar ambiguidades entre recomendação histórica e decisão atual. Manual deve mostrar uso real de marca, hierarquia de cor, contraste, logo em redução, áreas de proteção, tipografia, arte, voz, componentes/estados e todas as telas. Ícone maskable exige margem própria. Prompt de produção deve mapear o CSS atual, preservar privacidade/comportamento e evitar copiar dados ilustrativos ou o tamanho reduzido dos mockups. Exportar PDF legível e verificar as páginas renderizadas.
+
+## Aura — variações de cor conferidas · 13/09/2026
+
+A lavanda original agora pode ser comparada com Pistache, Azul névoa, Rosa mineral, Maré e Manteiga. Preservadas as mesmas fotos, formas, fontes, telas e conteúdo. O pastel define a atmosfera; os tons profundos sustentam texto e ações; apoio permanece pontual, sem introduzir um elemento visual apenas para mostrar outra cor.
+
+Aprendizado: uma comparação apenas cromática precisa congelar também a estrutura e os contornos do logo. O estudo usa o mesmo renderizador de Aura, altera somente tokens de cor e recolore os SVGs preservando os caminhos. 384 combinações/30.156 verificações de estilo sem desvios; 156 pares sólidos de texto aprovados e 60 telefones em cinco larguras/modos sem overflow. Navegação e foco passaram. Pranchas de boas-vindas e perfil inspecionadas. Contraste não equivale a auditoria completa WCAG. [Guia e paletas](brand-exploration/AURA-CORES.md).
+
+## Aura — critérios da variação de cores · 13/09/2026
+
+A preferência do usuário é por Aura. Nesta etapa somente cores podem variar: manter Syne/Manrope, contornos vetoriais, fotografias, raios, espaçamentos, navegação e conteúdo. Comparar seis paletas na mesma tela, com seus papéis de fundo, texto, superfície e ação; manter alternativas claras/escuras. A fotografia continua a mesma, sem filtros ou regeneração. Não reabrir identidade, logo ou layout.
+
+## Três identidades — fechamento · 13/09/2026
+
+Ritual (Bodoni Moda/vinho/areia), Pulso (Bricolage/cobalto/lima) e Aura (Syne/figo/lavanda) foram aplicadas ao mesmo conteúdo em 32 telas e estados, com modos claro e escuro. As pranchas geradas por IA são exploração de atmosfera; SVGs, tokens e HTML são as propostas precisas. Fotografias e dados trazem identificação ilustrativa; nenhuma funcionalidade real é inferida dos mockups.
+
+A revisão encontrou e corrigiu contraste em convites e metadados de Aura, troca indevida do destino Comunidades na navegação e vazamento da tipografia editorial do relatório para os telefones. Aprendizado: isolar CSS de apresentação sem aumentar especificidade dos estilos fora dos mockups; medir paridade de família, tamanho, peso, entrelinha e espaçamento. Os 531 elementos textuais comparados agora preservam o sistema da galeria.
+
+82 pares sólidos de texto aprovados; 960 verificações em cinco larguras sem overflow e PDF de 47 páginas renderizado/inspecionado. O detector sinalizou somente fundo creme na galeria, aceito pela revisão como escolha editorial coerente com o contexto. Revisão independente: ship no escopo das correções pontuadas, não aprovação de uma marca ou certificação WCAG. [Entregáveis e limites](brand-exploration/README.md) · [Parecer](brand-exploration/.impeccable/review/finish-review.md).
+
+## Três identidades — critérios antes de desenvolver · 13/09/2026
+
+As opções devem diferir em conceito, desenho de marca, tipografia, paleta, composição e direção de imagem. Apresentar as mesmas telas e conteúdo nas três opções para comparação justa. Construir uma direção editorial com personalidade e preservar legibilidade, ações, estados e informação de audiência no celular. Mostrar cores exatas, papéis tipográficos, logo reduzido e aplicações claras; distinguir imagens de exploração de arquivos mestres.
+
+Relatório deve cobrir identidade, criação de logo, tipografia, direção de arte e recomendação. Não usar mockups como comprovação de funcionalidade ou atividade real. Identificar conteúdo ilustrativo e fotografias sintéticas. Verificar os resultados renderizados e registrar limites de validação.
+
+## Pesquisa de branding — critérios da rodada
+
+Avaliar skills pela capacidade de construir uma identidade reconhecível para o Pico Social, com direção editorial de moda, jovem, expressiva e refinada. Exigir exploração de alternativas, tipografia, linguagem gráfica, fotografia, aplicações e critérios de revisão. Distinguir um briefing, uma prancha conceitual e arquivos finais utilizáveis.
+
+Usar tokens atuais e capturas versionadas apenas como contexto, sem tratá-las como auditoria do produto publicado. Preservar clareza social, leitura mobile, acessibilidade e veracidade de dados. A curadoria deve apontar defaults estéticos que possam homogeneizar a marca ou conflitar com pt-BR, dark mode e os contratos do Pico.
+
+### Aprendizados da pesquisa
+
+Skills de briefing, produção de pranchas e execução da identidade têm entregas diferentes. Brandkit é apoio à comparação visual; arquivos vetoriais, fontes e cores finais exigem construção e verificação próprias. A `brand-guidelines` da Anthropic aplica a identidade da Anthropic e não atende à criação da marca Pico. Impeccable 4.3.1 inclui engine/launcher e pode envolver hooks; não tratar sua distribuição atual como apenas Markdown.
+
+A direção editorial precisa funcionar com pessoas e ações reais no celular. Regras externas que eliminam sinais de interação ou impõem uma única categoria tipográfica não devem prevalecer sobre o briefing. A próxima rodada de identidade deve reconciliar grafite/areia dos guias históricos com o verde-água do sistema corrente. Comparar três propostas nas mesmas aplicações e distinguir conceito de entrega final. [Evidências e seleção](PICO_BRANDING_SKILLS_RESEARCH.md).
+
 ### Revisão final — tutorial guiado
 
 A dica usa o destaque areia e uma ação primária de avanço. “Mostrar onde” recolhe o painel, rola e foca o controle para liberar espaço de exploração no celular. Targets em disclosures fechados precisam verificar o ancestral `details`: Chromium pode manter dimensões de controles invisíveis. A instrução muda ao abrir arena ou comunidade e a busca de Pessoas no demo descreve apenas os filtros que existem nele.

@@ -1,0 +1,282 @@
+[
+  {
+    "path": "MANUAL.md",
+    "bytes": 22430,
+    "sha256": "af5da53cfb3d0af1a0b7e674db04d13346889b48e61db9505420f87618c20d72"
+  },
+  {
+    "path": "PROMPT-PRODUCAO.md",
+    "bytes": 16621,
+    "sha256": "3acff7cbb78278b2d6bf89966bb7be5fc30508572708738952b6d51281fd8405"
+  },
+  {
+    "path": "IMPLEMENTACAO.md",
+    "bytes": 8063,
+    "sha256": "e60462cf7464dec0844a101e3dbef041232f7d87b529008627128a1c4c934828"
+  },
+  {
+    "path": "tokens.json",
+    "bytes": 4787,
+    "sha256": "1ee381bcfba6ee3ba62a2f5aaafc1a0d92fe40e6d53653eeb4e6bf818d83fb66"
+  },
+  {
+    "path": "tokens.css",
+    "bytes": 2961,
+    "sha256": "7d0b75b5c68ba5fcddfc057fdb55115c2b5eec8d9738384c871359204c6b3bce"
+  },
+  {
+    "path": "contrast.json",
+    "bytes": 9806,
+    "sha256": "73c0757c19c1dfd4d5ccb8ed1a73f31bfe39ba0e7cc5881f5163642687672256"
+  },
+  {
+    "path": "logo/app-icon-primary.svg",
+    "bytes": 378,
+    "sha256": "4bed8c95f7a696e3dddd9b42104c4d33c4de85a7ef5e32aaab61f3a3e3bbd802"
+  },
+  {
+    "path": "logo/app-icon-reverse.svg",
+    "bytes": 378,
+    "sha256": "5aa947608e974a0c73a9eb5b88e4a33125afe83ec8b1012a91876dae09afb0dc"
+  },
+  {
+    "path": "logo/apple-icon.png",
+    "bytes": 2991,
+    "sha256": "b9fc04825e86e8b3dcf34f7ecfa2a97b210b9f118a21f451357adac10b7c36cc"
+  },
+  {
+    "path": "logo/favicon-16.png",
+    "bytes": 431,
+    "sha256": "7459bce7d81231ae51b4bae9875a1466fd61f368623c9a5a57437d598a2bf3a0"
+  },
+  {
+    "path": "logo/favicon-32.png",
+    "bytes": 769,
+    "sha256": "73684480c37fbee991d1865f02ad143e53bd189a747c884dfbca07641725d337"
+  },
+  {
+    "path": "logo/favicon.ico",
+    "bytes": 1238,
+    "sha256": "d70c9ee5459a3ff1de32467be68ba246442c2ad6e57b9d3db8c9ccd2f60a2e57"
+  },
+  {
+    "path": "logo/lockup-black.svg",
+    "bytes": 8525,
+    "sha256": "0914979aebbf07c875341909890aaee72d237199acf8ad1029a5b8b362190212"
+  },
+  {
+    "path": "logo/lockup-cacau.png",
+    "bytes": 50294,
+    "sha256": "42837d39e613d03996770a8ca62c13cb5cce95a99a89f5d4fbca26ae6e6704ca"
+  },
+  {
+    "path": "logo/lockup-cacau.svg",
+    "bytes": 8525,
+    "sha256": "f2a0d0352bb0b0b681fae30fca85dd8f1919c80f82b9ca482fe922a59b6f12c4"
+  },
+  {
+    "path": "logo/lockup-ink.svg",
+    "bytes": 8530,
+    "sha256": "97ab2da225191f354f56d1f49d1235cc70b43adc40ec9e3e94830c300a95b455"
+  },
+  {
+    "path": "logo/lockup-manteiga.png",
+    "bytes": 50713,
+    "sha256": "255e5e04311553b1577a4db85f32d2da5c2f71e9a87080877aed367e8aaa8dac"
+  },
+  {
+    "path": "logo/lockup-manteiga.svg",
+    "bytes": 8525,
+    "sha256": "8e0b6cd356373ec9fe8ca2eeedcd138e6654d3169ae82581adb819bfaf464d06"
+  },
+  {
+    "path": "logo/lockup-papel.svg",
+    "bytes": 8525,
+    "sha256": "2ceb4717b37ff89d04d4075e492f11ef39bbde4728899fc29009dde77ec66f8a"
+  },
+  {
+    "path": "logo/lockup-white.svg",
+    "bytes": 8530,
+    "sha256": "a390fac446ca29bd779b578a39567018f928470ae3913bc703ccbfdbb7a76328"
+  },
+  {
+    "path": "logo/lockup.svg",
+    "bytes": 8535,
+    "sha256": "491a5e93369f124c588596ded7ec56552a72c39c3df2901e9b610ca4aa5e728c"
+  },
+  {
+    "path": "logo/mark-black.svg",
+    "bytes": 312,
+    "sha256": "83cd028696f76dff1b33af62a8725e0b8422342473f9d7b6b789c11d2b66cfed"
+  },
+  {
+    "path": "logo/mark-cacau.svg",
+    "bytes": 312,
+    "sha256": "9e168fe931fa71de466842613fe7088b7cebff1ab9731a47d24438e277945ae7"
+  },
+  {
+    "path": "logo/mark-ink.svg",
+    "bytes": 322,
+    "sha256": "2d6ebdb19642ce8419f52550ae45119e289f21a5de526f2603528cd7b0bcc2a1"
+  },
+  {
+    "path": "logo/mark-manteiga.svg",
+    "bytes": 312,
+    "sha256": "fae9340d811c89668eb159229b56033705e3e1a714378d0bc2f65c518de67e80"
+  },
+  {
+    "path": "logo/mark-papel.svg",
+    "bytes": 312,
+    "sha256": "72c29a35325a771e36b777a47cf3920e356ec69b1737bf8083f9623b641d60a8"
+  },
+  {
+    "path": "logo/mark-white.svg",
+    "bytes": 322,
+    "sha256": "d2193555ca318bcb01294b679112fbfda4f0f502bb59e8f67e8aaf5a305c3433"
+  },
+  {
+    "path": "logo/mark.svg",
+    "bytes": 327,
+    "sha256": "adb796980b65edc03af73e4fb6caa80d843f20821590f124cd4e7c470710237b"
+  },
+  {
+    "path": "logo/pico-192.png",
+    "bytes": 4762,
+    "sha256": "b9e2acef903598a91f68a2c5473ab7d116e7b3aad86afc68179a079920df70ca"
+  },
+  {
+    "path": "logo/pico-512.png",
+    "bytes": 17328,
+    "sha256": "f9efce308099649abda3b71f647bb8b95dbc5f9fa56d633950a39d4763c2381a"
+  },
+  {
+    "path": "logo/pico-app.svg",
+    "bytes": 378,
+    "sha256": "5aa947608e974a0c73a9eb5b88e4a33125afe83ec8b1012a91876dae09afb0dc"
+  },
+  {
+    "path": "logo/pico-maskable-512.png",
+    "bytes": 12793,
+    "sha256": "b3000ae761fd9311d7b43014a6e9be8df2817c31a2f5fef6d889f12d28397f28"
+  },
+  {
+    "path": "logo/pico-maskable-512.svg",
+    "bytes": 369,
+    "sha256": "333a5152174d3213d8612bb44bbaebd82bd365b453fc3687869156f6832c13a7"
+  },
+  {
+    "path": "logo/provenance.json",
+    "bytes": 614,
+    "sha256": "3a7e510431594866c703a7a20049c8d5cbf9e334d0a35966793e71e7c668a9d0"
+  },
+  {
+    "path": "logo/wordmark-black.svg",
+    "bytes": 1850,
+    "sha256": "4f1706b06db8d77cc4b1859fbb86ef8fd58e27d4a00dcbcf78320c1f2e293dbf"
+  },
+  {
+    "path": "logo/wordmark-cacau.png",
+    "bytes": 33099,
+    "sha256": "36b7071f4c49bbfe353e66c154351597acde64446c17a60c893f94d2fe44018a"
+  },
+  {
+    "path": "logo/wordmark-cacau.svg",
+    "bytes": 1850,
+    "sha256": "af68ea8bfc86b88cb0f20c071eb7298a9675d05d20fde0faf1d472beacebc147"
+  },
+  {
+    "path": "logo/wordmark-ink.svg",
+    "bytes": 1855,
+    "sha256": "9c6b3acfdab75bb90df994340d9121e55ab529ccf40e69c1b94b1850066d1428"
+  },
+  {
+    "path": "logo/wordmark-manteiga.png",
+    "bytes": 33295,
+    "sha256": "ac2ffca29291ea4681107273ed85d2f81b6b58a409004119dff182c737477316"
+  },
+  {
+    "path": "logo/wordmark-manteiga.svg",
+    "bytes": 1850,
+    "sha256": "44898d7a3be9642a3131da3239f0b5dab5291ebb2711df3ca1e91116ab08ffdb"
+  },
+  {
+    "path": "logo/wordmark-papel.svg",
+    "bytes": 1850,
+    "sha256": "efe5e0d68a96f6e93dc9da1293c1bf1f3741498b3680c1cb0c9e22dce933ba35"
+  },
+  {
+    "path": "logo/wordmark-white.svg",
+    "bytes": 1855,
+    "sha256": "caf455d98e5b9da27fd6fe41d372ced555f711f0106f4d6a1faa01fd4049057d"
+  },
+  {
+    "path": "logo/wordmark.svg",
+    "bytes": 1860,
+    "sha256": "bbf74d82ce990bdc26d350a9fa32e1889761592912c3e795b89c728e5b0ca6e6"
+  },
+  {
+    "path": "fonts/manrope-OFL.txt",
+    "bytes": 4384,
+    "sha256": "e01b637272e0cbdfb240184dd98ea5cc671556d9894dae2668d92ab2c906787c"
+  },
+  {
+    "path": "fonts/manrope.ttf",
+    "bytes": 165420,
+    "sha256": "d0639be45d0af36e798172419d7bd173c4bd4f29e2b76cbb69db1d11bf8b0a40"
+  },
+  {
+    "path": "fonts/manrope.woff2",
+    "bytes": 53668,
+    "sha256": "bdba01fe2dee470c1cd07e08a5836efdff032f7356a45063be5c213f93c1c8b9"
+  },
+  {
+    "path": "fonts/sources.json",
+    "bytes": 810,
+    "sha256": "d39786ea50a3fb13587006d2cfe5140c2029d41a354fea964baff6e1bfb3e926"
+  },
+  {
+    "path": "fonts/syne-OFL.txt",
+    "bytes": 4402,
+    "sha256": "cc43cdce6f91c57989af8459341c276655e34224e954fa69c2ad700831a742d8"
+  },
+  {
+    "path": "fonts/syne.ttf",
+    "bytes": 146980,
+    "sha256": "ce5ac77142a65cab2248a1a2ebb740b1d4d9c20b52488877d3ff664d1356104a"
+  },
+  {
+    "path": "fonts/syne.woff2",
+    "bytes": 60956,
+    "sha256": "4a47c00c32a9531c52eaf993855b41f9b6c5caa75becc2102f87883af8969955"
+  },
+  {
+    "path": "applications/social-post.png",
+    "bytes": 940437,
+    "sha256": "74a3f76e0dd3d25cd1185003cbf52eeb2b601af91c00f81742d4a1fc51c79197"
+  },
+  {
+    "path": "applications/story.png",
+    "bytes": 1205396,
+    "sha256": "0f375d3ca0d9981434caafcb16b66184b5eaea2c1abac21288866316c34b13ae"
+  },
+  {
+    "path": "Pico-Social-Manual-Aura-Manteiga.pdf",
+    "bytes": 9510544,
+    "sha256": "6688d9930f758e603fbf58ded7adfad439ff141f88b1ccc7941bc5b4745e922c"
+  },
+  {
+    "path": "imagery/aura-photo-sintetica.png",
+    "bytes": 2103946,
+    "sha256": "e1c181973d5e54c219bea68ed6db012ef7d3dd3aa6a9a6d4fadc097cdd1f9512"
+  },
+  {
+    "path": "imagery/proveniencia.md",
+    "bytes": 7491,
+    "sha256": "19dab579dd8d2144f9f69b3671cf68d2abc772350c6dede867bd5fd277f3030d"
+  },
+  {
+    "path": "licenses/LUCIDE-ISC.txt",
+    "bytes": 3208,
+    "sha256": "b495047bd93a9b06913511076f504daba17d5bbeb3e0650f3bb53a4220329c57"
+  }
+]

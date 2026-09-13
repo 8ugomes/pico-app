@@ -1,0 +1,16 @@
+{
+  "repository": "pbakaus/impeccable",
+  "commit": "cb56ed6c19a07329a9fa0cd4e657bee040156593",
+  "path": ".agents/skills/impeccable",
+  "skill_sha256": "38c2e839e130008b6da814ab9c16f3fcbbedfdf721a9638eebd31a9e65341a7a",
+  "local_customization": {
+    "date": "2026-09-13",
+    "scope": "Pico project context; Aura Manteiga; domains; assisted onboarding; proportional validation",
+    "context": "docs/pico-company-context.md",
+    "catalog": "docs/pico-skills.md",
+    "main_skill": ".agents/skills/pico-redesign/SKILL.md",
+    "upstream_body_preserved": true,
+    "frontmatter_note": "Ramp catalog fields moved under metadata; original upstream hash retained in skill_sha256.",
+    "installed_skill_sha256": "cd755316449028de97d540daf0c0c577ead89217744e9571155efabe1e53e415"
+  }
+}

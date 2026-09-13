@@ -1,0 +1,331 @@
+{
+  "screens": "Profile at five widths in both modes; feed/profile and welcome/signup navigation.",
+  "checks": [
+    {
+      "width": 320,
+      "mode": "light",
+      "documentOverflow": false,
+      "phones": [
+        {
+          "palette": "lavanda",
+          "overflow": false
+        },
+        {
+          "palette": "pistache",
+          "overflow": false
+        },
+        {
+          "palette": "nevoa",
+          "overflow": false
+        },
+        {
+          "palette": "rosa",
+          "overflow": false
+        },
+        {
+          "palette": "mare",
+          "overflow": false
+        },
+        {
+          "palette": "manteiga",
+          "overflow": false
+        }
+      ],
+      "images": true
+    },
+    {
+      "width": 320,
+      "mode": "dark",
+      "documentOverflow": false,
+      "phones": [
+        {
+          "palette": "lavanda",
+          "overflow": false
+        },
+        {
+          "palette": "pistache",
+          "overflow": false
+        },
+        {
+          "palette": "nevoa",
+          "overflow": false
+        },
+        {
+          "palette": "rosa",
+          "overflow": false
+        },
+        {
+          "palette": "mare",
+          "overflow": false
+        },
+        {
+          "palette": "manteiga",
+          "overflow": false
+        }
+      ],
+      "images": true
+    },
+    {
+      "width": 390,
+      "mode": "light",
+      "documentOverflow": false,
+      "phones": [
+        {
+          "palette": "lavanda",
+          "overflow": false
+        },
+        {
+          "palette": "pistache",
+          "overflow": false
+        },
+        {
+          "palette": "nevoa",
+          "overflow": false
+        },
+        {
+          "palette": "rosa",
+          "overflow": false
+        },
+        {
+          "palette": "mare",
+          "overflow": false
+        },
+        {
+          "palette": "manteiga",
+          "overflow": false
+        }
+      ],
+      "images": true
+    },
+    {
+      "width": 390,
+      "mode": "dark",
+      "documentOverflow": false,
+      "phones": [
+        {
+          "palette": "lavanda",
+          "overflow": false
+        },
+        {
+          "palette": "pistache",
+          "overflow": false
+        },
+        {
+          "palette": "nevoa",
+          "overflow": false
+        },
+        {
+          "palette": "rosa",
+          "overflow": false
+        },
+        {
+          "palette": "mare",
+          "overflow": false
+        },
+        {
+          "palette": "manteiga",
+          "overflow": false
+        }
+      ],
+      "images": true
+    },
+    {
+      "width": 768,
+      "mode": "light",
+      "documentOverflow": false,
+      "phones": [
+        {
+          "palette": "lavanda",
+          "overflow": false
+        },
+        {
+          "palette": "pistache",
+          "overflow": false
+        },
+        {
+          "palette": "nevoa",
+          "overflow": false
+        },
+        {
+          "palette": "rosa",
+          "overflow": false
+        },
+        {
+          "palette": "mare",
+          "overflow": false
+        },
+        {
+          "palette": "manteiga",
+          "overflow": false
+        }
+      ],
+      "images": true
+    },
+    {
+      "width": 768,
+      "mode": "dark",
+      "documentOverflow": false,
+      "phones": [
+        {
+          "palette": "lavanda",
+          "overflow": false
+        },
+        {
+          "palette": "pistache",
+          "overflow": false
+        },
+        {
+          "palette": "nevoa",
+          "overflow": false
+        },
+        {
+          "palette": "rosa",
+          "overflow": false
+        },
+        {
+          "palette": "mare",
+          "overflow": false
+        },
+        {
+          "palette": "manteiga",
+          "overflow": false
+        }
+      ],
+      "images": true
+    },
+    {
+      "width": 1024,
+      "mode": "light",
+      "documentOverflow": false,
+      "phones": [
+        {
+          "palette": "lavanda",
+          "overflow": false
+        },
+        {
+          "palette": "pistache",
+          "overflow": false
+        },
+        {
+          "palette": "nevoa",
+          "overflow": false
+        },
+        {
+          "palette": "rosa",
+          "overflow": false
+        },
+        {
+          "palette": "mare",
+          "overflow": false
+        },
+        {
+          "palette": "manteiga",
+          "overflow": false
+        }
+      ],
+      "images": true
+    },
+    {
+      "width": 1024,
+      "mode": "dark",
+      "documentOverflow": false,
+      "phones": [
+        {
+          "palette": "lavanda",
+          "overflow": false
+        },
+        {
+          "palette": "pistache",
+          "overflow": false
+        },
+        {
+          "palette": "nevoa",
+          "overflow": false
+        },
+        {
+          "palette": "rosa",
+          "overflow": false
+        },
+        {
+          "palette": "mare",
+          "overflow": false
+        },
+        {
+          "palette": "manteiga",
+          "overflow": false
+        }
+      ],
+      "images": true
+    },
+    {
+      "width": 1440,
+      "mode": "light",
+      "documentOverflow": false,
+      "phones": [
+        {
+          "palette": "lavanda",
+          "overflow": false
+        },
+        {
+          "palette": "pistache",
+          "overflow": false
+        },
+        {
+          "palette": "nevoa",
+          "overflow": false
+        },
+        {
+          "palette": "rosa",
+          "overflow": false
+        },
+        {
+          "palette": "mare",
+          "overflow": false
+        },
+        {
+          "palette": "manteiga",
+          "overflow": false
+        }
+      ],
+      "images": true
+    },
+    {
+      "width": 1440,
+      "mode": "dark",
+      "documentOverflow": false,
+      "phones": [
+        {
+          "palette": "lavanda",
+          "overflow": false
+        },
+        {
+          "palette": "pistache",
+          "overflow": false
+        },
+        {
+          "palette": "nevoa",
+          "overflow": false
+        },
+        {
+          "palette": "rosa",
+          "overflow": false
+        },
+        {
+          "palette": "mare",
+          "overflow": false
+        },
+        {
+          "palette": "manteiga",
+          "overflow": false
+        }
+      ],
+      "images": true
+    }
+  ],
+  "errors": [],
+  "singlePaletteFilter": true,
+  "navigation": true,
+  "signupNavigation": true,
+  "keyboardFocus": true,
+  "paletteDownload": true
+}

@@ -1,0 +1,16 @@
+{
+  "repository": "Leonxlnx/taste-skill",
+  "commit": "ccbc15639c97057cbfcf32ecebc38ef716e4bb37",
+  "path": "skills/brandkit",
+  "skill_sha256": "b0c4837e1bd140ca816ae54948754ddd2ac1e2a4d3619363777a80caf00b2ede",
+  "local_customization": {
+    "date": "2026-09-13",
+    "scope": "Pico project context; Aura Manteiga; domains; assisted onboarding; proportional validation",
+    "context": "docs/pico-company-context.md",
+    "catalog": "docs/pico-skills.md",
+    "main_skill": ".agents/skills/pico-redesign/SKILL.md",
+    "upstream_body_preserved": true,
+    "frontmatter_note": "Ramp catalog fields moved under metadata; original upstream hash retained in skill_sha256.",
+    "installed_skill_sha256": "dca98b6413fd8e0a3e68e7c54b3ae409ff9f9c70413ae5659995cb24a0930e70"
+  }
+}

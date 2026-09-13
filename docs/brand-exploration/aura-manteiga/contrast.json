@@ -1,0 +1,433 @@
+{
+  "method": "WCAG sRGB relative luminance; unrounded comparison; solid colors only",
+  "checks": [
+    {
+      "mode": "light",
+      "foreground": "foreground",
+      "background": "background",
+      "ratio": 10.666527772958057,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "foreground": "foreground",
+      "background": "surface",
+      "ratio": 11.239150673985376,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "foreground": "foreground",
+      "background": "surface-raised",
+      "ratio": 11.81080782033282,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "foreground": "foreground",
+      "background": "accent-soft",
+      "ratio": 9.755498871149877,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "foreground": "text-secondary",
+      "background": "background",
+      "ratio": 4.997794154357951,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "foreground": "text-secondary",
+      "background": "surface",
+      "ratio": 5.266096215564901,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "foreground": "text-secondary",
+      "background": "surface-raised",
+      "ratio": 5.533945773089645,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "foreground": "text-secondary",
+      "background": "accent-soft",
+      "ratio": 4.570932197325294,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "foreground": "text-muted",
+      "background": "background",
+      "ratio": 4.997794154357951,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "foreground": "text-muted",
+      "background": "surface",
+      "ratio": 5.266096215564901,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "foreground": "text-muted",
+      "background": "surface-raised",
+      "ratio": 5.533945773089645,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "foreground": "text-muted",
+      "background": "accent-soft",
+      "ratio": 4.570932197325294,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "foreground": "accent-ink",
+      "background": "accent",
+      "ratio": 10.666527772958057,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "foreground": "accent-ink",
+      "background": "accent-hover",
+      "ratio": 8.093117881492068,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "foreground": "accent-ink",
+      "background": "accent-active",
+      "ratio": 13.067852148901089,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "foreground": "success",
+      "background": "success-bg",
+      "ratio": 6.559992959543857,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "foreground": "warning",
+      "background": "warning-bg",
+      "ratio": 6.147345132655815,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "foreground": "error",
+      "background": "error-bg",
+      "ratio": 6.024033725677746,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "foreground": "info",
+      "background": "info-bg",
+      "ratio": 7.335457838554381,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "foreground": "focus",
+      "background": "background",
+      "ratio": 10.666527772958057,
+      "required": 3,
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "foreground": "focus",
+      "background": "surface",
+      "ratio": 11.239150673985376,
+      "required": 3,
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "foreground": "border-control",
+      "background": "background",
+      "ratio": 3.041454906364401,
+      "required": 3,
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "foreground": "border-control",
+      "background": "surface",
+      "ratio": 3.204732663559344,
+      "required": 3,
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "foreground": "foreground",
+      "background": "background",
+      "ratio": 14.262652470758574,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "foreground": "foreground",
+      "background": "surface",
+      "ratio": 12.025827545292998,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "foreground": "foreground",
+      "background": "surface-raised",
+      "ratio": 10.464978417249068,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "foreground": "foreground",
+      "background": "accent-soft",
+      "ratio": 8.89747302079013,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "foreground": "text-secondary",
+      "background": "background",
+      "ratio": 8.564175409719017,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "foreground": "text-secondary",
+      "background": "surface",
+      "ratio": 7.221047891061892,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "foreground": "text-secondary",
+      "background": "surface-raised",
+      "ratio": 6.283817894882631,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "foreground": "text-secondary",
+      "background": "accent-soft",
+      "ratio": 5.342591064986978,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "foreground": "text-muted",
+      "background": "background",
+      "ratio": 8.564175409719017,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "foreground": "text-muted",
+      "background": "surface",
+      "ratio": 7.221047891061892,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "foreground": "text-muted",
+      "background": "surface-raised",
+      "ratio": 6.283817894882631,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "foreground": "text-muted",
+      "background": "accent-soft",
+      "ratio": 5.342591064986978,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "foreground": "accent-ink",
+      "background": "accent",
+      "ratio": 9.240732335806795,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "foreground": "accent-ink",
+      "background": "accent-hover",
+      "ratio": 10.040217091750787,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "foreground": "accent-ink",
+      "background": "accent-active",
+      "ratio": 7.301576936050409,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "foreground": "success",
+      "background": "success-bg",
+      "ratio": 7.46617139749553,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "foreground": "warning",
+      "background": "warning-bg",
+      "ratio": 7.567405161565997,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "foreground": "error",
+      "background": "error-bg",
+      "ratio": 7.31253561825036,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "foreground": "info",
+      "background": "info-bg",
+      "ratio": 7.703588688596503,
+      "required": 4.5,
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "foreground": "focus",
+      "background": "background",
+      "ratio": 12.356162819455465,
+      "required": 3,
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "foreground": "focus",
+      "background": "surface",
+      "ratio": 10.418334422224735,
+      "required": 3,
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "foreground": "border-control",
+      "background": "background",
+      "ratio": 3.5749491573563934,
+      "required": 3,
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "foreground": "border-control",
+      "background": "surface",
+      "ratio": 3.0142865878349445,
+      "required": 3,
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "foreground": "border-control-raised",
+      "background": "surface-raised",
+      "ratio": 4.288134492069584,
+      "required": 3,
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "foreground": "border-control-raised",
+      "background": "accent-soft",
+      "ratio": 3.5419161697565285,
+      "required": 3,
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "foreground": "border-control-raised",
+      "background": "surface-raised",
+      "ratio": 3.8891813940825752,
+      "required": 3,
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "foreground": "border-control-raised",
+      "background": "accent-soft",
+      "ratio": 3.306637161312464,
+      "required": 3,
+      "pass": true
+    }
+  ],
+  "brandPairs": [
+    {
+      "foreground": "cacau",
+      "background": "manteiga",
+      "ratio": 9.240732335806795
+    },
+    {
+      "foreground": "cacau",
+      "background": "papel",
+      "ratio": 10.666527772958057
+    },
+    {
+      "foreground": "cacau",
+      "background": "lavanda",
+      "ratio": 6.593690121543014
+    },
+    {
+      "foreground": "manteiga",
+      "background": "papel",
+      "ratio": 1.1542946365437363
+    },
+    {
+      "foreground": "lavanda",
+      "background": "papel",
+      "ratio": 1.6176871488255413
+    }
+  ],
+  "limits": "No full WCAG certification; text over imagery, interactive implementations and assistive technologies require application QA."
+}

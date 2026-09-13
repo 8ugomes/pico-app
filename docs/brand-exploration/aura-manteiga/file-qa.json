@@ -1,0 +1,214 @@
+{
+  "pdf": "output/pdf/Pico-Social-Manual-Aura-Manteiga.pdf",
+  "sha256": "6688d9930f758e603fbf58ded7adfad439ff141f88b1ccc7941bc5b4745e922c",
+  "pageCount": 32,
+  "pages": [
+    {
+      "page": 1,
+      "chars": 290,
+      "footer": true
+    },
+    {
+      "page": 2,
+      "chars": 1504,
+      "footer": true
+    },
+    {
+      "page": 3,
+      "chars": 1009,
+      "footer": true
+    },
+    {
+      "page": 4,
+      "chars": 1877,
+      "footer": true
+    },
+    {
+      "page": 5,
+      "chars": 1425,
+      "footer": true
+    },
+    {
+      "page": 6,
+      "chars": 1343,
+      "footer": true
+    },
+    {
+      "page": 7,
+      "chars": 1602,
+      "footer": true
+    },
+    {
+      "page": 8,
+      "chars": 1581,
+      "footer": true
+    },
+    {
+      "page": 9,
+      "chars": 1620,
+      "footer": true
+    },
+    {
+      "page": 10,
+      "chars": 1571,
+      "footer": true
+    },
+    {
+      "page": 11,
+      "chars": 1508,
+      "footer": true
+    },
+    {
+      "page": 12,
+      "chars": 1551,
+      "footer": true
+    },
+    {
+      "page": 13,
+      "chars": 1283,
+      "footer": true
+    },
+    {
+      "page": 14,
+      "chars": 1392,
+      "footer": true
+    },
+    {
+      "page": 15,
+      "chars": 1707,
+      "footer": true
+    },
+    {
+      "page": 16,
+      "chars": 1692,
+      "footer": true
+    },
+    {
+      "page": 17,
+      "chars": 1989,
+      "footer": true
+    },
+    {
+      "page": 18,
+      "chars": 2616,
+      "footer": true
+    },
+    {
+      "page": 19,
+      "chars": 2644,
+      "footer": true
+    },
+    {
+      "page": 20,
+      "chars": 2154,
+      "footer": true
+    },
+    {
+      "page": 21,
+      "chars": 2364,
+      "footer": true
+    },
+    {
+      "page": 22,
+      "chars": 2864,
+      "footer": true
+    },
+    {
+      "page": 23,
+      "chars": 2791,
+      "footer": true
+    },
+    {
+      "page": 24,
+      "chars": 1693,
+      "footer": true
+    },
+    {
+      "page": 25,
+      "chars": 1990,
+      "footer": true
+    },
+    {
+      "page": 26,
+      "chars": 2617,
+      "footer": true
+    },
+    {
+      "page": 27,
+      "chars": 2645,
+      "footer": true
+    },
+    {
+      "page": 28,
+      "chars": 2155,
+      "footer": true
+    },
+    {
+      "page": 29,
+      "chars": 2365,
+      "footer": true
+    },
+    {
+      "page": 30,
+      "chars": 2865,
+      "footer": true
+    },
+    {
+      "page": 31,
+      "chars": 2792,
+      "footer": true
+    },
+    {
+      "page": 32,
+      "chars": 1881,
+      "footer": true
+    }
+  ],
+  "vectorGeometryPreserved": true,
+  "rasterDimensions": {
+    "logo/pico-192.png": [
+      192,
+      192
+    ],
+    "logo/pico-512.png": [
+      512,
+      512
+    ],
+    "logo/pico-maskable-512.png": [
+      512,
+      512
+    ],
+    "logo/apple-icon.png": [
+      180,
+      180
+    ],
+    "applications/social-post.png": [
+      1080,
+      1350
+    ],
+    "applications/story.png": [
+      1080,
+      1920
+    ]
+  },
+  "maskableGlyphMaxRadius": 139.31618714277246,
+  "maskableSafeRadius": 204.8,
+  "maskableOpaque": true,
+  "faviconSizes": [
+    [
+      16,
+      16
+    ],
+    [
+      32,
+      32
+    ]
+  ],
+  "limits": "Artifact verification; no physical-device or deployed-application validation.",
+  "pdfPagesRenderedAndInspected": 32,
+  "applicationFontsVerified": [
+    "Syne 700",
+    "Manrope 400"
+  ],
+  "applicationFontOrigin": "Same-origin browser document; verified loaded before PNG export."
+}

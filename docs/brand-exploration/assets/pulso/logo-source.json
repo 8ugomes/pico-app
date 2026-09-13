@@ -1,0 +1,17 @@
+{
+  "status": "proposal",
+  "wordmark_typeface": "bricolagegrotesque",
+  "axes": {
+    "wght": 800,
+    "wdth": 80,
+    "opsz": 48
+  },
+  "tracking_font_units": -25,
+  "wordmark": "Font outlines with adjusted spacing; not a newly invented typeface.",
+  "symbol": "Custom vector construction; no trademark clearance performed.",
+  "canonical_assets": [
+    "wordmark.svg",
+    "mark.svg",
+    "app-icon-primary.svg"
+  ]
+}

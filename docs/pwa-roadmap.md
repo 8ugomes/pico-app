@@ -1,5 +1,11 @@
 # Pico — PWA no Ciclo 9
 
+## Aura Manteiga integrada · 13/09/2026
+
+[Aura Manteiga](brand-exploration/aura-manteiga/README.md) aplicada a favicon, Apple, ícones 192/512, maskable, manifesto, metadados de tema e telas de instalação/retomada. Os arquivos entregues foram copiados e comparados byte a byte; maskable 512 com fundo totalmente opaco. `id`, `scope`, `start_url`, nomes por ambiente e instalação existente preservados. Metadados claro/escuro seguem o dispositivo; manifesto usa Papel. [Auditoria de assets](aura-redesign-review/assets-contrast.json). Instalação em aparelho físico continua sem nova validação. O onboarding assistido pode explicar instalação quando pertinente, sem transformar o convite dispensável em requisito de acesso. Seguir [domínios](pico-domains.md) e [skill principal](../.agents/skills/pico-redesign/SKILL.md).
+
+## Base implementada
+
 Implementado: manifesto com id estável, nome Pico no principal e identificação distinta no desenvolvimento, ícones 192/512/maskable/apple, standalone, safe areas, alvos de toque e navegação móvel. `/instalar` orienta Chrome/Android, Safari/iOS e saída de navegadores internos. O convite de instalação é dispensável e o prompt nativo só aparece quando disponível.
 
 Versão compilada é exposta por endpoint sem dados pessoais; foco/retomada verificam versão e sessão. Atualizar exige ação explícita e avisa sobre edição não salva. Identidade trocada/logout descartam a árvore anterior; bfcache recarrega. Falha temporária preserva rascunho e indica rede indisponível, sem anunciar sucesso nem agendar publicação.

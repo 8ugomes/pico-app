@@ -1,0 +1,42 @@
+[
+  {
+    "font": "bodonimoda",
+    "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/bodonimoda/",
+    "file": "bodonimoda.ttf",
+    "license": "OFL-1.1",
+    "sha256": "550f5e34ee0a828d7941b1fe9bc58b34e5260d3f33a61532e6d0a0114e79a5cf",
+    "downloaded_at": "2026-09-13",
+    "font_version": "Version 2.005",
+    "woff2_sha256": "e2dd7abe7cf0c1965ee5705e05f73f28ec9a73cf662fa8fc6a1f357a8ee823a8"
+  },
+  {
+    "font": "manrope",
+    "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/manrope/",
+    "file": "manrope.ttf",
+    "license": "OFL-1.1",
+    "sha256": "d0639be45d0af36e798172419d7bd173c4bd4f29e2b76cbb69db1d11bf8b0a40",
+    "downloaded_at": "2026-09-13",
+    "font_version": "Version 4.504",
+    "woff2_sha256": "bdba01fe2dee470c1cd07e08a5836efdff032f7356a45063be5c213f93c1c8b9"
+  },
+  {
+    "font": "bricolagegrotesque",
+    "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/bricolagegrotesque/",
+    "file": "bricolagegrotesque.ttf",
+    "license": "OFL-1.1",
+    "sha256": "413e7357809ddd12fd80a96a8a396de0e401638d4acd3cb3e37532f0472ac682",
+    "downloaded_at": "2026-09-13",
+    "font_version": "Version 1.001;gftools[0.9.33.dev8+g029e19f]",
+    "woff2_sha256": "9b86cf51d0a4f0acbb966d5f86a48280faafd43d614fe8b2ccc675949514383b"
+  },
+  {
+    "font": "syne",
+    "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/syne/",
+    "file": "syne.ttf",
+    "license": "OFL-1.1",
+    "sha256": "ce5ac77142a65cab2248a1a2ebb740b1d4d9c20b52488877d3ff664d1356104a",
+    "downloaded_at": "2026-09-13",
+    "font_version": "Version 2.200",
+    "woff2_sha256": "4a47c00c32a9531c52eaf993855b41f9b6c5caa75becc2102f87883af8969955"
+  }
+]

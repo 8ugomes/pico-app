@@ -38,6 +38,7 @@ Manter fora do MVP: IA, voz, reservas, pagamentos, B2B, anúncios, ranking avan�
 Decisões pequenas devem ser tomadas com bom senso, sem pedir confirmação.
 O plano corrente é docs/pico-product-plan.md; a revisão corrente é docs/deslopify.md.
 Consultar também docs/pico-design-system.md, docs/pwa-roadmap.md e docs/04_SUPABASE_SCHEMA.md.
+Contexto institucional e de marca: docs/pico-company-context.md. Mapa dos contratos: docs/pico-domains.md. Skills locais e ordem de uso: docs/pico-skills.md. PRODUCT.md, BRIEF.md e DESIGN.md apontam para essas fontes.
 Os documentos numerados anteriores preservam a evolução histórica.
 
 - README.md: setup, comandos, configuração e limites atuais.
@@ -56,7 +57,8 @@ Tokens em src/app/globals.css. Reutilizar os componentes existentes.
 
 ## Produto e apresentação
 
-Mobile-first, dark mode, grafite e areia, cards arredondados, transparência discreta e movimento reduzível.
+Identidade escolhida: **Pico Social / Aura Manteiga**, editorial de moda jovem, artística, premium e refinada. Manteiga #F2E3B5, Cacau #44342F, Papel #F8F3E7, Lavanda de apoio #CBBBE0; Syne em títulos e Manrope na operação. Logo e tokens canônicos em docs/brand-exploration/aura-manteiga. Claro editorial e escuro próprio, curvas pontuais, superfícies calmas e movimento reduzível. O código legado ainda será migrado; consultar docs/pico-design-system.md para distinguir decisão e implementação.
+Redesign integral usa a skill pico-redesign, o manual completo e os contratos dos domínios. Incluir onboarding assistido opcional, contextual e retomável; manter perfil inicial, aviso institucional e tutorial como etapas distintas. Assistência não significa IA/voz nem ações sociais automáticas.
 Texto em pt-BR, curto, próximo e concreto. Uma ação principal por contexto.
 Dados ilustrativos precisam de rótulo; não fingir cadastro, presença, salvamento ou métricas.
 Demonstração exige configuração explícita. Ambientes conectados negam acesso social sem admissão vigente. Decisão de 13/09/2026: cadastro aberto com admissão automática, após confirmação do e-mail; preservar suspensões/revogações e exclusão. A publicação coordenada está descrita em docs/OFFICIAL_COMMUNITY_AUTH.md. O responsável corrigiu a separação interna: publicar a main no projeto Vercel pico-app, em pico-app-sepia.vercel.app. Usar scripts/deploy.mjs; não exigir cycle-9-internal ou projeto separado. O Supabase existente (identidade técnica beta) preserva contas e dados. Unificar a publicação não altera admissão, RLS, convites ou escopo de acesso.
@@ -80,4 +82,5 @@ Avançar com decisões razoáveis e reversíveis, sem pedir confirmação a cada
 Pedir confirmação somente diante de risco real de apagar dados, expor segredo, sobrescrever trabalho importante ou alterar algo sensível.
 Preservar alterações existentes e não publicar em destinos não solicitados.
 Executar lint, typecheck, build e smoke pertinente. Não declarar validação real de Supabase sem configuração e exercício dos fluxos.
+Durante criação visual, reduzir heavy testing: revisar amostra representativa, corrigir em lote e confirmar os pontos afetados. Não criar testes cosméticos redundantes ou repetir suíte completa/remota a cada ajuste; ampliar por risco, mudança ou falha. No fechamento, manter checks obrigatórios e testes pertinentes aos comportamentos alterados, especialmente acesso, audiência, jogos privados e isolamento do onboarding.
 Atualizar documentação e informar limitações. Fazer commit/push quando autorizado, sem inventar remote ou identidade Git.

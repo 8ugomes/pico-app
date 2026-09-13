@@ -30,7 +30,7 @@ export function ConnectedDiscovery() {
   const players = data?.players ?? [];
   const options = catalog.state.status === 'success' && catalog.state.data.kind === 'arenas' ? catalog.state.data : null;
   return <>
-    <PageHeading eyebrow="UM ESPORTE EM COMUM" title="Pessoas" />
+    <PageHeading title="Pessoas" />
     <p className="page-intro">Encontre quem compartilha seu esporte e seus lugares.</p>
     {catalog.state.status === 'loading' && <ReadLoading />}
     {(catalog.state.status === 'error' || catalog.state.status === 'demo') && <ReadFailure state={catalog.state} retry={catalog.retry} />}

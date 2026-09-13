@@ -2,6 +2,12 @@
 
 # Conheça o Pico — tutorial guiado
 
+## Próxima direção — redesign Aura Manteiga
+
+Aura Manteiga aplicada ao convite, guia, formulário inicial e aviso institucional. O perfil inicial mostra quantos dos três dados essenciais estão preenchidos (nome, usuário e esporte), links às seções e dados opcionais separados. Isso indica preenchimento, sem afirmar salvamento. Textos do guia foram encurtados; “Mostrar onde” e “Pausar” têm rótulos visíveis. Em altura curta o painel entra no fluxo da página; a navegação reserva sua altura medida quando o texto cresce.
+
+As seis etapas, IDs e ordem foram preservados: `pico.tour.v1:account:<id>` e `pico.tour.v1:demo` continuam compatíveis, sem migration nem novo estado remoto. Pausa/dispensa, retomada voluntária, isolamento entre contas/origem/demo e suspensão durante edição/diálogo permanecem. Perfil inicial e aviso oficial confirmado no servidor continuam separados do tutorial. [Oito grupos de regressão e oito layouts](aura-redesign-review/onboarding/checks.json), incluindo armazenamento negado, múltiplas abas, falhas/vazios e nenhuma gravação social; [demo compilado](aura-redesign-review/onboarding/demo-checks.json) completou as seis etapas sem APIs sociais.
+
 ## Problema e resultado esperado
 
 O responsável quer que quem chega entenda a identidade do Pico e encontre um caminho entre lugares, pessoas e comunidades. O refinamento anterior organizou as telas; este incremento explica como usá-las no próprio app. É uma hipótese de onboarding, ainda sem pesquisa com jogadores.

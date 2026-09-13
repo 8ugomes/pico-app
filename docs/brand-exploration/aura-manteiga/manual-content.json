@@ -1,0 +1,430 @@
+{
+  "version": "1.0",
+  "date": "2026-09-13",
+  "pages": [
+    {
+      "kind": "cover",
+      "title": "Me acha\nno Pico.",
+      "subtitle": "Identidade visual / Aura Manteiga",
+      "intro": "Uma marca jovem, artística e refinada para o ponto de encontro da areia.",
+      "notes": "Manual 1.0 · 13 setembro 2026 · direção escolhida pelo responsável"
+    },
+    {
+      "kind": "story",
+      "title": "O encontro deixa uma atmosfera.",
+      "intro": "Aura ganha luz de manteiga, profundidade de cacau e um contraponto lavanda. A expressão vem da letra, da fotografia e do espaço.",
+      "blocks": [
+        [
+          "Propósito",
+          "Aproximar quem joga futevôlei, beach tennis e vôlei de praia. Ajudar pessoas a encontrar sua turma, reconhecer seus lugares e continuar as relações entre jogos."
+        ],
+        [
+          "Posicionamento",
+          "Para quem faz da areia parte da vida, Pico é a rede social que transforma interesses, arenas e comunidades em pertencimento. O registro privado guarda os jogos que já aconteceram."
+        ],
+        [
+          "Promessa",
+          "O ponto de encontro da areia. A experiência ajuda a reconhecer pessoas e comunidades relevantes sem prometer presença ao vivo, performance esportiva ou exclusividade."
+        ],
+        [
+          "Personalidade",
+          "Artística no olhar; calorosa no encontro; segura na operação; refinada na edição. Premium significa cuidado com leitura, proporção e conteúdo, com espaço para diferentes níveis e repertórios."
+        ],
+        [
+          "Princípios em prática",
+          "Pertencimento: mostrar gente e contextos reconhecíveis. Expressão: preservar identidades de pessoas e lugares. Cuidado: deixar privacidade e ações claras. Clareza: uma ação principal por contexto."
+        ],
+        [
+          "Arquitetura de marca",
+          "Pico é a assinatura curta. Pico Social apresenta o aplicativo. Aura Manteiga identifica este sistema internamente; não aparece como renomeação do produto. A história institucional não é inventada neste manual."
+        ]
+      ]
+    },
+    {
+      "kind": "logo",
+      "title": "Uma assinatura ampla. Um símbolo aberto.",
+      "intro": "O desenho da Aura é preservado. A mudança consolidada está na aplicação cromática, mantendo os contornos vetoriais.",
+      "blocks": [
+        [
+          "Wordmark",
+          "“pico” parte de Syne 800, com espaçamento ajustado e letras em contornos. Não é uma nova família tipográfica. O desenho amplo dá presença sem precisar de adornos."
+        ],
+        [
+          "Símbolo",
+          "Um P contínuo, arredondado e aberto na base da curva, acompanhado de um ponto. Representa acolhimento e encontro. O ponto é parte do logo; não deve comunicar presença online."
+        ],
+        [
+          "Assinatura completa",
+          "Use o lockup Pico Social no primeiro contato, apresentações, peças institucionais e materiais de parceiros. No cabeçalho do app e em espaços menores, use somente Pico."
+        ],
+        [
+          "Cores do logo",
+          "Preferência: cacau sobre manteiga ou papel; manteiga/papel sobre cacau. Monocromático preto ou branco quando o processo exigir. Os SVGs contêm o desenho exato e independem do carregamento da fonte."
+        ]
+      ]
+    },
+    {
+      "kind": "logo-rules",
+      "title": "Proteção, redução e reprodução.",
+      "intro": "Cada uso tem uma versão adequada. Não redesenhe nem altere o espaço entre letras para encaixar a assinatura.",
+      "blocks": [
+        [
+          "Área de proteção",
+          "Reserve no mínimo a altura do ponto do “i” ao redor do wordmark/lockup. Para o símbolo, reserve 15 unidades em uma grade de 100. Coassinaturas recebem intervalo mínimo de duas áreas de proteção."
+        ],
+        [
+          "Tamanhos mínimos",
+          "Wordmark: 88 px de largura. Lockup com SOCIAL: 136 px. Símbolo independente: 24 px. Em favicons de 16 px, use o ícone fornecido e verifique a leitura no dispositivo. Na impressão, testar wordmark a partir de 24 mm e lockup a partir de 36 mm."
+        ],
+        [
+          "Construção do símbolo",
+          "Grade 100 × 100; traço 15, terminais redondos; ponto com raio 6 em (53,39). Preservar a abertura e as curvas do arquivo mestre. A grade ilustra a construção e não orienta redesenho manual."
+        ],
+        [
+          "Ícone PWA",
+          "O ícone preferencial usa manteiga com símbolo cacau. O maskable tem fundo quadrado completo e símbolo dentro do círculo seguro central de raio 204,8 em 512 px. Apple usa fundo completo, sem cantos transparentes pré-aplicados."
+        ],
+        [
+          "Uso incorreto",
+          "Não esticar, inclinar, aplicar contorno, sombra, gradiente ou fotografia dentro do logo. Não acrescentar o ponto final da marca antiga. Não comprimir o lockup nem usar SOCIAL ilegível."
+        ],
+        [
+          "Produção gráfica",
+          "SVG é o mestre; PNG/ICO são exportações. Cores são sRGB para o produto digital. Não há Pantone ou receita CMYK homologada: converter para o perfil de impressão e aprovar prova física. Não foi feita busca de anterioridade da marca."
+        ]
+      ]
+    },
+    {
+      "kind": "color",
+      "title": "Manteiga, com profundidade.",
+      "intro": "Quatro cores fixas. As tonalidades de interface são derivadas para função e contraste, sem ampliar a paleta de expressão.",
+      "blocks": [
+        [
+          "Manteiga · #F2E3B5",
+          "Cor de reconhecimento em aberturas, peças de marca, ícone e destaques. Deve parecer luz quente, sem brilho metálico ou saturação neon."
+        ],
+        [
+          "Cacau · #44342F",
+          "Estrutura visual: logo, texto, traços e ações claras. É o contrapeso que mantém a paleta adulta e refinada."
+        ],
+        [
+          "Papel · #F8F3E7",
+          "Base de leitura no modo claro. Superfícies levemente mais claras organizam o conteúdo sem transformar tudo em cartões."
+        ],
+        [
+          "Lavanda · #CBBBE0",
+          "Acento artístico pontual. Usar em peças editoriais, detalhes e fundos com texto cacau; nunca como texto sobre papel ou como substituto automático de status."
+        ],
+        [
+          "Proporção editorial",
+          "Referência de área: Papel 55%, Manteiga 25%, Cacau 15%, Lavanda 5%. É uma orientação para materiais claros, não fórmula rígida nem limite aplicado às fotografias ou ao modo escuro."
+        ],
+        [
+          "Pares",
+          "Cacau/manteiga e cacau/papel são pares preferenciais. Não escrever manteiga sobre papel, lavanda sobre papel ou branco sobre manteiga. A diferença de luminosidade nesses pares é insuficiente para texto comum."
+        ]
+      ]
+    },
+    {
+      "kind": "tokens",
+      "title": "A mesma marca. Duas atmosferas.",
+      "intro": "O claro é a referência editorial. A interface pode acompanhar a preferência do dispositivo; o escuro é um sistema próprio, nunca uma inversão automática.",
+      "blocks": [
+        [
+          "Modo claro",
+          "Papel como fundo; cacau no texto e na ação. Campos em superfície clara, bordas funcionais definidas e destaque manteiga suave."
+        ],
+        [
+          "Modo escuro",
+          "Fundo cacau profundo, superfícies quentes, papel para leitura e manteiga para a ação. Lavanda continua pontual."
+        ],
+        [
+          "Abertura constante",
+          "A tela de boas-vindas preserva o campo manteiga com texto cacau nos dois modos. Menus, formulários e demais superfícies operacionais usam os tokens do modo ativo."
+        ],
+        [
+          "Semântica",
+          "Tokens descrevem papel: fundo, superfície, texto, ação, foco e estado. Não substitua uma cor literal globalmente sem avaliar o contexto; fotos e identidades dos usuários mantêm suas cores."
+        ]
+      ]
+    },
+    {
+      "kind": "states",
+      "title": "Estados claros, mesmo sem depender da cor.",
+      "intro": "Sucesso, atenção, erro e informação têm pares próprios. Sempre combinar a cor com texto, ícone e estado acessível.",
+      "blocks": [
+        [
+          "Ação",
+          "Botão principal: cacau/papel no claro, manteiga/cacau no escuro. Hover e pressionado têm tokens próprios. Foco externo de 2 px com afastamento de 3 px; não remover o foco do teclado."
+        ],
+        [
+          "Seleção e inatividade",
+          "Seleção combina preenchimento, ícone/check e aria-pressed ou estado nativo. Disabled usa controle realmente desabilitado e indicação textual quando o motivo importa. Não aplicar opacidade ao bloco inteiro de texto."
+        ],
+        [
+          "Contraste",
+          "50 pares sólidos de tokens foram calculados sem arredondar a decisão: texto comum ≥4,5:1, limites e foco relevantes ≥3:1. O relatório de contraste acompanha os arquivos; fotos, sobreposições e código final exigem verificação própria."
+        ],
+        [
+          "Estados vazios e falha",
+          "Explique o estado e a próxima ação. Exemplo: “Seu primeiro jogo fica aqui.” / “Depois de jogar, guarde um registro só seu.” Erro: “Não foi possível carregar. Confira sua conexão e tente novamente.”"
+        ]
+      ]
+    },
+    {
+      "kind": "type",
+      "title": "Syne expressa. Manrope sustenta.",
+      "intro": "A largura da Syne cria a assinatura editorial. A Manrope mantém a operação confortável, mesmo em formulários e conteúdo denso.",
+      "blocks": [
+        [
+          "Syne 600–800",
+          "Aberturas, títulos de página, seções editoriais e campanhas. Tracking próximo de −0,02em; evitar títulos longos, caixa alta em parágrafos e deformação horizontal. O logo continua sendo o SVG."
+        ],
+        [
+          "Manrope 400–700",
+          "Corpo 400, metadados 500, labels 600 e ações 600–700. Números e rótulos mantêm espaçamento natural. Inputs sempre em 16 px para uso móvel."
+        ],
+        [
+          "Escala de produção",
+          "A tabela usa pixels CSS a zoom 100%. Os telefones no PDF são miniaturas do estudo: não copiar tamanhos pequenos de legenda e navegação sem aplicar a escala real. Texto deve ampliar a 200% sem esconder informação."
+        ],
+        [
+          "Arquivos e carregamento",
+          "Syne 2.200 e Manrope 4.504 em WOFF2/TTF, licenças SIL OFL incluídas. Carregar apenas as duas famílias via next/font/local. Fallback de interface: system-ui; display: Arial/sans-serif. Não baixar SF Pro nem adicionar outra família."
+        ]
+      ]
+    },
+    {
+      "kind": "layout",
+      "title": "Curvas com propósito. Leitura com espaço.",
+      "intro": "A forma editorial aparece em capas e momentos de marca; as telas cotidianas são organizadas pelo conteúdo.",
+      "blocks": [
+        [
+          "Geometria",
+          "Controles 16 px; cards 22 px; painéis 30 px. Pílulas em 999 px e avatares circulares. Destaques editoriais: 24/24/70/24 px; entrada fotográfica: curva superior esquerda de 130 px, proporcional ao tamanho da peça."
+        ],
+        [
+          "Ritmo",
+          "Escala de espaço: 4, 8, 12, 16, 20, 24, 32, 48 e 64 px. Conteúdo móvel começa com 20 px de margem, reduzindo para 16 px em 320 px de largura. Uma ação principal por contexto."
+        ],
+        [
+          "Estruturas específicas",
+          "Pessoas em linhas de identidade; comunidades com propósito e condição de entrada; arenas como lugares; posts como conteúdo; jogos em cronologia privada. Preservar diversidade de composição e evitar a mesma capa em tudo."
+        ],
+        [
+          "Componentes e interação",
+          "Controles com alvo mínimo de 44 px, sem sobreposição. Labels persistentes; erro próximo ao campo; foco visível. Diálogos preservam Escape, foco contido, retorno ao acionador, rolagem e acesso às ações com teclado virtual."
+        ],
+        [
+          "Conteúdo variável",
+          "Nomes e títulos podem quebrar. Não cortar audiência, nomes de ações ou avisos de privacidade. Fotografias e texto real podem deslocar a dobra; o conteúdo permanece rolável."
+        ],
+        [
+          "Superfícies",
+          "Fundos sólidos e diferenças tonais discretas. Sombra só para sobreposição útil; o card de post não precisa de elevação. Se existir translucidez, manter fallback opaco e contraste, sem importar vidro para toda a interface."
+        ]
+      ]
+    },
+    {
+      "kind": "photo",
+      "title": "O jogo como cultura vivida.",
+      "intro": "A fotografia aproxima pessoas e lugares. O esporte precisa ser reconhecível desde o primeiro contato.",
+      "blocks": [
+        [
+          "Assuntos",
+          "Adultos de diferentes repertórios e níveis, duplas, conversas entre jogos, mãos, areia, redes, linhas e equipamentos das três modalidades. Mostrar encontro, contexto e gesto."
+        ],
+        [
+          "Luz e cor",
+          "Luz suave, natural ou difusa de fim de tarde. Temperatura levemente quente; preservar tons de pele, textura e cor dos lugares. O calor da paleta não exige filtro amarelo sobre todas as imagens."
+        ],
+        [
+          "Enquadramento",
+          "Alternar plano de contexto, retrato relacional e detalhe. Deixar área calma para texto quando necessário. Recortes assimétricos enquadram a imagem inteira; não cortar rosto, bola ou gesto essencial."
+        ],
+        [
+          "Evitar",
+          "Pose de banco de imagens, filtro de beleza, cenário genérico de wellness, luxo distante, pódio e performance como única narrativa. A promessa é convivência no esporte, não exclusão por habilidade."
+        ],
+        [
+          "Ilustração",
+          "Usar a curva aberta e linhas da quadra como elementos planos, em uma ou duas cores da paleta. Ornamentação fica em campanhas/vazios adequados; não gerar mascote, efeito 3D ou símbolo substituto do logo."
+        ],
+        [
+          "Proveniência",
+          "A foto demonstrativa foi gerada por IA na exploração Aura e permanece sem alteração. Não representa perfis ou arenas reais. Campanhas de produção devem usar pessoas e locais autorizados, com procedência registrada."
+        ]
+      ]
+    },
+    {
+      "kind": "motion",
+      "title": "Gestos discretos. Sinais consistentes.",
+      "intro": "A identidade também vive no comportamento: resposta rápida, hierarquia estável e respeito ao movimento reduzido.",
+      "blocks": [
+        [
+          "Ícones",
+          "Lucide já presente no projeto; grade 24 × 24. Exibir normalmente a 20–24 px; traço 1,7 e 2 no estado ativo. Mesma família para navegação, segurança, edição e estados."
+        ],
+        [
+          "Significado",
+          "Ação deve ter rótulo ou nome acessível. Ícone decorativo fica oculto à tecnologia assistiva. Não usar bola/lugar para sugerir presença ao vivo. Check e cadeado reforçam seleção e privacidade."
+        ],
+        [
+          "Tempos",
+          "160 ms para respostas pequenas; 220 ms para mudança de superfície; 280 ms para gesto editorial opcional. Curva cubic-bezier(0.22, 1, 0.36, 1). Animar preferencialmente opacidade/transform."
+        ],
+        [
+          "Coreografia",
+          "Uma camada por vez. Sem bouncing, rotação do logo, parallax obrigatório, blur animado ou transição que atrase a ação. Preservar posição e foco ao abrir/fechar diálogos."
+        ],
+        [
+          "Movimento reduzido",
+          "Com prefers-reduced-motion: reduce, retirar deslocamentos e animações decorativas. Estados continuam claros por texto e mudança imediata. Carregamento não depende de shimmer para ser entendido."
+        ],
+        [
+          "Handoff",
+          "São parâmetros de implementação, não medição de desempenho. Verificar fluidez e interação em hardware alvo antes de afirmar taxa de quadros ou experiência instalada validada."
+        ]
+      ]
+    },
+    {
+      "kind": "voice",
+      "title": "Próxima na fala. Precisa na ação.",
+      "intro": "O tom editorial aparece nas aberturas. A interface usa verbos concretos e explica o que acontece com os dados.",
+      "blocks": [
+        [
+          "Assinaturas",
+          "Institucional: “O ponto de encontro da areia.” Campanha: “Me acha no Pico.” Apoio: “Tem espaço para o seu jeito.” Usar uma assinatura principal por peça."
+        ],
+        [
+          "Manifesto curto",
+          "Uma bola, uma rede, um pedaço de areia. O jogo começa ali, mas o encontro continua: gente com o mesmo ritmo, um lugar que vira referência, uma conversa depois. O Pico aproxima essa turma. Para reconhecer suas pessoas, encontrar seus lugares e guardar o que ficou do jogo. Cada um no seu tempo. Todo mundo com espaço."
+        ],
+        [
+          "Vocabulário",
+          "Usar você, turma, jogo, areia, arena, comunidade e modalidade. “Turma” cabe no contexto afetivo; o destino de navegação continua “Comunidades”. Sem gíria forçada, superlativo vazio ou linguagem de clube exclusivo."
+        ],
+        [
+          "Ações",
+          "“Criar conta”, “Registrar jogo”, “Salvar perfil”, “Publicar”. Não substituir o verbo por frases poéticas que escondam a consequência. Guardar jogo e publicar são ações diferentes."
+        ],
+        [
+          "Privacidade",
+          "“Só você vê.” / “Registrar um jogo não publica no feed.” / “Você escolhe com quem compartilhar.” Exibir audiência e destino antes da confirmação de publicação."
+        ],
+        [
+          "Sucesso e falha",
+          "Confirme somente depois do retorno real do sistema. Não mostrar “Publicado” antes de confirmação. Erros apontam o que houve e o próximo passo, sem culpa: “Não foi possível salvar. Tente novamente.”"
+        ]
+      ]
+    },
+    {
+      "kind": "applications",
+      "title": "Uma linguagem que sai da tela.",
+      "intro": "Campanha, cartaz e peça social usam a mesma assinatura, campo de cor, fotografia e ritmo.",
+      "blocks": [
+        [
+          "Feed de marca · 1080 × 1350",
+          "Margem de 64 px; wordmark de 260 px; fotografia com curva ampla; título de até quatro linhas em Syne. Uma assinatura e um destino. O exemplo não é um post publicado."
+        ],
+        [
+          "Story · 1080 × 1920",
+          "Conteúdo essencial em área central, com 250 px livres no topo e embaixo como margem editorial de segurança. Rever sobreposições da plataforma antes de veicular."
+        ],
+        [
+          "Cartaz / parceria",
+          "Papel ou manteiga como campo; cacau no texto. Coassinaturas separadas, sem fusão dos logos. Mostrar modalidade e contexto da peça; não inventar evento, horário, endereço, patrocínio ou parceria."
+        ],
+        [
+          "Reuso",
+          "Arquivos de exemplo são composições editáveis em HTML, acompanhadas de PNGs. Fotos são sintéticas e identificadas. Para impressão real, preparar resolução/cor no perfil do fornecedor e aprovar prova."
+        ]
+      ]
+    },
+    {
+      "kind": "email",
+      "title": "Reconhecimento nos pontos de contato.",
+      "intro": "A marca deve funcionar no e-mail, no ícone, na apresentação e na primeira dobra, além do feed.",
+      "blocks": [
+        [
+          "E-mail transacional",
+          "Logo pequeno, fundo papel, texto cacau e uma ação principal. Em clientes sem fonte web, usar Arial/system-ui. Não alterar links, tokens, idioma, segurança ou política de autenticação em nome do visual."
+        ],
+        [
+          "Assinatura institucional",
+          "Pico Social / O ponto de encontro da areia. URL e contatos entram somente quando forem os canais oficiais confirmados. Evitar dados fictícios em material externo."
+        ],
+        [
+          "Apresentações",
+          "Formato 16:9, grade de 12 colunas, margens amplas. Capa com título curto em Syne e marca discreta; conteúdo em Manrope. Fotografias e gráficos recebem legendas e fontes."
+        ],
+        [
+          "Instalação PWA",
+          "Conjunto entregue: SVG, PNG 192/512, maskable 512, Apple 180 e favicon 16/32. Preservar identificador, escopo e início do aplicativo atual. O fundo do ícone permanece estável nos dois modos."
+        ]
+      ]
+    },
+    {
+      "kind": "implementation",
+      "title": "Da identidade ao aplicativo real.",
+      "intro": "O visual escolhido está consolidado. A implementação deve adaptar os componentes existentes e preservar o funcionamento do Pico.",
+      "blocks": [
+        [
+          "Fontes e marca",
+          "Carregar apenas Syne/Manrope localmente em layout.tsx. Substituir o texto antigo de Brand.tsx pelo SVG escolhido e revisar ícones, favicon, Apple e manifesto."
+        ],
+        [
+          "Tokens e CSS",
+          "Migrar globals.css e o @theme inline; revisar cores literais e aliases em social, forms, journey, profile, onboarding e avisos. O token de areia e o de ação deixam de compartilhar significado por acidente."
+        ],
+        [
+          "Cobertura",
+          "Aplicar a autenticação, navegação, conteúdo, formulários, gestão, estados, PWA, tutorial e mensagens institucionais. Não limitar a entrega ao feed ou à landing page."
+        ],
+        [
+          "Contratos preservados",
+          "Manter audiência, admissão, sessão, papéis, convites, fotos reais e jogos retrospectivos privados. Não copiar dados ilustrativos nem criar rotas a partir de estados dos mockups."
+        ],
+        [
+          "Validação",
+          "Lint, typecheck, testes, build e smoke do app real. Claro/escuro, cinco larguras, texto 200%, teclado, foco, conteúdo longo, privacidade, contraste e PWA. A verificação do manual não substitui a validação da implementação."
+        ],
+        [
+          "Prompt executável",
+          "PROMPT-PRODUCAO.md contém o escopo completo, mapa de arquivos, critérios de aceite e publicação via PR/CI/scripts/deploy.mjs no projeto pico-app. A rodada do manual prepara os arquivos; não executa o deploy."
+        ]
+      ]
+    },
+    {
+      "kind": "sources",
+      "title": "Fonte de verdade e continuidade.",
+      "intro": "Esta edição consolida a escolha Aura Manteiga. O PDF anterior continua como registro das alternativas, sem prevalecer sobre esta decisão.",
+      "blocks": [
+        [
+          "Arquivos canônicos",
+          "MANUAL.md e manual-content.json: conteúdo; tokens.json: valores e medidas; logo/: vetores e exportações; fonts/: fontes e licenças. manual.html e PDF são apresentações do mesmo sistema."
+        ],
+        [
+          "Origem da identidade",
+          "PDF Pico-Social-Identidade, 47 páginas, com estratégia comum e Aura nas páginas 31–44. A paleta Manteiga deriva do estudo cromático e foi escolhida pelo responsável nesta rodada."
+        ],
+        [
+          "Licenças e imagem",
+          "Syne/Manrope: SIL OFL, versões e hashes em fonts/sources.json. Lucide: ISC, licença no pacote. A fotografia Aura foi gerada por IA; prompts e procedência permanecem na pasta original."
+        ],
+        [
+          "Critérios técnicos",
+          "Contraste de texto: W3C WCAG 2.2 SC 1.4.3. Contraste não textual: SC 1.4.11. Máscara PWA: Web Application Manifest. Documentação local Next.js 16.3.4 para fontes, manifesto e ícones."
+        ],
+        [
+          "Manutenção",
+          "Qualquer nova aplicação herda os tokens e os mestres, não extrai cor de captura. Atualizar versão, data e registro de decisão ao mudar o sistema. O responsável pelo projeto decide mudanças de marca."
+        ],
+        [
+          "Limites desta edição",
+          "Direção visual escolhida; aplicação em produção ainda não realizada. Não houve teste de percepção com público, ensaio real ou registro da marca. Telas e campanhas são exemplos identificados. Validar disponibilidade jurídica e reprodução quando pertinentes ao lançamento."
+        ]
+      ]
+    }
+  ]
+}
