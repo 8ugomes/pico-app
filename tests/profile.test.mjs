@@ -1,12 +1,31 @@
 import assert from 'node:assert/strict';
 import { after, before, test } from 'node:test';
 import { createTestDatabase, asUser, ALICE, BOB, FUTEVOLEI, BEACH } from './helpers/database.mjs';
-import { parseMutation } from '../src/lib/supabase/mutations.ts';
+import { parseMutation, mutateSocial } from '../src/lib/supabase/mutations.ts';
+import { profileSetupComplete } from '../src/lib/profile-setup.ts';
 let db;
 before(async () => { db = await createTestDatabase(); });
 after(async () => { await db?.close(); });
 const input = { action: 'save_profile', name: 'Alice Nova', username: 'alice_nova', bio: 'Bora jogar', city: 'São Paulo', neighborhood: 'Pinheiros', sportId: FUTEVOLEI, level: 'Intermediário', available: true };
 const save = (sport = FUTEVOLEI, username = 'alice_nova') => db.query(`select public.save_profile('Alice Nova',$1,'Bora jogar','São Paulo','Pinheiros',$2,'Intermediário',true)`, [username, sport]);
+test('profile setup requires a saved photo and sport, without requiring optional personal details', () => {
+  const complete = { onboardingCompleted: true, avatarPath: 'own/photo.webp', name: 'Alice', username: 'alice', sports: [{ isPrimary: true }], bio: '', city: '', neighborhood: '' };
+  assert.equal(profileSetupComplete(complete), true);
+  for (const change of [{ onboardingCompleted: false }, { avatarPath: null }, { name: ' ' }, { username: 'a' }, { sports: [{ isPrimary: false }] }]) assert.equal(profileSetupComplete({ ...complete, ...change }), false);
+});
+test('profile API checks the verified owner photo before committing onboarding', async () => {
+  let photo = null, called = 0;
+  const client = {
+    auth: { getUser: async () => ({ data: { user: { id: ALICE } }, error: null }) },
+    from: table => { assert.equal(table, 'profiles'); return { select: columns => { assert.equal(columns, 'avatar_path'); return { eq: (column, id) => { assert.equal(column, 'id'); assert.equal(id, ALICE); return { maybeSingle: async () => ({ data: { avatar_path: photo }, error: null }) }; } }; } }; },
+    rpc: async name => { assert.equal(name, 'save_profile'); called++; return { error: null }; },
+  };
+  await assert.rejects(mutateSocial(client, input), error => error.status === 400 && /foto/.test(error.message));
+  assert.equal(called, 0);
+  photo = `${ALICE}/saved.webp`;
+  await mutateSocial(client, input);
+  assert.equal(called, 1);
+});
 test('profile input rejects forged identity, invalid fields and normalizes username', () => {
   assert.equal(parseMutation({ ...input, username: ' ALICE_NOVA ' }).username, 'alice_nova');
   for (const bad of [{ player_id: BOB }, { id: BOB }, { name: ' ' }, { username: 'email@test.com' }, { sportId: 'bad' }, { level: 'Pro' }, { available: 'true' }, { bio: 'a'.repeat(161) }]) assert.throws(() => parseMutation({ ...input, ...bad }));

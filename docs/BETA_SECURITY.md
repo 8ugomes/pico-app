@@ -1,3 +1,5 @@
+> Correção posterior desta data: o fluxo integral de perfil encontrou bloqueio de leitura `blob:` na etapa final do recorte. A CSP agora permite esse recurso local; envio real e armazenamento foram verificados. [Evidência atual](profile-setup-review/README.md).
+
 # Segurança e preparação do beta — 13/09/2026
 
 ## Decisão e prontidão

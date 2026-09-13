@@ -1,4 +1,17 @@
+## Foto no cabeçalho e perfil antes de explorar — plano · 13/09/2026
+
+Corrigir o avatar conectado no topo/lateral usando o perfil autorizado da conta atual. Compartilhar a leitura entre shell, perfil, gate e tutorial, atualizar após salvar/remover foto e invalidar na troca de identidade. Antes das telas sociais, exigir perfil salvo com foto, nome, usuário e modalidade principal; manter Conta/Acesso/Privacidade disponíveis. Bio, cidade e bairro são personalização opcional, sem coleta desnecessária. Contas já completas não refazem o percurso. Tutorial opcional e aviso institucional aparecem somente depois do perfil pronto.
+
+Reutilizar upload privado/recorte, orientar confirmação da foto e mostrar preenchimento real dos quatro requisitos. Validar a foto também na API de salvar perfil; o gate é jornada de produto e não substitui admissão/RLS. Sem migration ou nova política de acesso. Validar links diretos, recarga, falha, troca de foto/conta, campos preservados, 320/390 px e desktop, lint/typecheck/testes pertinentes/build. Publicar pela main/PR/CI no destino já autorizado. Trabalho isolado da landing paralela.
+
 # Pico — plano de produto
+
+### Fechamento da rodada
+
+Avatar conectado usa a foto privada confirmada da conta; leitura compartilhada e invalidação entre abas. Gate da jornada e API exigem foto salva; nome provisório começa vazio e personalização opcional permanece no formulário. Corrigidos rótulos acessíveis dos selects. A execução real encontrou bloqueio de `fetch(blob:)` no recorte pela CSP; exceção local de Blob corrigida sem liberar novos hosts de rede ou scripts inline.
+
+99 testes locais e lint/typecheck/build passaram; 48 verificações com duas contas temporárias, upload real normalizado, erros, recarga, nova identidade, outra aba e limpeza completa. Tutorial: oito grupos/oito layouts, sem gravações sociais. [Capturas, evidências e limites](profile-setup-review/README.md). Não houve migration ou mudança de dados reais; produção seguirá PR/CI/main e recibo de release. Engajamento e aparelho físico não medidos.
+
 
 ## Landing pública de divulgação — PLAN · 13/09/2026
 

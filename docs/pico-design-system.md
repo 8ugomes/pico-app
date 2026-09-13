@@ -111,3 +111,7 @@ As capturas usam o app Next compilado com fixtures locais e rede externa bloquea
 O sistema anterior permanece no histórico Git e nas capturas `before-*` da revisão Aura, além de [visual-review](visual-review/README.md) e [journey-review](journey-review/README.md). A antiga paleta, a fonte única e o material anterior não são especificação vigente. Os contratos funcionais preservados continuam descritos nos documentos de domínio.
 
 Esta consolidação não comprova Supabase real, entrega de e-mail, instalação PWA em aparelho físico, teclado/safe areas de hardware ou pesquisa com jogadores. O check remoto de perfil e a publicação dependem do PR/CI e do recibo operacional; não foram comprovados nesta etapa. Verificar a revisão pública em `/api/version` após a publicação autorizada; não inferir deploy de documentação ou screenshot.
+
+## Avatar e configuração do perfil
+
+Cabeçalho móvel e lateral conectados usam o avatar privado da conta, com 44 px reservados, recorte circular e fallback de indisponibilidade. Na configuração inicial, foto salva, nome, usuário e esporte têm progresso de quatro requisitos. A escolha de foto fica exposta antes de existir um avatar; bio e localização aparecem como personalização opcional. A atualização de imagem preserva o rascunho do formulário.
