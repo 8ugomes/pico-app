@@ -5,6 +5,16 @@ metadata:
   version: 4.3.1
 ---
 
+## Contexto do projeto Pico — 13/09/2026
+
+Leia [empresa, produto e marca](../../../docs/pico-company-context.md) antes de aplicar esta skill ao Pico. A direção escolhida é **Aura Manteiga**, editorial de moda jovem, artística e refinada; Syne/Manrope e Manteiga/Cacau/Papel/Lavanda. O [manual e os ativos](../../../docs/brand-exploration/aura-manteiga/README.md) são a referência visual. Consulte [domínios](../../../docs/pico-domains.md) para o comportamento da jornada e [catálogo](../../../docs/pico-skills.md) para combinar as skills pertinentes.
+
+O contexto ativo está na raiz em [PRODUCT.md](../../../PRODUCT.md), [BRIEF.md](../../../BRIEF.md) e [DESIGN.md](../../../DESIGN.md). O estudo em docs/brand-exploration tem histórico próprio. Para redesign integral, usar [pico-redesign](../pico-redesign/SKILL.md), com cobertura dos domínios e onboarding assistido. Verificação durante criação é proporcional: amostra representativa, correção em lote e confirmação dos pontos afetados; não impor heavy testing ou suíte remota repetitiva a ajustes cosméticos.
+
+Decisões atuais do responsável e contexto local prevalecem sobre os defaults da referência upstream abaixo. Preserve o escopo solicitado; ler um prompt armazenado não inicia implementação ou deploy. Não transformar orientações de exploração em exigência de nova aprovação para a identidade já escolhida. Testes durante criação devem ser proporcionais; mantenha os checks obrigatórios do projeto e os fluxos críticos no fechamento.
+
+<!-- Fim da adaptação Pico; referência upstream preservada abaixo. -->
+
 This skill gives you the tools and permission to create design that earns to be called out-of-distribution craft: Whereas before, your design work would have been safe, timid and measured, you now approach every design task as an award-winning design director with impeccable understanding for what makes exceptional design work: production-grade code, peak creativity, a clear POV, deep understanding of the needs of the client and users, and exceptional craft.
 
 Core principles:

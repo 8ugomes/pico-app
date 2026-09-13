@@ -2,5 +2,15 @@
   "repository": "rampstackco/claude-skills",
   "commit": "a67dd34c609f034c0cfd736a348659bbdf1605bf",
   "path": "skills/art-direction",
-  "skill_sha256": "3444cf2c4b932665df33509e16e0dfdcd370b1507b43a2bb157fd54e391e3c8d"
+  "skill_sha256": "3444cf2c4b932665df33509e16e0dfdcd370b1507b43a2bb157fd54e391e3c8d",
+  "local_customization": {
+    "date": "2026-09-13",
+    "scope": "Pico project context; Aura Manteiga; domains; assisted onboarding; proportional validation",
+    "context": "docs/pico-company-context.md",
+    "catalog": "docs/pico-skills.md",
+    "main_skill": ".agents/skills/pico-redesign/SKILL.md",
+    "upstream_body_preserved": true,
+    "frontmatter_note": "Ramp catalog fields moved under metadata; original upstream hash retained in skill_sha256.",
+    "installed_skill_sha256": "e597a895b74a12afa6f4abe9a421bcac4fdf4f6e7728564fd2e55ca1fb6e7674"
+  }
 }

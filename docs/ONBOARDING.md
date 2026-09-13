@@ -2,6 +2,10 @@
 
 # Conheça o Pico — tutorial guiado
 
+## Próxima direção — redesign Aura Manteiga
+
+O responsável solicitou refinar o onboarding assistido como parte do redesign integral. A [skill principal](../.agents/skills/pico-redesign/SKILL.md), o [prompt](brand-exploration/aura-manteiga/PROMPT-PRODUCAO.md) e o [mapa de domínios](pico-domains.md) orientam essa execução futura. A apresentação, o texto e a sequência podem ser simplificados, preservando guia opcional, pausa/retomada, isolamento por conta, preferências anteriores e ausência de ações sociais automáticas. Perfil inicial e confirmação de comunidade continuam separados do tutorial. A documentação abaixo descreve a implementação existente, não o redesign já executado.
+
 ## Problema e resultado esperado
 
 O responsável quer que quem chega entenda a identidade do Pico e encontre um caminho entre lugares, pessoas e comunidades. O refinamento anterior organizou as telas; este incremento explica como usá-las no próprio app. É uma hipótese de onboarding, ainda sem pesquisa com jogadores.

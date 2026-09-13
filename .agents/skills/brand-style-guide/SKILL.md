@@ -1,10 +1,21 @@
 ---
 name: brand-style-guide
 description: "Build or audit a comprehensive brand style guide that documents the full brand system including story, logo system, color, typography, imagery, voice, applications, and dos/don'ts. Use this skill whenever the user wants to create brand guidelines, document an existing brand, build a brand book, audit an existing style guide for completeness, or produce the artifact that other teams will reference for years. Triggers on style guide, brand guidelines, brand book, brand standards, brand manual, style sheet, brand documentation, brand reference. Also triggers when the brand identity is finished and needs to be documented for handoff to designers, developers, vendors, or future team members."
-category: brand
-catalog_summary: "The canonical reference document for the full brand system"
-display_order: 3
+metadata:
+  category: brand
+  catalog_summary: "The canonical reference document for the full brand system"
+  display_order: 3
 ---
+
+## Contexto do projeto Pico — 13/09/2026
+
+Leia [empresa, produto e marca](../../../docs/pico-company-context.md) antes de aplicar esta skill ao Pico. A direção escolhida é **Aura Manteiga**, editorial de moda jovem, artística e refinada; Syne/Manrope e Manteiga/Cacau/Papel/Lavanda. O [manual e os ativos](../../../docs/brand-exploration/aura-manteiga/README.md) são a referência visual. Consulte [domínios](../../../docs/pico-domains.md) para o comportamento da jornada e [catálogo](../../../docs/pico-skills.md) para combinar as skills pertinentes.
+
+Mantenha o manual Aura Manteiga como fonte única do sistema. Ao alterar o conteúdo do manual, atualize sua fonte, versões derivadas e exportações pertinentes; não criar outro manual concorrente nem alterar a marca por defaults genéricos.
+
+Decisões atuais do responsável e contexto local prevalecem sobre os defaults da referência upstream abaixo. Preserve o escopo solicitado; ler um prompt armazenado não inicia implementação ou deploy. Não transformar orientações de exploração em exigência de nova aprovação para a identidade já escolhida. Testes durante criação devem ser proporcionais; mantenha os checks obrigatórios do projeto e os fluxos críticos no fechamento.
+
+<!-- Fim da adaptação Pico; referência upstream preservada abaixo. -->
 
 # Brand Style Guide
 

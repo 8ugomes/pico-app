@@ -1,3 +1,5 @@
+> Estado atual — 13/09/2026: o responsável escolheu **Aura Manteiga**. Leia [o contexto vigente](../pico-company-context.md), [o manual escolhido](aura-manteiga/MANUAL.md) e [a skill principal](../../.agents/skills/pico-redesign/SKILL.md). O conteúdo abaixo registra a fase de exploração; suas alternativas e decisões pendentes não substituem a escolha posterior. O redesign do app segue pendente.
+
 # Direção criativa do estudo Pico Social
 
 ## Projeto

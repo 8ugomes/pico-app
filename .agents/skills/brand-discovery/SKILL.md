@@ -1,10 +1,21 @@
 ---
 name: brand-discovery
 description: "Run upstream brand discovery covering audience research, competitive landscape, category dynamics, problem space, and positioning territory exploration. Use this skill at the very start of a brand or website project when the user needs to understand who they're for, who they compete with, what the audience actually needs, and where the brand could plausibly stand. Triggers on brand discovery, audience research, market research, competitive scan, category research, customer research, who is this for, who are we, positioning research, intake, kickoff. Also triggers when a creative brief is requested but the upstream inputs (audience, competitors, problem space) are not yet clear."
-category: strategy-and-discovery
-catalog_summary: "Audience research, competitive scan, positioning territory exploration"
-display_order: 1
+metadata:
+  category: strategy-and-discovery
+  catalog_summary: "Audience research, competitive scan, positioning territory exploration"
+  display_order: 1
 ---
+
+## Contexto do projeto Pico — 13/09/2026
+
+Leia [empresa, produto e marca](../../../docs/pico-company-context.md) antes de aplicar esta skill ao Pico. A direção escolhida é **Aura Manteiga**, editorial de moda jovem, artística e refinada; Syne/Manrope e Manteiga/Cacau/Papel/Lavanda. O [manual e os ativos](../../../docs/brand-exploration/aura-manteiga/README.md) são a referência visual. Consulte [domínios](../../../docs/pico-domains.md) para o comportamento da jornada e [catálogo](../../../docs/pico-skills.md) para combinar as skills pertinentes.
+
+Pesquise lacunas reais de público, categoria ou contexto quando a tarefa pedir. Diferencie fatos, hipóteses e evidências; a identidade já escolhida não exige repetir discovery a cada entrega.
+
+Decisões atuais do responsável e contexto local prevalecem sobre os defaults da referência upstream abaixo. Preserve o escopo solicitado; ler um prompt armazenado não inicia implementação ou deploy. Não transformar orientações de exploração em exigência de nova aprovação para a identidade já escolhida. Testes durante criação devem ser proporcionais; mantenha os checks obrigatórios do projeto e os fluxos críticos no fechamento.
+
+<!-- Fim da adaptação Pico; referência upstream preservada abaixo. -->
 
 # Brand Discovery
 

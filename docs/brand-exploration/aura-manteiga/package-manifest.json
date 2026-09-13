@@ -6,13 +6,13 @@
   },
   {
     "path": "PROMPT-PRODUCAO.md",
-    "bytes": 11042,
-    "sha256": "990ffb9bdf0e0ea7d82ab754aeeb39072c11086e39357106dab45ab402e9b7a1"
+    "bytes": 16621,
+    "sha256": "3acff7cbb78278b2d6bf89966bb7be5fc30508572708738952b6d51281fd8405"
   },
   {
     "path": "IMPLEMENTACAO.md",
-    "bytes": 6914,
-    "sha256": "1426cb4e7b33cce6113995b3c4352713c5ce462d4783e16ce9b22721763b0963"
+    "bytes": 8063,
+    "sha256": "e60462cf7464dec0844a101e3dbef041232f7d87b529008627128a1c4c934828"
   },
   {
     "path": "tokens.json",

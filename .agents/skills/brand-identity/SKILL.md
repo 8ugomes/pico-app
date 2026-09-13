@@ -1,10 +1,21 @@
 ---
 name: brand-identity
 description: "Design or evaluate a brand visual identity system covering logo, color, typography, imagery direction, iconography, and motion principles. Use this skill whenever the user wants to design a logo, build a visual identity, define brand colors, choose brand typography, develop iconography, plan brand imagery, or evaluate an existing identity for cohesion. Triggers on logo design, brand identity, visual identity, brand mark, wordmark, monogram, color palette, brand colors, brand typography, type system, iconography, brand imagery, motion design, brand system, identity system. Also triggers when the user has a brand direction approved and now needs the visual artifacts that express it."
-category: brand
-catalog_summary: "Logo system, color, typography, imagery, iconography, motion"
-display_order: 2
+metadata:
+  category: brand
+  catalog_summary: "Logo system, color, typography, imagery, iconography, motion"
+  display_order: 2
 ---
+
+## Contexto do projeto Pico — 13/09/2026
+
+Leia [empresa, produto e marca](../../../docs/pico-company-context.md) antes de aplicar esta skill ao Pico. A direção escolhida é **Aura Manteiga**, editorial de moda jovem, artística e refinada; Syne/Manrope e Manteiga/Cacau/Papel/Lavanda. O [manual e os ativos](../../../docs/brand-exploration/aura-manteiga/README.md) são a referência visual. Consulte [domínios](../../../docs/pico-domains.md) para o comportamento da jornada e [catálogo](../../../docs/pico-skills.md) para combinar as skills pertinentes.
+
+Use os SVGs em contornos e tokens entregues como mestres. Estenda o sistema sem regenerar o logo ou substituir Syne/Manrope. A implementação no app é uma migração ainda pendente, não um resultado já publicado.
+
+Decisões atuais do responsável e contexto local prevalecem sobre os defaults da referência upstream abaixo. Preserve o escopo solicitado; ler um prompt armazenado não inicia implementação ou deploy. Não transformar orientações de exploração em exigência de nova aprovação para a identidade já escolhida. Testes durante criação devem ser proporcionais; mantenha os checks obrigatórios do projeto e os fluxos críticos no fechamento.
+
+<!-- Fim da adaptação Pico; referência upstream preservada abaixo. -->
 
 # Brand Identity
 

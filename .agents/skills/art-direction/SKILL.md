@@ -1,10 +1,21 @@
 ---
 name: art-direction
 description: "Direct visual and creative work for campaigns, photography, illustration, video, and branded experiences. Use this skill whenever the user wants to brief a photographer, direct illustrators, plan a creative campaign, develop visual concepts, or evaluate creative work for fit. Triggers on art direction, photo brief, photography brief, illustration brief, campaign concept, creative concept, visual direction, mood board, look and feel, visual treatment, video direction. Also triggers when the user has approved brand identity but needs to extend it into specific creative deliverables. Use `creative-direction` instead when the ask is the project-wide aesthetic brief that this skill consumes as input."
-category: design
-catalog_summary: "Photography, illustration, and visual direction for campaigns"
-display_order: 3
+metadata:
+  category: design
+  catalog_summary: "Photography, illustration, and visual direction for campaigns"
+  display_order: 3
 ---
+
+## Contexto do projeto Pico — 13/09/2026
+
+Leia [empresa, produto e marca](../../../docs/pico-company-context.md) antes de aplicar esta skill ao Pico. A direção escolhida é **Aura Manteiga**, editorial de moda jovem, artística e refinada; Syne/Manrope e Manteiga/Cacau/Papel/Lavanda. O [manual e os ativos](../../../docs/brand-exploration/aura-manteiga/README.md) são a referência visual. Consulte [domínios](../../../docs/pico-domains.md) para o comportamento da jornada e [catálogo](../../../docs/pico-skills.md) para combinar as skills pertinentes.
+
+Estenda a direção editorial aos três esportes, com luz difusa, textura e pessoas reconhecíveis. Fotografia sintética e aplicações do estudo são exemplos identificados; não podem representar contas, arenas ou atividade real.
+
+Decisões atuais do responsável e contexto local prevalecem sobre os defaults da referência upstream abaixo. Preserve o escopo solicitado; ler um prompt armazenado não inicia implementação ou deploy. Não transformar orientações de exploração em exigência de nova aprovação para a identidade já escolhida. Testes durante criação devem ser proporcionais; mantenha os checks obrigatórios do projeto e os fluxos críticos no fechamento.
+
+<!-- Fim da adaptação Pico; referência upstream preservada abaixo. -->
 
 # Art Direction
 

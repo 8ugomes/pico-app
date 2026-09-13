@@ -1,5 +1,13 @@
 # Changelog — Pico
 
+## 2026-09-13 — contexto Aura Manteiga e skill principal de redesign
+
+- Atualizadas as oito skills de branding/design com a direção escolhida, contexto Pico e validação proporcional. Preservados corpos de origem, referências e licenças; hashes locais e origem registrados separadamente. Campos de catálogo Ramp movidos para `metadata` compatível.
+- Criadas cinco skills: `pico-context`, `pico-product-plan`, `pico-dev`, `pico-deslopify` e **`pico-redesign`**. [Catálogo de 13 skills](pico-skills.md).
+- Criados [contexto de empresa/produto/marca](pico-company-context.md), [mapa de domínios](pico-domains.md) e entradas PRODUCT/BRIEF/DESIGN. Atualizados AGENTS, README, plano, Deslopify, guias do Pico, design system e direção futura de onboarding/PWA.
+- [Prompt principal](brand-exploration/aura-manteiga/PROMPT-PRODUCAO.md) ampliado para redesign integral e onboarding assistido, exigindo manual completo e contratos dos domínios. Menos testes repetitivos durante criação; checks obrigatórios e testes dos comportamentos alterados preservados. ZIP da marca atualizado; PDF/ativos visuais mantidos.
+- 13 skills passaram no validador; referências locais, procedência e preservação upstream conferidas. Lint, typecheck e build aprovados. Sem alteração de código do app, banco, dependências, push ou deploy.
+
 ## 2026-09-13 — manual Aura Manteiga e prompt de produção
 
 - Consolidada a escolha do responsável: estética Aura com paleta Manteiga. [Manual](brand-exploration/aura-manteiga/README.md) de 32 páginas, incluindo 32 telas em cada modo, marca, logo, cores, tipografia, arte, voz, movimento e aplicações.

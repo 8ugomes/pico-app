@@ -2,12 +2,14 @@
 
 Este documento conecta a identidade ao código encontrado em 13/09/2026, base `f80684c`. É especificação para a próxima rodada; não comprova modificação ou publicação do aplicativo. [Prompt completo](PROMPT-PRODUCAO.md).
 
+Atualização de escopo: o responsável pediu redesign integral, incluindo onboarding assistido e verificação mais leve durante criação. Usar [pico-redesign](../../../.agents/skills/pico-redesign/SKILL.md), [contexto institucional](../../pico-company-context.md) e [mapa de domínios](../../pico-domains.md). O manual completo e as skills pertinentes devem ser consultados; este mapa técnico não os substitui.
+
 ## Ordem recomendada
 
 1. Tokens e fontes globais; logo e ícones.
 2. Controles, diálogos, navegação e shell.
 3. Conteúdo social, perfis, arenas, comunidades e diário privado.
-4. Gestão, convites, autenticação, conta, PWA, tutorial e estados.
+4. Onboarding assistido (já considerado nas jornadas iniciais), gestão, convites, autenticação, conta, PWA e estados.
 5. QA visual/funcional, PR/CI e publicação no destino existente.
 
 ## Mapeamento para o código atual
@@ -19,7 +21,7 @@ Este documento conecta a identidade ao código encontrado em 13/09/2026, base `f
 | `src/components/pico/Brand.tsx` | SVG `logo/wordmark.svg` em cor semântica ou variante fixa adequada; retirar texto e ponto antigos. | Link de início e nome acessível. |
 | `src/app/forms.css` e `src/components/ui` | Fontes, fundos, bordas, estados e raio; tirar `color-scheme: dark` fixo do select. | Inputs, labels, validação, ChoiceChip nativo, foco contido/retornado e Escape dos diálogos. |
 | `social.css`, `social-pages.css`, `journey.css`, `profile.css` | Converter cores fixas e aplicar hierarquia/curvas por conteúdo. | Conteúdo real, audiência, nomenclatura e estados conectados/demo. |
-| `onboarding.css`, GuidedOnboarding, OfficialWelcome | Cores semânticas, título e acabamento. | Percurso, persistência existente do tutorial, foco e confirmação institucional. |
+| `onboarding.css`, GuidedOnboarding, OfficialWelcome, ProfileEditor, `src/lib/onboarding.ts` | Identidade, hierarquia, ajuda contextual e refinamento da sequência/apresentação, distinguindo perfil, aviso e tutorial. | Guia opcional, pausa/retomada, isolamento e compatibilidade da preferência, foco e confirmação institucional real; sem ações sociais automáticas. |
 | `BottomNav.tsx`, `AppShell.tsx` | Marca, tipografia e seleção com sinal além da cor. | Início/Pessoas/Comunidades/Arenas/Perfil e associação de jogos ao perfil. |
 | `src/app/icon.svg`, `favicon.ico`, `apple-icon.png`, `public/icons` | Substituir com as exportações da pasta `logo`. | Dimensões, MIME, propósito e carregamento pela convenção Next. |
 | `src/app/manifest.ts` | Cores e caminhos/bytes dos ícones; validar maskable específico. | `id: /`, `start_url: /feed`, `scope: /`, nomes por ambiente e display standalone. |
@@ -52,13 +54,13 @@ Manifesto admite um fundo de lançamento estável; use papel como base coerente 
 
 ## Roteiro de aceite
 
-Comparar todas as superfícies claras e escuras, incluindo estados de acesso, formulários longos, gestão e conteúdo vazio. Conferir 320/390/430/768/1440 px, zoom/texto 200%, foco/teclado, entrada de texto e safe areas. Verificar que recortes não esconderam informação e que o estilo não removeu controles. Cálculos de tokens são referência; medir os pares reais depois da cascata CSS e de sobreposições.
+Inventariar a cobertura de todas as superfícies claras e escuras, incluindo acesso, formulários, gestão e estados. Inspecionar uma amostra representativa em 320/390 px e desktop adequado; acrescentar outras larguras conforme composição ou defeitos encontrados. Conferir texto 200%, foco/teclado, entrada de texto e safe areas nos fluxos relevantes. Verificar que recortes não esconderam informação e que o estilo não removeu controles. Cálculos de tokens são referência; medir os pares reais depois da cascata CSS e de sobreposições.
 
-Rodar lint, typecheck, testes, build e smoke pertinente. A implementação visual deve preservar as regressões funcionais existentes. Validar com fixtures isoladas; não criar atividade social artificial em produção. Somente afirmar QA real de Supabase ou aparelho físico quando executado.
+Durante criação, usar revisão visual representativa e correções em lote; não repetir suíte completa/remota ou matriz exaustiva a cada ajuste cosmético. No fechamento, rodar lint, typecheck, build, smoke e testes pertinentes aos comportamentos alterados, mantendo CI e regressões críticas. Validar com fixtures isoladas; não criar atividade social artificial em produção. Somente afirmar QA real de Supabase ou aparelho físico quando executado. O [prompt principal](PROMPT-PRODUCAO.md) e a skill `pico-redesign` detalham a cobertura integral e o refinamento do onboarding assistido.
 
 ## Publicação posterior
 
-O prompt completo autoriza futura implementação e publicação após os gates. Respeitar branch/PR/CI e proteções da main. `scripts/deploy.mjs` exige árvore limpa, main sincronizada com origin, projeto Vercel correto e migrations registradas. Usar **pico-app**, em **pico-app-sepia.vercel.app**. Não contornar guardas nem criar projeto paralelo. Confirmar `/api/version`, registrar versão servida e referência de rollback.
+O prompt completo, quando enviado como pedido de execução pelo responsável, autoriza implementação e publicação após os gates. Respeitar branch/PR/CI e proteções da main. `scripts/deploy.mjs` exige árvore limpa, main sincronizada com origin, projeto Vercel correto e migrations registradas. Usar **pico-app**, em **pico-app-sepia.vercel.app**. Não contornar guardas nem criar projeto paralelo. Confirmar `/api/version`, registrar versão servida e referência de rollback.
 
 A atualização visual não exige migrations, substituição de banco, mudança de regras de acesso ou reenvio de conteúdo. Se algo estrutural já estiver pendente no ambiente, isso deve ser informado e tratado pelo procedimento próprio, sem escondê-lo como parte do branding.
 

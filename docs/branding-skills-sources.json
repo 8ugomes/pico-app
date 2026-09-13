@@ -1,5 +1,5 @@
 {
-  "purpose": "Curadoria e registro da instalação por projeto em 13/09/2026.",
+  "purpose": "Curadoria, instalação e contextualização das skills do Pico Social para Aura Manteiga, com skills próprias de produto e redesign.",
   "consulted_at_utc": "2026-09-13T02:58:22.396350+00:00",
   "consulted_local_date": "2026-09-12",
   "timezone": "America/Sao_Paulo",
@@ -22,7 +22,16 @@
       "runtime_note": "Instruction files; visual production uses available tools.",
       "status": "installed",
       "installed_at": "2026-09-13",
-      "installed_skill_sha256": "b0c4837e1bd140ca816ae54948754ddd2ac1e2a4d3619363777a80caf00b2ede"
+      "installed_skill_sha256": "dca98b6413fd8e0a3e68e7c54b3ae409ff9f9c70413ae5659995cb24a0930e70",
+      "local_customization": {
+        "date": "2026-09-13",
+        "scope": "Pico project context; Aura Manteiga; domains; assisted onboarding; proportional validation",
+        "context": "docs/pico-company-context.md",
+        "catalog": "docs/pico-skills.md",
+        "main_skill": ".agents/skills/pico-redesign/SKILL.md",
+        "upstream_body_preserved": true,
+        "frontmatter_note": "Ramp catalog fields moved under metadata; original upstream hash retained in skill_sha256."
+      }
     },
     {
       "name": "impeccable",
@@ -39,7 +48,16 @@
       "runtime_note": "Launcher and engine; installer may also configure hooks. Full engine not audited.",
       "status": "installed",
       "installed_at": "2026-09-13",
-      "installed_skill_sha256": "38c2e839e130008b6da814ab9c16f3fcbbedfdf721a9638eebd31a9e65341a7a"
+      "installed_skill_sha256": "cd755316449028de97d540daf0c0c577ead89217744e9571155efabe1e53e415",
+      "local_customization": {
+        "date": "2026-09-13",
+        "scope": "Pico project context; Aura Manteiga; domains; assisted onboarding; proportional validation",
+        "context": "docs/pico-company-context.md",
+        "catalog": "docs/pico-skills.md",
+        "main_skill": ".agents/skills/pico-redesign/SKILL.md",
+        "upstream_body_preserved": true,
+        "frontmatter_note": "Ramp catalog fields moved under metadata; original upstream hash retained in skill_sha256."
+      }
     },
     {
       "name": "brand-discovery",
@@ -56,7 +74,16 @@
       "runtime_note": "Instruction files; visual production uses available tools.",
       "status": "installed",
       "installed_at": "2026-09-13",
-      "installed_skill_sha256": "1826d52344ec219bf964ac594ed22ac3573b046999ff56b39ec3f7c05cda773f"
+      "installed_skill_sha256": "80ce04be02f7cdaa95036f055bc8abe4c855ade6f31a68eee85709859ec72dd5",
+      "local_customization": {
+        "date": "2026-09-13",
+        "scope": "Pico project context; Aura Manteiga; domains; assisted onboarding; proportional validation",
+        "context": "docs/pico-company-context.md",
+        "catalog": "docs/pico-skills.md",
+        "main_skill": ".agents/skills/pico-redesign/SKILL.md",
+        "upstream_body_preserved": true,
+        "frontmatter_note": "Ramp catalog fields moved under metadata; original upstream hash retained in skill_sha256."
+      }
     },
     {
       "name": "brand-ideation",
@@ -73,7 +100,16 @@
       "runtime_note": "Instruction files; visual production uses available tools.",
       "status": "installed",
       "installed_at": "2026-09-13",
-      "installed_skill_sha256": "af477efaf396388b0c957b3c17de27c57847e7ae8b07d2e142c22cfa4d4e77d7"
+      "installed_skill_sha256": "9977d7c917b61470323082cc0bb9fe82030572718a2ab3ee9eccdb9f7ff9062f",
+      "local_customization": {
+        "date": "2026-09-13",
+        "scope": "Pico project context; Aura Manteiga; domains; assisted onboarding; proportional validation",
+        "context": "docs/pico-company-context.md",
+        "catalog": "docs/pico-skills.md",
+        "main_skill": ".agents/skills/pico-redesign/SKILL.md",
+        "upstream_body_preserved": true,
+        "frontmatter_note": "Ramp catalog fields moved under metadata; original upstream hash retained in skill_sha256."
+      }
     },
     {
       "name": "creative-direction",
@@ -90,7 +126,16 @@
       "runtime_note": "Instruction files; visual production uses available tools.",
       "status": "installed",
       "installed_at": "2026-09-13",
-      "installed_skill_sha256": "fc11c13225666233b3e544854a7a46a19d3a04ced7faefaa0fc1cfd892fd0eb4"
+      "installed_skill_sha256": "defba383a8fa8f7549ec3828ec885ce9f473f599bd5d46584483443ef3a16e99",
+      "local_customization": {
+        "date": "2026-09-13",
+        "scope": "Pico project context; Aura Manteiga; domains; assisted onboarding; proportional validation",
+        "context": "docs/pico-company-context.md",
+        "catalog": "docs/pico-skills.md",
+        "main_skill": ".agents/skills/pico-redesign/SKILL.md",
+        "upstream_body_preserved": true,
+        "frontmatter_note": "Ramp catalog fields moved under metadata; original upstream hash retained in skill_sha256."
+      }
     },
     {
       "name": "brand-identity",
@@ -107,7 +152,16 @@
       "runtime_note": "Instruction files; visual production uses available tools.",
       "status": "installed",
       "installed_at": "2026-09-13",
-      "installed_skill_sha256": "91dc7f2acc3a0ad57867329adc327c0d531e1df3881c83f4115409079a67b63b"
+      "installed_skill_sha256": "4aea7f71c0415c73d4d19aaa6ad1350417d4f38316e40108417ac87dad790285",
+      "local_customization": {
+        "date": "2026-09-13",
+        "scope": "Pico project context; Aura Manteiga; domains; assisted onboarding; proportional validation",
+        "context": "docs/pico-company-context.md",
+        "catalog": "docs/pico-skills.md",
+        "main_skill": ".agents/skills/pico-redesign/SKILL.md",
+        "upstream_body_preserved": true,
+        "frontmatter_note": "Ramp catalog fields moved under metadata; original upstream hash retained in skill_sha256."
+      }
     },
     {
       "name": "art-direction",
@@ -124,7 +178,16 @@
       "runtime_note": "Instruction files; visual production uses available tools.",
       "status": "installed",
       "installed_at": "2026-09-13",
-      "installed_skill_sha256": "3444cf2c4b932665df33509e16e0dfdcd370b1507b43a2bb157fd54e391e3c8d"
+      "installed_skill_sha256": "e597a895b74a12afa6f4abe9a421bcac4fdf4f6e7728564fd2e55ca1fb6e7674",
+      "local_customization": {
+        "date": "2026-09-13",
+        "scope": "Pico project context; Aura Manteiga; domains; assisted onboarding; proportional validation",
+        "context": "docs/pico-company-context.md",
+        "catalog": "docs/pico-skills.md",
+        "main_skill": ".agents/skills/pico-redesign/SKILL.md",
+        "upstream_body_preserved": true,
+        "frontmatter_note": "Ramp catalog fields moved under metadata; original upstream hash retained in skill_sha256."
+      }
     },
     {
       "name": "brand-style-guide",
@@ -141,7 +204,16 @@
       "runtime_note": "Instruction files; visual production uses available tools.",
       "status": "installed",
       "installed_at": "2026-09-13",
-      "installed_skill_sha256": "e5de2c8ff359f2c6204b3efbceb52e06d980545f50a915af38216e27de5845ff"
+      "installed_skill_sha256": "80c125336e49654d4b4d14cb00fa92d7286bad62e69d301d9189c29f6ca35f9c",
+      "local_customization": {
+        "date": "2026-09-13",
+        "scope": "Pico project context; Aura Manteiga; domains; assisted onboarding; proportional validation",
+        "context": "docs/pico-company-context.md",
+        "catalog": "docs/pico-skills.md",
+        "main_skill": ".agents/skills/pico-redesign/SKILL.md",
+        "upstream_body_preserved": true,
+        "frontmatter_note": "Ramp catalog fields moved under metadata; original upstream hash retained in skill_sha256."
+      }
     }
   ],
   "repositories_screened": [
@@ -312,5 +384,51 @@
     "Impeccable context launcher initially lacked execute permission; direct document context used. Launcher permission corrected. concept-seed, detect and embed-prompt executed.",
     "Independent finish reviewer and documenter used as requested by Impeccable new-work workflow.",
     "Production application and Supabase were not changed."
+  ],
+  "local_context": {
+    "date": "2026-09-13",
+    "scope": "Pico project context; Aura Manteiga; domains; assisted onboarding; proportional validation",
+    "context": "docs/pico-company-context.md",
+    "catalog": "docs/pico-skills.md",
+    "main_skill": ".agents/skills/pico-redesign/SKILL.md",
+    "upstream_body_preserved": true,
+    "frontmatter_note": "Ramp catalog fields moved under metadata; original upstream hash retained in skill_sha256."
+  },
+  "project_native_skills": [
+    {
+      "name": "pico-context",
+      "destination": ".agents/skills/pico-context",
+      "created_at": "2026-09-13",
+      "installed_skill_sha256": "6cac1ad7c19aa5f2a660b16ff86e30acc14f661529f6a06b7b62095890b3cf5b",
+      "source": "Pico project instructions and approved Aura Manteiga identity"
+    },
+    {
+      "name": "pico-deslopify",
+      "destination": ".agents/skills/pico-deslopify",
+      "created_at": "2026-09-13",
+      "installed_skill_sha256": "84b96e61bb1e09ff1d2f83fbb6c46f7c7947bd6829c5c36106f433cc335fad7e",
+      "source": "Pico project instructions and approved Aura Manteiga identity"
+    },
+    {
+      "name": "pico-dev",
+      "destination": ".agents/skills/pico-dev",
+      "created_at": "2026-09-13",
+      "installed_skill_sha256": "e2d627c8f8ff55f369c59e22363d94a57d2a5f887997605c64126acfe3e3c5ac",
+      "source": "Pico project instructions and approved Aura Manteiga identity"
+    },
+    {
+      "name": "pico-product-plan",
+      "destination": ".agents/skills/pico-product-plan",
+      "created_at": "2026-09-13",
+      "installed_skill_sha256": "06b251038485deb90ad5d03684c9d31a9eb2d537a1420bfac20f110b635fa61b",
+      "source": "Pico project instructions and approved Aura Manteiga identity"
+    },
+    {
+      "name": "pico-redesign",
+      "destination": ".agents/skills/pico-redesign",
+      "created_at": "2026-09-13",
+      "installed_skill_sha256": "a8a147a7299d7864b1e8747813038d94dab453315fb7d04ce7af0e16275a7baf",
+      "source": "Pico project instructions and approved Aura Manteiga identity"
+    }
   ]
 }

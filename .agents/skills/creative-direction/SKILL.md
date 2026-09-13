@@ -1,10 +1,21 @@
 ---
 name: creative-direction
 description: "Walk the user through four directional axes (tone register, aesthetic philosophy, audience relationship, sensory ambition) and produce a structured aesthetic brief that downstream content, copy, design, and art-direction skills consume as required input. The aesthetic depth layer, distinct from `creative-brief` (operational kickoff: scope, audience, deliverables, constraints). Use when a project needs aesthetic coherence across many small decisions and the user has only a vague feeling, or when multiple downstream aesthetic-producing skills need a shared brief. Triggers on creative direction, aesthetic direction, set the aesthetic, define the visual direction, what's the vibe, what's the tone, the four axes. Does NOT fire for a general kickoff brief (use `creative-brief`), tactical single-piece work, already-documented direction, purely functional output, or locked production-stage work."
-category: strategy-and-discovery
-catalog_summary: "Four-axis aesthetic brief (tone, aesthetic, audience, sensory ambition) for cross-skill coherence"
-display_order: 3
+metadata:
+  category: strategy-and-discovery
+  catalog_summary: "Four-axis aesthetic brief (tone, aesthetic, audience, sensory ambition) for cross-skill coherence"
+  display_order: 3
 ---
+
+## Contexto do projeto Pico — 13/09/2026
+
+Leia [empresa, produto e marca](../../../docs/pico-company-context.md) antes de aplicar esta skill ao Pico. A direção escolhida é **Aura Manteiga**, editorial de moda jovem, artística e refinada; Syne/Manrope e Manteiga/Cacau/Papel/Lavanda. O [manual e os ativos](../../../docs/brand-exploration/aura-manteiga/README.md) são a referência visual. Consulte [domínios](../../../docs/pico-domains.md) para o comportamento da jornada e [catálogo](../../../docs/pico-skills.md) para combinar as skills pertinentes.
+
+Os quatro eixos já estão definidos em [BRIEF.md](../../../BRIEF.md). Use o brief como entrada; não repetir questionário estético nem pedir aprovação de Aura Manteiga novamente. Esta skill serve para revisar o brief quando a tarefa exigir.
+
+Decisões atuais do responsável e contexto local prevalecem sobre os defaults da referência upstream abaixo. Preserve o escopo solicitado; ler um prompt armazenado não inicia implementação ou deploy. Não transformar orientações de exploração em exigência de nova aprovação para a identidade já escolhida. Testes durante criação devem ser proporcionais; mantenha os checks obrigatórios do projeto e os fluxos críticos no fechamento.
+
+<!-- Fim da adaptação Pico; referência upstream preservada abaixo. -->
 
 # Creative Direction
 

@@ -5,7 +5,7 @@ description: Revisar a interface e o texto do Pico para manter clareza, personal
 
 # Revisão visual e editorial do Pico
 
-Use após implementar uma tela ou quando a interface perder identidade. Este guia complementa skill_pico_dev.md.
+Guia vigente, exposto como skill em [.agents/skills/pico-deslopify](../.agents/skills/pico-deslopify/SKILL.md). Use antes/depois de implementar uma tela ou quando a interface perder identidade. Complementa skill_pico_dev.md e o [contexto institucional](pico-company-context.md).
 
 A revisão agora também acontece antes de codar. Critérios e aprendizados por rodada ficam em [deslopify.md](deslopify.md).
 Critério vigente: uso social em 390px, pessoas reconhecíveis e jogos privados registrados depois da experiência. A decisão de pós-jogo substitui o check-in central da rodada 2.
@@ -16,11 +16,12 @@ Uma pessoa que joga na areia reconhece para quem é a tela e entende a próxima 
 
 ## Identidade
 
-- Marca: Pico. Tagline: O ponto de encontro da areia. Frase: Me acha no Pico.
+- Marca: Pico Social; assinatura curta Pico. Tagline: O ponto de encontro da areia. Frase: Me acha no Pico.
 - Tom próximo, brasileiro e adulto. Esportivo sem gritar; social sem sobrecarregar.
-- Grafite profundo e destaque areia. Outras cores só comunicam informação específica.
-- Tipografia clara, contraste, bastante espaço e hierarquia forte.
-- Raio de borda e transparência coerentes. Glassmorphism precisa de contraste e função.
+- Aura Manteiga é a direção escolhida: Manteiga/Cacau/Papel/Lavanda, claro editorial e escuro próprio. [Manual](brand-exploration/aura-manteiga/MANUAL.md) e [design system](pico-design-system.md) orientam a aplicação; a antiga marca verde-água não orienta novas telas.
+- Syne expressiva nos títulos; Manrope legível em leitura e operação. Contraste, espaço e hierarquia antes de ornamento. Escala de produção, não o texto pequeno das miniaturas.
+- Curvas editoriais pontuais, fotografia protagonista e superfícies calmas. Reduzir repetição de cards, blur, bordas e sombras. Não remover informação funcional para simular minimalismo.
+- Onboarding assistido usa dicas curtas e controles reais. Perfil inicial, comunidade oficial e tutorial continuam distintos; pausa, saída e retomada visíveis. Ver [domínios](pico-domains.md).
 
 ## Cortes prioritários
 
@@ -61,6 +62,8 @@ Contextualize estados vazios: ofereça uma ação útil apenas se ela existir.
 9. Desempenho: evitar JavaScript, blur e animações sem benefício claro.
 
 Priorize os problemas que impedem uso ou entendimento. Não redesenhe a tela inteira só por gosto pessoal.
+
+Quando o pedido for redesign integral, aplicar [pico-redesign](../.agents/skills/pico-redesign/SKILL.md) e cobrir todas as superfícies existentes. A revisão durante criação usa amostra representativa de mobile/desktop e ambos os temas, correção em lote e confirmação dos pontos alterados. Não exigir heavy testing ou repetição da suíte completa para refinos cosméticos; ampliar por falha ou risco. Manter os checks obrigatórios e verificar os comportamentos críticos alterados no fechamento.
 
 ## Checklist de conclusão
 

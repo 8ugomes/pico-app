@@ -2,6 +2,8 @@
 
 Identidade consolidada a partir da estética Aura, da paleta Manteiga escolhida pelo responsável e do PDF inicial. Versão 1.0, 13/09/2026. Nome de produto: **Pico Social**; assinatura curta: **Pico**. A implementação em produção será uma rodada posterior.
 
+O [prompt principal](PROMPT-PRODUCAO.md) foi ampliado para redesign integral e onboarding assistido, com validação proporcional durante criação. Ele usa a [skill pico-redesign](../../../.agents/skills/pico-redesign/SKILL.md), o [catálogo de 13 skills](../../pico-skills.md), o [contexto institucional](../../pico-company-context.md) e o [mapa de domínios](../../pico-domains.md). O PDF e os ativos visuais permanecem na versão 1.0 escolhida; as instruções de implementação refletem o pedido posterior.
+
 ## Entregas
 
 - [Manual visual](manual.html): 32 páginas, com logo, cores, tipografia, arte, voz, movimento, aplicações e 32 telas em cada modo.

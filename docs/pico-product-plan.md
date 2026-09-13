@@ -1,5 +1,21 @@
 # Pico — plano de produto
 
+## Contexto vigente e próxima execução
+
+**Identidade escolhida: Pico Social / Aura Manteiga.** [Contexto institucional](pico-company-context.md), [design system](pico-design-system.md), [domínios](pico-domains.md) e [catálogo de skills](pico-skills.md) orientam novas tarefas. As entradas anteriores registram decisões de cada etapa; Ritual, Pistache e a lavanda original são alternativas históricas. A identidade foi entregue em manual e ativos; a migração do aplicativo ainda será executada.
+
+## Skills e redesign integral — plano antes de desenvolver · 13/09/2026
+
+Atualizar as oito skills locais com a identidade escolhida e criar skills próprias de contexto, planejamento, desenvolvimento, revisão e redesign integral. Centralizar empresa/produto, fontes da marca e mapa de domínios. Atualizar o prompt de implementação para cobrir toda a jornada, incluindo onboarding assistido opcional e retomável. Diminuir testes repetitivos durante criação: revisão visual por amostragem e testes orientados a risco, mantendo lint/typecheck/build e regressões críticas no fechamento. Entrega desta rodada é documental; não executar o redesign nem publicar. Validar referências, formato/procedência das skills, atualizar changelog e fazer commit local.
+
+### Fechamento
+
+Oito skills contextualizadas e cinco skills próprias criadas: `pico-context`, `pico-product-plan`, `pico-dev`, `pico-deslopify` e **`pico-redesign`**. Contexto institucional, PRODUCT/BRIEF/DESIGN, mapa de domínios, catálogo, guias técnicos/visuais, AGENTS e plano agora compartilham Aura Manteiga como direção. O design system diferencia alvo aprovado e baseline legado; a pesquisa e os briefs de exploração permanecem históricos.
+
+O prompt principal exige o manual completo, leitura das skills pertinentes e contratos dos domínios. Inclui refinamento de perfil inicial, boas-vindas e tutorial opcional, com continuidade e autonomia preservadas. Verificação durante criação usa amostra representativa, correções em lote e ampliação por risco; não remove checks obrigatórios ou regressões críticas. Pacote ZIP atualizado com o prompt e o mapa de implementação revisados.
+
+Verificação: 13 skills válidas no validador de formato; referências locais adicionadas conferidas; oito corpos upstream preservados e hashes de origem/local distintos; cinco hashes das skills próprias registrados. Lint, typecheck e build aprovados. Nenhum arquivo de app, banco, dependência ou teste foi alterado. Sem teste funcional/remoto novo, push ou deploy; o redesign permanece como próxima execução mediante o pedido correspondente.
+
 ## Aura Manteiga — identidade consolidada e prompt entregues · 13/09/2026
 
 Consolidada a escolha do responsável em [manual exclusivo](brand-exploration/aura-manteiga/README.md), com 32 páginas e 64 vistas de tela (32 claras/32 escuras). Entrega inclui narrativa, logo/lockup/símbolo com geometria Aura preservada, paleta Manteiga/Cacau/Papel/Lavanda, tokens semânticos, Syne/Manrope, direção de arte, voz, movimento, aplicações, fontes/licenças e ícones SVG/PNG/ICO com maskable específico. [Prompt completo](brand-exploration/aura-manteiga/PROMPT-PRODUCAO.md) e [mapa do código](brand-exploration/aura-manteiga/IMPLEMENTACAO.md) orientam futura implementação e publicação pelo destino existente.

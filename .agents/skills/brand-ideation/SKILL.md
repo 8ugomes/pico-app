@@ -1,10 +1,21 @@
 ---
 name: brand-ideation
 description: "Generate, evaluate, and narrow brand concepts during early ideation including positioning territories, naming candidates, mood directions, and narrative angles. Use this skill whenever the user is in the early phase of brand creation, exploring brand directions, brainstorming names, building moodboards, generating positioning options, or trying to choose between multiple brand directions. Triggers on brand ideation, brand concept, naming, brand name, name candidates, positioning, brand positioning, mood board, brand directions, exploring brands, early brand work, brand exploration, brand brainstorm, brand options. Also triggers when the user has multiple half-formed brand ideas and needs help converging on one, even if they do not say 'ideation' explicitly."
-category: brand
-catalog_summary: "Naming, positioning territories, mood directions, narrative angles"
-display_order: 1
+metadata:
+  category: brand
+  catalog_summary: "Naming, positioning territories, mood directions, narrative angles"
+  display_order: 1
 ---
+
+## Contexto do projeto Pico — 13/09/2026
+
+Leia [empresa, produto e marca](../../../docs/pico-company-context.md) antes de aplicar esta skill ao Pico. A direção escolhida é **Aura Manteiga**, editorial de moda jovem, artística e refinada; Syne/Manrope e Manteiga/Cacau/Papel/Lavanda. O [manual e os ativos](../../../docs/brand-exploration/aura-manteiga/README.md) são a referência visual. Consulte [domínios](../../../docs/pico-domains.md) para o comportamento da jornada e [catálogo](../../../docs/pico-skills.md) para combinar as skills pertinentes.
+
+Explore aplicações e narrativas dentro da direção escolhida. Naming, novas paletas e alternativas de identidade só entram quando o responsável pedir para reabrir essas decisões.
+
+Decisões atuais do responsável e contexto local prevalecem sobre os defaults da referência upstream abaixo. Preserve o escopo solicitado; ler um prompt armazenado não inicia implementação ou deploy. Não transformar orientações de exploração em exigência de nova aprovação para a identidade já escolhida. Testes durante criação devem ser proporcionais; mantenha os checks obrigatórios do projeto e os fluxos críticos no fechamento.
+
+<!-- Fim da adaptação Pico; referência upstream preservada abaixo. -->
 
 # Brand Ideation
 

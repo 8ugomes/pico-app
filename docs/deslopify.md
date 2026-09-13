@@ -1,5 +1,19 @@
 # Pico — Deslopify
 
+## Critério vigente
+
+**Aura Manteiga** é a direção aprovada: editorial de moda jovem, expressivo, premium e refinado. Usar o [manual](brand-exploration/aura-manteiga/MANUAL.md) e o [design system](pico-design-system.md); não recuperar escolhas históricas como orientação atual. O alvo do redesign é o aplicativo inteiro, com composição própria por conteúdo e onboarding assistido que preserve autonomia.
+
+## Skills e redesign — critérios antes da atualização · 13/09/2026
+
+Dar às skills uma referência institucional comum, distinguir marca aprovada de código ainda legado e ligar decisões visuais aos domínios reais. O prompt deve exigir leitura de todo o manual e acesso às referências pertinentes de cada skill, sem copiar miniaturas ou transformar o app em apresentação de marca. Reduzir carga visual e repetição de testes durante a criação; manter proteção de autenticação, audiência, jogos privados e preferências de onboarding. Não inventar estrutura societária, resultados de pesquisa ou funcionalidades.
+
+### Fechamento e aprendizados
+
+Treze skills conectadas ao contexto institucional e aos domínios. Oito referências externas receberam adaptação curta antes do corpo original; cinco skills próprias oferecem contexto, planejamento, desenvolvimento, revisão e redesign. Briefs antigos foram sinalizados como históricos, e o design system separa alvo aprovado de implementação legada. Dados de empresa ausentes continuam explícitos, sem biografia ou números inventados.
+
+O prompt integral agora trata assistência como orientação opcional de interface: perfil inicial, aviso institucional e tutorial têm contratos distintos. Simplificar texto e apresentação não autoriza ocultar audiência, converter progresso em atividade social ou reiniciar preferências dispensadas. Cobertura integral de design não exige matriz exaustiva de testes durante cada ajuste; a regra comum é amostra representativa, correção em lote e verificação proporcional do conjunto final. Formato/referências/procedência e lint/typecheck/build passaram; não houve nova implementação visual a inspecionar nesta rodada.
+
 ## Aura Manteiga — fechamento do manual · 13/09/2026
 
 Identidade fechada sobre a escolha Aura + Manteiga, com diferenciação clara entre miniaturas de apresentação e escala real de leitura. Mantidas curvas, contornos e fontes da Aura; complementados pares semânticos, estados, ícones e aplicações. A orientação atual substitui as recomendações históricas de Ritual/Pistache, preservadas como registro de exploração.

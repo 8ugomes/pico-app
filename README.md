@@ -6,7 +6,9 @@ Rede social PWA mobile-first para futevôlei, beach tennis e vôlei de praia. O 
 
 [Perfil/HEIC: implementação, testes e limites do Ciclo 10](docs/CYCLE10_PROFILE.md). O código foi validado em CI e em Chromium/WebKit com ambiente de teste isolado; esta rodada não executou novo deploy nem teste em aparelhos físicos.
 
-O refino visual global consolida fonte nativa, cores, formulários e diálogos sem mudar os fluxos de dados. [Tokens e padrões](docs/pico-design-system.md) · [capturas antes/depois, cobertura e limites](docs/visual-review/README.md).
+**Identidade escolhida: Aura Manteiga.** Pico Social adota a direção editorial jovem, artística e refinada, com Syne/Manrope e Manteiga/Cacau/Papel/Lavanda. [Manual completo e ativos](docs/brand-exploration/aura-manteiga/README.md) entregues; a migração do aplicativo ainda está pendente. O refino com fonte nativa/verde-água é o baseline anterior. [Design system e estado](docs/pico-design-system.md).
+
+**Contexto para próximas tarefas:** [empresa/produto/marca](docs/pico-company-context.md), [domínios](docs/pico-domains.md), [13 skills locais](docs/pico-skills.md) e [plano corrente](docs/pico-product-plan.md). A skill principal [pico-redesign](.agents/skills/pico-redesign/SKILL.md) e o [prompt de execução](docs/brand-exploration/aura-manteiga/PROMPT-PRODUCAO.md) cobrem todo o aplicativo, onboarding assistido e validação proporcional durante criação. A preparação desses arquivos não executa o redesign nem publica o app.
 
 Endereço principal: [Pico](https://pico-app-sepia.vercel.app). O Ciclo 9 está integrado à `main`; publicação por `npm run deploy` no projeto Vercel `pico-app`. O endereço antigo `pico-internal.vercel.app` encaminha ao principal. [Ambientes](docs/ENVIRONMENTS.md) descreve a configuração, [operação](docs/BETA_OPERATIONS.md) explica publicação e rollback e [contratos](docs/CYCLE9_CONTRACTS.md) define permissões. A versão efetivamente servida pode ser consultada em [/api/version](https://pico-app-sepia.vercel.app/api/version). O relatório [INTERNAL_REVIEW.md](docs/INTERNAL_REVIEW.md) preserva a validação anterior à unificação.
 
@@ -34,7 +36,7 @@ Demonstração exige `NEXT_PUBLIC_PICO_ENV=demo` e `PICO_ENV=demo`, sem chaves S
 
 | Caminho | Comportamento |
 | --- | --- |
-| /signup, /login, /acesso | Cadastro apenas com convite individual vigente, login e admissão separada; recuperação/exclusão próprias preservadas |
+| /signup, /login, /acesso | Cadastro aberto com e-mail confirmado e admissão automática; suspensão/revogação/exclusão preservadas. Ver pendência SMTP no contrato oficial. |
 | /admin | Administração global: acesso beta, papéis, pedidos, catálogo/custódia e moderação auditada |
 | /arenas e /arenas/[slug] | Catálogo permitido pela admissão, participação reversível, perfil do local, mural e comunidades |
 | /arenas/[slug]/gestao | Edição versionada, imagens, modalidades, equipe, convites e transferência conforme papel |

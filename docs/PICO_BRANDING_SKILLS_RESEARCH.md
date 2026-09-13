@@ -1,3 +1,5 @@
+> Atualização de contexto — 13/09/2026: as oito skills pesquisadas foram instaladas e contextualizadas para **Aura Manteiga**; cinco skills próprias completam o conjunto atual. Veja [catálogo](pico-skills.md), [contexto institucional](pico-company-context.md) e [procedência](branding-skills-sources.json). A pesquisa abaixo permanece como registro histórico.
+
 # Skills para a identidade do Pico Social
 
 ## Recomendação
