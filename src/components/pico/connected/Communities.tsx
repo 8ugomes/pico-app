@@ -4,8 +4,8 @@ import{ConnectedFeed}from'./ConnectedFeed';
 import{useId,useState}from'react';import Link from'next/link';import{useRouter}from'next/navigation';import{Button}from'@/components/ui/Button';import{Modal}from'@/components/ui/Modal';import{PageHeading,EmptyState}from'../SocialUI';import{useEntity,entityAction}from'./useEntity';import{useRemoteRead}from'./useRemoteRead';import type{ReadSport}from'@/types/read';
 import { Plus, UsersRound, LoaderCircle, ArrowRight, LockKeyhole, MapPin } from 'lucide-react';
 import { ChoiceChip } from '@/components/ui/ChoiceChip';
-export type CommunityCard={id:string;slug:string;name:string;entry_mode:'open'|'approval'|'invite';visibility:'beta'|'private';membership:string|null;description:string|null;arena_name?:string;is_official?:boolean};
-export type CommunityPage=CommunityCard&{readable:boolean;rank:number;version:number;rules:string|null;sports:ReadSport[];owner:{id:string;name:string;username:string}|null;members:{id:string;name:string;username:string;role:string;status:string}[];arena:{id:string;name:string;slug:string;official:boolean;status:string}|null;avatar_path:string|null;cover_path:string|null};
+export type CommunityCard={id:string;slug:string;name:string;entry_mode:'open'|'approval'|'invite';visibility:'beta'|'private';membership:string|null;description:string|null;arena_name?:string;is_official?:boolean;pico_official?:boolean};
+export type CommunityPage=CommunityCard&{editorial?:{id:string;title:string;body:string;published_at:string}[];readable:boolean;rank:number;version:number;rules:string|null;sports:ReadSport[];owner:{id:string;name:string;username:string}|null;members:{id:string;name:string;username:string;role:string;status:string}[];arena:{id:string;name:string;slug:string;official:boolean;status:string}|null;avatar_path:string|null;cover_path:string|null};
 export function Communities({ arenaId }: { arenaId?: string }) {
   const [mine, setMine] = useState(true), [search, setSearch] = useState(''), [offset, setOffset] = useState(0), [create, setCreate] = useState(false);
   const { data, error, reload } = useEntity<CommunityCard[]>(`/api/communities?search=${encodeURIComponent(search)}&mine=${arenaId ? false : mine}&offset=${offset}${arenaId ? '&arena=' + arenaId : ''}`);
@@ -15,7 +15,7 @@ export function Communities({ arenaId }: { arenaId?: string }) {
       {!arenaId && <>
         <div className="feed-tabs" aria-label="Filtrar comunidades">
           <button type="button" className={mine ? 'active-tab' : ''} aria-pressed={mine} onClick={() => { setMine(true); setOffset(0); }}>Minhas comunidades</button>
-          <button type="button" className={!mine ? 'active-tab' : ''} aria-pressed={!mine} onClick={() => { setMine(false); setOffset(0); }}>Explorar</button>
+          <button data-tour="community-explore" type="button" className={!mine ? 'active-tab' : ''} aria-pressed={!mine} onClick={() => { setMine(false); setOffset(0); }}>Explorar</button>
         </div>
       </>}
       <label className="input-group">Buscar comunidades<input className="input" type="search" placeholder="Nome da comunidade" value={search} onChange={e => { setSearch(e.target.value); setOffset(0); }} /></label>
@@ -24,8 +24,8 @@ export function Communities({ arenaId }: { arenaId?: string }) {
     {!data && !error && <p className="read-source" role="status"><LoaderCircle className="spinner" size={18} aria-hidden="true" />Carregando comunidades…</p>}
     <div className="community-list">{data?.slice(0, 20).map(c => <article className="community-card" key={c.id}>
       <Link className="community-card-title" href={`/comunidades/${c.slug}`}><span className="community-symbol"><UsersRound size={22} aria-hidden="true" /></span><h2>{c.name}</h2><ArrowRight size={18} aria-hidden="true" /></Link>
-      {c.description && <p className="community-purpose">{c.description}</p>}
-      <p className="community-meta">{c.visibility === 'private' ? 'Somente participantes ativos' : 'Pessoas aprovadas no beta'} · {({ open: 'Entrada aberta', approval: 'Entrada por aprovação', invite: 'Por convite' })[c.entry_mode]}</p>
+      {c.pico_official && <p className="community-membership">Oficial do Pico · Todas as modalidades</p>}{c.description && <p className="community-purpose">{c.description}</p>}
+      <p className="community-meta">{c.visibility === 'private' ? 'Somente participantes ativos' : 'Pessoas do Pico'} · {({ open: 'Entrada aberta', approval: 'Entrada por aprovação', invite: 'Por convite' })[c.entry_mode]}</p>
       {c.arena_name && <p className="community-place"><MapPin size={14} aria-hidden="true" />{c.arena_name}{c.is_official ? ' · Oficial' : ''}</p>}
       {c.membership && <p className="community-membership">{({ active: 'Você participa', pending: 'Pedido de entrada em análise', suspended: 'Participação suspensa', rejected: 'Pedido de entrada recusado' })[c.membership as 'active'] || 'Consulte as condições de entrada.'}</p>}
     </article>)}</div>
@@ -59,7 +59,7 @@ export function CommunityForm({ community, onDone }: { community?: CommunityPage
     </fieldset>
     <fieldset className="form-section" disabled={busy}>
       <legend>Acesso e participação</legend>
-      <label className="input-group">Quem vê o conteúdo<select className="input" aria-describedby={hintId} disabled={!!community} value={data.visibility} onChange={e => setData({ ...data, visibility: e.target.value as 'beta' | 'private' })}><option value="beta">Pessoas aprovadas no beta</option><option value="private">Somente participantes ativos</option></select><span id={hintId} className="input-hint">A audiência é preservada depois da criação.</span></label>
+      <label className="input-group">Quem vê o conteúdo<select className="input" aria-describedby={hintId} disabled={!!community} value={data.visibility} onChange={e => setData({ ...data, visibility: e.target.value as 'beta' | 'private' })}><option value="beta">Pessoas do Pico</option><option value="private">Somente participantes ativos</option></select><span id={hintId} className="input-hint">A audiência é preservada depois da criação.</span></label>
       <label className="input-group">Como participar<select className="input" value={data.entry_mode} onChange={e => setData({ ...data, entry_mode: e.target.value as 'open' | 'approval' | 'invite' })}><option value="open">Entrada aberta</option><option value="approval">Aprovação da equipe</option><option value="invite">Convite individual</option></select></label>
     </fieldset>
     <fieldset className="form-section" disabled={busy}>
@@ -89,19 +89,20 @@ export function Community({ slug }: { slug: string }) {
     {c && <>
       <header className="community-identity">
         {c.readable && <EntityImages avatar={c.avatar_path} cover={c.cover_path} name={c.name} />}
-        <PageHeading eyebrow="COMUNIDADE" title={c.name} />
+        <PageHeading eyebrow={c.pico_official ? "OFICIAL DO PICO" : "COMUNIDADE"} title={c.name} />
         <p className="community-description">{c.description || (c.readable ? 'A comunidade ainda não adicionou uma descrição.' : 'Confira as condições para participar.')}</p>
         {c.arena?.status === 'approved' && <Link className="community-place" href={`/arenas/${c.arena.slug}`}><MapPin size={16} aria-hidden="true" />{c.arena.name}{c.arena.official ? ' · Grupo oficial' : ''}</Link>}
-        <p className="community-conditions">{c.visibility === 'private' && <LockKeyhole size={15} aria-hidden="true" />}{c.visibility === 'private' ? 'Conteúdo só para participantes ativos' : 'Conteúdo para pessoas aprovadas no beta'} · {({ open: 'entrada aberta', approval: 'entrada por aprovação', invite: 'entrada por convite' })[c.entry_mode]}</p>
+        <p data-tour="community-conditions" className="community-conditions">{c.visibility === 'private' && <LockKeyhole size={15} aria-hidden="true" />}{c.visibility === 'private' ? 'Conteúdo só para participantes ativos' : 'Conteúdo para pessoas do Pico'} · {({ open: 'entrada aberta', approval: 'entrada por aprovação', invite: 'entrada por convite' })[c.entry_mode]}</p>
       </header>
       <div className="community-participation">
         {c.membership === 'active' ? <p className="membership-confirmed">Você participa desta comunidade.</p> : c.membership === 'pending' ? <p role="status">Seu pedido está em análise. {c.visibility === 'private' ? 'O mural fica disponível após a aprovação.' : 'Você pode ler o mural; publicar exige participação aprovada.'}</p> : c.membership === 'suspended' ? <p>Participação suspensa. As ações de membro estão indisponíveis.</p> : c.membership === 'rejected' ? <p>Seu pedido de entrada foi recusado.</p> : c.entry_mode === 'invite' ? <p>Para participar, é preciso um convite individual da equipe.</p> : <Button disabled={busy} onClick={membership}>{busy ? 'Enviando…' : c.entry_mode === 'approval' ? 'Solicitar participação' : 'Participar da comunidade'}</Button>}
         <p role="status">{message}</p>
         {c.rank >= 20 && <Link className="community-manage-link" href={`/comunidades/${slug}/gestao`}>Gerenciar comunidade <ArrowRight size={16} aria-hidden="true" /></Link>}
-        {c.rank < 40 && c.membership === 'active' && <details><summary>Opções de participação</summary><Button variant="quiet" disabled={busy} onClick={membership}>Sair da comunidade</Button></details>}
+        {(c.pico_official || c.rank < 40) && c.membership === 'active' && <details><summary>Opções de participação</summary><Button variant="quiet" disabled={busy} onClick={membership}>Sair da comunidade</Button></details>}
       </div>
       {c.readable ? <>
         <details className="community-about"><summary>Sobre o grupo e participantes</summary><div><h2>Modalidades</h2><p>{c.sports.map(s => s.name).join(' · ') || 'As modalidades ainda não foram informadas.'}</p><h2>Regras da comunidade</h2><p>{c.rules || 'As regras ainda não foram informadas.'}</p><h2>Quem participa</h2><ul className="member-rows">{c.members.filter(m => m.status === 'active').map(m => <li key={m.id}><Link href={`/perfil/${m.username}`}><span className="member-initial" aria-hidden="true">{m.name.slice(0, 1)}</span><span>{m.name}<small>{({ owner: 'Proprietário', admin: 'Administrador', moderator: 'Moderador', member: 'Participante' })[m.role as 'member']}</small></span><ArrowRight size={16} aria-hidden="true" /></Link></li>)}</ul></div></details>
+        {c.pico_official && <section className="official-editorial" aria-label="Publicações do Pico">{c.editorial?.map(post => <article key={post.id}><p className="eyebrow">PICO · PUBLICAÇÃO OFICIAL</p><h2>{post.title}</h2><p>{post.body}</p></article>)}</section>}
         <section id="community-wall" aria-label="Mural da comunidade"><ConnectedFeed communityId={c.id} readOnly={c.rank < 10} moderate={c.rank >= 20 ? { community: c.id } : undefined} /></section>
       </> : <section className="community-private"><LockKeyhole size={24} aria-hidden="true" /><h2>Um espaço reservado ao grupo</h2><p>Publicações e informações de participantes ficam disponíveis para quem tem acesso aprovado nesta comunidade.</p><Link href="/comunidades">Conhecer outras comunidades <ArrowRight size={16} aria-hidden="true" /></Link></section>}
     </>}

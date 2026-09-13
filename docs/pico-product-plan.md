@@ -1,5 +1,27 @@
 # Pico — plano de produto
 
+## Comunidade oficial e autenticação — fechamento de 13/09/2026
+
+Implementados cadastro aberto após confirmação do e-mail, comunidade institucional geral, três publicações editoriais, inclusão transacional após formulário e aviso reconhecido por conta. Saída, suspensão e edição de modalidade não causam nova inclusão. Textos de acesso/audiência atualizados. Corrigida diferença entre mínimo do frontend (8) e do provedor (6): novas senhas exigem 12; reforço de reautenticação, cookies, recuperação, reenvio e exclusão com senha legada.
+
+87 testes locais, 211 verificações hospedadas anteriores e 92 adicionais de autenticação/comunidade passaram; 11 verificações de navegador real com backend e cinco medidas responsivas/200%, sem erros JavaScript. Lint, typecheck e builds conectado/demo aprovados. Desenvolvimento está com 22 migrations e política de senha aplicada; principal permanece com 21 migrations e versão 047cb6d5091b, auditado somente em leitura. Fixtures removidas. Código pronto para revisão/commit local, sem push/deploy.
+
+O responsável confirmou ausência de domínio e SMTP. Liberação pública depende de configurar remetente e testar entrega real de confirmação/recuperação; não desativar confirmação. [Auditoria e contrato](OFFICIAL_COMMUNITY_AUTH.md) · [Próxima ação externa](EMAIL_SETUP.md).
+
+### Fechamento — tutorial guiado
+
+Implementado convite opcional e seis etapas nas telas reais, com destaque contextual, recolhimento para explorar, anterior/próxima e retomada/reinício no Perfil. Identidade do Pico e diferença entre acompanhamento, jogo privado e publicação explícita fazem parte da narrativa. Estado local versionado por conta/demo; sem migrations, telemetria ou escrita social automática.
+
+Lint, typecheck, builds conectado/demo e 84 testes locais passaram. Chromium no app compilado: percurso completo com APIs isoladas, destaque em disclosures, filtro por arena, pausa/reload/replay, troca de identidade, outra aba, storage indisponível, admissão negada, dados vazios/erro e preservação de rascunho; zero gravações sociais e zero erros JavaScript. Oito medições em 320–1280 px, altura curta e texto 200%. Demo percorreu as seis etapas com apenas a API pública de versão. [Especificação](ONBOARDING.md) · [Evidências e reprodução](onboarding-review/README.md). Entrega local; publicação e validação física/com jogadores não realizadas nesta rodada.
+
+## Rodada 2026-09-12 — tutorial guiado · plano antes de codar
+
+Pedido: apresentar a identidade do Pico e ensinar a explorar arenas, pessoas e comunidades dentro das telas reais. Implementar convite discreto no Início e percurso opcional em seis etapas: Arenas → Pessoas → Comunidades → Início/publicação → Meus jogos → Perfil. O guia aponta controles reais, acompanha detalhes de arena/comunidade e permite experimentar sem exigir cadastro de conteúdo, acompanhamento ou publicação. Uma dica recolhível, anterior/próxima, pausa e retomada/reinício pelo próprio perfil.
+
+Estado versionado de apresentação/progresso apenas neste navegador, separado por identidade confirmada e demo; nenhum conteúdo social no armazenamento. Montar somente dentro do acesso aprovado, sem substituir o preenchimento inicial de perfil ou alterar `onboarding_completed`. Nenhuma migration ou escrita social automática. Estados de erro/vazio preservam saída útil; formulários e diálogos mantêm foco/rascunho. Mobile 320–430, desktop, teclado, zoom e movimento reduzido precisam de verificação.
+
+Entrega: especificação curta em ONBOARDING.md, implementação, testes de comportamento/inspeção visual local conectada com APIs isoladas e demo, lint/typecheck/build, documentação final e commit. A publicação existente permanece a referência até nova entrega remota autorizada.
+
 ### Fechamento da publicação integrada
 
 PR #6/CI aprovados; main integrada e publicada no pico-app principal. 21 migrations em ambos os Supabase, tipos idênticos e dados/arquivos principais preservados por comparação. Gate remoto 210/210 e limpeza completa; smoke público e sessão/perfil/foto/navegação/legado no navegador confirmados sem escrita em dados reais. [Evidência e limites](JOURNEY_RELEASE.md).
@@ -317,3 +339,16 @@ Comparar três organizações e duas direções visuais em JOURNEY_REFINEMENT.md
 Conjunto integrado localmente à main: início contextual previsível; navegação fixa; pessoas em linhas abertas, grupos por propósito, arenas por lugar e jogos em cronologia; registros privados com compartilhamento separado e canônico. Legado fechado socialmente e consultável só pelo próprio autor, sem conversão. Escolhas de audiência, datas da experiência/publicação, pedidos pendentes e erros têm consequências distintas e explícitas.
 
 81 testes, lint, typecheck e builds conectado/demo passaram. UI local: criação/edição de comunidade, perfil, vínculo unilateral, jogo com falha/retry/correção/exclusão, compartilhamento idempotente, acesso privado pendente, erros/vazios e jornada demo. 25 medições em cinco larguras, nove auxiliares, seis com texto a 200% e diálogo em altura reduzida. [Evidências](journey-review/README.md). Nenhum resultado remoto, físico ou de pesquisa foi presumido. Duas migrations ainda precisam de aplicação remota autorizada; sem push/deploy nesta rodada.
+# Comunidade oficial e cadastro aberto — PLAN (2026-09-13)
+
+Pedido vigente: após escolher a modalidade no perfil inicial, incluir a pessoa na comunidade geral oficial do Pico e confirmar essa entrada no aplicativo. A decisão explícita do responsável é permitir cadastro e acesso imediato: sem convite nem aprovação manual, preservando confirmação do e-mail, suspensão, exclusão e RLS. A política anterior de convite permanece apenas histórica.
+
+Implementar comunidade institucional única, conteúdo editorial identificado como Pico, membros reais e inclusão transacional/idempotente independente da modalidade. Permitir saída sem reinscrição automática; aviso persistido por conta e reconhecido no servidor. Integrar ao tutorial e ao primeiro formulário. Auditar login, cadastro, confirmação, recuperação, logout, cookies, armazenamento de credenciais e permissões com identidades isoladas no desenvolvimento. Inspecionar configuração principal sem registrar segredos; documentar separadamente entrega de e-mails e testes físicos. Validar SQL/RLS, UI, lint, types, testes e build; registrar limitações e commit.
+
+## Publicação do tutorial e comunidade — plano de 13/09/2026
+
+Responsável autorizou comitar tudo e sincronizar com produção. Publicar o conjunto 6b1e3da + 7860519 pela main, respeitando PR/CI e o projeto pico-app existente. Conferir/ajustar o diretório de execução da captura de configuração no backup, preservar banco/arquivos em backup cifrado, comparar inventários, aplicar a migration pendente e política de senha no principal. A autorização de publicação é vigente mesmo com SMTP ainda pendente: manter confirmação de e-mail e informar que distribuição pública continua limitada. Preparar artefato Production sem trocar domínio, conferir versão/headers/rotas, promover e sincronizar main local/remota com o commit servido. Registrar evidência, limites e status final sem criar ciclo de commits documentais não publicados.
+
+### Fechamento da preparação para publicação
+
+Backup principal concluído; migration aplicada e política de senha sincronizada. Comparação confirmou preservação das 33 tabelas anteriores, da conta e dos três arquivos, descontando os registros oficiais adicionados. 87 testes, lint, types e build passaram novamente. Ajustado o cwd do comando que exporta configuração para garantir sua inclusão no backup. PR/CI e artefato serão verificados antes da promoção; o resultado final fica no recibo operacional e em /api/version, evitando commit documental divergente da produção. [Registro](ONBOARDING_RELEASE.md). SMTP é pendência de divulgação, não impedimento à publicação agora autorizada.

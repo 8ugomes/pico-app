@@ -4,7 +4,7 @@ import { Brand } from "./Brand";
 import { AuthForm } from "./AuthForm";
 import { GlassPanel } from "@/components/ui/GlassPanel";
 
-export function AuthPage({ mode, confirmationError = false }: { mode: "login" | "signup"; confirmationError?: boolean }) {
+export function AuthPage({ mode, confirmationError = false, passwordUpdated = false }: { mode: "login" | "signup"; confirmationError?: boolean; passwordUpdated?: boolean }) {
   const signup = mode === "signup";
   return (
     <div className="landing-shell auth-shell">
@@ -15,6 +15,7 @@ export function AuthPage({ mode, confirmationError = false }: { mode: "login" | 
           <h1>{signup ? <>Seu próximo encontro<br />começa <span>aqui.</span></> : <>Bom te ver<br />no <span>Pico.</span></>}</h1>
           <p className="auth-description">{signup ? "Uma conta. Sua turma. Muitos jogos pela frente." : "Entre para continuar de onde a areia te deixou."}</p>
           {confirmationError && <p className="auth-notice notice-error" role="alert">Não conseguimos confirmar seu e-mail. O link pode ter expirado ou ter sido aberto em outro navegador. Abra o link mais recente no navegador em que fez o cadastro.</p>}
+          {passwordUpdated && <p className="auth-notice notice-success" role="status">Senha alterada. Entre com sua nova senha.</p>}
           <AuthForm mode={mode} />
         </GlassPanel>
         <p className="auth-footnote">Me acha no Pico.</p>

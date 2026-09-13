@@ -1,0 +1,12 @@
+{
+  "demo": true,
+  "hosted": false,
+  "physicalDevice": false,
+  "steps": 6,
+  "completion": true,
+  "adaptedPeopleSearch": true,
+  "apiCalls": [
+    "/api/version"
+  ],
+  "errors": []
+}

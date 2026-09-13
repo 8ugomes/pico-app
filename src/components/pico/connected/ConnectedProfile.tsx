@@ -8,6 +8,7 @@ import type { ReadProfile } from '@/types/read';
 import { Button, buttonVariants } from '@/components/ui/Button';
 import { ProfilePlaces } from './ActivityHistory';
 import { ConnectedFeed } from './ConnectedFeed';
+import { TourLauncher } from '../GuidedOnboarding';
 import { ProfileEditor } from './ProfileEditor';
 import { RemoteAvatar } from './Media';
 import { SportIcon } from '../SocialUI';
@@ -82,7 +83,7 @@ function ProfileWorkspace({ profile, refresh }: { profile: ReadProfile; refresh:
         <SportIcon sport={sport.slug} size={18} /><span><strong>{sport.name}</strong><small>{level}{isPrimary ? ' · Principal' : ''}</small></span>
       </span>)}</div>
       <div className="profile-v2-actions">
-        <Button variant="secondary" onClick={() => { setEditing(true); setSaved(false); }}><Pencil size={16} aria-hidden="true" />{profile.onboardingCompleted ? 'Editar perfil' : 'Completar perfil'}</Button>
+        <Button data-tour="edit-profile" variant="secondary" onClick={() => { setEditing(true); setSaved(false); }}><Pencil size={16} aria-hidden="true" />{profile.onboardingCompleted ? 'Editar perfil' : 'Completar perfil'}</Button>
       </div>
     </section>
     {saved && <p className="auth-notice notice-success" role="status">Perfil atualizado.</p>}
@@ -94,6 +95,7 @@ function ProfileWorkspace({ profile, refresh }: { profile: ReadProfile; refresh:
     {panels.map(item => <section key={item.id} role="tabpanel" id={`${tabId}-panel-${item.id}`} aria-labelledby={`${tabId}-${item.id}`} hidden={panel !== item.id} tabIndex={0} className="profile-v2-panel">
       {panel === item.id && (item.id === 'posts' ? <ConnectedFeed authorId={profile.id} readOnly /> : item.id === 'places' ? <ProfilePlaces playerId={profile.id} /> : <><p className="profile-v2-private"><ShieldCheck size={16} aria-hidden="true" />Só você vê seu histórico detalhado.</p><p>Guarde as lembranças dos seus jogos por arena e data.</p><Link className={buttonVariants()} href="/jogos">Abrir Meus jogos</Link></>)}
     </section>)}
+    <TourLauncher />
     <footer className="profile-v2-footer">
       {canManage && <Link href="/admin" className={buttonVariants({ variant: 'quiet', size: 'small' })}>Gerenciar meus Picos <ArrowUpRight size={15} aria-hidden="true" /></Link>}
       <Link href="/instalar">Instalar o Pico</Link><Link href="/conta">Privacidade e conta</Link>

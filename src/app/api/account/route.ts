@@ -11,7 +11,7 @@ export async function DELETE(request: Request) {
   try {
     sameOrigin(request);
     const body = await jsonBody(request); exactKeys(body,['password','confirmation']);
-    if (body.confirmation !== 'EXCLUIR' || typeof body.password !== 'string' || body.password.length < 8 || body.password.length > 128) throw new MutationError(400,'Digite EXCLUIR e confirme sua senha.');
+    if (body.confirmation !== 'EXCLUIR' || typeof body.password !== 'string' || body.password.length < 1 || body.password.length > 128) throw new MutationError(400,'Digite EXCLUIR e confirme sua senha.');
     const client = await createClient(), config = getSupabaseConfig();
     if (!client || !config) throw new MutationError(503,'Não foi possível conectar agora.');
     const user = await requireUser(client);

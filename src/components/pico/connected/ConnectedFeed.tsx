@@ -39,7 +39,7 @@ function ConnectedPost({ post, viewerId, refresh, moderate }: { post: PostRecord
   const mutation = useMutation();
   return <article className="post-card">
     <header className="post-header"><Link href={`/perfil/${post.username}`} className="post-person"><RemoteAvatar src={post.avatar} name={post.display_name} /><span><strong>{post.display_name}</strong><small><time dateTime={post.created_at} title="Data da publicação">Publicado em {new Date(post.created_at).toLocaleString('pt-BR', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })}</time></small></span></Link>{post.sport_slug&&<span className="sport-label"><SportIcon sport={post.sport_slug} />{post.sport_name}</span>}</header>
-    <p className="form-note">{post.audience==='private'?'Participantes do grupo privado':'Pessoas aprovadas no beta'} · <Link href={`/publicacoes/${post.id}`}>Abrir publicação</Link></p>
+    <p className="form-note">{post.audience==='private'?'Participantes do grupo privado':'Pessoas do Pico'} · <Link href={`/publicacoes/${post.id}`}>Abrir publicação</Link></p>
     {post.game_played_on && <p className="post-game-date">Jogado em <time dateTime={post.game_played_on}>{formatGameDate(post.game_played_on)}</time> · relato de quem publicou</p>}
     <p className="post-copy">{post.body}</p>
     {post.destinations.some(d => d.community_slug) && <div className="post-context-links">{post.destinations.filter(d => d.community_slug).map(d => <Link key={d.community_id} href={`/comunidades/${d.community_slug}`}>{d.community_name}</Link>)}</div>}

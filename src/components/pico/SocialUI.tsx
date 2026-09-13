@@ -18,8 +18,8 @@ export function SportFilter({ value, onChange }: { value: SportId | "all"; onCha
     {state.sports.map(s => <button key={s.id} type="button" className={value === s.id ? "filter-chip selected" : "filter-chip"} aria-pressed={value === s.id} onClick={() => onChange(s.id)}><SportIcon sport={s.id} />{s.shortName}</button>)}
   </div>;
 }
-export function SearchField({ value, onChange, placeholder, label }: { value: string; onChange: (v: string) => void; placeholder: string; label: string }) {
-  return <label className="search-field"><Search size={19} aria-hidden="true" /><span className="sr-only">{label}</span><input type="search" value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} /></label>;
+export function SearchField({ value, onChange, placeholder, label, tourId }: { tourId?: string; value: string; onChange: (v: string) => void; placeholder: string; label: string }) {
+  return <label data-tour={tourId} className="search-field"><Search size={19} aria-hidden="true" /><span className="sr-only">{label}</span><input type="search" value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} /></label>;
 }
 export function EmptyState({ title, children }: { title: string; children: React.ReactNode }) {
   return <div className="social-empty"><Compass size={28} aria-hidden="true" /><h3>{title}</h3><p>{children}</p></div>;

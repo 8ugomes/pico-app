@@ -1,5 +1,17 @@
 # Pico — Deslopify
 
+### Revisão final — tutorial guiado
+
+A dica usa o destaque areia e uma ação primária de avanço. “Mostrar onde” recolhe o painel, rola e foca o controle para liberar espaço de exploração no celular. Targets em disclosures fechados precisam verificar o ancestral `details`: Chromium pode manter dimensões de controles invisíveis. A instrução muda ao abrir arena ou comunidade e a busca de Pessoas no demo descreve apenas os filtros que existem nele.
+
+Texto a 200% exigiu quebra da linha de ações e rolagem própria da dica, mantendo avançar/recolher/pausar acessíveis. O painel desaparece sob diálogos nativos; edição de perfil suspende os controles de navegação. Capturas e oito medições passaram, além dos percursos conectado com fixture e demo. Não há resultado de pesquisa com jogadores nem teste em aparelho físico. [Revisão](onboarding-review/README.md).
+
+## Tutorial guiado · 2026-09-12 · critérios antes de codar
+
+Abrir com “O ponto de encontro da areia” e explicar o valor para quem joga, sem empilhar slogans. Guiar pelas telas existentes, com dicas curtas e alvo visível; acompanhar arena é vínculo, não prova de jogo nem presença. Descobrir pessoas por arena respeita filtros e visibilidade atuais. Explicar entrada pendente em comunidades, audiência antes de publicar e diferença entre guardar jogo e compartilhar.
+
+Convite opcional, seis passos, uma ação principal de avanço, voltar, recolher e “Agora não”. Manter navegação e conteúdo utilizáveis; evitar máscara que bloqueie a tela e evitar disputa de foco com editores/diálogos. Tutorial não depende de resultados nem de envio; funciona com catálogo vazio e falha de rede. Reabrir no perfil, manter progresso local por conta e distinguir demo. Conferir 320/390/430/768/1280 px, altura curta, texto 200%, teclado e ausência de envio involuntário.
+
 ### Conferência do domínio principal
 
 Versão nova exibiu Pico, a navegação de cinco destinos e conteúdo real após recarga da sessão. Foto/perfil preservados, compositor com audiência/destinos explícitos e “Meus jogos” privado, sem sinais de presença. Início, jogos e arenas sem overflow em 390 px; um registro anterior permanece somente no histórico privado. Não houve criação de dados reais durante a inspeção.
@@ -255,3 +267,21 @@ Conjunto integrado localmente à main: início contextual previsível; navegaç�
 81 testes, lint, typecheck e builds conectado/demo passaram. UI local: criação/edição de comunidade, perfil, vínculo unilateral, jogo com falha/retry/correção/exclusão, compartilhamento idempotente, acesso privado pendente, erros/vazios e jornada demo. 25 medições em cinco larguras, nove auxiliares, seis com texto a 200% e diálogo em altura reduzida. [Evidências](journey-review/README.md). Nenhum resultado remoto, físico ou de pesquisa foi presumido. Duas migrations ainda precisam de aplicação remota autorizada; sem push/deploy nesta rodada.
 
 Aprendizados: reduzir controles antes de reduzir texto ajuda a mostrar pessoas no primeiro trecho da tela. Uma arena pede imagem/contexto, uma comunidade pede propósito/condições; o mesmo card não serve a todas. A repetição após resposta perdida é parte da jornada e exige identidade estável, além de mensagem clara. Texto ampliado expôs rótulos colados; a navegação recebeu espaço próprio e hifenização, preservando destinos e foco. Dados de fixture e falhas da ferramenta de captura não são evidência de infraestrutura nem métricas de usabilidade.
+# Comunidade oficial e acesso imediato — PLAN (2026-09-13)
+
+Uma confirmação breve após concluir o perfil: “Você entrou na comunidade oficial do Pico”. Ação principal para conhecer a comunidade, alternativa de dispensar; não bloquear o tutorial nem repetir a cada acesso. Explicar antes de salvar que todas as modalidades compartilham esse espaço e que a pessoa pode sair. Publicações de boas-vindas com autoria institucional clara, sem inventar participantes, mensagens pessoais, curtidas ou atividade. Preservar controles de audiência e pessoas bloqueadas. Revisar login/cadastro sem linguagem de convite obrigatório ou aprovação; testar 320/390/430 px e erros reais de autenticação em ambiente isolado.
+
+
+## Comunidade oficial e acesso imediato — VERIFY
+
+O aviso representa participação real, explica por que aconteceu e oferece conhecer a comunidade ou dispensar. Inicialmente ele ficava acima da dobra após o formulário longo; a inspeção corrigiu a rolagem/foco para anunciar a inclusão no ponto certo. A identidade institucional e três mensagens editoriais evitam um mural sem contexto, sem simular atividade ou autoria pessoal. A opção de sair permanece disponível inclusive para operadores. Microcopy de acesso por aprovação foi retirada da navegação, cadastro, instalação e audiência geral; aprovação de comunidades privadas continua explícita.
+
+11 verificações Chromium com backend real e cinco medidas (320/390/430/768 e 200%) aprovadas. Sem overflow e sem erros de execução. Nome/participante nas capturas são de uma identidade controlada removida depois. Não há evidência de entrega de e-mail, dispositivo físico ou pesquisa com jogadores. [Capturas](official-review/README.md). Aprendizado: uma confirmação correta no servidor também precisa aparecer no campo de visão depois de concluir uma tarefa longa.
+
+## Publicação do tutorial e comunidade — PLAN
+
+Conferir em produção identidade oficial, textos de cadastro sem aprovação, aviso confirmado e tutorial no contexto real. Não simular conta/pessoas ou enviar mensagens externas. Verificar 390 px, links, headers, versão e preservação de sessão/dados quando houver sessão autorizada disponível. Distinguir publicação concluída de entrega SMTP e validação física, que continuam pendentes.
+
+### VERIFY da preparação de publicação
+
+Nenhuma nova mudança visual nesta etapa. Mantidos tutorial opcional, confirmação real de entrada e textos de audiência. Verificações locais passaram; confirmação de interface no domínio final integra o smoke de promoção. Não usar a existência da build como evidência de entrega de e-mail ou teste físico. Recibo final em .vercel e versão servida permitem conferir a entrega sem deixar documentação comitada depois do deploy.

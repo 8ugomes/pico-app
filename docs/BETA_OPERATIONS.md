@@ -26,7 +26,7 @@ Falhas de API produzem evento estruturado mínimo: identificador aleatório, cat
 
 ## Auth, continuidade e rollback
 
-Cadastro público está fechado pelo Before User Created Hook, baseado em convite individual pendente ao e-mail exato. Cadastro não admite automaticamente. No beta a confirmação de e-mail está habilitada; desenvolvimento exclusivo permite confirmação imediata só para identidades controladas. Nenhum convite externo enviado.
+Cadastro foi aberto por decisão do responsável: o hook aceita novos usuários, a admissão é automática e a confirmação do e-mail continua obrigatória. Suspensão/revogação/exclusão continuam impedindo acesso. O primeiro perfil completo inclui participação na comunidade oficial. No beta a confirmação de e-mail está habilitada; desenvolvimento exclusivo permite confirmação imediata só para identidades controladas. Nenhum convite externo enviado.
 
 PKCE continua padrão. Templates por token foram preparados, mas o provedor Free/default recusou personalização sem SMTP; não ativar `NEXT_PUBLIC_PICO_EMAIL_TEMPLATES=custom` antes de configurar e testar templates/remetente/caixa. SMTP foi adiado pelo responsável, sem compra ou mudança de plano.
 

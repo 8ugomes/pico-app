@@ -29,7 +29,7 @@ export function GamesView({ initialArenaId }: { initialArenaId?: string }) {
     <Link href="/perfil" className="detail-back">Voltar ao perfil</Link><PageHeading eyebrow="DEPOIS DA AREIA" title="Meus jogos" />
     <p className="page-intro">Guarde onde você jogou e a data de cada encontro.</p><JournalPrivacy />
     <p className="form-note">Demonstração: os registros do jogador fictício ficam somente nesta sessão e somem ao recarregar.</p>
-    <Button onClick={() => {if(editing){setEditing(null);setArenaId('');setSportId('');setDate('');}setError('');setOpen(true);setMessage('');}}>Registrar jogo</Button>
+    <Button data-tour="register-game" onClick={() => {if(editing){setEditing(null);setArenaId('');setSportId('');setDate('');}setError('');setOpen(true);setMessage('');}}>Registrar jogo</Button>
     {message && <p role="status" className="inline-success">{message}</p>}
     <GameEntries games={games} shareControl={game => <PostComposer key={`${game.id}:${game.version}`} game={game} />} onEdit={g => {setEditing(g);setArenaId(g.arena_id);setSportId(g.sport_slug);setDate(g.played_on);setError('');setOpen(true);}} onDelete={setDeleting} />
     <Modal open={open} onClose={() => setOpen(false)} title={editing ? 'Corrigir jogo' : 'Joguei aqui'}><form className="connected-form" onSubmit={e => {

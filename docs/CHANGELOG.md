@@ -1,5 +1,27 @@
 # Changelog — Pico
 
+## 2026-09-13 — publicação coordenada autorizada
+
+- Tutorial, comunidade oficial e ajustes de cadastro/autenticação preparados para main e produção pelo fluxo PR/CI/deploy. Backup cifrado e comparação preservaram dados/arquivos existentes.
+- Migration e política de senha aplicadas no principal; 22 migrations nos dois ambientes. Corrigido o diretório de exportação de configuração do backup. 87 testes, lint, typecheck e build aprovados novamente.
+- Versão efetiva conferida por /api/version e recibo operacional; SMTP/domínio e entrega real continuam pendentes para divulgação pública. [Registro](ONBOARDING_RELEASE.md).
+
+## 2026-09-13 — comunidade oficial e cadastro aberto (desenvolvimento)
+
+- Comunidade institucional única do Pico, independente da modalidade, com três publicações editoriais e participantes reais. Inclusão automática após concluir perfil; aviso persistido por conta, saída sem reinscrição e proteção contra apropriação do recurso.
+- Cadastro sem convite/aprovação manual, com e-mail confirmado e controles de suspensão/exclusão preservados. Migration aditiva aplicada só no desenvolvimento; tipos gerados do remoto.
+- Auditoria identificou mínimo de 6 no servidor contra 8 na interface. Política de novas senhas alinhada em 12, reautenticação reforçada, cookies Secure no principal, reenvio de confirmação, recuperação com falha de logout explícita e exclusão compatível com senhas legadas.
+- 87 testes locais, 211 verificações hospedadas e 92 adicionais passaram. UI real em Chromium: 11 verificações, cinco medidas responsivas/200%. Lint, typecheck, builds conectado/demo e auditoria de segredos aprovados.
+- Principal auditado somente em leitura; sem push, merge ou deploy. Abertura aguarda domínio, SMTP e teste real de entrega de e-mail. [Relatório](OFFICIAL_COMMUNITY_AUTH.md) · [Configuração pendente](EMAIL_SETUP.md).
+
+## 2026-09-12 — tutorial guiado do Pico (local)
+
+- Convite no Início apresenta a proposta do Pico; percurso opcional em Arenas, Pessoas, Comunidades, Início, Meus jogos e Perfil.
+- Destaques em controles reais, instruções contextuais em detalhes, recolher/mostrar onde, voltar/avançar, pausa e retomada/reinício pelo Perfil. Nenhuma ação social é exigida ou enviada automaticamente.
+- Progresso versionado apenas neste navegador, isolado por conta confirmada/demo; sem migrations nem alteração do cadastro inicial de perfil. Erros/vazios não bloqueiam o passeio; diálogos e rascunhos preservados.
+- Lint, typecheck, builds conectado/demo, 84 testes e Chromium com APIs isoladas aprovados. Oito medições responsivas/altura/texto 200%; zero gravações sociais no roteiro conectado. [Escopo e limites](ONBOARDING.md) · [Evidência](onboarding-review/README.md).
+- Commit local, sem push/deploy ou exercício de infraestrutura hospedada nesta rodada.
+
 ## 2026-09-12 — refino integrado publicado
 
 - PR #6 integrado após verify e regressão Chromium/WebKit aprovados; artefato Production READY promovido ao domínio principal.
