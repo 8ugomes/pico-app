@@ -1,5 +1,18 @@
 # Entrega da jornada e do pós-jogo — setembro de 2026
 
+## Publicação validada
+
+[PR #6](https://github.com/8ugomes/pico-app/pull/6) integrado em `baf2e920e098` após [verify](https://github.com/8ugomes/pico-app/actions/runs/34729657739) e [regressão Chromium/WebKit](https://github.com/8ugomes/pico-app/actions/runs/34729657698) aprovados. O envio autenticado pela conexão GitHub preservou a árvore exata dos commits locais; não houve force-push.
+
+As duas migrations foram aplicadas no principal após backup e gate de desenvolvimento. Ambos os ledgers têm **21 migrations**, e os tipos gerados de ambos os projetos são idênticos. Comparação posterior confirmou hashes/contagens das **29 tabelas preexistentes**, a mesma conta e os mesmos **três arquivos**, incluindo SHA-256 dos bytes. Legado não foi convertido nem apagado.
+
+Artefato inicial `dpl_Fdwhkho9EYg9s6pNH3JQNukEz5nC` preparado por `scripts/deploy.mjs --stage`, inspecionado como READY/Production/pico-app e promovido ao domínio principal. Em 13/09/2026 01:10 UTC, o domínio respondeu versão `baf2e920e098`, ambiente beta, manifesto Pico e APIs privadas com 401/no-store sem sessão. Endereço antigo encaminha ao principal. A revisão vigente pode avançar em commits de documentação; consultar [/api/version](https://pico-app-sepia.vercel.app/api/version).
+
+CUA no domínio principal: sessão existente preservada após recarga, perfil/foto reais carregados, início conectado vazio sem mocks, audiência/destinos do compositor visíveis, catálogo com arenas ilustrativas rotuladas, `/checkin` encaminhando a `/jogos`, zero jogos novos e um registro legado legível apenas no próprio histórico. Início/jogos/arenas sem overflow em 390 px. Nenhum formulário foi enviado nem dado real editado. O redirecionamento de página do Next pode vir no stream HTML com HTTP 200; o destino foi confirmado no navegador, não inferido pelo status.
+
+O gate hospedado terminou com limpeza rastreada e inventário remoto final de desenvolvimento: zero usuários, perfis, posts, jogos e arquivos. Evidências privadas: `.vercel/journey-*-ledger.log`, `journey-data-before/after.json`, `journey-public-smoke.json`, log do gate e recibos dos backups. Não versionar IDs/credenciais das fixtures nem fotos pessoais.
+
+
 O responsável autorizou publicar o conjunto completo de jornada/design e pós-jogo, composto por `c66e83e` e `779be54`, após a revisão local. A publicação mantém o projeto Vercel `pico-app` e o Supabase principal existente; não cria ambientes, contas pessoais, convites externos ou conteúdo a partir do legado.
 
 ## Destinos e preparação verificados

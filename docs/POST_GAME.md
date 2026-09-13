@@ -4,7 +4,7 @@ Substitui a presença ao vivo. A pessoa declara um jogo já terminado, guarda ar
 
 ## Contrato de dados
 
-Migrations `20260912090000_played_games.sql` e `20260912091000_game_sharing.sql`, adicionais às 19 anteriores. Ambas foram exercitadas em PostgreSQL/PGlite descartável e aplicadas no Supabase exclusivo de desenvolvimento. Ledger, backup e validação da entrega estão em [JOURNEY_RELEASE.md](JOURNEY_RELEASE.md).
+Migrations `20260912090000_played_games.sql` e `20260912091000_game_sharing.sql`, adicionais às 19 anteriores. Ambas foram exercitadas em PostgreSQL/PGlite descartável e no Supabase exclusivo de desenvolvimento, e depois aplicadas ao principal com preservação conferida. Ledger, backup e validação da entrega estão em [JOURNEY_RELEASE.md](JOURNEY_RELEASE.md).
 
 - `played_games`: UUID, dono, arena/modalidade, `played_on` como data civil, timestamps de gravação e versão. RLS permite leitura somente pelo dono com admissão vigente; cliente não tem escrita direta.
 - `save_played_game`: dono vem da sessão, datas futuras/inválidas são recusadas, arena/modalidade novas precisam estar disponíveis. A data civil usa `America/Sao_Paulo` no cliente e no banco; não coleta fuso ou localização do dispositivo. A validação é sobre a data declarada, sem prova de presença ou horário de término.

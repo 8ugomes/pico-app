@@ -1,5 +1,9 @@
 # Pico — plano de produto
 
+### Fechamento da publicação integrada
+
+PR #6/CI aprovados; main integrada e publicada no pico-app principal. 21 migrations em ambos os Supabase, tipos idênticos e dados/arquivos principais preservados por comparação. Gate remoto 210/210 e limpeza completa; smoke público e sessão/perfil/foto/navegação/legado no navegador confirmados sem escrita em dados reais. [Evidência e limites](JOURNEY_RELEASE.md).
+
 ### Gate integrado hospedado
 
 210 verificações remotas passaram no desenvolvimento exclusivo: Auth/HTTP/Storage/RLS, concorrência de jogos e compartilhamento, correção/exclusão sem alteração do snapshot publicado. Tipos hospedados consolidados; 81 testes locais, lint, types e build passaram. Backups dos dois destinos preservados. Próximo gate: PR/verify/main, migrations principais ausentes e promoção do artefato READY, com inventário comparado e smoke somente leitura.

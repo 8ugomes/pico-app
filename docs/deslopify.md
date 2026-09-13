@@ -1,5 +1,9 @@
 # Pico — Deslopify
 
+### Conferência do domínio principal
+
+Versão nova exibiu Pico, a navegação de cinco destinos e conteúdo real após recarga da sessão. Foto/perfil preservados, compositor com audiência/destinos explícitos e “Meus jogos” privado, sem sinais de presença. Início, jogos e arenas sem overflow em 390 px; um registro anterior permanece somente no histórico privado. Não houve criação de dados reais durante a inspeção.
+
 ### Verificação integrada hospedada
 
 Contratos reais de jogos e posts confirmados no desenvolvimento; o formato de retorno do save é `{id}`, e a exclusão alheia é idempotente sem efeito. O gate verifica o estado preservado, não deduz sucesso de exclusão pelo HTTP 200. Nenhuma UI precisou mudar após a revisão local. A inspeção do artefato publicado complementa as capturas locais, sem apresentá-las como prova de infraestrutura.

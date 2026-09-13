@@ -1,5 +1,11 @@
 # Changelog — Pico
 
+## 2026-09-12 — refino integrado publicado
+
+- PR #6 integrado após verify e regressão Chromium/WebKit aprovados; artefato Production READY promovido ao domínio principal.
+- 21 migrations confirmadas em desenvolvimento/principal; tipos hospedados idênticos. Conta, dados das 29 tabelas anteriores e três arquivos preservados.
+- Smoke público e navegação com sessão real confirmados; testes destrutivos restritos ao desenvolvimento, com limpeza completa. [Evidência](JOURNEY_RELEASE.md).
+
 ## 2026-09-12 — validação hospedada e preparação da publicação integrada
 
 - Backups cifrados de desenvolvimento e principal; ledger conferido antes da aplicação das duas migrations novas no desenvolvimento. Tipos completos regenerados do Supabase remoto.
