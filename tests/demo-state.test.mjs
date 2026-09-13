@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { mock } from "../src/data/mock.ts";
-import { createDemoState, demoReducer, activeCheckins, validatePost, CHECKIN_DURATION, normalizeSearch } from "../src/lib/demo-state.ts";
+import { createDemoState, demoReducer, validatePost, normalizeSearch } from "../src/lib/demo-state.ts";
 const initial = () => createDemoState(mock);
 
 test("demo state is independent from its seed and new sessions", () => {
@@ -62,24 +62,23 @@ test("comments reject blank, oversized, unknown and duplicate submissions", () =
   assert.equal(demoReducer(state, { type: "comment", postId: "post-marina", content: "Outra", id: "c", now: 2 }), state);
 });
 
-test("a player has one active check-in and replacement preserves others", () => {
-  let state = initial();
-  const others = state.checkins.filter(c => c.playerId !== "rafa");
-  state = demoReducer(state, { type: "checkin", arenaId: "vila", sportId: "futevolei", id: "one", now: 100 });
-  state = demoReducer(state, { type: "checkin", arenaId: "ipanema", sportId: "beach-tennis", id: "two", now: 200 });
-  const mine = state.checkins.filter(c => c.playerId === "rafa");
-  assert.equal(mine.length, 1);
-  assert.equal(mine[0].arenaId, "ipanema");
-  assert.deepEqual(state.checkins.filter(c => c.playerId !== "rafa"), others);
-  assert.equal(demoReducer(state, { type: "checkin", arenaId: "vila", sportId: "beach-tennis", id: "bad", now: 300 }), state);
-});
-
-test("check-in expires exactly at the boundary and checkout removes presence", () => {
-  const state = demoReducer(initial(), { type: "checkin", arenaId: "vila", sportId: "futevolei", id: "one", now: 100 });
-  assert.ok(!activeCheckins(state, 99).some(c => c.playerId === "rafa"));
-  assert.ok(activeCheckins(state, 100 + CHECKIN_DURATION - 1).some(c => c.playerId === "rafa"));
-  assert.ok(!activeCheckins(state, 100 + CHECKIN_DURATION).some(c => c.playerId === "rafa"));
-  assert.ok(!activeCheckins(demoReducer(state, { type: "checkout" }), 101).some(c => c.playerId === "rafa"));
+test("games are private local records with dates, corrections and no posts", () => {
+  const original = initial();
+  const action = { type: "save_game", arenaId: "vila", sportId: "futevolei", id: "one", playedOn: "2026-01-01" };
+  const saved = demoReducer(original, action);
+  assert.equal(saved.games.length, 1);
+  assert.deepEqual(saved.posts, original.posts);
+  assert.equal(demoReducer(saved, action), saved);
+  assert.equal(demoReducer(saved, {...action, id:"future", playedOn:"2099-01-01"}), saved);
+  assert.equal(demoReducer(saved, {...action, id:"invalid", playedOn:"2026-02-30"}), saved);
+  const corrected = demoReducer(saved, {...action, playedOn:"2026-01-02", version:1});
+  assert.equal(corrected.games[0].playedOn, "2026-01-02");
+  assert.equal(corrected.games[0].version, 2);
+  assert.equal(demoReducer(corrected, {...action, playedOn:"2026-01-03", version:1}), corrected);
+  assert.equal(demoReducer({...saved,currentUserId:"marina"}, {type:"delete_game",id:"one"}).games.length, 1);
+  const deleted = demoReducer(saved, {type:"delete_game",id:"one"});
+  assert.equal(deleted.games.length, 0);
+  assert.equal(demoReducer(deleted, action), deleted);
 });
 
 test("profile editing validates lengths, trims and leaves other players unchanged", () => {

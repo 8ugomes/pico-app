@@ -1,7 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { getSupabaseConfig } from "./config";
-import type { Database } from "@/types/database";
+import type { Database } from "@/types/app-database";
 
 // For Route Handlers and Server Actions, which can write session cookies.
 // Add the documented session-refresh proxy before using auth in Server Components.

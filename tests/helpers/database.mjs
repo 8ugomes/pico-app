@@ -8,7 +8,7 @@ export const FUTEVOLEI = '10000000-0000-4000-8000-000000000001';
 export const BEACH = '10000000-0000-4000-8000-000000000002';
 export const PRIVATE = '20000000-0000-4000-8000-000000000099';
 
-export async function createTestDatabase() {
+export async function createTestDatabase({ through } = {}) {
   const db = new PGlite();
   // Only this disposable test DB emulates the Supabase identity boundary.
   // Production migrations use the real auth.users and verified JWT identity.
@@ -37,7 +37,7 @@ export async function createTestDatabase() {
     insert into auth.users (id, email) values ('30000000-0000-4000-8000-000000000000', 'before-migration@example.invalid');
   `);
   const directory = new URL('../../supabase/migrations/', import.meta.url);
-  for (const name of (await readdir(directory)).filter(n => n.endsWith('.sql')).sort()) {
+  for (const name of (await readdir(directory)).filter(n => n.endsWith('.sql') && (!through || n <= through)).sort()) {
     await db.exec(await readFile(new URL(name, directory), 'utf8'));
   }
   const seed = await readFile(new URL('../../supabase/seed.sql', import.meta.url), 'utf8');

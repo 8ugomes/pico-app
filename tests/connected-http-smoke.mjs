@@ -1,12 +1,12 @@
 // Manual integration check: run fixture + isolated connected Next build first (README).
 // Real Route Handlers and SDK cookies against local SQL; Auth/REST are simulated.
 import assert from 'node:assert/strict';
+import { randomUUID } from 'node:crypto';
 import { createServerClient } from '@supabase/ssr';
 const origin = 'http://localhost:3002';
 const fixture = 'http://127.0.0.1:54331';
 const VILA = '20000000-0000-4000-8000-000000000001';
 const FUTE = '10000000-0000-4000-8000-000000000001';
-const BEACH = '10000000-0000-4000-8000-000000000002';
 const BOB = '30000000-0000-4000-8000-000000000002';
 const cookies = new Map();
 const client = createServerClient(fixture, 'sb_publishable_fixture_only', { cookies: { getAll: () => [...cookies].map(([name, value]) => ({ name, value })), setAll: values => values.forEach(({ name, value }) => value ? cookies.set(name, value) : cookies.delete(name)) } });
@@ -21,7 +21,7 @@ const read = params => request('/api/social/read?' + new URLSearchParams(params)
 const write = (body, status = 200) => request('/api/social/mutate', { method: 'POST', headers: { Origin: origin, 'Content-Type': 'application/json' }, body: JSON.stringify(body) }, status);
 const setMode = value => fetch(`${fixture}/fixture-mode?value=${value}`, { method: 'POST' });
 try {
-  for (const resource of ['profile', 'feed', 'checkin', 'discover']) await request(`/api/social/read?resource=${resource}`, {}, 401);
+  for (const resource of ['profile', 'feed', 'discover']) await request(`/api/social/read?resource=${resource}`, {}, 401);
   await read({ resource: 'arenas' });
   await request('/api/social/mutate', { method: 'POST', headers: { Origin: 'https://other.invalid', 'Content-Type': 'application/json' }, body: '{}' }, 403);
   await request('/api/social/mutate', { method: 'POST', headers: { Origin: origin, 'Content-Type': 'text/plain' }, body: '{}' }, 415);
@@ -35,11 +35,15 @@ try {
   const username = `http_${Date.now()}`;
   await write({ action: 'save_profile', name: 'HTTP Perfil', username, bio: 'Perfil de teste HTTP', city: 'São Paulo', neighborhood: 'Pinheiros', sportId: FUTE, level: 'Intermediário', available: true });
   assert.equal((await read({ resource: 'profile' })).data.profile.onboardingCompleted, true);
-  await write({ action: 'start_checkin', arenaId: VILA, sportId: FUTE });
-  const checkin = (await read({ resource: 'checkin' })).data;
-  assert.equal(checkin.own.playerId, profile.id); assert.ok(checkin.presence.some(p => p.playerId === BOB));
-  await write({ action: 'start_checkin', arenaId: VILA, sportId: BEACH }, 400);
-  assert.equal((await read({ resource: 'checkin' })).data.own.id, checkin.own.id);
+  await request('/api/social/read?resource=checkin', {}, 400);
+  const gameId=randomUUID();
+  const gameWrite=(body,status=200)=>request('/api/games',{method:'POST',headers:{Origin:origin,'Content-Type':'application/json'},body:JSON.stringify(body)},status);
+  const gameInput={action:'save',id:gameId,arenaId:VILA,sportId:FUTE,playedOn:'2026-01-02'};
+  await gameWrite(gameInput); await gameWrite(gameInput);
+  assert.equal((await request('/api/games')).data.filter(g=>g.id===gameId).length,1);
+  await gameWrite({...gameInput,player_id:BOB},400);
+  await gameWrite({...gameInput,playedOn:'2999-01-01'},400);
+  await client.rpc('set_arena_membership',{p_arena:VILA,p_join:true});
   const body = `Publicação HTTP ${Date.now()}`;
   await write({ action: 'create_post', arenaId: VILA, sportId: FUTE, body });
   const post = (await read({ resource: 'feed' })).data.posts.find(p => p.body === body);
@@ -53,13 +57,13 @@ try {
   assert.equal((await read({ resource: 'feed' })).data.posts.find(p => p.id === post.id).like_count, 0);
   await write({ action: 'set_connection', playerId: profile.id, connected: true }, 400);
   await write({ action: 'set_connection', playerId: BOB, connected: true });
-  assert.equal((await read({ resource: 'discover', sportId: FUTE, arenaId: VILA, level: 'Intermediário', active: 'true' })).data.players.find(p => p.id === BOB).connected, true);
+  assert.equal((await read({ resource: 'discover', sportId: FUTE, arenaId: VILA, level: 'Intermediário' })).data.players.find(p => p.id === BOB).connected, true);
   const other = (await read({ resource: 'player', username: 'bruno_teste' })).data;
   assert.equal(other.own, false); assert.ok(!('email' in other.profile));
   await write({ action: 'set_connection', playerId: BOB, connected: false });
-  await write({ action: 'end_checkin' });
-  const ended = (await read({ resource: 'checkin' })).data;
-  assert.equal(ended.own, null); assert.ok(ended.presence.some(p => p.playerId === BOB));
+  await gameWrite({action:'delete',id:gameId});
+  assert.ok(!(await request('/api/games')).data.some(g=>g.id===gameId));
+  await request('/api/social/read?resource=discover&active=true',{},400);
   await setMode('error');
   const failed = await request('/api/social/read?resource=feed', {}, 503);
   assert.equal(failed.status, 'error'); assert.ok(!JSON.stringify(failed).includes('Internal fixture'));
@@ -69,6 +73,6 @@ try {
   assert.equal((await read({ resource: 'feed' })).data.posts.length, 0);
   await setMode('success');
   await client.auth.signOut();
-  for (const resource of ['profile', 'feed', 'checkin', 'discover']) await request(`/api/social/read?resource=${resource}`, {}, 401);
+  for (const resource of ['profile', 'feed', 'discover']) await request(`/api/social/read?resource=${resource}`, {}, 401);
   console.log(`${checks} HTTP assertions passed (local SQL; simulated Auth/REST).`);
 } finally { await setMode('success'); }

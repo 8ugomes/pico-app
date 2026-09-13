@@ -6,7 +6,7 @@ import { createTestDatabase, asUser, ALICE, BOB, FUTEVOLEI, VILA } from './datab
 const db = await createTestDatabase();
 await asUser(db, BOB, async () => {
   await db.query(`select save_profile('Bruno Teste','bruno_teste','Jogo de tarde.','São Paulo','Pinheiros',$1,'Intermediário',true)`, [FUTEVOLEI]);
-  await db.query('select start_checkin($1,$2)', [VILA, FUTEVOLEI]);
+  await db.query('select set_arena_membership($1,true)', [VILA]);
 });
 const accounts = new Map([['alice-ui@example.invalid', { id: ALICE, name: 'Alice Teste' }], ['bruno-ui@example.invalid', { id: BOB, name: 'Bruno Teste' }]]);
 const tokens = new Map();
@@ -43,6 +43,7 @@ const server = createServer((req, res) => {
       if (accounts.has(body.email)) return send({ code: 'user_already_exists' }, 400);
       const account = { id: randomUUID(), name: body.data?.display_name || 'Novo jogador' };
       await db.query('insert into auth.users(id,email,raw_user_meta_data) values($1,$2,$3)', [account.id, body.email, JSON.stringify(body.data || {})]);
+      await db.query("insert into pico_private.beta_admissions(player_id,status) values($1,'approved')",[account.id]);
       accounts.set(body.email, account); return send(session(authUser(body.email, account)));
     }
     if (url.pathname === '/auth/v1/token') {
@@ -65,7 +66,7 @@ const server = createServer((req, res) => {
         if (url.pathname.includes('/rpc/')) {
           const rpc = {
             save_profile: ['p_name','p_username','p_bio','p_city','p_neighborhood','p_sport_id','p_level','p_available'],
-            start_checkin: ['arena_id','sport_id'], end_checkin: [],
+            set_arena_membership: ['p_arena','p_join'], read_played_games: ['p_offset'], save_played_game: ['p_id','p_arena','p_sport','p_played_on','p_version'], delete_played_game: ['p_id'], read_retired_checkins: ['p_offset'],
             read_feed: ['p_offset','p_arena_id'], discover_players: ['p_offset','p_sport_id','p_arena_id','p_level','p_active'],
           }[table];
           if (!rpc) throw new Error('Unsupported fixture RPC');
@@ -89,10 +90,6 @@ const server = createServer((req, res) => {
         if (table === 'sports') return (await db.query('select * from sports order by name')).rows;
         if (table === 'arenas') return (await db.query(`select a.*,coalesce(jsonb_agg(jsonb_build_object('sports',to_jsonb(s))) filter(where s.id is not null),'[]') as arena_sports from arenas a left join arena_sports x on a.id=x.arena_id left join sports s on s.id=x.sport_id where ($1::text is null or a.slug=$1) group by a.id order by a.name,a.id offset $2 limit $3`, [eq('slug'), offset, limit])).rows;
         if (table === 'profiles') return (await db.query(`select p.*,coalesce(jsonb_agg(jsonb_build_object('sports',to_jsonb(s),'level',x.level,'is_primary',x.is_primary)) filter(where s.id is not null),'[]') as player_sports from profiles p left join player_sports x on p.id=x.player_id left join sports s on s.id=x.sport_id where ($1::uuid is null or p.id=$1) and ($2::text is null or p.username=$2) group by p.id`, [eq('id'), eq('username')])).rows;
-        if (table === 'checkins') {
-          const filter = url.searchParams.get('player_id') ?? '';
-          return (await db.query(`select c.*,jsonb_build_object('display_name',p.display_name,'username',p.username) profiles, jsonb_build_object('arenas',jsonb_build_object('id',a.id,'name',a.name,'slug',a.slug),'sports',to_jsonb(s)) arena_sports from checkins c join profiles p on p.id=c.player_id join arena_sports x on x.arena_id=c.arena_id and x.sport_id=c.sport_id join arenas a on a.id=x.arena_id join sports s on s.id=x.sport_id where ($1::uuid is null or c.player_id=$1) and ($2::uuid is null or c.player_id<>$2) and ($3::uuid is null or c.arena_id=$3) order by c.started_at desc,c.id limit $4`, [filter.startsWith('eq.') ? filter.slice(3) : null, filter.startsWith('neq.') ? filter.slice(4) : null, eq('arena_id'), limit])).rows;
-        }
         if (table === 'comments') return (await db.query(`select c.*, jsonb_build_object('display_name',p.display_name,'username',p.username) profiles from comments c join profiles p on p.id=c.author_id where c.post_id=$1 order by c.created_at,c.id offset $2 limit $3`, [eq('post_id'), offset, limit])).rows;
         if (table === 'connections') return (await db.query('select followed_id from connections where follower_id=$1 and followed_id=$2', [eq('follower_id'), eq('followed_id')])).rows;
         throw new Error('Unsupported fixture table');

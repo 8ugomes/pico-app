@@ -1,0 +1,71 @@
+{
+  "scope": "Real local Route Handlers at localhost:3004, no authenticated session and no remote data exercise",
+  "results": [
+    {
+      "method": "GET",
+      "path": "/api/games",
+      "status": 401,
+      "privateNoStore": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/games/legacy",
+      "status": 401,
+      "privateNoStore": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/games?player=30000000-0000-4000-8000-000000000001",
+      "status": 400,
+      "privateNoStore": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/games/legacy?player=30000000-0000-4000-8000-000000000001",
+      "status": 400,
+      "privateNoStore": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/social/read?resource=checkin",
+      "status": 400,
+      "privateNoStore": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/social/read?resource=discover&active=true",
+      "status": 400,
+      "privateNoStore": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/games",
+      "status": 401,
+      "privateNoStore": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/games",
+      "status": 400,
+      "privateNoStore": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/games/share",
+      "status": 401,
+      "privateNoStore": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/games/share",
+      "status": 400,
+      "privateNoStore": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/games/share",
+      "status": 403,
+      "privateNoStore": true
+    }
+  ]
+}

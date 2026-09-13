@@ -1,0 +1,65 @@
+[
+  {
+    "route": "/login",
+    "heading": "Bom te verno Pico.",
+    "scrollWidth": 390,
+    "title": "Entrar | Pico",
+    "width": 390
+  },
+  {
+    "route": "/signup",
+    "heading": "Seu próximo encontrocomeça aqui.",
+    "scrollWidth": 390,
+    "title": "Criar conta | Pico",
+    "width": 390
+  },
+  {
+    "route": "/acesso",
+    "heading": "Acesso ao Pico",
+    "scrollWidth": 390,
+    "title": "Pico — O ponto de encontro da areia.",
+    "width": 390
+  },
+  {
+    "route": "/conta",
+    "heading": "Privacidade e conta.",
+    "scrollWidth": 390,
+    "title": "Privacidade e conta | Pico",
+    "width": 390
+  },
+  {
+    "route": "/privacidade",
+    "heading": "Privacidade no Pico.",
+    "scrollWidth": 390,
+    "title": "Privacidade | Pico",
+    "width": 390
+  },
+  {
+    "route": "/instalar",
+    "heading": "Instalar o Pico",
+    "scrollWidth": 390,
+    "title": "Instalar o Pico | Pico",
+    "width": 390
+  },
+  {
+    "route": "/admin",
+    "heading": "Gestão",
+    "scrollWidth": 390,
+    "title": "Pico — O ponto de encontro da areia.",
+    "width": 390
+  },
+  {
+    "route": "/recuperar",
+    "heading": "Volte pro Pico.",
+    "scrollWidth": 390,
+    "title": "Recuperar acesso | Pico",
+    "width": 390
+  },
+  {
+    "route": "/arenas",
+    "heading": "Arenas",
+    "scrollWidth": 390,
+    "title": "Arenas | Pico",
+    "width": 390
+  }
+]

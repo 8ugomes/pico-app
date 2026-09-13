@@ -76,7 +76,9 @@ export async function hostedBeta({origin,a,b,guest,admin,anonymous,read,write,ok
   await read(origin,a,{resource:'player',username:b.username},404);
   assert.ok(!(await read(origin,b,{resource:'feed'})).posts.some(p=>p.author_id===a.id));
   assert.ok(!(await read(origin,b,{resource:'discover'})).players.some(p=>p.id===a.id));
-  assert.ok(!(await read(origin,b,{resource:'checkin'})).presence.some(p=>p.playerId===a.id));
+  await read(origin,b,{resource:'checkin'},400);
+  denied(await b.client.from('checkins').select('id'),['42501'],'retired live history remains inaccessible');
+  assert.equal(ok(await b.client.from('played_games').select('id').eq('player_id',a.id),'private game history').length,0);
   await http(b,post.image,'GET',undefined,undefined,404);
   await http(b,profile.avatar,'GET',undefined,undefined,404);
   assert.ok((await b.client.storage.from('post-media').download(photo)).error);checks++;

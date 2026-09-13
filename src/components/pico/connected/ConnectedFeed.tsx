@@ -10,21 +10,39 @@ import type { PostRecord, FeedData } from '@/types/posts';
 import { Modal } from '@/components/ui/Modal';
 import { useEntity, entityAction } from './useEntity';
 import { PublicationComposer } from './PublicationComposer';
+import { formatGameDate } from '@/lib/game-date';
+import { ConnectedHomeContexts } from './ConnectedHomeContexts';
 import { PageHeading, EmptyState, SportIcon } from '../SocialUI';
 import { useRemoteRead } from './useRemoteRead';
 import { ReadFailure, ReadLoading } from './ReadState';
 import { useMutation, MutationNotice } from './useMutation';
-export function ConnectedFeed({arenaId,communityId,authorId,postId,readOnly=false,moderate}:{initialSlug?:string;arenaId?:string;communityId?:string;authorId?:string;postId?:string;readOnly?:boolean;moderate?:{arena?:string;community?:string}}){
- const[offset,setOffset]=useState(0);const{data,error,reload}=useEntity<FeedData>(`/api/posts?offset=${offset}${arenaId?'&arena='+arenaId:''}${communityId?'&community='+communityId:''}${authorId?'&author='+authorId:''}${postId?'&post='+postId:''}`);
- return <>{!arenaId&&!communityId&&!authorId&&!postId&&<PageHeading eyebrow="A RESENHA COMEÇA AQUI" title="Seu feed."/>}{error&&<p role="alert">{error}</p>}{!data&&!error&&<ReadLoading/>}{data&&<>{!readOnly&&<PublicationComposer viewerId={data.viewerId} arenaId={arenaId} communityId={communityId} onDone={()=>{setOffset(0);reload()}}/>}<div className="list-heading"><h2>{arenaId||communityId?'Mural':authorId?'Publicações':'Pela comunidade'}</h2><Button size="small" variant="quiet" onClick={reload}>Atualizar</Button></div>{!data.posts.length&&<EmptyState title="Ainda não há publicações por aqui.">Apenas conteúdo disponível para sua conta aparece aqui.</EmptyState>}<div className="feed-posts">{data.posts.map(post=><ConnectedPost key={`${data.viewerId}:${post.id}`} post={post} viewerId={data.viewerId} refresh={reload} moderate={moderate}/>)}</div>{(offset>0||data.hasMore)&&<nav className="read-pagination" aria-label="Páginas de publicações"><Button variant="secondary" disabled={!offset} onClick={()=>setOffset(offset-20)}>Anterior</Button><Button disabled={!data.hasMore} onClick={()=>setOffset(offset+20)}>Próxima</Button></nav>}</>}</>;
+export function ConnectedFeed({ arenaId, communityId, authorId, postId, readOnly = false, moderate }: { initialSlug?: string; arenaId?: string; communityId?: string; authorId?: string; postId?: string; readOnly?: boolean; moderate?: { arena?: string; community?: string } }) {
+  const [offset, setOffset] = useState(0);
+  const { data, error, reload } = useEntity<FeedData>(`/api/posts?offset=${offset}${arenaId ? '&arena=' + arenaId : ''}${communityId ? '&community=' + communityId : ''}${authorId ? '&author=' + authorId : ''}${postId ? '&post=' + postId : ''}`);
+  const home = !arenaId && !communityId && !authorId && !postId;
+  return <>
+    {home && (data ? <ConnectedHomeContexts viewerId={data.viewerId} /> : <PageHeading eyebrow="ENTRE UM JOGO E OUTRO" title="Seu Pico." />)}
+    {postId && <Link className="detail-back" href="/feed">← Início</Link>}
+    {error && <section className="read-message"><p role="alert">{error}</p><Button variant="secondary" onClick={reload}>Tentar novamente</Button></section>}
+    {!data && !error && <ReadLoading />}
+    {data && <>
+      {!readOnly && <PublicationComposer viewerId={data.viewerId} arenaId={arenaId} communityId={communityId} onDone={() => { setOffset(0); reload(); }} />}
+      <div className="list-heading"><h2>{postId ? 'Publicação' : arenaId || communityId ? 'Mural' : 'Publicações'}</h2><Button size="small" variant="quiet" onClick={reload}>Atualizar</Button></div>
+      {!data.posts.length && <div className="feed-empty"><EmptyState title={postId ? 'Publicação indisponível.' : 'A conversa pode começar aqui.'}>{postId ? 'Ela pode ter sido removida ou não estar disponível para sua conta.' : readOnly ? 'Ainda não há publicações disponíveis para sua conta neste contexto.' : 'Compartilhe uma história do jogo quando quiser. Sua audiência aparece antes de publicar.'}</EmptyState>{home && <Link className="journey-text-link" href="/descobrir">Conhecer pessoas que jogam <Send size={16} aria-hidden="true" /></Link>}</div>}
+      <div className="feed-posts">{data.posts.map(post => <ConnectedPost key={`${data.viewerId}:${post.id}`} post={post} viewerId={data.viewerId} refresh={reload} moderate={moderate} />)}</div>
+      {(offset > 0 || data.hasMore) && <nav className="read-pagination" aria-label="Páginas de publicações"><Button variant="secondary" disabled={!offset} onClick={() => setOffset(offset - 20)}>Anterior</Button><Button disabled={!data.hasMore} onClick={() => setOffset(offset + 20)}>Próxima</Button></nav>}
+    </>}
+  </>;
 }
 function ConnectedPost({ post, viewerId, refresh, moderate }: { post: PostRecord; viewerId:string; refresh: () => void; moderate?:{arena?:string;community?:string} }) {
   const [expanded, setExpanded] = useState(false);
   const mutation = useMutation();
   return <article className="post-card">
-    <header className="post-header"><Link href={`/perfil/${post.username}`} className="post-person"><RemoteAvatar src={post.avatar} name={post.display_name} /><span><strong>{post.display_name}</strong><small><time dateTime={post.created_at}>{new Date(post.created_at).toLocaleString('pt-BR', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })}</time></small></span></Link>{post.sport_slug&&<span className="sport-label"><SportIcon sport={post.sport_slug} />{post.sport_name}</span>}</header>
-    <p className="form-note">{post.audience==='private'?'Comunidade privada':'Público no beta'} · <Link href={`/publicacoes/${post.id}`}>Abrir publicação</Link></p>
+    <header className="post-header"><Link href={`/perfil/${post.username}`} className="post-person"><RemoteAvatar src={post.avatar} name={post.display_name} /><span><strong>{post.display_name}</strong><small><time dateTime={post.created_at} title="Data da publicação">Publicado em {new Date(post.created_at).toLocaleString('pt-BR', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })}</time></small></span></Link>{post.sport_slug&&<span className="sport-label"><SportIcon sport={post.sport_slug} />{post.sport_name}</span>}</header>
+    <p className="form-note">{post.audience==='private'?'Participantes do grupo privado':'Pessoas aprovadas no beta'} · <Link href={`/publicacoes/${post.id}`}>Abrir publicação</Link></p>
+    {post.game_played_on && <p className="post-game-date">Jogado em <time dateTime={post.game_played_on}>{formatGameDate(post.game_played_on)}</time> · relato de quem publicou</p>}
     <p className="post-copy">{post.body}</p>
+    {post.destinations.some(d => d.community_slug) && <div className="post-context-links">{post.destinations.filter(d => d.community_slug).map(d => <Link key={d.community_id} href={`/comunidades/${d.community_slug}`}>{d.community_name}</Link>)}</div>}
     {post.image && <Image className="post-photo" unoptimized src={post.image} width={800} height={600} alt={`Foto da publicação de ${post.display_name}`} />}
     <footer className="post-actions"><div><button className={`post-action ${post.liked ? 'is-liked' : ''}`} disabled={mutation.busy} aria-label={`${post.liked ? 'Descurtir' : 'Curtir'} post de ${post.display_name}`} aria-pressed={post.liked} onClick={async () => { if (await mutation.run({ action: 'set_like', postId: post.id, liked: !post.liked }, post.liked ? 'Curtida removida.' : 'Post curtido.')) refresh(); }}><Heart size={21} fill={post.liked ? 'currentColor' : 'none'} aria-hidden="true" /><span>{post.like_count}</span></button><button className="post-action" aria-expanded={expanded} aria-label={`Comentários do post de ${post.display_name}`} onClick={() => setExpanded(!expanded)}><MessageCircle size={21} aria-hidden="true" /><span>{post.comment_count}</span></button></div>{post.arena_slug&&<Link className="post-arena-link" href={`/arenas/${post.arena_slug}`}>{post.arena_name}{post.arena_is_demo ? ' · Demo' : ''}</Link>}</footer>
     <MutationNotice compact message={mutation.message} />

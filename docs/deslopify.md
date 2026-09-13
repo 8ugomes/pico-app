@@ -1,5 +1,23 @@
 # Pico — Deslopify
 
+### Verificação integrada hospedada
+
+Contratos reais de jogos e posts confirmados no desenvolvimento; o formato de retorno do save é `{id}`, e a exclusão alheia é idempotente sem efeito. O gate verifica o estado preservado, não deduz sucesso de exclusão pelo HTTP 200. Nenhuma UI precisou mudar após a revisão local. A inspeção do artefato publicado complementa as capturas locais, sem apresentá-las como prova de infraestrutura.
+
+## Publicação integrada — 2026-09-12 · critérios
+
+Publicar o refinamento completo já revisado, preservando navegação, estados e distinção entre registro privado e publicação explícita. Confirmar no artefato hospedado a versão, login, rotas, ausência de fallback demonstrativo e apresentação mobile. Validar direitos no Supabase real de desenvolvimento com dados controlados; smoke do principal sem alterar conteúdo de pessoas reais. Evidência local continua identificada como local, e a entrega remota só será declarada após promoção e resposta do domínio principal.
+
+## Rodada 2026-09-12 — critérios antes de codar
+
+Remover sinais de presença, contadores e urgência territorial. Registro depois do jogo: arena, modalidade e data em composição simples; visível somente ao dono, sem publicação automática. `Meus jogos` é acesso contextual de perfil/arena, sem herdar o botão central de mais. Navegação deve nomear destinos reais. Descoberta conecta interesses e vínculos, sem deduzir disponibilidade de jogos ou posts. Rever feed, arenas, pessoas, comunidades, onboarding, privacidade, instalação e demo; capturas anteriores são históricas. Validar 320/390/430 px e estados vazio, erro e sucesso; distinguir fixture local de Supabase hospedado e de aparelho físico.
+
+### Fechamento visual do pós-jogo
+
+Retirados contadores, bolinhas, atividade de chegada e linguagem de presença. “Meus jogos” usa linhas com arena/modalidade/data e privacidade explícita; a ação vem do perfil ou da arena. Erros preservam os campos e a confirmação aparece após retorno da gravação. A barra abre Arenas e mantém o rótulo curto Turmas, com Perfil ativo no histórico. O formulário de 320 px permite rolar até salvar sem cobrir a ação.
+
+Capturas atuais e limites em [post-game/README.md](visual-review/post-game/README.md). O conteúdo antes do fold varia conforme os avisos de instalação/versão; não é evidência de teclado físico. O redesign amplo e compartilhamento estruturado pertencem à tarefa integradora.
+
 > Estado final do Ciclo 9: PRONTO PARA REVISÃO INTERNA — NÃO LIBERADO. Preview `e891dca1e741`, 19 migrations em dev/beta e smoke 67/67. [URL, versão e evidências atuais](INTERNAL_REVIEW.md). Os registros abaixo preservam a sequência de auditoria, plano e execução.
 
 
@@ -219,3 +237,17 @@ Refinar a main existente, começando por Criar comunidade: fonte nativa única, 
 O conteúdo do feed aparece antes do formulário extenso: um acionador discreto abre os mesmos campos e preserva o rascunho. Comunidades agrupam informações, acesso e modalidades; os chips mantêm checkboxes e marca de seleção. Vidro fica em elevações, cartões de leitura permanecem estáveis. O contorno do diálogo é neutro; o foco verde-água permanece acessível. O cinza secundário foi clareado após medir o pior caso de vidro sobre branco.
 
 Inspeção real encontrou e corrigiu foco escapando com Shift+Tab e Escape de recorte fechando também a publicação. O retorno ao arquivo e o rascunho foram exercitados no navegador. Perfil/HEIC recebidos da main foram preservados e harmonizados. Capturas de viewport substituem a captura longa com costura defeituosa da ferramenta; não houve edição de imagens. 50 verificações de largura e checagem de altura reduzida passaram. Testes são emulados e usam APIs simuladas; não representam aparelho físico, autenticação ou persistência remota. Prints originais das referências não estavam disponíveis.
+
+## Jornada integrada e jogos passados — PLAN (2026-09-12)
+
+A decisão atual retira presença ao vivo por segurança e substitui as orientações históricas de check-in central. Implementar o conjunto completo localmente: início contextual previsível, navegação por pessoas/comunidades/arenas/perfil, vínculos e próximas ações, composições distintas por entidade e registros retrospectivos privados com compartilhamento opcional separado. Nomes de trabalho: Joguei aqui / Meus jogos; validar com jogadores.
+
+Comparar três organizações e duas direções visuais em JOURNEY_REFINEMENT.md. Mapear e retirar UI, filtros, timers, comandos e exposição SQL de presença; preservar dados legados em leitura estritamente própria. Criar migration aditiva para jogos com data civil passada, autoria, RLS, versionamento e idempotência; nenhum dado real será migrado nesta rodada. Reutilizar publicação canônica com audiência explícita, distinguindo data do jogo da publicação. Capturar baseline atual e resultado; testar banco descartável com duas identidades, APIs/contratos, demo e UI emulada em 320/390/430/tablet/desktop. Executar lint/typecheck/build e testes; atualizar documentos e fazer commit local. Sem push, merge, deploy, credenciais ou mutation remota.
+
+## Jornada integrada e jogos passados — VERIFY
+
+Conjunto integrado localmente à main: início contextual previsível; navegação fixa; pessoas em linhas abertas, grupos por propósito, arenas por lugar e jogos em cronologia; registros privados com compartilhamento separado e canônico. Legado fechado socialmente e consultável só pelo próprio autor, sem conversão. Escolhas de audiência, datas da experiência/publicação, pedidos pendentes e erros têm consequências distintas e explícitas.
+
+81 testes, lint, typecheck e builds conectado/demo passaram. UI local: criação/edição de comunidade, perfil, vínculo unilateral, jogo com falha/retry/correção/exclusão, compartilhamento idempotente, acesso privado pendente, erros/vazios e jornada demo. 25 medições em cinco larguras, nove auxiliares, seis com texto a 200% e diálogo em altura reduzida. [Evidências](journey-review/README.md). Nenhum resultado remoto, físico ou de pesquisa foi presumido. Duas migrations ainda precisam de aplicação remota autorizada; sem push/deploy nesta rodada.
+
+Aprendizados: reduzir controles antes de reduzir texto ajuda a mostrar pessoas no primeiro trecho da tela. Uma arena pede imagem/contexto, uma comunidade pede propósito/condições; o mesmo card não serve a todas. A repetição após resposta perdida é parte da jornada e exige identidade estável, além de mensagem clara. Texto ampliado expôs rótulos colados; a navegação recebeu espaço próprio e hifenização, preservando destinos e foco. Dados de fixture e falhas da ferramenta de captura não são evidência de infraestrutura nem métricas de usabilidade.

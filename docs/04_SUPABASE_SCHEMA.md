@@ -1,8 +1,10 @@
-# Schema atual — Ciclo 9
+> Atualização vigente de 2026-09-12: [POST_GAME.md](POST_GAME.md) substitui os contratos históricos de presença/check-in deste documento. As migrations locais 20260912090000/20260912091000 adicionam jogos privados, compartilhamento explícito e leitura privada do legado, e revogam presença; ainda não aplicadas remotamente nesta tarefa.
 
-19 migrations aditivas em `supabase/migrations`; execução por destino está registrada em [revisão interna](INTERNAL_REVIEW.md). Tipos gerados em `src/types/database.ts`. Segurança e matriz de autoridade: [contratos atuais](CYCLE9_CONTRACTS.md). O bloco histórico abaixo descreve o ponto de partida, não o schema completo atual.
+# Schema local — Ciclo 9 e jornada pós-jogo
 
-Novos contratos: `pico_private` guarda admissão, papéis globais e convites; arenas têm proprietário/equipe/status/versão, pedidos e convites de gestão. Comunidades independentes têm membros/papéis/visibilidade/entrada e vínculos aprovados com arenas. `post_destinations` distribui um post canônico; arena/modalidade deixam de ser obrigatórias. Histórico detalhado fica em RPC própria; resumo depende de opt-in. `entity_media_assets`/bucket `entity-media` pertencem ao recurso e usam remoção serializada. A última migration acrescenta medidas reais de moderação, catálogo/custódia e paginação filtrada.
+21 migrations aditivas em `supabase/migrations`; execução por destino está registrada em [revisão interna](INTERNAL_REVIEW.md). Tipos gerados em `src/types/database.ts`. Segurança e matriz de autoridade: [contratos atuais](CYCLE9_CONTRACTS.md). O bloco histórico abaixo descreve o ponto de partida, não o schema completo atual.
+
+Novos contratos: `pico_private` guarda admissão, papéis globais e convites; arenas têm proprietário/equipe/status/versão, pedidos e convites de gestão. Comunidades independentes têm membros/papéis/visibilidade/entrada e vínculos aprovados com arenas. `post_destinations` distribui um post canônico; arena/modalidade deixam de ser obrigatórias. O antigo resumo foi revogado. Jogos e legado são exclusivamente próprios; compartilhar cria um post separado com snapshot da data. `entity_media_assets`/bucket `entity-media` pertencem ao recurso e usam remoção serializada. A última migration acrescenta medidas reais de moderação, catálogo/custódia e paginação filtrada.
 
 Toda tabela exposta tem RLS; RPCs validam admissão e concessões vigentes. Funções SECURITY DEFINER têm `search_path` restrito e EXECUTE delimitado. Cliente comum não grava papéis, não assume service role e não recebe acesso direto ao Storage. Não reescrever migrations aplicadas; corrigir por nova migration.
 
@@ -27,6 +29,8 @@ Toda tabela exposta tem RLS; RPCs validam admissão e concessões vigentes. Fun�
 - `20260910096000_resource_photos.sql`
 - `20260910096100_photo_read_scope.sql`
 - `20260910100000_operator_measures.sql`
+- `20260912090000_played_games.sql` — local, pendente remoto
+- `20260912091000_game_sharing.sql` — local, pendente remoto
 
 ## Referência histórica anterior ao Ciclo 9
 

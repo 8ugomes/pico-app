@@ -2,6 +2,7 @@
 @import "./social.css";
 @import "./social-pages.css";
 @import "./forms.css";
+@import "./journey.css";
 
 :root {
   color-scheme: dark;
@@ -114,10 +115,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .scene-caption { position: absolute; left: 2rem; bottom: 8.9rem; }
 .scene-caption > span { font-size: .75rem; font-weight: 500; letter-spacing: .17em; color: rgb(255 255 255 / 75%); }
 .scene-caption p { font-size: 2.6rem; line-height: 1.08; letter-spacing: -.04em; font-weight: 500; margin: .7rem 0 0; }
-.check-in-toast { display: flex; align-items: center; gap: .75rem; position: absolute; right: 1.35rem; bottom: 2.6rem; max-width: calc(100% - 2rem); padding: .85rem 1rem; border: 1px solid rgb(255 255 255 / 20%); background: rgb(28 29 25 / 70%); backdrop-filter: blur(20px); border-radius: 18px; box-shadow: 0 10px 25px rgb(0 0 0 / 20%); }
-.check-in-icon { display: grid; place-items: center; width: 39px; height: 39px; flex-shrink: 0; border-radius: 12px; background: rgb(216 180 106 / 15%); color: var(--accent); }
-.check-in-toast strong { font-size: .875rem; font-weight: 600; display: block; }
-.check-in-toast div > span { display: block; font-size: .75rem; color: var(--text-secondary); margin-top: .2rem; }
 .status-dot { width: 6px; height: 6px; flex-shrink: 0; border-radius: 50%; background: var(--accent); margin-left: .7rem; }
 .arena-preview { position: relative; z-index: 1; background: linear-gradient(115deg, #20201f, #151514); border: 1px solid var(--glass-border); border-radius: 20px; padding: 1.4rem 1.5rem; margin: -1.5rem 1.1rem 0 -1.3rem; box-shadow: 0 14px 45px rgb(0 0 0 / 30%); }
 .arena-preview-heading { display: flex; align-items: center; justify-content: space-between; gap: .75rem; }
@@ -205,7 +202,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .scene-caption { left: 1.5rem; bottom: 8.7rem; }
   .scene-caption p { font-size: 2.4rem; }
   .scene-topline { top: 1.15rem; left: 1.15rem; right: 1.15rem; }
-  .check-in-toast { right: 1rem; bottom: 2.6rem; }
   .arena-preview { margin: -1.5rem .6rem 0; padding: 1.2rem; }
   .arena-preview h2 { font-size: 1.125rem; }
   .arena-preview-bottom { gap: .6rem; }

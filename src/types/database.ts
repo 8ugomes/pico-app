@@ -706,6 +706,54 @@ export type Database = {
           },
         ]
       }
+      played_games: {
+        Row: {
+          arena_id: string
+          created_at: string
+          id: string
+          played_on: string
+          player_id: string
+          sport_id: string
+          updated_at: string
+          version: number
+        }
+        Insert: {
+          arena_id: string
+          created_at?: string
+          id: string
+          played_on: string
+          player_id: string
+          sport_id: string
+          updated_at?: string
+          version?: number
+        }
+        Update: {
+          arena_id?: string
+          created_at?: string
+          id?: string
+          played_on?: string
+          player_id?: string
+          sport_id?: string
+          updated_at?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "played_games_arena_id_sport_id_fkey"
+            columns: ["arena_id", "sport_id"]
+            isOneToOne: false
+            referencedRelation: "arena_sports"
+            referencedColumns: ["arena_id", "sport_id"]
+          },
+          {
+            foreignKeyName: "played_games_player_id_fkey"
+            columns: ["player_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       player_sports: {
         Row: {
           is_primary: boolean
@@ -783,6 +831,29 @@ export type Database = {
             foreignKeyName: "post_destinations_post_id_fkey"
             columns: ["post_id"]
             isOneToOne: false
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      post_game_context: {
+        Row: {
+          played_on: string
+          post_id: string
+        }
+        Insert: {
+          played_on: string
+          post_id: string
+        }
+        Update: {
+          played_on?: string
+          post_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "post_game_context_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: true
             referencedRelation: "posts"
             referencedColumns: ["id"]
           },
@@ -1110,6 +1181,7 @@ export type Database = {
       community_page: { Args: { p_slug: string }; Returns: Json }
       create_community: { Args: { p_data: Json }; Returns: Json }
       create_official_community: { Args: { p_arena: string }; Returns: string }
+      delete_played_game: { Args: { p_id: string }; Returns: undefined }
       discover_common_players: { Args: { p_offset?: number }; Returns: Json }
       discover_players: {
         Args: {
@@ -1212,6 +1284,8 @@ export type Database = {
           username: string
         }[]
       }
+      read_played_games: { Args: { p_offset?: number }; Returns: Json }
+      read_retired_checkins: { Args: { p_offset?: number }; Returns: Json }
       read_social_feed: {
         Args: {
           p_arena?: string
@@ -1253,6 +1327,16 @@ export type Database = {
         Args: { p_data: Json; p_id: string; p_version: number }
         Returns: undefined
       }
+      save_played_game: {
+        Args: {
+          p_arena: string
+          p_id: string
+          p_played_on: string
+          p_sport: string
+          p_version?: number
+        }
+        Returns: string
+      }
       save_profile: {
         Args: {
           p_available: boolean
@@ -1273,6 +1357,19 @@ export type Database = {
       set_entity_photo: {
         Args: { p_id: string; p_kind: string; p_path?: string; p_slot: string }
         Returns: undefined
+      }
+      share_played_game: {
+        Args: {
+          p_audience?: string
+          p_body?: string
+          p_groups?: string[]
+          p_id: string
+          p_image_path?: string
+          p_key: string
+          p_version: number
+          p_wall_arena?: string
+        }
+        Returns: string
       }
       start_checkin: {
         Args: { arena_id: string; sport_id: string }

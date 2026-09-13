@@ -20,7 +20,7 @@ Nunca limpar todos os usuários/buckets. A suíte registra IDs/caminhos e remove
 
 ## Limites e observabilidade
 
-Limites transacionais no banco continuam vigentes: posts 10/10min, comentários 30/10min, likes 120/min, conexões 60/h, bloqueios 30/h, denúncias 5/dia, check-ins 30/h, mudanças de perfil/vínculos 120/h, reservas de mídia 20/h. Comunidades, convites e operações de recurso têm limites adicionais nas migrations. Reserva inválida também conta. Isto não equivale a teste de carga pública.
+Limites transacionais no banco continuam vigentes: posts 10/10min, comentários 30/10min, likes 120/min, conexões 60/h, bloqueios 30/h, denúncias 5/dia, jogos privados 60/h, mudanças de perfil/vínculos 120/h, reservas de mídia 20/h. Comunidades, convites e operações de recurso têm limites adicionais nas migrations. Reserva inválida também conta. Isto não equivale a teste de carga pública.
 
 Falhas de API produzem evento estruturado mínimo: identificador aleatório, categoria/status e versão. Sem serializar request, URL, corpo, SQL ou erro bruto. Eventos de auditoria registram ação/alvo necessários; acesso restrito. CI executa lint, types, testes e build em demo, sem segredos do Supabase.
 

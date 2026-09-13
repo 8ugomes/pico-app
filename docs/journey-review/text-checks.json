@@ -1,0 +1,38 @@
+[
+  {
+    "route": "/feed",
+    "font": "32px",
+    "scrollWidth": 390,
+    "width": 390
+  },
+  {
+    "route": "/descobrir",
+    "font": "32px",
+    "scrollWidth": 390,
+    "width": 390
+  },
+  {
+    "route": "/comunidades",
+    "font": "32px",
+    "scrollWidth": 390,
+    "width": 390
+  },
+  {
+    "route": "/arenas/areia-da-vila",
+    "font": "32px",
+    "scrollWidth": 390,
+    "width": 390
+  },
+  {
+    "route": "/perfil",
+    "font": "32px",
+    "scrollWidth": 390,
+    "width": 390
+  },
+  {
+    "route": "/jogos",
+    "font": "32px",
+    "scrollWidth": 390,
+    "width": 390
+  }
+]

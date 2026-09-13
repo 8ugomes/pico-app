@@ -131,7 +131,7 @@ test('making an arena private hides its posts, comments, likes, membership and s
   await db.query('update arenas set is_public=true where id=$1',[VILA]);
 });
 
-test('checkins deny all direct client writes and enforce maximum duration, uniqueness and expiry', async () => {
+test('retired checkin rows preserve legacy constraints and deny direct client access', async () => {
   await asUser(db, ALICE, async () => {
     await denied(db.query(`insert into checkins(player_id,arena_id,sport_id,expires_at) values ($1,$2,$3,now()+interval '2 hours')`,[ALICE,VILA,FUTEVOLEI]));
     await denied(db.query('update checkins set ended_at=now() where player_id=$1',[ALICE]));
@@ -142,9 +142,9 @@ test('checkins deny all direct client writes and enforce maximum duration, uniqu
   await db.query(`insert into checkins(player_id,arena_id,sport_id,expires_at) values ($1,$2,$3,now()+interval '2 hours')`,[ALICE,VILA,FUTEVOLEI]);
   await invalid(db.query(`insert into checkins(player_id,arena_id,sport_id,expires_at) values ($1,$2,$3,now()+interval '2 hours')`,[ALICE,VILA,FUTEVOLEI]));
   await db.query(`insert into checkins(player_id,arena_id,sport_id,started_at,expires_at) values ($1,$2,$3,now()-interval '3 hours',now()-interval '1 hour')`,[BOB,VILA,FUTEVOLEI]);
-  await asUser(db, BOB, async () => { assert.equal((await db.query('select * from checkins')).rows.length,1); });
+  await asUser(db, BOB, async () => { await denied(db.query('select * from checkins')); });
   await db.query('update checkins set ended_at=now() where player_id=$1',[ALICE]);
-  await asUser(db, ALICE, async () => { assert.equal((await db.query('select * from checkins')).rows.length,0); });
+  await asUser(db, ALICE, async () => { await denied(db.query('select * from checkins')); });
 });
 
 test('deleting your post cascades its likes/comments without deleting other authors', async () => {

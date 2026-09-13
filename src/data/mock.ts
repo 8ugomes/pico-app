@@ -1,7 +1,7 @@
 import type { DemoSeed } from "../types/social";
 
 const minute = 60_000;
-// All names, places, attendance and activity are fictional.
+// All names, places and posts are fictional.
 // Times are offsets from the start of the demo, not production timestamps.
 export const mock: DemoSeed = {
   currentUserId: "rafa",
@@ -24,7 +24,7 @@ export const mock: DemoSeed = {
     { id: "ipanema", slug: "quintal-de-areia", name: "Quintal de Areia", neighborhood: "Moema", city: "São Paulo", description: "A praia cabe no nosso quintal. Beach tennis, gente boa e uma turma que acolhe do primeiro saque ao último ponto.", sports: ["beach-tennis", "volei-praia"], members: 94, image: "/images/urban-court.webp", imagePosition: "85% 50%", amenities: ["Café", "Duchas", "Espaço de convivência"] },
   ],
   posts: [
-    { id: "post-marina", authorId: "marina", arenaId: "vila", sportId: "futevolei", content: "Aquele fim de tarde que a gente queria que durasse mais. Quem fecha o próximo jogo com a gente?", photo: "/images/urban-court.webp", createdAt: -18 * minute, likes: 24 },
+    { id: "post-marina", communityIds: ["fim-de-tarde"], authorId: "marina", arenaId: "vila", sportId: "futevolei", content: "Aquele fim de tarde que a gente queria que durasse mais. Quem fecha o próximo jogo com a gente?", photo: "/images/urban-court.webp", createdAt: -18 * minute, likes: 24 },
     { id: "post-bia", authorId: "bia", arenaId: "ipanema", sportId: "beach-tennis", content: "Procurando uma dupla pro beach amanhã, às 19h. Nível intermediário e zero pressão. O importante é jogar!", createdAt: -42 * minute, likes: 12 },
     { id: "post-lucas", authorId: "lucas", arenaId: "alto", sportId: "volei-praia", content: "Hoje teve gente nova na roda e jogo até acenderem as luzes. É por isso que eu volto.", createdAt: -75 * minute, likes: 31 },
   ],
@@ -32,15 +32,10 @@ export const mock: DemoSeed = {
     { id: "comment-1", postId: "post-marina", authorId: "lucas", content: "Pode contar comigo no próximo!", createdAt: -12 * minute },
     { id: "comment-2", postId: "post-bia", authorId: "pedro", content: "Tô dentro! Jogo no Quintal também.", createdAt: -25 * minute },
   ],
-  checkins: [
-    { id: "check-marina", playerId: "marina", arenaId: "vila", sportId: "futevolei", startedAt: -30 * minute, expiresAt: 90 * minute },
-    { id: "check-lucas", playerId: "lucas", arenaId: "vila", sportId: "volei-praia", startedAt: -20 * minute, expiresAt: 100 * minute },
-    { id: "check-bia", playerId: "bia", arenaId: "ipanema", sportId: "beach-tennis", startedAt: -15 * minute, expiresAt: 105 * minute },
-    { id: "check-julia", playerId: "julia", arenaId: "alto", sportId: "volei-praia", startedAt: -45 * minute, expiresAt: 75 * minute },
-  ],
-  activities: [
-    { id: "activity-1", playerId: "julia", arenaId: "alto", text: "chegou para o vôlei", minutesAgo: 8 },
-    { id: "activity-2", playerId: "bia", arenaId: "ipanema", text: "tá procurando uma dupla", minutesAgo: 20 },
-    { id: "activity-3", playerId: "marina", arenaId: "vila", text: "compartilhou um fim de tarde", minutesAgo: 35 },
+  games: [],
+  communities: [
+    { id: 'fim-de-tarde', slug: 'turma-do-fim-de-tarde', name: 'Turma do fim de tarde', description: 'Para quem gosta de jogar sem pressa e continuar a conversa depois.', rules: 'Receba quem está começando e respeite o ritmo de cada pessoa.', sports: ['futevolei', 'volei-praia'], arenaId: 'vila', visibility: 'beta', entryMode: 'open', members: ['rafa', 'marina', 'lucas'], pending: [] },
+    { id: 'primeiros-saques', slug: 'primeiros-saques', name: 'Primeiros saques', description: 'Um grupo para aprender beach tennis, trocar experiências e conhecer pessoas.', rules: 'Um passo de cada vez. Respeito e paciência para aprender junto.', sports: ['beach-tennis'], arenaId: 'alto', visibility: 'beta', entryMode: 'open', members: ['bia', 'pedro'], pending: [] },
+    { id: 'roda-reservada', slug: 'roda-reservada', name: 'Roda reservada', description: 'Uma comunidade privada de vôlei de praia.', rules: 'Regras visíveis apenas para membros ativos.', sports: ['volei-praia'], visibility: 'private', entryMode: 'approval', members: ['julia'], pending: [] },
   ],
 };

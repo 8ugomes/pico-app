@@ -24,7 +24,7 @@ function DeleteAccount() {
       window.location.replace('/login?account=deleted');
     }catch(failure){setError(failure instanceof Error?failure.message:'Não foi possível concluir. Tente novamente.');}finally{setBusy(false);}
   }
-  return <section className="connected-panel"><h2>Excluir minha conta</h2><p className="form-note">Remove seu perfil, fotos, publicações, comentários, conexões e check-ins. A exclusão é definitiva.</p><Button variant="quiet" onClick={()=>setOpen(true)}>Quero excluir minha conta</Button>
+  return <section className="connected-panel"><h2>Excluir minha conta</h2><p className="form-note">Remove seu perfil, fotos, publicações, comentários, conexões e registros de jogos. A exclusão é definitiva.</p><Button variant="quiet" onClick={()=>setOpen(true)}>Quero excluir minha conta</Button>
     <Modal open={open} onClose={()=>{if(!busy)setOpen(false);}} title="Excluir sua conta?">
       <p className="form-note">Confirme a senha da conta atual. Se a conexão cair após iniciar, repita aqui para concluir. Dados já removidos não poderão ser recuperados.</p>
       <form className="connected-form" onSubmit={submit}><fieldset disabled={busy}><Input id="delete-password" name="password" type="password" label="Sua senha atual" autoComplete="current-password" minLength={8} maxLength={128} required /><Input id="delete-confirmation" name="confirmation" label="Digite EXCLUIR para confirmar" autoComplete="off" pattern="EXCLUIR" required /><Button type="submit">{busy?'Excluindo…':'Excluir definitivamente'}</Button></fieldset>{error && <p role="alert" className="auth-notice notice-error">{error}</p>}</form>

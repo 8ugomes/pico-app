@@ -16,8 +16,8 @@ Pico é uma rede social PWA mobile-first para futevôlei, beach tennis e vôlei 
 
 ## Prioridades
 
-Responder quem joga onde o usuário joga, quem está disponível e o que acontece nas suas arenas.
-Priorizar pessoas, perfis de arenas, comunidades próprias, check-in, feed e descoberta. Ciclo 9 amplia expressamente o escopo: comunidades independentes ou vinculadas a arenas, com papéis e audiência próprios.
+Responder quem joga onde o usuário joga, quais comunidades combinam com o usuário e o que acontece nas suas arenas.
+Priorizar pessoas, perfis de arenas, comunidades próprias, registro privado depois do jogo, feed e descoberta. Ciclo 9 amplia expressamente o escopo: comunidades independentes ou vinculadas a arenas, com papéis e audiência próprios.
 Manter fora do MVP: IA, voz, reservas, pagamentos, B2B, anúncios, ranking avançado, mapa em tempo real e app nativo.
 
 ## Leia antes de desenvolver
@@ -61,7 +61,7 @@ Texto em pt-BR, curto, próximo e concreto. Uma ação principal por contexto.
 Dados ilustrativos precisam de rótulo; não fingir cadastro, presença, salvamento ou métricas.
 Demonstração exige configuração explícita. Ambientes conectados negam acesso social sem admissão vigente. O responsável corrigiu a separação interna: publicar a main no projeto Vercel pico-app, em pico-app-sepia.vercel.app. Usar scripts/deploy.mjs; não exigir cycle-9-internal ou projeto separado. O Supabase existente (identidade técnica beta) preserva contas e dados. Unificar a publicação não altera admissão, RLS, convites ou escopo de acesso.
 Auth real e jogador fictício são estados distintos. Ações do demo ficam locais, identificadas e sem envio para outras pessoas.
-Rotas canônicas: /feed, /arenas, /arenas/[slug], /checkin, /descobrir, /perfil.
+Rotas canônicas: /feed, /arenas, /arenas/[slug], /jogos, /descobrir, /perfil.
 Não implementar um recurso só porque apareceu como sugestão de rota no plano.
 
 ## Backend e privacidade
@@ -72,7 +72,7 @@ Toda tabela exposta precisa de RLS, autoria verificada e migrations versionadas.
 Storage exige políticas, limites de upload e vínculo ao proprietário.
 Autorização usa getClaims/getUser no servidor; nunca confia apenas em getSession ou estado React.
 O helper server.ts atual é para Route Handlers/Server Actions; implementar renovação via proxy antes de páginas privadas no servidor.
-Presença é voluntária e expira; não rastrear localização contínua.
+Presença ao vivo está fora do produto. Jogos são registros retrospectivos privados, sem inferência de disponibilidade, publicação automática ou localização contínua. Compartilhar é uma ação separada, com audiência/destinos explícitos e snapshot da data; editar/excluir o jogo não altera o post. /checkin só redireciona links antigos para /jogos; dados legados ficam preservados e sem acesso social.
 
 ## Autonomia e entrega
 

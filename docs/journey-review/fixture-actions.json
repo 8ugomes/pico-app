@@ -1,0 +1,122 @@
+{
+  "fixture": true,
+  "writes": [
+    {
+      "path": "/api/games",
+      "body": {
+        "action": "save",
+        "id": "4f3860da-df2d-4830-ad05-710e65226675",
+        "arenaId": "20000000-0000-4000-8000-000000000001",
+        "sportId": "10000000-0000-4000-8000-000000000002",
+        "playedOn": "2026-01-03"
+      }
+    },
+    {
+      "path": "/api/games",
+      "body": {
+        "action": "save",
+        "id": "4f3860da-df2d-4830-ad05-710e65226675",
+        "arenaId": "20000000-0000-4000-8000-000000000001",
+        "sportId": "10000000-0000-4000-8000-000000000002",
+        "playedOn": "2026-01-03"
+      }
+    },
+    {
+      "path": "/api/games/share",
+      "body": {
+        "body": "Um jogo para lembrar com a turma.",
+        "imagePath": null,
+        "audience": "beta",
+        "groups": [
+          "40000000-0000-4000-8000-000000000001"
+        ],
+        "id": "4f3860da-df2d-4830-ad05-710e65226675",
+        "version": 1,
+        "key": "6a58b859-258e-474f-ad64-4ad8c9766e07"
+      }
+    },
+    {
+      "path": "/api/games/share",
+      "body": {
+        "body": "Um jogo para lembrar com a turma.",
+        "imagePath": null,
+        "audience": "beta",
+        "groups": [
+          "40000000-0000-4000-8000-000000000001"
+        ],
+        "id": "4f3860da-df2d-4830-ad05-710e65226675",
+        "version": 1,
+        "key": "6a58b859-258e-474f-ad64-4ad8c9766e07"
+      }
+    },
+    {
+      "path": "/api/communities",
+      "body": {
+        "action": "create",
+        "data": {
+          "name": "Turma de validação local",
+          "description": "",
+          "rules": "",
+          "entry_mode": "open",
+          "visibility": "beta",
+          "sports": [
+            "10000000-0000-4000-8000-000000000002"
+          ]
+        }
+      }
+    },
+    {
+      "path": "/api/communities",
+      "body": {
+        "action": "edit",
+        "id": "40000000-0000-4000-8000-000000000002",
+        "version": 1,
+        "data": {
+          "name": "Turma de validação local",
+          "description": "Uma turma local para rever nossos jogos.",
+          "rules": "",
+          "entry_mode": "open",
+          "visibility": "beta",
+          "sports": [
+            "10000000-0000-4000-8000-000000000002"
+          ]
+        }
+      }
+    },
+    {
+      "path": "/api/games",
+      "body": {
+        "action": "save",
+        "id": "4f3860da-df2d-4830-ad05-710e65226675",
+        "arenaId": "20000000-0000-4000-8000-000000000001",
+        "sportId": "10000000-0000-4000-8000-000000000002",
+        "playedOn": "2026-01-04",
+        "version": 1
+      }
+    },
+    {
+      "path": "/api/games",
+      "body": {
+        "action": "delete",
+        "id": "4f3860da-df2d-4830-ad05-710e65226675"
+      }
+    },
+    {
+      "path": "/api/social/mutate",
+      "body": {
+        "action": "save_profile",
+        "name": "Alice Teste",
+        "username": "alice_teste",
+        "bio": "Uma partida a mais, uma boa história depois.",
+        "city": "São Paulo",
+        "neighborhood": "Vila Madalena",
+        "sportId": "10000000-0000-4000-8000-000000000002",
+        "level": "Intermediário",
+        "available": true
+      }
+    }
+  ],
+  "mode": "success",
+  "games": [],
+  "posts": 2
+}

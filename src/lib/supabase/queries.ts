@@ -1,5 +1,5 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
-import type { Database } from '../../types/database';
+import type { Database } from '../../types/app-database';
 import { ReadError } from './read-errors.ts';
 
 const arenaFields = 'id, slug, name, description, neighborhood, city, image_path, is_demo, arena_sports(enabled, sports(id, slug, name))' as const;
