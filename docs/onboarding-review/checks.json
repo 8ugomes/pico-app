@@ -1,0 +1,123 @@
+{
+  "fixture": true,
+  "hosted": false,
+  "physicalDevice": false,
+  "checks": [
+    "optional invitation, dismiss persists, profile replay, all six steps, real arena/person/community targets, filter request, completion persists",
+    "compositor and game dialogs hide guide; Escape and draft preserved; profile editing pauses advancement; zero required social writes",
+    "pause/resume/restart, voluntary resume after reload, collapse/expand",
+    "empty catalog and failing reads preserve navigation without fixtures becoming social success",
+    "320/390/430/768/1280px, short height, 200% text, keyboard focus and Escape, reduced motion",
+    "new identity has independent preference; admission denial and failed profile read do not offer tutorial",
+    "another tab updates the preference without redirecting or opening the guide",
+    "denied localStorage keeps the guide usable in memory"
+  ],
+  "layouts": [
+    {
+      "name": "arenas-390",
+      "width": 390,
+      "height": 844,
+      "documentWidth": 390,
+      "panel": {
+        "x": 21,
+        "top": 8,
+        "bottom": 105.375,
+        "width": 348
+      },
+      "controlsOutsideViewport": []
+    },
+    {
+      "name": "320x620",
+      "width": 320,
+      "height": 620,
+      "documentWidth": 320,
+      "panel": {
+        "x": 15,
+        "top": 123.6875,
+        "bottom": 464.6875,
+        "width": 290
+      },
+      "controlsOutsideViewport": []
+    },
+    {
+      "name": "390x844",
+      "width": 390,
+      "height": 844,
+      "documentWidth": 390,
+      "panel": {
+        "x": 21,
+        "top": 123.6875,
+        "bottom": 385.828125,
+        "width": 348
+      },
+      "controlsOutsideViewport": []
+    },
+    {
+      "name": "430x932",
+      "width": 430,
+      "height": 932,
+      "documentWidth": 430,
+      "panel": {
+        "x": 21,
+        "top": 123.6875,
+        "bottom": 385.828125,
+        "width": 388
+      },
+      "controlsOutsideViewport": []
+    },
+    {
+      "name": "768x850",
+      "width": 768,
+      "height": 850,
+      "documentWidth": 768,
+      "panel": {
+        "x": 65,
+        "top": 123.6875,
+        "bottom": 343.828125,
+        "width": 638
+      },
+      "controlsOutsideViewport": []
+    },
+    {
+      "name": "1280x900",
+      "width": 1280,
+      "height": 900,
+      "documentWidth": 1280,
+      "panel": {
+        "x": 326.5,
+        "top": 122.890625,
+        "bottom": 385.03125,
+        "width": 562
+      },
+      "controlsOutsideViewport": []
+    },
+    {
+      "name": "390x500",
+      "width": 390,
+      "height": 500,
+      "documentWidth": 390,
+      "panel": {
+        "x": 21,
+        "top": 123.6875,
+        "bottom": 385.828125,
+        "width": 348
+      },
+      "controlsOutsideViewport": []
+    },
+    {
+      "name": "text-200",
+      "width": 390,
+      "height": 844,
+      "documentWidth": 390,
+      "panel": {
+        "x": 41,
+        "top": 228.390625,
+        "bottom": 692.578125,
+        "width": 308
+      },
+      "controlsOutsideViewport": []
+    }
+  ],
+  "writes": [],
+  "errors": []
+}

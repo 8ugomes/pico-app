@@ -1,0 +1,47 @@
+{
+  "environment": "exclusive development",
+  "checks": [
+    "real signup opens initial profile without invitation",
+    "first profile saves and displays server-backed enrollment",
+    "enrollment announcement is visible after long form",
+    "official editorial and server acknowledgment",
+    "real participant links to profile",
+    "leaving survives reload without automatic rejoin",
+    "real logout clears browser auth",
+    "wrong-password feedback",
+    "login preserves voluntary departure",
+    "no browser runtime errors",
+    "frame protection header"
+  ],
+  "layouts": [
+    {
+      "width": 320,
+      "viewport": 320,
+      "document": 320
+    },
+    {
+      "width": 390,
+      "viewport": 390,
+      "document": 390
+    },
+    {
+      "width": 430,
+      "viewport": 430,
+      "document": 430
+    },
+    {
+      "width": 768,
+      "viewport": 768,
+      "document": 768
+    },
+    {
+      "zoom": "200%",
+      "viewport": 390,
+      "document": 390
+    }
+  ],
+  "errors": [],
+  "emailDeliveryTested": false,
+  "realDevicesTested": false,
+  "fixtureRemoved": true
+}

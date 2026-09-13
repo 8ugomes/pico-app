@@ -30,7 +30,7 @@ export function ConnectedGames({ initialSlug }: { initialSlug?: string }) {
     <PageHeading eyebrow="DEPOIS DA AREIA" title="Meus jogos" />
     <p className="page-intro">Um lugar para guardar onde você jogou e as datas de cada encontro.</p>
     <JournalPrivacy />
-    <Button onClick={() => { setMessage(''); setForm(previous => previous && !previous.game ? previous : {}); setEditorOpen(true); }}>Registrar jogo</Button>
+    <Button data-tour="register-game" onClick={() => { setMessage(''); setForm(previous => previous && !previous.game ? previous : {}); setEditorOpen(true); }}>Registrar jogo</Button>
     {message && <p role="status" className="inline-success">{message}</p>}
     {loading && <p role="status">Carregando seus jogos…</p>}
     {error && <div className="connected-panel"><p role="alert">{error}</p><Button variant="secondary" onClick={reload}>Tentar novamente</Button></div>}

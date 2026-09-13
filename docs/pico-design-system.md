@@ -57,3 +57,11 @@ Direção “Editorial de quadra”: o início apresenta relações próprias; p
 Filtros de pessoas e informações complementares de arena/grupo ficam em disclosures; audiência de publicação e condições de participação permanecem visíveis. “Comunidades” é o nome do destino; “turma” aparece como linguagem contextual. Acompanhar é unilateral e não envia convite. “Joguei aqui” registra o passado; “Compartilhar jogo” publica somente após outra confirmação.
 
 [Comparação das alternativas](JOURNEY_REFINEMENT.md) e [capturas locais](journey-review/README.md). A direção e os rótulos ainda precisam de avaliação com jogadores; não há resultado de pesquisa declarado.
+
+## Tutorial guiado
+
+`GuidedOnboarding` apresenta convite editorial no Início e um guia opcional em `onboarding.css`. Destaque areia conecta dica e controle real; a tela continua interativa. “Mostrar onde” recolhe a dica antes de focar o controle. O painel acompanha a rolagem, respeita a navegação e pode ser expandido/pausado; corpo rola em altura curta/texto ampliado, ações ficam acessíveis. Diálogos nativos o ocultam e editores de perfil suspendem o avanço. Não confundir progresso do passeio com ações sociais concluídas. [Escopo e evidências](ONBOARDING.md).
+
+## Boas-vindas institucionais
+
+Aviso em superfície editorial, título focável e rolagem após salvar o formulário. Uma ação principal para conhecer a comunidade, alternativa discreta para reconhecer. As mensagens fixas identificam autoria Pico e não exibem engajamento fictício. [Evidências](official-review/README.md).

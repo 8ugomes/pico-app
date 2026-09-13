@@ -1,4 +1,4 @@
-import{readFileSync,writeFileSync,mkdirSync}from'node:fs';import{spawnSync}from'node:child_process';import{assertRemoteIdentity}from'./environment-guard.mjs';
+import{resolve}from'node:path';import{readFileSync,writeFileSync,mkdirSync}from'node:fs';import{spawnSync}from'node:child_process';import{assertRemoteIdentity}from'./environment-guard.mjs';
 const expected=await assertRemoteIdentity(process.env,'migration');const origins=expected.appOrigins;
 if(!origins?.length)throw Error('Register validated application origins in config/environments.json first');
 const wd='.vercel/auth-templates-'+expected.purpose;mkdirSync(wd+'/supabase/templates',{recursive:true});
@@ -16,7 +16,7 @@ content_path = "./supabase/templates/confirmation.html"
 subject = "Recuperar acesso ao Pico"
 content_path = "./supabase/templates/recovery.html"`:""}
 `,{mode:0o600});
-function cli(command){const r=spawnSync('npx',['--yes','supabase@2.117.0','config',command,'--yes','--project-ref',expected.projectRef,'--workdir',wd],{encoding:'utf8',timeout:90000,maxBuffer:4e6});if(r.status!==0)throw Error('Auth configuration failed; inspect protected CLI output or provider settings');return r.stdout;}
+function cli(command){const r=spawnSync('npx',['--yes','supabase@2.117.0','config',command,'--yes','--project-ref',expected.projectRef,'--workdir',resolve(wd)],{cwd:resolve(wd),encoding:'utf8',timeout:90000,maxBuffer:4e6});if(r.status!==0)throw Error('Auth configuration failed; inspect protected CLI output or provider settings');return r.stdout;}
 const diff=cli('diff');writeFileSync(wd+'/review.diff',diff,{mode:0o600});
 // This minimal config changes only origins/templates, never SMTP, admission,
 // signup or verification settings. Keep the reviewed provider diff protected.

@@ -16,7 +16,7 @@ export function AppShell({ children, environment = 'demo' }: { children: ReactNo
     <aside className="app-sidebar"><Brand /><p className="sidebar-tagline">O ponto de encontro<br />da areia.</p><BottomNav desktop /><Link className="sidebar-profile" href="/perfil">{connected ? <>{profileIcon}<span><strong>Minha conta</strong><small>Seu perfil no Pico</small></span></> : <><PlayerAvatar player={me} /><span><strong>{me.name}</strong><small>Seu perfil de demonstração</small></span></>}</Link></aside>
     <div className="app-center">
       <header className="mobile-app-header"><Brand /><span className="header-location"><MapPin size={13} aria-hidden="true" /> {connected ? 'Encontre seu Pico' : 'São Paulo, SP'}</span><Link href="/perfil" aria-label="Abrir meu perfil">{connected ? profileIcon : <PlayerAvatar player={me} size="small" />}</Link></header>
-      {connected ? <div className="demo-banner read-mode-banner"><span className="demo-indicator" />Pico <span>· acesso por aprovação</span></div> : <div className="demo-banner"><span className="demo-indicator" />Demonstração <span>· pessoas fictícias, ações nesta sessão</span></div>}
+      {connected ? <div className="demo-banner read-mode-banner"><span className="demo-indicator" />Pico <span>· sua turma na areia</span></div> : <div className="demo-banner"><span className="demo-indicator" />Demonstração <span>· pessoas fictícias, ações nesta sessão</span></div>}
       <PwaStatus/><main id="main-content" className="social-main">{children}</main>
     </div>
     <aside className="community-sidebar">

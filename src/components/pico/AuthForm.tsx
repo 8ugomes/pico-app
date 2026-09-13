@@ -1,5 +1,6 @@
 "use client";
 
+import { newPasswordError } from '@/lib/auth/password';
 import { afterLogin } from '@/lib/auth/navigation';
 import { useEffect, useState, type FormEvent } from "react";
 import Link from "next/link";
@@ -16,7 +17,7 @@ type AuthMode = "login" | "signup";
 function authError(code?: string) {
   switch (code) {
     case "hook_error":
-    case "hook_payload_invalid_content_type": return "O cadastro depende de convite individual para este e-mail.";
+    case "hook_payload_invalid_content_type": return "Não foi possível concluir o cadastro agora. Tente novamente mais tarde.";
     case "invalid_credentials": return "E-mail ou senha incorretos. Confira e tente novamente.";
     case "email_not_confirmed": return "Confirme seu e-mail antes de entrar. Confira também a caixa de spam.";
     case "over_request_rate_limit":
@@ -34,6 +35,7 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
   const [busy, setBusy] = useState(false);
   const [checking, setChecking] = useState(Boolean(client));
   const [email, setEmail] = useState<string | null>(null);
+  const [confirmationEmail, setConfirmationEmail] = useState<string | null>(null);
   const signup = mode === "signup";
 
   useEffect(() => {
@@ -60,6 +62,7 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
       setNotice({ kind: "error", text: "Conte como você quer ser chamado, com pelo menos 2 caracteres." });
       return;
     }
+    if (signup) { const error = newPasswordError(password); if (error) { setNotice({ kind: 'error', text: error }); return; } }
     setBusy(true);
     setNotice(null);
     try {
@@ -70,12 +73,13 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
             options: { data: { display_name: name }, emailRedirectTo: new URL(process.env.NEXT_PUBLIC_PICO_EMAIL_TEMPLATES === "custom" ? "/auth/confirm" : "/auth/callback", window.location.origin).href },
           })
         : await client.auth.signInWithPassword({ email: address, password });
-      if (error) { setNotice({ kind: "error", text: authError(error.code) }); return; }
+      if (error) { if (error.code === "email_not_confirmed") setConfirmationEmail(address); setNotice({ kind: "error", text: authError(error.code) }); return; }
       if (result.session) {
         setEmail(result.user?.email ?? address);
         router.replace(afterLogin());
         router.refresh();
       } else {
+        setConfirmationEmail(address);
         setNotice({ kind: "success", text: "Confira seu e-mail para continuar. Se o cadastro puder ser concluído, você receberá um link de confirmação. Abra o link no mesmo navegador em que você fez o pedido." });
       }
       form.reset();
@@ -84,6 +88,16 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
     } finally {
       setBusy(false);
     }
+  }
+
+  async function resendConfirmation() {
+    if (!client || !confirmationEmail || busy) return;
+    setBusy(true); setNotice(null);
+    try {
+      const { error } = await client.auth.resend({ type: 'signup', email: confirmationEmail, options: { emailRedirectTo: new URL(process.env.NEXT_PUBLIC_PICO_EMAIL_TEMPLATES === 'custom' ? '/auth/confirm' : '/auth/callback', location.origin).href } });
+      setNotice(error ? { kind: 'error', text: authError(error.code) } : { kind: 'success', text: 'Se houver um cadastro aguardando confirmação, você receberá um novo link. Confira também o spam.' });
+    } catch { setNotice({ kind: 'error', text: authError() }); }
+    finally { setBusy(false); }
   }
 
   async function signOut() {
@@ -120,13 +134,14 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
         <fieldset disabled={!client || busy}>
           {signup && <Input id="name" name="name" label="Como você quer ser chamado?" placeholder="Seu nome" autoComplete="nickname" minLength={2} maxLength={60} required />}
           <Input id="email" name="email" label="E-mail" placeholder="voce@exemplo.com" type="email" autoComplete="email" autoCapitalize="none" spellCheck={false} maxLength={254} required />
-          <Input id="password" name="password" label="Senha" placeholder={signup ? "Crie sua senha" : "Sua senha"} type="password" autoComplete={signup ? "new-password" : "current-password"} minLength={signup ? 8 : undefined} maxLength={128} hint={signup ? "Pelo menos 8 caracteres." : undefined} required />
+          <Input id="password" name="password" label="Senha" placeholder={signup ? "Crie sua senha" : "Sua senha"} type="password" autoComplete={signup ? "new-password" : "current-password"} minLength={signup ? 12 : undefined} maxLength={128} hint={signup ? "Pelo menos 12 caracteres. Prefira uma frase única para o Pico." : undefined} required />
           <Button type="submit" size="large" className="auth-submit">
             {busy ? <><LoaderCircle size={18} className="spinner" aria-hidden="true" /> {signup ? "Criando conta…" : "Entrando…"}</> : <>{signup ? "Criar conta" : "Entrar"} <ArrowUpRight size={18} aria-hidden="true" /></>}
           </Button>
         </fieldset>
         {notice && <p className={`auth-notice notice-${notice.kind}`} role={notice.kind === "error" ? "alert" : "status"}>{notice.text}</p>}
       </form>
+      {confirmationEmail && <Button variant="quiet" disabled={busy} onClick={resendConfirmation}>Reenviar confirmação</Button>}
       <p className="auth-switch">{signup ? "Já tá no Pico?" : "Ainda não tá no Pico?"} <Link href={signup ? "/login" : "/signup"}>{signup ? "Entrar" : "Criar conta"}</Link></p>
       {!signup && <p className="auth-switch"><Link href="/recuperar">Esqueci minha senha</Link></p>}
       <p className="auth-switch"><Link href="/privacidade">Privacidade no Pico</Link></p>

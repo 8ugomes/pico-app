@@ -46,7 +46,7 @@ export function ProfileEditor({ profile, done, onAvatarChange = () => {} }: {
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (blocked) return;
-    if (await mutation.run({ action: 'save_profile', ...draft }, 'Perfil salvo.')) done(true);
+    if (await mutation.run({ action: 'save_profile', ...draft }, 'Perfil salvo.')) { window.dispatchEvent(new Event('pico:profile-saved')); done(true); }
   }
   function field<K extends keyof typeof draft>(key: K, value: typeof draft[K]) {
     setDraft(previous => ({ ...previous, [key]: value }));
@@ -85,6 +85,7 @@ export function ProfileEditor({ profile, done, onAvatarChange = () => {} }: {
           <h2 id={`${prefix}-location`}><MapPin size={18} aria-hidden="true" />Onde você joga</h2><p>Cidade e bairro aparecem no perfil. Não informe seu endereço completo.</p>
           <div className="profile-editor-v2-row"><Input id={`${prefix}-city`} name="city" label="Cidade" value={draft.city} onChange={e => field('city', e.target.value)} maxLength={80} autoComplete="address-level2" /><Input id={`${prefix}-neighborhood`} name="neighborhood" label="Bairro" value={draft.neighborhood} onChange={e => field('neighborhood', e.target.value)} maxLength={80} /></div>
         </section>
+        {!profile.onboardingCompleted && <p className="form-note">Ao salvar, você entra na comunidade oficial do Pico, junto com pessoas de todas as modalidades. Seu perfil fica visível às pessoas do Pico. Você pode sair da comunidade quando quiser.</p>}
         <div className="profile-editor-v2-save"><p>{dirty ? 'Você tem alterações para salvar.' : 'Seu e-mail e sua senha ficam em Privacidade e conta.'}</p><div><Button type="submit" disabled={!state.data.sports.length || blocked}><Check size={18} aria-hidden="true" />{mutation.busy ? 'Salvando…' : 'Salvar perfil'}</Button>{profile.onboardingCompleted && <Button type="button" variant="quiet" disabled={blocked} onClick={cancel}>Cancelar edição</Button>}</div></div>
         {!state.data.sports.length && <p role="status">Ainda não há esportes disponíveis. Atualize para tentar novamente.</p>}
       </fieldset>

@@ -29,7 +29,7 @@ export function PostCard({ post }: { post: Post }) {
       <Link href={author.id === me.id ? "/perfil" : `/perfil/${author.username}`} className="post-person"><PlayerAvatar player={author} /><span><strong>{author.name}</strong><small>Publicado {timeAgo(post.createdAt, now)} · Demo</small></span></Link>
       <SportLabel sport={post.sportId} />
     </header>
-    <p className="form-note">{post.audience === 'private' ? 'Grupo privado · simulação' : 'Pessoas aprovadas no beta · simulação'} · <Link href={`/publicacoes/${post.id}`}>Abrir publicação</Link></p>
+    <p className="form-note">{post.audience === 'private' ? 'Grupo privado · simulação' : 'Pessoas do Pico · simulação'} · <Link href={`/publicacoes/${post.id}`}>Abrir publicação</Link></p>
     {post.gamePlayedOn && <p className="post-game-date">Jogado em <time dateTime={post.gamePlayedOn}>{formatGameDate(post.gamePlayedOn)}</time> · relato de quem publicou</p>}
     <p className="post-copy">{post.content}</p>
     {post.photo && <Link className="post-photo" href={`/arenas/${arena.slug}`} aria-label={`Conhecer ${arena.name}`}>

@@ -2,13 +2,17 @@
 
 **O ponto de encontro da areia. Me acha no Pico.**
 
-Rede social PWA mobile-first para futevôlei, beach tennis e vôlei de praia. O Ciclo 9 implementa comunidades próprias, gestão de arenas, papéis no banco, publicação com destinos, histórico privado e fotos recortadas. O Ciclo 10 organiza o perfil, elimina a duplicação do editor e acrescenta conversão HEIC/HEIF local. A publicação usa o ambiente principal, com acesso às contas por aprovação.
+Rede social PWA mobile-first para futevôlei, beach tennis e vôlei de praia. O Ciclo 9 implementa comunidades próprias, gestão de arenas, papéis no banco, publicação com destinos, histórico privado e fotos recortadas. O Ciclo 10 organiza o perfil, elimina a duplicação do editor e acrescenta conversão HEIC/HEIF local. O conjunto de tutorial, comunidade oficial e cadastro aberto foi autorizado para publicação coordenada no ambiente principal; o acesso exige e-mail confirmado e conta ativa. [Registro da entrega e verificação da versão](docs/ONBOARDING_RELEASE.md).
 
 [Perfil/HEIC: implementação, testes e limites do Ciclo 10](docs/CYCLE10_PROFILE.md). O código foi validado em CI e em Chromium/WebKit com ambiente de teste isolado; esta rodada não executou novo deploy nem teste em aparelhos físicos.
 
 O refino visual global consolida fonte nativa, cores, formulários e diálogos sem mudar os fluxos de dados. [Tokens e padrões](docs/pico-design-system.md) · [capturas antes/depois, cobertura e limites](docs/visual-review/README.md).
 
 Endereço principal: [Pico](https://pico-app-sepia.vercel.app). O Ciclo 9 está integrado à `main`; publicação por `npm run deploy` no projeto Vercel `pico-app`. O endereço antigo `pico-internal.vercel.app` encaminha ao principal. [Ambientes](docs/ENVIRONMENTS.md) descreve a configuração, [operação](docs/BETA_OPERATIONS.md) explica publicação e rollback e [contratos](docs/CYCLE9_CONTRACTS.md) define permissões. A versão efetivamente servida pode ser consultada em [/api/version](https://pico-app-sepia.vercel.app/api/version). O relatório [INTERNAL_REVIEW.md](docs/INTERNAL_REVIEW.md) preserva a validação anterior à unificação.
+
+**Comunidade oficial e autenticação (13/09):** cadastro aberto após confirmação de e-mail, comunidade geral automática após o perfil, três mensagens oficiais e aviso por conta. 87 testes locais + 303 verificações hospedadas + UI real aprovados. Migration e política de senha aplicadas nos dois ambientes; publicação desta revisão autorizada. Domínio e SMTP ainda precisam ser configurados. [Auditoria e estado por ambiente](docs/OFFICIAL_COMMUNITY_AUTH.md) · [Configuração de e-mail](docs/EMAIL_SETUP.md).
+
+**Tutorial guiado (incremento local):** convite opcional no Início, seis etapas nas telas reais e retomada pelo Perfil. Preferência por conta neste navegador; sem ações sociais automáticas. [Especificação](docs/ONBOARDING.md) · [Capturas e verificação](docs/onboarding-review/README.md). Incluído na publicação coordenada desta revisão.
 
 **Jornada e pós-jogo:** início com acesso aos próprios grupos/arenas, navegação fixa Início/Pessoas/Comunidades/Arenas/Perfil, composições específicas e jogos privados com compartilhamento explícito separado. [Decisões de jornada](docs/JOURNEY_REFINEMENT.md) · [contratos](docs/POST_GAME.md) · [evidências](docs/journey-review/README.md). Conjunto completo publicado no ambiente principal após PR/CI, 210 verificações hospedadas e aplicação das duas migrations novas (21 em ambos os bancos). [Evidência da entrega e limites](docs/JOURNEY_RELEASE.md); consulte `/api/version` para a revisão efetivamente servida.
 

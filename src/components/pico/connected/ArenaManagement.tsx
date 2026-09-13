@@ -7,7 +7,7 @@ export type ArenaProfile={id:string;slug:string;name:string;description:string;c
 export function ArenaExtras({ data, reload }: { data: ArenaProfile; reload: () => void }) {
   const [message, setMessage] = useState(''), [busy, setBusy] = useState(false);
   return <section className="arena-participation">
-    <div className="arena-join-actions"><Button disabled={busy || data.membership === 'suspended'} variant={data.membership === 'active' ? 'secondary' : 'primary'} aria-pressed={data.membership === 'active'} onClick={async () => {
+    <div className="arena-join-actions"><Button data-tour="arena-follow" disabled={busy || data.membership === 'suspended'} variant={data.membership === 'active' ? 'secondary' : 'primary'} aria-pressed={data.membership === 'active'} onClick={async () => {
       setBusy(true); setMessage('');
       try { await entityAction('/api/arenas', { action: 'follow', id: data.id, join: data.membership !== 'active' }); setMessage(data.membership === 'active' ? 'Você deixou de acompanhar esta arena.' : 'Arena acompanhada. Ela aparece nos seus vínculos, no início e no perfil.'); reload(); }
       catch (e) { setMessage(e instanceof Error ? e.message : 'Não foi possível confirmar.'); }

@@ -11,6 +11,7 @@ export async function createClient() {
   const cookieStore = await cookies();
 
   return createServerClient<Database>(config.url, config.key, {
+    cookieOptions: { sameSite: 'lax', secure: process.env.NEXT_PUBLIC_PICO_ENV === 'beta' || process.env.NEXT_PUBLIC_PICO_ENV === 'production' },
     db: { timeout: 10000, retry: false },
     global: { fetch: (input, init) => fetch(input, { ...init, cache: "no-store", signal: init?.signal ?? AbortSignal.timeout(10000) }) },
     cookies: {

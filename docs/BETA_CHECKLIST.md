@@ -1,3 +1,7 @@
+> Atualização de publicação: sincronização com produção autorizada em 13/09/2026; migration e política de senha já aplicadas no principal. [Preparação, destino e verificação da revisão servida](ONBOARDING_RELEASE.md). SMTP continua pendente. As referências abaixo a “somente desenvolvimento”/“não publicado” registram a etapa anterior.
+
+> Atualização de 13/09/2026: o responsável escolheu cadastro e acesso imediato após confirmação do e-mail. Implementação/migration/política de senha validadas no desenvolvimento; principal auditado sem alterações. O estado histórico de convite abaixo ainda descreve a publicação existente. [Estado por ambiente e testes](OFFICIAL_COMMUNITY_AUTH.md). Domínio e SMTP inexistentes, conforme informado pelo responsável; [configuração pendente](EMAIL_SETUP.md).
+
 # Pico — checklist operacional
 
 A publicação no projeto principal foi autorizada pelo responsável. Destinos e comandos em [ENVIRONMENTS.md](ENVIRONMENTS.md); [INTERNAL_REVIEW.md](INTERNAL_REVIEW.md) é o registro anterior à unificação. Autenticação e admissão continuam vigentes.

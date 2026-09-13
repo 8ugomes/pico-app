@@ -37,7 +37,7 @@ export function ConnectedArenas() {
     {(state.status === 'error' || state.status === 'demo') && <ReadFailure state={state} retry={retry} />}
     {data && <>
       <p className="page-intro">Conheça o lugar, acompanhe a arena e encontre comunidades ligadas a ela.</p>
-      <SearchField value={query} onChange={setQuery} placeholder="Arena, bairro ou cidade" label="Buscar arenas nesta página" />
+      <SearchField tourId="arena-search" value={query} onChange={setQuery} placeholder="Arena, bairro ou cidade" label="Buscar arenas nesta página" />
       <div className="sport-filters" aria-label="Filtrar arenas por esporte nesta página">
         <button className={`filter-chip ${sport === 'all' ? 'selected' : ''}`} aria-pressed={sport === 'all'} onClick={() => setSport('all')}>Todos</button>
         {data.sports.map(s => <button key={s.id} className={`filter-chip ${sport === s.id ? 'selected' : ''}`} aria-pressed={sport === s.id} onClick={() => setSport(s.id)}><SportIcon sport={s.slug} />{s.name}</button>)}

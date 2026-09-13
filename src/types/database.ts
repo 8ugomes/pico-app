@@ -1210,6 +1210,7 @@ export type Database = {
         }[]
       }
       end_checkin: { Args: never; Returns: undefined }
+      ensure_pico_membership: { Args: never; Returns: undefined }
       environment_identity: { Args: never; Returns: Json }
       invite_arena_manager: {
         Args: { p_arena: string; p_email: string; p_role: string }
@@ -1247,6 +1248,7 @@ export type Database = {
         }
         Returns: undefined
       }
+      pico_welcome: { Args: { p_acknowledge?: boolean }; Returns: Json }
       profile_places: { Args: { p_player?: string }; Returns: Json }
       publication_options: { Args: never; Returns: Json }
       publish_post: {
