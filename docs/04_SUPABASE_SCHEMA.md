@@ -1,6 +1,6 @@
-> Atualização vigente de 2026-09-12: [POST_GAME.md](POST_GAME.md) substitui os contratos históricos de presença/check-in deste documento. As migrations locais 20260912090000/20260912091000 adicionam jogos privados, compartilhamento explícito e leitura privada do legado, e revogam presença; ainda não aplicadas remotamente nesta tarefa.
+> Atualização vigente de 2026-09-12: [POST_GAME.md](POST_GAME.md) substitui os contratos históricos de presença/check-in deste documento. As migrations 20260912090000/20260912091000 adicionam jogos privados, compartilhamento explícito e leitura privada do legado, e revogam presença. Ambas foram aplicadas em desenvolvimento e principal; 21 migrations confirmadas, com evidência em [JOURNEY_RELEASE.md](JOURNEY_RELEASE.md).
 
-# Schema local — Ciclo 9 e jornada pós-jogo
+# Schema — Ciclo 9 e jornada pós-jogo
 
 21 migrations aditivas em `supabase/migrations`; execução por destino está registrada em [revisão interna](INTERNAL_REVIEW.md). Tipos gerados em `src/types/database.ts`. Segurança e matriz de autoridade: [contratos atuais](CYCLE9_CONTRACTS.md). O bloco histórico abaixo descreve o ponto de partida, não o schema completo atual.
 
@@ -29,8 +29,8 @@ Toda tabela exposta tem RLS; RPCs validam admissão e concessões vigentes. Fun�
 - `20260910096000_resource_photos.sql`
 - `20260910096100_photo_read_scope.sql`
 - `20260910100000_operator_measures.sql`
-- `20260912090000_played_games.sql` — local, pendente remoto
-- `20260912091000_game_sharing.sql` — local, pendente remoto
+- `20260912090000_played_games.sql` — aplicada em desenvolvimento e principal
+- `20260912091000_game_sharing.sql` — aplicada em desenvolvimento e principal
 
 ## Referência histórica anterior ao Ciclo 9
 
