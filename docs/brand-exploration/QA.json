@@ -1,0 +1,25 @@
+{
+  "checkedAt": "2026-09-13T03:28:01.042Z",
+  "viewports": [
+    320,
+    390,
+    768,
+    1024,
+    1440
+  ],
+  "screens": 32,
+  "modes": 2,
+  "concepts": 3,
+  "phoneChecks": 960,
+  "errors": [],
+  "failures": [],
+  "navigation": true,
+  "honestAction": true,
+  "report": {
+    "pages": 47,
+    "phones": 108,
+    "overflow": [],
+    "footerOverlap": [],
+    "images": []
+  }
+}

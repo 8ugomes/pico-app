@@ -1,5 +1,31 @@
 # Pico — plano de produto
 
+## Aura — variações de cor entregues · 13/09/2026
+
+Mantida a linha Aura escolhida pelo responsável. Criadas cinco alternativas — Pistache, Azul névoa, Rosa mineral, Maré e Manteiga — para comparar com a lavanda original. [Galeria de cores](brand-exploration/aura-cores.html?screen=profile&palette=all&mode=light) com as mesmas 32 telas/estados, seis paletas e dois modos; [guia](brand-exploration/AURA-CORES.md) e tokens separados. Logo, tipografia, fotos, conteúdo e composição preservados. Pistache é a recomendação cromática autoral, seguida de Azul névoa; a paleta final ainda não foi escolhida.
+
+Conferidas 384 combinações e 30.156 propriedades de estilo sem diferenças estruturais/tipográficas entre paletas. 156 pares sólidos de texto passaram no contraste adotado; 60 telefones no perfil em cinco larguras/modos sem overflow, imagens faltantes ou erros de JavaScript. Filtro de paleta, navegação, foco e download aprovados. Lint, typecheck e build passaram. O relatório inicial foi preservado como histórico; a preferência posterior por Aura orienta a continuidade. Nenhuma aplicação ao produto, push ou deploy.
+
+## Aura — exploração apenas de cores · plano antes de desenvolver · 13/09/2026
+
+O responsável escolheu a linha Aura e solicitou mais opções de cor. Preservar integralmente logo, tipografia, fotos, estrutura e conteúdo das telas. Comparar a paleta original com cinco alternativas cromáticas no mesmo perfil e permitir navegação pelas telas já desenhadas. Criar galeria separada para manter o estudo inicial disponível; a cor final ainda não foi escolhida. Verificar contraste, invariância tipográfica/estrutural e responsividade. Nenhuma aplicação ao produto publicado.
+
+## Identidade Pico Social — fechamento · 13/09/2026
+
+Oito skills instaladas por projeto com revisões fixadas, hashes e licenças. Criadas três propostas completas — Ritual, Pulso e Aura — com estratégia, logos vetoriais, cores, fontes locais, fotografia sintética, direção de arte e aplicações. Entrega em [galeria comparativa](brand-exploration/index.html), [relatório de 47 páginas](brand-exploration/Pico-Social-Identidade.pdf) e [guia dos arquivos](brand-exploration/README.md).
+
+A galeria cobre 32 telas/estados, três identidades e dois modos (192 combinações). Preserva Início/Pessoas/Comunidades/Arenas/Perfil; jogos continuam privados, acessíveis pelo perfil/conta. Produto publicado, Supabase e contratos de audiência não foram modificados. Ritual é recomendação autoral, não identidade aprovada.
+
+Lint, typecheck e build aprovados. QA da proposta: 960 verificações em cinco larguras, imagens carregadas, navegação local, nenhum overflow; 82 pares sólidos de texto com contraste aprovado; 108 telefones/531 elementos com paridade tipográfica entre galeria e relatório. PDF com 47 páginas, texto extraível, rodapés conferidos e inspeção das páginas renderizadas. Revisão independente marcou como resolvidas as correções de navegação, contrato e tipografia; veredito ship limitado a esses itens. Sem validação com público, fluxo real de Supabase, push ou deploy.
+
+Próxima etapa de produto: selecionar uma direção, fazer refinamento óptico e validação qualitativa e então aplicar o sistema escolhido aos componentes reais. Os arquivos deste estudo não devem ser tratados como uma decisão de marca já aprovada.
+
+## Identidade Pico Social — plano antes de desenvolver · 13/09/2026
+
+Instalar as oito skills selecionadas nas revisões registradas e desenvolver três propostas completas de identidade, com linguagem editorial de moda, jovem, expressiva e refinada. Criar conceitos distintos de marca, logos, cores, tipografia, direção de fotografia/grafismo e aplicações comparáveis nas telas do produto. Entregar relatório visual completo, galeria navegável de propostas e arquivos de identidade para avaliação.
+
+As três alternativas são estudos de marca; nenhuma substitui automaticamente a identidade publicada. Usar dados explicitamente ilustrativos e respeitar os contratos sociais atuais. Conferir fontes/licenças, legibilidade e contraste, renderizar os artefatos, executar lint/typecheck/build, atualizar documentação e fazer commit local. Sem publicação remota nesta rodada.
+
 ## Pesquisa de skills para branding — plano da rodada
 
 Pesquisar fontes públicas e inspecionar os arquivos originais de skills para preparar a identidade do Pico Social. Direção escolhida pelo responsável: editorial de moda, jovem, expressiva e refinada. Comparar estratégia, exploração visual, sistema de identidade, direção de arte, documentação e aplicação ao produto; conferir autoria, revisão, licença, dependências e conflitos com os padrões locais.

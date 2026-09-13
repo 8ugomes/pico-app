@@ -1,0 +1,15 @@
+{
+  "status": "proposal",
+  "wordmark_typeface": "syne",
+  "axes": {
+    "wght": 800
+  },
+  "tracking_font_units": -18,
+  "wordmark": "Font outlines with adjusted spacing; not a newly invented typeface.",
+  "symbol": "Custom vector construction; no trademark clearance performed.",
+  "canonical_assets": [
+    "wordmark.svg",
+    "mark.svg",
+    "app-icon-primary.svg"
+  ]
+}

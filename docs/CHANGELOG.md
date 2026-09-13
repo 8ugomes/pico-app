@@ -1,5 +1,21 @@
 # Changelog — Pico
 
+## 2026-09-13 — Aura em seis paletas
+
+- O responsável escolheu Aura e pediu somente novas cores. Preservados logo, Syne/Manrope, fotos, formas, composição, conteúdo e navegação.
+- [Galeria cromática](brand-exploration/aura-cores.html?screen=profile&palette=all&mode=light): lavanda original, Pistache, Azul névoa, Rosa mineral, Maré e Manteiga nas mesmas 32 telas, claro/escuro. [Guia](brand-exploration/AURA-CORES.md), tokens e pranchas comparativas incluídos.
+- 384 combinações e 30.156 verificações de estilo sem diferenças estruturais/tipográficas; 156 pares sólidos de texto aprovados. Conferência responsiva de 60 telefones, navegação, foco, imagens e download passou. Lint, typecheck e build aprovados.
+- Recomendação cromática: Pistache, seguida de Azul névoa. Paleta final ainda não escolhida. Estudo inicial preservado como histórico; nenhum deploy ou alteração do aplicativo publicado.
+
+## 2026-09-13 — três propostas de identidade do Pico Social
+
+- Instaladas oito skills selecionadas em `.agents/skills`, com revisões, hashes e licenças. Nenhum hook instalado; ESLint ignora somente o código de terceiros dessas skills.
+- Criadas Ritual, Pulso e Aura: conceito de marca, voz, wordmarks/lockups/símbolos/ícones em SVG, paletas, fontes locais licenciadas e direção de fotografia, composição e movimento.
+- [Galeria](brand-exploration/index.html) com 32 telas/estados em três identidades e dois modos; [relatório de 47 páginas](brand-exploration/Pico-Social-Identidade.pdf), campanhas ilustrativas, pranchas e fotografias sintéticas com prompts/procedência.
+- Navegação canônica preservada no estudo; registros de jogo privados e compartilhamento separado. Corrigidos contraste e herança tipográfica na exportação do relatório.
+- Lint, typecheck e build passaram. 960 verificações responsivas, 82 pares de contraste e paridade tipográfica de 108 telefones/531 elementos aprovados; PDF renderizado e revisado. Revisor independente: correções pontuadas resolvidas, disposition ship no escopo da revisão.
+- Nenhuma direção adotada em produção, nenhuma alteração de dados/Supabase, push ou deploy. [Guia e limites](brand-exploration/README.md).
+
 ## 2026-09-12 — pesquisa de skills para identidade do Pico Social
 
 - Pesquisa pública com triagem de 16 repositórios e seleção de oito skills para branding, direção editorial, propostas visuais e aplicação ao produto. Preferência confirmada: editorial de moda, jovem, expressiva e refinada.

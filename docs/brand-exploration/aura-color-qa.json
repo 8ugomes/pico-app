@@ -1,0 +1,1427 @@
+{
+  "screenModePaletteChecks": 384,
+  "elementStyleChecks": 30156,
+  "invarianceProperties": [
+    "fontFamily",
+    "fontSize",
+    "fontWeight",
+    "lineHeight",
+    "letterSpacing",
+    "borderRadius",
+    "padding",
+    "margin",
+    "width",
+    "height",
+    "display",
+    "position",
+    "gap"
+  ],
+  "mismatches": [],
+  "contrastPairs": [
+    {
+      "palette": "lavanda",
+      "mode": "light",
+      "ratio": 13.23,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "9:41"
+    },
+    {
+      "palette": "lavanda",
+      "mode": "light",
+      "ratio": 7.94,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "SOCIAL"
+    },
+    {
+      "palette": "lavanda",
+      "mode": "light",
+      "ratio": 7.94,
+      "required": 3,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Me achano Pico."
+    },
+    {
+      "palette": "lavanda",
+      "mode": "light",
+      "ratio": 13.23,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Encontrar minha turma"
+    },
+    {
+      "palette": "lavanda",
+      "mode": "light",
+      "ratio": 6.25,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Estudo visual · dados ilustrativos"
+    },
+    {
+      "palette": "pistache",
+      "mode": "light",
+      "ratio": 11.47,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "9:41"
+    },
+    {
+      "palette": "pistache",
+      "mode": "light",
+      "ratio": 9.22,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "SOCIAL"
+    },
+    {
+      "palette": "pistache",
+      "mode": "light",
+      "ratio": 9.22,
+      "required": 3,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Me achano Pico."
+    },
+    {
+      "palette": "pistache",
+      "mode": "light",
+      "ratio": 11.47,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Encontrar minha turma"
+    },
+    {
+      "palette": "pistache",
+      "mode": "light",
+      "ratio": 5.16,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Estudo visual · dados ilustrativos"
+    },
+    {
+      "palette": "nevoa",
+      "mode": "light",
+      "ratio": 11.45,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "9:41"
+    },
+    {
+      "palette": "nevoa",
+      "mode": "light",
+      "ratio": 8.55,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "SOCIAL"
+    },
+    {
+      "palette": "nevoa",
+      "mode": "light",
+      "ratio": 8.55,
+      "required": 3,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Me achano Pico."
+    },
+    {
+      "palette": "nevoa",
+      "mode": "light",
+      "ratio": 11.45,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Encontrar minha turma"
+    },
+    {
+      "palette": "nevoa",
+      "mode": "light",
+      "ratio": 5.47,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Estudo visual · dados ilustrativos"
+    },
+    {
+      "palette": "rosa",
+      "mode": "light",
+      "ratio": 10.61,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "9:41"
+    },
+    {
+      "palette": "rosa",
+      "mode": "light",
+      "ratio": 7.53,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "SOCIAL"
+    },
+    {
+      "palette": "rosa",
+      "mode": "light",
+      "ratio": 7.53,
+      "required": 3,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Me achano Pico."
+    },
+    {
+      "palette": "rosa",
+      "mode": "light",
+      "ratio": 10.61,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Encontrar minha turma"
+    },
+    {
+      "palette": "rosa",
+      "mode": "light",
+      "ratio": 5.51,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Estudo visual · dados ilustrativos"
+    },
+    {
+      "palette": "mare",
+      "mode": "light",
+      "ratio": 10.44,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "9:41"
+    },
+    {
+      "palette": "mare",
+      "mode": "light",
+      "ratio": 7.99,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "SOCIAL"
+    },
+    {
+      "palette": "mare",
+      "mode": "light",
+      "ratio": 7.99,
+      "required": 3,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Me achano Pico."
+    },
+    {
+      "palette": "mare",
+      "mode": "light",
+      "ratio": 10.44,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Encontrar minha turma"
+    },
+    {
+      "palette": "mare",
+      "mode": "light",
+      "ratio": 5.32,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Estudo visual · dados ilustrativos"
+    },
+    {
+      "palette": "manteiga",
+      "mode": "light",
+      "ratio": 10.67,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "9:41"
+    },
+    {
+      "palette": "manteiga",
+      "mode": "light",
+      "ratio": 9.24,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "SOCIAL"
+    },
+    {
+      "palette": "manteiga",
+      "mode": "light",
+      "ratio": 9.24,
+      "required": 3,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Me achano Pico."
+    },
+    {
+      "palette": "manteiga",
+      "mode": "light",
+      "ratio": 10.67,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Encontrar minha turma"
+    },
+    {
+      "palette": "manteiga",
+      "mode": "light",
+      "ratio": 5,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Estudo visual · dados ilustrativos"
+    },
+    {
+      "palette": "lavanda",
+      "mode": "light",
+      "ratio": 13.23,
+      "required": 3,
+      "pass": true,
+      "screen": "login",
+      "text": "Bom te verpor aqui."
+    },
+    {
+      "palette": "pistache",
+      "mode": "light",
+      "ratio": 11.47,
+      "required": 3,
+      "pass": true,
+      "screen": "login",
+      "text": "Bom te verpor aqui."
+    },
+    {
+      "palette": "nevoa",
+      "mode": "light",
+      "ratio": 11.45,
+      "required": 3,
+      "pass": true,
+      "screen": "login",
+      "text": "Bom te verpor aqui."
+    },
+    {
+      "palette": "rosa",
+      "mode": "light",
+      "ratio": 10.61,
+      "required": 3,
+      "pass": true,
+      "screen": "login",
+      "text": "Bom te verpor aqui."
+    },
+    {
+      "palette": "mare",
+      "mode": "light",
+      "ratio": 10.44,
+      "required": 3,
+      "pass": true,
+      "screen": "login",
+      "text": "Bom te verpor aqui."
+    },
+    {
+      "palette": "manteiga",
+      "mode": "light",
+      "ratio": 10.67,
+      "required": 3,
+      "pass": true,
+      "screen": "login",
+      "text": "Bom te verpor aqui."
+    },
+    {
+      "palette": "lavanda",
+      "mode": "light",
+      "ratio": 10.55,
+      "required": 4.5,
+      "pass": true,
+      "screen": "confirm",
+      "text": "A confirmação protege sua conta. Depois dela, a admissão é a"
+    },
+    {
+      "palette": "pistache",
+      "mode": "light",
+      "ratio": 10.07,
+      "required": 4.5,
+      "pass": true,
+      "screen": "confirm",
+      "text": "A confirmação protege sua conta. Depois dela, a admissão é a"
+    },
+    {
+      "palette": "nevoa",
+      "mode": "light",
+      "ratio": 9.67,
+      "required": 4.5,
+      "pass": true,
+      "screen": "confirm",
+      "text": "A confirmação protege sua conta. Depois dela, a admissão é a"
+    },
+    {
+      "palette": "rosa",
+      "mode": "light",
+      "ratio": 8.69,
+      "required": 4.5,
+      "pass": true,
+      "screen": "confirm",
+      "text": "A confirmação protege sua conta. Depois dela, a admissão é a"
+    },
+    {
+      "palette": "mare",
+      "mode": "light",
+      "ratio": 8.9,
+      "required": 4.5,
+      "pass": true,
+      "screen": "confirm",
+      "text": "A confirmação protege sua conta. Depois dela, a admissão é a"
+    },
+    {
+      "palette": "manteiga",
+      "mode": "light",
+      "ratio": 9.76,
+      "required": 4.5,
+      "pass": true,
+      "screen": "confirm",
+      "text": "A confirmação protege sua conta. Depois dela, a admissão é a"
+    },
+    {
+      "palette": "lavanda",
+      "mode": "light",
+      "ratio": 14.33,
+      "required": 4.5,
+      "pass": true,
+      "screen": "access",
+      "text": "Sair da conta"
+    },
+    {
+      "palette": "pistache",
+      "mode": "light",
+      "ratio": 12.1,
+      "required": 4.5,
+      "pass": true,
+      "screen": "access",
+      "text": "Sair da conta"
+    },
+    {
+      "palette": "nevoa",
+      "mode": "light",
+      "ratio": 12.07,
+      "required": 4.5,
+      "pass": true,
+      "screen": "access",
+      "text": "Sair da conta"
+    },
+    {
+      "palette": "rosa",
+      "mode": "light",
+      "ratio": 11.31,
+      "required": 4.5,
+      "pass": true,
+      "screen": "access",
+      "text": "Sair da conta"
+    },
+    {
+      "palette": "mare",
+      "mode": "light",
+      "ratio": 11.11,
+      "required": 4.5,
+      "pass": true,
+      "screen": "access",
+      "text": "Sair da conta"
+    },
+    {
+      "palette": "manteiga",
+      "mode": "light",
+      "ratio": 11.24,
+      "required": 4.5,
+      "pass": true,
+      "screen": "access",
+      "text": "Sair da conta"
+    },
+    {
+      "palette": "lavanda",
+      "mode": "light",
+      "ratio": 10.55,
+      "required": 3,
+      "pass": true,
+      "screen": "feed",
+      "text": "D"
+    },
+    {
+      "palette": "pistache",
+      "mode": "light",
+      "ratio": 10.07,
+      "required": 3,
+      "pass": true,
+      "screen": "feed",
+      "text": "D"
+    },
+    {
+      "palette": "nevoa",
+      "mode": "light",
+      "ratio": 9.67,
+      "required": 3,
+      "pass": true,
+      "screen": "feed",
+      "text": "D"
+    },
+    {
+      "palette": "rosa",
+      "mode": "light",
+      "ratio": 8.69,
+      "required": 3,
+      "pass": true,
+      "screen": "feed",
+      "text": "D"
+    },
+    {
+      "palette": "mare",
+      "mode": "light",
+      "ratio": 8.9,
+      "required": 3,
+      "pass": true,
+      "screen": "feed",
+      "text": "D"
+    },
+    {
+      "palette": "manteiga",
+      "mode": "light",
+      "ratio": 9.76,
+      "required": 3,
+      "pass": true,
+      "screen": "feed",
+      "text": "D"
+    },
+    {
+      "palette": "lavanda",
+      "mode": "light",
+      "ratio": 13.23,
+      "required": 3,
+      "pass": true,
+      "screen": "discover",
+      "text": "Tem uma turma para você."
+    },
+    {
+      "palette": "pistache",
+      "mode": "light",
+      "ratio": 11.47,
+      "required": 3,
+      "pass": true,
+      "screen": "discover",
+      "text": "Tem uma turma para você."
+    },
+    {
+      "palette": "nevoa",
+      "mode": "light",
+      "ratio": 11.45,
+      "required": 3,
+      "pass": true,
+      "screen": "discover",
+      "text": "Tem uma turma para você."
+    },
+    {
+      "palette": "rosa",
+      "mode": "light",
+      "ratio": 10.61,
+      "required": 3,
+      "pass": true,
+      "screen": "discover",
+      "text": "Tem uma turma para você."
+    },
+    {
+      "palette": "mare",
+      "mode": "light",
+      "ratio": 10.44,
+      "required": 3,
+      "pass": true,
+      "screen": "discover",
+      "text": "Tem uma turma para você."
+    },
+    {
+      "palette": "manteiga",
+      "mode": "light",
+      "ratio": 10.67,
+      "required": 3,
+      "pass": true,
+      "screen": "discover",
+      "text": "Tem uma turma para você."
+    },
+    {
+      "palette": "lavanda",
+      "mode": "light",
+      "ratio": 4.99,
+      "required": 4.5,
+      "pass": true,
+      "screen": "community",
+      "text": "Comunidade independente · vôlei de praia"
+    },
+    {
+      "palette": "pistache",
+      "mode": "light",
+      "ratio": 4.53,
+      "required": 4.5,
+      "pass": true,
+      "screen": "community",
+      "text": "Comunidade independente · vôlei de praia"
+    },
+    {
+      "palette": "nevoa",
+      "mode": "light",
+      "ratio": 4.62,
+      "required": 4.5,
+      "pass": true,
+      "screen": "community",
+      "text": "Comunidade independente · vôlei de praia"
+    },
+    {
+      "palette": "rosa",
+      "mode": "light",
+      "ratio": 4.51,
+      "required": 4.5,
+      "pass": true,
+      "screen": "community",
+      "text": "Comunidade independente · vôlei de praia"
+    },
+    {
+      "palette": "mare",
+      "mode": "light",
+      "ratio": 4.54,
+      "required": 4.5,
+      "pass": true,
+      "screen": "community",
+      "text": "Comunidade independente · vôlei de praia"
+    },
+    {
+      "palette": "manteiga",
+      "mode": "light",
+      "ratio": 4.57,
+      "required": 4.5,
+      "pass": true,
+      "screen": "community",
+      "text": "Comunidade independente · vôlei de praia"
+    },
+    {
+      "palette": "lavanda",
+      "mode": "light",
+      "ratio": 6,
+      "required": 4.5,
+      "pass": true,
+      "screen": "states",
+      "text": "Confira sua conexão e tente novamente."
+    },
+    {
+      "palette": "pistache",
+      "mode": "light",
+      "ratio": 6.39,
+      "required": 4.5,
+      "pass": true,
+      "screen": "states",
+      "text": "Confira sua conexão e tente novamente."
+    },
+    {
+      "palette": "nevoa",
+      "mode": "light",
+      "ratio": 6.43,
+      "required": 4.5,
+      "pass": true,
+      "screen": "states",
+      "text": "Confira sua conexão e tente novamente."
+    },
+    {
+      "palette": "rosa",
+      "mode": "light",
+      "ratio": 6.3,
+      "required": 4.5,
+      "pass": true,
+      "screen": "states",
+      "text": "Confira sua conexão e tente novamente."
+    },
+    {
+      "palette": "mare",
+      "mode": "light",
+      "ratio": 6.28,
+      "required": 4.5,
+      "pass": true,
+      "screen": "states",
+      "text": "Confira sua conexão e tente novamente."
+    },
+    {
+      "palette": "manteiga",
+      "mode": "light",
+      "ratio": 6.42,
+      "required": 4.5,
+      "pass": true,
+      "screen": "states",
+      "text": "Confira sua conexão e tente novamente."
+    },
+    {
+      "palette": "lavanda",
+      "mode": "dark",
+      "ratio": 14.59,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "9:41"
+    },
+    {
+      "palette": "lavanda",
+      "mode": "dark",
+      "ratio": 7.94,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "SOCIAL"
+    },
+    {
+      "palette": "lavanda",
+      "mode": "dark",
+      "ratio": 7.94,
+      "required": 3,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Me achano Pico."
+    },
+    {
+      "palette": "lavanda",
+      "mode": "dark",
+      "ratio": 13.23,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Encontrar minha turma"
+    },
+    {
+      "palette": "lavanda",
+      "mode": "dark",
+      "ratio": 9.53,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Estudo visual · dados ilustrativos"
+    },
+    {
+      "palette": "pistache",
+      "mode": "dark",
+      "ratio": 14.61,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "9:41"
+    },
+    {
+      "palette": "pistache",
+      "mode": "dark",
+      "ratio": 9.22,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "SOCIAL"
+    },
+    {
+      "palette": "pistache",
+      "mode": "dark",
+      "ratio": 9.22,
+      "required": 3,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Me achano Pico."
+    },
+    {
+      "palette": "pistache",
+      "mode": "dark",
+      "ratio": 11.47,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Encontrar minha turma"
+    },
+    {
+      "palette": "pistache",
+      "mode": "dark",
+      "ratio": 8.76,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Estudo visual · dados ilustrativos"
+    },
+    {
+      "palette": "nevoa",
+      "mode": "dark",
+      "ratio": 14.67,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "9:41"
+    },
+    {
+      "palette": "nevoa",
+      "mode": "dark",
+      "ratio": 8.55,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "SOCIAL"
+    },
+    {
+      "palette": "nevoa",
+      "mode": "dark",
+      "ratio": 8.55,
+      "required": 3,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Me achano Pico."
+    },
+    {
+      "palette": "nevoa",
+      "mode": "dark",
+      "ratio": 11.45,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Encontrar minha turma"
+    },
+    {
+      "palette": "nevoa",
+      "mode": "dark",
+      "ratio": 8.75,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Estudo visual · dados ilustrativos"
+    },
+    {
+      "palette": "rosa",
+      "mode": "dark",
+      "ratio": 14.11,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "9:41"
+    },
+    {
+      "palette": "rosa",
+      "mode": "dark",
+      "ratio": 7.53,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "SOCIAL"
+    },
+    {
+      "palette": "rosa",
+      "mode": "dark",
+      "ratio": 7.53,
+      "required": 3,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Me achano Pico."
+    },
+    {
+      "palette": "rosa",
+      "mode": "dark",
+      "ratio": 10.61,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Encontrar minha turma"
+    },
+    {
+      "palette": "rosa",
+      "mode": "dark",
+      "ratio": 8.48,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Estudo visual · dados ilustrativos"
+    },
+    {
+      "palette": "mare",
+      "mode": "dark",
+      "ratio": 14.01,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "9:41"
+    },
+    {
+      "palette": "mare",
+      "mode": "dark",
+      "ratio": 7.99,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "SOCIAL"
+    },
+    {
+      "palette": "mare",
+      "mode": "dark",
+      "ratio": 7.99,
+      "required": 3,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Me achano Pico."
+    },
+    {
+      "palette": "mare",
+      "mode": "dark",
+      "ratio": 10.44,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Encontrar minha turma"
+    },
+    {
+      "palette": "mare",
+      "mode": "dark",
+      "ratio": 8.43,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Estudo visual · dados ilustrativos"
+    },
+    {
+      "palette": "manteiga",
+      "mode": "dark",
+      "ratio": 14.26,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "9:41"
+    },
+    {
+      "palette": "manteiga",
+      "mode": "dark",
+      "ratio": 9.24,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "SOCIAL"
+    },
+    {
+      "palette": "manteiga",
+      "mode": "dark",
+      "ratio": 9.24,
+      "required": 3,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Me achano Pico."
+    },
+    {
+      "palette": "manteiga",
+      "mode": "dark",
+      "ratio": 10.67,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Encontrar minha turma"
+    },
+    {
+      "palette": "manteiga",
+      "mode": "dark",
+      "ratio": 8.56,
+      "required": 4.5,
+      "pass": true,
+      "screen": "welcome",
+      "text": "Estudo visual · dados ilustrativos"
+    },
+    {
+      "palette": "lavanda",
+      "mode": "dark",
+      "ratio": 14.59,
+      "required": 3,
+      "pass": true,
+      "screen": "login",
+      "text": "Bom te verpor aqui."
+    },
+    {
+      "palette": "pistache",
+      "mode": "dark",
+      "ratio": 14.61,
+      "required": 3,
+      "pass": true,
+      "screen": "login",
+      "text": "Bom te verpor aqui."
+    },
+    {
+      "palette": "nevoa",
+      "mode": "dark",
+      "ratio": 14.67,
+      "required": 3,
+      "pass": true,
+      "screen": "login",
+      "text": "Bom te verpor aqui."
+    },
+    {
+      "palette": "rosa",
+      "mode": "dark",
+      "ratio": 14.11,
+      "required": 3,
+      "pass": true,
+      "screen": "login",
+      "text": "Bom te verpor aqui."
+    },
+    {
+      "palette": "mare",
+      "mode": "dark",
+      "ratio": 14.01,
+      "required": 3,
+      "pass": true,
+      "screen": "login",
+      "text": "Bom te verpor aqui."
+    },
+    {
+      "palette": "manteiga",
+      "mode": "dark",
+      "ratio": 14.26,
+      "required": 3,
+      "pass": true,
+      "screen": "login",
+      "text": "Bom te verpor aqui."
+    },
+    {
+      "palette": "lavanda",
+      "mode": "dark",
+      "ratio": 9.65,
+      "required": 4.5,
+      "pass": true,
+      "screen": "confirm",
+      "text": "A confirmação protege sua conta. Depois dela, a admissão é a"
+    },
+    {
+      "palette": "pistache",
+      "mode": "dark",
+      "ratio": 9.34,
+      "required": 4.5,
+      "pass": true,
+      "screen": "confirm",
+      "text": "A confirmação protege sua conta. Depois dela, a admissão é a"
+    },
+    {
+      "palette": "nevoa",
+      "mode": "dark",
+      "ratio": 9.52,
+      "required": 4.5,
+      "pass": true,
+      "screen": "confirm",
+      "text": "A confirmação protege sua conta. Depois dela, a admissão é a"
+    },
+    {
+      "palette": "rosa",
+      "mode": "dark",
+      "ratio": 9.4,
+      "required": 4.5,
+      "pass": true,
+      "screen": "confirm",
+      "text": "A confirmação protege sua conta. Depois dela, a admissão é a"
+    },
+    {
+      "palette": "mare",
+      "mode": "dark",
+      "ratio": 9.09,
+      "required": 4.5,
+      "pass": true,
+      "screen": "confirm",
+      "text": "A confirmação protege sua conta. Depois dela, a admissão é a"
+    },
+    {
+      "palette": "manteiga",
+      "mode": "dark",
+      "ratio": 8.9,
+      "required": 4.5,
+      "pass": true,
+      "screen": "confirm",
+      "text": "A confirmação protege sua conta. Depois dela, a admissão é a"
+    },
+    {
+      "palette": "lavanda",
+      "mode": "dark",
+      "ratio": 12.58,
+      "required": 4.5,
+      "pass": true,
+      "screen": "access",
+      "text": "Sair da conta"
+    },
+    {
+      "palette": "pistache",
+      "mode": "dark",
+      "ratio": 12.54,
+      "required": 4.5,
+      "pass": true,
+      "screen": "access",
+      "text": "Sair da conta"
+    },
+    {
+      "palette": "nevoa",
+      "mode": "dark",
+      "ratio": 12.6,
+      "required": 4.5,
+      "pass": true,
+      "screen": "access",
+      "text": "Sair da conta"
+    },
+    {
+      "palette": "rosa",
+      "mode": "dark",
+      "ratio": 12.19,
+      "required": 4.5,
+      "pass": true,
+      "screen": "access",
+      "text": "Sair da conta"
+    },
+    {
+      "palette": "mare",
+      "mode": "dark",
+      "ratio": 12.02,
+      "required": 4.5,
+      "pass": true,
+      "screen": "access",
+      "text": "Sair da conta"
+    },
+    {
+      "palette": "manteiga",
+      "mode": "dark",
+      "ratio": 12.03,
+      "required": 4.5,
+      "pass": true,
+      "screen": "access",
+      "text": "Sair da conta"
+    },
+    {
+      "palette": "lavanda",
+      "mode": "dark",
+      "ratio": 14.59,
+      "required": 4.5,
+      "pass": true,
+      "screen": "feed",
+      "text": "Seu Pico"
+    },
+    {
+      "palette": "lavanda",
+      "mode": "dark",
+      "ratio": 9.65,
+      "required": 3,
+      "pass": true,
+      "screen": "feed",
+      "text": "D"
+    },
+    {
+      "palette": "pistache",
+      "mode": "dark",
+      "ratio": 14.61,
+      "required": 4.5,
+      "pass": true,
+      "screen": "feed",
+      "text": "Seu Pico"
+    },
+    {
+      "palette": "pistache",
+      "mode": "dark",
+      "ratio": 9.34,
+      "required": 3,
+      "pass": true,
+      "screen": "feed",
+      "text": "D"
+    },
+    {
+      "palette": "nevoa",
+      "mode": "dark",
+      "ratio": 14.67,
+      "required": 4.5,
+      "pass": true,
+      "screen": "feed",
+      "text": "Seu Pico"
+    },
+    {
+      "palette": "nevoa",
+      "mode": "dark",
+      "ratio": 9.52,
+      "required": 3,
+      "pass": true,
+      "screen": "feed",
+      "text": "D"
+    },
+    {
+      "palette": "rosa",
+      "mode": "dark",
+      "ratio": 14.11,
+      "required": 4.5,
+      "pass": true,
+      "screen": "feed",
+      "text": "Seu Pico"
+    },
+    {
+      "palette": "rosa",
+      "mode": "dark",
+      "ratio": 9.4,
+      "required": 3,
+      "pass": true,
+      "screen": "feed",
+      "text": "D"
+    },
+    {
+      "palette": "mare",
+      "mode": "dark",
+      "ratio": 14.01,
+      "required": 4.5,
+      "pass": true,
+      "screen": "feed",
+      "text": "Seu Pico"
+    },
+    {
+      "palette": "mare",
+      "mode": "dark",
+      "ratio": 9.09,
+      "required": 3,
+      "pass": true,
+      "screen": "feed",
+      "text": "D"
+    },
+    {
+      "palette": "manteiga",
+      "mode": "dark",
+      "ratio": 14.26,
+      "required": 4.5,
+      "pass": true,
+      "screen": "feed",
+      "text": "Seu Pico"
+    },
+    {
+      "palette": "manteiga",
+      "mode": "dark",
+      "ratio": 8.9,
+      "required": 3,
+      "pass": true,
+      "screen": "feed",
+      "text": "D"
+    },
+    {
+      "palette": "lavanda",
+      "mode": "dark",
+      "ratio": 7.94,
+      "required": 4.5,
+      "pass": true,
+      "screen": "discover",
+      "text": "Ver comunidades"
+    },
+    {
+      "palette": "pistache",
+      "mode": "dark",
+      "ratio": 9.22,
+      "required": 4.5,
+      "pass": true,
+      "screen": "discover",
+      "text": "Ver comunidades"
+    },
+    {
+      "palette": "nevoa",
+      "mode": "dark",
+      "ratio": 8.55,
+      "required": 4.5,
+      "pass": true,
+      "screen": "discover",
+      "text": "Ver comunidades"
+    },
+    {
+      "palette": "rosa",
+      "mode": "dark",
+      "ratio": 7.53,
+      "required": 4.5,
+      "pass": true,
+      "screen": "discover",
+      "text": "Ver comunidades"
+    },
+    {
+      "palette": "mare",
+      "mode": "dark",
+      "ratio": 7.99,
+      "required": 4.5,
+      "pass": true,
+      "screen": "discover",
+      "text": "Ver comunidades"
+    },
+    {
+      "palette": "manteiga",
+      "mode": "dark",
+      "ratio": 9.24,
+      "required": 4.5,
+      "pass": true,
+      "screen": "discover",
+      "text": "Ver comunidades"
+    },
+    {
+      "palette": "lavanda",
+      "mode": "dark",
+      "ratio": 14.59,
+      "required": 3,
+      "pass": true,
+      "screen": "community",
+      "text": "D"
+    },
+    {
+      "palette": "lavanda",
+      "mode": "dark",
+      "ratio": 6.3,
+      "required": 4.5,
+      "pass": true,
+      "screen": "community",
+      "text": "Comunidade independente · vôlei de praia"
+    },
+    {
+      "palette": "pistache",
+      "mode": "dark",
+      "ratio": 14.61,
+      "required": 3,
+      "pass": true,
+      "screen": "community",
+      "text": "D"
+    },
+    {
+      "palette": "pistache",
+      "mode": "dark",
+      "ratio": 5.6,
+      "required": 4.5,
+      "pass": true,
+      "screen": "community",
+      "text": "Comunidade independente · vôlei de praia"
+    },
+    {
+      "palette": "nevoa",
+      "mode": "dark",
+      "ratio": 14.67,
+      "required": 3,
+      "pass": true,
+      "screen": "community",
+      "text": "D"
+    },
+    {
+      "palette": "nevoa",
+      "mode": "dark",
+      "ratio": 5.68,
+      "required": 4.5,
+      "pass": true,
+      "screen": "community",
+      "text": "Comunidade independente · vôlei de praia"
+    },
+    {
+      "palette": "rosa",
+      "mode": "dark",
+      "ratio": 14.11,
+      "required": 3,
+      "pass": true,
+      "screen": "community",
+      "text": "D"
+    },
+    {
+      "palette": "rosa",
+      "mode": "dark",
+      "ratio": 5.65,
+      "required": 4.5,
+      "pass": true,
+      "screen": "community",
+      "text": "Comunidade independente · vôlei de praia"
+    },
+    {
+      "palette": "mare",
+      "mode": "dark",
+      "ratio": 14.01,
+      "required": 3,
+      "pass": true,
+      "screen": "community",
+      "text": "D"
+    },
+    {
+      "palette": "mare",
+      "mode": "dark",
+      "ratio": 5.47,
+      "required": 4.5,
+      "pass": true,
+      "screen": "community",
+      "text": "Comunidade independente · vôlei de praia"
+    },
+    {
+      "palette": "manteiga",
+      "mode": "dark",
+      "ratio": 14.26,
+      "required": 3,
+      "pass": true,
+      "screen": "community",
+      "text": "D"
+    },
+    {
+      "palette": "manteiga",
+      "mode": "dark",
+      "ratio": 5.34,
+      "required": 4.5,
+      "pass": true,
+      "screen": "community",
+      "text": "Comunidade independente · vôlei de praia"
+    },
+    {
+      "palette": "lavanda",
+      "mode": "dark",
+      "ratio": 9.61,
+      "required": 4.5,
+      "pass": true,
+      "screen": "states",
+      "text": "Confira sua conexão e tente novamente."
+    },
+    {
+      "palette": "pistache",
+      "mode": "dark",
+      "ratio": 9.52,
+      "required": 4.5,
+      "pass": true,
+      "screen": "states",
+      "text": "Confira sua conexão e tente novamente."
+    },
+    {
+      "palette": "nevoa",
+      "mode": "dark",
+      "ratio": 9.49,
+      "required": 4.5,
+      "pass": true,
+      "screen": "states",
+      "text": "Confira sua conexão e tente novamente."
+    },
+    {
+      "palette": "rosa",
+      "mode": "dark",
+      "ratio": 9.32,
+      "required": 4.5,
+      "pass": true,
+      "screen": "states",
+      "text": "Confira sua conexão e tente novamente."
+    },
+    {
+      "palette": "mare",
+      "mode": "dark",
+      "ratio": 9.29,
+      "required": 4.5,
+      "pass": true,
+      "screen": "states",
+      "text": "Confira sua conexão e tente novamente."
+    },
+    {
+      "palette": "manteiga",
+      "mode": "dark",
+      "ratio": 9.25,
+      "required": 4.5,
+      "pass": true,
+      "screen": "states",
+      "text": "Confira sua conexão e tente novamente."
+    }
+  ],
+  "contrastFailures": []
+}

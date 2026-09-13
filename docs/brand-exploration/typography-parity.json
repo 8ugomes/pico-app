@@ -1,0 +1,12 @@
+{
+  "phonesCompared": 108,
+  "textElementsCompared": 531,
+  "properties": [
+    "fontFamily",
+    "fontSize",
+    "fontWeight",
+    "lineHeight",
+    "letterSpacing"
+  ],
+  "mismatches": []
+}

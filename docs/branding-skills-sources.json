@@ -1,10 +1,10 @@
 {
-  "purpose": "Curadoria para futura instalação; este arquivo não instala nem configura skills.",
+  "purpose": "Curadoria e registro da instalação por projeto em 13/09/2026.",
   "consulted_at_utc": "2026-09-13T02:58:22.396350+00:00",
   "consulted_local_date": "2026-09-12",
   "timezone": "America/Sao_Paulo",
-  "installation_status": "not_installed",
-  "evaluation": "Static review of selected instructions, references, licenses and repository metadata; no candidate execution or comparative output benchmark.",
+  "installation_status": "installed",
+  "evaluation": "Initial curation used static source review without an output benchmark. The selected skills were subsequently installed and applied to three proposals in docs/brand-exploration on 2026-09-13; this is not a controlled comparison of skill quality.",
   "recommended_project_directory": ".agents/skills",
   "selected_skills": [
     {
@@ -20,7 +20,9 @@
       "source_file_count": 1,
       "contains_non_markdown_files": false,
       "runtime_note": "Instruction files; visual production uses available tools.",
-      "status": "selected_not_installed"
+      "status": "installed",
+      "installed_at": "2026-09-13",
+      "installed_skill_sha256": "b0c4837e1bd140ca816ae54948754ddd2ac1e2a4d3619363777a80caf00b2ede"
     },
     {
       "name": "impeccable",
@@ -35,7 +37,9 @@
       "source_file_count": 56,
       "contains_non_markdown_files": true,
       "runtime_note": "Launcher and engine; installer may also configure hooks. Full engine not audited.",
-      "status": "selected_not_installed"
+      "status": "installed",
+      "installed_at": "2026-09-13",
+      "installed_skill_sha256": "38c2e839e130008b6da814ab9c16f3fcbbedfdf721a9638eebd31a9e65341a7a"
     },
     {
       "name": "brand-discovery",
@@ -50,7 +54,9 @@
       "source_file_count": 3,
       "contains_non_markdown_files": false,
       "runtime_note": "Instruction files; visual production uses available tools.",
-      "status": "selected_not_installed"
+      "status": "installed",
+      "installed_at": "2026-09-13",
+      "installed_skill_sha256": "1826d52344ec219bf964ac594ed22ac3573b046999ff56b39ec3f7c05cda773f"
     },
     {
       "name": "brand-ideation",
@@ -65,7 +71,9 @@
       "source_file_count": 3,
       "contains_non_markdown_files": false,
       "runtime_note": "Instruction files; visual production uses available tools.",
-      "status": "selected_not_installed"
+      "status": "installed",
+      "installed_at": "2026-09-13",
+      "installed_skill_sha256": "af477efaf396388b0c957b3c17de27c57847e7ae8b07d2e142c22cfa4d4e77d7"
     },
     {
       "name": "creative-direction",
@@ -80,7 +88,9 @@
       "source_file_count": 4,
       "contains_non_markdown_files": false,
       "runtime_note": "Instruction files; visual production uses available tools.",
-      "status": "selected_not_installed"
+      "status": "installed",
+      "installed_at": "2026-09-13",
+      "installed_skill_sha256": "fc11c13225666233b3e544854a7a46a19d3a04ced7faefaa0fc1cfd892fd0eb4"
     },
     {
       "name": "brand-identity",
@@ -95,7 +105,9 @@
       "source_file_count": 3,
       "contains_non_markdown_files": false,
       "runtime_note": "Instruction files; visual production uses available tools.",
-      "status": "selected_not_installed"
+      "status": "installed",
+      "installed_at": "2026-09-13",
+      "installed_skill_sha256": "91dc7f2acc3a0ad57867329adc327c0d531e1df3881c83f4115409079a67b63b"
     },
     {
       "name": "art-direction",
@@ -110,7 +122,9 @@
       "source_file_count": 4,
       "contains_non_markdown_files": false,
       "runtime_note": "Instruction files; visual production uses available tools.",
-      "status": "selected_not_installed"
+      "status": "installed",
+      "installed_at": "2026-09-13",
+      "installed_skill_sha256": "3444cf2c4b932665df33509e16e0dfdcd370b1507b43a2bb157fd54e391e3c8d"
     },
     {
       "name": "brand-style-guide",
@@ -125,7 +139,9 @@
       "source_file_count": 3,
       "contains_non_markdown_files": false,
       "runtime_note": "Instruction files; visual production uses available tools.",
-      "status": "selected_not_installed"
+      "status": "installed",
+      "installed_at": "2026-09-13",
+      "installed_skill_sha256": "e5de2c8ff359f2c6204b3efbceb52e06d980545f50a915af38216e27de5845ff"
     }
   ],
   "repositories_screened": [
@@ -289,5 +305,12 @@
       "selected": false,
       "note": "Repository push is not the date of an individual skill. Null license is not permission to redistribute."
     }
+  ],
+  "execution_notes": [
+    "Installed project-local with the official Codex skill installer at pinned commits; no hooks installed.",
+    "Read and applied the selected guides. Used the native image tool for six final rasters.",
+    "Impeccable context launcher initially lacked execute permission; direct document context used. Launcher permission corrected. concept-seed, detect and embed-prompt executed.",
+    "Independent finish reviewer and documenter used as requested by Impeccable new-work workflow.",
+    "Production application and Supabase were not changed."
   ]
 }

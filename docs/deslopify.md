@@ -1,5 +1,29 @@
 # Pico — Deslopify
 
+## Aura — variações de cor conferidas · 13/09/2026
+
+A lavanda original agora pode ser comparada com Pistache, Azul névoa, Rosa mineral, Maré e Manteiga. Preservadas as mesmas fotos, formas, fontes, telas e conteúdo. O pastel define a atmosfera; os tons profundos sustentam texto e ações; apoio permanece pontual, sem introduzir um elemento visual apenas para mostrar outra cor.
+
+Aprendizado: uma comparação apenas cromática precisa congelar também a estrutura e os contornos do logo. O estudo usa o mesmo renderizador de Aura, altera somente tokens de cor e recolore os SVGs preservando os caminhos. 384 combinações/30.156 verificações de estilo sem desvios; 156 pares sólidos de texto aprovados e 60 telefones em cinco larguras/modos sem overflow. Navegação e foco passaram. Pranchas de boas-vindas e perfil inspecionadas. Contraste não equivale a auditoria completa WCAG. [Guia e paletas](brand-exploration/AURA-CORES.md).
+
+## Aura — critérios da variação de cores · 13/09/2026
+
+A preferência do usuário é por Aura. Nesta etapa somente cores podem variar: manter Syne/Manrope, contornos vetoriais, fotografias, raios, espaçamentos, navegação e conteúdo. Comparar seis paletas na mesma tela, com seus papéis de fundo, texto, superfície e ação; manter alternativas claras/escuras. A fotografia continua a mesma, sem filtros ou regeneração. Não reabrir identidade, logo ou layout.
+
+## Três identidades — fechamento · 13/09/2026
+
+Ritual (Bodoni Moda/vinho/areia), Pulso (Bricolage/cobalto/lima) e Aura (Syne/figo/lavanda) foram aplicadas ao mesmo conteúdo em 32 telas e estados, com modos claro e escuro. As pranchas geradas por IA são exploração de atmosfera; SVGs, tokens e HTML são as propostas precisas. Fotografias e dados trazem identificação ilustrativa; nenhuma funcionalidade real é inferida dos mockups.
+
+A revisão encontrou e corrigiu contraste em convites e metadados de Aura, troca indevida do destino Comunidades na navegação e vazamento da tipografia editorial do relatório para os telefones. Aprendizado: isolar CSS de apresentação sem aumentar especificidade dos estilos fora dos mockups; medir paridade de família, tamanho, peso, entrelinha e espaçamento. Os 531 elementos textuais comparados agora preservam o sistema da galeria.
+
+82 pares sólidos de texto aprovados; 960 verificações em cinco larguras sem overflow e PDF de 47 páginas renderizado/inspecionado. O detector sinalizou somente fundo creme na galeria, aceito pela revisão como escolha editorial coerente com o contexto. Revisão independente: ship no escopo das correções pontuadas, não aprovação de uma marca ou certificação WCAG. [Entregáveis e limites](brand-exploration/README.md) · [Parecer](brand-exploration/.impeccable/review/finish-review.md).
+
+## Três identidades — critérios antes de desenvolver · 13/09/2026
+
+As opções devem diferir em conceito, desenho de marca, tipografia, paleta, composição e direção de imagem. Apresentar as mesmas telas e conteúdo nas três opções para comparação justa. Construir uma direção editorial com personalidade e preservar legibilidade, ações, estados e informação de audiência no celular. Mostrar cores exatas, papéis tipográficos, logo reduzido e aplicações claras; distinguir imagens de exploração de arquivos mestres.
+
+Relatório deve cobrir identidade, criação de logo, tipografia, direção de arte e recomendação. Não usar mockups como comprovação de funcionalidade ou atividade real. Identificar conteúdo ilustrativo e fotografias sintéticas. Verificar os resultados renderizados e registrar limites de validação.
+
 ## Pesquisa de branding — critérios da rodada
 
 Avaliar skills pela capacidade de construir uma identidade reconhecível para o Pico Social, com direção editorial de moda, jovem, expressiva e refinada. Exigir exploração de alternativas, tipografia, linguagem gráfica, fotografia, aplicações e critérios de revisão. Distinguir um briefing, uma prancha conceitual e arquivos finais utilizáveis.
