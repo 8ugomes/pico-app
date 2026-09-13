@@ -1,3 +1,10 @@
+## 2026-09-13 — arenas reais com fotos e menos repetição
+
+- Catálogo verificado de 17 arenas de São Paulo (Sul/Oeste), incluindo Riplay Alto do Ipiranga, Villa Beach Sports e Posto 011 Klabin; 76 fotos, endereços e fontes versionadas.
+- Galerias sem recorte adicional, filtros por região e busca por endereço; informações de gestão recolhidas. Acompanhar salva em Meus Picos.
+- Três exemplos fictícios arquivados com histórico preservado. Importação idempotente não sobrescreve edições nem cria posse/comunidades; aprovação continua necessária para gestão oficial.
+- Comunidade do Pico com uma chamada de conversa; estados vazios de arenas/comunidades compactados. 102 testes locais e 72 checks hospedados passaram; lint/types/build e revisão visual. [Pesquisa e validação](arena-catalog-review/README.md).
+
 ## 2026-09-13 — Avatar e perfil antes de explorar
 
 ## 2026-09-13 — estabilidade e beta sem confirmação

@@ -1,3 +1,15 @@
+## Arenas reais — revisão e aprendizados · 13/09/2026
+
+Fotografia, nome e endereço orientam a leitura; descrição e origem ficam em Sobre e gestão. Quadros preservam a foto completa e a galeria mostra uma por vez. Evitar duas caixas de boas-vindas em um lugar vazio: comunidades e mural agora usam uma linha cada. Comunidade oficial tem descrição curta e uma pergunta que acrescenta conversa. Acompanhar foi confirmado em Meus Picos; gestão depende de aprovação, sem sinalização falsa de parceria. Revisão em 320/390/1280 px, tema escuro nativo e claro com fixture local de CSS. [Evidências e limitações](arena-catalog-review/README.md).
+
+### Refinamento com fotos e menos repetição
+
+Pedido expresso de fotos públicas de todas as arenas verificadas. Escolher imagens da unidade correta, sem recorte adicional na exibição; galeria sob demanda com crédito discreto. Lista em composição compacta, sem repetir descrições. Separar endereço, acompanhar e gestão. Comunidade oficial terá uma chamada de conversa; retirar boas-vindas e manual repetidos do mural. Preservar rótulos de acesso/privacidade e revisar celular/desktop/claro/escuro.
+
+## Arenas reais · critérios antes de implementar · 13/09/2026
+
+A lista conectada deve mostrar lugares reais, nomes e bairros conferidos, sem fotos ilustrativas apresentadas como reais. No perfil da arena, expor endereço, fonte pública e data da consulta; cadastro no diretório não equivale a participação oficial da empresa. Acompanhar salva o vínculo existente no perfil. Responsáveis podem solicitar gestão e, após análise, criar/vincular comunidade. Não inventar porte comparativo, horários, preços, seguidores ou propriedade. Manter estados vazios honestos e distinguir comunidade oficial de grupo de jogadores.
+
 ## Perfil com foto — critérios antes de implementar · 13/09/2026
 
 ### Fechamento da estabilidade e entrada

@@ -1,3 +1,15 @@
+## Arenas reais — implementação concluída · 13/09/2026
+
+17 arenas (9 Sul, 8 Oeste), 76 fotos otimizadas e fontes por unidade. Importador transacional separado do seed arquiva os três exemplos conhecidos, preserva histórico e não atribui gestão. Galeria sem recorte adicional, busca por endereço/região, vínculo em Meus Picos e comunidade oficial após aprovação. Duas mensagens institucionais removidas e estados vazios compactados. 102 testes locais, 72 checks reais, lint/typecheck/build aprovados; revisão responsiva e backup direcionado. [Pesquisa e evidências](arena-catalog-review/README.md). Publicação coordenada pela main após CI; tarefa de busca incorpora esta entrega e publica por último.
+
+### Ajuste de escopo autorizado
+
+O responsável pediu coleta das fotos públicas de cada arena, revisão de enquadramento e refinamento editorial antes de commit/publicação. Coletar galerias identificadas por unidade, otimizar sem cortar, manter origem/crédito e revisar todas em folha de contato. Fotos próprias confirmadas pela gestão têm prioridade. Diretório documental versionado alimenta importação transacional separada do seed de testes; nenhuma identidade/posse/participação automática. Consolidar as três mensagens institucionais em uma chamada curta, preservando posts dos usuários e regras de audiência.
+
+## Catálogo real de arenas de São Paulo · PLAN · 13/09/2026
+
+Pesquisar publicamente unidades das zonas Sul e Oeste, priorizando Riplay Alto do Ipiranga, Villa Beach Sports e Posto 011 Klabin. Registrar fontes, data da consulta e divergências; importar fatos com descrições próprias, sem fotos sem licença, avaliações ou pessoas raspadas. Substituir a vitrine fictícia por arenas reais sem proprietário atribuído. Arquivar exemplos com preservação de IDs e relações históricas; acompanhar continua sendo vínculo explícito do jogador. Conferir solicitação de gestão, aprovação e comunidade oficial por arena. Preparar migration idempotente, testes de catálogo/RLS e revisão em navegador; lint/typecheck/build, backup do principal, publicação coordenada e verificação do catálogo servido. Preservar a landing na outra branch.
+
 ## Foto no cabeçalho e perfil antes de explorar — plano · 13/09/2026
 
 ### Fechamento da validação de estabilidade

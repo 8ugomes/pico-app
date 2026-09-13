@@ -10,7 +10,7 @@ export function Communities({ arenaId }: { arenaId?: string }) {
   const [mine, setMine] = useState(true), [search, setSearch] = useState(''), [offset, setOffset] = useState(0), [create, setCreate] = useState(false);
   const { data, error, reload } = useEntity<CommunityCard[]>(`/api/communities?search=${encodeURIComponent(search)}&mine=${arenaId ? false : mine}&offset=${offset}${arenaId ? '&arena=' + arenaId : ''}`);
   return <>
-    {!arenaId && <><PageHeading title="Comunidades" /><p className="page-intro">Cada grupo tem seu jeito de jogar e conversar. Conheça o propósito e as condições de entrada.</p></>}
+    {!arenaId && <><PageHeading title="Comunidades" /></>}
     <div className="community-toolbar">
       {!arenaId && <>
         <div className="feed-tabs" aria-label="Filtrar comunidades">
@@ -18,7 +18,7 @@ export function Communities({ arenaId }: { arenaId?: string }) {
           <button data-tour="community-explore" type="button" className={!mine ? 'active-tab' : ''} aria-pressed={!mine} onClick={() => { setMine(false); setOffset(0); }}>Explorar</button>
         </div>
       </>}
-      <label className="input-group">Buscar comunidades<input className="input" type="search" placeholder="Nome da comunidade" value={search} onChange={e => { setSearch(e.target.value); setOffset(0); }} /></label>
+      {(!arenaId || search || (data?.length ?? 0) > 3) && <label className="input-group">Buscar comunidades<input className="input" type="search" placeholder="Nome da comunidade" value={search} onChange={e => { setSearch(e.target.value); setOffset(0); }} /></label>}
     </div>
     {error && <div className="read-message"><p className="form-error" role="alert">{error}</p><Button size="small" variant="secondary" onClick={reload}>Tentar novamente</Button></div>}
     {!data && !error && <p className="read-source" role="status"><LoaderCircle className="spinner" size={18} aria-hidden="true" />Carregando comunidades…</p>}
@@ -29,9 +29,9 @@ export function Communities({ arenaId }: { arenaId?: string }) {
       {c.arena_name && <p className="community-place"><MapPin size={14} aria-hidden="true" />{c.arena_name}{c.is_official ? ' · Oficial' : ''}</p>}
       {c.membership && <p className="community-membership">{({ active: 'Você participa', pending: 'Pedido de entrada em análise', suspended: 'Participação suspensa', rejected: 'Pedido de entrada recusado' })[c.membership as 'active'] || 'Consulte as condições de entrada.'}</p>}
     </article>)}</div>
-    {data?.length === 0 && <div className="community-empty"><EmptyState title={search ? 'Nenhum grupo com esse nome.' : mine && !arenaId ? 'Encontre uma turma para chamar de sua.' : 'Ainda não há comunidades por aqui.'}>{search ? 'Tente outro nome ou limpe a busca.' : mine && !arenaId ? 'Os grupos de que você participa e seus pedidos de entrada aparecem aqui.' : 'Você pode conhecer outros grupos ou criar uma comunidade.'}</EmptyState><div className="read-message-actions">{search ? <Button variant="secondary" onClick={() => setSearch('')}>Limpar busca</Button> : mine && !arenaId ? <Button onClick={() => { setMine(false); setOffset(0); }}>Explorar comunidades</Button> : <Link href="/comunidades">Conhecer outras comunidades</Link>}</div></div>}
+    {data?.length === 0 && <div className="community-empty">{arenaId && !search ? <p className="muted-text">Ainda sem comunidades vinculadas.</p> : <EmptyState title={search ? 'Nenhum grupo com esse nome.' : mine && !arenaId ? 'Encontre uma turma para chamar de sua.' : 'Ainda não há comunidades por aqui.'}>{search ? 'Tente outro nome ou limpe a busca.' : mine && !arenaId ? 'Os grupos de que você participa e seus pedidos de entrada aparecem aqui.' : 'Você pode conhecer outros grupos ou criar uma comunidade.'}</EmptyState>}<div className="read-message-actions">{search ? <Button variant="secondary" onClick={() => setSearch('')}>Limpar busca</Button> : mine && !arenaId ? <Button onClick={() => { setMine(false); setOffset(0); }}>Explorar comunidades</Button> : <Link href="/comunidades">Conhecer outras comunidades</Link>}</div></div>}
     {data && (offset > 0 || data.length > 20) && <nav className="read-pagination" aria-label="Páginas de comunidades"><Button variant="secondary" disabled={!offset} onClick={() => setOffset(Math.max(0, offset - 20))}>Anterior</Button><Button disabled={data.length <= 20} onClick={() => setOffset(offset + 20)}>Próxima</Button></nav>}
-    {!arenaId && <footer className="community-create"><div><h2>Já tem uma turma?</h2><p>Crie um espaço com o propósito e as regras do seu grupo.</p></div><Button variant="secondary" size="small" onClick={() => setCreate(true)}><Plus size={18} aria-hidden="true" />Criar comunidade</Button></footer>}
+    {!arenaId && <footer className="community-create"><div><h2>Já tem uma turma?</h2><p>Dê um lugar para a conversa continuar.</p></div><Button variant="secondary" size="small" onClick={() => setCreate(true)}><Plus size={18} aria-hidden="true" />Criar comunidade</Button></footer>}
     <Modal open={create} onClose={() => setCreate(false)} title="Criar comunidade"><CommunityForm onDone={() => { setCreate(false); reload(); }} /></Modal>
   </>;
 }
@@ -102,7 +102,7 @@ export function Community({ slug }: { slug: string }) {
       </div>
       {c.readable ? <>
         <details className="community-about"><summary>Sobre o grupo e participantes</summary><div><h2>Modalidades</h2><p>{c.sports.map(s => s.name).join(' · ') || 'As modalidades ainda não foram informadas.'}</p><h2>Regras da comunidade</h2><p>{c.rules || 'As regras ainda não foram informadas.'}</p><h2>Quem participa</h2><ul className="member-rows">{c.members.filter(m => m.status === 'active').map(m => <li key={m.id}><Link href={`/perfil/${m.username}`}><span className="member-initial" aria-hidden="true">{m.name.slice(0, 1)}</span><span>{m.name}<small>{({ owner: 'Proprietário', admin: 'Administrador', moderator: 'Moderador', member: 'Participante' })[m.role as 'member']}</small></span><ArrowRight size={16} aria-hidden="true" /></Link></li>)}</ul></div></details>
-        {c.pico_official && <section className="official-editorial" aria-label="Publicações do Pico">{c.editorial?.map(post => <article key={post.id}><p className="eyebrow">PICO · PUBLICAÇÃO OFICIAL</p><h2>{post.title}</h2><p>{post.body}</p></article>)}</section>}
+        {c.pico_official && <section className="official-editorial" aria-label="Publicações do Pico">{c.editorial?.map(post => <article key={post.id}><p className="eyebrow">PICO</p><h2>{post.title}</h2><p>{post.body}</p></article>)}</section>}
         <section id="community-wall" aria-label="Mural da comunidade"><ConnectedFeed communityId={c.id} readOnly={c.rank < 10} moderate={c.rank >= 20 ? { community: c.id } : undefined} /></section>
       </> : <section className="community-private"><LockKeyhole size={24} aria-hidden="true" /><h2>Um espaço reservado ao grupo</h2><p>Publicações e informações de participantes ficam disponíveis para quem tem acesso aprovado nesta comunidade.</p><Link href="/comunidades">Conhecer outras comunidades <ArrowRight size={16} aria-hidden="true" /></Link></section>}
     </>}
