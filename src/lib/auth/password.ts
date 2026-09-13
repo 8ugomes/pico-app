@@ -5,3 +5,7 @@ export function newPasswordError(password: string): string | null {
   if (new TextEncoder().encode(password).length > 72) return 'Use uma senha menor: o limite é 72 bytes. Acentos e emojis ocupam mais espaço.';
   return null;
 }
+
+export function passwordConfirmationError(password: string, confirmation: string): string | null {
+  return password === confirmation ? null : 'As senhas não coincidem. Confira e tente de novo.';
+}

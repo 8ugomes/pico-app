@@ -8,9 +8,9 @@
 .arena-list { display: flex; flex-direction: column; gap: 1.3rem; }
 .arena-card { overflow: hidden; border: 0; border-radius: 0; background: transparent; }
 .arena-card > a { display: block; }
-.arena-card-photo { position: relative; height: 200px; overflow: hidden; border-radius: var(--radius-feature); }
+.arena-card-photo { position: relative; height: auto; aspect-ratio: 4 / 3; padding: var(--space-2); overflow: hidden; border-radius: var(--radius-card); background: var(--surface); }
 
-.arena-card-photo img, .arena-detail-photo img { width: 100%; height: 100%; object-fit: cover; }
+.arena-card-photo img, .arena-detail-photo img { width: 100%; height: 100%; object-fit: contain; }
 .arena-label-badge { position: absolute; top: 1rem; left: 1rem; display: inline-flex; align-items: center; gap: .4rem; font-size: var(--text-caption); padding: .45rem .7rem; color: var(--brand-papel); background: var(--brand-cacau); border: 0; border-radius: 999px; z-index: 1; }
 .arena-open-icon { position: absolute; bottom: .85rem; right: .85rem; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--brand-cacau); color: var(--brand-papel); border: 0; z-index: 1; }
 .arena-card-content { padding: 1.15rem 0 1.5rem; }
@@ -23,19 +23,19 @@
 .mini-avatar-stack .player-avatar { width: 30px; height: 30px; border: 2px solid var(--surface); margin-left: -5px; }
 .arena-card-community > span { font-size: var(--text-caption); color: var(--text-muted); line-height: 1.5; }
 .detail-back { display: inline-flex; align-items: center; gap: .4rem; min-height: 52px; color: var(--text-secondary); font-size: .875rem; }
-.arena-detail-photo { position: relative; height: 228px; border-radius: var(--radius-card); overflow: hidden; }
+.arena-detail-photo { position: relative; aspect-ratio: 4 / 3; padding: var(--space-2); border-radius: var(--radius-card); overflow: hidden; background: var(--surface); }
 .arena-detail-header { padding: 1.25rem 0 .5rem; }
 .arena-detail-header h1 { font-size: 2rem; font-weight: 600; letter-spacing: -.025em; line-height: 1.2; margin: .6rem 0 .7rem; }
 .arena-directory-list { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
-.arena-directory-list .arena-card-photo { height: auto; aspect-ratio: 16 / 9; background: var(--surface); }
+.arena-directory-list .arena-card-photo { height: auto; aspect-ratio: 4 / 3; background: var(--surface); }
 .arena-directory-list .arena-card-photo img { object-fit: contain; }
 .arena-directory-list .arena-card-content { padding-bottom: .25rem; }
 .arena-directory-list .arena-card-content h2 { font-size: 1.1rem; line-height: 1.35; }
 .arena-directory-list .arena-sports { margin-block: .65rem; }
 .arena-gallery { margin: 0; }
 .arena-detail-photo img { object-fit: contain; background: var(--surface); }
-.arena-gallery-frame { width: 100%; max-height: min(65svh, 560px); overflow: hidden; border-radius: var(--radius-feature); background: var(--surface); }
-.arena-gallery-frame img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.arena-gallery-frame { width: 100%; padding: var(--space-2); border-radius: var(--radius-card); background: var(--surface); }
+.arena-gallery-frame img { display: block; width: 100%; height: auto; max-height: min(65svh, 560px); object-fit: contain; }
 .arena-gallery-caption { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .25rem .75rem; color: var(--text-muted); font-size: var(--text-caption); }
 .arena-gallery-caption > a { display: inline-flex; align-items: center; min-height: 44px; text-underline-offset: 3px; }
 .arena-gallery-controls { display: flex; align-items: center; gap: .25rem; }
@@ -111,8 +111,6 @@
 .profile-arenas { margin-top: 1.2rem; }
 .demo-account-link { display: flex; align-items: center; justify-content: center; gap: .3rem; color: var(--text-muted); font-size: var(--text-caption); min-height: 48px; margin-top: 1.5rem; }
 @media (min-width: 800px) {
-  .arena-card-photo { height: 228px; }
-  .arena-detail-photo { height: 270px; }
   .profile-cover { height: 190px; }
 }
 @media (max-width: 359px) {

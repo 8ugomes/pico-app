@@ -3,6 +3,7 @@ import { useState, type FormEvent } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
+import { PasswordInput } from '@/components/ui/PasswordInput';
 import { Modal } from '@/components/ui/Modal';
 import { createClient } from '@/lib/supabase/client';
 import { PageHeading } from '../SocialUI';
@@ -10,6 +11,7 @@ import { useRemoteRead } from './useRemoteRead';
 import { useMutation, MutationNotice } from './useMutation';
 import { ReadLoading, ReadFailure } from './ReadState';
 import { removePhoto } from './Media';
+import { SignOutButton } from '../SignOutButton';
 import { AccountExport } from '../AccountExport';
 
 function DeleteAccount() {
@@ -28,14 +30,14 @@ function DeleteAccount() {
   return <section className="connected-panel"><h2>Excluir minha conta</h2><p className="form-note">Remove seu perfil, fotos, publicações, comentários, conexões e registros de jogos. A exclusão é definitiva.</p><Button variant="quiet" onClick={()=>setOpen(true)}>Quero excluir minha conta</Button>
     <Modal open={open} onClose={()=>{if(!busy)setOpen(false);}} title="Excluir sua conta?">
       <p className="form-note">Confirme a senha da conta atual. Se a conexão cair após iniciar, repita aqui para concluir. Dados já removidos não poderão ser recuperados.</p>
-      <form className="connected-form" onSubmit={submit}><fieldset disabled={busy}><Input id="delete-password" name="password" type="password" label="Sua senha atual" autoComplete="current-password" minLength={1} maxLength={128} required /><Input id="delete-confirmation" name="confirmation" label="Digite EXCLUIR para confirmar" autoComplete="off" pattern="EXCLUIR" required /><Button type="submit">{busy?'Excluindo…':'Excluir definitivamente'}</Button></fieldset>{error && <p role="alert" className="auth-notice notice-error">{error}</p>}</form>
+      <form className="connected-form" onSubmit={submit}><fieldset disabled={busy}><PasswordInput id="delete-password" name="password" label="Sua senha atual" autoComplete="current-password" minLength={1} maxLength={128} required /><Input id="delete-confirmation" name="confirmation" label="Digite EXCLUIR para confirmar" autoComplete="off" pattern="EXCLUIR" required /><Button type="submit">{busy?'Excluindo…':'Excluir definitivamente'}</Button></fieldset>{error && <p role="alert" className="auth-notice notice-error">{error}</p>}</form>
     </Modal></section>;
 }
 export function ConnectedAccount() {
   const {state,retry,refresh}=useRemoteRead('resource=account');
   const data=state.status==='success' && state.data.kind==='account'?state.data:null;
   const mutation=useMutation();const [photoError,setPhotoError]=useState<string|null>(null), [removing,setRemoving]=useState<string|null>(null);
-  return <><PageHeading title="Privacidade e conta." /><p className="form-note"><Link href="/privacidade">Como o Pico usa seus dados</Link> · <Link href="/recuperar">Recuperar acesso</Link> · <Link href="/login">Gerenciar acesso e sair</Link></p>
+  return <><PageHeading title="Sua conta"><SignOutButton /></PageHeading><p className="form-note"><Link href="/privacidade">Como o Pico usa seus dados</Link> · <Link href="/recuperar">Recuperar acesso</Link></p>
     {state.status==='loading' && <ReadLoading />}{(state.status==='error'||state.status==='demo') && <ReadFailure state={state} retry={retry} />}
     {data?.deletionPending && <p role="status" className="auth-notice">Sua exclusão está em andamento. Confirme a senha novamente abaixo para concluir.</p>}
     {data && !data.deletionPending && <div key={data.viewerId}>

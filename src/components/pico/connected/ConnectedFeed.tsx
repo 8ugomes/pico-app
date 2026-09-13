@@ -24,14 +24,14 @@ export function ConnectedFeed({ arenaId, communityId, authorId, postId, readOnly
   const { data, error, reload } = useEntity<FeedData>(`/api/posts?offset=${offset}${arenaId ? '&arena=' + arenaId : ''}${communityId ? '&community=' + communityId : ''}${authorId ? '&author=' + authorId : ''}${postId ? '&post=' + postId : ''}`);
   const home = !arenaId && !communityId && !authorId && !postId;
   return <>
-    {home && (data ? <ConnectedHomeContexts viewerId={data.viewerId} /> : <PageHeading eyebrow="ENTRE UM JOGO E OUTRO" title="Seu Pico." />)}
+    {home && (data ? <ConnectedHomeContexts viewerId={data.viewerId} /> : <PageHeading title="Seu Pico." />)}
     {postId && <Link className="detail-back" href="/feed">← Início</Link>}
     {error && <section className="read-message"><p role="alert">{error}</p><Button variant="secondary" onClick={reload}>Tentar novamente</Button></section>}
     {!data && !error && <ReadLoading />}
     {data && <>
       {!readOnly && <PublicationComposer viewerId={data.viewerId} arenaId={arenaId} communityId={communityId} onDone={() => { setOffset(0); reload(); }} />}
       <div className="list-heading"><h2>{postId ? 'Publicação' : arenaId || communityId ? 'Mural' : 'Publicações'}</h2><Button size="small" variant="quiet" onClick={reload}>Atualizar</Button></div>
-      {!data.posts.length && <div className="feed-empty">{(arenaId || communityId) && !postId ? <p className="muted-text">Nenhuma publicação por aqui ainda.</p> : <EmptyState title={postId ? 'Publicação indisponível.' : 'A conversa pode começar aqui.'}>{postId ? 'Ela pode ter sido removida ou não estar disponível para sua conta.' : readOnly ? 'Ainda não há publicações disponíveis para sua conta neste contexto.' : 'Compartilhe uma história do jogo quando quiser. Sua audiência aparece antes de publicar.'}</EmptyState>}{home && <Link className="journey-text-link" href="/descobrir">Conhecer pessoas que jogam <Send size={16} aria-hidden="true" /></Link>}</div>}
+      {!data.posts.length && <div className="feed-empty">{(arenaId || communityId) && !postId ? <p className="muted-text">Nenhuma publicação por aqui ainda.</p> : <EmptyState title={postId ? 'Publicação indisponível.' : 'Sua turma aparece aqui.'}>{postId ? 'Ela pode ter sido removida ou não estar disponível para sua conta.' : readOnly ? 'Nenhuma publicação por aqui ainda.' : 'Acompanhe pessoas para trazer a conversa para o seu Início.'}</EmptyState>}{home && <Link className="journey-text-link" href="/descobrir">Conhecer pessoas que jogam <Send size={16} aria-hidden="true" /></Link>}</div>}
       <div className="feed-posts">{data.posts.map(post => <ConnectedPost key={`${data.viewerId}:${post.id}`} post={post} viewerId={data.viewerId} refresh={reload} moderate={moderate} />)}</div>
       {(offset > 0 || data.hasMore) && <nav className="read-pagination" aria-label="Páginas de publicações"><Button variant="secondary" disabled={!offset} onClick={() => setOffset(offset - 20)}>Anterior</Button><Button disabled={!data.hasMore} onClick={() => setOffset(offset + 20)}>Próxima</Button></nav>}
     </>}

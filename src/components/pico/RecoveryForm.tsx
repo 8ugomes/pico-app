@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
+import { PasswordInput } from '@/components/ui/PasswordInput';
 import { emailDeliveryEnabled } from '../../../config/auth-policy.json';
 
 export function RecoveryForm({ reset = false }: { reset?: boolean }) {
@@ -42,7 +43,7 @@ export function RecoveryForm({ reset = false }: { reset?: boolean }) {
   }
   if (!reset && !emailDeliveryEnabled) return <><p className="auth-notice" role="status">A recuperação por e-mail ainda não está disponível nesta beta. Se você está conectado em outro aparelho, mantenha essa sessão aberta.</p><p className="auth-switch"><Link href="/login">Voltar para entrar</Link></p></>;
   return <><form className="auth-form" onSubmit={submit}><fieldset disabled={busy || !client}>
-    {reset ? <><Input id="password" name="password" label="Nova senha" type="password" autoComplete="new-password" disabled={changed} minLength={12} maxLength={72} required /><Input id="confirm" name="confirm" label="Repita a nova senha" type="password" autoComplete="new-password" disabled={changed} minLength={12} maxLength={72} required /></> : <Input id="email" name="email" label="E-mail da sua conta" type="email" autoComplete="email" maxLength={254} required />}
+    {reset ? <><PasswordInput id="password" name="password" label="Nova senha" autoComplete="new-password" disabled={changed} minLength={12} maxLength={72} required /><PasswordInput id="confirm" name="confirm" label="Repita a nova senha" autoComplete="new-password" disabled={changed} minLength={12} maxLength={72} required /></> : <Input id="email" name="email" label="E-mail da sua conta" type="email" autoComplete="email" maxLength={254} required />}
     <Button type="submit">{busy ? 'Aguarde…' : reset ? changed ? 'Encerrar sessões' : 'Salvar nova senha' : 'Enviar link'}</Button>
   </fieldset>{notice && <p role={notice.error?'alert':'status'} className={`auth-notice notice-${notice.error?'error':'success'}`}>{notice.text}</p>}
   {!client && <p role="status" className="form-note">O acesso às contas está indisponível nesta versão.</p>}</form><p className="auth-switch"><Link href="/login">Voltar para entrar</Link></p></>;

@@ -1,0 +1,113 @@
+{
+  "completed": true,
+  "checks": [
+    "signup fits 390px light",
+    "signup fits 320px dark",
+    "keyboard reveals password",
+    "confirmation toggle is independent",
+    "eye does not submit",
+    "mismatch never reaches Auth",
+    "mismatch keeps original input",
+    "mismatch focuses and identifies confirmation",
+    "matching signup creates one real development account",
+    "logout available before profile completion",
+    "optional profile fields start collapsed",
+    "setup fits 390px light",
+    "feed fits 390px light",
+    "arenas fits 390px light",
+    "arenas fits 1280px dark",
+    "gallery preserves full image",
+    "arena fits 390px light",
+    "team portrait cover preserves full image",
+    "portrait-fixture fits 320px dark",
+    "missing image has explicit fallback",
+    "profile fits 390px light",
+    "profile logout fits enlarged text",
+    "account fits 390px light",
+    "remote logout failure still removes local session and protected UI",
+    "real logout denies private reads",
+    "logout discards account in both tabs",
+    "login eye preserves credential",
+    "new login starts with hidden password",
+    "successful profile logout returns to login",
+    "login fits 390px light"
+  ],
+  "layouts": [
+    {
+      "name": "signup",
+      "width": 390,
+      "colorScheme": "light",
+      "fits": true
+    },
+    {
+      "name": "signup",
+      "width": 320,
+      "colorScheme": "dark",
+      "fits": true
+    },
+    {
+      "name": "setup",
+      "width": 390,
+      "colorScheme": "light",
+      "fits": true
+    },
+    {
+      "name": "feed",
+      "width": 390,
+      "colorScheme": "light",
+      "fits": true
+    },
+    {
+      "name": "arenas",
+      "width": 390,
+      "colorScheme": "light",
+      "fits": true
+    },
+    {
+      "name": "arenas",
+      "width": 1280,
+      "colorScheme": "dark",
+      "fits": true
+    },
+    {
+      "name": "arena",
+      "width": 390,
+      "colorScheme": "light",
+      "fits": true
+    },
+    {
+      "name": "portrait-fixture",
+      "width": 320,
+      "colorScheme": "dark",
+      "fits": true
+    },
+    {
+      "name": "profile",
+      "width": 390,
+      "colorScheme": "light",
+      "fits": true
+    },
+    {
+      "name": "account",
+      "width": 390,
+      "colorScheme": "light",
+      "fits": true
+    },
+    {
+      "name": "login",
+      "width": 390,
+      "colorScheme": "light",
+      "fits": true
+    }
+  ],
+  "runtimeErrors": [],
+  "controlledAccountRemoved": true,
+  "realEmailDeliveryTested": false,
+  "physicalDevicesTested": false,
+  "fixtures": [
+    "portrait cover",
+    "missing image",
+    "logout failure"
+  ],
+  "environment": "exclusive development"
+}

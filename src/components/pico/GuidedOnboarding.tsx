@@ -202,10 +202,9 @@ function TourProvider({ children, identity, demo = false }: { children: ReactNod
   const context = ready && identity ? { progress, start } : null;
   return <Tour.Provider value={context}><div ref={boundary} className="tour-boundary">
     {ready && !progress && path === '/feed' && <section className="tour-welcome" aria-labelledby={titleId}>
-      <h2 id={titleId}>Seu primeiro passo na areia.</h2>
-      <p>Um guia rápido para encontrar pessoas, comunidades e seus lugares no Pico.</p>
-      <div className="tour-welcome-actions"><Button onClick={() => start()}>Conhecer o Pico <ArrowRight size={17} aria-hidden="true" /></Button><Button variant="quiet" onClick={() => save({ version: 1, status: 'dismissed', step: 0 })}>Agora não</Button></div>
-      <small>Opcional. Explore no seu ritmo e retome no Perfil.</small>
+      <h2 id={titleId}>Quer uma mão?</h2>
+      <div className="tour-welcome-actions"><Button variant="secondary" size="small" onClick={() => start()}>Conhecer o Pico <ArrowRight size={17} aria-hidden="true" /></Button><Button variant="quiet" onClick={() => save({ version: 1, status: 'dismissed', step: 0 })}>Agora não</Button></div>
+      <small>Guia opcional. Retome no Perfil.</small>
     </section>}
     {active && <aside ref={panel} className="tour-guide" aria-labelledby={titleId} data-testid="guided-tour" onKeyDown={event => {
       if (event.key === 'Escape') { event.stopPropagation(); pause(); }

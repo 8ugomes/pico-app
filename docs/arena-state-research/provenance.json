@@ -1,0 +1,14 @@
+{
+  "source": "https://servicodados.ibge.gov.br/api/v1/localidades/estados/35/municipios?orderBy=nome",
+  "checkedOn": "2026-09-13",
+  "municipalities": 645,
+  "terms": [
+    "arena beach tennis",
+    "arena futevôlei",
+    "quadra vôlei de praia",
+    "arena esportes de areia",
+    "beach sports"
+  ],
+  "googleSearchesExecuted": 0,
+  "arenasImported": 0
+}

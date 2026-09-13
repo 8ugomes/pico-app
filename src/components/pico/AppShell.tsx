@@ -27,7 +27,7 @@ export function AppShell({ children, environment = 'demo' }: { children: ReactNo
       <PwaStatus/><main id="main-content" className="social-main">{children}</main>
     </div>
     <aside className="community-sidebar">
-      <section className="journey-rail"><h2>Guarde o que viveu na areia.</h2><p>Em Meus jogos, arena, modalidade e data ficam só para você. Compartilhe quando quiser.</p><Link href="/jogos">Abrir Meus jogos <ArrowUpRight size={17} aria-hidden="true" /></Link></section>
+      <section className="journey-rail"><h2>Meus jogos</h2><p>Seu histórico privado da areia.</p><Link href="/jogos">Abrir Meus jogos <ArrowUpRight size={17} aria-hidden="true" /></Link></section>
       <div className="rail-footer"><span>Me acha no Pico.</span><Link href="/privacidade">Sobre seus dados <ArrowUpRight size={13} aria-hidden="true" /></Link><Link href="/instalar">Instalar o Pico</Link></div>
     </aside>
     <BottomNav />
