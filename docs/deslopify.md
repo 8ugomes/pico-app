@@ -1,5 +1,17 @@
 # Pico — Deslopify
 
+## Pesquisa de branding — critérios da rodada
+
+Avaliar skills pela capacidade de construir uma identidade reconhecível para o Pico Social, com direção editorial de moda, jovem, expressiva e refinada. Exigir exploração de alternativas, tipografia, linguagem gráfica, fotografia, aplicações e critérios de revisão. Distinguir um briefing, uma prancha conceitual e arquivos finais utilizáveis.
+
+Usar tokens atuais e capturas versionadas apenas como contexto, sem tratá-las como auditoria do produto publicado. Preservar clareza social, leitura mobile, acessibilidade e veracidade de dados. A curadoria deve apontar defaults estéticos que possam homogeneizar a marca ou conflitar com pt-BR, dark mode e os contratos do Pico.
+
+### Aprendizados da pesquisa
+
+Skills de briefing, produção de pranchas e execução da identidade têm entregas diferentes. Brandkit é apoio à comparação visual; arquivos vetoriais, fontes e cores finais exigem construção e verificação próprias. A `brand-guidelines` da Anthropic aplica a identidade da Anthropic e não atende à criação da marca Pico. Impeccable 4.3.1 inclui engine/launcher e pode envolver hooks; não tratar sua distribuição atual como apenas Markdown.
+
+A direção editorial precisa funcionar com pessoas e ações reais no celular. Regras externas que eliminam sinais de interação ou impõem uma única categoria tipográfica não devem prevalecer sobre o briefing. A próxima rodada de identidade deve reconciliar grafite/areia dos guias históricos com o verde-água do sistema corrente. Comparar três propostas nas mesmas aplicações e distinguir conceito de entrega final. [Evidências e seleção](PICO_BRANDING_SKILLS_RESEARCH.md).
+
 ### Revisão final — tutorial guiado
 
 A dica usa o destaque areia e uma ação primária de avanço. “Mostrar onde” recolhe o painel, rola e foca o controle para liberar espaço de exploração no celular. Targets em disclosures fechados precisam verificar o ancestral `details`: Chromium pode manter dimensões de controles invisíveis. A instrução muda ao abrir arena ou comunidade e a busca de Pessoas no demo descreve apenas os filtros que existem nele.

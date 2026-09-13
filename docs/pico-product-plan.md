@@ -1,5 +1,17 @@
 # Pico — plano de produto
 
+## Pesquisa de skills para branding — plano da rodada
+
+Pesquisar fontes públicas e inspecionar os arquivos originais de skills para preparar a identidade do Pico Social. Direção escolhida pelo responsável: editorial de moda, jovem, expressiva e refinada. Comparar estratégia, exploração visual, sistema de identidade, direção de arte, documentação e aplicação ao produto; conferir autoria, revisão, licença, dependências e conflitos com os padrões locais.
+
+Entrega desta rodada: relatório de pesquisa com seleção justificada, fontes verificáveis e proposta de instalação por projeto. Instalação e desenvolvimento da nova identidade são etapas posteriores ao levantamento solicitado. A pesquisa não altera a UI nem configurações do aplicativo. Registrar conclusão, verificações e aprendizados na documentação e fazer commit local.
+
+### Fechamento da pesquisa
+
+Triados 16 repositórios públicos e selecionadas oito skills: seis da Ramp para descoberta, ideação, direção criativa, identidade, direção de arte e manual; Brandkit para propostas visuais; Impeccable para aplicação futura ao app. Relatório registra critérios, alternativas, limitações, adaptações e fluxo de entrega. Manifesto registra revisões confirmadas, caminhos, licenças e hashes dos arquivos principais. [Pesquisa completa](PICO_BRANDING_SKILLS_RESEARCH.md) · [Manifesto](branding-skills-sources.json).
+
+Lint, typecheck e build locais aprovados. Nenhuma skill instalada, nenhum script de terceiro executado, sem alteração de UI ou infraestrutura. Próxima etapa: instalar o conjunto selecionado no escopo do projeto e desenvolver três direções visuais equivalentes para o Pico Social, usando a preferência editorial de moda já confirmada. Não há benchmark de resultados gerados nem validação com jogadores nesta pesquisa.
+
 ## Comunidade oficial e autenticação — fechamento de 13/09/2026
 
 Implementados cadastro aberto após confirmação do e-mail, comunidade institucional geral, três publicações editoriais, inclusão transacional após formulário e aviso reconhecido por conta. Saída, suspensão e edição de modalidade não causam nova inclusão. Textos de acesso/audiência atualizados. Corrigida diferença entre mínimo do frontend (8) e do provedor (6): novas senhas exigem 12; reforço de reautenticação, cookies, recuperação, reenvio e exclusão com senha legada.

@@ -1,5 +1,12 @@
 # Changelog — Pico
 
+## 2026-09-12 — pesquisa de skills para identidade do Pico Social
+
+- Pesquisa pública com triagem de 16 repositórios e seleção de oito skills para branding, direção editorial, propostas visuais e aplicação ao produto. Preferência confirmada: editorial de moda, jovem, expressiva e refinada.
+- [Relatório](PICO_BRANDING_SKILLS_RESEARCH.md) com análise das candidatas, fontes primárias, limites e sequência de desenvolvimento. [Manifesto](branding-skills-sources.json) com revisões, caminhos, licenças e hashes para futura instalação por projeto.
+- Plano e Deslopify atualizados antes e depois da entrega. Lint, typecheck e build locais aprovados; revisão documental e dos links locais realizada.
+- Pesquisa documental: nenhuma skill instalada, nenhum script de terceiro executado, nenhuma alteração de UI, banco ou publicação. Resultados de design das candidatas não foram comparados por execução.
+
 ## 2026-09-13 — publicação coordenada autorizada
 
 - Tutorial, comunidade oficial e ajustes de cadastro/autenticação preparados para main e produção pelo fluxo PR/CI/deploy. Backup cifrado e comparação preservaram dados/arquivos existentes.
