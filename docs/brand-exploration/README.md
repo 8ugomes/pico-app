@@ -1,5 +1,7 @@
 # Pico Social — três propostas de identidade
 
+**Identidade escolhida e consolidada:** [Pico Social / Aura Manteiga](aura-manteiga/README.md). O [novo manual](aura-manteiga/manual.html), os [ativos](aura-manteiga/Pico-Social-Aura-Manteiga.zip) e o [prompt de implementação/publicação](aura-manteiga/PROMPT-PRODUCAO.md) incorporam a decisão posterior do responsável. As comparações abaixo preservam o histórico da exploração.
+
 Estudo de 13/09/2026 para a direção **editorial de moda: jovem, expressiva e refinada**. As alternativas iniciais são **Ritual**, **Pulso** e **Aura**; o aplicativo continua se chamando Pico Social. O responsável escolheu **Aura para continuar a exploração**, pedindo somente novas cores. A paleta final ainda não foi escolhida e o estudo não foi aplicado ao produto.
 
 **Entrega mais recente:** [Aura em seis paletas](aura-cores.html?screen=profile&palette=all&mode=light), com as mesmas 32 telas, claro/escuro, logo, tipografia, fotos e composição. [Guia das cores](AURA-CORES.md) · [Prancha comparativa](preview/aura-palettes-welcome.png) · [Tokens das paletas](aura-palettes.json).

@@ -314,7 +314,7 @@ Fontes desta extração: `PRODUCT.md`, `BRIEF.md`, `tokens.json`, `gallery.css`,
 
 O parecer `ship` resolve apenas navegação, contrato/FORM e tipografia das telas do PDF na sequência de revisão registrada. Não constitui nova revisão integral nem aprovação de marca. A recomendação de Ritual no relatório permanece julgamento autoral sem pesquisa de preferência com usuários.
 
-**Preferência posterior do responsável:** a linha visual Aura foi escolhida para explorar outras cores, preservando tipografia, logo, fotografias e layout. A cor final continua sem aprovação. As seis paletas estão em `aura-cores.html`, com guia em `AURA-CORES.md` e tokens em `aura-palettes.json`. Elas complementam os tokens originais registrados neste documento; as três propostas iniciais ficam preservadas como base de comparação.
+**Decisão posterior do responsável:** a linha Aura e a paleta **Manteiga** foram escolhidas. A identidade consolidada está em `aura-manteiga/MANUAL.md` e `aura-manteiga/tokens.json`, com PDF próprio, ativos e prompt de implementação. Os tokens deste documento continuam registrando as três propostas iniciais para comparação; a aplicação em produção ainda não foi executada.
 
 ## Colors
 

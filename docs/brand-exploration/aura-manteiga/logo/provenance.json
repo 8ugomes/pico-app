@@ -1,0 +1,23 @@
+{
+  "version": "1.0",
+  "direction": "Aura Manteiga",
+  "selected_by_user": true,
+  "geometry_source": "../assets/aura/*.svg",
+  "modification": "Recolor only; original contours and spacing retained. Maskable layout uses a smaller glyph on a full square background.",
+  "wordmark_typeface": "Syne 800, adjusted spacing, converted to outlines",
+  "legal_clearance": "Not performed",
+  "maskable_safe_area": {
+    "canvas": 512,
+    "safe_circle_center": [
+      256,
+      256
+    ],
+    "safe_circle_radius": 204.8,
+    "glyph_bounds_conservative": [
+      164.5,
+      119.5,
+      371.5,
+      371.5
+    ]
+  }
+}

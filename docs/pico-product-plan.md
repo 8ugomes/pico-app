@@ -1,5 +1,15 @@
 # Pico — plano de produto
 
+## Aura Manteiga — identidade consolidada e prompt entregues · 13/09/2026
+
+Consolidada a escolha do responsável em [manual exclusivo](brand-exploration/aura-manteiga/README.md), com 32 páginas e 64 vistas de tela (32 claras/32 escuras). Entrega inclui narrativa, logo/lockup/símbolo com geometria Aura preservada, paleta Manteiga/Cacau/Papel/Lavanda, tokens semânticos, Syne/Manrope, direção de arte, voz, movimento, aplicações, fontes/licenças e ícones SVG/PNG/ICO com maskable específico. [Prompt completo](brand-exploration/aura-manteiga/PROMPT-PRODUCAO.md) e [mapa do código](brand-exploration/aura-manteiga/IMPLEMENTACAO.md) orientam futura implementação e publicação pelo destino existente.
+
+PDF renderizado e inspecionado; 32 páginas e rodapés conferidos, 64 telefones sem falha de imagem/overflow editorial ou erro JS. 50 pares sólidos de contraste passaram; contornos vetoriais comparados aos originais, PNGs/ICO e margem do maskable verificados. Exportações de campanha usam fontes locais carregadas na mesma origem. Pacote ZIP com 58 arquivos verificado. Lint, typecheck e build aprovados. Nenhum código de produção, dado, serviço ou deploy foi alterado; a próxima rodada executa o prompt autorizado pelo responsável quando for enviado.
+
+## Aura Manteiga — consolidação da identidade · plano antes de desenvolver · 13/09/2026
+
+O responsável escolheu a paleta Manteiga na estética Aura e pediu identidade completa baseada no PDF anterior, acompanhada de prompt para futura atualização do aplicativo em produção. Consolidar manual exclusivo, logos recoloridos, ícones PWA, fontes, tokens semânticos claros/escuros, aplicações e telas existentes. Distinguir medidas de miniatura e parâmetros de implementação. Ler o código atual para mapear migração de tokens, fontes, marca, CSS e manifesto no prompt. A entrega presente é de identidade e instrução; implementação/publicação serão executadas quando o prompt for usado. Validar artefatos, atualizar documentação, executar lint/typecheck/build e fazer commit local.
+
 ## Aura — variações de cor entregues · 13/09/2026
 
 Mantida a linha Aura escolhida pelo responsável. Criadas cinco alternativas — Pistache, Azul névoa, Rosa mineral, Maré e Manteiga — para comparar com a lavanda original. [Galeria de cores](brand-exploration/aura-cores.html?screen=profile&palette=all&mode=light) com as mesmas 32 telas/estados, seis paletas e dois modos; [guia](brand-exploration/AURA-CORES.md) e tokens separados. Logo, tipografia, fotos, conteúdo e composição preservados. Pistache é a recomendação cromática autoral, seguida de Azul névoa; a paleta final ainda não foi escolhida.

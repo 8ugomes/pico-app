@@ -1,5 +1,13 @@
 # Changelog — Pico
 
+## 2026-09-13 — manual Aura Manteiga e prompt de produção
+
+- Consolidada a escolha do responsável: estética Aura com paleta Manteiga. [Manual](brand-exploration/aura-manteiga/README.md) de 32 páginas, incluindo 32 telas em cada modo, marca, logo, cores, tipografia, arte, voz, movimento e aplicações.
+- SVGs recoloridos preservando contornos; fontes Syne/Manrope locais licenciadas; ícones PNG/ICO/Apple/maskable, tokens semânticos, exemplos sociais e pacote de entrega com 58 arquivos.
+- [Prompt de implementação/publicação](brand-exploration/aura-manteiga/PROMPT-PRODUCAO.md) baseado no código real e no pipeline existente; inclui preservação dos contratos e QA de todas as superfícies.
+- 50 pares sólidos de contraste, dimensões, margem maskable, geometria vetorial e PDF renderizado/verificado. Corrigidas paginação e origem de carregamento das fontes nas exportações. Lint, typecheck e build passaram.
+- Identidade e documentação entregues; nenhuma aplicação ao frontend publicado, alteração de backend, push ou deploy nesta rodada.
+
 ## 2026-09-13 — Aura em seis paletas
 
 - O responsável escolheu Aura e pediu somente novas cores. Preservados logo, Syne/Manrope, fotos, formas, composição, conteúdo e navegação.

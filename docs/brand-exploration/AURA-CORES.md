@@ -1,5 +1,7 @@
 # Pico Social — Aura em novas cores
 
+**Decisão posterior:** o responsável escolheu **Manteiga** na estética Aura. O sistema consolidado está no [manual Aura Manteiga](aura-manteiga/MANUAL.md). As recomendações e o estado de exploração abaixo registram o momento da comparação inicial.
+
 O responsável escolheu a linha Aura e pediu somente alternativas de cor. Este complemento de 13/09/2026 preserva logo, Syne + Manrope, fotografias, formas, espaçamento, composição, conteúdo e navegação. A paleta final ainda está em exploração.
 
 [Abrir a comparação](aura-cores.html?screen=profile&palette=all&mode=light) · [Boas-vindas nas seis paletas](preview/aura-palettes-welcome.png) · [Perfil nas seis paletas](preview/aura-palettes-profile.png) · [Cores e tokens completos](aura-palettes.json)

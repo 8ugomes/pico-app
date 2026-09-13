@@ -1,5 +1,15 @@
 # Pico — Deslopify
 
+## Aura Manteiga — fechamento do manual · 13/09/2026
+
+Identidade fechada sobre a escolha Aura + Manteiga, com diferenciação clara entre miniaturas de apresentação e escala real de leitura. Mantidas curvas, contornos e fontes da Aura; complementados pares semânticos, estados, ícones e aplicações. A orientação atual substitui as recomendações históricas de Ritual/Pistache, preservadas como registro de exploração.
+
+Revisão corrigiu a densidade da página de temas, exportação de PNG com dimensão fracionária e fallback tipográfico em documento de origem opaca. Aprendizados: isolar a peça na origem local antes de rasterizar, aguardar/verificar Syne/Manrope e conferir dimensões exatas; bordas funcionais em superfície elevada precisam de par próprio, mesmo quando a borda padrão passa no fundo comum. 50 pares aprovados, 32 páginas revisadas, SVGs preservados e máscara PWA verificada. Não confundir validação dos arquivos com teste do app real. [Manual e limites](brand-exploration/aura-manteiga/README.md).
+
+## Aura Manteiga — critérios de consolidação · 13/09/2026
+
+Preservar a linha escolhida: curvas amplas, assinatura Syne e interface Manrope. Fixar Manteiga/Cacau/Papel/Lavanda e retirar ambiguidades entre recomendação histórica e decisão atual. Manual deve mostrar uso real de marca, hierarquia de cor, contraste, logo em redução, áreas de proteção, tipografia, arte, voz, componentes/estados e todas as telas. Ícone maskable exige margem própria. Prompt de produção deve mapear o CSS atual, preservar privacidade/comportamento e evitar copiar dados ilustrativos ou o tamanho reduzido dos mockups. Exportar PDF legível e verificar as páginas renderizadas.
+
 ## Aura — variações de cor conferidas · 13/09/2026
 
 A lavanda original agora pode ser comparada com Pistache, Azul névoa, Rosa mineral, Maré e Manteiga. Preservadas as mesmas fotos, formas, fontes, telas e conteúdo. O pastel define a atmosfera; os tons profundos sustentam texto e ações; apoio permanece pontual, sem introduzir um elemento visual apenas para mostrar outra cor.

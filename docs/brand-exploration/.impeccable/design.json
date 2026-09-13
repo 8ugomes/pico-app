@@ -30,12 +30,16 @@
       "subsequentPreference": {
         "direction": "aura",
         "purpose": "Additional palette exploration only, keeping typography, logo, photographs and layout fixed.",
-        "finalPaletteApproved": false,
+        "finalPaletteApproved": true,
         "additionalPaletteArtifact": "aura-cores.html",
         "documentedHere": false,
         "paletteGuide": "AURA-CORES.md",
         "paletteTokens": "aura-palettes.json",
-        "paletteCount": 6
+        "paletteCount": 6,
+        "selectedPalette": "manteiga",
+        "selectedIdentityGuide": "aura-manteiga/MANUAL.md",
+        "selectedIdentityTokens": "aura-manteiga/tokens.json",
+        "productionApplied": false
       }
     },
     "colorMeta": {
