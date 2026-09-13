@@ -10,6 +10,7 @@ import { getSupabaseEnvironment } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/client";
 import { Button, buttonVariants } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
+import { emailDeliveryEnabled } from '../../../config/auth-policy.json';
 
 type Notice = { kind: "error" | "success"; text: string };
 type AuthMode = "login" | "signup";
@@ -91,7 +92,7 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
   }
 
   async function resendConfirmation() {
-    if (!client || !confirmationEmail || busy) return;
+    if (!client || !confirmationEmail || busy || !emailDeliveryEnabled) return;
     setBusy(true); setNotice(null);
     try {
       const { error } = await client.auth.resend({ type: 'signup', email: confirmationEmail, options: { emailRedirectTo: new URL(process.env.NEXT_PUBLIC_PICO_EMAIL_TEMPLATES === 'custom' ? '/auth/confirm' : '/auth/callback', location.origin).href } });
@@ -141,7 +142,8 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
         </fieldset>
         {notice && <p className={`auth-notice notice-${notice.kind}`} role={notice.kind === "error" ? "alert" : "status"}>{notice.text}</p>}
       </form>
-      {confirmationEmail && <Button variant="quiet" disabled={busy} onClick={resendConfirmation}>Reenviar confirmação</Button>}
+      {signup && !emailDeliveryEnabled && <p className="form-note">Guarde sua senha. A recuperação por e-mail ainda não está disponível nesta beta.</p>}
+      {confirmationEmail && emailDeliveryEnabled && <Button variant="quiet" disabled={busy} onClick={resendConfirmation}>Reenviar confirmação</Button>}
       <p className="auth-switch">{signup ? "Já tá no Pico?" : "Ainda não tá no Pico?"} <Link href={signup ? "/login" : "/signup"}>{signup ? "Entrar" : "Criar conta"}</Link></p>
       {!signup && <p className="auth-switch"><Link href="/recuperar">Esqueci minha senha</Link></p>}
       <p className="auth-switch"><Link href="/privacidade">Privacidade no Pico</Link></p>

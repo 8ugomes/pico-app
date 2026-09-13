@@ -1,0 +1,28 @@
+{
+  "at": "2026-09-13T14:42:57.014Z",
+  "projectRef": "bxjhqxdfknspxezgftyz",
+  "db": {
+    "active_operators": 1,
+    "anon_auth_read": false,
+    "auth_users": 1,
+    "client_auth_read": false,
+    "definers_without_empty_search_path": 0,
+    "migrations": 24,
+    "non_bcrypt_passwords": 0,
+    "public_buckets": 0,
+    "public_credential_columns": 0,
+    "public_tables": 26,
+    "public_tables_without_rls": 0
+  },
+  "auth": {
+    "auth.additional_redirect_urls": [
+      "https://pico-internal.vercel.app/auth/callback",
+      "https://pico-internal.vercel.app/auth/confirm",
+      "https://pico-app-sepia.vercel.app/auth/callback",
+      "https://pico-app-sepia.vercel.app/auth/confirm"
+    ],
+    "auth.email.secure_password_change": true,
+    "auth.site_url": "https://pico-app-sepia.vercel.app"
+  },
+  "tlsEnforced": true
+}

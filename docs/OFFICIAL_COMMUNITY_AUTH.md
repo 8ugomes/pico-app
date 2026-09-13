@@ -1,3 +1,5 @@
+> Decisão posterior na rodada de estabilidade (13/09/2026): cadastro com e-mail e senha, sem confirmação e sem SMTP, expressamente escolhido pelo responsável. `config/auth-policy.json` documenta a política; `scripts/configure-beta-access.mjs` altera exclusivamente a confirmação. Novos cadastros são autoconfirmados pelo provedor, sem comprovar titularidade do endereço. RLS, admissões, suspensão, revogação e exclusão permanecem. Recuperação por e-mail indisponível. [Evidência e estado aplicado](STABILITY_REVIEW.md). As exigências de confirmação abaixo registram a política anterior.
+
 > Preparação do beta: responsável reiterou cadastro pelo link, sem convite obrigatório. [Reforços de segurança e pendências atuais](BETA_SECURITY.md). Registros de ambiente/versão abaixo preservam etapas anteriores.
 
 > Atualização de publicação: sincronização com produção autorizada em 13/09/2026; migration e política de senha já aplicadas no principal. [Preparação, destino e verificação da revisão servida](ONBOARDING_RELEASE.md). SMTP continua pendente. As referências abaixo a “somente desenvolvimento”/“não publicado” registram a etapa anterior.

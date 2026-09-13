@@ -1,3 +1,5 @@
+> Política vigente da beta: operar sem SMTP e sem confirmação, por decisão expressa nesta rodada. O cadastro não depende de envio de e-mail; recuperação/reenvio ficam indisponíveis. As instruções abaixo são para habilitar entrega futuramente. Após validar SMTP, atualizar `config/auth-policy.json`, aplicar a política e publicar o app em conjunto. [Revisão atual](STABILITY_REVIEW.md).
+
 # E-mails do Pico — configuração pendente
 
 Em 13/09/2026 o responsável confirmou que ainda não tem domínio próprio nem provedor SMTP. Não há credenciais a configurar nesta rodada. Não divulgar cadastro aberto antes de concluir a validação abaixo.

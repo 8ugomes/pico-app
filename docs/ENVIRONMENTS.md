@@ -1,3 +1,5 @@
+> Rodada de estabilidade de 13/09/2026: nova decisão permite cadastro por senha sem confirmação/SMTP. Destinos mantidos: Vercel `pico-app` + Supabase principal. Nenhuma referência a Render foi encontrada no código, configuração ou histórico do repositório. [Auditoria e limites medidos](STABILITY_REVIEW.md). As notas de confirmação abaixo são históricas.
+
 > Atualização de publicação: sincronização com produção autorizada em 13/09/2026; migration e política de senha já aplicadas no principal. [Preparação, destino e verificação da revisão servida](ONBOARDING_RELEASE.md). SMTP continua pendente. As referências abaixo a “somente desenvolvimento”/“não publicado” registram a etapa anterior.
 
 > Atualização de 13/09/2026: o responsável escolheu cadastro e acesso imediato após confirmação do e-mail. Implementação/migration/política de senha validadas no desenvolvimento; principal auditado sem alterações. O estado histórico de convite abaixo ainda descreve a publicação existente. [Estado por ambiente e testes](OFFICIAL_COMMUNITY_AUTH.md). Domínio e SMTP inexistentes, conforme informado pelo responsável; [configuração pendente](EMAIL_SETUP.md).

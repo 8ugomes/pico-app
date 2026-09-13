@@ -31,7 +31,7 @@ Navegação principal: Início, Pessoas, Comunidades, Arenas e Perfil. Conteúdo
 
 O onboarding assistido deve ajudar a entender e usar controles reais, com pausa, saída e retomada. É opcional e não equivale a IA, atendimento humano ou assistente de voz. A configuração inicial de perfil, o aviso de entrada na comunidade oficial e o tutorial têm finalidades e persistências distintas. O tutorial não executa ações sociais nem concede acesso. Consulte [domínios](pico-domains.md) e [onboarding](ONBOARDING.md).
 
-Cadastro aberto com e-mail confirmado e admissão automática não restaura contas suspensas, revogadas ou excluídas. Audiências, papéis e RLS continuam vigentes. Demo é explicitamente rotulado e local; fotografia sintética do estudo não representa pessoas ou arenas reais. A pendência operacional de SMTP não pode ser resolvida ocultando confirmação de e-mail.
+Cadastro com e-mail e senha, sem confirmação e com admissão automática não restaura contas suspensas, revogadas ou excluídas. Audiências, papéis e RLS continuam vigentes. Demo é explicitamente rotulado e local; fotografia sintética do estudo não representa pessoas ou arenas reais. Decisão expressa da rodada de estabilidade: beta sem SMTP e sem confirmação. O endereço informado não comprova titularidade; recuperação por e-mail fica indisponível e isso deve ser informado na entrada.
 
 Fora do escopo atual: reservas, pagamentos, B2B, anúncios, IA/voz, ranking avançado, presença ou mapa em tempo real, localização contínua e app nativo. Um redesign integral pode reorganizar a apresentação e a assistência da jornada; não autoriza ampliar esse escopo.
 

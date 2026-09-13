@@ -1,5 +1,13 @@
 ## 2026-09-13 — Avatar e perfil antes de explorar
 
+## 2026-09-13 — estabilidade e beta sem confirmação
+
+- Política explícita de cadastro por e-mail/senha sem confirmação; script aplica só essa propriedade no provedor e confere o resultado. Sem SMTP, recuperação/reenvio não prometem entrega.
+- Limite de tempo para Auth no navegador e conferência de admissão, evitando carregamento indefinido em falhas de rede.
+- Ensaio reproduzível: 1.500 leituras com 16 identidades até 30 req/s, sem erros no cenário local + Supabase de desenvolvimento; auditoria remota e regressões de segurança. Fixture de Auth atualizada para confirmar foto antes de concluir perfil.
+- Monitor silencioso de disponibilidade dos componentes reais a cada 10 minutos. Busca completa não encontrou Render; [evidência e limites](STABILITY_REVIEW.md).
+
+
 - Foto confirmada no cabeçalho móvel e lateral, compartilhada com o perfil e atualizada entre abas.
 - Configuração com foto, nome, usuário e esporte antes das telas sociais; bio/localização opcionais, Conta e edição própria preservadas.
 - API recusa salvar sem foto; campos sobrevivem à atualização do avatar e falhas. Selects com rótulos acessíveis.

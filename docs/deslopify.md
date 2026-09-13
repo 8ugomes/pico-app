@@ -1,5 +1,14 @@
 ## Perfil com foto — critérios antes de implementar · 13/09/2026
 
+### Fechamento da estabilidade e entrada
+
+Cadastro dispensa confirmação por decisão expressa; informar recuperação indisponível junto à criação da conta e na página de recuperação. Nenhum envio fictício. Corrigido carregamento sem prazo no Auth e na admissão. Amostra no navegador carregou campos e mensagem de recuperação sem erros. A fixture antiga de Auth ignorava a foto obrigatória publicada: adequar o teste ao fluxo real, sem remover a exigência. Capacidade apresentada por requisições/segundo e cenário medido, sem inventar número máximo de usuários. [Relatório](STABILITY_REVIEW.md).
+
+## Estabilidade da beta · critérios de 13/09/2026
+
+Validar que entrada, carregamento, falhas, retomada e ações sociais funcionam sem travar, preservando isolamento de contas e jogos privados. Apresentar capacidade com cenário, volume e latência medidos; não converter um smoke em promessa de disponibilidade. A automação precisa de destino comprovado e deve ficar silenciosa quando saudável. Explicar a dependência real de e-mail sem inventar confirmação, recuperação ou entrada já disponível.
+
+
 O avatar do cabeçalho deve mostrar a mesma imagem confirmada no perfil, com dimensão reservada e fallback honesto. Configuração inicial apresenta quatro requisitos: foto, nome, usuário e esporte; reconhecer somente foto salva e não um arquivo ainda em recorte. Foto visível e ação clara, sem esconder a escolha num disclosure durante onboarding. Campos opcionais incentivam expressão pessoal sem inventar benefício de engajamento medido. Etapa inicial antecede feed, aviso institucional e tutorial; Conta e direitos permanecem acessíveis. Rascunho resiste a atualizações; identidade nova descarta dados anteriores. Conferir leitura/toque/foco, ambos os temas e altura curta.
 
 # Pico — Deslopify

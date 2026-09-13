@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
+import { emailDeliveryEnabled } from '../../../config/auth-policy.json';
 
 export function RecoveryForm({ reset = false }: { reset?: boolean }) {
   const [client] = useState(createClient);
@@ -12,7 +13,7 @@ export function RecoveryForm({ reset = false }: { reset?: boolean }) {
   const [busy,setBusy] = useState(false);
   const [notice,setNotice] = useState<{error:boolean;text:string}|null>(null);
   async function submit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault(); if (!client || busy) return;
+    e.preventDefault(); if (!client || busy || (!reset && !emailDeliveryEnabled)) return;
     const form=e.currentTarget, data=new FormData(form);
     setBusy(true); setNotice(null);
     try {
@@ -39,6 +40,7 @@ export function RecoveryForm({ reset = false }: { reset?: boolean }) {
     } catch { setNotice({error:true,text:'Confira sua conexão e tente novamente.'}); }
     finally { setBusy(false); }
   }
+  if (!reset && !emailDeliveryEnabled) return <><p className="auth-notice" role="status">A recuperação por e-mail ainda não está disponível nesta beta. Se você está conectado em outro aparelho, mantenha essa sessão aberta.</p><p className="auth-switch"><Link href="/login">Voltar para entrar</Link></p></>;
   return <><form className="auth-form" onSubmit={submit}><fieldset disabled={busy || !client}>
     {reset ? <><Input id="password" name="password" label="Nova senha" type="password" autoComplete="new-password" disabled={changed} minLength={12} maxLength={72} required /><Input id="confirm" name="confirm" label="Repita a nova senha" type="password" autoComplete="new-password" disabled={changed} minLength={12} maxLength={72} required /></> : <Input id="email" name="email" label="E-mail da sua conta" type="email" autoComplete="email" maxLength={254} required />}
     <Button type="submit">{busy ? 'Aguarde…' : reset ? changed ? 'Encerrar sessões' : 'Salvar nova senha' : 'Enviar link'}</Button>

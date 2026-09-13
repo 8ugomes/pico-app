@@ -5,6 +5,7 @@ import { writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { createClient } from '@supabase/supabase-js';
 import { createServerClient } from '@supabase/ssr';
+import sharp from 'sharp';
 import { assertRemoteIdentity } from '../scripts/environment-guard.mjs';
 await assertRemoteIdentity(process.env,'hosted-test');
 process.umask(0o077);
@@ -27,6 +28,12 @@ try {
  check((await api(a,'/api/welcome',{action:'check'})).data===null,'incomplete profile is not enrolled');
  const sports=ok(await a.client.from('sports').select('id'),'read sports');
  const profile={action:'save_profile',name:'Teste de acesso A',username:'auth_'+a.id.replaceAll('-','').slice(0,12),bio:'',city:'',neighborhood:'',sportId:sports[0].id,level:'Iniciante',available:false};
+ // The published profile contract requires a confirmed photo before completion.
+ await api(a,'/api/social/mutate',profile,400);
+ const photo=await sharp({create:{width:32,height:32,channels:3,background:'#f2e3b5'}}).png().toBuffer();
+ const upload=await fetch(origin+'/api/media?bucket=avatars',{method:'POST',headers:{Origin:origin,'Content-Type':'image/png',Cookie:[...a.jar].map(([k,v])=>k+'='+v).join('; ')},body:photo,signal:AbortSignal.timeout(20000)});
+ check(upload.status===200,'controlled profile photo uploaded');
+ await api(a,'/api/social/mutate',{action:'set_avatar',path:(await upload.json()).data.path});
  await api(a,'/api/social/mutate',profile);
  await Promise.all([api(a,'/api/welcome',{action:'check'}),api(a,'/api/welcome',{action:'check'})]);
  const welcome=(await api(a,'/api/welcome',{action:'check'})).data;check(welcome.pending===true,'enrollment notice persists');
@@ -72,7 +79,11 @@ try {
  writeFileSync('.vercel/auth-password-storage-audit.json',audit,{mode:0o600});
  completed=true;
 } finally {
- for(const u of users)ok(await admin.auth.admin.deleteUser(u.id),'tracked test identity removed');
+ for(const u of users){
+  const photos=ok(await admin.storage.from('avatars').list(u.id,{limit:1000}),'list controlled photos');
+  if(photos.length)ok(await admin.storage.from('avatars').remove(photos.map(photo=>u.id+'/'+photo.name)),'controlled photos removed');
+  ok(await admin.auth.admin.deleteUser(u.id),'tracked test identity removed');
+ }
  writeFileSync('.vercel/auth-official-results.json',JSON.stringify({completed,checks:results.length,results,emailDeliveryTested:false,productionMutated:false},null,2));
  console.log('Auth/official hosted checks:',results.length,'completed:',completed,'fixtures cleaned:',users.length);
 }
