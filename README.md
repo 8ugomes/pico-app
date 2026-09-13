@@ -46,13 +46,13 @@ Demonstração exige `NEXT_PUBLIC_PICO_ENV=demo` e `PICO_ENV=demo`, sem chaves S
 | /admin | Administração global: acesso beta, papéis, pedidos, catálogo/custódia e moderação auditada |
 | /arenas e /arenas/[slug] | Catálogo permitido pela admissão, participação reversível, perfil do local, mural e comunidades |
 | /arenas/[slug]/gestao | Edição versionada, imagens, modalidades, equipe, convites e transferência conforme papel |
-| /comunidades | Criar/encontrar comunidades independentes ou vinculadas; entrada aberta, aprovada ou por convite |
+| /comunidades | Buscar por nome em Explorar ou Minhas comunidades; grupos independentes ou vinculados, com entrada aberta, aprovada ou por convite |
 | /comunidades/[slug]/gestao | Informações, participantes, papéis, fotos, convites e vínculo de arena |
 | /feed | Início com atalhos aos próprios grupos/arenas e estado inicial orientado à descoberta. Post canônico: perfil, mural e grupos selecionados; audiência explícita, curtidas/comentários/denúncia; sem sugestão derivada de presença |
 | /jogos | Registro privado de jogo realizado: arena, modalidade e data; correção/exclusão própria; compartilhar é uma ação separada com audiência/destinos explícitos; sem publicação ou aviso automático |
 | /checkin | Compatibilidade de links: redireciona para /jogos |
 | /perfil e /perfil/[username] | Perfil, esportes, avatar com recorte, publicações e vínculos visíveis; perfil próprio com abas e editor organizado separado; sem e-mail alheio |
-| /descobrir | Interesses, vínculos permitidos e conexões unilaterais; sem usar histórico privado |
+| /descobrir | Buscar por nome/@usuário, combinar esporte/nível/arena e acompanhar pessoas; sem usar histórico privado |
 | /conta | Bloqueios, denúncias próprias, fotos sem uso e exclusão com senha; recursos geridos entram em custódia |
 | /recuperar, /redefinir-senha | PKCE por padrão; fluxo oficial por token preparado para templates próprios, ainda sem entrega externa comprovada |
 | /instalar | Instruções por navegador, manifesto, rede e versão; atualização por decisão explícita |

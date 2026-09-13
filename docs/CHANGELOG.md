@@ -1,3 +1,10 @@
+## 2026-09-13 — busca de pessoas e comunidades
+
+- Atalho Buscar no cabeçalho, campo por nome/@usuário em Pessoas e acesso direto à busca de comunidades.
+- Comunidades abre Explorar; busca por nome com alternativa Minhas comunidades e ampliação de escopo sem apagar o texto.
+- Filtro no banco antes de paginar, sem distinção de caixa/acentos; caracteres literais, limites, timeout, descarte de respostas antigas e recuperação de erros. Sem ampliar acesso a perfis ou grupos privados.
+- Migration aditiva com leitor antigo preservado; tipos gerados no desenvolvimento. Testes de banco, UI e 61 verificações reais com limpeza; integração/publicação coordenadas depois do catálogo de arenas. [Detalhes](SEARCH.md).
+
 ## 2026-09-13 — Avatar e perfil antes de explorar
 
 ## 2026-09-13 — estabilidade e beta sem confirmação

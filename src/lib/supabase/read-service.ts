@@ -31,9 +31,11 @@ export function parseReadRequest(params: URLSearchParams): ReadRequest {
     const sportId = params.get('sportId') ?? undefined;
     const arenaId = params.get('arenaId') ?? undefined;
     const level = params.get('level') as Level | null;
+    const search = (params.get('search') ?? '').trim();
+    if (search.length > 100) throw new ReadError('invalid_request', 400);
     if (params.has('active')) throw new ReadError('invalid_request', 400);
     if (!/^\d{1,5}$/.test(offset) || Number(offset) > 10000 || (sportId && !uuidPattern.test(sportId)) || (arenaId && !uuidPattern.test(arenaId)) || (level && !levels.includes(level))) throw new ReadError('invalid_request', 400);
-    return { resource, offset: Number(offset), sportId, arenaId, level: level ?? undefined };
+    return { resource, offset: Number(offset), sportId, arenaId, level: level ?? undefined, search };
   }
   if (resource === 'feed' || resource === 'comments') {
     const value = params.get('offset') ?? '0';
@@ -73,7 +75,7 @@ export async function readSocial(client: SupabaseClient<Database>, request: Read
   }
   if (request.resource === 'discover') {
     await requireUser(client);
-    const { data, error } = await client.rpc('discover_players', { p_offset: request.offset, ...(request.sportId ? { p_sport_id: request.sportId } : {}), ...(request.arenaId ? { p_arena_id: request.arenaId } : {}), ...(request.level ? { p_level: request.level } : {}) });
+    const { data, error } = await client.rpc('search_players', { p_search: request.search ?? '', p_offset: request.offset, ...(request.sportId ? { p_sport_id: request.sportId } : {}), ...(request.arenaId ? { p_arena_id: request.arenaId } : {}), ...(request.level ? { p_level: request.level } : {}) });
     if (error || !data) throw new ReadError('unavailable');
     const rows = data.slice(0,24);
     const avatars = rows.length ? await client.from('profiles').select('id,avatar_path').in('id',rows.map(p=>p.id)) : { data: [], error: null };

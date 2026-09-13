@@ -1,0 +1,23 @@
+{
+  "checks": [
+    "@handle search opens the correct profile",
+    "new search resets server pagination",
+    "empty search recovers by clearing",
+    "late responses cannot overwrite the latest search",
+    "people errors allow retry",
+    "community directory starts in Explore",
+    "private group access remains labeled",
+    "private description is absent",
+    "expand scope preserves search text",
+    "community errors allow retry",
+    "desktop has no horizontal overflow",
+    "320px enlarged text has no horizontal overflow",
+    "search accepts keyboard focus",
+    "search makes no social writes",
+    "no browser runtime errors"
+  ],
+  "errors": [],
+  "writes": [],
+  "fixture": true,
+  "remoteValidated": false
+}

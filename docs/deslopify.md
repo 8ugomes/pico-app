@@ -1,3 +1,11 @@
+## Busca de pessoas e comunidades — revisão · 13/09/2026
+
+A lupa do cabeçalho e o campo antes dos filtros dão entrada reconhecível à busca. Explore é o escopo inicial de comunidades; a seleção Minhas comunidades não se confunde com o catálogo todo, e o vazio permite ampliar o escopo sem perder o texto. Removidas sugestões paralelas durante busca de pessoas. Amostra em 390 px/claro, 1280 px/escuro e 320 px/200%: título e link agora quebram em linhas quando necessário e o campo tem um único contorno de foco. Resultado privado mantém condição de entrada e oculta descrição. Falha/retry, descarte de resposta atrasada e demo sem gravações conferidos; Supabase real validado separadamente. Refinamentos da tarefa de arenas serão preservados na integração.
+
+### Critérios registrados antes da execução
+
+Campo com lupa logo abaixo do título, rótulo acessível e exemplo concreto de nome/@usuário. Comunidades abre o catálogo explorável; o escopo Minhas comunidades permanece explícito. Uma busca não deve exibir sugestões alheias como se fossem resultados, reter resultados antigos durante nova consulta ou exigir limpar filtros invisíveis. Mostrar carregamento, vazio recuperável, erro com nova tentativa e paginação após o filtro. Preservar audiência e condições de entrada, usar componentes e tokens Aura existentes. Atalho de busca reconhecível no cabeçalho; ligação simples entre Pessoas e Comunidades.
+
 ## Perfil com foto — critérios antes de implementar · 13/09/2026
 
 ### Fechamento da estabilidade e entrada

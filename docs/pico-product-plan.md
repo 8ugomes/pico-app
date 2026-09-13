@@ -1,3 +1,18 @@
+## Busca de pessoas e comunidades — PLAN · 13/09/2026
+
+### Implementação e validação
+
+Campo por nome/@usuário em Pessoas, atalho Buscar no cabeçalho, ligação entre os destinos e Comunidades em Explorar. Busca normalizada no banco antes da paginação, com texto literal, limites e filtros combináveis. Estados antigos descartados, debounce, timeout e recuperação; demo permanece local. RPC nova preserva o leitor antigo e as permissões sociais. Migration aplicada somente no desenvolvimento nesta etapa; tipos gerados desse projeto.
+
+Lint, typecheck, build conectado e testes locais aprovados; smoke real de desenvolvimento passou em 61 verificações com duas contas e um grupo privados temporários, totalmente removidos. UI com fixtures: 15 verificações; demo: cinco, sem envio social. [Contrato e evidências](SEARCH.md). Integração aguarda o release de arenas e preservará seus refinamentos em listas vinculadas; publicação principal terá recibo próprio.
+
+
+Pedido autoriza implementar busca por nome/@usuário e comunidades, coordenar com a tarefa de arenas e entregar commit final na main. Trabalho em `codex/people-community-search`, worktree próprio sobre `d11781f`; catálogo de arenas publica primeiro, busca integra depois. Landing e materiais paralelos ficam preservados.
+
+Adicionar campo visível em Pessoas, busca no servidor antes da paginação e combinação com filtros existentes. Nomes sem distinção de maiúsculas/acentos, @ opcional para usuário e caracteres literais. Reaproveitar RPC de descoberta compatível por nova função; manter RLS, bloqueios, perfis completos, admissão e jogos privados. Comunidades inicia em Explorar, com busca evidente e alternância para Minhas comunidades; preservar ficha mínima de grupos privados. Busca demo usa somente dados locais rotulados. Criar atalho de busca no cabeçalho e ligação entre os dois destinos existentes.
+
+Antes do fechamento: testes de consultas/paginação/limites/acesso, smoke no app, revisão 390px/claro e desktop/escuro, lint/typecheck/build. Migration aditiva validada no desenvolvimento antes do principal; publicação sequencial pela main protegida, após confirmação da outra tarefa.
+
 ## Foto no cabeçalho e perfil antes de explorar — plano · 13/09/2026
 
 ### Fechamento da validação de estabilidade
