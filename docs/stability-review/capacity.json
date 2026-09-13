@@ -1,0 +1,139 @@
+{
+  "at": "2026-09-13T14:41:57.612Z",
+  "completed": true,
+  "cleanupComplete": true,
+  "immediateSignup": true,
+  "accounts": 16,
+  "stages": [
+    {
+      "targetRps": 5,
+      "scheduled": 150,
+      "completed": 150,
+      "dropped": 0,
+      "errors": 0,
+      "peakInFlight": 2,
+      "elapsedMs": 29912,
+      "successfulRps": 5.01,
+      "statuses": {
+        "200": 150
+      },
+      "p50Ms": 80,
+      "p95Ms": 266,
+      "p99Ms": 363,
+      "maxMs": 369,
+      "routes": [
+        {
+          "path": "/api/posts",
+          "requests": 50,
+          "p50Ms": 147,
+          "p95Ms": 284,
+          "p99Ms": 334,
+          "maxMs": 334
+        },
+        {
+          "path": "/api/social/read?resource=profile",
+          "requests": 50,
+          "p50Ms": 68,
+          "p95Ms": 206,
+          "p99Ms": 369,
+          "maxMs": 369
+        },
+        {
+          "path": "/api/games",
+          "requests": 50,
+          "p50Ms": 64,
+          "p95Ms": 230,
+          "p99Ms": 363,
+          "maxMs": 363
+        }
+      ]
+    },
+    {
+      "targetRps": 15,
+      "scheduled": 450,
+      "completed": 450,
+      "dropped": 0,
+      "errors": 0,
+      "peakInFlight": 13,
+      "elapsedMs": 29985,
+      "successfulRps": 15.01,
+      "statuses": {
+        "200": 450
+      },
+      "p50Ms": 97,
+      "p95Ms": 689,
+      "p99Ms": 1142,
+      "maxMs": 2020,
+      "routes": [
+        {
+          "path": "/api/posts",
+          "requests": 150,
+          "p50Ms": 145,
+          "p95Ms": 801,
+          "p99Ms": 1295,
+          "maxMs": 1566
+        },
+        {
+          "path": "/api/social/read?resource=profile",
+          "requests": 150,
+          "p50Ms": 72,
+          "p95Ms": 560,
+          "p99Ms": 888,
+          "maxMs": 1100
+        },
+        {
+          "path": "/api/games",
+          "requests": 150,
+          "p50Ms": 67,
+          "p95Ms": 620,
+          "p99Ms": 1142,
+          "maxMs": 2020
+        }
+      ]
+    },
+    {
+      "targetRps": 30,
+      "scheduled": 900,
+      "completed": 900,
+      "dropped": 0,
+      "errors": 0,
+      "peakInFlight": 6,
+      "elapsedMs": 30040,
+      "successfulRps": 29.96,
+      "statuses": {
+        "200": 900
+      },
+      "p50Ms": 76,
+      "p95Ms": 164,
+      "p99Ms": 209,
+      "maxMs": 346,
+      "routes": [
+        {
+          "path": "/api/posts",
+          "requests": 300,
+          "p50Ms": 141,
+          "p95Ms": 191,
+          "p99Ms": 258,
+          "maxMs": 346
+        },
+        {
+          "path": "/api/social/read?resource=profile",
+          "requests": 300,
+          "p50Ms": 67,
+          "p95Ms": 112,
+          "p99Ms": 164,
+          "maxMs": 189
+        },
+        {
+          "path": "/api/games",
+          "requests": 300,
+          "p50Ms": 64,
+          "p95Ms": 99,
+          "p99Ms": 133,
+          "maxMs": 209
+        }
+      ]
+    }
+  ],
+  "scope": "Next production build on local Mac + hosted development Supabase; small dataset, paced mixed reads, 90 seconds total; excludes image traffic, Vercel capacity and long-term saturation."
+}

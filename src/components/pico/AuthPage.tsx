@@ -3,6 +3,7 @@ import { ArrowLeft } from "lucide-react";
 import { Brand } from "./Brand";
 import { AuthForm } from "./AuthForm";
 import { GlassPanel } from "@/components/ui/GlassPanel";
+import { emailConfirmationRequired } from '../../../config/auth-policy.json';
 
 export function AuthPage({ mode, confirmationError = false, passwordUpdated = false }: { mode: "login" | "signup"; confirmationError?: boolean; passwordUpdated?: boolean }) {
   const signup = mode === "signup";
@@ -13,7 +14,7 @@ export function AuthPage({ mode, confirmationError = false, passwordUpdated = fa
       <main id="main-content" className="auth-main">
         <GlassPanel className="auth-panel">
           <h1>{signup ? <>Seu lugar<br />na areia.</> : <>Bom te ver<br />por aqui.</>}</h1>
-          <p className="auth-description">{signup ? "Crie sua conta e confirme seu e-mail para encontrar sua turma." : "Entre para continuar a conversa."}</p>
+          <p className="auth-description">{signup ? emailConfirmationRequired ? "Crie sua conta e confirme seu e-mail para encontrar sua turma." : "Crie sua conta para encontrar sua turma." : "Entre para continuar a conversa."}</p>
           {confirmationError && <p className="auth-notice notice-error" role="alert">Não conseguimos confirmar seu e-mail. O link pode ter expirado ou ter sido aberto em outro navegador. Abra o link mais recente no navegador em que fez o cadastro.</p>}
           {passwordUpdated && <p className="auth-notice notice-success" role="status">Senha alterada. Entre com sua nova senha.</p>}
           <AuthForm mode={mode} />

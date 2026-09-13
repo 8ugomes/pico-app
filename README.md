@@ -1,3 +1,5 @@
+> Atualização da beta de 13/09/2026: o responsável decidiu cadastro com e-mail e senha, sem confirmação e sem SMTP. Recuperação por e-mail indisponível. A política explícita está em `config/auth-policy.json`; configuração auditável em `scripts/configure-beta-access.mjs`. [Revisão atual de estabilidade](docs/STABILITY_REVIEW.md). A restrição SMTP dos registros anteriores foi substituída por essa decisão.
+
 > Preparação para beta: [segurança, testes e pendências de abertura](docs/BETA_SECURITY.md). As correções podem ser publicadas; novos cadastros dependem de SMTP e da definição operacional de privacidade.
 
 # Pico

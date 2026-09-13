@@ -1,5 +1,18 @@
 ## Foto no cabeçalho e perfil antes de explorar — plano · 13/09/2026
 
+### Fechamento da validação de estabilidade
+
+Cadastro sem confirmação configurado e verificado no principal, preservando a conta existente. Interface explica ausência de recuperação; Auth/admissão têm timeout. Main publicada usada como base, com landing local preservada. 99 testes locais, 211 verificações funcionais hospedadas, 403 de segurança, 101 de autenticação/comunidade e 1.500 leituras ritmadas sem erros até 30 req/s no cenário local + desenvolvimento. Monitor de app/Auth/banco criado a cada 10 minutos; Render não encontrado. [Auditoria, resultados e limites](STABILITY_REVIEW.md). Publicação por PR/CI e revisão servida devem constar no recibo de release.
+
+## Validação de estabilidade para distribuição da beta · PLAN · 13/09/2026
+
+Decisão recebida nesta rodada: cadastro com e-mail e senha **sem confirmação**, sem SMTP. Ajustar somente a política de confirmação do provedor, sem restaurar admissões nem alterar RLS; Supabase preenche a confirmação administrativa no cadastro imediato. Avisar que recuperação por e-mail está indisponível. Corrigir requisições de autenticação/acesso sem timeout, verificar signup real no desenvolvimento e validar a configuração aplicada no principal. A cópia isolada parte de `origin/main` para incluir a configuração obrigatória de perfil já publicada, preservando a landing local fora deste release. Busca em todas as refs e arquivos do repositório não encontrou Render.
+
+Revisar a versão atual, segurança de Auth/e-mail/senhas, RLS/Storage, APIs e dependências; confirmar configuração e revisão servidas no principal por leituras. Reexecutar testes locais e hospedados no desenvolvimento exclusivo e ampliar o ensaio de concorrência com limites, parada por erro e resultados reproduzíveis. Capacidade observada deve distinguir Next local, Supabase de desenvolvimento e Vercel principal, sem extrapolar usuários a partir de requisições.
+
+Responsável quer distribuir o link hoje sem SMTP e solicita ping periódico ao Render. Verificar infraestrutura real e documentação dos provedores; localizar a URL antes de criar automação. Registrar a incompatibilidade entre confirmação obrigatória e envio padrão, aguardando definição do acesso sem SMTP antes de alterar essa política sensível. Corrigir problemas comprovados, manter dados existentes, atualizar evidências/Deslopify/changelog e executar lint/typecheck/build antes do commit.
+
+
 Corrigir o avatar conectado no topo/lateral usando o perfil autorizado da conta atual. Compartilhar a leitura entre shell, perfil, gate e tutorial, atualizar após salvar/remover foto e invalidar na troca de identidade. Antes das telas sociais, exigir perfil salvo com foto, nome, usuário e modalidade principal; manter Conta/Acesso/Privacidade disponíveis. Bio, cidade e bairro são personalização opcional, sem coleta desnecessária. Contas já completas não refazem o percurso. Tutorial opcional e aviso institucional aparecem somente depois do perfil pronto.
 
 Reutilizar upload privado/recorte, orientar confirmação da foto e mostrar preenchimento real dos quatro requisitos. Validar a foto também na API de salvar perfil; o gate é jornada de produto e não substitui admissão/RLS. Sem migration ou nova política de acesso. Validar links diretos, recarga, falha, troca de foto/conta, campos preservados, 320/390 px e desktop, lint/typecheck/testes pertinentes/build. Publicar pela main/PR/CI no destino já autorizado. Trabalho isolado da landing paralela.

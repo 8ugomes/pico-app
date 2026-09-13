@@ -1,0 +1,133 @@
+[
+  {
+    "path": "/",
+    "status": 307,
+    "ms": 1349,
+    "bytes": 9663,
+    "csp": true,
+    "noStore": true
+  },
+  {
+    "path": "/signup",
+    "status": 200,
+    "ms": 161,
+    "bytes": 18876,
+    "csp": true,
+    "noStore": true
+  },
+  {
+    "path": "/login",
+    "status": 200,
+    "ms": 79,
+    "bytes": 18727,
+    "csp": true,
+    "noStore": true
+  },
+  {
+    "path": "/recuperar",
+    "status": 200,
+    "ms": 96,
+    "bytes": 17094,
+    "csp": true,
+    "noStore": true
+  },
+  {
+    "path": "/feed",
+    "status": 200,
+    "ms": 118,
+    "bytes": 30654,
+    "csp": true,
+    "noStore": true
+  },
+  {
+    "path": "/arenas",
+    "status": 200,
+    "ms": 83,
+    "bytes": 31019,
+    "csp": true,
+    "noStore": true
+  },
+  {
+    "path": "/descobrir",
+    "status": 200,
+    "ms": 96,
+    "bytes": 30689,
+    "csp": true,
+    "noStore": true
+  },
+  {
+    "path": "/jogos",
+    "status": 200,
+    "ms": 85,
+    "bytes": 30354,
+    "csp": true,
+    "noStore": true
+  },
+  {
+    "path": "/perfil",
+    "status": 200,
+    "ms": 79,
+    "bytes": 30667,
+    "csp": true,
+    "noStore": true
+  },
+  {
+    "path": "/conta",
+    "status": 200,
+    "ms": 87,
+    "bytes": 30264,
+    "csp": true,
+    "noStore": true
+  },
+  {
+    "path": "/comunidades",
+    "status": 200,
+    "ms": 90,
+    "bytes": 30714,
+    "csp": true,
+    "noStore": true
+  },
+  {
+    "path": "/privacidade",
+    "status": 200,
+    "ms": 83,
+    "bytes": 29331,
+    "csp": true,
+    "noStore": true
+  },
+  {
+    "path": "/api/posts",
+    "status": 401,
+    "deniesAnonymous": true
+  },
+  {
+    "path": "/api/games",
+    "status": 401,
+    "deniesAnonymous": true
+  },
+  {
+    "path": "/api/access",
+    "status": 401,
+    "deniesAnonymous": true
+  },
+  {
+    "path": "/api/social/read?resource=profile",
+    "status": 401,
+    "deniesAnonymous": true
+  },
+  {
+    "path": "/api/manage",
+    "status": 401,
+    "deniesAnonymous": true
+  },
+  {
+    "path": "/api/media?bucket=avatars&path=none",
+    "status": 401,
+    "deniesAnonymous": true
+  },
+  {
+    "path": "/api/communities",
+    "status": 401,
+    "deniesAnonymous": true
+  }
+]

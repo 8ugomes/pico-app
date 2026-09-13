@@ -1,3 +1,5 @@
+> Atualização de acesso: o responsável decidiu operar esta beta sem SMTP e sem confirmação de e-mail. Isso substitui o bloqueio de cadastro por SMTP e a exigência de confirmação nesta revisão histórica. Recuperação por e-mail indisponível; endereço autodeclarado não prova titularidade. [Revisão atual, testes e estado publicado](STABILITY_REVIEW.md).
+
 > Correção posterior desta data: o fluxo integral de perfil encontrou bloqueio de leitura `blob:` na etapa final do recorte. A CSP agora permite esse recurso local; envio real e armazenamento foram verificados. [Evidência atual](profile-setup-review/README.md).
 
 # Segurança e preparação do beta — 13/09/2026
