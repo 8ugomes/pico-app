@@ -4,10 +4,15 @@ export type FeedRow = Database['public']['Functions']['read_feed']['Returns'][nu
 type DiscoveryResult = Database['public']['Functions']['discover_players']['Returns'][number];
 export type DiscoveryRow = Omit<DiscoveryResult, 'arena_name' | 'arena_slug' | 'expires_at' | 'available'> & { avatar: string | null };
 export type ReadSport = { id: string; slug: SportId; name: string };
+export type ArenaDirectory = {
+  address: string; region: string; note: string; sourceUrl: string; checkedOn: string;
+  photos: { src: string; width: number; height: number; sourcePage: string }[];
+};
 export type ReadArena = {
   id: string; slug: string; name: string; description: string;
   neighborhood: string; city: string; image: string | null; isDemo: boolean;
   sports: ReadSport[];
+  directory?: ArenaDirectory;
 };
 export type ReadProfile = {
   id: string; username: string; name: string; bio: string; city: string; avatar: string | null; avatarPath: string | null;

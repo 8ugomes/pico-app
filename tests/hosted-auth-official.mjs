@@ -42,7 +42,7 @@ try {
  await api(a,'/api/welcome',{action:'acknowledge'},403,'https://untrusted.example');
  check((await api(a,'/api/welcome',{action:'check'})).data.pending,'CSRF cannot dismiss');
  await api(a,'/api/welcome',{action:'acknowledge'});check(!(await api(a,'/api/welcome',{action:'check'})).data.pending,'acknowledgment is persisted');
- const page=ok(await a.client.rpc('community_page',{p_slug:'pico-oficial'}),'official page');check(page.editorial.length===3&&page.pico_official,'institutional content');check(page.members.some(m=>m.id===a.id),'real member listed');
+ const page=ok(await a.client.rpc('community_page',{p_slug:'pico-oficial'}),'official page');check(page.editorial.length===1&&page.pico_official,'institutional content');check(page.members.some(m=>m.id===a.id),'real member listed');
  await api(a,'/api/communities',{action:'membership',id:welcome.id,memberAction:'leave'});await api(a,'/api/social/mutate',{...profile,sportId:sports[1].id});check((await api(a,'/api/welcome',{action:'check'})).data===null,'sport changes do not rejoin');
  check(Boolean((await a.client.from('profiles').select('email')).error),'email not in social profile schema');
  check(Boolean((await a.client.schema('auth').from('users').select('email,encrypted_password')).error),'Auth schema not exposed');

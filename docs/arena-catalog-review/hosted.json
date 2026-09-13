@@ -1,0 +1,16 @@
+{
+  "checks": 72,
+  "passed": true,
+  "projectRef": "tsebpkfnxjvhntosbkdu",
+  "origin": "http://localhost:3002",
+  "arenas": 17,
+  "scenarios": [
+    "anonymous denied",
+    "all covers served",
+    "follow persisted and deduplicated",
+    "claim requires operator review",
+    "one official community after approval",
+    "concise institutional editorial"
+  ],
+  "completedAt": "2026-09-13T15:15:58.247Z"
+}

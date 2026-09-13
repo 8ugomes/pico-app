@@ -20,7 +20,7 @@ test('official enrollment follows complete profile, is atomic, idempotent and re
    await save(db, BEACH);
    assert.equal((await db.query('select public.pico_welcome() w')).rows[0].w.pending, false);
    const page = (await db.query("select public.community_page('pico-oficial') p")).rows[0].p;
-   assert.equal(page.pico_official, true); assert.equal(page.editorial.length, 3); assert.equal(page.owner, null);
+   assert.equal(page.pico_official, true); assert.equal(page.editorial.length, 1); assert.equal(page.owner, null);
    await db.query("select public.community_membership($1,'leave')", [id]);
    await save(db); await db.query('select public.ensure_pico_membership()');
    assert.equal((await db.query('select public.pico_welcome() w')).rows[0].w, null);
