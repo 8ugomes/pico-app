@@ -1,0 +1,1391 @@
+{
+  "version": 1,
+  "checkedOn": "2026-09-13",
+  "city": "São Paulo",
+  "arenas": [
+    {
+      "id": "636e608f-9504-5cf7-92cc-39a3d34e9cfe",
+      "slug": "riplay-alto-do-ipiranga",
+      "name": "Riplay Alto do Ipiranga",
+      "city": "São Paulo",
+      "region": "Sul",
+      "neighborhood": "Vila Dom Pedro I",
+      "address": "Rua Gama Lobo, 1475",
+      "sports": [
+        "futevolei",
+        "beach-tennis",
+        "volei-praia"
+      ],
+      "description": "Esportes de areia no Alto do Ipiranga.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://riplaysports.com.br/unidades/",
+      "sources": [
+        {
+          "url": "https://riplaysports.com.br/unidades/",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address"
+          ]
+        },
+        {
+          "url": "https://totalpass.com/br/academias/riplay-alto-do-ipiranga/",
+          "kind": "venue-partner",
+          "supports": [
+            "address",
+            "sports",
+            "photos"
+          ]
+        }
+      ],
+      "photoPage": "https://totalpass.com/br/academias/riplay-alto-do-ipiranga/",
+      "photos": [
+        {
+          "src": "/images/arenas/riplay-alto-do-ipiranga-5-04e9c7fa49.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 235234,
+          "sha256": "04e9c7fa494d8663968dcdedbbed182baaad34a056d827ab0b5323ce0a151a92",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvb2l2bjNkenlobjM5ZWtoZHA5NnpxeXdqZmNwMHZmM2Z5cnR2ZWtud3oydmR2dXNwa2xrM2F0MmVidDVv",
+          "sourcePage": "https://totalpass.com/br/academias/riplay-alto-do-ipiranga/"
+        },
+        {
+          "src": "/images/arenas/riplay-alto-do-ipiranga-2-c7e0e63a8d.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 158852,
+          "sha256": "c7e0e63a8d6483e2572b05d458892e28a4996547a1355bbb4053f90c3cfdfec4",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvbWpseG5hczUwcjV2d2lpNmFwZ21mMjU5enM5dHFzdGFqa3diNWF3cGJod3k4ZTh2YmRtZHRmZG5uMjhv",
+          "sourcePage": "https://totalpass.com/br/academias/riplay-alto-do-ipiranga/"
+        },
+        {
+          "src": "/images/arenas/riplay-alto-do-ipiranga-3-54ad81934a.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 290686,
+          "sha256": "54ad81934ae36744068f853cc41b9005380a8a6764898226771839d1a619beac",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvbGM0ZzUyaGJhc255cjU2OXRidHNrenNlaHVoMjVoN3QxZnJ5ano0NjRqbG96a240aTh0ZG14dWw2MWQ5",
+          "sourcePage": "https://totalpass.com/br/academias/riplay-alto-do-ipiranga/"
+        },
+        {
+          "src": "/images/arenas/riplay-alto-do-ipiranga-4-7429f9d189.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 165160,
+          "sha256": "7429f9d18935996c3ea2012a939b64ce2e2c76f298a52be6e461134beebe426d",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvYzJycXZqZnl6a3g0azRyeWcxd3lhejliOGo1cXhubmVoeWQ1MGl1MGloc3kyaW1id3oyZ2FhczRhbHk2",
+          "sourcePage": "https://totalpass.com/br/academias/riplay-alto-do-ipiranga/"
+        },
+        {
+          "src": "/images/arenas/riplay-alto-do-ipiranga-6-286e821fb6.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 168432,
+          "sha256": "286e821fb6c876fdda133032eea98da395047150da7ec878158880b9a3a82cc8",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvMmV5MnJyeXl1emNhYmdxeWEzYzV1Y3ZqbXdxYjVwc3ZwY3ZwaGdocW9oNGI4cTVsNXFkbGl1aGlqeW1r",
+          "sourcePage": "https://totalpass.com/br/academias/riplay-alto-do-ipiranga/"
+        },
+        {
+          "src": "/images/arenas/riplay-alto-do-ipiranga-7-2c8e977e67.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 148776,
+          "sha256": "2c8e977e672fc6721980dd70b6c6d03a68f839d18cbe6dac10c5eb88794d2504",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvM2FscnQ2d2VmMTA1b3NrZ2hmOXkwZmJkM3VnZmQzYjlyaHFwNmk2NGQ5czA5Z3VpbGFzMmd5cGlwaDA2",
+          "sourcePage": "https://totalpass.com/br/academias/riplay-alto-do-ipiranga/"
+        },
+        {
+          "src": "/images/arenas/riplay-alto-do-ipiranga-8-0151ab1c29.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 165904,
+          "sha256": "0151ab1c2986037dc6275589ec86540a9d9b783d15a9c25439da5ee250ca8829",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvZzhmNGRxbHVtZzZzZmYxb3A5NTI3czc4ODFpNWhjNWF3OTM2YXFkazE3dGUxcnZkaWJ6MWphMXk5aWtr",
+          "sourcePage": "https://totalpass.com/br/academias/riplay-alto-do-ipiranga/"
+        }
+      ]
+    },
+    {
+      "id": "3c1d0409-8bf4-5131-b2c8-a2410a58b46d",
+      "slug": "riplay-bt-ipiranga",
+      "name": "Arena Riplay BT Ipiranga",
+      "city": "São Paulo",
+      "region": "Sul",
+      "neighborhood": "Ipiranga",
+      "address": "Rua Moreira e Costa, 474",
+      "sports": [
+        "beach-tennis"
+      ],
+      "description": "Unidade dedicada ao beach tennis no Ipiranga.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://riplaysports.com.br/unidades/",
+      "sources": [
+        {
+          "url": "https://riplaysports.com.br/unidades/",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address"
+          ]
+        },
+        {
+          "url": "https://totalpass.com/br/academias/arena-riplayy-beach-tennis/",
+          "kind": "venue-partner",
+          "supports": [
+            "address",
+            "sports",
+            "photos"
+          ]
+        }
+      ],
+      "photoPage": "https://totalpass.com/br/academias/arena-riplayy-beach-tennis/",
+      "photos": [
+        {
+          "src": "/images/arenas/riplay-bt-ipiranga-2-424576b0bf.webp",
+          "width": 1080,
+          "height": 720,
+          "bytes": 202532,
+          "sha256": "424576b0bf03d5812549043bad7d956fbf28b70cce206af5986e3da8f72a7880",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvMGJtcXUyejIzcjRoMDJ6dnl6dTlsbWxpc3J4OWx3N2Nhc3lzZmk4azY0aTdtczJ6dnY0eXlvYngwMHJw",
+          "sourcePage": "https://totalpass.com/br/academias/arena-riplayy-beach-tennis/"
+        },
+        {
+          "src": "/images/arenas/riplay-bt-ipiranga-3-dc76a05ee9.webp",
+          "width": 141,
+          "height": 235,
+          "bytes": 7946,
+          "sha256": "dc76a05ee973d21ea6b972a28dc3c4e330efdf6276e4f72b99a4a342a7afe7c4",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvMm8zMWkwODV1emNvM3UyYnFtbGNpMHJvaG4zNWZ2aXJuODY4ZTV5eXE3aWFzMnBqb3VlaWR5em40dTQ4",
+          "sourcePage": "https://totalpass.com/br/academias/arena-riplayy-beach-tennis/"
+        },
+        {
+          "src": "/images/arenas/riplay-bt-ipiranga-4-5920dfe06e.webp",
+          "width": 141,
+          "height": 235,
+          "bytes": 7320,
+          "sha256": "5920dfe06ed5b6ad432e2dd0348bc4c4eedd8c0821c6ac8d8f67b068ea0e28b2",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvb3J2eDVnaGdvZTJ5YWZzajd3MHZkdWR2N2VvanV6Njg4ZmN1cWNjemFmaWZyZGYycjBtdGpyaXFhYmpp",
+          "sourcePage": "https://totalpass.com/br/academias/arena-riplayy-beach-tennis/"
+        },
+        {
+          "src": "/images/arenas/riplay-bt-ipiranga-5-b0001e970b.webp",
+          "width": 765,
+          "height": 720,
+          "bytes": 131966,
+          "sha256": "b0001e970b619dd3a3a0d0df32a4a85907dbb597c41f1720b32b2daf2adc8b80",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvdXNhZWlkaDJld2Rma2cxYXdnNXd4bTh4Ym05Y3o2cnN1YTBpZjc2a3lhOXUwNXhoOXV0b2trc2tuOGlv",
+          "sourcePage": "https://totalpass.com/br/academias/arena-riplayy-beach-tennis/"
+        },
+        {
+          "src": "/images/arenas/riplay-bt-ipiranga-7-5dcdea6069.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 89274,
+          "sha256": "5dcdea6069e940dbc51cc22fa33a89f59a1b615c9c087f38e886afefb060afb2",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvZ21jZGNjZDY1bjd1NHVjZWRvcTQyZGswYzAyYjltNnE0dDR6M3NxdndwOXFhbWNweW9ycDc1N2wwa2ht",
+          "sourcePage": "https://totalpass.com/br/academias/arena-riplayy-beach-tennis/"
+        }
+      ]
+    },
+    {
+      "id": "93e115bd-e86b-50d5-9a86-57e42a7398fc",
+      "slug": "riplay-jardins",
+      "name": "Riplay Jardins",
+      "city": "São Paulo",
+      "region": "Oeste",
+      "neighborhood": "Pinheiros",
+      "address": "Avenida Rebouças, 4015",
+      "sports": [
+        "futevolei",
+        "beach-tennis",
+        "volei-praia"
+      ],
+      "description": "A unidade Jardins da Riplay fica em Pinheiros.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://riplaysports.com.br/unidades/",
+      "sources": [
+        {
+          "url": "https://riplaysports.com.br/unidades/",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address"
+          ]
+        },
+        {
+          "url": "https://totalpass.com/br/academias/riplay-jardins/",
+          "kind": "venue-partner",
+          "supports": [
+            "address",
+            "sports",
+            "photos"
+          ]
+        }
+      ],
+      "photoPage": "https://totalpass.com/br/academias/riplay-jardins/",
+      "photos": [
+        {
+          "src": "/images/arenas/riplay-jardins-2-9532e354da.webp",
+          "width": 1080,
+          "height": 720,
+          "bytes": 182446,
+          "sha256": "9532e354da485464db692c5fef4b11cb79bfd638ac57d88fe09640eb5c2117d9",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvNm14OTZ2bDI5ZDJ3djNpYXd5ZWF1dHB4dWp6OGx1enhmeGt3bmNxMGNndXYzNHM4dWMxbHUyanF3Znhv",
+          "sourcePage": "https://totalpass.com/br/academias/riplay-jardins/"
+        },
+        {
+          "src": "/images/arenas/riplay-jardins-1-1250d2ffb7.webp",
+          "width": 1080,
+          "height": 720,
+          "bytes": 127792,
+          "sha256": "1250d2ffb731b95b48e2806f93fe566fdc0a720c92edab7fbe5d117e13bcfe65",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvd2d3bWV1bzZ6ZnY0Y2V0djJtb2Znbnl3d3RvcWg3OXJtYzFvNG1mZzBsYTVqemt0Zmg1emw3cmF6NXV6",
+          "sourcePage": "https://totalpass.com/br/academias/riplay-jardins/"
+        },
+        {
+          "src": "/images/arenas/riplay-jardins-4-fbca6024ba.webp",
+          "width": 1080,
+          "height": 720,
+          "bytes": 133106,
+          "sha256": "fbca6024baaf1b4def5045e7e246e1cdb75476d6669b6629c787639f125e8033",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvZzRqc2M1MGhsanRvbWw5cmFyaDZzNHlhZGdmcDN1aG53Z2psc2tvMGc0bWx2bGxodHhla25uMmJ2c2J4",
+          "sourcePage": "https://totalpass.com/br/academias/riplay-jardins/"
+        },
+        {
+          "src": "/images/arenas/riplay-jardins-5-b1b19d9116.webp",
+          "width": 245,
+          "height": 206,
+          "bytes": 11236,
+          "sha256": "b1b19d9116e4eb83cc18ef5e5e10e877e2a5aff5720489c28aa7c6755917f2e2",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvZjU2d2Q3a2pjaGNnaTJhMmh1OTVxZWZoNmF0Y2V2d2szZmJ2ZDlzb3djMWJrbjA3NjhuaDIwa2pncmJ1",
+          "sourcePage": "https://totalpass.com/br/academias/riplay-jardins/"
+        }
+      ]
+    },
+    {
+      "id": "79b0498d-99ac-50de-a69d-6db7e2f35961",
+      "slug": "riplay-pompeia",
+      "name": "Riplay Pompeia",
+      "city": "São Paulo",
+      "region": "Oeste",
+      "neighborhood": "Barra Funda",
+      "address": "Rua Inocêncio Tobias, 75",
+      "sports": [
+        "futevolei",
+        "beach-tennis",
+        "volei-praia"
+      ],
+      "description": "Seis quadras de areia e espaço de convivência na região da Pompeia.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://riplaysports.com.br/unidades/",
+      "sources": [
+        {
+          "url": "https://riplaysports.com.br/unidades/",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address"
+          ]
+        },
+        {
+          "url": "https://totalpass.com/br/academias/riplay-sports-pompeia/",
+          "kind": "venue-partner",
+          "supports": [
+            "address",
+            "sports",
+            "photos"
+          ]
+        },
+        {
+          "url": "https://wellhub.com/pt-br/search/partners/riplay-pompeia-parque-industrial-tomas-edson/",
+          "kind": "venue-partner",
+          "supports": [
+            "sports",
+            "six-sand-courts"
+          ]
+        }
+      ],
+      "photoPage": "https://totalpass.com/br/academias/riplay-sports-pompeia/",
+      "photos": [
+        {
+          "src": "/images/arenas/riplay-pompeia-2-214f18e19f.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 152992,
+          "sha256": "214f18e19f7bf2e15d0628f48ba51f158d7d7b310ad73224064cf0557b5564e5",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvZTh3aThoZ3dpaWg5NTZudzByZGY5cWV6M24zM200MGhvYTRsZGsxNjN5NmFkZTQ4cmIyODlvZ3g0ejlr",
+          "sourcePage": "https://totalpass.com/br/academias/riplay-sports-pompeia/"
+        },
+        {
+          "src": "/images/arenas/riplay-pompeia-3-4b48f48002.webp",
+          "width": 960,
+          "height": 720,
+          "bytes": 139544,
+          "sha256": "4b48f480020714416429cf67196f8b30f15b2b2c8abfab6514d22d94b751ab6c",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvYnZ0eGN4MDk5d3AyMGU1dGhxMjNua2djaWphNnp3dzVrN2I3N2d2NWVuYjR1aGJma3A0MzdweWZramV5",
+          "sourcePage": "https://totalpass.com/br/academias/riplay-sports-pompeia/"
+        },
+        {
+          "src": "/images/arenas/riplay-pompeia-6-61b16e52bf.webp",
+          "width": 960,
+          "height": 720,
+          "bytes": 87276,
+          "sha256": "61b16e52bf0248106d942bdefc5bd600602deaf84a752208a0820c180a8127d0",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvbWlnY3J6cXQ2ZWRvNDIzejl0Nzg4Zmk4azkweDR2bzd0MTNyaWcwdjFhMzE0ZHVjcWV3em5lbjlseWo5",
+          "sourcePage": "https://totalpass.com/br/academias/riplay-sports-pompeia/"
+        },
+        {
+          "src": "/images/arenas/riplay-pompeia-8-9c4d99b35e.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 182138,
+          "sha256": "9c4d99b35ea2627166240180bc2a76b06170f479d10638a831f1b4ef2da1e8d7",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMveXF1bDVyNzhzNzlwYnFoM2prZWlmeGVrdmNvbDJ6czF2NW92ZGI2aXozZDZuY3RkdHR0Y2VucWQ4aHNy",
+          "sourcePage": "https://totalpass.com/br/academias/riplay-sports-pompeia/"
+        },
+        {
+          "src": "/images/arenas/riplay-pompeia-5-fd11b0eff7.webp",
+          "width": 1080,
+          "height": 720,
+          "bytes": 55100,
+          "sha256": "fd11b0eff771a1c80b9adb970e54fac11ad04df229c78311f82ad982ef81a8ec",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvNDVqazB1ejd0NDRybHplaWhoc2E1eWpnZjJubGNkcXR1dW9neW1sMXc0YnZiOXYzcmk5OGozem5neHFt",
+          "sourcePage": "https://totalpass.com/br/academias/riplay-sports-pompeia/"
+        }
+      ]
+    },
+    {
+      "id": "007313a5-de2f-5133-9ded-3828459ee5c1",
+      "slug": "villa-beach-sports",
+      "name": "Villa Beach Sports",
+      "city": "São Paulo",
+      "region": "Sul",
+      "neighborhood": "Vila Mariana",
+      "address": "Rua Pero Correia, 57",
+      "sports": [
+        "futevolei",
+        "beach-tennis",
+        "volei-praia"
+      ],
+      "description": "Esportes de areia na Vila Mariana.",
+      "note": "A ClassPass também informa Travessa Luiz Puglisi, 56. Confirme a entrada com a arena.",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://wellhub.com/pt-br/search/partners/villa-beach-sports/",
+      "sources": [
+        {
+          "url": "https://wellhub.com/pt-br/search/partners/villa-beach-sports/",
+          "kind": "venue-partner",
+          "supports": [
+            "name",
+            "address"
+          ]
+        },
+        {
+          "url": "https://totalpass.com/br/academias/villa-beach-sports/",
+          "kind": "venue-partner",
+          "supports": [
+            "address",
+            "sports",
+            "photos"
+          ]
+        },
+        {
+          "url": "https://classpass.com/studios/villa-beach-sports-vila-mariana-so-paulo",
+          "kind": "venue-partner",
+          "supports": [
+            "alternate-address"
+          ]
+        },
+        {
+          "url": "https://www.instagram.com/villa_beachsports/",
+          "kind": "venue-social",
+          "supports": [
+            "contact-only-page-unavailable"
+          ]
+        }
+      ],
+      "photoPage": "https://totalpass.com/br/academias/villa-beach-sports/",
+      "photos": [
+        {
+          "src": "/images/arenas/villa-beach-sports-3-8ae4066e82.webp",
+          "width": 1024,
+          "height": 720,
+          "bytes": 69616,
+          "sha256": "8ae4066e82084a498bbb894ed6b71b43c213d74471b4b4953e4e2980116c355b",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvcWl5ZmViN2o3Njk5emNtdGJlYmV4MGxjejJ6djdubGQwZjIyYWQweDd1dmxhYWdvNDJwZ3gydDl4MTg3",
+          "sourcePage": "https://totalpass.com/br/academias/villa-beach-sports/"
+        },
+        {
+          "src": "/images/arenas/villa-beach-sports-1-f005934b32.webp",
+          "width": 1024,
+          "height": 720,
+          "bytes": 89078,
+          "sha256": "f005934b325b82e50b5386ce8b2b889bc728ed1862f5a55f281e06f153d88dcc",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvbmt4ZnU5emhjaXUxdW50MzV2YjNydXl2ZXJzajQ5c3dzY2xmaGJjcXZxcG1icXk0czYzMW1hdTJoY2Rw",
+          "sourcePage": "https://totalpass.com/br/academias/villa-beach-sports/"
+        },
+        {
+          "src": "/images/arenas/villa-beach-sports-2-7e5b9c0e08.webp",
+          "width": 1024,
+          "height": 720,
+          "bytes": 91402,
+          "sha256": "7e5b9c0e08e803c58ab6805df8abc3f867f652de758134499bfd92ef4e7ad010",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvdThtam8yZHVmOXl5dGNmOXhra3Nidm04ZDQya3gzeXphMmh4aTUwZG9jZmJ3ZzAzejFocHN5Ym9mZXZp",
+          "sourcePage": "https://totalpass.com/br/academias/villa-beach-sports/"
+        },
+        {
+          "src": "/images/arenas/villa-beach-sports-5-ca6e82ef21.webp",
+          "width": 1024,
+          "height": 720,
+          "bytes": 121756,
+          "sha256": "ca6e82ef216a5525dca63c9e9f86660b61245933d4aa0a7d64cee32dcdf2f7d6",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvamI1MDZtZ3UyNW0xMXd4ZW8xNHo4MXhxd3k5emNzYXNtb2FmOGV2NDVuZjRhdjh2aHo3Y2QyMWZqbGFr",
+          "sourcePage": "https://totalpass.com/br/academias/villa-beach-sports/"
+        },
+        {
+          "src": "/images/arenas/villa-beach-sports-4-6ddbbf4812.webp",
+          "width": 768,
+          "height": 720,
+          "bytes": 54298,
+          "sha256": "6ddbbf4812dc55baeb911e5ba0af780610a03106b91985fac2b0121665bbf15f",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvZzVnNWsxM2NqdWNoOW45Z3hyeWZvOHNweGp1MmphZXBtNzVqaDBkNGV0enRodzNsYng2dmoxb2dyb3Fm",
+          "sourcePage": "https://totalpass.com/br/academias/villa-beach-sports/"
+        },
+        {
+          "src": "/images/arenas/villa-beach-sports-6-e81e1b8d27.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 62878,
+          "sha256": "e81e1b8d279fcfce8e5e43f1d40995028fb902b325b2cc634f5114216933877e",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvNGRlc3htZjQ0NW5rbmx6YWp3cjFsaXNsNHZmNG9hc3owMW8xZmgzNDQxMnlhbXplMmNucnNoNTJreWgx",
+          "sourcePage": "https://totalpass.com/br/academias/villa-beach-sports/"
+        }
+      ]
+    },
+    {
+      "id": "89a6c234-34bc-5b52-9f71-efaecd90a14f",
+      "slug": "posto-011-klabin",
+      "name": "Posto 011 Klabin",
+      "city": "São Paulo",
+      "region": "Sul",
+      "neighborhood": "Vila Mariana",
+      "address": "Rua Santa Cruz, 1350",
+      "sports": [
+        "futevolei",
+        "beach-tennis",
+        "volei-praia"
+      ],
+      "description": "Quadras de areia na região da Chácara Klabin.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://posto011.com.br/unidade/klabin/",
+      "sources": [
+        {
+          "url": "https://posto011.com.br/unidade/klabin/",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address"
+          ]
+        },
+        {
+          "url": "https://wellhub.com/pt-br/search/partners/arena-imigrantes-beach-zone-vila-mariana/",
+          "kind": "venue-partner",
+          "supports": [
+            "address",
+            "sports",
+            "photos"
+          ]
+        }
+      ],
+      "photoPage": "https://wellhub.com/pt-br/search/partners/arena-imigrantes-beach-zone-vila-mariana/",
+      "photos": [
+        {
+          "src": "/images/arenas/posto-011-klabin-1-d3e99360f3.webp",
+          "width": 540,
+          "height": 360,
+          "bytes": 30714,
+          "sha256": "d3e99360f3aefb9f736249544a90390966500decf5de6d67603e90b6e6ac350b",
+          "sourceUrl": "https://assets-cdn.wellhub.com/images/?su=https%3A%2F%2Fimages.partners.gympass.com%2Fimage%2Ffilename%2F6102889%2Flg_NmXi8FqFEZaY9hldArYsuqShPev-KxLs.jpg&h=360",
+          "sourcePage": "https://wellhub.com/pt-br/search/partners/arena-imigrantes-beach-zone-vila-mariana/"
+        },
+        {
+          "src": "/images/arenas/posto-011-klabin-3-f425547986.webp",
+          "width": 540,
+          "height": 360,
+          "bytes": 36882,
+          "sha256": "f4255479867bdb785c311af3e1ee0b352b690d279d3cf3e04d9a5fc6de56b218",
+          "sourceUrl": "https://assets-cdn.wellhub.com/images/?su=https%3A%2F%2Fimages.partners.gympass.com%2Fimage%2Ffilename%2F6102891%2Flg_akMMnuiOxsYAvYhakrtl2r-CEEnuJUo1.jpg&h=360",
+          "sourcePage": "https://wellhub.com/pt-br/search/partners/arena-imigrantes-beach-zone-vila-mariana/"
+        },
+        {
+          "src": "/images/arenas/posto-011-klabin-2-2ee2d29c32.webp",
+          "width": 639,
+          "height": 359,
+          "bytes": 78296,
+          "sha256": "2ee2d29c326df132b4d198d9f7aa092c6e782c1894369a51c4cc519b59b71fde",
+          "sourceUrl": "https://assets-cdn.wellhub.com/images/?su=https%3A%2F%2Fimages.partners.gympass.com%2Fimage%2Fpartners%2Fv1_ziF2-lCNEqNkgMx0xJw0CQ%2Flg_bc0a1ecc-380c-4b73-90df-009e205be9a4_Klabin.jpg&h=360",
+          "sourcePage": "https://wellhub.com/pt-br/search/partners/arena-imigrantes-beach-zone-vila-mariana/"
+        }
+      ]
+    },
+    {
+      "id": "f712864e-d1bf-533e-b2f2-d0cf19e20daf",
+      "slug": "posto-011-vila-mariana",
+      "name": "Posto 011 Vila Mariana",
+      "city": "São Paulo",
+      "region": "Sul",
+      "neighborhood": "Vila Mariana",
+      "address": "Rua França Pinto, 568",
+      "sports": [
+        "futevolei",
+        "beach-tennis",
+        "volei-praia"
+      ],
+      "description": "Unidade do Posto 011 na Vila Mariana.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://posto011.com.br/unidade/vila-mariana/",
+      "sources": [
+        {
+          "url": "https://posto011.com.br/unidade/vila-mariana/",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address"
+          ]
+        },
+        {
+          "url": "https://totalpass.com/br/academias/posto011-perdizes/",
+          "kind": "venue-partner",
+          "supports": [
+            "address",
+            "sports",
+            "photos"
+          ]
+        }
+      ],
+      "photoPage": "https://totalpass.com/br/academias/posto011-perdizes/",
+      "photos": [
+        {
+          "src": "/images/arenas/posto-011-vila-mariana-5-2d71e03779.webp",
+          "width": 680,
+          "height": 322,
+          "bytes": 43152,
+          "sha256": "2d71e03779cc28888f0bb44048e4929f3db0625427795df3010e55c7783efc43",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvMmNibjdib2MxbWV2Y2N4aGsxMmpkeGk5enEza294cWk0bWFkYnJuNTVqMGljN245Znk5bmEybjI2ajVo",
+          "sourcePage": "https://totalpass.com/br/academias/posto011-perdizes/"
+        },
+        {
+          "src": "/images/arenas/posto-011-vila-mariana-1-822e65b505.webp",
+          "width": 680,
+          "height": 510,
+          "bytes": 99576,
+          "sha256": "822e65b505c26f8c94b75be2e42f762ff710708ef8a237ce7f738051d4887ddc",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvMTk3cmV2Z3d1Y29neGxkeDJkMmRoamRoMW5kZHRwYXQ4Y2ZmdG0zenA2OXA3YWQzZW9kbGVsZ201emFs",
+          "sourcePage": "https://totalpass.com/br/academias/posto011-perdizes/"
+        },
+        {
+          "src": "/images/arenas/posto-011-vila-mariana-2-1c5ca5a534.webp",
+          "width": 382,
+          "height": 510,
+          "bytes": 38806,
+          "sha256": "1c5ca5a5345269f5500cb514dd44de5633e46c3363336f242fb69a06634a3b8a",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMveW55cGxwYjVmaXR3cG5pMHJrNmFldm1zOTV5dGQ3MGMzcWtyY3FxbXFsa2pzYWdwYnBoNzd3cnNqa2l0",
+          "sourcePage": "https://totalpass.com/br/academias/posto011-perdizes/"
+        },
+        {
+          "src": "/images/arenas/posto-011-vila-mariana-3-40369cb742.webp",
+          "width": 680,
+          "height": 510,
+          "bytes": 91440,
+          "sha256": "40369cb742dc7f68d7c8baa0fd0673e28227f0eab2793bf6bc6cb64240df2751",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMveGNmYXcwczczMjFzaTl4eTIxcWEzamhha3NwaGN2M3BmN2QxdWdqNXUxYXFhY3I5eHA1cXFtYXdpOWdw",
+          "sourcePage": "https://totalpass.com/br/academias/posto011-perdizes/"
+        },
+        {
+          "src": "/images/arenas/posto-011-vila-mariana-4-95f07c95d8.webp",
+          "width": 382,
+          "height": 510,
+          "bytes": 40172,
+          "sha256": "95f07c95d8a2df191a8dd78e091c3a5662473b66459204fbac6782d6f3dcf68b",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvbmdvc25hcDFxY2JnZmV1ZGt5bXBob3djd2M1cjhuNG12OGozZnBhMHFydHhoaDEyOHBqbmY2bHUzdHgw",
+          "sourcePage": "https://totalpass.com/br/academias/posto011-perdizes/"
+        }
+      ]
+    },
+    {
+      "id": "ae915b05-1029-5e15-afa8-813f727178cc",
+      "slug": "posto-011-brooklin",
+      "name": "Posto 011 Brooklin",
+      "city": "São Paulo",
+      "region": "Sul",
+      "neighborhood": "Cidade Monções",
+      "address": "Rua Pensilvânia, 1174",
+      "sports": [
+        "futevolei",
+        "beach-tennis",
+        "volei-praia"
+      ],
+      "description": "Esportes de areia no Brooklin.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://posto011.com.br/unidade/brooklin/",
+      "sources": [
+        {
+          "url": "https://posto011.com.br/unidade/brooklin/",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address",
+            "photos"
+          ]
+        },
+        {
+          "url": "https://totalpass.com/br/academias/fun-beach-sports-brooklin/",
+          "kind": "venue-partner",
+          "supports": [
+            "address",
+            "sports",
+            "photos"
+          ]
+        }
+      ],
+      "photoPage": "https://posto011.com.br/unidade/brooklin/",
+      "photos": [
+        {
+          "src": "/images/arenas/posto-011-brooklin-1-c73c59b6bd.webp",
+          "width": 1024,
+          "height": 576,
+          "bytes": 128604,
+          "sha256": "c73c59b6bdf47af9e32509e046373c7315fb7ba04cc44633e9ef07653ded0706",
+          "sourceUrl": "https://posto011.com.br/wp-content/uploads/2024/07/FUN-BROOKLIN-1024x576.jpeg",
+          "sourcePage": "https://posto011.com.br/unidade/brooklin/"
+        }
+      ]
+    },
+    {
+      "id": "6a8563dc-aa17-5d6a-b059-fc9158420624",
+      "slug": "posto-011-butanta",
+      "name": "Posto 011 Butantã",
+      "city": "São Paulo",
+      "region": "Oeste",
+      "neighborhood": "Butantã",
+      "address": "Rua Alvarenga, 2222",
+      "sports": [
+        "futevolei",
+        "beach-tennis",
+        "volei-praia"
+      ],
+      "description": "Quadras de areia no Butantã.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://posto011.com.br/unidade/butanta/",
+      "sources": [
+        {
+          "url": "https://posto011.com.br/unidade/butanta/",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address"
+          ]
+        },
+        {
+          "url": "https://totalpass.com/br/academias/posto011-butanta/",
+          "kind": "venue-partner",
+          "supports": [
+            "address",
+            "sports",
+            "photos"
+          ]
+        }
+      ],
+      "photoPage": "https://totalpass.com/br/academias/posto011-butanta/",
+      "photos": [
+        {
+          "src": "/images/arenas/posto-011-butanta-4-757427fa2f.webp",
+          "width": 1080,
+          "height": 720,
+          "bytes": 158894,
+          "sha256": "757427fa2f1c0815adb1c1539731a8c3729d1acf96420c4cc4c00f0600c1393e",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvN3FqdmdmaHcybHY0dG0xdnYzd2hwdmhzMTBoYjR1enRpZ2QyajJqbjNiNXhydDg4ODgyazloODY5aWpu",
+          "sourcePage": "https://totalpass.com/br/academias/posto011-butanta/"
+        },
+        {
+          "src": "/images/arenas/posto-011-butanta-1-637e46a270.webp",
+          "width": 1080,
+          "height": 720,
+          "bytes": 179264,
+          "sha256": "637e46a27075bda3971121f3d6614eba2e317a5797062d20bcd4f53658c912ac",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvMzJ5OHpiNHNpM3lhdWxub250YmtubjBzMWk4amN6NHVmN2dueWJlNGphd2s5NHI5OWZvc290ZHNlMGZ6",
+          "sourcePage": "https://totalpass.com/br/academias/posto011-butanta/"
+        },
+        {
+          "src": "/images/arenas/posto-011-butanta-2-575a60907d.webp",
+          "width": 1080,
+          "height": 720,
+          "bytes": 79486,
+          "sha256": "575a60907dae1b6a2b834d83b119fedbd5778e7f748343778cd0ccbcfe6c129b",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvM3cwZmprcXRzcmdkY3UzNjIxM3owcTkyenU2bmlqbXdiNTBvdXZjMTd1N2M2b2JpdmI0em1kM3ZleDd2",
+          "sourcePage": "https://totalpass.com/br/academias/posto011-butanta/"
+        },
+        {
+          "src": "/images/arenas/posto-011-butanta-3-e65f9bc82a.webp",
+          "width": 1080,
+          "height": 720,
+          "bytes": 179586,
+          "sha256": "e65f9bc82a5e6bfc1b4747ed56e54f7cd47c4b24abf0ba6720473edd212628c6",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvMmJ3N3gyaTc5ZmxhdXRwMjRsaHMweG5hZmdsdHlkZ3NneDVmdHI5dWp5NXkwa2N1ZjRtY21oZWFya3Jj",
+          "sourcePage": "https://totalpass.com/br/academias/posto011-butanta/"
+        },
+        {
+          "src": "/images/arenas/posto-011-butanta-5-46165e845e.webp",
+          "width": 664,
+          "height": 720,
+          "bytes": 89018,
+          "sha256": "46165e845edea4a06bf16b84b2e713225cc803c22622bdeb53484b7bc27a7616",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvdHIxa2czY2g3a3pwNWh0MXQ0amE3aTd2cG9senQzOTlrajBpZDJnZHhmajF5azRudGQ5bXpiY2s2ancz",
+          "sourcePage": "https://totalpass.com/br/academias/posto011-butanta/"
+        },
+        {
+          "src": "/images/arenas/posto-011-butanta-6-64a181ba57.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 171090,
+          "sha256": "64a181ba577f66bfe83dae23c5c3a3f0f4b58682007530f6e1e2ba3937435087",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvYndiaHlzb3B3ZjhjaXJsaHNjdTY4bThwNzEwYzNianU5dmZnYXFrbzBlM3I2cHUzczZ1MGtmcTl5MDBp",
+          "sourcePage": "https://totalpass.com/br/academias/posto011-butanta/"
+        }
+      ]
+    },
+    {
+      "id": "9c4d5d0a-1024-5f5b-873d-ad9358d2fd02",
+      "slug": "posto-011-lapa",
+      "name": "Posto 011 Lapa",
+      "city": "São Paulo",
+      "region": "Oeste",
+      "neighborhood": "Alto da Lapa",
+      "address": "Rua Barbalha, 381",
+      "sports": [
+        "futevolei",
+        "beach-tennis",
+        "volei-praia"
+      ],
+      "description": "Espaço de esportes de areia no Alto da Lapa.",
+      "note": "Esta unidade informa atendimento para locação de quadras e eventos.",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://posto011.com.br/unidade/lapa/",
+      "sources": [
+        {
+          "url": "https://posto011.com.br/unidade/lapa/",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address"
+          ]
+        },
+        {
+          "url": "https://totalpass.com/br/academias/posto011-lapa/",
+          "kind": "venue-partner",
+          "supports": [
+            "address",
+            "sports",
+            "photos"
+          ]
+        }
+      ],
+      "photoPage": "https://totalpass.com/br/academias/posto011-lapa/",
+      "photos": [
+        {
+          "src": "/images/arenas/posto-011-lapa-1-032df088f9.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 272188,
+          "sha256": "032df088f9c2eb362db1f77b4d503b1253f62f6128d495a73b5313ddbe14795a",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvbDlzYnducHdybDQxZzZ4Y2lvdGY1c3p2ZjBjeTNzbjNueTQ0MHFtMnpub2h0ZmpkcTg1YTV3ZWVicDE3",
+          "sourcePage": "https://totalpass.com/br/academias/posto011-lapa/"
+        },
+        {
+          "src": "/images/arenas/posto-011-lapa-5-319aa43fa7.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 353810,
+          "sha256": "319aa43fa7cfb6d2a32d1b7f67927ec700ab238cf6e09760a6210e032892d12a",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvYnBsNmJoOHp0MGJ1bXY2MjV4dWV0eWxxcTVubHpxa3VvenAwbmk0NnpoZTRuOGE5N3UxbDA3ZjU4ZG91",
+          "sourcePage": "https://totalpass.com/br/academias/posto011-lapa/"
+        },
+        {
+          "src": "/images/arenas/posto-011-lapa-2-f06ecc695f.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 215232,
+          "sha256": "f06ecc695fd62b44b17996de8a16e2c6fdf34631653acd766e78d0d88306eee4",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvMWY1MDNrdWEwaGJub29vOTdxdG5wMm9qeXpwYzNidWNhbTUzMjZkemw5cDhrdGY1NW1pODRrd3lrbWp6",
+          "sourcePage": "https://totalpass.com/br/academias/posto011-lapa/"
+        },
+        {
+          "src": "/images/arenas/posto-011-lapa-4-195393f89c.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 103366,
+          "sha256": "195393f89c70b8ca5aa96e9bf2d0a0583a7c130e0c4f4d9b432f667f89e69e8f",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvenVhNW53cGQ5bXV3a3d4MzlmYmF0ZTg0ZGJoOW1iajJzamVjamRvMTZwN3Q1eGRmd3p0OGo5cjdhcHdo",
+          "sourcePage": "https://totalpass.com/br/academias/posto011-lapa/"
+        }
+      ]
+    },
+    {
+      "id": "b18c5824-8b84-5035-9f29-9710613e9000",
+      "slug": "posto-011-campo-belo",
+      "name": "Posto 011 Campo Belo",
+      "city": "São Paulo",
+      "region": "Sul",
+      "neighborhood": "Jardim Prudência",
+      "address": "Avenida Professor Vicente Ráo, 1287",
+      "sports": [
+        "futevolei",
+        "beach-tennis",
+        "volei-praia"
+      ],
+      "description": "A unidade Campo Belo fica na Avenida Vicente Ráo.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://posto011.com.br/unidade/campo-belo/",
+      "sources": [
+        {
+          "url": "https://posto011.com.br/unidade/campo-belo/",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address"
+          ]
+        },
+        {
+          "url": "https://totalpass.com/br/academias/praiana-beach-sports/",
+          "kind": "venue-partner",
+          "supports": [
+            "address",
+            "sports",
+            "photos"
+          ]
+        }
+      ],
+      "photoPage": "https://totalpass.com/br/academias/praiana-beach-sports/",
+      "photos": [
+        {
+          "src": "/images/arenas/posto-011-campo-belo-11-2c41c0216a.webp",
+          "width": 680,
+          "height": 453,
+          "bytes": 53300,
+          "sha256": "2c41c0216a62a56bf5bb98308ba7d0724e14816423fc2517008edee358c07624",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvdDQ4eWNxbjl2cDk3cThpcmJjc2h2aGR3MHI0eTFycGZsc3IzdTYyM215eGgxMDN0aG5memZuOHlueGUz",
+          "sourcePage": "https://totalpass.com/br/academias/praiana-beach-sports/"
+        },
+        {
+          "src": "/images/arenas/posto-011-campo-belo-10-a7fd6e4481.webp",
+          "width": 680,
+          "height": 453,
+          "bytes": 41596,
+          "sha256": "a7fd6e4481e20420925e2457e06b40fda3cbfdc148615ce10f7ac846414f8422",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvcXhncG5sbm93NjAyNXA0bGgzbmM0YTdwY3d0d2k4MHNpdWprNXhpamt5eHdwajQ4MmdjZTE1dGdjN3N2",
+          "sourcePage": "https://totalpass.com/br/academias/praiana-beach-sports/"
+        },
+        {
+          "src": "/images/arenas/posto-011-campo-belo-1-a02a66f980.webp",
+          "width": 382,
+          "height": 510,
+          "bytes": 49450,
+          "sha256": "a02a66f98025917ac3f468c29344ab6d448f15e41d1d2a294aadf8f426a8a8f3",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvODE1am11aTlqdzRwb3I0enI5Mm53NnEwaDdzNm11emZjcjZ2OHMxeGM4b2RtNDdpOXBnc3pjbWN3a3Vm",
+          "sourcePage": "https://totalpass.com/br/academias/praiana-beach-sports/"
+        },
+        {
+          "src": "/images/arenas/posto-011-campo-belo-6-75d5cc8ff7.webp",
+          "width": 680,
+          "height": 510,
+          "bytes": 107256,
+          "sha256": "75d5cc8ff7c82e0c4138f335cb1fc8155696b915303820693cd3d99a4bd4c36f",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvbzVqcDg2NnB4YW5iOWp1MzN6b2R3cHZmY2cwYm05bjZ0bDNreng1c2FpaGIxMXhwaWZzMHl0Yjc5azk1",
+          "sourcePage": "https://totalpass.com/br/academias/praiana-beach-sports/"
+        },
+        {
+          "src": "/images/arenas/posto-011-campo-belo-7-9ee2d5a6c4.webp",
+          "width": 287,
+          "height": 510,
+          "bytes": 38674,
+          "sha256": "9ee2d5a6c40de461ff74beeba202a80372e29d0a849fb275d1db67c95d3d9137",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvcXJvOGVsY2J4cWZhNGR6MWFsdGE0Z21nOG4zOXBjMWVvbDI0aDJ1ejU3cWczYW85aGQwOTI3MWdpdXhl",
+          "sourcePage": "https://totalpass.com/br/academias/praiana-beach-sports/"
+        },
+        {
+          "src": "/images/arenas/posto-011-campo-belo-9-710cc866f1.webp",
+          "width": 680,
+          "height": 453,
+          "bytes": 72114,
+          "sha256": "710cc866f1bdd3d8376e7375788fcdcd3a821503681d0e658fb404d204308db1",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvcTdhb2Z4cng1aDdhbDlvMzRvMDJtcWw0NW96NTBnM2d0cXd4bzR2cGdsc2k2cjNzc3dxemtmaXF5a2Vo",
+          "sourcePage": "https://totalpass.com/br/academias/praiana-beach-sports/"
+        },
+        {
+          "src": "/images/arenas/posto-011-campo-belo-12-50665fdce9.webp",
+          "width": 473,
+          "height": 510,
+          "bytes": 71628,
+          "sha256": "50665fdce9bed242b56ad3f34537b8647a38f35af99bde7573daefea3205bd9c",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvankzdmN2Z2Q4cmM0NWFjaXF2azdpaGZlYWtwNTdsZmI3eGwzM3lsYjl2YW01aXM4d2xucDVzOG4zbmls",
+          "sourcePage": "https://totalpass.com/br/academias/praiana-beach-sports/"
+        }
+      ]
+    },
+    {
+      "id": "84fc0ae5-3e47-5b1e-904f-dcdd027e00b3",
+      "slug": "posto-011-jurubatuba",
+      "name": "Posto 011 Jurubatuba",
+      "city": "São Paulo",
+      "region": "Sul",
+      "neighborhood": "Jurubatuba",
+      "address": "Avenida Engenheiro Eusébio Stevaux, 1407",
+      "sports": [
+        "futevolei",
+        "beach-tennis",
+        "volei-praia"
+      ],
+      "description": "Esportes de areia em Jurubatuba.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://posto011.com.br/unidade/jurubatuba/",
+      "sources": [
+        {
+          "url": "https://posto011.com.br/unidade/jurubatuba/",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address",
+            "photos"
+          ]
+        },
+        {
+          "url": "https://totalpass.com/br/academias/paulistania-beach-sports/",
+          "kind": "venue-partner",
+          "supports": [
+            "address",
+            "sports",
+            "photos"
+          ]
+        }
+      ],
+      "photoPage": "https://posto011.com.br/unidade/jurubatuba/",
+      "photos": [
+        {
+          "src": "/images/arenas/posto-011-jurubatuba-1-1510a5480d.webp",
+          "width": 1024,
+          "height": 579,
+          "bytes": 79510,
+          "sha256": "1510a5480d0bfc6a8cb61738d5f2e9b154ebcb7fc6d6c6f2a77b94b66280e893",
+          "sourceUrl": "https://posto011.com.br/wp-content/uploads/2025/09/JURUBATUBA-09-2025-DRONE-FOTOS-041-scaled-e1760458061414-1024x579.jpg",
+          "sourcePage": "https://posto011.com.br/unidade/jurubatuba/"
+        }
+      ]
+    },
+    {
+      "id": "a35b74d9-cfa9-5be7-8857-e2afde4dbd08",
+      "slug": "posto-011-barra-funda",
+      "name": "Posto 011 Barra Funda",
+      "city": "São Paulo",
+      "region": "Oeste",
+      "neighborhood": "Barra Funda",
+      "address": "Rua Tagipuru, 171",
+      "sports": [
+        "futevolei",
+        "beach-tennis",
+        "volei-praia"
+      ],
+      "description": "Unidade do Posto 011 na Barra Funda.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://posto011.com.br/unidade/barra-funda/",
+      "sources": [
+        {
+          "url": "https://posto011.com.br/unidade/barra-funda/",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address"
+          ]
+        },
+        {
+          "url": "https://totalpass.com/br/academias/posto-011-barra-funda/",
+          "kind": "venue-partner",
+          "supports": [
+            "address",
+            "sports",
+            "photos"
+          ]
+        }
+      ],
+      "photoPage": "https://totalpass.com/br/academias/posto-011-barra-funda/",
+      "photos": [
+        {
+          "src": "/images/arenas/posto-011-barra-funda-1-d5272911a4.webp",
+          "width": 539,
+          "height": 510,
+          "bytes": 57780,
+          "sha256": "d5272911a4e65ac24671f43c876ee12d3d3a9ca1bfe9bb9a2fb2459051e72e54",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvM2F3eTd2bDF5djBndzZsZGNybzh4MGxhMXczeHB6M2I3aDM0ODFmOGd3NXI5bjkxMHZlbm82d3Z1dGMy",
+          "sourcePage": "https://totalpass.com/br/academias/posto-011-barra-funda/"
+        },
+        {
+          "src": "/images/arenas/posto-011-barra-funda-2-73952cc8c3.webp",
+          "width": 664,
+          "height": 720,
+          "bytes": 56884,
+          "sha256": "73952cc8c3b571bcf046241f517d1a30df18825f7877782f8808de79a41735c8",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvZXI1YWtxcng4NXA0a2l3anhiZTczeTg4cDBsdG1hY3VpNGwwZ3Z5Z2Mza2IybnFid3ZqZDY4cnN2NnI5",
+          "sourcePage": "https://totalpass.com/br/academias/posto-011-barra-funda/"
+        },
+        {
+          "src": "/images/arenas/posto-011-barra-funda-3-704ee80411.webp",
+          "width": 1080,
+          "height": 720,
+          "bytes": 160428,
+          "sha256": "704ee804117c34f3340fc594a203d0cedb3c0fc529688d270ba49f927838a5bd",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvMmxieTYyZW5uaWl4OXc3ZXlzbzMxYjhyYWF3eDZod3R2b2tpdW9uYmhtdHdkamx3YmEwcXNlcDZrcnBx",
+          "sourcePage": "https://totalpass.com/br/academias/posto-011-barra-funda/"
+        },
+        {
+          "src": "/images/arenas/posto-011-barra-funda-4-289c0495d3.webp",
+          "width": 1080,
+          "height": 720,
+          "bytes": 95238,
+          "sha256": "289c0495d32a75e2bb3ff27c9ff8eb30c7c8b8aa61cd70aafb2b7b6070b3bbf1",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvaHJydWkxcnowd2VyYmxydHp4MnJ6bGFsaHJ0cDh6NTlodGx2bnJnd3cwdDZzemVzMW50OW40cnlqeGIy",
+          "sourcePage": "https://totalpass.com/br/academias/posto-011-barra-funda/"
+        },
+        {
+          "src": "/images/arenas/posto-011-barra-funda-5-40e506edde.webp",
+          "width": 1080,
+          "height": 720,
+          "bytes": 60818,
+          "sha256": "40e506eddee86a6eaf7b6df79a46e39d098a4b682840a3650aa6dd725aae60f0",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvbmt0a3Mzd2gyNGljMmtvbWFhd2ZmdDN6aXh2ZzF5djI5aHgwZnF0bW5rMzV4YWZ0bTk3aDZ5ZDVwemVo",
+          "sourcePage": "https://totalpass.com/br/academias/posto-011-barra-funda/"
+        }
+      ]
+    },
+    {
+      "id": "1d4935a2-c706-574b-9251-973d854107f7",
+      "slug": "posto-011-planalto-paulista",
+      "name": "Posto 011 Planalto Paulista",
+      "city": "São Paulo",
+      "region": "Sul",
+      "neighborhood": "Planalto Paulista",
+      "address": "Avenida Indianópolis, 2755",
+      "sports": [
+        "futevolei",
+        "beach-tennis",
+        "volei-praia"
+      ],
+      "description": "Quadras de areia no Planalto Paulista.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://posto011.com.br/unidade/planalto-paulista/",
+      "sources": [
+        {
+          "url": "https://posto011.com.br/unidade/planalto-paulista/",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address"
+          ]
+        },
+        {
+          "url": "https://totalpass.com/br/academias/posto011-planalto-paulista/",
+          "kind": "venue-partner",
+          "supports": [
+            "address",
+            "sports",
+            "photos"
+          ]
+        }
+      ],
+      "photoPage": "https://totalpass.com/br/academias/posto011-planalto-paulista/",
+      "photos": [
+        {
+          "src": "/images/arenas/posto-011-planalto-paulista-2-f81257f408.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 249044,
+          "sha256": "f81257f4081d66cb35615d10969d765b1cec4f43075a995d1ad27efdfe828047",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvemlqa3ZqbTByZmpqODgxc2x1ZXpnM2FhNmk3bmJucmlueXI1cWI5YnRtbzA1OGQ2bWRqMjJ5NGkxbHBj",
+          "sourcePage": "https://totalpass.com/br/academias/posto011-planalto-paulista/"
+        },
+        {
+          "src": "/images/arenas/posto-011-planalto-paulista-1-1dbd5d81f9.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 159280,
+          "sha256": "1dbd5d81f9d08e64907aee43b14314c95ce65954ab74535f143ac898662f1bb1",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvbXhtaHhsZnI4c25uaW5ldGxnMWx3YXZtMDRxZGd1ZzVza2NvdGE1YnQwcDVwcHE4ZXExdHQwdWxyYXcx",
+          "sourcePage": "https://totalpass.com/br/academias/posto011-planalto-paulista/"
+        },
+        {
+          "src": "/images/arenas/posto-011-planalto-paulista-3-490274153b.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 199000,
+          "sha256": "490274153b464d4b8ab6dcebdefde1ff195601f03103395e2268de4a44a078f3",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvM290NjdjZDMwcjlnd2ozMXI3MmM0MXBrZ25sY2Z3bnVjYW91M21oa3hxdmZyZnlhaGdhMWlhaTQyNmxm",
+          "sourcePage": "https://totalpass.com/br/academias/posto011-planalto-paulista/"
+        },
+        {
+          "src": "/images/arenas/posto-011-planalto-paulista-4-1183da2a20.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 198380,
+          "sha256": "1183da2a20bc01db578573de0abb733677d3030b96d3a5cca58bb883ae710bdf",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvMHZnYjVxbjFsdWx0Y20yaWlxNGVmazJ6ejE4cnpqN2ptNTZlOXM4b3A0dTc1MTNtbG5obW43a3M2ODk1",
+          "sourcePage": "https://totalpass.com/br/academias/posto011-planalto-paulista/"
+        },
+        {
+          "src": "/images/arenas/posto-011-planalto-paulista-5-df748bd1d3.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 240510,
+          "sha256": "df748bd1d33078158e9c11906d95d13ccbd45d495a71103692c8083c274f5ea5",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvd2wzdW5ra2N4NHB5ZjVkYXVsZ2UwZjVkOWt3bmJyZ3c4YnFyODdnMnE0bDZlZHZ1cDBuZWFkenQ4aGR2",
+          "sourcePage": "https://totalpass.com/br/academias/posto011-planalto-paulista/"
+        }
+      ]
+    },
+    {
+      "id": "a5caf9a8-b081-5edb-91e3-56b017870067",
+      "slug": "arena-ace",
+      "name": "Arena Ace",
+      "city": "São Paulo",
+      "region": "Oeste",
+      "neighborhood": "Vila Leopoldina",
+      "address": "Rua Baumann, 191",
+      "sports": [
+        "futevolei",
+        "beach-tennis",
+        "volei-praia"
+      ],
+      "description": "Três quadras de areia em um complexo esportivo na Vila Leopoldina.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://arenaace.com.br/",
+      "sources": [
+        {
+          "url": "https://arenaace.com.br/",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address"
+          ]
+        },
+        {
+          "url": "https://wellhub.com/pt-br/search/partners/arena-ace/",
+          "kind": "venue-partner",
+          "supports": [
+            "address",
+            "sports",
+            "photos"
+          ]
+        }
+      ],
+      "photoPage": "https://wellhub.com/pt-br/search/partners/arena-ace/",
+      "photos": [
+        {
+          "src": "/images/arenas/arena-ace-1-de1a9656d5.webp",
+          "width": 540,
+          "height": 360,
+          "bytes": 35692,
+          "sha256": "de1a9656d5f17448f81c75426890e22648cfba8ecd1b680676d63c376c7813b8",
+          "sourceUrl": "https://assets-cdn.wellhub.com/images/?su=https%3A%2F%2Fimages.partners.gympass.com%2Fimage%2Ffilename%2F5007131%2Flg_4YHfTge9F0Y_-g8AmRSEzPLHDTqukKHu.png&h=360",
+          "sourcePage": "https://wellhub.com/pt-br/search/partners/arena-ace/"
+        },
+        {
+          "src": "/images/arenas/arena-ace-2-4bac26d614.webp",
+          "width": 449,
+          "height": 360,
+          "bytes": 31830,
+          "sha256": "4bac26d6145163d11f49b00d87318200600b2d890474a84ee6f783c173cff017",
+          "sourceUrl": "https://assets-cdn.wellhub.com/images/?su=https%3A%2F%2Fimages.partners.gympass.com%2Fimage%2Ffilename%2F5007132%2Flg_FZVflcdtZ84m4HiabRYSimIKvDhO1rTn.png&h=360",
+          "sourcePage": "https://wellhub.com/pt-br/search/partners/arena-ace/"
+        },
+        {
+          "src": "/images/arenas/arena-ace-3-1a985adc42.webp",
+          "width": 540,
+          "height": 360,
+          "bytes": 38906,
+          "sha256": "1a985adc42e787c703b4e06be8936b8bbd41e5f73e5b6e02f167d01fe60c367e",
+          "sourceUrl": "https://assets-cdn.wellhub.com/images/?su=https%3A%2F%2Fimages.partners.gympass.com%2Fimage%2Ffilename%2F4609069%2Flg_XcJThe0ufQUmZdIe1TbsUpv63RfLI7sY.jpeg&h=360",
+          "sourcePage": "https://wellhub.com/pt-br/search/partners/arena-ace/"
+        }
+      ]
+    },
+    {
+      "id": "76a71088-4215-5fc4-ac8a-e14cea9d7883",
+      "slug": "arena-ace-beach-indoor",
+      "name": "Arena Ace Beach Indoor",
+      "city": "São Paulo",
+      "region": "Oeste",
+      "neighborhood": "Bela Aliança",
+      "address": "Rua Aliança Liberal, 952",
+      "sports": [
+        "beach-tennis"
+      ],
+      "description": "A segunda unidade da Arena Ace recebe beach tennis na Bela Aliança.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://arenaace.com.br/",
+      "sources": [
+        {
+          "url": "https://arenaace.com.br/",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address"
+          ]
+        },
+        {
+          "url": "https://totalpass.com/br/academias/arena-ace-beach-indoor/",
+          "kind": "venue-partner",
+          "supports": [
+            "address",
+            "sports",
+            "photos"
+          ]
+        }
+      ],
+      "photoPage": "https://totalpass.com/br/academias/arena-ace-beach-indoor/",
+      "photos": [
+        {
+          "src": "/images/arenas/arena-ace-beach-indoor-4-cba7df9502.webp",
+          "width": 199,
+          "height": 265,
+          "bytes": 15396,
+          "sha256": "cba7df9502ab349c638ec52b32a776a371ab4f12897aa13d1ab9e5f35b44c91c",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvY2tnYWU1NHNlZWMxa3l0bGd3ZWdjY3Q2ZmQzeDE1MW9hczlqMXFmNWs4MXBkMTVhZTNnMDE4MG8wbzFu",
+          "sourcePage": "https://totalpass.com/br/academias/arena-ace-beach-indoor/"
+        },
+        {
+          "src": "/images/arenas/arena-ace-beach-indoor-2-6474f135ab.webp",
+          "width": 199,
+          "height": 265,
+          "bytes": 13210,
+          "sha256": "6474f135abedf1ea937209763da6bfecd4c9bd24fb7a4e28981615f4f2c77b66",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvZHk1YXl5Zjllejd0d2NtZWYzcDdnNHV3dHc2dnRxamU5dXVlYmxkaHM1dnp3aWtmM3NnejZ3dWF5MDNi",
+          "sourcePage": "https://totalpass.com/br/academias/arena-ace-beach-indoor/"
+        },
+        {
+          "src": "/images/arenas/arena-ace-beach-indoor-1-3ce0e511fd.webp",
+          "width": 216,
+          "height": 265,
+          "bytes": 20740,
+          "sha256": "3ce0e511fdc4a476f7ec8661a5be176b039397e95fd79e0e526646112b28186f",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvczEzcDR5dmxwZjNpeGgwZHZ6bjNkYTRxbnJlY3RyaXVrOHJzbHR6M3B2YW42ZzRtbXlqZmhzMDFmMjc0",
+          "sourcePage": "https://totalpass.com/br/academias/arena-ace-beach-indoor/"
+        },
+        {
+          "src": "/images/arenas/arena-ace-beach-indoor-3-b3f9ae1eef.webp",
+          "width": 222,
+          "height": 265,
+          "bytes": 21166,
+          "sha256": "b3f9ae1eef8a67b8844e6fd923dd51bdefe0872b936293f7f34d89b3a12ac8d6",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvdmo2and3M2EwNTNuMG95YmV4dDJ3ejJ4bXBmNjNtZXJ4dzlvdGNuNGl1OGVudWFyZXVmOXN0Nnd1NThj",
+          "sourcePage": "https://totalpass.com/br/academias/arena-ace-beach-indoor/"
+        }
+      ]
+    },
+    {
+      "id": "767b3b8a-cf7e-51d7-b8e4-7a2d8683753d",
+      "slug": "nossa-arena",
+      "name": "Nossa Arena",
+      "city": "São Paulo",
+      "region": "Oeste",
+      "neighborhood": "Barra Funda",
+      "address": "Avenida Nicolas Boer, 100 — acesso à rua sem saída, 200",
+      "sports": [
+        "futevolei",
+        "beach-tennis",
+        "volei-praia"
+      ],
+      "description": "Espaço dedicado ao esporte feminino, com quatro quadras de areia.",
+      "note": "Programação voltada a meninas e mulheres; confira as condições de participação com a arena.",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://nossaarenasp.com.br/",
+      "sources": [
+        {
+          "url": "https://nossaarenasp.com.br/",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address"
+          ]
+        },
+        {
+          "url": "https://totalpass.com/br/academias/nossa-arena/",
+          "kind": "venue-partner",
+          "supports": [
+            "address",
+            "sports",
+            "photos"
+          ]
+        }
+      ],
+      "photoPage": "https://totalpass.com/br/academias/nossa-arena/",
+      "photos": [
+        {
+          "src": "/images/arenas/nossa-arena-3-53693e4e8d.webp",
+          "width": 1080,
+          "height": 720,
+          "bytes": 206260,
+          "sha256": "53693e4e8df99c802e00592aca0a31d5b5d5f5c5688edccb62ee6472603316b3",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvNXI1dThodndsZ29uc3hlb3ExdHdxYjhkZGpiN3NmamR6Y204ZXpwc3RpaGFwcmxuZ2pnNHFrbHFiazlm",
+          "sourcePage": "https://totalpass.com/br/academias/nossa-arena/"
+        },
+        {
+          "src": "/images/arenas/nossa-arena-1-4120fc9901.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 160804,
+          "sha256": "4120fc990125af0b88ceceead6ff3c41efe8b7aa4642ca30f3e1e2beaf4d5757",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvdHRtbDhueHJjazRra2FhbWJkODMzcWo4Z2N4a3owOGdzYXc0bW1jdjdtYnFkaWFvYmRmdHRibzExcXIx",
+          "sourcePage": "https://totalpass.com/br/academias/nossa-arena/"
+        },
+        {
+          "src": "/images/arenas/nossa-arena-2-df3bc3559b.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 211866,
+          "sha256": "df3bc3559bb5f54dc622289acf5ffc0f7f6c80521c85d8e5ec66ad5dd4366d0e",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMveHlld3hyb3JlenBlOW4xZDh4OWhjcWxpNjZrMTMzbmo3dnhjeW94YWNnZXFhejFrY3Rjc3lmazJ1Z3dn",
+          "sourcePage": "https://totalpass.com/br/academias/nossa-arena/"
+        },
+        {
+          "src": "/images/arenas/nossa-arena-4-3a396f7384.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 165722,
+          "sha256": "3a396f73846a0f69ba648eb85249ce0969fc3a7e7118072ef9aca454e923d435",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvMDU2bDByNDJiZTU0ZGR5eWoxeHRvbWhqdXNiZGoxdndodmQ5a2Q2M3k4YjI1ejJ2d2Ixenl1Z2d1c3M5",
+          "sourcePage": "https://totalpass.com/br/academias/nossa-arena/"
+        },
+        {
+          "src": "/images/arenas/nossa-arena-5-6ae7307a97.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 80468,
+          "sha256": "6ae7307a97d58c0fe4423618176e974119b9d5244952cc8c5da9a795225db2ff",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvM2V0NG9zdDNrMTlvc205dGFsN3Z3YW9oYTM1c3c2ZjNkczU2ZWs3aHR0ZjlydWZ5OXNpNzh1dm11ZXI4",
+          "sourcePage": "https://totalpass.com/br/academias/nossa-arena/"
+        }
+      ]
+    }
+  ]
+}
