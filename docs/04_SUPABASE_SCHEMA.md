@@ -1,3 +1,5 @@
+> Busca de pessoas/comunidades · 13/09/2026: `20260913200000_people_community_search.sql` adiciona `search_players` com RLS/admissão, preserva o leitor antigo e normaliza a busca literal no diretório de comunidades sem ampliar a ficha privada. [Contrato e validação](SEARCH.md). Aplicação por ambiente registrada na revisão da busca e no recibo de release.
+
 > Segurança e privacidade · 13/09/2026: migration aditiva `20260913110000_account_privacy_security.sql`, total de 24 nos dois ambientes. RPCs de exportação/limpeza privada disponíveis só ao servidor; guarda de último administrador antes de iniciar exclusão. Sem alteração dos dados existentes. [Auditoria e limites](BETA_SECURITY.md).
 
 > Republicações · 13/09/2026: migration aditiva `20260913100000_post_reposts.sql`, aplicada no desenvolvimento (23 migrations). Tabela `post_reposts` com RLS, escrita por `set_post_repost` e leitura por `read_repost_feed`; leitores anteriores preservados para rollback. Aplicação no principal integra o release autorizado, conferido pelo ledger e recibo operacional. [Contrato e evidências](REPOSTS.md).

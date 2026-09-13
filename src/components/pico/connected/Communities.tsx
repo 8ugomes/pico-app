@@ -1,16 +1,20 @@
 'use client';
 import{EntityPhotos,EntityImages}from'./EntityPhotos';
 import{ConnectedFeed}from'./ConnectedFeed';
-import{useId,useState}from'react';import Link from'next/link';import{useRouter}from'next/navigation';import{Button}from'@/components/ui/Button';import{Modal}from'@/components/ui/Modal';import{PageHeading,EmptyState}from'../SocialUI';import{useEntity,entityAction}from'./useEntity';import{useRemoteRead}from'./useRemoteRead';import type{ReadSport}from'@/types/read';
+import{useId,useState}from'react';import Link from'next/link';import{useRouter}from'next/navigation';import{Button}from'@/components/ui/Button';import{Modal}from'@/components/ui/Modal';import{PageHeading,EmptyState,SearchField}from'../SocialUI';import{useEntity,entityAction}from'./useEntity';import{useRemoteRead}from'./useRemoteRead';import type{ReadSport}from'@/types/read';
 import { Plus, UsersRound, LoaderCircle, ArrowRight, LockKeyhole, MapPin } from 'lucide-react';
+import { useSearchInput } from '../useSearchInput';
 import { ChoiceChip } from '@/components/ui/ChoiceChip';
 export type CommunityCard={id:string;slug:string;name:string;entry_mode:'open'|'approval'|'invite';visibility:'beta'|'private';membership:string|null;description:string|null;arena_name?:string;is_official?:boolean;pico_official?:boolean};
 export type CommunityPage=CommunityCard&{editorial?:{id:string;title:string;body:string;published_at:string}[];readable:boolean;rank:number;version:number;rules:string|null;sports:ReadSport[];owner:{id:string;name:string;username:string}|null;members:{id:string;name:string;username:string;role:string;status:string}[];arena:{id:string;name:string;slug:string;official:boolean;status:string}|null;avatar_path:string|null;cover_path:string|null};
 export function Communities({ arenaId }: { arenaId?: string }) {
-  const [mine, setMine] = useState(true), [search, setSearch] = useState(''), [offset, setOffset] = useState(0), [create, setCreate] = useState(false);
-  const { data, error, reload } = useEntity<CommunityCard[]>(`/api/communities?search=${encodeURIComponent(search)}&mine=${arenaId ? false : mine}&offset=${offset}${arenaId ? '&arena=' + arenaId : ''}`);
+  const { search, setSearch, settled, pending } = useSearchInput();
+  const [mine, setMine] = useState(false), [offset, setOffset] = useState(0), [create, setCreate] = useState(false);
+  const result = useEntity<CommunityCard[]>(`/api/communities?search=${encodeURIComponent(settled)}&mine=${arenaId ? false : mine}&offset=${offset}${arenaId ? '&arena=' + arenaId : ''}`);
+  const { reload } = result;
+  const data = pending ? null : result.data, error = pending ? '' : result.error;
   return <>
-    {!arenaId && <><PageHeading title="Comunidades" /></>}
+    {!arenaId && <><PageHeading title="Comunidades"><Link className="journey-text-link" href="/descobrir">Buscar pessoas</Link></PageHeading></>}
     <div className="community-toolbar">
       {!arenaId && <>
         <div className="feed-tabs" aria-label="Filtrar comunidades">
@@ -18,10 +22,12 @@ export function Communities({ arenaId }: { arenaId?: string }) {
           <button data-tour="community-explore" type="button" className={!mine ? 'active-tab' : ''} aria-pressed={!mine} onClick={() => { setMine(false); setOffset(0); }}>Explorar</button>
         </div>
       </>}
-      {(!arenaId || search || (data?.length ?? 0) > 3) && <label className="input-group">Buscar comunidades<input className="input" type="search" placeholder="Nome da comunidade" value={search} onChange={e => { setSearch(e.target.value); setOffset(0); }} /></label>}
+      {(!arenaId || search || (data?.length ?? 0) > 3) && <SearchField label={mine && !arenaId ? "Buscar nas minhas comunidades" : "Buscar comunidades"} placeholder="Nome da comunidade" maxLength={100} value={search} onChange={value => { setSearch(value); setOffset(0); }} />}
+      {search && <Button variant="quiet" size="small" onClick={() => { setSearch(''); setOffset(0); }}>Limpar busca</Button>}
     </div>
     {error && <div className="read-message"><p className="form-error" role="alert">{error}</p><Button size="small" variant="secondary" onClick={reload}>Tentar novamente</Button></div>}
     {!data && !error && <p className="read-source" role="status"><LoaderCircle className="spinner" size={18} aria-hidden="true" />Carregando comunidades…</p>}
+    {!arenaId && <div role="status" className="read-source">{data && `${Math.min(data.length, 20)} ${data.length === 1 ? 'comunidade' : 'comunidades'} nesta página`}</div>}
     <div className="community-list">{data?.slice(0, 20).map(c => <article className="community-card" key={c.id}>
       <Link className="community-card-title" href={`/comunidades/${c.slug}`}><span className="community-symbol"><UsersRound size={22} aria-hidden="true" /></span><h2>{c.name}</h2><ArrowRight size={18} aria-hidden="true" /></Link>
       {c.pico_official && <p className="community-membership">Oficial do Pico · Todas as modalidades</p>}{c.description && <p className="community-purpose">{c.description}</p>}
@@ -29,7 +35,7 @@ export function Communities({ arenaId }: { arenaId?: string }) {
       {c.arena_name && <p className="community-place"><MapPin size={14} aria-hidden="true" />{c.arena_name}{c.is_official ? ' · Oficial' : ''}</p>}
       {c.membership && <p className="community-membership">{({ active: 'Você participa', pending: 'Pedido de entrada em análise', suspended: 'Participação suspensa', rejected: 'Pedido de entrada recusado' })[c.membership as 'active'] || 'Consulte as condições de entrada.'}</p>}
     </article>)}</div>
-    {data?.length === 0 && <div className="community-empty">{arenaId && !search ? <p className="muted-text">Ainda sem comunidades vinculadas.</p> : <EmptyState title={search ? 'Nenhum grupo com esse nome.' : mine && !arenaId ? 'Encontre uma turma para chamar de sua.' : 'Ainda não há comunidades por aqui.'}>{search ? 'Tente outro nome ou limpe a busca.' : mine && !arenaId ? 'Os grupos de que você participa e seus pedidos de entrada aparecem aqui.' : 'Você pode conhecer outros grupos ou criar uma comunidade.'}</EmptyState>}<div className="read-message-actions">{search ? <Button variant="secondary" onClick={() => setSearch('')}>Limpar busca</Button> : mine && !arenaId ? <Button onClick={() => { setMine(false); setOffset(0); }}>Explorar comunidades</Button> : <Link href="/comunidades">Conhecer outras comunidades</Link>}</div></div>}
+    {data?.length === 0 && <div className="community-empty">{arenaId && !search ? <p className="muted-text">Ainda sem comunidades vinculadas.</p> : <EmptyState title={search ? 'Nenhum grupo com esse nome.' : mine && !arenaId ? 'Encontre uma turma para chamar de sua.' : 'Ainda não há comunidades por aqui.'}>{search ? (mine && !arenaId ? 'Esta busca está nas suas comunidades. Explore todas para encontrar novos grupos.' : 'Tente outro nome ou limpe a busca.') : mine && !arenaId ? 'Os grupos de que você participa aparecem aqui.' : 'Você pode conhecer outros grupos ou criar uma comunidade.'}</EmptyState>}<div className="read-message-actions">{search ? (mine && !arenaId && <Button variant="secondary" onClick={() => { setMine(false); setOffset(0); }}>Buscar em todas as comunidades</Button>) : mine && !arenaId ? <Button onClick={() => { setMine(false); setOffset(0); }}>Explorar comunidades</Button> : <Link href="/comunidades">Conhecer outras comunidades</Link>}</div></div>}
     {data && (offset > 0 || data.length > 20) && <nav className="read-pagination" aria-label="Páginas de comunidades"><Button variant="secondary" disabled={!offset} onClick={() => setOffset(Math.max(0, offset - 20))}>Anterior</Button><Button disabled={data.length <= 20} onClick={() => setOffset(offset + 20)}>Próxima</Button></nav>}
     {!arenaId && <footer className="community-create"><div><h2>Já tem uma turma?</h2><p>Dê um lugar para a conversa continuar.</p></div><Button variant="secondary" size="small" onClick={() => setCreate(true)}><Plus size={18} aria-hidden="true" />Criar comunidade</Button></footer>}
     <Modal open={create} onClose={() => setCreate(false)} title="Criar comunidade"><CommunityForm onDone={() => { setCreate(false); reload(); }} /></Modal>

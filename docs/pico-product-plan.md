@@ -1,3 +1,18 @@
+## Busca de pessoas e comunidades — PLAN · 13/09/2026
+
+### Implementação e validação
+
+Campo por nome/@usuário em Pessoas, atalho Buscar no cabeçalho, ligação entre os destinos e Comunidades em Explorar. Busca normalizada no banco antes da paginação, com texto literal, limites e filtros combináveis. Estados antigos descartados, debounce, timeout e recuperação; demo permanece local. RPC nova preserva o leitor antigo e as permissões sociais. Migration validada no desenvolvimento; tipos gerados desse projeto. Aplicação principal e revisão servida são conferidas no recibo de release.
+
+Lint, typecheck, build conectado e testes locais aprovados; smoke real de desenvolvimento passou em 61 verificações com duas contas e um grupo privados temporários, totalmente removidos. UI com fixtures: 15 verificações; demo: cinco, sem envio social. [Contrato e evidências](SEARCH.md). Integração local incorpora a main `055d2cf` (arenas, PR #14), preservando listas vinculadas compactas, mural e catálogo. A busca publica depois do catálogo, com uso exclusivo da main e recibo próprio. Conjunto integrado: 108 testes, lint, typecheck, build e 15 verificações de UI no app compilado aprovados.
+
+
+Pedido autoriza implementar busca por nome/@usuário e comunidades, coordenar com a tarefa de arenas e entregar commit final na main. Trabalho em `codex/people-community-search`, worktree próprio sobre `d11781f`; catálogo de arenas publica primeiro, busca integra depois. Landing e materiais paralelos ficam preservados.
+
+Adicionar campo visível em Pessoas, busca no servidor antes da paginação e combinação com filtros existentes. Nomes sem distinção de maiúsculas/acentos, @ opcional para usuário e caracteres literais. Reaproveitar RPC de descoberta compatível por nova função; manter RLS, bloqueios, perfis completos, admissão e jogos privados. Comunidades inicia em Explorar, com busca evidente e alternância para Minhas comunidades; preservar ficha mínima de grupos privados. Busca demo usa somente dados locais rotulados. Criar atalho de busca no cabeçalho e ligação entre os dois destinos existentes.
+
+Antes do fechamento: testes de consultas/paginação/limites/acesso, smoke no app, revisão 390px/claro e desktop/escuro, lint/typecheck/build. Migration aditiva validada no desenvolvimento antes do principal; publicação sequencial pela main protegida, após confirmação da outra tarefa.
+
 ## Arenas reais — implementação concluída · 13/09/2026
 
 17 arenas (9 Sul, 8 Oeste), 76 fotos otimizadas e fontes por unidade. Importador transacional separado do seed arquiva os três exemplos conhecidos, preserva histórico e não atribui gestão. Galeria sem recorte adicional, busca por endereço/região, vínculo em Meus Picos e comunidade oficial após aprovação. Duas mensagens institucionais removidas e estados vazios compactados. 102 testes locais, 72 checks reais, lint/typecheck/build aprovados; revisão responsiva e backup direcionado. [Pesquisa e evidências](arena-catalog-review/README.md). Publicação coordenada pela main após CI; tarefa de busca incorpora esta entrega e publica por último.

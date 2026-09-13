@@ -1400,6 +1400,32 @@ export type Database = {
         }
         Returns: undefined
       }
+      search_players: {
+        Args: {
+          p_arena_id?: string
+          p_level?: Database["public"]["Enums"]["player_level"]
+          p_offset?: number
+          p_search?: string
+          p_sport_id?: string
+        }
+        Returns: {
+          arena_name: string
+          arena_slug: string
+          available: boolean
+          bio: string
+          city: string
+          connected: boolean
+          display_name: string
+          expires_at: string
+          id: string
+          is_demo: boolean
+          level: Database["public"]["Enums"]["player_level"]
+          neighborhood: string
+          sport_name: string
+          sport_slug: Database["public"]["Enums"]["sport_slug"]
+          username: string
+        }[]
+      }
       set_arena_membership: {
         Args: { p_arena: string; p_join: boolean }
         Returns: undefined

@@ -1,3 +1,11 @@
+## Busca de pessoas e comunidades — revisão · 13/09/2026
+
+A lupa do cabeçalho e o campo antes dos filtros dão entrada reconhecível à busca. Explore é o escopo inicial de comunidades; a seleção Minhas comunidades não se confunde com o catálogo todo, e o vazio permite ampliar o escopo sem perder o texto. Removidas sugestões paralelas durante busca de pessoas. Amostra em 390 px/claro, 1280 px/escuro e 320 px/200%: título e link agora quebram em linhas quando necessário e o campo tem um único contorno de foco. Resultado privado mantém condição de entrada e oculta descrição. Falha/retry, descarte de resposta atrasada e demo sem gravações conferidos; Supabase real validado separadamente. Integração preservou os refinamentos da tarefa de arenas: busca nas listas vinculadas somente quando útil, vazio em uma linha e textos compactos.
+
+### Critérios registrados antes da execução
+
+Campo com lupa logo abaixo do título, rótulo acessível e exemplo concreto de nome/@usuário. Comunidades abre o catálogo explorável; o escopo Minhas comunidades permanece explícito. Uma busca não deve exibir sugestões alheias como se fossem resultados, reter resultados antigos durante nova consulta ou exigir limpar filtros invisíveis. Mostrar carregamento, vazio recuperável, erro com nova tentativa e paginação após o filtro. Preservar audiência e condições de entrada, usar componentes e tokens Aura existentes. Atalho de busca reconhecível no cabeçalho; ligação simples entre Pessoas e Comunidades.
+
 ## Arenas reais — revisão e aprendizados · 13/09/2026
 
 Fotografia, nome e endereço orientam a leitura; descrição e origem ficam em Sobre e gestão. Quadros preservam a foto completa e a galeria mostra uma por vez. Evitar duas caixas de boas-vindas em um lugar vazio: comunidades e mural agora usam uma linha cada. Comunidade oficial tem descrição curta e uma pergunta que acrescenta conversa. Acompanhar foi confirmado em Meus Picos; gestão depende de aprovação, sem sinalização falsa de parceria. Revisão em 320/390/1280 px, tema escuro nativo e claro com fixture local de CSS. [Evidências e limitações](arena-catalog-review/README.md).
