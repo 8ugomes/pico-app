@@ -1,4 +1,15 @@
+## Perfil com foto — critérios antes de implementar · 13/09/2026
+
+O avatar do cabeçalho deve mostrar a mesma imagem confirmada no perfil, com dimensão reservada e fallback honesto. Configuração inicial apresenta quatro requisitos: foto, nome, usuário e esporte; reconhecer somente foto salva e não um arquivo ainda em recorte. Foto visível e ação clara, sem esconder a escolha num disclosure durante onboarding. Campos opcionais incentivam expressão pessoal sem inventar benefício de engajamento medido. Etapa inicial antecede feed, aviso institucional e tutorial; Conta e direitos permanecem acessíveis. Rascunho resiste a atualizações; identidade nova descarta dados anteriores. Conferir leitura/toque/foco, ambos os temas e altura curta.
+
 # Pico — Deslopify
+
+### Fechamento e aprendizados
+
+Foto aparece em escala de avatar no cabeçalho/lateral e o formulário destaca identidade, esporte e detalhes pessoais opcionais. Quatro requisitos refletem campos preenchidos e foto confirmada; não são uma métrica de engajamento. O nome genérico não conta como apresentação inicial sem edição. Atualizar a foto não encerra o formulário; remover durante edição preserva o rascunho e os outros destinos pedem nova configuração. Conta permanece acessível.
+
+48 checks reais e oito grupos do tutorial passaram; 320 px escuro, 390 px claro e desktop sem overflow. Separar label e select corrigiu o nome acessível que incluía suas opções. A CSP precisa permitir leitura da imagem local até o fim do recorte: abrir o diálogo não basta para validar upload. [Evidências e limites](profile-setup-review/README.md).
+
 
 ## Landing pública — critérios antes de codar · 13/09/2026
 

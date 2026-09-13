@@ -4,12 +4,13 @@ import { createClient } from '@/lib/supabase/client';
 import type { ReadResponse } from '@/types/read';
 
 type ReadState = ReadResponse | { status: 'loading' };
-export function useRemoteRead(query: string) {
+export function useRemoteRead(query: string, enabled = true) {
   const identity = useRef<string | null>(null);
   const [attempt, setAttempt] = useState(0);
   const [retain, setRetain] = useState(false);
   const [result, setResult] = useState<{ query: string; attempt: number; state: ReadState; warning?: boolean } | null>(null);
   useEffect(() => {
+    if (!enabled) return;
     const controller = new AbortController();
     let active = true;
     async function load() {
@@ -28,8 +29,9 @@ export function useRemoteRead(query: string) {
     }
     void load();
     return () => { active = false; controller.abort(); };
-  }, [query, attempt, retain]);
+  }, [query, attempt, retain, enabled]);
   useEffect(() => {
+    if (!enabled) return;
     // Refresh on focus; account changes invalidate before loading any new private data.
     const refresh = () => { if (document.visibilityState === 'visible') { setRetain(true); setAttempt(value => value + 1); } };
     const client = createClient();
@@ -40,9 +42,16 @@ export function useRemoteRead(query: string) {
     }).data.subscription;
     window.addEventListener('focus', refresh);
     return () => { window.removeEventListener('focus', refresh); subscription?.unsubscribe(); };
-  }, []);
+  }, [enabled]);
   const state: ReadState = result?.query === query && (result.attempt === attempt || (retain && result.state.status === 'success')) ? result.state : { status: 'loading' };
   const retry = useCallback(() => { setRetain(false); setAttempt(value => value + 1); }, []);
   const refresh = useCallback(() => { setRetain(true); setAttempt(value => value + 1); }, []);
+  useEffect(() => {
+    if (!enabled || query !== 'resource=profile') return;
+    window.addEventListener('pico:profile-saved', refresh);
+    let channel: BroadcastChannel | undefined;
+    try { channel = new BroadcastChannel('pico:profile'); channel.onmessage = () => refresh(); } catch { /* Focus still refreshes. */ }
+    return () => { window.removeEventListener('pico:profile-saved', refresh); channel?.close(); };
+  }, [enabled, query, refresh]);
   return { state, retry, refresh, refreshError: Boolean(result?.warning), refreshing: result?.attempt !== attempt };
 }

@@ -1,3 +1,13 @@
+# Perfil personalizado antes de explorar · 13/09/2026
+
+Foto confirmada, nome, usuário e esporte principal compõem a configuração inicial. O formulário pede os quatro antes de liberar Feed, Pessoas, Arenas e Comunidades, inclusive por link direto e após recarga. Nome provisório “Novo jogador” começa vazio para ser personalizado. Bio, cidade e bairro continuam opcionais; o texto explica que aparecem no perfil. Os níveis existentes permanecem selecionáveis.
+
+Escolher e recortar uma imagem não conclui a etapa: “Usar esta foto” confirma o avatar no servidor. O topo e a lateral usam a mesma URL privada do perfil. Ao salvar/remover a foto, a leitura compartilhada atualiza os consumidores e avisa as outras abas para reler; nenhum dado pessoal é guardado ou enviado pelo canal de invalidação. Falha da imagem mostra um ícone identificado como indisponível. O formulário mantém os campos durante atualização de foto e erro de gravação.
+
+A API de salvar perfil recusa a ausência de avatar. A navegação só avança depois de ler o perfil salvo. Este é um requisito de jornada, não uma nova permissão do banco: admissão, RLS e autorização do Storage continuam independentes, sem migration. Conta, Acesso e Privacidade permanecem disponíveis; o próprio perfil já salvo permite edição/remoção de foto sem descartar o rascunho. Se a foto for removida, os demais destinos sociais voltam à configuração. Perfis que já atendem aos requisitos entram normalmente, sem refazer etapas.
+
+O aviso da comunidade oficial e o tutorial opcional aparecem depois da configuração. Nenhum acompanhamento, jogo ou publicação é criado pelo gate. Engajamento maior é uma hipótese de produto, sem resultado medido nesta entrega.
+
 > Atualização de publicação: sincronização com produção autorizada em 13/09/2026; migration e política de senha já aplicadas no principal. [Preparação, destino e verificação da revisão servida](ONBOARDING_RELEASE.md). SMTP continua pendente. As referências abaixo a “somente desenvolvimento”/“não publicado” registram a etapa anterior.
 
 # Conheça o Pico — tutorial guiado

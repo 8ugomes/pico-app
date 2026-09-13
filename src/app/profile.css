@@ -78,3 +78,6 @@
 .profile-setup-progress a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: 4px; font-size: var(--text-label); }
 .profile-editor-v2-section h2 { scroll-margin-top: 1.5rem; }
 .profile-editor-v2-section > .profile-editor-v2-count + p { margin-top: 1rem; }
+.profile-setup-account { padding: 1rem 0; border-top: 1px solid var(--border-subtle); font-size: var(--text-label); }
+.profile-setup-photo-controls { margin-top: .75rem; }
+.profile-editor-v2-photo { scroll-margin-top: 6rem; }

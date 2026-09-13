@@ -166,3 +166,8 @@
 .repost-action.is-reposted { color: var(--accent); font-weight: 700; }
 
 .form-actions.repost-confirmation-actions > .button { flex: 1 1 9rem; padding-inline: 12px; }
+.shell-avatar { display: inline-flex; flex-shrink: 0; }
+.shell-avatar .read-profile-avatar { width: 44px; height: 44px; border-radius: 50%; overflow: hidden; display: grid; place-items: center; border: 1px solid var(--border-control); background: var(--accent-soft); }
+.shell-avatar img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.shell-avatar svg { width: 20px; height: 20px; }
+.sidebar-profile > span:last-child { min-width: 0; overflow-wrap: anywhere; }

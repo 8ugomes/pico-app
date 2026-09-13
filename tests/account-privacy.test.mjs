@@ -39,7 +39,7 @@ test('deletion erases own private invitation data, preserves others and refuses 
 test('production policy restricts scripts, connections, framing and browser sensors without allowing JS eval',()=>{
  const policy=contentSecurityPolicy('test-random-nonce','https://project.supabase.co');
  assert.ok(policy.includes("'nonce-test-random-nonce'"));assert.ok(policy.includes("'strict-dynamic'"));assert.ok(!policy.includes("'unsafe-eval'"));
- assert.match(policy,/connect-src 'self' https:\/\/project.supabase.co;/);assert.ok(policy.includes("frame-ancestors 'none'"));
+ assert.match(policy,/connect-src 'self' blob: https:\/\/project.supabase.co;/);assert.ok(policy.includes("frame-ancestors 'none'"));
  assert.ok(!policy.split(';').find(p=>p.trim().startsWith('script-src')).includes('unsafe-inline'));
 });
 

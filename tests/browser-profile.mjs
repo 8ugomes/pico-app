@@ -60,12 +60,12 @@ const server=createServer(async(req,res)=>{try{
 }catch(error){res.writeHead(400);res.end(String(error.message));}});
 await new Promise(done=>server.listen(0,'127.0.0.1',done));const origin=`http://127.0.0.1:${server.address().port}`;
 const id='11111111-1111-4111-8111-111111111111',sport={id:'22222222-2222-4222-8222-222222222222',slug:'futevolei',name:'Futevôlei'};
-const original={id,name:'Alex da Areia',username:'alex_teste',bio:'Futevôlei, amigos e um jogo no fim do dia.',city:'São Paulo',neighborhood:'Vila Mariana',avatar:null,avatarPath:null,available:true,isDemo:false,onboardingCompleted:true,sports:[{sport,level:'Intermediário',isPrimary:true}]};
+const original={id,name:'Alex da Areia',username:'alex_teste',bio:'Futevôlei, amigos e um jogo no fim do dia.',city:'São Paulo',neighborhood:'Vila Mariana',avatar:'/api/media?bucket=avatars&path='+id+'/aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa.webp',avatarPath:id+'/aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa.webp',available:true,isDemo:false,onboardingCompleted:true,sports:[{sport,level:'Intermediário',isPrimary:true}]};
 const summary=[];let currentBrowser=null,currentPage=null;
 try {
  for(const [name,engine] of [['chromium',chromium],['webkit',webkit]]){
   const browser=await engine.launch();currentBrowser=browser;const context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});const page=await context.newPage();currentPage=page;
-  let profile=structuredClone(original),readCount=0,saveCount=0,failSave=false;mediaFixture.stored=null;mediaFixture.uploads=0;mediaFixture.wireFormat=null;const errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error'&&!(m.text().includes('503')&&m.location().url.includes('/api/social/mutate')))errors.push(m.text())});
+  let profile=structuredClone(original),readCount=0,saveCount=0,failSave=false;mediaFixture.stored=await sharp({create:{width:64,height:64,channels:3,background:'#44342f'}}).webp().toBuffer();mediaFixture.uploads=0;mediaFixture.wireFormat=null;const errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error'&&!(m.text().includes('503')&&m.location().url.includes('/api/social/mutate')))errors.push(m.text())});
   await page.route(/\/api\/(?!media(?:\?|$)).*/,async route=>{const request=route.request(),url=new URL(request.url());let data={};
    if(url.pathname==='/api/social/read'){
     if(url.searchParams.get('resource')==='profile'){readCount++;data={status:'success',data:{kind:'profile',profile}};}

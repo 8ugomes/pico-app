@@ -1,3 +1,11 @@
+## 2026-09-13 — Avatar e perfil antes de explorar
+
+- Foto confirmada no cabeçalho móvel e lateral, compartilhada com o perfil e atualizada entre abas.
+- Configuração com foto, nome, usuário e esporte antes das telas sociais; bio/localização opcionais, Conta e edição própria preservadas.
+- API recusa salvar sem foto; campos sobrevivem à atualização do avatar e falhas. Selects com rótulos acessíveis.
+- Corrigido bloqueio de leitura `blob:` do recorte sob CSP; rede/scripts continuam restritos.
+- 99 testes locais e 48 checks reais de desenvolvimento com limpeza; tutorial em oito layouts. [Revisão](profile-setup-review/README.md).
+
 # Changelog — Pico
 
 ## 2026-09-13 — segurança, direitos e preparação do beta

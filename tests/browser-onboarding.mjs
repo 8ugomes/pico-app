@@ -161,7 +161,7 @@ try {
   await page.reload(); await visible(page.getByRole('heading', { name: 'Seu acesso está indisponível.' }));
   await hidden(page.getByRole('button', { name: 'Conhecer o Pico', exact: true }));
   access = true; brokenProfile = true;
-  await page.reload(); await visible(page.getByRole('heading', { name: 'Seu Pico.', exact: true }));
+  await page.reload(); await visible(page.getByRole('heading', { name: 'Não deu para carregar.', exact: true }));
   await hidden(page.getByRole('button', { name: 'Conhecer o Pico', exact: true }));
   checks.push('new identity has independent preference; admission denial and failed profile read do not offer tutorial');
 

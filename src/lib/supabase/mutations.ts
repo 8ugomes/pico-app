@@ -128,6 +128,9 @@ export async function mutateSocial(client: SupabaseClient<Database>, input: Muta
     const { error } = await client.from('comments').insert({ post_id: input.postId, body: input.body });
     if (error) mutationFailure(error); return;
   }
+  const { data: profile, error: profileError } = await client.from('profiles').select('avatar_path').eq('id', user.id).maybeSingle();
+  if (profileError) mutationFailure(profileError);
+  if (!profile?.avatar_path) throw new MutationError(400, 'Escolha e confirme sua foto antes de salvar o perfil.');
   const { error } = await client.rpc('save_profile', {
     p_name: input.name, p_username: input.username, p_bio: input.bio, p_city: input.city,
     p_neighborhood: input.neighborhood, p_sport_id: input.sportId, p_level: input.level, p_available: input.available,

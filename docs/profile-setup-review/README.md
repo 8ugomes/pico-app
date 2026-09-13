@@ -1,0 +1,11 @@
+# Foto e perfil inicial — revisão de 13/09/2026
+
+Correção do avatar conectado no topo/lateral e configuração com foto confirmada, nome, usuário e modalidade antes dos destinos sociais. A API verifica foto no próprio perfil antes de salvar. Conta e edição própria permanecem disponíveis. Não há alteração de banco/RLS ou dados reais do principal.
+
+99 testes locais, lint, typecheck e build passaram. [48 verificações reais](results.json) no Next compilado local + Supabase exclusivo de desenvolvimento: duas contas temporárias, upload/recorte WebP sem EXIF, confirmação/erro/retentativa, referência alheia recusada, links diretos, recarga, campos preservados, atualização de outra aba e troca de identidade. Contas e arquivos removidos no fechamento. Imagens desta pasta mostram dados e imagem sintéticos; o estado de erro de gravação é controlado. 320 px escuro, 390 px claro e 1280 px sem overflow. Capturas de página inteira podem posicionar controles fixos fora da região visível original.
+
+[Regressão do tutorial](tour-checks.json): oito grupos e oito layouts, incluindo texto ampliado, pausa/retomada, isolamento, falha de leitura e zero gravações sociais. A CI de perfil verifica também Chromium/WebKit e HEIC. Publicação efetiva e CI serão registradas no PR/recibo local `.vercel/profile-onboarding-release.json`.
+
+A jornada completa identificou um bloqueio real em `fetch(blob:)` durante o recorte sob CSP. `connect-src` agora permite URLs locais de Blob, mantendo destinos de rede restritos e scripts com nonce. Confirmar que o diálogo fecha e que bytes normalizados chegaram ao Storage é necessário: apenas abrir o recorte não comprova upload. Referência: [MDN connect-src](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/connect-src).
+
+Reprodução: build conectado com `.env.local` validado; iniciar Next com credencial administrativa de desenvolvimento apenas no servidor; `PLAYWRIGHT_MODULE=<caminho> PLAYWRIGHT_CHANNEL=chrome node --env-file=.env.local --env-file=.env.hosted-admin tests/hosted-profile-setup.mjs`, servidor em localhost:3024 ou `PROFILE_BASE_URL`. O teste recusa ambientes que não sejam de desenvolvimento e não envia e-mail. Não equivale a teste em telefone físico ou pesquisa de engajamento.

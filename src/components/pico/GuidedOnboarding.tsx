@@ -6,7 +6,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { ArrowLeft, ArrowRight, ChevronDown, Compass, LocateFixed, X } from 'lucide-react';
 import { Button, buttonVariants } from '@/components/ui/Button';
 import { parseTourProgress, tourSteps, tourStepAt, tourStorageKey, type TourProgress } from '@/lib/onboarding';
-import { useRemoteRead } from './connected/useRemoteRead';
+import { useOwnProfile } from './connected/OwnProfile';
 
 type TourContext = { progress: TourProgress | null; start: (step?: number) => void };
 const Tour = createContext<TourContext | null>(null);
@@ -18,7 +18,7 @@ export function GuidedOnboarding({ children, demo }: { children: ReactNode; demo
 }
 
 function ConnectedTour({ children }: { children: ReactNode }) {
-  const { state } = useRemoteRead('resource=profile');
+  const { state } = useOwnProfile();
   const identity = state.status === 'success' && state.data.kind === 'profile' ? state.data.profile.id : null;
   // Loading optional preferences must not remount forms already in use.
   // A real switch between two known accounts still discards the old subtree.

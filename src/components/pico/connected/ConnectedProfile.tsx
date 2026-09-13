@@ -12,12 +12,12 @@ import { TourLauncher } from '../GuidedOnboarding';
 import { ProfileEditor } from './ProfileEditor';
 import { RemoteAvatar } from './Media';
 import { SportIcon } from '../SocialUI';
-import { useRemoteRead } from './useRemoteRead';
+import { useOwnProfile } from './OwnProfile';
 import { useEntity } from './useEntity';
 import { ReadFailure, ReadLoading } from './ReadState';
 
 export function ConnectedProfile() {
-  const { state, retry, refresh, refreshError } = useRemoteRead('resource=profile');
+  const { state, retry, refresh, refreshError } = useOwnProfile();
   if (state.status === 'loading') return <ReadLoading />;
   if (state.status !== 'success') return <ReadFailure state={state} retry={retry} />;
   if (state.data.kind !== 'profile') return null;
