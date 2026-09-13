@@ -1,5 +1,9 @@
 ## Refino social de posts e comentários — implementação e validação · 13/09/2026
 
+### Publicação autorizada · 13/09/2026
+
+O responsável autorizou publicar `b9c0930`. Integrar por PR/CI na main, usar o projeto Vercel existente e aplicar somente a migration `20260913210000` já validada. Antes da aplicação, guardar definições anteriores das funções e inventário privado de conteúdo; depois conferir igualdade dos dados e leitura do post recuperado sob RLS. Preparar Production sem trocar domínio, conferir versão/identidade/rotas e promover o mesmo artefato. Estado final, SHA e deployment ficam no recibo operacional e no PR. Preservar o trabalho de landing na checkout original.
+
 Posts e comentários separados por contorno/superfície, nomes fortes, avatares e acentos por identidade. Menu ••• operacional com edição/exclusão própria, denúncia/bloqueio alheio e moderação por escopo. Edição de comentário validada no servidor e por RLS; erro preserva o rascunho. 118 testes locais, 104 verificações hospedadas em desenvolvimento, lint/typecheck/build e revisão visual passaram. Corrigida no desenvolvimento a ocultação de posts das três arenas fictícias retiradas, sem reescrever conteúdo; publicação/aplicação principal pendentes. Migrations e deploys passam a emitir recibos privados de preservação. [Evidências e limites](social-refinement-review/README.md).
 
 ### Ajuste de escopo: preservação de publicações

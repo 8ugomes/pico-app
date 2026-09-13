@@ -1,5 +1,7 @@
 ## Refino social — revisão e aprendizados · 13/09/2026
 
+Publicação autorizada nesta rodada: conferir no artefato servido os estilos de posts/comentários e rotas de entrada, preservando as evidências de interação já exercitadas com contas de desenvolvimento. A mudança no banco deve restaurar a leitura do mesmo original, sem reintroduzir a arena fictícia nem alterar conteúdo. Registrar a revisão final no recibo do release.
+
 Contorno agora separa publicações; comentários ganham camada própria, avatar e acento lateral. Ações ficam no ••• e autoria ganha contraste. Próprio/alheio também se distingue pelo texto Você, sem depender da cor. Revisados 320/390/1280 px, claro/escuro, 200% de texto, foco, edição/cancelamento e falha com retry. A quantidade de linhas no banco não prova que o usuário ainda vê o conteúdo: importação e mudança de RLS precisam exercitar o mesmo post pelo feed, perfil e link direto. [Capturas e testes](social-refinement-review/README.md).
 
 ### Critérios registrados antes da implementação

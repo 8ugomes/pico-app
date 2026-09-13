@@ -14,7 +14,7 @@ O problema foi reproduzido antes da migration no desenvolvimento. A migration `2
 
 Admissão, bloqueios, moderação, exclusão e audiência privada continuam obrigatórios. Arenas reais e outras arenas privadas/arquivadas não recebem a exceção. Testes exercitam feed, perfil, permalink, leitor anterior, mídia, comentários, republicações e repetição da importação.
 
-**Aplicação:** migration validada e aplicada somente no Supabase de desenvolvimento. O banco principal foi consultado, sem aplicação da correção nesta rodada. O commit não publica o frontend nem aplica automaticamente a migration principal.
+**Estado ao concluir a implementação (`b9c0930`):** migration validada e aplicada somente no Supabase de desenvolvimento. O banco principal foi consultado, sem aplicação da correção naquela rodada. O responsável autorizou a publicação na rodada seguinte, pelo fluxo main/PR/CI, migration e artefato Vercel verificado. A aplicação efetiva e versão servida são conferidas no recibo operacional e no PR; o commit isolado não publica o frontend nem aplica automaticamente a migration principal.
 
 ## Verificação
 

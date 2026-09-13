@@ -1,5 +1,7 @@
 ## 2026-09-13 — camadas sociais, ações de comentários e histórico preservado
 
+Publicação autorizada após o commit de implementação; promoção pela main/PR/CI com inventário anterior/posterior, conferência do histórico sob RLS e recibo do artefato servido.
+
 - Contorno dos posts, comentários com avatar/balão próprio e nomes com mais contraste; acentos Aura por identidade e marca textual Você.
 - Menu ••• funcional; editar/excluir próprios posts e comentários, denunciar/bloquear alheios e retirar do mural conforme permissão. Texto preservado em falha, foco acessível e edição de comentário autenticada/RLS.
 - Corrigida a regra que escondia posts ligados às três arenas fictícias retiradas: histórico intacto, sem devolver exemplos ao catálogo ou ampliar grupos privados. Migration aplicada somente no desenvolvimento nesta rodada.
