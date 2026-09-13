@@ -1,5 +1,7 @@
 # Pico
 
+**Republicações:** publicações alheias podem aparecer no seu perfil e no Início de quem acompanha você, com autoria, curtidas, comentários e audiência originais preservados. É possível desfazer; grupos privados continuam restritos. [Contrato e verificação](docs/REPOSTS.md).
+
 **O ponto de encontro da areia. Me acha no Pico.**
 
 Rede social PWA mobile-first para futevôlei, beach tennis e vôlei de praia. O Ciclo 9 implementa comunidades próprias, gestão de arenas, papéis no banco, publicação com destinos, histórico privado e fotos recortadas. O Ciclo 10 organiza o perfil, elimina a duplicação do editor e acrescenta conversão HEIC/HEIF local. O conjunto de tutorial, comunidade oficial e cadastro aberto foi autorizado para publicação coordenada no ambiente principal; o acesso exige e-mail confirmado e conta ativa. [Registro da entrega e verificação da versão](docs/ONBOARDING_RELEASE.md).

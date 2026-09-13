@@ -2,7 +2,7 @@
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { Pencil, Check, Plus, ArrowLeft, ArrowUpRight } from "lucide-react";
-import { visibleDemoPosts } from "@/lib/demo-state";
+import { demoFeed } from "@/lib/demo-state";
 import { TourLauncher } from "./GuidedOnboarding";
 import { useDemo } from "./DemoProvider";
 import { PlayerAvatar } from "./PlayerAvatar";
@@ -23,7 +23,7 @@ export function ProfileView({ playerId }: { playerId?: string }) {
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const connected = state.connectedPlayerIds.includes(player.id);
-  const posts = visibleDemoPosts(state).filter(p => p.authorId === player.id);
+  const posts = demoFeed(state, player.id);
   const arenas = state.arenas.filter(a => (mine ? state.followedArenaIds : player.arenaIds).includes(a.id));
   function save(event: FormEvent) {
     event.preventDefault();
@@ -39,8 +39,8 @@ export function ProfileView({ playerId }: { playerId?: string }) {
     <div className="profile-sports">{player.sports.map(s => <div key={s.sportId}><SportIcon sport={s.sportId} size={19} /><span><strong>{state.sports.find(sport => sport.id === s.sportId)?.name}</strong><small>{s.level}</small></span></div>)}</div>
     {mine && <Link className="journal-link" href="/jogos">Meus jogos <ArrowUpRight size={18} aria-hidden="true" /></Link>}
     {notice && <p className="inline-success" role="status">{notice}</p>}
-    <div className="feed-tabs detail-tabs" role="group" aria-label="Conteúdo do perfil"><button type="button" className={tab === "posts" ? "active-tab" : ""} aria-pressed={tab === "posts"} onClick={() => setTab("posts")}>{mine ? "Meus posts" : "Posts"}</button><button type="button" className={tab === "arenas" ? "active-tab" : ""} aria-pressed={tab === "arenas"} onClick={() => setTab("arenas")}>{mine ? "Meus Picos" : "Vínculos"} <span>({arenas.length})</span></button></div>
-    {tab === "posts" && <div className="detail-content">{mine && <PostComposer />}<div className="post-list">{posts.map(p => <PostCard post={p} key={p.id} />)}{!posts.length && <EmptyState title={mine ? "Seu primeiro post te espera." : "A resenha ainda vai começar."}>{mine ? "Compartilhe um jogo ou chame sua próxima dupla no campo acima." : "Enquanto isso, conheça as arenas dessa pessoa."}</EmptyState>}</div></div>}
+    <div className="feed-tabs detail-tabs" role="group" aria-label="Conteúdo do perfil"><button type="button" className={tab === "posts" ? "active-tab" : ""} aria-pressed={tab === "posts"} onClick={() => setTab("posts")}>Publicações</button><button type="button" className={tab === "arenas" ? "active-tab" : ""} aria-pressed={tab === "arenas"} onClick={() => setTab("arenas")}>{mine ? "Meus Picos" : "Vínculos"} <span>({arenas.length})</span></button></div>
+    {tab === "posts" && <div className="detail-content">{mine && <PostComposer />}<div className="post-list">{posts.map(({ post, repost }) => <PostCard post={post} repost={repost} key={post.id} />)}{!posts.length && <EmptyState title={mine ? "Seu primeiro post te espera." : "A resenha ainda vai começar."}>{mine ? "Compartilhe um jogo ou chame sua próxima dupla no campo acima." : "Enquanto isso, conheça as arenas dessa pessoa."}</EmptyState>}</div></div>}
     {tab === "arenas" && <div className="profile-places"><h2>Arenas acompanhadas</h2><div className="context-links">{arenas.map(a => <Link href={`/arenas/${a.slug}`} key={a.id}>{a.name}</Link>)}</div><h2>Comunidades</h2><div className="context-links">{state.communities.filter(c => c.members.includes(player.id) && (c.visibility === "beta" || c.members.includes(me.id))).map(c => <Link href={`/comunidades/${c.slug}`} key={c.id}>{c.name}</Link>)}</div>{!arenas.length && <EmptyState title="Encontre seu lugar na areia.">Explore as arenas e siga suas comunidades favoritas.</EmptyState>}</div>}
     {mine && <TourLauncher />}
     {mine && <Link className="demo-account-link" href="/login">Acessar minha conta real <ArrowUpRight size={15} aria-hidden="true" /></Link>}

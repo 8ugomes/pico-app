@@ -1,4 +1,6 @@
-> Publicação de 13/09/2026: **22 migrations nos dois ambientes**, incluindo comunidade oficial e cadastro aberto. Tipos e preservação dos dados conferidos; [registro da publicação](ONBOARDING_RELEASE.md). As notas seguintes preservam os estados anteriores.
+> Republicações · 13/09/2026: migration aditiva `20260913100000_post_reposts.sql`, aplicada no desenvolvimento (23 migrations). Tabela `post_reposts` com RLS, escrita por `set_post_repost` e leitura por `read_repost_feed`; leitores anteriores preservados para rollback. Aplicação no principal integra o release autorizado, conferido pelo ledger e recibo operacional. [Contrato e evidências](REPOSTS.md).
+
+> Publicação anterior de 13/09/2026: **22 migrations nos dois ambientes**, incluindo comunidade oficial e cadastro aberto. Tipos e preservação dos dados conferidos; [registro da publicação](ONBOARDING_RELEASE.md). As notas seguintes preservam os estados anteriores.
 
 > Estado de 13/09/2026: **22 migrations em desenvolvimento; 21 no principal**. `20260913090000_pico_official_open_signup.sql` acrescenta cadastro aberto/admissão automática após confirmação, comunidade institucional, editoriais e avisos privados. Nova matrícula integrada a `save_profile`. Tipos gerados do desenvolvimento. Principal permanece sem esta migration até a publicação coordenada. [Contrato e segurança](OFFICIAL_COMMUNITY_AUTH.md).
 

@@ -96,3 +96,39 @@ test("Portuguese search handles accents, case and surrounding whitespace", () =>
   assert.equal(normalizeSearch("  JÚLIA  "), "julia");
   assert.ok(normalizeSearch("Vila Madalena São Paulo").includes(normalizeSearch("sao paulo")));
 });
+
+test('demo republication is explicit, canonical, idempotent and disappears after undo', async () => {
+  const { demoFeed } = await import('../src/lib/demo-state.ts');
+  let state = initial();
+  const original = state.posts.find(p => p.authorId !== state.currentUserId);
+  const before = structuredClone({ posts: state.posts, comments: state.comments, games: state.games });
+  const action = { type: 'repost', postId: original.id, reposted: true, now: Date.now() };
+  state = demoReducer(state, action);
+  assert.equal(state.reposts.length, 1);
+  assert.equal(demoReducer(state, { ...action, now: action.now + 1000 }), state);
+  assert.deepEqual({ posts: state.posts, comments: state.comments, games: state.games }, before);
+  const own = demoFeed(state, state.currentUserId).find(p => p.post.id === original.id);
+  assert.equal(own.post.authorId, original.authorId);
+  assert.equal(own.repost.playerId, state.currentUserId);
+  assert.equal(demoFeed(state).filter(p => p.post.id === original.id).length, 1);
+  state = demoReducer(state, { ...action, reposted: false });
+  assert.equal(state.reposts.length, 0);
+  assert.equal(demoFeed(state, state.currentUserId).some(p => p.post.id === original.id), false);
+});
+
+test('demo republication cannot expose private posts and tracks follower direction', async () => {
+  const { demoFeed } = await import('../src/lib/demo-state.ts');
+  let state = initial();
+  const original = state.posts.find(p => p.authorId !== state.currentUserId);
+  const other = state.players.find(p => p.id !== state.currentUserId && p.id !== original.authorId);
+  const privatePost = { ...original, id: 'private-repost-test', audience: 'private', communityIds: ['closed'] };
+  state = { ...state, posts: [...state.posts, privatePost], communities: [...state.communities, { id: 'closed', members: [original.authorId, other.id] }], reposts: [{ postId: privatePost.id, playerId: other.id, createdAt: Date.now() }] };
+  assert.equal(demoReducer(state, { type: 'repost', postId: privatePost.id, reposted: true, now: Date.now() }), state);
+  assert.equal(demoFeed(state).some(p => p.post.id === privatePost.id), false);
+  state = { ...state, communities: state.communities.map(c => c.id === 'closed' ? { ...c, members: [...c.members, state.currentUserId] } : c), connectedPlayerIds: [] };
+  assert.equal(demoFeed(state).find(p => p.post.id === privatePost.id).repost, undefined);
+  state = { ...state, connectedPlayerIds: [other.id] };
+  assert.equal(demoFeed(state).find(p => p.post.id === privatePost.id).repost.playerId, other.id);
+  state = { ...state, communities: state.communities.map(c => c.id === 'closed' ? { ...c, members: c.members.filter(id => id !== other.id) } : c) };
+  assert.equal(demoFeed(state).find(p => p.post.id === privatePost.id).repost, undefined);
+});

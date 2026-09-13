@@ -1,5 +1,19 @@
 # Pico — plano de produto
 
+## Republicações — plano antes de desenvolver · 13/09/2026
+
+Pedido autoriza implementar e publicar republicações após o redesign entregue na main `308b86b`. Uma pessoa poderá republicar uma publicação alheia e desfazer essa ação. O feed de quem a acompanha e seu perfil passam a incluir a referência ao original, com autoria preservada; curtidas, comentários, mídia e edição permanecem no post canônico. Uma publicação aparece uma vez por contexto, ordenada pela publicação ou republicação elegível mais recente. Murais e permalink continuam apontando ao original, sem redistribuição automática.
+
+Audiência efetiva é a interseção do acesso atual ao original e à pessoa que republicou. Grupos privados não ganham audiência; bloqueio, moderação, exclusão, revogação de admissão e perda de participação removem a referência das leituras. Não republicar conteúdo próprio ou associado a arena arquivada. Demo simula apenas em memória, com rótulo explícito.
+
+Implementar migration aditiva com RLS/RPC, novo leitor compatível com a versão anterior, tipos gerados, API validada e controle reutilizável Aura Manteiga. Verificar idempotência, paginação, seguidores, perfil, acesso privado, remoção e falha de rede; executar testes de banco local e do Supabase exclusivo de desenvolvimento, lint/typecheck/build e smoke de interface. Antes da publicação: backup do principal, migration conferida, PR/CI, main sincronizada, deploy pelo script e versão pública. Preservar o release Aura como rollback. Contrato detalhado em [REPOSTS.md](REPOSTS.md).
+
+### Fechamento da implementação de republicações
+
+Migration aditiva e tipos gerados do desenvolvimento; API verifica identidade, origem e estado desejado. Controle compartilhado em conectado/demo, confirmação de audiência e atribuição acima do autor original. Feed deduplica antes da paginação; perfil inclui republicações e murais não recebem destinos novos. Em erro, não anuncia sucesso sem confirmação.
+
+Lint, typecheck, builds conectado/demo e 93 testes passaram. Desenvolvimento hospedado: 112 checks, quatro contas controladas e limpeza concluída; UI real cobriu erro, clique duplo, recarga, seguidor, perfil, audiência privada e desfazer. Demo conferido sem escrita externa. Amostra visual com teclado e texto a 200%; corrigidas quebras do cabeçalho, compositor, linha de título e botões. [Evidências](reposts-review/README.md). Backup cifrado e inventário do principal preparados. PR/CI, migration principal e promoção serão registrados no PR e em `.vercel/reposts-release.json`; confirmar revisão pública em `/api/version`.
+
 ## Redesign integral Aura Manteiga — PLAN · 13/09/2026
 
 Pedido vigente autoriza implementação e publicação no pico-app após PR/CI. Branch `codex/aura-manteiga-redesign`, base `3bd6dc4`, árvore inicialmente limpa. Migrar fundação (tokens semânticos, Syne/Manrope locais, SVG e PWA), entrada/auth, navegação, conteúdo por domínio, todos os formulários/gestão e estados. Refinar perfil inicial, aviso oficial e tutorial mantendo persistências e contratos. Não há mudança de banco ou APIs.

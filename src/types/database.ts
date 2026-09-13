@@ -892,6 +892,39 @@ export type Database = {
           },
         ]
       }
+      post_reposts: {
+        Row: {
+          created_at: string
+          player_id: string
+          post_id: string
+        }
+        Insert: {
+          created_at?: string
+          player_id: string
+          post_id: string
+        }
+        Update: {
+          created_at?: string
+          player_id?: string
+          post_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "post_reposts_player_id_fkey"
+            columns: ["player_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "post_reposts_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       posts: {
         Row: {
           arena_id: string | null
@@ -1287,6 +1320,16 @@ export type Database = {
         }[]
       }
       read_played_games: { Args: { p_offset?: number }; Returns: Json }
+      read_repost_feed: {
+        Args: {
+          p_arena?: string
+          p_author?: string
+          p_community?: string
+          p_offset?: number
+          p_post?: string
+        }
+        Returns: Json
+      }
       read_retired_checkins: { Args: { p_offset?: number }; Returns: Json }
       read_social_feed: {
         Args: {
@@ -1359,6 +1402,10 @@ export type Database = {
       set_entity_photo: {
         Args: { p_id: string; p_kind: string; p_path?: string; p_slot: string }
         Returns: undefined
+      }
+      set_post_repost: {
+        Args: { p_post: string; p_reposted: boolean }
+        Returns: boolean
       }
       share_played_game: {
         Args: {

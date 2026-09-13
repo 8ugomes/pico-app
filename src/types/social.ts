@@ -8,4 +8,5 @@ export type Comment = { id: string; postId: string; authorId: string; content: s
 export type DemoGame = { id: string; playerId: string; arenaId: string; sportId: SportId; playedOn: string; createdAt: string; version: number };
 export type DemoCommunity = { id: string; slug: string; name: string; description: string; rules: string; sports: SportId[]; arenaId?: string; visibility: "beta" | "private"; entryMode: "open" | "approval" | "invite"; members: string[]; pending: string[] };
 export type DemoSeed = { currentUserId: string; sports: Sport[]; players: Player[]; arenas: Arena[]; posts: Post[]; comments: Comment[]; games: DemoGame[]; communities: DemoCommunity[] };
-export type DemoState = DemoSeed & { deletedGameIds: string[]; likedPostIds: string[]; connectedPlayerIds: string[]; followedArenaIds: string[] };
+export type DemoRepost = { postId: string; playerId: string; createdAt: number };
+export type DemoState = DemoSeed & { reposts: DemoRepost[]; deletedGameIds: string[]; likedPostIds: string[]; connectedPlayerIds: string[]; followedArenaIds: string[] };

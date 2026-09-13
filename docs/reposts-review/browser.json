@@ -1,0 +1,84 @@
+{
+  "completed": true,
+  "layouts": [
+    {
+      "theme": "light",
+      "scale": 1,
+      "width": 390,
+      "documentWidth": 390,
+      "dialogWidth": 366,
+      "clientWidth": 366,
+      "controls": [
+        {
+          "text": "",
+          "width": 44,
+          "height": 44
+        },
+        {
+          "text": "Republicar",
+          "width": 153,
+          "height": 48
+        },
+        {
+          "text": "Cancelar",
+          "width": 153,
+          "height": 48
+        }
+      ],
+      "overflow": []
+    },
+    {
+      "theme": "dark",
+      "scale": 1,
+      "width": 320,
+      "documentWidth": 320,
+      "dialogWidth": 296,
+      "clientWidth": 296,
+      "controls": [
+        {
+          "text": "",
+          "width": 44,
+          "height": 44
+        },
+        {
+          "text": "Republicar",
+          "width": 126,
+          "height": 69.1875
+        },
+        {
+          "text": "Cancelar",
+          "width": 126,
+          "height": 69.1875
+        }
+      ],
+      "overflow": []
+    },
+    {
+      "theme": "light",
+      "scale": 2,
+      "width": 320,
+      "documentWidth": 320,
+      "dialogWidth": 272,
+      "clientWidth": 272,
+      "controls": [
+        {
+          "text": "",
+          "width": 44,
+          "height": 44
+        },
+        {
+          "text": "Republicar",
+          "width": 208,
+          "height": 136.375
+        },
+        {
+          "text": "Cancelar",
+          "width": 208,
+          "height": 136.375
+        }
+      ],
+      "overflow": []
+    }
+  ],
+  "errors": []
+}

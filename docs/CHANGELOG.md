@@ -1,5 +1,12 @@
 # Changelog — Pico
 
+## 2026-09-13 — republicações para seguidores e perfil
+
+- Republicar/desfazer publicação alheia, com audiência confirmada e identificação de quem republicou. Conteúdo, autoria, mídia, curtidas e comentários ficam no original; murais não ganham distribuição automática.
+- Feed reúne originais e republicações elegíveis sem duplicar posts. Perfil inclui republicações; bloqueio, moderação, exclusão e perda de acesso ocultam referências. Grupos privados continuam restritos aos participantes.
+- Migration aditiva com RLS, estado desejado idempotente, limite de escrita e leitores anteriores preservados. Tipos gerados do desenvolvimento. Demo em memória, sem envio.
+- 93 testes locais, 112 verificações hospedadas com limpeza, smoke conectado/demo e revisão visual; lint/typecheck/build aprovados. [Contrato e evidências](REPOSTS.md). Publicação pelo fluxo PR/CI/main, backup e preservação antes da promoção.
+
 ## 2026-09-13 — redesign integral Aura Manteiga no aplicativo
 
 - Aplicada a identidade aprovada ao app real: temas pelo dispositivo, dois WOFF2 locais/OFL, SVG original em contornos e todos os ícones PWA. Sete folhas CSS migradas a papéis semânticos, incluindo estados, bordas elevadas e controles nativos.

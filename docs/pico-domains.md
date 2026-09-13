@@ -1,5 +1,7 @@
 # Pico — mapa de domínios para design e desenvolvimento
 
+Republicações acrescentam referências ao post original no perfil e no feed de seguidores, respeitando acesso atual e grupos privados. [Contrato e verificação](REPOSTS.md); pontos de entrada: `RepostControl`, `ConnectedFeed`, `post_reposts` e `read_repost_feed`.
+
 Apresentação Aura Manteiga aplicada em 13/09/2026; [cobertura por domínio/rota e evidências](aura-redesign-review/coverage.md). Os contratos abaixo continuam vigentes, sem novas tabelas ou permissões.
 
 

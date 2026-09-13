@@ -8,14 +8,17 @@ import { PlayerAvatar } from "./PlayerAvatar";
 import { SportLabel } from "./SocialUI";
 import { formatGameDate } from '@/lib/game-date';
 import { timeAgo } from "@/lib/demo-state";
-import type { Post } from "@/types/social";
+import { RepostAttribution, RepostControl } from "./RepostControl";
+import type { Post, DemoRepost } from "@/types/social";
 
-export function PostCard({ post }: { post: Post }) {
+export function PostCard({ post, repost }: { post: Post; repost?: DemoRepost }) {
   const { state, dispatch, now, me } = useDemo();
   const [expanded, setExpanded] = useState(false);
   const [comment, setComment] = useState("");
   const author = state.players.find(p => p.id === post.authorId)!;
   const arena = state.arenas.find(a => a.id === post.arenaId)!;
+  const republisher = state.players.find(p => p.id === repost?.playerId);
+  const reposted = state.reposts.some(r => r.postId === post.id && r.playerId === me.id);
   const liked = state.likedPostIds.includes(post.id);
   const comments = state.comments.filter(c => c.postId === post.id);
   function send(event: FormEvent) {
@@ -25,6 +28,7 @@ export function PostCard({ post }: { post: Post }) {
     setComment("");
   }
   return <article className="post-card">
+    {repost && republisher && <RepostAttribution name={republisher.id === me.id ? "Você" : republisher.name} href={republisher.id === me.id ? "/perfil" : `/perfil/${republisher.username}`} createdAt={new Date(repost.createdAt).toISOString()} />}
     <header className="post-header">
       <Link href={author.id === me.id ? "/perfil" : `/perfil/${author.username}`} className="post-person"><PlayerAvatar player={author} /><span><strong>{author.name}</strong><small>Publicado {timeAgo(post.createdAt, now)} · Demo</small></span></Link>
       <SportLabel sport={post.sportId} />
@@ -39,7 +43,7 @@ export function PostCard({ post }: { post: Post }) {
     {post.communityIds?.length ? <div className="post-context-links">{state.communities.filter(c => post.communityIds?.includes(c.id)).map(c => <Link href={`/comunidades/${c.slug}`} key={c.id}>{c.name}</Link>)}</div> : null}
     <footer className="post-actions">
       <div><button type="button" className={liked ? "post-action is-liked" : "post-action"} aria-label={liked ? `Descurtir post de ${author.name}` : `Curtir post de ${author.name}`} aria-pressed={liked} onClick={() => dispatch({ type: "like", postId: post.id })}><Heart size={21} fill={liked ? "currentColor" : "none"} aria-hidden="true" /><span>{post.likes + Number(liked)}</span></button>
-      <button type="button" className="post-action" onClick={() => setExpanded(!expanded)} aria-expanded={expanded} aria-label={`Comentários do post de ${author.name}`}><MessageCircle size={21} aria-hidden="true" /><span>{comments.length}</span></button></div>
+      <button type="button" className="post-action" onClick={() => setExpanded(!expanded)} aria-expanded={expanded} aria-label={`Comentários do post de ${author.name}`}><MessageCircle size={21} aria-hidden="true" /><span>{comments.length}</span></button>{post.authorId !== me.id && <RepostControl demo reposted={reposted} author={author.name} audience={post.audience ?? "beta"} onChange={async reposted => { dispatch({ type: "repost", postId: post.id, reposted, now }); }} />}</div>
       <Link className="post-arena-link" href={`/arenas/${arena.slug}`}>{arena.name}</Link>
     </footer>
     {expanded && <section className="comments-section" aria-label="Comentários">

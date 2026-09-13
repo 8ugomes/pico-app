@@ -5,6 +5,7 @@ export type PostInput = { arenaId: string; sportId: SportId; content: string; co
 export type ProfileInput = Pick<Player, "name" | "bio" | "available">;
 export type DemoAction =
   | { type: "like"; postId: string }
+  | { type: "repost"; postId: string; reposted: boolean; now: number }
   | { type: "connect"; playerId: string }
   | { type: "follow"; arenaId: string }
   | { type: "post"; input: PostInput; id: string; now: number }
@@ -15,7 +16,7 @@ export type DemoAction =
   | { type: "profile"; input: ProfileInput };
 
 export function createDemoState(seed: DemoSeed): DemoState {
-  return { ...structuredClone(seed), deletedGameIds: [], likedPostIds: [], connectedPlayerIds: ["marina", "lucas"], followedArenaIds: [...(seed.players.find(p => p.id === seed.currentUserId)?.arenaIds ?? [])] };
+  return { ...structuredClone(seed), reposts: [], deletedGameIds: [], likedPostIds: [], connectedPlayerIds: ["marina", "lucas"], followedArenaIds: [...(seed.players.find(p => p.id === seed.currentUserId)?.arenaIds ?? [])] };
 }
 function toggle(items: string[], id: string) { return items.includes(id) ? items.filter(item => item !== id) : [...items, id]; }
 export function validArenaSport(state: DemoState, arenaId: string, sportId: SportId) {
@@ -37,6 +38,14 @@ export function validatePost(state: DemoState, input: PostInput) {
 }
 export function demoReducer(state: DemoState, action: DemoAction): DemoState {
   switch (action.type) {
+    case "repost": {
+      const previous = state.reposts.some(r => r.postId === action.postId && r.playerId === state.currentUserId);
+      if (action.reposted === previous) return state;
+      if (action.reposted && !visibleDemoPosts(state).some(p => p.id === action.postId && p.authorId !== state.currentUserId)) return state;
+      return { ...state, reposts: action.reposted
+        ? [...state.reposts, { postId: action.postId, playerId: state.currentUserId, createdAt: action.now }]
+        : state.reposts.filter(r => r.postId !== action.postId || r.playerId !== state.currentUserId) };
+    }
     case "like": return state.posts.some(p => p.id === action.postId) ? { ...state, likedPostIds: toggle(state.likedPostIds, action.postId) } : state;
     case "connect": return action.playerId !== state.currentUserId && state.players.some(p => p.id === action.playerId) ? { ...state, connectedPlayerIds: toggle(state.connectedPlayerIds, action.playerId) } : state;
     case "follow": return state.arenas.some(a => a.id === action.arenaId) ? { ...state, followedArenaIds: toggle(state.followedArenaIds, action.arenaId) } : state;
@@ -77,4 +86,17 @@ export function timeAgo(createdAt: number, now: number) {
 
 export function visibleDemoPosts(state: DemoState) {
   return state.posts.filter(p => p.audience !== 'private' || p.communityIds?.some(id => state.communities.some(c => c.id === id && c.members.includes(state.currentUserId))));
+}
+
+export function demoFeed(state: DemoState, authorId?: string, followingOnly = false) {
+  return visibleDemoPosts(state).map(post => {
+    const repost = state.reposts.filter(r => r.postId === post.id && r.playerId !== post.authorId
+      && state.players.some(p => p.id === r.playerId)
+      && (post.audience !== 'private' || state.communities.some(c => post.communityIds?.includes(c.id) && c.members.includes(r.playerId)))
+      && (authorId ? r.playerId === authorId : r.playerId === state.currentUserId || state.connectedPlayerIds.includes(r.playerId)))
+      .sort((a, b) => b.createdAt - a.createdAt || b.playerId.localeCompare(a.playerId))[0];
+    return { post, repost };
+  }).filter(({ post, repost }) => authorId ? post.authorId === authorId || repost
+    : !followingOnly || post.authorId === state.currentUserId || state.connectedPlayerIds.includes(post.authorId) || repost)
+    .sort((a, b) => Math.max(b.post.createdAt, b.repost?.createdAt ?? 0) - Math.max(a.post.createdAt, a.repost?.createdAt ?? 0) || b.post.id.localeCompare(a.post.id));
 }
