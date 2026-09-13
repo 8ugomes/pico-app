@@ -197,18 +197,17 @@ function TourProvider({ children, identity, demo = false }: { children: ReactNod
   const context = ready && identity ? { progress, start } : null;
   return <Tour.Provider value={context}><div ref={boundary} className="tour-boundary">
     {ready && !progress && path === '/feed' && <section className="tour-welcome" aria-labelledby={titleId}>
-      <p className="tour-eyebrow"><Compass size={17} aria-hidden="true" />BEM-VINDO AO PICO</p>
-      <h2 id={titleId}>O ponto de encontro da areia.</h2>
-      <p>Futevôlei, beach tennis ou vôlei de praia: seus lugares, sua turma e a conversa depois do jogo. Vamos conhecer o app juntos?</p>
+      <h2 id={titleId}>Seu primeiro passo na areia.</h2>
+      <p>Um guia rápido para encontrar pessoas, comunidades e seus lugares no Pico.</p>
       <div className="tour-welcome-actions"><Button onClick={() => start()}>Conhecer o Pico <ArrowRight size={17} aria-hidden="true" /></Button><Button variant="quiet" onClick={() => save({ version: 1, status: 'dismissed', step: 0 })}>Agora não</Button></div>
-      <small>6 passos, no seu ritmo. Você pode pular e rever no Perfil.</small>
+      <small>Opcional. Explore no seu ritmo e retome no Perfil.</small>
     </section>}
     {active && <aside ref={panel} className="tour-guide" aria-labelledby={titleId} data-testid="guided-tour" onKeyDown={event => {
       if (event.key === 'Escape') { event.stopPropagation(); pause(); }
     }}>
       <header className="tour-guide-header"><span className="tour-eyebrow">GUIA · {stepIndex + 1}/{tourSteps.length}</span><div>
         <button type="button" className="icon-button" aria-label={collapsed ? 'Expandir tutorial' : 'Recolher tutorial'} aria-expanded={!collapsed} onClick={() => setCollapsed(!collapsed)}><ChevronDown size={18} className={collapsed ? 'tour-chevron-up' : ''} aria-hidden="true" /></button>
-        <button type="button" className="icon-button" aria-label="Pausar tutorial" onClick={pause}><X size={18} aria-hidden="true" /></button>
+        <Button variant="quiet" size="small" className="tour-pause" aria-label="Pausar tutorial" onClick={pause}><X size={16} aria-hidden="true" />Pausar</Button>
       </div></header>
       <h2 ref={heading} id={titleId} tabIndex={-1}>{collapsed ? step.label : step.title}</h2>
       {collapsed && <p id={descriptionId} className="sr-only">{instruction}</p>}
@@ -218,7 +217,7 @@ function TourProvider({ children, identity, demo = false }: { children: ReactNod
           {demo && <p className="tour-demo-note">Demonstração: pessoas e ações são ilustrativas.</p>}
         </div>
         {!editing && <footer className="tour-guide-actions">
-          {onTourRoute && targetAvailable && <button type="button" className="icon-button tour-point" aria-label="Mostrar onde" title="Mostrar onde" onClick={pointToTarget}><LocateFixed size={20} aria-hidden="true" /></button>}
+          {onTourRoute && targetAvailable && <Button variant="quiet" size="small" className="tour-point" onClick={pointToTarget}><LocateFixed size={18} aria-hidden="true" />Mostrar onde</Button>}
           {stepIndex > 0 && <Link href={tourSteps[stepIndex - 1].path} className={buttonVariants({ variant: 'quiet', size: 'small' })} aria-label={`Voltar: ${tourSteps[stepIndex - 1].label}`} onClick={() => { focusNext.current = true; }}><ArrowLeft size={16} aria-hidden="true" /></Link>}
           {!onTourRoute ? <Link href={step.path} className={buttonVariants({ size: 'small' })}>Voltar ao passeio</Link> : stepIndex < tourSteps.length - 1 ? <Link href={tourSteps[stepIndex + 1].path} className={buttonVariants({ size: 'small' })} onClick={() => { focusNext.current = true; }}>Próxima: {tourSteps[stepIndex + 1].label}<ArrowRight size={16} aria-hidden="true" /></Link> : <Button size="small" onClick={() => { save({ version: 1, status: 'complete', step: stepIndex }); setFinished(true); }}>Concluir tutorial</Button>}
         </footer>}

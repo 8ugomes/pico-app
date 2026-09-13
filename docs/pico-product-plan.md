@@ -1,8 +1,20 @@
 # Pico — plano de produto
 
-## Contexto vigente e próxima execução
+## Redesign integral Aura Manteiga — PLAN · 13/09/2026
 
-**Identidade escolhida: Pico Social / Aura Manteiga.** [Contexto institucional](pico-company-context.md), [design system](pico-design-system.md), [domínios](pico-domains.md) e [catálogo de skills](pico-skills.md) orientam novas tarefas. As entradas anteriores registram decisões de cada etapa; Ritual, Pistache e a lavanda original são alternativas históricas. A identidade foi entregue em manual e ativos; a migração do aplicativo ainda será executada.
+Pedido vigente autoriza implementação e publicação no pico-app após PR/CI. Branch `codex/aura-manteiga-redesign`, base `3bd6dc4`, árvore inicialmente limpa. Migrar fundação (tokens semânticos, Syne/Manrope locais, SVG e PWA), entrada/auth, navegação, conteúdo por domínio, todos os formulários/gestão e estados. Refinar perfil inicial, aviso oficial e tutorial mantendo persistências e contratos. Não há mudança de banco ou APIs.
+
+Inventário e cobertura em [aura-redesign-review/coverage.md](aura-redesign-review/coverage.md). Começar por entrada, Início, perfil e compositor; propagar o sistema às demais superfícies. Revisão conjunta 320/390/desktop, claro/escuro, texto 200%, foco/diálogos e estados. No fechamento: lint, typecheck, testes existentes pertinentes e build; PR, CI exigida, main sincronizada, deploy pelo script existente e conferência pública de versão/manifesto/assets. Preservar o artefato estável anterior como rollback. SMTP e aparelho físico continuam limites reais, sem necessidade de migrations visuais.
+
+### Implementação e verificação do conjunto
+
+Fundação e todas as superfícies visuais migradas: sete folhas CSS, SVG em contornos, Syne/Manrope locais com OFL, ícones PWA, entrada/auth, Início compacto, perfil/editor, guias e demais domínios por componentes compartilhados. API, auth, RLS, migrations, audiência e dados preservados. [Inventário final por domínio e rota](aura-redesign-review/coverage.md).
+
+Build conectado e demo, lint/typecheck e 87 testes passaram. Regressões de onboarding conectado/demo e jogos privados executadas em fixtures; 39 verificações de tela nos dois temas sem overflow/erros de JS/imagens visíveis quebradas ou contraste textual insuficiente. 50 pares do CSS compilado auditados; fontes, contornos e arquivos de ícone conferidos. Estado desta documentação: preparação local do PR. CI, merge protegido e publicação serão registrados no PR e no recibo operacional local `.vercel/aura-redesign-release.json`, com referência anterior de rollback e SHA servido, sem alterar dados.
+
+## Contexto vigente e próximas tarefas
+
+**Identidade escolhida: Pico Social / Aura Manteiga.** [Contexto institucional](pico-company-context.md), [design system](pico-design-system.md), [domínios](pico-domains.md) e [catálogo de skills](pico-skills.md) orientam novas tarefas. As entradas anteriores registram decisões de cada etapa; Ritual, Pistache e a lavanda original são alternativas históricas. A identidade está implementada no app; [cobertura e evidências](aura-redesign-review/README.md). A revisão publicada é verificável por `/api/version`.
 
 ## Skills e redesign integral — plano antes de desenvolver · 13/09/2026
 

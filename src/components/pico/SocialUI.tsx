@@ -24,6 +24,6 @@ export function SearchField({ value, onChange, placeholder, label, tourId }: { t
 export function EmptyState({ title, children }: { title: string; children: React.ReactNode }) {
   return <div className="social-empty"><Compass size={28} aria-hidden="true" /><h3>{title}</h3><p>{children}</p></div>;
 }
-export function PageHeading({ eyebrow, title, children }: { eyebrow: string; title: string; children?: React.ReactNode }) {
-  return <header className="page-heading"><div><p>{eyebrow}</p><h1>{title}</h1></div>{children}</header>;
+export function PageHeading({ eyebrow, title, children }: { eyebrow?: string; title: string; children?: React.ReactNode }) {
+  return <header className="page-heading"><div>{eyebrow && <p>{eyebrow}</p>}<h1>{title}</h1></div>{children}</header>;
 }

@@ -26,7 +26,7 @@ export function GamesView({ initialArenaId }: { initialArenaId?: string }) {
     return { id:g.id,arena_id:place.id,arena_name:place.name,arena_slug:place.slug,is_demo:true,sport_id:g.sportId,sport_slug:g.sportId,sport_name:state.sports.find(s => s.id === g.sportId)!.name,played_on:g.playedOn,created_at:g.createdAt,updated_at:g.createdAt,version:g.version };
   });
   return <>
-    <Link href="/perfil" className="detail-back">Voltar ao perfil</Link><PageHeading eyebrow="DEPOIS DA AREIA" title="Meus jogos" />
+    <Link href="/perfil" className="detail-back">Voltar ao perfil</Link><PageHeading title="Meus jogos" />
     <p className="page-intro">Guarde onde você jogou e a data de cada encontro.</p><JournalPrivacy />
     <p className="form-note">Demonstração: os registros do jogador fictício ficam somente nesta sessão e somem ao recarregar.</p>
     <Button data-tour="register-game" onClick={() => {if(editing){setEditing(null);setArenaId('');setSportId('');setDate('');}setError('');setOpen(true);setMessage('');}}>Registrar jogo</Button>

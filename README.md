@@ -6,7 +6,7 @@ Rede social PWA mobile-first para futevôlei, beach tennis e vôlei de praia. O 
 
 [Perfil/HEIC: implementação, testes e limites do Ciclo 10](docs/CYCLE10_PROFILE.md). O código foi validado em CI e em Chromium/WebKit com ambiente de teste isolado; esta rodada não executou novo deploy nem teste em aparelhos físicos.
 
-**Identidade escolhida: Aura Manteiga.** Pico Social adota a direção editorial jovem, artística e refinada, com Syne/Manrope e Manteiga/Cacau/Papel/Lavanda. [Manual completo e ativos](docs/brand-exploration/aura-manteiga/README.md) entregues; a migração do aplicativo ainda está pendente. O refino com fonte nativa/verde-água é o baseline anterior. [Design system e estado](docs/pico-design-system.md).
+**Identidade escolhida: Aura Manteiga.** Pico Social adota a direção editorial jovem, artística e refinada, com Syne/Manrope e Manteiga/Cacau/Papel/Lavanda. [Manual completo e ativos](docs/brand-exploration/aura-manteiga/README.md) aplicados ao aplicativo: temas claro/escuro, duas fontes locais, marca em contornos, controles, composições por domínio e onboarding assistido. [Cobertura, capturas e verificações](docs/aura-redesign-review/README.md). [Design system e estado](docs/pico-design-system.md).
 
 **Contexto para próximas tarefas:** [empresa/produto/marca](docs/pico-company-context.md), [domínios](docs/pico-domains.md), [13 skills locais](docs/pico-skills.md) e [plano corrente](docs/pico-product-plan.md). A skill principal [pico-redesign](.agents/skills/pico-redesign/SKILL.md) e o [prompt de execução](docs/brand-exploration/aura-manteiga/PROMPT-PRODUCAO.md) cobrem todo o aplicativo, onboarding assistido e validação proporcional durante criação. A preparação desses arquivos não executa o redesign nem publica o app.
 

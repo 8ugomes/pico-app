@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-13T04:27:40.312267+00:00",
+  "title": "Design System: Pico Social / Aura Manteiga",
+  "extensions": {
+    "provenance": {
+      "status": "Derived tool mirror; not a token authority or deployment record",
+      "canonicalIdentity": "docs/brand-exploration/aura-manteiga/MANUAL.md",
+      "canonicalTokens": "docs/brand-exploration/aura-manteiga/tokens.json",
+      "implementation": [
+        "src/app/globals.css",
+        "src/app/social.css",
+        "src/app/social-pages.css",
+        "src/app/forms.css",
+        "src/app/journey.css",
+        "src/app/profile.css",
+        "src/app/onboarding.css",
+        "src/components/ui/Button.tsx",
+        "src/components/ui/Input.tsx",
+        "src/components/ui/ChoiceChip.tsx",
+        "src/components/ui/BottomNav.tsx"
+      ],
+      "narrativeSource": "DESIGN.md",
+      "previewContract": "Snippets inherit the app CSS custom properties from the host. They are isolated visual excerpts, without React behavior, persistence or real social data. Primitives and synthetic tonal ramps are intentionally omitted to preserve the approved canonical sources."
+    },
+    "shadows": [
+      {
+        "name": "shadow-elevated",
+        "value": "var(--shadow-elevated)",
+        "purpose": "Diálogos e guia sobreposto; origem em globals.css."
+      }
+    ],
+    "motion": [
+      {
+        "name": "motion-fast",
+        "value": "var(--motion-fast)",
+        "purpose": "Resposta de controles."
+      },
+      {
+        "name": "motion-standard",
+        "value": "var(--motion-standard)",
+        "purpose": "Mudança de superfície/fotografia."
+      },
+      {
+        "name": "motion-brand",
+        "value": "var(--motion-brand)",
+        "purpose": "Expressão de marca opcional."
+      },
+      {
+        "name": "motion-ease",
+        "value": "var(--motion-ease)",
+        "purpose": "Curva compartilhada."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mobile-compact-max",
+        "value": "359px"
+      },
+      {
+        "name": "social-sidebar-min",
+        "value": "800px"
+      },
+      {
+        "name": "auth-editorial-min",
+        "value": "1000px"
+      },
+      {
+        "name": "social-context-min",
+        "value": "1160px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botão primary",
+      "kind": "button",
+      "description": "Variante primary do Button, tamanho default. Exemplo visual sem gravação.",
+      "html": "<button type=\"button\" class=\"ds-button\">Salvar perfil</button>",
+      "css": ".ds-button{background:var(--accent);color:var(--accent-ink)}.ds-button:hover:not(:disabled){background:var(--accent-hover)}.ds-button:active:not(:disabled){background:var(--accent-active)}.ds-button{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);min-width:44px;min-height:48px;max-width:100%;padding:.75rem 1.5rem;border:1px solid transparent;border-radius:var(--radius-control);font-family:var(--font-body);font-size:var(--text-body);font-weight:600;line-height:1.35;text-align:center;white-space:normal;overflow-wrap:anywhere;cursor:pointer;transition:background var(--motion-fast) var(--motion-ease),border-color var(--motion-fast),transform var(--motion-fast) var(--motion-ease)}.ds-button:focus-visible{outline:2px solid var(--focus);outline-offset:3px}.ds-button:active{transform:scale(.98)}.ds-button:disabled{cursor:not-allowed;background:var(--disabled-bg);color:var(--disabled-ink);border-color:transparent;transform:none}@media(prefers-reduced-motion:reduce){.ds-button{transition:none;transform:none}}"
+    },
+    {
+      "name": "Botão secondary",
+      "kind": "button",
+      "description": "Variante secondary do Button, tamanho default. Exemplo visual sem gravação.",
+      "html": "<button type=\"button\" class=\"ds-button\">Voltar</button>",
+      "css": ".ds-button{color:var(--foreground);background:var(--surface);border-color:var(--border-control-raised)}.ds-button:hover:not(:disabled){background:var(--surface-raised);border-color:var(--border-control-raised)}.ds-button{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);min-width:44px;min-height:48px;max-width:100%;padding:.75rem 1.5rem;border:1px solid transparent;border-radius:var(--radius-control);font-family:var(--font-body);font-size:var(--text-body);font-weight:600;line-height:1.35;text-align:center;white-space:normal;overflow-wrap:anywhere;cursor:pointer;transition:background var(--motion-fast) var(--motion-ease),border-color var(--motion-fast),transform var(--motion-fast) var(--motion-ease)}.ds-button:focus-visible{outline:2px solid var(--focus);outline-offset:3px}.ds-button:active{transform:scale(.98)}.ds-button:disabled{cursor:not-allowed;background:var(--disabled-bg);color:var(--disabled-ink);border-color:transparent;transform:none}@media(prefers-reduced-motion:reduce){.ds-button{transition:none;transform:none}} .ds-button:not(:disabled){border-color:var(--border-control-raised)}"
+    },
+    {
+      "name": "Botão quiet",
+      "kind": "button",
+      "description": "Variante quiet do Button, tamanho default. Exemplo visual sem gravação.",
+      "html": "<button type=\"button\" class=\"ds-button\">Agora não</button>",
+      "css": ".ds-button{color:var(--text-secondary);background:transparent}.ds-button:hover:not(:disabled){background:var(--surface-raised);border-color:var(--border-control-raised)}.ds-button{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);min-width:44px;min-height:48px;max-width:100%;padding:.75rem 1.5rem;border:1px solid transparent;border-radius:var(--radius-control);font-family:var(--font-body);font-size:var(--text-body);font-weight:600;line-height:1.35;text-align:center;white-space:normal;overflow-wrap:anywhere;cursor:pointer;transition:background var(--motion-fast) var(--motion-ease),border-color var(--motion-fast),transform var(--motion-fast) var(--motion-ease)}.ds-button:focus-visible{outline:2px solid var(--focus);outline-offset:3px}.ds-button:active{transform:scale(.98)}.ds-button:disabled{cursor:not-allowed;background:var(--disabled-bg);color:var(--disabled-ink);border-color:transparent;transform:none}@media(prefers-reduced-motion:reduce){.ds-button{transition:none;transform:none}}"
+    },
+    {
+      "name": "Campo com label",
+      "kind": "input",
+      "description": "Input com ajuda persistente; o estado inválido usa a borda de erro.",
+      "html": "<div class=\"ds-field\"><label for=\"ds-name\">Nome</label><input class=\"ds-input\" id=\"ds-name\" aria-describedby=\"ds-name-hint\" placeholder=\"Como você quer aparecer\"><span id=\"ds-name-hint\">Exemplo de preenchimento.</span></div>",
+      "css": ".ds-field{display:flex;flex-direction:column;min-width:0;gap:var(--space-2);font-family:var(--font-body);color:var(--text-secondary);font-size:var(--text-label);line-height:1.45}.ds-field label{font-weight:600}.ds-field>span{font-size:var(--text-caption);color:var(--text-muted);line-height:1.5}.ds-input{width:100%;min-width:0;min-height:50px;border:1px solid var(--border-control);border-radius:var(--radius-control);background:var(--surface-input);color:var(--foreground);padding:.75rem var(--space-4);font-family:var(--font-body);font-size:var(--text-body);line-height:1.5;transition:border-color var(--motion-fast),background var(--motion-fast)}.ds-input::placeholder{color:var(--text-muted);opacity:1}.ds-input:focus{border-color:var(--accent)}.ds-input:focus-visible{outline:2px solid var(--focus);outline-offset:3px}.ds-input[aria-invalid=true]{border-color:var(--error)}.ds-input:disabled{color:var(--text-muted);background:var(--disabled-bg);cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-input{transition:none}}"
+    },
+    {
+      "name": "Escolha de modalidade",
+      "kind": "chip",
+      "description": "ChoiceChip com checkbox nativo e check além da cor.",
+      "html": "<label class=\"ds-choice\"><input type=\"checkbox\" checked><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m20 6-11 11-5-5\"/></svg><span>Beach tennis</span></label>",
+      "css": ".ds-choice{position:relative;display:inline-flex;align-items:center;gap:var(--space-2);min-height:44px;max-width:100%;padding:.625rem .875rem;border:1px solid var(--border-control);border-radius:var(--radius-pill);background:var(--surface-input);color:var(--text-secondary);font-family:var(--font-body);font-size:var(--text-label);line-height:1.35;overflow-wrap:anywhere;cursor:pointer}.ds-choice input{position:absolute;width:1px;height:1px;opacity:0}.ds-choice>svg{flex-shrink:0;visibility:hidden}.ds-choice:has(input:checked){background:var(--accent-soft);color:var(--accent);border-color:var(--accent)}.ds-choice:has(input:checked)>svg{visibility:visible}.ds-choice:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:3px}.ds-choice:has(input:disabled){color:var(--text-muted);cursor:not-allowed}"
+    },
+    {
+      "name": "Navegação móvel",
+      "kind": "nav",
+      "description": "Recorte de BottomNav no fluxo do painel; no app é fixa e sua altura medida reserva espaço ao conteúdo. Links demonstrativos.",
+      "html": "<nav id=\"ds-navigation\" class=\"ds-navigation\" aria-label=\"Exemplo de navegação\"><a href=\"#ds-navigation\" aria-current=\"page\"><span class=\"ds-nav-icon\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8\"/><path d=\"M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\"/></svg></span><span>Início</span></a><a href=\"#ds-navigation\"><span class=\"ds-nav-icon\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m16.24 7.76-2.12 6.36-6.36 2.12 2.12-6.36z\"/><circle cx=\"12\" cy=\"12\" r=\"10\"/></svg></span><span>Pessoas</span></a><a href=\"#ds-navigation\"><span class=\"ds-nav-icon\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M18 21a8 8 0 0 0-16 0\"/><circle cx=\"10\" cy=\"8\" r=\"5\"/><path d=\"M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3\"/></svg></span><span>Comunidades</span></a><a href=\"#ds-navigation\"><span class=\"ds-nav-icon\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0\"/><circle cx=\"12\" cy=\"10\" r=\"3\"/></svg></span><span>Arenas</span></a><a href=\"#ds-navigation\"><span class=\"ds-nav-icon\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"8\" r=\"5\"/><path d=\"M20 21a8 8 0 0 0-16 0\"/></svg></span><span>Perfil</span></a></nav>",
+      "css": ".ds-navigation{display:flex;flex-wrap:wrap;padding:.65rem;background:var(--surface-overlay);border-top:1px solid var(--border-subtle);font-family:var(--font-body)}.ds-navigation>a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35rem;min-height:56px;min-width:44px;padding-inline:.2rem;flex:1 0 max-content;color:var(--text-muted);font-size:.75rem;line-height:1.25;text-decoration:none;transition:color var(--motion-fast) var(--motion-ease),transform var(--motion-fast) var(--motion-ease)}.ds-navigation>a>span{max-width:100%;overflow-wrap:normal;text-align:center;hyphens:none}.ds-nav-icon{display:grid;place-items:center;height:26px}.ds-navigation>a[aria-current]{color:var(--foreground);font-weight:700}.ds-navigation>a[aria-current] .ds-nav-icon{background:var(--accent-soft);border-radius:var(--radius-pill);width:44px}.ds-navigation>a[aria-current] svg{stroke-width:2}.ds-navigation>a:hover{color:var(--foreground)}.ds-navigation>a:focus-visible{outline:2px solid var(--focus);outline-offset:3px}.ds-navigation>a:active{transform:scale(.97)}@media(prefers-reduced-motion:reduce){.ds-navigation>a{transition:none;transform:none}}"
+    },
+    {
+      "name": "Superfície de publicação",
+      "kind": "card",
+      "description": "Recorte da superfície de leitura do post; texto demonstrativo sem pessoa ou publicação real.",
+      "html": "<article class=\"ds-post\"><header><strong>Exemplo de publicação</strong><small>Dados ilustrativos</small></header><p>O conteúdo e sua audiência ocupam o primeiro plano.</p></article>",
+      "css": ".ds-post{overflow:hidden;border:0;border-radius:var(--radius-card);background:var(--surface);color:var(--foreground);font-family:var(--font-body)}.ds-post header{padding:1rem 1rem 0}.ds-post strong{display:block;font-size:var(--text-body);font-weight:600;line-height:1.4}.ds-post small{display:block;margin-top:.15rem;font-size:var(--text-caption);color:var(--text-muted)}.ds-post p{font-size:var(--text-body);line-height:1.65;margin:.9rem 1rem 1rem;overflow-wrap:anywhere}"
+    },
+    {
+      "name": "Convite editorial",
+      "kind": "custom",
+      "description": "Recorte visual de tour-welcome; convite opcional, sem implementar o comportamento do tutorial no painel.",
+      "html": "<section class=\"ds-welcome\"><h2>Conheça o Pico</h2><p>Um guia curto pelos controles do aplicativo.</p><button type=\"button\" class=\"ds-button\">Começar</button></section>",
+      "css": ".ds-welcome{margin:.5rem 0 1.5rem;padding:1.5rem;border-radius:var(--radius-feature);background:var(--accent-soft);color:var(--foreground);font-family:var(--font-body)}.ds-welcome h2{font-family:var(--font-heading);font-size:clamp(1.6rem,6vw,2rem);max-width:22ch;line-height:1.16;letter-spacing:-.035em;margin:.8rem 0}.ds-welcome p{max-width:54ch;color:var(--text-secondary);line-height:1.65}.ds-button{background:var(--accent);color:var(--accent-ink)}.ds-button:hover:not(:disabled){background:var(--accent-hover)}.ds-button:active:not(:disabled){background:var(--accent-active)}.ds-button{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);min-width:44px;min-height:48px;max-width:100%;padding:.75rem 1.5rem;border:1px solid transparent;border-radius:var(--radius-control);font-family:var(--font-body);font-size:var(--text-body);font-weight:600;line-height:1.35;text-align:center;white-space:normal;overflow-wrap:anywhere;cursor:pointer;transition:background var(--motion-fast) var(--motion-ease),border-color var(--motion-fast),transform var(--motion-fast) var(--motion-ease)}.ds-button:focus-visible{outline:2px solid var(--focus);outline-offset:3px}.ds-button:active{transform:scale(.98)}.ds-button:disabled{cursor:not-allowed;background:var(--disabled-bg);color:var(--disabled-ink);border-color:transparent;transform:none}@media(prefers-reduced-motion:reduce){.ds-button{transition:none;transform:none}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Aura Manteiga",
+    "overview": "Editorial de moda jovem, artístico e refinado, com calor no encontro e clareza na operação. A expressão vem da Syne, da fotografia e do espaço; a Manrope sustenta a leitura e as ações. Premium significa cuidado com proporção e uso, com espaço para diferentes pessoas e repertórios.",
+    "keyCharacteristics": [
+      "Papel e Cacau na leitura; Manteiga no reconhecimento; Lavanda pontual.",
+      "Títulos expressivos, operação legível e superfícies sólidas.",
+      "Composição orientada ao conteúdo, com curvas editoriais em momentos específicos.",
+      "Uma ação principal por contexto, foco visível e movimento reduzível."
+    ],
+    "rules": [],
+    "dos": [
+      "**Do** reutilizar tokens, SVGs e componentes canônicos, verificando a aplicação nos dois temas.",
+      "**Do** preservar leitura, foco, alvos de toque e ações acessíveis com texto ampliado.",
+      "**Do** editar títulos e rótulos para que cada linha acrescente informação.",
+      "**Do** manter audiência, privacidade, estado real e identificação de demonstração visíveis."
+    ],
+    "donts": [
+      "**Don't** extrair cores de capturas, regenerar o logo ou adicionar outra família tipográfica.",
+      "**Don't** hifenizar a navegação, cortar ações ou ocultar avisos para encaixar conteúdo.",
+      "**Don't** substituir fotos reais por imagens sintéticas do estudo ou inventar métricas.",
+      "**Don't** tratar evidência local, mockup ou manual como comprovação de publicação ou de uso real."
+    ]
+  }
+}

@@ -1,5 +1,8 @@
 # Pico — mapa de domínios para design e desenvolvimento
 
+Apresentação Aura Manteiga aplicada em 13/09/2026; [cobertura por domínio/rota e evidências](aura-redesign-review/coverage.md). Os contratos abaixo continuam vigentes, sem novas tabelas ou permissões.
+
+
 “Domínios” neste projeto são as responsabilidades de produto e seus contratos. O código existente as distribui por `src/components/pico`, `src/lib` e `src/app`; não há exigência de criar uma pasta `domains/` ou reorganizar a arquitetura para fazer o redesign. Este índice conecta os documentos e pontos de entrada atuais; confira o código antes de editar.
 
 ## Mapa de leitura e cobertura

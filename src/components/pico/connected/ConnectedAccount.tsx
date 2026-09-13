@@ -34,7 +34,7 @@ export function ConnectedAccount() {
   const {state,retry,refresh}=useRemoteRead('resource=account');
   const data=state.status==='success' && state.data.kind==='account'?state.data:null;
   const mutation=useMutation();const [photoError,setPhotoError]=useState<string|null>(null), [removing,setRemoving]=useState<string|null>(null);
-  return <><PageHeading eyebrow="SEU PICO" title="Privacidade e conta." /><p className="form-note"><Link href="/privacidade">Como o Pico usa seus dados</Link> · <Link href="/recuperar">Recuperar acesso</Link> · <Link href="/login">Gerenciar acesso e sair</Link></p>
+  return <><PageHeading title="Privacidade e conta." /><p className="form-note"><Link href="/privacidade">Como o Pico usa seus dados</Link> · <Link href="/recuperar">Recuperar acesso</Link> · <Link href="/login">Gerenciar acesso e sair</Link></p>
     {state.status==='loading' && <ReadLoading />}{(state.status==='error'||state.status==='demo') && <ReadFailure state={state} retry={retry} />}
     {data?.deletionPending && <p role="status" className="auth-notice">Sua exclusão está em andamento. Confirme a senha novamente abaixo para concluir.</p>}
     {data && !data.deletionPending && <div key={data.viewerId}>

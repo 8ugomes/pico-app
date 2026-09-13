@@ -3,12 +3,12 @@
 .home-intro .eyebrow { margin: 0 0 var(--space-2); color: var(--text-muted); font-size: var(--text-caption); letter-spacing: .06em; }
 .home-intro h1 { margin: 0; font-size: var(--text-title); font-weight: 600; letter-spacing: -.035em; line-height: 1.2; }
 .home-intro > p:last-child { color: var(--text-secondary); line-height: 1.6; margin-block: var(--space-3) 0; max-width: 30rem; }
-.home-place-groups { display: grid; gap: var(--space-4); margin-top: var(--space-5); }
+.home-place-groups { display: grid; gap: var(--space-2); margin-top: var(--space-5); }
 .context-heading { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); }
-.context-heading h2 { font-size: var(--text-label); font-weight: 500; color: var(--text-muted); }
+.context-heading h2 { font-family: var(--font-body); font-size: var(--text-label); font-weight: 600; color: var(--text-secondary); }
 .context-heading > a { display: grid; place-items: center; min-width: 44px; min-height: 44px; color: var(--text-secondary); border-radius: var(--radius-control); }
 .context-links { display: flex; gap: var(--space-2); flex-wrap: wrap; }
-.context-links > a { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 44px; max-width: 100%; padding: var(--space-2) var(--space-3); border-radius: var(--radius-control); border: 1px solid var(--border-subtle); color: var(--foreground); font-size: var(--text-label); line-height: 1.5; }
+.context-links > a { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 44px; max-width: 100%; padding: var(--space-2) var(--space-3); border-radius: var(--radius-control); border: 1px solid var(--border-control-raised); color: var(--foreground); font-size: var(--text-label); line-height: 1.5; }
 .context-links > a > svg { flex-shrink: 0; color: var(--text-muted); }
 .context-links > a > span { overflow-wrap: anywhere; }
 .home-first-step { display: flex; align-items: flex-start; gap: var(--space-3); padding-block: var(--space-6) 0; }
@@ -22,7 +22,7 @@
 .community-card .community-purpose { font-size: 1rem; line-height: 1.6; }
 .community-place { display: flex; align-items: center; gap: var(--space-2); min-height: 44px; font-size: var(--text-label); color: var(--text-secondary); }
 .community-place > svg { flex-shrink: 0; }
-.community-create { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-4); border-top: 1px solid var(--border-subtle); padding-top: var(--space-6); margin-top: var(--space-6); }
+.community-create { border-radius: var(--radius-feature); background: var(--accent-soft); padding: var(--space-5); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-4); border-top: 1px solid var(--border-subtle); padding-top: var(--space-6); margin-top: var(--space-6); }
 .community-create > div { flex: 1 1 14rem; }
 .community-create h2 { font-size: var(--text-section); font-weight: 600; }
 .community-create p { color: var(--text-muted); font-size: var(--text-label); line-height: 1.6; margin: var(--space-2) 0; }
@@ -56,7 +56,7 @@
 @media (max-width: 359px) { .home-first-step > .community-symbol { display: none; } }
 @media (prefers-reduced-motion: no-preference) { .context-links > a { transition: background 160ms; } }
 @media (hover: hover) { .context-links > a:hover, .context-heading > a:hover { background: var(--glass); } }
-.journey-rail h2 { font-size: var(--text-section); font-weight: 500; line-height: 1.4; margin-block: var(--space-5) var(--space-3); }
+.journey-rail h2 { font-size: 2rem; font-weight: 600; line-height: 1.4; margin-block: var(--space-5) var(--space-3); }
 .journey-rail > p:not(.rail-eyebrow) { color: var(--text-muted); font-size: var(--text-label); line-height: 1.7; }
 .journey-rail > a { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); min-height: 44px; margin-top: var(--space-4); font-size: var(--text-label); }
 .discovery-filters { border-block: 1px solid var(--border-subtle); margin-bottom: var(--space-4); }
@@ -107,3 +107,5 @@
 .legacy-records li > a { display: inline-flex; min-height: 44px; align-items: center; }
 .legacy-records li > span { display: block; font-size: var(--text-label); color: var(--text-muted); line-height: 1.6; }
 .demo-profile-top { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); margin-top: var(--space-6); }
+
+.home-places-label { font-family: var(--font-body); font-size: var(--text-label); font-weight: 600; color: var(--text-secondary); margin: 0 0 .25rem; }

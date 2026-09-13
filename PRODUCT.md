@@ -19,7 +19,7 @@ Preservar contratos, dados, permissões e audiência. Demo identificado, separad
 
 ## Confirmed Direction
 
-**Aura Manteiga** escolhida: editorial de moda jovem, artístico, premium e refinado. Syne/Manrope, logo Aura preservado, Manteiga/Cacau/Papel/Lavanda. Claro editorial e escuro próprio. Manual e ativos concluídos; migração do aplicativo pendente. O próximo redesign deve cobrir toda a jornada, inclusive onboarding assistido, com testes proporcionais e sem ciclos de polimento intermináveis.
+**Aura Manteiga** escolhida: editorial de moda jovem, artístico, premium e refinado. Syne/Manrope, logo Aura preservado, Manteiga/Cacau/Papel/Lavanda. Claro editorial e escuro próprio. Manual e ativos aplicados ao aplicativo inteiro, inclusive entrada, gestão e onboarding assistido. A implementação usa temas do dispositivo, fontes locais e contratos existentes. [Cobertura e evidências](docs/aura-redesign-review/README.md). Manter testes proporcionais e sem ciclos de polimento intermináveis.
 
 ## Sources of Truth
 

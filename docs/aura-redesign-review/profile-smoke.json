@@ -1,0 +1,15 @@
+{
+  "fixture": true,
+  "hosted": false,
+  "engine": "Chromium installed Chrome",
+  "readCount": 4,
+  "saves": 1,
+  "checks": [
+    "required fields remain editable",
+    "controlled save failure preserves text",
+    "discard dialog returns to unchanged draft",
+    "one confirmed save renders complete accented long name",
+    "no horizontal overflow at 390px"
+  ],
+  "errors": []
+}

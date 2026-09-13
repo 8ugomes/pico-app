@@ -1,5 +1,13 @@
 # Changelog — Pico
 
+## 2026-09-13 — redesign integral Aura Manteiga no aplicativo
+
+- Aplicada a identidade aprovada ao app real: temas pelo dispositivo, dois WOFF2 locais/OFL, SVG original em contornos e todos os ícones PWA. Sete folhas CSS migradas a papéis semânticos, incluindo estados, bordas elevadas e controles nativos.
+- Entrada editorial, autenticação, Início compacto e perfil aberto; estilos e composição propagados a pessoas, arenas, comunidades, gestão, posts, jogos, conta, convites, privacidade e instalação. Nenhuma nova rota, migration ou dependência.
+- Perfil inicial com progresso de dados essenciais e opcionais separados; guia com texto curto, ajuda/pausa visíveis, tratamento de altura curta e navegação ampliada. Mesmas seis etapas, preferências locais por conta/demo e aviso institucional confirmado no servidor.
+- Lint, typecheck, builds conectado/demo e 87 testes aprovados; onboarding e jogos em fixtures isoladas, 39 verificações visuais e 50 pares de contraste do CSS compilado. Ajustados os roteiros existentes para URLs/canal de navegador e seletores inequívocos, preservando os checks. [Cobertura, capturas e limites](aura-redesign-review/README.md).
+- Publicação autorizada pelo pedido, condicionada ao fluxo PR/CI/main e script existente; recibo local de release registra artefato anterior e revisão servida. SMTP e instalação física permanecem sem nova validação.
+
 ## 2026-09-13 — contexto Aura Manteiga e skill principal de redesign
 
 - Atualizadas as oito skills de branding/design com a direção escolhida, contexto Pico e validação proporcional. Preservados corpos de origem, referências e licenças; hashes locais e origem registrados separadamente. Campos de catálogo Ramp movidos para `metadata` compatível.

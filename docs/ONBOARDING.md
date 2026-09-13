@@ -4,7 +4,9 @@
 
 ## Próxima direção — redesign Aura Manteiga
 
-O responsável solicitou refinar o onboarding assistido como parte do redesign integral. A [skill principal](../.agents/skills/pico-redesign/SKILL.md), o [prompt](brand-exploration/aura-manteiga/PROMPT-PRODUCAO.md) e o [mapa de domínios](pico-domains.md) orientam essa execução futura. A apresentação, o texto e a sequência podem ser simplificados, preservando guia opcional, pausa/retomada, isolamento por conta, preferências anteriores e ausência de ações sociais automáticas. Perfil inicial e confirmação de comunidade continuam separados do tutorial. A documentação abaixo descreve a implementação existente, não o redesign já executado.
+Aura Manteiga aplicada ao convite, guia, formulário inicial e aviso institucional. O perfil inicial mostra quantos dos três dados essenciais estão preenchidos (nome, usuário e esporte), links às seções e dados opcionais separados. Isso indica preenchimento, sem afirmar salvamento. Textos do guia foram encurtados; “Mostrar onde” e “Pausar” têm rótulos visíveis. Em altura curta o painel entra no fluxo da página; a navegação reserva sua altura medida quando o texto cresce.
+
+As seis etapas, IDs e ordem foram preservados: `pico.tour.v1:account:<id>` e `pico.tour.v1:demo` continuam compatíveis, sem migration nem novo estado remoto. Pausa/dispensa, retomada voluntária, isolamento entre contas/origem/demo e suspensão durante edição/diálogo permanecem. Perfil inicial e aviso oficial confirmado no servidor continuam separados do tutorial. [Oito grupos de regressão e oito layouts](aura-redesign-review/onboarding/checks.json), incluindo armazenamento negado, múltiplas abas, falhas/vazios e nenhuma gravação social; [demo compilado](aura-redesign-review/onboarding/demo-checks.json) completou as seis etapas sem APIs sociais.
 
 ## Problema e resultado esperado
 

@@ -1,0 +1,20 @@
+{
+  "fixture": true,
+  "hosted": false,
+  "physicalDevice": false,
+  "results": [
+    "demo /feed",
+    "demo /arenas",
+    "demo /arenas/areia-da-vila",
+    "demo /descobrir",
+    "demo /perfil",
+    "demo /perfil/marinaalves",
+    "demo /comunidades",
+    "demo /privacidade",
+    "demo /instalar",
+    "demo create/edit/delete and old route redirect",
+    "demo future blocked by date control",
+    "connected read error/retry, save error preserves draft, lost acknowledgement retains ID, private create/edit/delete",
+    "320/390/430px, 620px height, Escape and form fit"
+  ]
+}

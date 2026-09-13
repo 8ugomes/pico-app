@@ -20,7 +20,7 @@ O Pico ajuda a responder: quem joga onde eu jogo, quais comunidades combinam com
 - Cores de marca: Manteiga `#F2E3B5`, Cacau `#44342F`, Papel `#F8F3E7`, Lavanda de apoio `#CBBBE0`. Os papéis claros/escuros e estados funcionais estão nos tokens do manual.
 - Tipografia: Syne 600–800 nos títulos e momentos de marca; Manrope 400–700 na leitura e operação. Logo vetorial em contornos entregue no pacote; não redigitar ou regenerar.
 - Direção de arte: luz difusa, textura de pele e areia, pessoas e gestos reconhecíveis dos esportes. Fotografia protagonista, curvas editoriais pontuais, ritmo e espaço livre. Superfícies calmas, contraste e legibilidade nas tarefas.
-- Claro como referência editorial e escuro próprio. Na futura implementação, acompanhar o dispositivo inicialmente e preservar eventual preferência explícita já existente.
+- Claro como referência editorial e escuro próprio. A implementação acompanha `prefers-color-scheme`, sem preferência remota ou novo ajuste de conta.
 - Voz: pt-BR próximo, adulto, breve e concreto. Ação clara e feedback honesto; sem linguagem de infraestrutura nos fluxos do jogador.
 
 Os [ativos e o manual](brand-exploration/aura-manteiga/README.md) consolidam a decisão. O [design system](pico-design-system.md) traduz a identidade para o produto. Ritual, Pulso, Pistache e a Aura lavanda pertencem à exploração anterior; não reabrir a direção salvo pedido do responsável.
@@ -46,7 +46,7 @@ O endereço operacional conhecido é o projeto Vercel `pico-app`, em `pico-app-s
 1. Pedido atual e decisões explícitas do responsável definem o escopo da tarefa; [AGENTS.md](../AGENTS.md) define o fluxo do projeto.
 2. Este contexto e o [plano corrente](pico-product-plan.md) registram direção e prioridade. Os documentos de [domínio](pico-domains.md) definem os contratos funcionais.
 3. [MANUAL.md](brand-exploration/aura-manteiga/MANUAL.md), [manual visual](brand-exploration/aura-manteiga/manual.html), [tokens.json](brand-exploration/aura-manteiga/tokens.json), logos e fontes definem a identidade escolhida. O PDF consolidado está em `output/pdf/Pico-Social-Manual-Aura-Manteiga.pdf`.
-4. O código e as evidências de release informam o que está implementado e publicado. Em 13/09/2026, o manual está entregue; a migração do código para Aura Manteiga ainda está pendente. Não afirmar que o aplicativo foi redesenhado apenas porque a documentação mudou.
+4. O código e as evidências de release informam o que está implementado e publicado. Em 13/09/2026, o manual foi aplicado ao código e verificado no app compilado. [Cobertura e capturas](aura-redesign-review/README.md); a revisão efetivamente servida continua sendo informada por `/api/version`.
 5. Propostas anteriores, PDFs de exploração e registros de rodadas antigas preservam histórico. Se houver divergência material, registre-a; não trate mockup como autorização para alterar privacidade ou schema.
 
-As [skills locais](pico-skills.md) usam esta referência compartilhada. O [prompt principal](brand-exploration/aura-manteiga/PROMPT-PRODUCAO.md) é um artefato para execução futura: a simples leitura do arquivo não inicia implementação, publicação ou mensagens externas.
+As [skills locais](pico-skills.md) usam esta referência compartilhada. O [prompt principal](brand-exploration/aura-manteiga/PROMPT-PRODUCAO.md) registra o escopo autorizado quando enviado como pedido: a simples leitura do arquivo não inicia implementação, publicação ou mensagens externas.

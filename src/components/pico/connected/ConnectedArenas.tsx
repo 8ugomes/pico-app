@@ -32,7 +32,7 @@ export function ConnectedArenas() {
   const data = state.status === 'success' && state.data.kind === 'arenas' ? state.data : null;
   const arenas = data?.arenas.filter(a => normalizeSearch(`${a.name} ${a.neighborhood} ${a.city}`).includes(normalizeSearch(query)) && (sport === 'all' || a.sports.some(s => s.id === sport))) ?? [];
   return <>
-    <PageHeading eyebrow="LUGARES PARA CRIAR VÍNCULOS" title="Arenas" />
+    <PageHeading title="Arenas" />
     {state.status === 'loading' && <ReadLoading />}
     {(state.status === 'error' || state.status === 'demo') && <ReadFailure state={state} retry={retry} />}
     {data && <>

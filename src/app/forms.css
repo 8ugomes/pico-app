@@ -1,20 +1,20 @@
 /* Shared form controls. Surface, scale and geometry are defined once in globals.css. */
 .input-group { display: flex; flex-direction: column; min-width: 0; gap: var(--space-2); color: var(--text-secondary); font-size: var(--text-label); line-height: 1.45; }
-.input-group label { color: var(--text-secondary); font-size: var(--text-label); }
+.input-group label { color: var(--text-secondary); font-size: var(--text-label); font-weight: 600; }
 .input, .social-form input, .social-form select, .social-form textarea { width: 100%; min-width: 0; min-height: 50px; border-radius: var(--radius-control); border: 1px solid var(--border-control); background: var(--surface-input); color: var(--foreground); padding: .75rem var(--space-4); font-size: var(--text-body); line-height: 1.5; transition: border-color var(--motion-fast), background var(--motion-fast); }
 .input::placeholder { color: var(--text-muted); opacity: 1; }
-.input:focus, .social-form :is(input,select,textarea):focus { border-color: var(--accent); background: rgb(255 255 255 / 7%); }
+.input:focus, .social-form :is(input,select,textarea):focus { border-color: var(--accent); background: var(--surface-input); }
 .input[aria-invalid=true] { border-color: var(--error); }
-.input:disabled, fieldset:disabled .input { color: var(--text-muted); background: rgb(255 255 255 / 3%); cursor: not-allowed; }
+.input:disabled, fieldset:disabled .input { color: var(--text-muted); background: var(--disabled-bg); cursor: not-allowed; }
 .input[readonly] { color: var(--text-secondary); }
 textarea.input, .social-form textarea { resize: vertical; min-height: 6rem; max-width: 100%; }
-select.input { color-scheme: dark; padding-right: var(--space-4); text-overflow: ellipsis; }
+select.input { color-scheme: inherit; padding-right: var(--space-4);  }
 select.input option { background: var(--surface-overlay); color: var(--foreground); }
 .input-hint { color: var(--text-muted); font-size: var(--text-caption); line-height: 1.5; }
 .connected-panel { padding: var(--space-5); border: 1px solid var(--border-subtle); border-radius: var(--radius-card); background: var(--graphite); margin: var(--space-5) 0; }
 .connected-panel h2 { margin: 0 0 var(--space-3); font-size: var(--text-dialog); line-height: 1.3; font-weight: 600; letter-spacing: -.02em; }
 .connected-panel :is(p,h2) { overflow-wrap: anywhere; }
-.connected-panel:has(.connected-form) { background: var(--surface-overlay); box-shadow: var(--shadow-elevated); border-radius: var(--radius-panel); }
+.connected-panel:has(.connected-form) { background: var(--surface-overlay); border-radius: var(--radius-panel); }
 .connected-form, .social-form { display: grid; gap: var(--space-5); margin-top: var(--space-5); min-width: 0; }
 .connected-form fieldset { border: 0; padding: 0; margin: 0; min-width: 0; display: grid; gap: var(--space-4); }
 .connected-form legend { font-size: var(--text-label); font-weight: 600; color: var(--foreground); padding: 0 0 var(--space-3); }
@@ -36,7 +36,7 @@ select.input option { background: var(--surface-overlay); color: var(--foregroun
 .choice-chip { max-width: 100%; min-width: 0; overflow-wrap: anywhere; position: relative; display: inline-flex; align-items: center; gap: var(--space-2); min-height: 44px; padding: .625rem .875rem; border: 1px solid var(--border-control); border-radius: var(--radius-pill); background: var(--surface-input); color: var(--text-secondary); font-size: var(--text-label); line-height: 1.35; cursor: pointer; }
 .choice-chip input { position: absolute; width: 1px; height: 1px; opacity: 0; }
 .choice-chip > svg { flex-shrink: 0; visibility: hidden; }
-.choice-chip:has(input:checked) { background: var(--accent-soft); color: var(--accent); border-color: rgb(77 225 193 / 32%); }
+.choice-chip:has(input:checked) { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); }
 .choice-chip:has(input:checked) > svg { visibility: visible; }
 .choice-chip:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 3px; }
 .choice-chip:has(input:disabled) { color: var(--text-muted); cursor: not-allowed; }
@@ -47,13 +47,13 @@ select.input option { background: var(--surface-overlay); color: var(--foregroun
 .photo-upload input::file-selector-button { min-height: 36px; margin-right: var(--space-3); padding: .375rem .75rem; border: 0; border-radius: .625rem; background: var(--glass-strong); color: var(--foreground); font: inherit; cursor: pointer; }
 
 /* Native dialog supplies the focus trap and Escape handling. Only the body scrolls. */
-.pico-dialog { position: fixed; inset: 0; margin: auto; width: calc(100% - 1.5rem); max-width: 32rem; max-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 1.5rem); padding: 0; border: 1px solid var(--border-control); border-radius: var(--radius-panel); color: var(--foreground); background: var(--surface-overlay); overflow: hidden; box-shadow: var(--shadow-elevated); }
+.pico-dialog { position: fixed; inset: 0; margin: auto; width: calc(100% - 1.5rem); max-width: 32rem; max-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 1.5rem); padding: 0; border: 0; border-radius: var(--radius-panel); color: var(--foreground); background: var(--surface-overlay); overflow: hidden; box-shadow: var(--shadow-elevated); }
 .pico-dialog[open] { display: flex; flex-direction: column; }
-.pico-dialog::backdrop { background: rgb(0 0 0 / 64%); }
+.pico-dialog::backdrop { background: rgb(40 33 33 / 60%); }
 .dialog-heading { display: flex; flex-shrink: 0; align-items: center; justify-content: space-between; gap: var(--space-3); padding: var(--space-4) var(--space-5) var(--space-3) var(--space-6); }
 .dialog-heading h2 { font-size: var(--text-dialog); line-height: 1.3; letter-spacing: -.02em; font-weight: 600; margin: 0; overflow-wrap: anywhere; }
 .dialog-heading .icon-button { background: var(--glass); }
-.dialog-body { min-height: 0; padding: var(--space-2) var(--space-6) var(--space-6); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: rgb(255 255 255 / 24%) transparent; scroll-padding-block: var(--space-4); }
+.dialog-body { min-height: 0; padding: var(--space-2) var(--space-6) var(--space-6); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--border-control-raised) transparent; scroll-padding-block: var(--space-4); }
 .dialog-body > .connected-form, .dialog-body > .social-form { margin-top: 0; }
 .dialog-body > form:not(.connected-form):not(.social-form) { display: grid; gap: var(--space-4); }
 .dialog-body > p { color: var(--text-secondary); line-height: 1.6; margin: 0 0 var(--space-5); font-size: var(--text-body); }
@@ -64,15 +64,9 @@ select.input option { background: var(--surface-overlay); color: var(--foregroun
 .publication-composer { margin: 0 0 var(--space-6); }
 .publication-composer .composer-trigger { min-height: 76px; background: var(--graphite); border-radius: var(--radius-card); padding: var(--space-4); }
 .publication-composer .composer-trigger > span { font-size: var(--text-body); flex: 1; }
-.publication-composer .composer-trigger > .composer-symbol { display: grid; place-items: center; flex: 0 0 40px; width: 40px; height: 40px; border-radius: 50%; background: var(--glass); color: var(--text-secondary); }
-@supports (backdrop-filter: blur(1px)) {
-  .pico-dialog, .connected-panel:has(.connected-form) { background: rgb(28 32 38 / 92%); backdrop-filter: blur(18px); }
-  .pico-dialog::backdrop { backdrop-filter: blur(4px); }
-}
-@media (prefers-reduced-transparency: reduce) {
-  .pico-dialog, .connected-panel:has(.connected-form) { background: var(--surface-overlay); backdrop-filter: none; }
-  .pico-dialog::backdrop { backdrop-filter: none; }
-}
+.publication-composer .composer-trigger > .composer-symbol { display: grid; place-items: center; flex: 0 0 40px; width: 40px; height: 40px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); }
+
+
 @media (min-width: 560px) { .connected-form-row { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 359px) {
   .dialog-heading { padding-inline: var(--space-4); }
@@ -94,3 +88,6 @@ select.input option { background: var(--surface-overlay); color: var(--foregroun
 .discovery-filters > summary { color: var(--foreground); font-weight: 500; }
 
 .form-note > a, .auth-footnote > a { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* Functional limits on raised or soft surfaces use the audited stronger pair. */
+.pico-dialog, .official-welcome, .tour-welcome, .publication-audience-summary { --border-control: var(--border-control-raised); }

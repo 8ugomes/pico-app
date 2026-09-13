@@ -27,7 +27,7 @@ export function ConnectedGames({ initialSlug }: { initialSlug?: string }) {
   const [deleteError, setDeleteError] = useState('');
   return <>
     <Link href="/perfil" className="detail-back">Voltar ao perfil</Link>
-    <PageHeading eyebrow="DEPOIS DA AREIA" title="Meus jogos" />
+    <PageHeading title="Meus jogos" />
     <p className="page-intro">Um lugar para guardar onde você jogou e as datas de cada encontro.</p>
     <JournalPrivacy />
     <Button data-tour="register-game" onClick={() => { setMessage(''); setForm(previous => previous && !previous.game ? previous : {}); setEditorOpen(true); }}>Registrar jogo</Button>

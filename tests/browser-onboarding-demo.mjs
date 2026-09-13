@@ -1,10 +1,12 @@
 // Explicit local demo build on 3018, without credentials or fixture APIs.
 import assert from 'node:assert/strict';
-import { writeFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync } from 'node:fs';
 const { chromium } = await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
-const browser = await chromium.launch({ headless: true });
+const browser = await chromium.launch({ headless: true, ...(process.env.PLAYWRIGHT_CHANNEL ? { channel: process.env.PLAYWRIGHT_CHANNEL } : {}) });
 const context = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' });
 const page = await context.newPage();
+const output = process.env.PICO_REVIEW_DIR || 'docs/onboarding-review';
+mkdirSync(output, { recursive: true });
 const calls = [], errors = [];
 page.setDefaultTimeout(10000);
 page.on('pageerror', error => errors.push(error.message));
@@ -15,14 +17,14 @@ await context.route('**/*', route => {
 });
 await context.addInitScript(() => localStorage.setItem('pico.install-dismissed', '1'));
 try {
-  await page.goto('http://127.0.0.1:3018/feed');
+  await page.goto((process.env.PICO_DEMO_URL || 'http://127.0.0.1:3018') + '/feed');
   await page.getByRole('button', { name: 'Conhecer o Pico', exact: true }).click();
   const guide = page.getByTestId('guided-tour');
   await page.waitForURL('**/arenas');
   await guide.getByRole('link', { name: 'Próxima: Pessoas' }).click();
   await page.locator('[data-tour="people-search"][data-tour-highlight]').waitFor();
   assert.match(await guide.innerText(), /Nesta demonstração, busque por nome, bairro ou esporte/);
-  await page.screenshot({ path: 'docs/onboarding-review/demo-people-390.png' });
+  await page.screenshot({ path: `${output}/demo-people-390.png` });
   for (const name of ['Próxima: Comunidades', 'Próxima: Início', 'Próxima: Meus jogos', 'Próxima: Perfil']) await guide.getByRole('link', { name }).click();
   await guide.getByRole('button', { name: 'Concluir tutorial' }).click();
   await page.getByRole('heading', { name: 'Agora, encontre seu Pico.' }).waitFor();
@@ -32,6 +34,6 @@ try {
   assert.deepEqual([...new Set(calls)], ['/api/version']);
   assert.deepEqual(errors, []);
   const result = { demo: true, hosted: false, physicalDevice: false, steps: 6, completion: true, adaptedPeopleSearch: true, apiCalls: [...new Set(calls)], errors };
-  writeFileSync('docs/onboarding-review/demo-checks.json', JSON.stringify(result, null, 2));
+  writeFileSync(`${output}/demo-checks.json`, JSON.stringify(result, null, 2));
   console.log(JSON.stringify(result));
 } finally { await context.unrouteAll({ behavior: 'wait' }); await browser.close(); }

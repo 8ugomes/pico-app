@@ -1,8 +1,8 @@
 # Pico — PWA no Ciclo 9
 
-## Identidade escolhida — migração pendente
+## Aura Manteiga integrada · 13/09/2026
 
-O próximo redesign aplica [Aura Manteiga](brand-exploration/aura-manteiga/README.md) a favicon, Apple, ícones 192/512, maskable, manifesto, metadados de tema e telas de instalação/retomada. Os ativos já estão entregues; sua integração ao app ainda não ocorreu. Preservar `id`, `scope`, `start_url`, nomes por ambiente e a instalação existente. O onboarding assistido pode explicar instalação quando pertinente, sem transformar o convite dispensável em requisito de acesso. Seguir [domínios](pico-domains.md) e [skill principal](../.agents/skills/pico-redesign/SKILL.md).
+[Aura Manteiga](brand-exploration/aura-manteiga/README.md) aplicada a favicon, Apple, ícones 192/512, maskable, manifesto, metadados de tema e telas de instalação/retomada. Os arquivos entregues foram copiados e comparados byte a byte; maskable 512 com fundo totalmente opaco. `id`, `scope`, `start_url`, nomes por ambiente e instalação existente preservados. Metadados claro/escuro seguem o dispositivo; manifesto usa Papel. [Auditoria de assets](aura-redesign-review/assets-contrast.json). Instalação em aparelho físico continua sem nova validação. O onboarding assistido pode explicar instalação quando pertinente, sem transformar o convite dispensável em requisito de acesso. Seguir [domínios](pico-domains.md) e [skill principal](../.agents/skills/pico-redesign/SKILL.md).
 
 ## Base implementada
 

@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-import { UsersRound } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { entityAction } from './connected/useEntity';
 
@@ -43,7 +42,7 @@ export function OfficialWelcome() {
   }
   if (!welcome && !error) return null;
   return <section className="official-welcome" aria-label="Boas-vindas ao Pico" aria-live="polite">
-    {welcome && <><p className="eyebrow"><UsersRound size={18} aria-hidden="true" /> SUA PRIMEIRA COMUNIDADE</p><h2 ref={heading} tabIndex={-1}>Você entrou na comunidade oficial do Pico.</h2><p>Adicionamos você ao concluir seu perfil. Todas as modalidades se encontram aqui. Conheça quem já chegou, leia as boas-vindas e apresente-se. Você pode sair quando quiser.</p><div className="read-message-actions"><Button disabled={busy} onClick={() => acknowledge(true)}>Conhecer a comunidade</Button><Button variant="quiet" disabled={busy} onClick={() => acknowledge(false)}>Entendi</Button></div></>}
+    {welcome && <><h2 ref={heading} tabIndex={-1}>Você entrou na comunidade oficial do Pico.</h2><p>Seu perfil está pronto e você já faz parte deste encontro entre modalidades. Conheça a comunidade; você pode sair quando quiser.</p><div className="read-message-actions"><Button disabled={busy} onClick={() => acknowledge(true)}>Conhecer a comunidade</Button><Button variant="quiet" disabled={busy} onClick={() => acknowledge(false)}>Entendi</Button></div></>}
     {error && <p role="status">{error} <Button size="small" variant="quiet" disabled={busy} onClick={() => setRevision(value => value + 1)}>Tentar novamente</Button></p>}
   </section>;
 }

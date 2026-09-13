@@ -1,5 +1,17 @@
 # Pico — Deslopify
 
+## Redesign integral Aura Manteiga — critérios antes de codar · 13/09/2026
+
+Substituir a fundação escura/verde por Papel/Cacau e escuro quente; aplicar logo em contornos e Syne/Manrope sem transformar operação em campanha. Curvas contidas em aberturas e lugares; pessoas, comunidades, publicações e diário com composição própria. Remover caixas, slogans e sombras repetidos. Entrada editorial manteiga constante; estados e controles usam pares semânticos, inclusive borda elevada.
+
+Perfil inicial deve explicar dados necessários/opcionais e progresso sem etapa decorativa. Guia curto, opcional e contextual, com “Mostrar onde” legível, pausa e retomada; aviso oficial continua confirmado no servidor. Rever alvos ausentes, altura curta, foco e ausência de ações sociais automáticas. QA representativo e correções em lote; registrar cobertura e limites em aura-redesign-review.
+
+### Fechamento e aprendizados desta implementação
+
+Entrada manteiga constante, operação em Papel/Cacau ou escuro quente, curvas nas capas e identidade em SVG/Syne. Removidos banner duplicado no conectado, slogans auxiliares, caixas e material translúcido repetido. Início reúne vínculos em um conjunto compacto; perfil tem identidade aberta, dados essenciais e detalhes opcionais distintos. Guia mais curto, com rótulos de ajuda/pausa e as mesmas preferências.
+
+A revisão em lote identificou badge usando borda decorativa como fundo e falta de espaço para navegação ampliada: corrigidos com `accent-soft` e altura real do rodapé. Em altura curta, o guia rola com a página. Aprendizado: área reservada ao rodapé deve acompanhar o texto, e borda funcional elevada não pode herdar o par do fundo comum. Revisão independente: os dois ajustes pedidos (rótulos redundantes e hifenização da navegação) foram resolvidos; `ship` nesse escopo. [Evidências](aura-redesign-review/README.md). Amostra e regressões locais não equivalem a teste com jogadores, instalação física ou nova certificação de Supabase.
+
 ## Critério vigente
 
 **Aura Manteiga** é a direção aprovada: editorial de moda jovem, expressivo, premium e refinado. Usar o [manual](brand-exploration/aura-manteiga/MANUAL.md) e o [design system](pico-design-system.md); não recuperar escolhas históricas como orientação atual. O alvo do redesign é o aplicativo inteiro, com composição própria por conteúdo e onboarding assistido que preserve autonomia.
