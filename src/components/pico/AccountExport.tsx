@@ -1,7 +1,7 @@
 'use client';
 import { useRef, useState, type FormEvent } from 'react';
 import { Button } from '@/components/ui/Button';
-import { Input } from '@/components/ui/Input';
+import { PasswordInput } from '@/components/ui/PasswordInput';
 import { Modal } from '@/components/ui/Modal';
 
 export function AccountExport() {
@@ -27,6 +27,6 @@ export function AccountExport() {
     } finally { pending.current = false; setBusy(false); }
   }
   return <section className="connected-panel"><h2>Baixar meus dados</h2><p className="form-note">Um arquivo com seu perfil, publicações, interações e registros privados. Inclui as referências das fotos, sem os arquivos de imagem. Guarde em um lugar seguro.</p><Button variant="quiet" onClick={() => { setError(''); setOpen(true); }}>Baixar meus dados</Button>
-    <Modal open={open} onClose={() => { if (!pending.current) setOpen(false); }} title="Baixar seus dados"><p className="form-note">Confirme sua senha para preparar o arquivo JSON. Ele contém dados pessoais e não inclui sua senha.</p><form className="connected-form" onSubmit={download}><fieldset disabled={busy}><Input id="export-password" name="password" type="password" label="Sua senha atual" autoComplete="current-password" minLength={1} maxLength={128} required /><Button type="submit">{busy ? 'Preparando…' : 'Baixar arquivo'}</Button></fieldset>{error && <p role="alert" className="auth-notice notice-error">{error}</p>}</form></Modal>
+    <Modal open={open} onClose={() => { if (!pending.current) setOpen(false); }} title="Baixar seus dados"><p className="form-note">Confirme sua senha para preparar o arquivo JSON. Ele contém dados pessoais e não inclui sua senha.</p><form className="connected-form" onSubmit={download}><fieldset disabled={busy}><PasswordInput id="export-password" name="password" label="Sua senha atual" autoComplete="current-password" minLength={1} maxLength={128} required /><Button type="submit">{busy ? 'Preparando…' : 'Baixar arquivo'}</Button></fieldset>{error && <p role="alert" className="auth-notice notice-error">{error}</p>}</form></Modal>
   </section>;
 }

@@ -117,3 +117,7 @@ Esta consolidação não comprova Supabase real, entrega de e-mail, instalação
 ## Avatar e configuração do perfil
 
 Cabeçalho móvel e lateral conectados usam o avatar privado da conta, com 44 px reservados, recorte circular e fallback de indisponibilidade. Na configuração inicial, foto salva, nome, usuário e esporte têm progresso de quatro requisitos. A escolha de foto fica exposta antes de existir um avatar; bio e localização aparecem como personalização opcional. A atualização de imagem preserva o rascunho do formulário.
+
+## Refino de fluxo · 13/09/2026
+
+Campos de senha usam ação lateral de mostrar/ocultar com 44px, rótulo acessível e estado independente. Erro associado mantém ajuda, marca invalidez e leva foco ao campo. A saída escrita aparece na conta/perfil/configuração inicial. Opcionais de perfil ficam em disclosure; ao concluir o cadastro, a jornada chega ao Início. Capas de arenas usam 4:3 com padding e raio de card, sem curva que corte os cantos; galerias usam proporção natural e contain. [Evidências](flow-review/README.md).

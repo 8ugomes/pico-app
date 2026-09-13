@@ -1,3 +1,12 @@
+## 2026-09-13 — Fluxo, senha e saída da conta
+
+- Saída visível no perfil, configuração inicial e conta, com descarte de sessão local entre abas.
+- Mostrar/ocultar senhas, confirmação obrigatória no cadastro e divergência apontada antes do envio.
+- Entrada e textos simplificados; dados opcionais recolhidos, perfil inicial termina no Início e orienta encontrar uma arena.
+- Fotos de arenas inteiras na lista/galeria, capas 4:3, contorno sem cortar cantos e fallback de imagem.
+- Pesquisa de todo o estado preparada em 645 municípios e 3.225 consultas; catálogo existente preservado, sem novas importações.
+- Lint/typecheck/build e testes locais; smoke real em desenvolvimento e [evidências/limites](flow-review/README.md). Publicação autorizada via PR/CI/main e script oficial, sem migration ou mudança de Auth.
+
 ## 2026-09-13 — camadas sociais, ações de comentários e histórico preservado
 
 Publicação autorizada após o commit de implementação; promoção pela main/PR/CI com inventário anterior/posterior, conferência do histórico sob RLS e recibo do artefato servido.

@@ -1,3 +1,16 @@
+## Fluxo claro, conta e senhas — PLAN · 13/09/2026
+
+Feedback de uso pesado: excesso de texto e próxima ação pouco clara. Simplificar a tela de entrada e a abertura do Início mantendo Aura Manteiga. A saída da conta deve estar escrita e visível, sem depender da tela de login. Olho acessível em cada senha, confirmação obrigatória no cadastro e erro junto ao campo; não limpar o formulário quando houver divergência.
+
+Fotos de arenas devem preservar o quadro inteiro também em capas enviadas pela gestão; usar superfície neutra, proporção consistente na lista e imagem íntegra no detalhe. Reduzir chamadas repetidas, não rótulos de privacidade/audiência. Amostra: cadastro 320/390px, Início e Perfil, catálogo e capa vertical, desktop escuro, teclado e texto ampliado. Cobertura estadual futura identificada como preparação, sem métricas ou arenas inventadas.
+
+### Implementação e aprendizados
+
+A saída precisa ser texto acionável no contexto da conta, inclusive antes de terminar o perfil. O olho fica junto a cada campo e nunca envia o formulário; divergência leva foco à confirmação. A abertura da conta usa títulos diretos, e o guia deixou de competir como uma segunda abertura de campanha. A configuração inicial revela opcionais sob demanda e termina no Início, com primeira arena como próxima ação.
+
+Fotos inteiras pedem contenção, margem e proporção de lista previsível; a curva assimétrica recortava cantos mesmo com contain. Capas com contorno simples e galeria natural preservam o quadro. Revisão em 320/390px e 1280px nos dois temas, teclado e texto ampliado; [evidências](flow-review/README.md). Pesquisa estadual preparada não equivale a cobertura concluída ou fotos licenciadas automaticamente.
+
+
 ## Refino social — revisão e aprendizados · 13/09/2026
 
 Publicação autorizada nesta rodada: conferir no artefato servido os estilos de posts/comentários e rotas de entrada, preservando as evidências de interação já exercitadas com contas de desenvolvimento. A mudança no banco deve restaurar a leitura do mesmo original, sem reintroduzir a arena fictícia nem alterar conteúdo. Registrar a revisão final no recibo do release.

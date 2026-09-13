@@ -8,6 +8,7 @@ import type { ReadProfile } from '@/types/read';
 import { Button, buttonVariants } from '@/components/ui/Button';
 import { ProfilePlaces } from './ActivityHistory';
 import { ConnectedFeed } from './ConnectedFeed';
+import { SignOutButton } from '../SignOutButton';
 import { TourLauncher } from '../GuidedOnboarding';
 import { ProfileEditor } from './ProfileEditor';
 import { RemoteAvatar } from './Media';
@@ -18,13 +19,16 @@ import { ReadFailure, ReadLoading } from './ReadState';
 
 export function ConnectedProfile() {
   const { state, retry, refresh, refreshError } = useOwnProfile();
-  if (state.status === 'loading') return <ReadLoading />;
-  if (state.status !== 'success') return <ReadFailure state={state} retry={retry} />;
-  if (state.data.kind !== 'profile') return null;
   return <>
+    <header className="profile-v2-toolbar">
+      <Link href="/conta" className="profile-account-link"><Settings2 size={18} aria-hidden="true" />Minha conta</Link>
+      <SignOutButton />
+    </header>
+    {state.status === 'loading' ? <ReadLoading /> : state.status !== 'success' ? <ReadFailure state={state} retry={retry} /> : state.data.kind === 'profile' ? <>
     {refreshError && <p role="status" className="form-note">Não foi possível atualizar. Suas edições nesta tela foram preservadas.</p>}
     {/* One identity boundary. Never reuse a profile ID for sibling editors. */}
     <ProfileWorkspace key={state.data.profile.id} profile={state.data.profile} refresh={refresh} />
+    </> : null}
   </>;
 }
 
@@ -66,10 +70,6 @@ function ProfileWorkspace({ profile, refresh }: { profile: ReadProfile; refresh:
   }
 
   return <div className="profile-v2" data-testid="profile-view">
-    <header className="profile-v2-toolbar">
-      <p className="profile-v2-kicker">Meu perfil</p>
-      <Link href="/conta" className="icon-button" aria-label="Privacidade e configurações"><Settings2 size={20} aria-hidden="true" /></Link>
-    </header>
     <section className="profile-v2-hero" aria-labelledby="profile-name-heading">
       <div className="profile-v2-identity">
         <div className="profile-v2-avatar"><RemoteAvatar src={profile.avatar} name={profile.name} /></div>
@@ -78,7 +78,7 @@ function ProfileWorkspace({ profile, refresh }: { profile: ReadProfile; refresh:
         </div>
       </div>
       {profile.isDemo && <span className="sport-label">Perfil de demonstração</span>}
-      <p className={`profile-v2-bio ${profile.bio ? '' : 'muted-text'}`}>{profile.bio || 'Seu próximo jogo começa com uma conexão. Conte um pouco sobre você.'}</p>
+      <p className="profile-v2-bio">{profile.bio}</p>
       <div className="profile-v2-sports">{profile.sports.map(({ sport, level, isPrimary }) => <span className="profile-v2-sport" key={sport.id}>
         <SportIcon sport={sport.slug} size={18} /><span><strong>{sport.name}</strong><small>{level}{isPrimary ? ' · Principal' : ''}</small></span>
       </span>)}</div>
@@ -93,7 +93,7 @@ function ProfileWorkspace({ profile, refresh }: { profile: ReadProfile; refresh:
       onClick={() => setPanel(item.id)} onKeyDown={event => moveTab(event, index)}
     >{item.label}</button>)}</div>
     {panels.map(item => <section key={item.id} role="tabpanel" id={`${tabId}-panel-${item.id}`} aria-labelledby={`${tabId}-${item.id}`} hidden={panel !== item.id} tabIndex={0} className="profile-v2-panel">
-      {panel === item.id && (item.id === 'posts' ? <ConnectedFeed authorId={profile.id} readOnly /> : item.id === 'places' ? <ProfilePlaces playerId={profile.id} /> : <><p className="profile-v2-private"><ShieldCheck size={16} aria-hidden="true" />Só você vê seu histórico detalhado.</p><p>Guarde as lembranças dos seus jogos por arena e data.</p><Link className={buttonVariants()} href="/jogos">Abrir Meus jogos</Link></>)}
+      {panel === item.id && (item.id === 'posts' ? <ConnectedFeed authorId={profile.id} readOnly /> : item.id === 'places' ? <ProfilePlaces playerId={profile.id} /> : <><p className="profile-v2-private"><ShieldCheck size={16} aria-hidden="true" />Seu histórico é privado.</p><Link className={buttonVariants()} href="/jogos">Abrir Meus jogos</Link></>)}
     </section>)}
     <TourLauncher />
     <footer className="profile-v2-footer">

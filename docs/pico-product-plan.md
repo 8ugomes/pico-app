@@ -1,3 +1,18 @@
+## Fluxo claro, conta e senhas — PLAN · 13/09/2026
+
+Pedido autoriza implementar e publicar no Pico principal. Base: main 2cc0a32, em worktree próprio, preservando landing e materiais em outras branches. Prioridades: saída visível no Perfil e Conta; mostrar/ocultar senha no login, cadastro, recuperação e confirmação sensível; duas senhas iguais antes de enviar cadastro. Preservar a política de Auth vigente, credenciais legadas e mensagens sobre recuperação indisponível.
+
+Reduzir texto e chamadas redundantes na entrada, Início e perfil; orientar a primeira arena e os vínculos já existentes sem ações automáticas. Preservar audiência, privacidade, tutorial opcional e recursos de busca publicados. Corrigir enquadramento de capas e detalhes, fallback de imagem indisponível e legibilidade. Preparar levantamento de arenas de todo o estado de São Paulo (escopo confirmado pelo responsável), com municípios, fontes Google/oficiais, deduplicação, direitos e créditos de fotos e importação revisada; não declarar cobertura completa com o catálogo atual de 17 unidades.
+
+Antes de publicar: checks locais, testes de senhas/logout e smoke com conta descartável no desenvolvimento, revisão representativa claro/escuro/mobile/desktop, commit, PR/CI/main, deploy pelo script oficial e comparação de preservação de conteúdo. Sem migration, seed, mudança de Auth ou importação não revisada nesta correção de UX.
+
+### Implementação e verificação
+
+Saída explícita em Perfil/Conta/configuração inicial; campo de senha com olho e confirmação exata antes de cadastro; menos texto na entrada, fotos, perfil, tutorial e boas-vindas. Dados opcionais recolhidos, perfil inicial leva ao Início, que orienta a primeira arena. Capas em 4:3 e galerias sem recorte, com fallback. Preparação estadual com 645 municípios, 3.225 links e ficha de candidatos; nenhuma nova arena importada. [Mudanças, testes e limites](flow-review/README.md) e [pesquisa preparada](arena-state-research/README.md).
+
+120 testes locais, lint/typecheck/build conectado aprovados, mais dez testes pertinentes após o ajuste do perfil. 30 verificações de cadastro, upload, senha, layout e saída no desenvolvimento aprovadas, sem erro de execução; conta e foto de teste removidas. Capturas em `flow-review`. Publicação autorizada por PR/CI/main e script oficial, com comparação de conteúdo e conferência de versão servida. Sem mudança de banco, Auth ou conteúdo dos jogadores.
+
+
 ## Refino social de posts e comentários — implementação e validação · 13/09/2026
 
 ### Publicação autorizada · 13/09/2026

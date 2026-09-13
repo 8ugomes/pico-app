@@ -42,7 +42,7 @@ export function OfficialWelcome() {
   }
   if (!welcome && !error) return null;
   return <section className="official-welcome" aria-label="Boas-vindas ao Pico" aria-live="polite">
-    {welcome && <><h2 ref={heading} tabIndex={-1}>Você entrou na comunidade oficial do Pico.</h2><p>Seu perfil está pronto e você já faz parte deste encontro entre modalidades. Conheça a comunidade; você pode sair quando quiser.</p><div className="read-message-actions"><Button disabled={busy} onClick={() => acknowledge(true)}>Conhecer a comunidade</Button><Button variant="quiet" disabled={busy} onClick={() => acknowledge(false)}>Entendi</Button></div></>}
+    {welcome && <><h2 ref={heading} tabIndex={-1}>Você entrou na comunidade oficial do Pico.</h2><p>Conheça a turma de todos os esportes. Você pode sair do grupo quando quiser.</p><div className="read-message-actions"><Button disabled={busy} onClick={() => acknowledge(true)}>Conhecer a comunidade</Button><Button variant="quiet" disabled={busy} onClick={() => acknowledge(false)}>Entendi</Button></div></>}
     {error && <p role="status">{error} <Button size="small" variant="quiet" disabled={busy} onClick={() => setRevision(value => value + 1)}>Tentar novamente</Button></p>}
   </section>;
 }

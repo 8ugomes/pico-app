@@ -29,3 +29,8 @@ body:has(dialog[open]) .tour-guide { display: none; }
 @media (min-width: 800px) { .tour-guide { top: 1rem; max-height: 52svh; } .tour-guide-actions > .button-primary { flex: 0 1 auto; } }
 @media (max-height: 560px) { .tour-guide { position: relative; top: auto; max-height: none; } .tour-guide-copy { overflow: visible; } }
 @media (prefers-reduced-motion: reduce) { .tour-boundary * { scroll-behavior: auto; } }
+
+.tour-welcome { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-2) var(--space-4); padding: var(--space-4); }
+.tour-welcome h2 { margin: 0; font-size: var(--text-body); }
+.tour-welcome .tour-welcome-actions { margin: 0; }
+.tour-welcome small { flex-basis: 100%; }

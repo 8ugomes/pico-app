@@ -1,6 +1,6 @@
 /* Profile workspace: view and edit are intentionally separate render trees. */
 .profile-v2 { min-width: 0; padding-bottom: 1rem; }
-.profile-v2-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+.profile-v2-toolbar { display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; justify-content: space-between; margin-bottom: 1rem; }
 .profile-v2-kicker { margin: 0; font-size: var(--text-caption); letter-spacing: .04em; color: var(--text-muted); font-weight: 600; }
 .profile-v2-hero { position: relative; padding: 1.5rem 0; border-bottom: 1px solid var(--border-subtle); }
 .profile-v2-identity { display: flex; align-items: flex-start; flex-direction: column; gap: 1.25rem; min-width: 0; }
@@ -81,3 +81,7 @@
 .profile-setup-account { padding: 1rem 0; border-top: 1px solid var(--border-subtle); font-size: var(--text-label); }
 .profile-setup-photo-controls { margin-top: .75rem; }
 .profile-editor-v2-photo { scroll-margin-top: 6rem; }
+
+.profile-personalization > summary { cursor: pointer; min-height: 44px; align-content: center; font-weight: 600; color: var(--foreground); }
+.profile-personalization[open] > summary { margin-bottom: var(--space-4); }
+.profile-personalization:not([open]) { display: block; }

@@ -6,3 +6,13 @@ export function rememberInvitation(path:string,token:string){if(paths.includes(p
 export function clearInvitation(){try{sessionStorage.removeItem(KEY)}catch{}}
 export function invitationToken(){const token=location.hash.slice(1);history.replaceState(null,'',location.pathname);if(/^[a-f0-9]{64}$/.test(token)){rememberInvitation(location.pathname,token);return token}const pending=pendingInvitation();return pending?.path===location.pathname?pending.token:''}
 export function afterLogin(){return pendingInvitation()?.path||safeNext(new URL(location.href).searchParams.get('next'))}
+
+// Both the auth event and the clicked control can finish the same logout.
+// One full navigation prevents competing replacements and clears account UI.
+let sessionRedirectStarted = false;
+export function resetAccountView(hasUser = false) {
+  if (sessionRedirectStarted) return;
+  sessionRedirectStarted = true;
+  clearInvitation();
+  window.location.replace(hasUser ? '/perfil' : '/login');
+}

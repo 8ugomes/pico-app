@@ -2,7 +2,6 @@
 .home-contexts { padding-block: var(--space-6); }
 .home-intro .eyebrow { margin: 0 0 var(--space-2); color: var(--text-muted); font-size: var(--text-caption); letter-spacing: .06em; }
 .home-intro h1 { margin: 0; font-size: var(--text-title); font-weight: 600; letter-spacing: -.035em; line-height: 1.2; }
-.home-intro > p:last-child { color: var(--text-secondary); line-height: 1.6; margin-block: var(--space-3) 0; max-width: 30rem; }
 .home-place-groups { display: grid; gap: var(--space-2); margin-top: var(--space-5); }
 .context-heading { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); }
 .context-heading h2 { font-family: var(--font-body); font-size: var(--text-label); font-weight: 600; color: var(--text-secondary); }
@@ -109,3 +108,6 @@
 .demo-profile-top { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); margin-top: var(--space-6); }
 
 .home-places-label { font-family: var(--font-body); font-size: var(--text-label); font-weight: 600; color: var(--text-secondary); margin: 0 0 .25rem; }
+
+.home-first-step { margin-top: var(--space-4); padding: var(--space-5); background: var(--accent-soft); border-radius: var(--radius-card); }
+.home-first-step h2 { font-size: var(--text-dialog); }

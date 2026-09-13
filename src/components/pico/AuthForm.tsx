@@ -1,6 +1,6 @@
 "use client";
 
-import { newPasswordError } from '@/lib/auth/password';
+import { newPasswordError, passwordConfirmationError } from '@/lib/auth/password';
 import { afterLogin } from '@/lib/auth/navigation';
 import { useEffect, useState, type FormEvent } from "react";
 import Link from "next/link";
@@ -10,6 +10,8 @@ import { getSupabaseEnvironment } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/client";
 import { Button, buttonVariants } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
+import { PasswordInput } from "@/components/ui/PasswordInput";
+import { SignOutButton } from "./SignOutButton";
 import { emailDeliveryEnabled } from '../../../config/auth-policy.json';
 
 type Notice = { kind: "error" | "success"; text: string };
@@ -34,6 +36,8 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
   const [client] = useState(createClient);
   const [notice, setNotice] = useState<Notice | null>(null);
   const [busy, setBusy] = useState(false);
+  const [passwordError, setPasswordError] = useState<string | undefined>();
+  const [confirmError, setConfirmError] = useState<string | undefined>();
   const [checking, setChecking] = useState(Boolean(client));
   const [email, setEmail] = useState<string | null>(null);
   const [confirmationEmail, setConfirmationEmail] = useState<string | null>(null);
@@ -63,7 +67,15 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
       setNotice({ kind: "error", text: "Conte como você quer ser chamado, com pelo menos 2 caracteres." });
       return;
     }
-    if (signup) { const error = newPasswordError(password); if (error) { setNotice({ kind: 'error', text: error }); return; } }
+    if (signup) {
+      const error = newPasswordError(password);
+      const confirmation = passwordConfirmationError(password, String(data.get('password-confirm') ?? ''));
+      setPasswordError(error ?? undefined); setConfirmError(confirmation ?? undefined); setNotice(null);
+      if (error || confirmation) {
+        (form.elements.namedItem(error ? 'password' : 'password-confirm') as HTMLInputElement)?.focus();
+        return;
+      }
+    }
     setBusy(true);
     setNotice(null);
     try {
@@ -101,19 +113,6 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
     finally { setBusy(false); }
   }
 
-  async function signOut() {
-    if (!client || busy) return;
-    setBusy(true);
-    setNotice(null);
-    try {
-      const { error } = await client.auth.signOut();
-      if (error) { setNotice({ kind: "error", text: "Não foi possível sair agora. Tente novamente." }); return; }
-      setEmail(null);
-    } catch {
-      setNotice({ kind: "error", text: "Não foi possível sair agora. Tente novamente." });
-    } finally { setBusy(false); }
-  }
-
   if (checking) return <p className="auth-notice" role="status"><LoaderCircle size={18} className="spinner" aria-hidden="true" /> Conferindo seu acesso…</p>;
 
   if (email) return (
@@ -121,9 +120,9 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
       <span className="success-icon"><Check size={24} aria-hidden="true" /></span>
       <h2>Você entrou no Pico.</h2>
       <p>Sessão iniciada com <strong>{email}</strong>.</p>
-      <p>Complete seu perfil e encontre seu esporte nas arenas. Seu perfil, registros de jogos, publicações e conexões ficam na sua conta.</p>
+
       <Link className={buttonVariants()} href="/perfil">Ver meu perfil <ArrowUpRight size={18} aria-hidden="true" /></Link>
-      <Button variant="quiet" disabled={busy} onClick={signOut}>{busy ? "Saindo…" : "Sair da conta"}</Button>
+      <SignOutButton />
       {notice && <p className="auth-notice notice-error" role="alert">{notice.text}</p>}
     </div>
   );
@@ -135,18 +134,18 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
         <fieldset disabled={!client || busy}>
           {signup && <Input id="name" name="name" label="Como você quer ser chamado?" placeholder="Seu nome" autoComplete="nickname" minLength={2} maxLength={60} required />}
           <Input id="email" name="email" label="E-mail" placeholder="voce@exemplo.com" type="email" autoComplete="email" autoCapitalize="none" spellCheck={false} maxLength={254} required />
-          <Input id="password" name="password" label="Senha" placeholder={signup ? "Crie sua senha" : "Sua senha"} type="password" autoComplete={signup ? "new-password" : "current-password"} minLength={signup ? 12 : undefined} maxLength={128} hint={signup ? "Pelo menos 12 caracteres. Prefira uma frase única para o Pico." : undefined} required />
+          <PasswordInput id="password" name="password" label="Senha" placeholder={signup ? "Crie sua senha" : "Sua senha"} autoComplete={signup ? "new-password" : "current-password"} minLength={signup ? 12 : undefined} maxLength={128} hint={signup ? "Pelo menos 12 caracteres." : undefined} error={passwordError} onChange={() => { setPasswordError(undefined); setConfirmError(undefined); }} required />
+          {signup && <PasswordInput id="password-confirm" name="password-confirm" label="Confirmar senha" placeholder="Repita sua senha" autoComplete="new-password" maxLength={128} error={confirmError} onChange={() => setConfirmError(undefined)} required />}
           <Button type="submit" size="large" className="auth-submit">
             {busy ? <><LoaderCircle size={18} className="spinner" aria-hidden="true" /> {signup ? "Criando conta…" : "Entrando…"}</> : <>{signup ? "Criar conta" : "Entrar"} <ArrowUpRight size={18} aria-hidden="true" /></>}
           </Button>
         </fieldset>
         {notice && <p className={`auth-notice notice-${notice.kind}`} role={notice.kind === "error" ? "alert" : "status"}>{notice.text}</p>}
       </form>
-      {signup && !emailDeliveryEnabled && <p className="form-note">Guarde sua senha. A recuperação por e-mail ainda não está disponível nesta beta.</p>}
+      {signup && !emailDeliveryEnabled && <p className="form-note">Recuperação por e-mail indisponível nesta beta. Guarde sua senha.</p>}
       {confirmationEmail && emailDeliveryEnabled && <Button variant="quiet" disabled={busy} onClick={resendConfirmation}>Reenviar confirmação</Button>}
       <p className="auth-switch">{signup ? "Já tá no Pico?" : "Ainda não tá no Pico?"} <Link href={signup ? "/login" : "/signup"}>{signup ? "Entrar" : "Criar conta"}</Link></p>
-      {!signup && <p className="auth-switch"><Link href="/recuperar">Esqueci minha senha</Link></p>}
-      <p className="auth-switch"><Link href="/privacidade">Privacidade no Pico</Link></p>
+      <nav className="auth-help" aria-label="Ajuda com sua conta">{!signup && <Link href="/recuperar">Esqueci minha senha</Link>}<Link href="/privacidade">Privacidade</Link></nav>
     </>
   );
 }
