@@ -1,3 +1,5 @@
+> Segurança e direitos atualizados: [BETA_SECURITY.md](BETA_SECURITY.md). Download reautenticado em Conta/Acesso, exclusão paginada e TLS obrigatório. Tutorial tardio não reinicia formulários. O cadastro continua pelo link; SMTP e dados reais de privacidade faltam para abrir o beta.
+
 # Pico — operação do ambiente principal
 
 Ciclo 9 na main, com publicação unificada no projeto principal. Configuração e destinos: [ambientes](ENVIRONMENTS.md). Evidência histórica anterior à unificação: [revisão interna](INTERNAL_REVIEW.md). Permissões: [contratos](CYCLE9_CONTRACTS.md).

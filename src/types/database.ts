@@ -1245,6 +1245,11 @@ export type Database = {
       end_checkin: { Args: never; Returns: undefined }
       ensure_pico_membership: { Args: never; Returns: undefined }
       environment_identity: { Args: never; Returns: Json }
+      erase_account_private_data: {
+        Args: { p_user: string }
+        Returns: undefined
+      }
+      export_account_data: { Args: { p_user: string }; Returns: Json }
       invite_arena_manager: {
         Args: { p_arena: string; p_email: string; p_role: string }
         Returns: Json

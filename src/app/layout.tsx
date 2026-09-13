@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { connection } from 'next/server';
 import "./globals.css";
 import { SessionGuard } from '@/components/pico/SessionGuard';
 
@@ -17,7 +18,9 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = { themeColor: [{ media: "(prefers-color-scheme: light)", color: "#F8F3E7" }, { media: "(prefers-color-scheme: dark)", color: "#282121" }], colorScheme: "light dark", width: "device-width", initialScale: 1, viewportFit: "cover" };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  // Nonces must be generated for each document, never reused from a static page.
+  await connection();
   return (
     <html lang="pt-BR" data-scroll-behavior="smooth" className={`${syne.variable} ${manrope.variable} h-full antialiased`}>
       <body className="min-h-full">

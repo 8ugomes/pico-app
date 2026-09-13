@@ -1,3 +1,5 @@
+> Segurança de documentos: HTML dinâmico com nonce único e `no-store`; assets de build continuam cacheáveis. Sem service worker ou armazenamento offline privado. [Revisão do beta](BETA_SECURITY.md).
+
 # Pico — PWA no Ciclo 9
 
 ## Aura Manteiga integrada · 13/09/2026

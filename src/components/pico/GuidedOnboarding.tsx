@@ -20,7 +20,11 @@ export function GuidedOnboarding({ children, demo }: { children: ReactNode; demo
 function ConnectedTour({ children }: { children: ReactNode }) {
   const { state } = useRemoteRead('resource=profile');
   const identity = state.status === 'success' && state.data.kind === 'profile' ? state.data.profile.id : null;
-  return <TourProvider key={identity ?? 'unavailable'} identity={identity ? `account:${identity}` : null}>{children}</TourProvider>;
+  // Loading optional preferences must not remount forms already in use.
+  // A real switch between two known accounts still discards the old subtree.
+  const [scope, setScope] = useState<{ id: string | null; generation: number }>({ id: null, generation: 0 });
+  if (identity && scope.id !== identity) setScope({ id: identity, generation: scope.id ? scope.generation + 1 : scope.generation });
+  return <TourProvider key={scope.generation} identity={identity ? `account:${identity}` : null}>{children}</TourProvider>;
 }
 
 export function TourLauncher() {
@@ -52,7 +56,7 @@ function TourProvider({ children, identity, demo = false }: { children: ReactNod
   const path = usePathname();
   const router = useRouter();
   const [progress, setProgress] = useState<TourProgress | null>(null);
-  const [ready, setReady] = useState(false);
+  const [loadedKey, setLoadedKey] = useState<string | null>(null);
   const [collapsed, setCollapsed] = useState(false);
   const [finished, setFinished] = useState(false);
   const [targetAvailable, setTargetAvailable] = useState(false);
@@ -65,6 +69,7 @@ function TourProvider({ children, identity, demo = false }: { children: ReactNod
   const descriptionId = useId();
   const titleId = useId();
   const key = identity ? tourStorageKey(identity) : null;
+  const ready = Boolean(key && loadedKey === key);
   const active = ready && progress?.status === 'active';
   const routeStep = tourStepAt(path);
   const stepIndex = active ? routeStep ?? progress.step : progress?.step ?? 0;
@@ -84,7 +89,7 @@ function TourProvider({ children, identity, demo = false }: { children: ReactNod
       try { stored = parseTourProgress(localStorage.getItem(key)); } catch { /* Private browsing can deny storage. */ }
       // A reload or another tab never opens a guide or redirects unexpectedly.
       if (stored?.status === 'active') stored = { ...stored, status: 'paused' };
-      if (live) { setProgress(stored); setReady(true); setFinished(false); }
+      if (live) { setProgress(stored); setLoadedKey(key); setFinished(false); setCollapsed(false); focusNext.current = false; }
     }
     queueMicrotask(read);
     const changed = (event: StorageEvent) => { if (event.key === key || event.key === null) read(); };
@@ -223,7 +228,7 @@ function TourProvider({ children, identity, demo = false }: { children: ReactNod
         </footer>}
       </>}
     </aside>}
-    {finished && <section className="tour-welcome tour-finish" aria-labelledby={titleId}>
+    {ready && finished && <section className="tour-welcome tour-finish" aria-labelledby={titleId}>
       <p className="tour-eyebrow" role="status">PASSEIO CONCLUÍDO</p><h2 id={titleId}>Agora, encontre seu Pico.</h2>
       <p>Comece por uma arena que faz parte da sua história. Conhecer pessoas, participar e compartilhar ficam no seu ritmo.</p>
       <div className="tour-welcome-actions"><Link href="/arenas" className={buttonVariants()} onClick={() => setFinished(false)}>Explorar arenas <ArrowRight size={17} aria-hidden="true" /></Link><Button variant="quiet" onClick={() => setFinished(false)}>Ficar no perfil</Button></div>
