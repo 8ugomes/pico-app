@@ -1,3 +1,5 @@
+> Histórico · 13/09/2026: `20260913210000_preserve_retired_arena_posts.sql` corrige visibilidade de originais/republicações ligados somente às três arenas demonstrativas conhecidas, arquivadas e não públicas. Nenhuma linha de conteúdo é alterada; catálogo, grupos privados, bloqueios, moderação e admissão permanecem protegidos. Validada/aplicada no desenvolvimento; principal pendente. [Evidências](social-refinement-review/README.md).
+
 > Busca de pessoas/comunidades · 13/09/2026: `20260913200000_people_community_search.sql` adiciona `search_players` com RLS/admissão, preserva o leitor antigo e normaliza a busca literal no diretório de comunidades sem ampliar a ficha privada. [Contrato e validação](SEARCH.md). Aplicação por ambiente registrada na revisão da busca e no recibo de release.
 
 > Segurança e privacidade · 13/09/2026: migration aditiva `20260913110000_account_privacy_security.sql`, total de 24 nos dois ambientes. RPCs de exportação/limpeza privada disponíveis só ao servidor; guarda de último administrador antes de iniciar exclusão. Sem alteração dos dados existentes. [Auditoria e limites](BETA_SECURITY.md).

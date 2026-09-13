@@ -181,3 +181,55 @@
 .page-heading > .journey-text-link { flex-shrink: 0; }
 .search-field:focus-within { outline: 2px solid var(--focus); outline-offset: 3px; }
 .search-field input:focus-visible { outline: none; }
+
+/* Social reading: distinct post, discussion and person surfaces. */
+[data-person-tone] { --person-tint: var(--accent-soft); --person-line: var(--brand-manteiga); }
+[data-person-tone="lavender"] { --person-tint: var(--info-bg); --person-line: var(--brand-lavanda); }
+[data-person-tone="clay"] { --person-tint: color-mix(in srgb, var(--brand-cacau) 10%, var(--surface-raised)); --person-line: var(--text-secondary); }
+.post-card { border: 1px solid color-mix(in srgb, var(--border-control) 65%, var(--border-subtle)); background: var(--surface); }
+.post-header { align-items: flex-start; flex-wrap: nowrap; gap: .5rem; }
+.post-person { flex: 1; min-width: 0; }
+.post-person > span { min-width: 0; }
+.post-person strong { color: var(--foreground); font-size: 1rem; font-weight: 750; overflow-wrap: anywhere; }
+.post-person .read-profile-avatar, .post-person .player-avatar, .comment-avatar > span { border: 2px solid var(--person-line); background: var(--person-tint); box-shadow: 0 0 0 3px var(--surface); }
+.post-meta { display: flex; align-items: center; flex-wrap: wrap; gap: .45rem .7rem; margin: .75rem 1rem 0; }
+.post-audience { display: inline-flex; align-items: center; gap: .3rem; flex-wrap: wrap; margin: 0; color: var(--text-secondary); font-size: var(--text-caption); line-height: 1.5; }
+.post-audience svg { flex-shrink: 0; }
+.post-audience:hover { color: var(--foreground); text-decoration: underline; text-underline-offset: 3px; }
+.post-photo { aspect-ratio: auto; }
+img.post-photo { width: calc(100% - 1.3rem); height: auto; object-fit: contain; }
+.post-photo img { display: block; width: 100%; height: auto; object-fit: contain; }
+.post-actions { margin: .35rem 1rem 0; padding: .5rem 0; border-top: 1px solid var(--border-subtle); }
+.post-action { font-size: var(--text-label); font-weight: 650; }
+.post-action.is-liked { color: var(--error); }
+.comments-section { padding: 1rem; background: color-mix(in srgb, var(--background) 82%, var(--person-tint)); border-top: 1px solid var(--border-subtle); }
+.comment-list { gap: .85rem; }
+.comment { gap: .65rem; align-items: flex-start; }
+.comment-avatar { display: block; flex: 0 0 34px; padding-top: .25rem; }
+.comment-avatar .read-profile-avatar, .comment-avatar .player-avatar { width: 34px; height: 34px; }
+.comment-avatar svg { width: 23px; height: 23px; }
+.comment-bubble { flex: 1; min-width: 0; padding: .6rem .75rem .8rem; border: 1px solid var(--border-subtle); border-left: 3px solid var(--person-line); border-radius: 4px 18px 18px; background: var(--surface-raised); }
+.comment[data-own="true"] .comment-bubble { background: var(--info-bg); }
+.comment-header { display: flex; align-items: flex-start; gap: .2rem; }
+.comment-identity { flex: 1; min-width: 0; padding-top: .2rem; }
+.comment strong { color: var(--foreground); font-size: .9375rem; font-weight: 750; overflow-wrap: anywhere; }
+.comment-identity > a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.comment-time { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; color: var(--text-muted); font-size: .75rem; line-height: 1.5; margin-top: .15rem; }
+.comment-own { font-size: .6875rem; line-height: 1.5; font-weight: 700; color: var(--info); background: var(--surface-raised); border-radius: var(--radius-pill); padding: .05rem .4rem; }
+.comment .comment-bubble > p { color: var(--foreground); font-size: .9375rem; line-height: 1.65; margin: .4rem 0 0; white-space: pre-wrap; }
+.comment-form { background: var(--surface-raised); border-color: var(--border-control-raised); margin-top: 1.1rem; }
+.comment-form .icon-button:not(:disabled) { background: var(--accent); color: var(--accent-ink); }
+.content-menu-trigger { flex: 0 0 44px; border: 1px solid var(--border-subtle); border-radius: 50%; background: var(--surface-raised); color: var(--foreground); }
+.comment-header .content-menu-trigger { margin: -.1rem -.3rem 0 0; background: transparent; border-color: transparent; }
+.content-menu-list { display: grid; gap: .4rem; }
+.content-menu-item { display: flex; align-items: center; gap: .8rem; width: 100%; min-height: 52px; padding: .8rem; border: 1px solid var(--border-subtle); border-radius: 12px; background: var(--surface); color: var(--foreground); text-align: left; font-size: 1rem; font-weight: 650; cursor: pointer; }
+.content-menu-item svg { flex-shrink: 0; }
+.content-menu-item:hover { background: var(--accent-soft); }
+.content-menu-danger { color: var(--error); }
+.content-edit-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .65rem; }
+.content-action-notice { flex-basis: 100%; }
+@media (max-width: 359px) {
+  .comments-section { padding: .75rem; }
+  .comment { gap: .45rem; }
+  .comment-bubble { padding-inline: .55rem; }
+}

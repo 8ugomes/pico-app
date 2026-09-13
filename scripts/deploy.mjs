@@ -1,6 +1,8 @@
 import { spawnSync } from 'node:child_process';
 import { readFileSync, readdirSync } from 'node:fs';
 import { assertRemoteIdentity } from './environment-guard.mjs';
+import { captureContentSnapshot, compareContentSnapshots } from './content-preservation.mjs';
+import { writeFileSync } from 'node:fs';
 
 const stage = process.argv.includes('--stage');
 if (process.argv.slice(2).some(arg => arg !== '--stage')) throw Error('Supported option: --stage');
@@ -21,6 +23,13 @@ const migrations = spawnSync('npx', ['--yes', 'supabase@2.117.0', 'db', 'query',
 if (migrations.status !== 0 || readdirSync('supabase/migrations').some(name => !migrations.stdout.includes(name.split('_')[0]))) throw Error('Primary database migrations incomplete');
 
 console.log('Deploy Pico', sha, expected.projectRef, stage ? '(stage before promotion)' : '(primary domain)');
+const receiptDirectory = '.vercel/content-preservation/' + new Date().toISOString().replace(/[:.]/g, '-') + '-' + sha.slice(0, 12);
+const before = await captureContentSnapshot(receiptDirectory + '/before.json', env);
 const args = ['--yes', 'vercel@59.14.0', 'deploy', '--yes', '--target=production', ...(stage ? ['--skip-domain'] : []), '--build-env', `PICO_BUILD_VERSION=${sha.slice(0, 12)}`, '--meta', `githubCommitSha=${sha}`, '--meta', 'githubCommitRef=main'];
 const result = spawnSync('npx', args, { stdio: 'inherit', env, timeout: 600000 });
+const after = await captureContentSnapshot(receiptDirectory + '/after.json', env);
+const preservation = compareContentSnapshots(before, after);
+writeFileSync(receiptDirectory + '/report.json', JSON.stringify({ sha, stage, ...preservation }, null, 2), { mode: 0o600 });
+console.log('Content preservation:', JSON.stringify(preservation));
+if (!preservation.preserved) throw Error('Content preservation failed; stop promotion and review private receipts. Do not restore over newer user data.');
 if (result.status !== 0) throw Error('Primary deployment failed');

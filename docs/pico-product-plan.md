@@ -1,3 +1,17 @@
+## Refino social de posts e comentários — implementação e validação · 13/09/2026
+
+### Publicação autorizada · 13/09/2026
+
+O responsável autorizou publicar `b9c0930`. Integrar por PR/CI na main, usar o projeto Vercel existente e aplicar somente a migration `20260913210000` já validada. Antes da aplicação, guardar definições anteriores das funções e inventário privado de conteúdo; depois conferir igualdade dos dados e leitura do post recuperado sob RLS. Preparar Production sem trocar domínio, conferir versão/identidade/rotas e promover o mesmo artefato. Estado final, SHA e deployment ficam no recibo operacional e no PR. Preservar o trabalho de landing na checkout original.
+
+Posts e comentários separados por contorno/superfície, nomes fortes, avatares e acentos por identidade. Menu ••• operacional com edição/exclusão própria, denúncia/bloqueio alheio e moderação por escopo. Edição de comentário validada no servidor e por RLS; erro preserva o rascunho. 118 testes locais, 104 verificações hospedadas em desenvolvimento, lint/typecheck/build e revisão visual passaram. Corrigida no desenvolvimento a ocultação de posts das três arenas fictícias retiradas, sem reescrever conteúdo; publicação/aplicação principal pendentes. Migrations e deploys passam a emitir recibos privados de preservação. [Evidências e limites](social-refinement-review/README.md).
+
+### Ajuste de escopo: preservação de publicações
+
+O responsável relatou desaparecimento de um post após atualização. Auditoria principal somente de leitura encontrou dois posts, um vinculado a arena demonstrativa arquivada; a RLS atual oculta esse original. Corrigir de forma restrita o histórico das três arenas de exemplo retiradas, mantendo catálogo, audiência privada, bloqueios, moderação e admissão. Não apagar, recriar nem reassociar posts a arenas reais. Acrescentar regressão da importação e conferência de IDs/hashes antes/depois de releases, com recibos privados fora do Git. Validar a migration no desenvolvimento e documentar a aplicação principal pendente, sem prometer restauração em produção antes dela.
+
+Pedido autoriza refinar e fazer commit. Partir da main e029cbe, preservando catálogo, busca e trabalho da landing. Dar contorno aos posts, separar comentários por pessoa, reforçar nomes e usar acentos da paleta em avatares/superfícies. Reunir ações em menu ••• acessível: editar/excluir conteúdo próprio, denunciar/bloquear conteúdo alheio; preservar audiência e moderação. Ligar edição de comentário à mutation autenticada existente, com validação e RLS, sem inventar chat privado. Demo permanece local e rotulado. Verificar teclado, toque, erro/cancelamento, limites/autoria, claro/escuro e mobile/desktop; lint/typecheck/build, testes pertinentes, documentação e commit.
+
 ## Busca de pessoas e comunidades — PLAN · 13/09/2026
 
 ### Implementação e validação

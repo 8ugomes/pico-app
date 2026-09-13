@@ -105,9 +105,9 @@ export async function readSocial(client: SupabaseClient<Database>, request: Read
   }
   if (request.resource === 'comments') {
     const user = await requireUser(client);
-    const { data, error } = await client.from('comments').select('id, author_id, body, created_at, profiles(display_name, username)').eq('post_id', request.postId).order('created_at').order('id').range(request.offset, request.offset + 20);
+    const { data, error } = await client.from('comments').select('id, author_id, body, created_at, profiles(display_name, username, avatar_path)').eq('post_id', request.postId).order('created_at').order('id').range(request.offset, request.offset + 20);
     if (error || !data) throw new ReadError('unavailable');
-    return { kind: 'comments', viewerId: user.id, hasMore: data.length > 20, comments: data.slice(0, 20).flatMap(row => row.profiles ? [{ id: row.id, authorId: row.author_id, body: row.body, createdAt: row.created_at, name: row.profiles.display_name, username: row.profiles.username }] : []) };
+    return { kind: 'comments', viewerId: user.id, hasMore: data.length > 20, comments: data.slice(0, 20).flatMap(row => row.profiles ? [{ id: row.id, authorId: row.author_id, body: row.body, createdAt: row.created_at, name: row.profiles.display_name, username: row.profiles.username, avatar: mediaUrl('avatars', row.profiles.avatar_path) }] : []) };
   }
   if (request.resource === 'sports') {
     const { data, error } = await listSports(client);

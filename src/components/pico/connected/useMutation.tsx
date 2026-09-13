@@ -17,7 +17,7 @@ export function useMutation() {
       setMessage({ error: true, text: 'Não foi possível confirmar a alteração. Atualize para conferir antes de tentar de novo.' }); return false;
     } finally { lock.current = false; setBusy(false); }
   }
-  return { run, busy, message };
+  return { run, busy, message, clearMessage: () => setMessage(null) };
 }
 export function MutationNotice({ message, compact = false }: { message: ReturnType<typeof useMutation>['message']; compact?: boolean }) {
   return message ? <p className={compact && !message.error ? 'sr-only' : `auth-notice notice-${message.error ? 'error' : 'success'}`} role={message.error ? 'alert' : 'status'}>{message.text}</p> : null;

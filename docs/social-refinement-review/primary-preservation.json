@@ -1,0 +1,18 @@
+{
+  "preserved": true,
+  "before": 15,
+  "after": 15,
+  "missing": 0,
+  "identityChanged": 0,
+  "edited": 0,
+  "added": 0,
+  "scope": "Read-only inventory during local changes; production migration and deploy not run",
+  "beforeCounts": {
+    "comments": 2,
+    "media_assets": 5,
+    "played_games": 2,
+    "post_game_context": 2,
+    "posts": 2,
+    "profiles": 2
+  }
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "background": "rgb(255, 255, 255)",
+    "name": "rgb(68, 52, 47)",
+    "own": "false",
+    "text": "rgb(68, 52, 47)",
+    "theme": "light",
+    "nameRatio": 11.81,
+    "textRatio": 11.81
+  },
+  {
+    "background": "rgb(236, 229, 244)",
+    "name": "rgb(68, 52, 47)",
+    "own": "true",
+    "text": "rgb(68, 52, 47)",
+    "theme": "light",
+    "nameRatio": 9.61,
+    "textRatio": 9.61
+  },
+  {
+    "background": "rgb(64, 55, 51)",
+    "name": "rgb(248, 243, 231)",
+    "own": "false",
+    "text": "rgb(248, 243, 231)",
+    "theme": "dark",
+    "nameRatio": 10.46,
+    "textRatio": 10.46
+  },
+  {
+    "background": "rgb(60, 49, 75)",
+    "name": "rgb(248, 243, 231)",
+    "own": "true",
+    "text": "rgb(248, 243, 231)",
+    "theme": "dark",
+    "nameRatio": 10.94,
+    "textRatio": 10.94
+  }
+]

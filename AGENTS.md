@@ -71,6 +71,7 @@ Não implementar um recurso só porque apareceu como sugestão de rota no plano.
 Sem segredos em Git, HTML, logs ou variáveis NEXT_PUBLIC_*.
 Somente URL e publishable key públicas do Supabase no cliente.
 Toda tabela exposta precisa de RLS, autoria verificada e migrations versionadas.
+Atualizações preservam publicações, comentários, fotos e jogos dos usuários no Supabase. Nunca usar seed/reset para publicar. Migrations e deploys registram inventários privados antes/depois com `scripts/content-preservation.mjs`; conferir também visibilidade do histórico, pois manter linhas não basta quando RLS ou catálogo mudam. Git guarda código/migrations, nunca conteúdo pessoal ou backups do banco.
 Storage exige políticas, limites de upload e vínculo ao proprietário.
 Autorização usa getClaims/getUser no servidor; nunca confia apenas em getSession ou estado React.
 O helper server.ts atual é para Route Handlers/Server Actions; implementar renovação via proxy antes de páginas privadas no servidor.
