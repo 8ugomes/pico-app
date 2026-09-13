@@ -10,6 +10,8 @@ export type DemoAction =
   | { type: "follow"; arenaId: string }
   | { type: "post"; input: PostInput; id: string; now: number }
   | { type: "comment"; postId: string; content: string; id: string; now: number }
+  | { type: "edit_content"; target: 'post' | 'comment'; id: string; content: string }
+  | { type: "delete_content"; target: 'post' | 'comment'; id: string }
   | { type: "save_game"; arenaId: string; sportId: SportId; id: string; playedOn: string; version?: number }
   | { type: "delete_game"; id: string }
   | { type: "community_membership"; id: string; join: boolean }
@@ -38,6 +40,18 @@ export function validatePost(state: DemoState, input: PostInput) {
 }
 export function demoReducer(state: DemoState, action: DemoAction): DemoState {
   switch (action.type) {
+    case 'edit_content': {
+      const rows = action.target === 'post' ? state.posts : state.comments;
+      if (!rows.some(row => row.id === action.id && row.authorId === state.currentUserId) || !action.content.trim() || action.content.trim().length > (action.target === 'post' ? 500 : 280)) return state;
+      if (action.target === 'comment') return { ...state, comments: state.comments.map(row => row.id === action.id ? { ...row, content: action.content.trim() } : row) };
+      return { ...state, posts: state.posts.map(row => row.id === action.id ? { ...row, content: action.content.trim() } : row) };
+    }
+    case 'delete_content': {
+      const rows = action.target === 'post' ? state.posts : state.comments;
+      if (!rows.some(row => row.id === action.id && row.authorId === state.currentUserId)) return state;
+      if (action.target === 'comment') return { ...state, comments: state.comments.filter(row => row.id !== action.id) };
+      return { ...state, posts: state.posts.filter(row => row.id !== action.id), comments: state.comments.filter(row => row.postId !== action.id), reposts: state.reposts.filter(row => row.postId !== action.id), likedPostIds: state.likedPostIds.filter(id => id !== action.id) };
+    }
     case "repost": {
       const previous = state.reposts.some(r => r.postId === action.postId && r.playerId === state.currentUserId);
       if (action.reposted === previous) return state;

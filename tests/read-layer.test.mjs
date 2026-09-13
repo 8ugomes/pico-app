@@ -109,3 +109,12 @@ test('arena images cannot pretend bundled demo artwork is a real venue or fetch 
   for(const path of ['/images/urban-court.webp','https://external.invalid/pixel','//external.invalid/pixel','/api/private','javascript:alert(1)',null]) assert.equal(safeArenaImage(path,false),null);
   assert.equal(safeArenaImage('https://external.invalid/pixel',true),null);
 });
+
+test('comment identity carries the authorized avatar URL without profile secrets', async () => {
+  const row={id:uid,author_id:uid,body:'Olá',created_at:'2026-09-13T12:00:00Z',profiles:{display_name:'Alice',username:'alice',avatar_path:uid+'/'+uid+'.webp',email:'private@example.invalid'}};
+  const {client,requests}=clientWith({tableData:{comments:[row]}});
+  const data=await readSocial(client,{resource:'comments',postId:uid,offset:0});
+  assert.match(data.comments[0].avatar,/^\/api\/media\?bucket=avatars&path=/);
+  assert.ok(!JSON.stringify(data).includes('private@example.invalid'));
+  assert.ok(requests[0].url.searchParams.get('select').includes('avatar_path'));
+});

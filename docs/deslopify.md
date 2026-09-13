@@ -1,3 +1,13 @@
+## Refino social — revisão e aprendizados · 13/09/2026
+
+Contorno agora separa publicações; comentários ganham camada própria, avatar e acento lateral. Ações ficam no ••• e autoria ganha contraste. Próprio/alheio também se distingue pelo texto Você, sem depender da cor. Revisados 320/390/1280 px, claro/escuro, 200% de texto, foco, edição/cancelamento e falha com retry. A quantidade de linhas no banco não prova que o usuário ainda vê o conteúdo: importação e mudança de RLS precisam exercitar o mesmo post pelo feed, perfil e link direto. [Capturas e testes](social-refinement-review/README.md).
+
+### Critérios registrados antes da implementação
+
+Histórico do jogador não deve desaparecer quando o catálogo é refinado. Uma arena fictícia retirada não volta à vitrine nem é substituída por um local inventado no post. Preservar autoria, texto, data e audiência, deixando de exibir o vínculo indisponível; segurança continua baseada em admissão, bloqueio, moderação e comunidade privada. Conferir persistência e visibilidade separadamente.
+
+O responsável pediu explicitamente mais borda, camadas e cor: aplicar separação funcional em posts e comentários mesmo onde o guia genérico pede reduzir caixas. Fundo do post, área de comentários e balão devem se distinguir. Nome/identidade vêm antes de metadados; avatar e pequeno acento por pessoa sem atribuir status à cor. Menu ••• com alvos de 44px, abertura real, Escape/click fora e retorno de foco. Editar e excluir somente quando permitido, feedback próximo, sem perda do texto em erro. Manter rótulos de audiência e reduzir ações dispersas.
+
 ## Busca de pessoas e comunidades — revisão · 13/09/2026
 
 A lupa do cabeçalho e o campo antes dos filtros dão entrada reconhecível à busca. Explore é o escopo inicial de comunidades; a seleção Minhas comunidades não se confunde com o catálogo todo, e o vazio permite ampliar o escopo sem perder o texto. Removidas sugestões paralelas durante busca de pessoas. Amostra em 390 px/claro, 1280 px/escuro e 320 px/200%: título e link agora quebram em linhas quando necessário e o campo tem um único contorno de foco. Resultado privado mantém condição de entrada e oculta descrição. Falha/retry, descarte de resposta atrasada e demo sem gravações conferidos; Supabase real validado separadamente. Integração preservou os refinamentos da tarefa de arenas: busca nas listas vinculadas somente quando útil, vazio em uma linha e textos compactos.

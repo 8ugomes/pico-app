@@ -19,7 +19,7 @@ export type ReadProfile = {
   neighborhood: string; available: boolean; isDemo: boolean; onboardingCompleted: boolean;
   sports: { sport: ReadSport; level: Level; isPrimary: boolean }[];
 };
-export type ReadComment = { id: string; authorId: string; body: string; createdAt: string; name: string; username: string };
+export type ReadComment = { id: string; authorId: string; body: string; createdAt: string; name: string; username: string; avatar: string | null };
 export type ReadRequest = { resource: 'discover'; search?: string; offset: number; sportId?: string; arenaId?: string; level?: Level } | { resource: 'player'; username: string } | { resource: 'arenas'; offset: number } | { resource: 'arena'; slug: string } | { resource: 'profile' } | { resource: 'account' } | { resource: 'sports' } | { resource: 'feed'; offset: number; arenaId?: string } | { resource: 'comments'; postId: string; offset: number };
 export type ReadData =
   | { kind: 'arenas'; arenas: ReadArena[]; sports: ReadSport[]; hasMore: boolean; offset: number }

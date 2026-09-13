@@ -12,6 +12,7 @@ export const levels: Level[] = ['Iniciante', 'Intermediário', 'Avançado'];
 export type Mutation = { action: 'save_profile'; name: string; username: string; bio: string; city: string; neighborhood: string; sportId: string; level: Level; available: boolean } | { action: 'set_connection'; playerId: string; connected: boolean } | { action: 'create_post'; arenaId: string; sportId: string; body: string; imagePath?: string | null } | { action: 'set_like'; postId: string; liked: boolean } | { action: 'create_comment'; postId: string; body: string }
   | { action: 'set_avatar'; path: string | null }
   | { action: 'delete_post'; id: string } | { action: 'delete_comment'; id: string }
+  | { action: 'edit_comment'; id: string; body: string }
   | { action: 'set_block'; playerId: string; blocked: boolean }
   | { action: 'report'; target: 'player' | 'post' | 'comment'; id: string; reason: 'spam' | 'harassment' | 'unsafe' | 'other'; details: string };
 export function invalid(): never { throw new MutationError(400, 'Confira os campos e tente novamente.'); }
@@ -38,6 +39,10 @@ export function parseMutation(value: unknown): Mutation {
   }
   if (body.action === 'delete_post' || body.action === 'delete_comment') {
     exactKeys(body, ['action','id']); return { action: body.action, id: uuid(body.id) };
+  }
+  if (body.action === 'edit_comment') {
+    exactKeys(body, ['action', 'id', 'body']);
+    return { action: body.action, id: uuid(body.id), body: textField(body.body, 1, 280) };
   }
   if (body.action === 'set_block') {
     exactKeys(body, ['action','playerId','blocked']);
@@ -96,6 +101,12 @@ export async function mutateSocial(client: SupabaseClient<Database>, input: Muta
     const { data, error } = await client.from(input.action === 'delete_post' ? 'posts' : 'comments').delete().eq('id',input.id).eq('author_id',user.id).select('id');
     if (error) mutationFailure(error);
     if (!data?.length) throw new MutationError(404,'Esse conteúdo não está disponível na sua conta.');
+    return;
+  }
+  if (input.action === 'edit_comment') {
+    const { data, error } = await client.from('comments').update({ body: input.body }).eq('id', input.id).eq('author_id', user.id).select('id');
+    if (error) mutationFailure(error);
+    if (!data?.length) throw new MutationError(404, 'Esse comentário não está disponível na sua conta.');
     return;
   }
   if (input.action === 'set_block') {

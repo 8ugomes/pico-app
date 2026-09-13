@@ -1,5 +1,7 @@
 # Pico — mapa de domínios para design e desenvolvimento
 
+Posts/comentários: `ContentMenu` e `SafetyActions` centralizam ações permitidas; `edit_comment` aceita somente ID/body, confirma identidade no servidor e preserva RLS. Histórico das três arenas demonstrativas retiradas tem exceção restrita em `20260913210000_preserve_retired_arena_posts.sql`, sem alterar audiência, autoria nem FKs. `content-preservation.mjs` registra recibos operacionais privados. [Verificação e aplicação](social-refinement-review/README.md).
+
 Republicações acrescentam referências ao post original no perfil e no feed de seguidores, respeitando acesso atual e grupos privados. [Contrato e verificação](REPOSTS.md); pontos de entrada: `RepostControl`, `ConnectedFeed`, `post_reposts` e `read_repost_feed`.
 
 Apresentação Aura Manteiga aplicada em 13/09/2026; [cobertura por domínio/rota e evidências](aura-redesign-review/coverage.md). Os contratos abaixo continuam vigentes, sem novas tabelas ou permissões.

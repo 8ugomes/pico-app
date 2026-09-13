@@ -11,6 +11,7 @@ export function Modal({ open, onClose, title, children }: { open: boolean; onClo
     if (!dialog || !open) return;
     const origin = document.activeElement;
     if (!dialog.open) dialog.showModal();
+    dialog.querySelector<HTMLElement>('[data-dialog-autofocus]')?.focus({ preventScroll: true });
     return () => {
       if (dialog.open) { controlledClosures.current += 1; dialog.close(); }
       if (origin instanceof HTMLElement && origin.isConnected && origin !== document.body && !origin.matches(':disabled')) {
