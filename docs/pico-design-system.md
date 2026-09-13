@@ -30,7 +30,7 @@ Corpo e texto digitado: `1rem`; metadados: `.8125rem`; labels: `.875rem`; seçõ
 
 ## Materiais e interação
 
-Cards de publicações e pessoas usam fundo estável. Formulários elevados e diálogos usam carvão com preenchimento a 92%, blur de 18px, borda neutra e sombra discreta. A regra base é opaca; `@supports` habilita translucidez, e `prefers-reduced-transparency` retorna ao opaco. Campos não recebem outro blur.
+Publicações usam fundo estável; pessoas usam linhas abertas, com identidade e esporte. Formulários elevados e diálogos usam carvão com preenchimento a 92%, blur de 18px, borda neutra e sombra discreta. A regra base é opaca; `@supports` habilita translucidez, e `prefers-reduced-transparency` retorna ao opaco. Campos não recebem outro blur.
 
 O diálogo nativo mantém cabeçalho e fechamento de 44px fora da única área de rolagem. A ação permanece no fluxo, sem cobrir conteúdo ou teclado. Escape e eventos de fechamento não se propagam ao diálogo pai; o foco retorna ao acionador. Tab/Shift+Tab permanecem entre controles visíveis e habilitados. O recorte de foto devolve o foco ao seletor de arquivo.
 
@@ -45,3 +45,15 @@ Não foram encontrados prints originais do Yankee ou um anexo de imagem do formu
 A stack de sistema e a separação entre conteúdo e superfícies elevadas seguem a direção das referências oficiais: [Apple Design](https://developer.apple.com/design/human-interface-guidelines/), [fontes Apple](https://developer.apple.com/fonts/) e [Meet Liquid Glass](https://developer.apple.com/videos/play/wwdc2025/219/). A simplicidade solicitada a partir do ChatGPT orienta agrupamento e discrição dos controles, sem prometer reprodução de um material nativo em CSS.
 
 Capturas reais, cobertura e limites da validação estão em [visual-review/README.md](visual-review/README.md). A fixture local renderiza o app real e simula apenas APIs; não comprova infraestrutura ou persistência remota.
+
+## Registro depois do jogo
+
+`GameJournal` apresenta arena, modalidade e data declarada em linhas abertas, com ícone de calendário e assinatura areia discreta. Não usa bolinhas de presença, prazo, estado ativo ou contador. `Meus jogos` fica no perfil e `Joguei aqui` na arena; a navegação fixa mantém Início, Pessoas, Comunidades, Arenas e Perfil, sem botão central de mais.
+
+## Composição por conteúdo · jornada de 12/09/2026
+
+Direção “Editorial de quadra”: o início apresenta relações próprias; pessoas são linhas de identidade; comunidades mostram propósito e condições; arenas priorizam o lugar; posts priorizam conteúdo; jogos ficam em cronologia privada. A composição usa `journey.css` e componentes dedicados, mantendo tokens e controles compartilhados. Evitar capas universais, métricas artificiais e caixas repetidas.
+
+Filtros de pessoas e informações complementares de arena/grupo ficam em disclosures; audiência de publicação e condições de participação permanecem visíveis. “Comunidades” é o nome do destino; “turma” aparece como linguagem contextual. Acompanhar é unilateral e não envia convite. “Joguei aqui” registra o passado; “Compartilhar jogo” publica somente após outra confirmação.
+
+[Comparação das alternativas](JOURNEY_REFINEMENT.md) e [capturas locais](journey-review/README.md). A direção e os rótulos ainda precisam de avaliação com jogadores; não há resultado de pesquisa declarado.

@@ -1,0 +1,852 @@
+[
+  {
+    "route": "/feed",
+    "height": 740,
+    "loading": false,
+    "nav": [
+      {
+        "height": 56,
+        "name": "Início",
+        "width": 48.3984375
+      },
+      {
+        "height": 56,
+        "name": "Pessoas",
+        "width": 64
+      },
+      {
+        "height": 56,
+        "name": "Comunidades",
+        "width": 90
+      },
+      {
+        "height": 56,
+        "name": "Arenas",
+        "width": 48.3984375
+      },
+      {
+        "height": 56,
+        "name": "Perfil",
+        "width": 48.40625
+      }
+    ],
+    "scrollWidth": 320,
+    "width": 320
+  },
+  {
+    "route": "/descobrir",
+    "height": 740,
+    "loading": false,
+    "nav": [
+      {
+        "height": 56,
+        "name": "Início",
+        "width": 48.3984375
+      },
+      {
+        "height": 56,
+        "name": "Pessoas",
+        "width": 64
+      },
+      {
+        "height": 56,
+        "name": "Comunidades",
+        "width": 90
+      },
+      {
+        "height": 56,
+        "name": "Arenas",
+        "width": 48.3984375
+      },
+      {
+        "height": 56,
+        "name": "Perfil",
+        "width": 48.40625
+      }
+    ],
+    "scrollWidth": 320,
+    "width": 320
+  },
+  {
+    "route": "/comunidades",
+    "height": 740,
+    "loading": false,
+    "nav": [
+      {
+        "height": 56,
+        "name": "Início",
+        "width": 48.3984375
+      },
+      {
+        "height": 56,
+        "name": "Pessoas",
+        "width": 64
+      },
+      {
+        "height": 56,
+        "name": "Comunidades",
+        "width": 90
+      },
+      {
+        "height": 56,
+        "name": "Arenas",
+        "width": 48.3984375
+      },
+      {
+        "height": 56,
+        "name": "Perfil",
+        "width": 48.40625
+      }
+    ],
+    "scrollWidth": 320,
+    "width": 320
+  },
+  {
+    "route": "/arenas/areia-da-vila",
+    "height": 740,
+    "loading": false,
+    "nav": [
+      {
+        "height": 56,
+        "name": "Início",
+        "width": 48.3984375
+      },
+      {
+        "height": 56,
+        "name": "Pessoas",
+        "width": 64
+      },
+      {
+        "height": 56,
+        "name": "Comunidades",
+        "width": 90
+      },
+      {
+        "height": 56,
+        "name": "Arenas",
+        "width": 48.3984375
+      },
+      {
+        "height": 56,
+        "name": "Perfil",
+        "width": 48.40625
+      }
+    ],
+    "scrollWidth": 320,
+    "width": 320
+  },
+  {
+    "route": "/perfil",
+    "height": 740,
+    "loading": false,
+    "nav": [
+      {
+        "height": 56,
+        "name": "Início",
+        "width": 48.3984375
+      },
+      {
+        "height": 56,
+        "name": "Pessoas",
+        "width": 64
+      },
+      {
+        "height": 56,
+        "name": "Comunidades",
+        "width": 90
+      },
+      {
+        "height": 56,
+        "name": "Arenas",
+        "width": 48.3984375
+      },
+      {
+        "height": 56,
+        "name": "Perfil",
+        "width": 48.40625
+      }
+    ],
+    "scrollWidth": 320,
+    "width": 320
+  },
+  {
+    "route": "/feed",
+    "height": 844,
+    "loading": false,
+    "nav": [
+      {
+        "height": 56,
+        "name": "Início",
+        "width": 67.125
+      },
+      {
+        "height": 56,
+        "name": "Pessoas",
+        "width": 67.125
+      },
+      {
+        "height": 56,
+        "name": "Comunidades",
+        "width": 100.6953125
+      },
+      {
+        "height": 56,
+        "name": "Arenas",
+        "width": 67.125
+      },
+      {
+        "height": 56,
+        "name": "Perfil",
+        "width": 67.125
+      }
+    ],
+    "scrollWidth": 390,
+    "width": 390
+  },
+  {
+    "route": "/descobrir",
+    "height": 844,
+    "loading": false,
+    "nav": [
+      {
+        "height": 56,
+        "name": "Início",
+        "width": 67.125
+      },
+      {
+        "height": 56,
+        "name": "Pessoas",
+        "width": 67.125
+      },
+      {
+        "height": 56,
+        "name": "Comunidades",
+        "width": 100.6953125
+      },
+      {
+        "height": 56,
+        "name": "Arenas",
+        "width": 67.125
+      },
+      {
+        "height": 56,
+        "name": "Perfil",
+        "width": 67.125
+      }
+    ],
+    "scrollWidth": 390,
+    "width": 390
+  },
+  {
+    "route": "/comunidades",
+    "height": 844,
+    "loading": false,
+    "nav": [
+      {
+        "height": 56,
+        "name": "Início",
+        "width": 67.125
+      },
+      {
+        "height": 56,
+        "name": "Pessoas",
+        "width": 67.125
+      },
+      {
+        "height": 56,
+        "name": "Comunidades",
+        "width": 100.6953125
+      },
+      {
+        "height": 56,
+        "name": "Arenas",
+        "width": 67.125
+      },
+      {
+        "height": 56,
+        "name": "Perfil",
+        "width": 67.125
+      }
+    ],
+    "scrollWidth": 390,
+    "width": 390
+  },
+  {
+    "route": "/arenas/areia-da-vila",
+    "height": 844,
+    "loading": false,
+    "nav": [
+      {
+        "height": 56,
+        "name": "Início",
+        "width": 67.125
+      },
+      {
+        "height": 56,
+        "name": "Pessoas",
+        "width": 67.125
+      },
+      {
+        "height": 56,
+        "name": "Comunidades",
+        "width": 100.6953125
+      },
+      {
+        "height": 56,
+        "name": "Arenas",
+        "width": 67.125
+      },
+      {
+        "height": 56,
+        "name": "Perfil",
+        "width": 67.125
+      }
+    ],
+    "scrollWidth": 390,
+    "width": 390
+  },
+  {
+    "route": "/perfil",
+    "height": 844,
+    "loading": false,
+    "nav": [
+      {
+        "height": 56,
+        "name": "Início",
+        "width": 67.125
+      },
+      {
+        "height": 56,
+        "name": "Pessoas",
+        "width": 67.125
+      },
+      {
+        "height": 56,
+        "name": "Comunidades",
+        "width": 100.6953125
+      },
+      {
+        "height": 56,
+        "name": "Arenas",
+        "width": 67.125
+      },
+      {
+        "height": 56,
+        "name": "Perfil",
+        "width": 67.125
+      }
+    ],
+    "scrollWidth": 390,
+    "width": 390
+  },
+  {
+    "route": "/feed",
+    "height": 932,
+    "loading": false,
+    "nav": [
+      {
+        "height": 56,
+        "name": "Início",
+        "width": 74.3984375
+      },
+      {
+        "height": 56,
+        "name": "Pessoas",
+        "width": 74.3984375
+      },
+      {
+        "height": 56,
+        "name": "Comunidades",
+        "width": 111.6015625
+      },
+      {
+        "height": 56,
+        "name": "Arenas",
+        "width": 74.3984375
+      },
+      {
+        "height": 56,
+        "name": "Perfil",
+        "width": 74.3984375
+      }
+    ],
+    "scrollWidth": 430,
+    "width": 430
+  },
+  {
+    "route": "/descobrir",
+    "height": 932,
+    "loading": false,
+    "nav": [
+      {
+        "height": 56,
+        "name": "Início",
+        "width": 74.3984375
+      },
+      {
+        "height": 56,
+        "name": "Pessoas",
+        "width": 74.3984375
+      },
+      {
+        "height": 56,
+        "name": "Comunidades",
+        "width": 111.6015625
+      },
+      {
+        "height": 56,
+        "name": "Arenas",
+        "width": 74.3984375
+      },
+      {
+        "height": 56,
+        "name": "Perfil",
+        "width": 74.3984375
+      }
+    ],
+    "scrollWidth": 430,
+    "width": 430
+  },
+  {
+    "route": "/comunidades",
+    "height": 932,
+    "loading": false,
+    "nav": [
+      {
+        "height": 56,
+        "name": "Início",
+        "width": 74.3984375
+      },
+      {
+        "height": 56,
+        "name": "Pessoas",
+        "width": 74.3984375
+      },
+      {
+        "height": 56,
+        "name": "Comunidades",
+        "width": 111.6015625
+      },
+      {
+        "height": 56,
+        "name": "Arenas",
+        "width": 74.3984375
+      },
+      {
+        "height": 56,
+        "name": "Perfil",
+        "width": 74.3984375
+      }
+    ],
+    "scrollWidth": 430,
+    "width": 430
+  },
+  {
+    "route": "/arenas/areia-da-vila",
+    "height": 932,
+    "loading": false,
+    "nav": [
+      {
+        "height": 56,
+        "name": "Início",
+        "width": 74.3984375
+      },
+      {
+        "height": 56,
+        "name": "Pessoas",
+        "width": 74.3984375
+      },
+      {
+        "height": 56,
+        "name": "Comunidades",
+        "width": 111.6015625
+      },
+      {
+        "height": 56,
+        "name": "Arenas",
+        "width": 74.3984375
+      },
+      {
+        "height": 56,
+        "name": "Perfil",
+        "width": 74.3984375
+      }
+    ],
+    "scrollWidth": 430,
+    "width": 430
+  },
+  {
+    "route": "/perfil",
+    "height": 932,
+    "loading": false,
+    "nav": [
+      {
+        "height": 56,
+        "name": "Início",
+        "width": 74.3984375
+      },
+      {
+        "height": 56,
+        "name": "Pessoas",
+        "width": 74.3984375
+      },
+      {
+        "height": 56,
+        "name": "Comunidades",
+        "width": 111.6015625
+      },
+      {
+        "height": 56,
+        "name": "Arenas",
+        "width": 74.3984375
+      },
+      {
+        "height": 56,
+        "name": "Perfil",
+        "width": 74.3984375
+      }
+    ],
+    "scrollWidth": 430,
+    "width": 430
+  },
+  {
+    "route": "/feed",
+    "height": 1024,
+    "loading": false,
+    "nav": [
+      {
+        "height": 56,
+        "name": "Início",
+        "width": 135.8515625
+      },
+      {
+        "height": 56,
+        "name": "Pessoas",
+        "width": 135.8515625
+      },
+      {
+        "height": 56,
+        "name": "Comunidades",
+        "width": 203.7890625
+      },
+      {
+        "height": 56,
+        "name": "Arenas",
+        "width": 135.8515625
+      },
+      {
+        "height": 56,
+        "name": "Perfil",
+        "width": 135.859375
+      }
+    ],
+    "scrollWidth": 768,
+    "width": 768
+  },
+  {
+    "route": "/descobrir",
+    "height": 1024,
+    "loading": false,
+    "nav": [
+      {
+        "height": 56,
+        "name": "Início",
+        "width": 135.8515625
+      },
+      {
+        "height": 56,
+        "name": "Pessoas",
+        "width": 135.8515625
+      },
+      {
+        "height": 56,
+        "name": "Comunidades",
+        "width": 203.7890625
+      },
+      {
+        "height": 56,
+        "name": "Arenas",
+        "width": 135.8515625
+      },
+      {
+        "height": 56,
+        "name": "Perfil",
+        "width": 135.859375
+      }
+    ],
+    "scrollWidth": 768,
+    "width": 768
+  },
+  {
+    "route": "/comunidades",
+    "height": 1024,
+    "loading": false,
+    "nav": [
+      {
+        "height": 56,
+        "name": "Início",
+        "width": 135.8515625
+      },
+      {
+        "height": 56,
+        "name": "Pessoas",
+        "width": 135.8515625
+      },
+      {
+        "height": 56,
+        "name": "Comunidades",
+        "width": 203.7890625
+      },
+      {
+        "height": 56,
+        "name": "Arenas",
+        "width": 135.8515625
+      },
+      {
+        "height": 56,
+        "name": "Perfil",
+        "width": 135.859375
+      }
+    ],
+    "scrollWidth": 768,
+    "width": 768
+  },
+  {
+    "route": "/arenas/areia-da-vila",
+    "height": 1024,
+    "loading": false,
+    "nav": [
+      {
+        "height": 56,
+        "name": "Início",
+        "width": 135.8515625
+      },
+      {
+        "height": 56,
+        "name": "Pessoas",
+        "width": 135.8515625
+      },
+      {
+        "height": 56,
+        "name": "Comunidades",
+        "width": 203.7890625
+      },
+      {
+        "height": 56,
+        "name": "Arenas",
+        "width": 135.8515625
+      },
+      {
+        "height": 56,
+        "name": "Perfil",
+        "width": 135.859375
+      }
+    ],
+    "scrollWidth": 768,
+    "width": 768
+  },
+  {
+    "route": "/perfil",
+    "height": 1024,
+    "loading": false,
+    "nav": [
+      {
+        "height": 56,
+        "name": "Início",
+        "width": 135.8515625
+      },
+      {
+        "height": 56,
+        "name": "Pessoas",
+        "width": 135.8515625
+      },
+      {
+        "height": 56,
+        "name": "Comunidades",
+        "width": 203.7890625
+      },
+      {
+        "height": 56,
+        "name": "Arenas",
+        "width": 135.8515625
+      },
+      {
+        "height": 56,
+        "name": "Perfil",
+        "width": 135.859375
+      }
+    ],
+    "scrollWidth": 768,
+    "width": 768
+  },
+  {
+    "route": "/feed",
+    "height": 900,
+    "loading": false,
+    "nav": [
+      {
+        "height": 0,
+        "name": "Início",
+        "width": 0
+      },
+      {
+        "height": 0,
+        "name": "Pessoas",
+        "width": 0
+      },
+      {
+        "height": 0,
+        "name": "Comunidades",
+        "width": 0
+      },
+      {
+        "height": 0,
+        "name": "Arenas",
+        "width": 0
+      },
+      {
+        "height": 0,
+        "name": "Perfil",
+        "width": 0
+      }
+    ],
+    "scrollWidth": 1280,
+    "width": 1280
+  },
+  {
+    "route": "/descobrir",
+    "height": 900,
+    "loading": false,
+    "nav": [
+      {
+        "height": 0,
+        "name": "Início",
+        "width": 0
+      },
+      {
+        "height": 0,
+        "name": "Pessoas",
+        "width": 0
+      },
+      {
+        "height": 0,
+        "name": "Comunidades",
+        "width": 0
+      },
+      {
+        "height": 0,
+        "name": "Arenas",
+        "width": 0
+      },
+      {
+        "height": 0,
+        "name": "Perfil",
+        "width": 0
+      }
+    ],
+    "scrollWidth": 1280,
+    "width": 1280
+  },
+  {
+    "route": "/comunidades",
+    "height": 900,
+    "loading": false,
+    "nav": [
+      {
+        "height": 0,
+        "name": "Início",
+        "width": 0
+      },
+      {
+        "height": 0,
+        "name": "Pessoas",
+        "width": 0
+      },
+      {
+        "height": 0,
+        "name": "Comunidades",
+        "width": 0
+      },
+      {
+        "height": 0,
+        "name": "Arenas",
+        "width": 0
+      },
+      {
+        "height": 0,
+        "name": "Perfil",
+        "width": 0
+      }
+    ],
+    "scrollWidth": 1280,
+    "width": 1280
+  },
+  {
+    "route": "/arenas/areia-da-vila",
+    "height": 900,
+    "loading": false,
+    "nav": [
+      {
+        "height": 0,
+        "name": "Início",
+        "width": 0
+      },
+      {
+        "height": 0,
+        "name": "Pessoas",
+        "width": 0
+      },
+      {
+        "height": 0,
+        "name": "Comunidades",
+        "width": 0
+      },
+      {
+        "height": 0,
+        "name": "Arenas",
+        "width": 0
+      },
+      {
+        "height": 0,
+        "name": "Perfil",
+        "width": 0
+      }
+    ],
+    "scrollWidth": 1280,
+    "width": 1280
+  },
+  {
+    "route": "/perfil",
+    "height": 900,
+    "loading": false,
+    "nav": [
+      {
+        "height": 0,
+        "name": "Início",
+        "width": 0
+      },
+      {
+        "height": 0,
+        "name": "Pessoas",
+        "width": 0
+      },
+      {
+        "height": 0,
+        "name": "Comunidades",
+        "width": 0
+      },
+      {
+        "height": 0,
+        "name": "Arenas",
+        "width": 0
+      },
+      {
+        "height": 0,
+        "name": "Perfil",
+        "width": 0
+      }
+    ],
+    "scrollWidth": 1280,
+    "width": 1280
+  }
+]

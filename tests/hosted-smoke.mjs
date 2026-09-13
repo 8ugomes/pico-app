@@ -87,7 +87,7 @@ try {
   assert.notEqual(a.id, b.id);
 
   for (const origin of origins) {
-    for (const resource of ['profile', 'feed', 'checkin', 'discover']) await read(origin, guest, { resource }, 401);
+    for (const resource of ['profile', 'feed', 'discover']) await read(origin, guest, { resource }, 401);
     await read(origin, guest, { resource: 'arenas' });
     await write(origin, guest, { action: 'create_post', arenaId, sportId, body: 'Must be rejected' }, 401);
     for (const actor of [a, b]) {
@@ -95,14 +95,16 @@ try {
       const profile = (await read(origin, actor, { resource: 'profile' })).profile;
       assert.equal(profile.id, actor.id); assert.equal(profile.onboardingCompleted, true); assert.ok(!('email' in profile));
     }
-    await write(origin, a, { action: 'start_checkin', arenaId, sportId });
-    const presence = (await read(origin, a, { resource: 'checkin' })).own;
-    assert.equal(presence.playerId, a.id);
-    const remaining = Date.parse(presence.expiresAt) - Date.now();
-    assert.ok(remaining > 7100000 && remaining <= 7205000, 'Presence must expire in two hours.');
+    await read(origin, a, { resource: 'checkin' }, 400);
+    const gameId = randomUUID();
+    const gameInput = {p_id:gameId,p_arena:arenaId,p_sport:sportId,p_played_on:'2026-01-02'};
+    ok(await a.client.rpc('save_played_game',gameInput),'save private game');
+    assert.equal(ok(await a.client.rpc('read_played_games'),'own games').filter(g=>g.id===gameId).length,1);
+    assert.equal(ok(await b.client.from('played_games').select('id').eq('player_id',a.id),'other private games').length,0);
+    ok(await a.client.rpc('set_arena_membership',{p_arena:arenaId,p_join:true}),'follow arena for distribution');
     const body = `Integração ${runId} ${origin}`;
     await write(origin, a, { action: 'create_post', arenaId, sportId, body });
-    const found = (await read(origin, b, { resource: 'discover', sportId, arenaId, active: 'true' })).players.find(p => p.id === a.id);
+    const found = (await read(origin, b, { resource: 'discover', sportId, arenaId })).players.find(p => p.id === a.id);
     assert.ok(found); assert.equal(found.username, a.username);
     const other = await read(origin, b, { resource: 'player', username: a.username });
     assert.equal(other.own, false); assert.equal(other.profile.id, a.id);
@@ -124,11 +126,10 @@ try {
     assert.equal(changed.length, 0);
     assert.equal((await read(origin, a, { resource: 'profile' })).profile.name, 'Pico teste A');
     denied(await b.client.from('profiles').update({ id: b.id }).eq('id', a.id), ['42501'], 'profile identity immutable');
-    denied(await b.client.from('checkins').insert({ player_id: a.id, arena_id: arenaId, sport_id: sportId, expires_at: new Date(Date.now() + 100000).toISOString() }), ['42501'], 'forged checkin');
-    denied(await b.client.from('checkins').update({ ended_at: new Date().toISOString() }).eq('id', presence.id), ['42501'], 'foreign checkin end');
-    denied(await b.client.rpc('end_checkin', { player_id: a.id }), ['PGRST202'], 'RPC identity injection');
-    ok(await b.client.rpc('end_checkin'), 'B can end only own presence');
-    assert.equal((await read(origin, a, { resource: 'checkin' })).own.id, presence.id);
+    denied(await b.client.from('checkins').select('id'), ['42501'], 'retired live data');
+    denied(await b.client.rpc('end_checkin'), ['42501'], 'retired live write');
+    denied(await b.client.rpc('save_played_game',{...gameInput,p_version:1,p_played_on:'2026-01-03'}), ['42501'], 'foreign game edit');
+    denied(await b.client.rpc('delete_played_game',{p_id:gameId}), ['42501'], 'foreign game delete');
     await write(origin, b, { action: 'end_checkin', player_id: a.id }, 400);
     denied(await b.client.from('posts').insert({ author_id: a.id, arena_id: arenaId, sport_id: sportId, body: 'Forged' }), ['42501'], 'forged post');
     denied(await b.client.from('post_likes').insert({ player_id: a.id, post_id: post.id }), ['42501'], 'forged like');
@@ -136,21 +137,20 @@ try {
     denied(await b.client.from('connections').insert({ follower_id: a.id, followed_id: b.id }), ['42501'], 'forged connection');
     denied(await b.client.from('player_sports').insert({ player_id: a.id, sport_id: sportId }), ['42501'], 'forged player sport');
     denied(await b.client.from('arena_members').insert({ player_id: a.id, arena_id: arenaId }), ['42501'], 'forged arena membership');
-    denied(await a.client.rpc('start_checkin', { arena_id: randomUUID(), sport_id: sportId }), ['23514'], 'invalid arena RPC');
-    assert.equal((await read(origin, a, { resource: 'checkin' })).own.id, presence.id, 'Rejected checkin must not close current presence.');
-    for (const table of ['profiles', 'player_sports', 'arena_members', 'posts', 'post_likes', 'comments', 'checkins', 'connections']) {
+    denied(await a.client.rpc('save_played_game',{...gameInput,p_id:randomUUID(),p_arena:randomUUID()}), ['23514'], 'invalid arena');
+    await read(origin,a,{resource:'discover',active:'true'},400);
+    for (const table of ['profiles', 'player_sports', 'arena_members', 'posts', 'post_likes', 'comments', 'checkins', 'played_games', 'connections']) {
       denied(await anonymous.from(table).select('*').limit(1), ['42501'], `anonymous ${table}`);
     }
     denied(await anonymous.rpc('start_checkin', { arena_id: arenaId, sport_id: sportId }), ['42501'], 'anonymous RPC');
     denied(await anonymous.from('posts').insert({ arena_id: arenaId, sport_id: sportId, body: 'Anonymous' }), ['42501'], 'anonymous post');
 
     // Concurrent hosted requests exercise the per-profile lock on separate DB connections.
-    const concurrent = await Promise.all(Array.from({ length: 4 }, () => a.client.rpc('start_checkin', { arena_id: arenaId, sport_id: sportId })));
-    concurrent.forEach(result => ok(result, 'concurrent start_checkin'));
-    const active = ok(await a.client.from('checkins').select('id').eq('player_id', a.id), 'active checkin count');
-    assert.equal(active.length, 1, 'Concurrent checkins must leave exactly one active row.');
-    await write(origin, a, { action: 'end_checkin' });
-    assert.equal((await read(origin, a, { resource: 'checkin' })).own, null);
+    const concurrent = await Promise.all(Array.from({ length: 4 }, () => a.client.rpc('save_played_game',gameInput)));
+    concurrent.forEach(result => ok(result, 'concurrent save retry'));
+    assert.equal(ok(await a.client.from('played_games').select('id').eq('id',gameId),'game retry count').length,1);
+    ok(await a.client.rpc('delete_played_game',{p_id:gameId}),'delete own game');
+    denied(await a.client.rpc('save_played_game',gameInput),['P0409'],'deleted game stays deleted');
     await write(origin, b, { action: 'set_connection', playerId: a.id, connected: false });
     for (const actor of [a, b]) {
       ok(await actor.client.auth.refreshSession(), 'real refresh token exchange');
@@ -161,7 +161,7 @@ try {
       ok(await actor.client.auth.signInWithPassword({ email: actor.email, password: actor.password }), 'signin');
       await read(origin, actor, { resource: 'profile' });
     }
-    console.log(`Hosted social flow, ownership denials, concurrent checkins and session refresh passed: ${origin}`);
+    console.log(`Hosted social flow, ownership denials, concurrent game retries and session refresh passed: ${origin}`);
   }
   const betaChecks = await hostedBeta({origin:origins.at(-1),a,b,guest,admin,anonymous,read,write,ok,denied,arenaId,sportId});
   checks += betaChecks;

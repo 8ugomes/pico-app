@@ -1,5 +1,5 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
-import type { Database } from '../../types/database';
+import type { Database } from '../../types/app-database';
 import type { Level } from '../../types/social';
 import { requireUser } from './queries.ts';
 
@@ -9,7 +9,7 @@ export class MutationError extends Error {
 }
 export const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 export const levels: Level[] = ['Iniciante', 'Intermediário', 'Avançado'];
-export type Mutation = { action: 'save_profile'; name: string; username: string; bio: string; city: string; neighborhood: string; sportId: string; level: Level; available: boolean } | { action: 'start_checkin'; arenaId: string; sportId: string } | { action: 'set_connection'; playerId: string; connected: boolean } | { action: 'end_checkin' } | { action: 'create_post'; arenaId: string; sportId: string; body: string; imagePath?: string | null } | { action: 'set_like'; postId: string; liked: boolean } | { action: 'create_comment'; postId: string; body: string }
+export type Mutation = { action: 'save_profile'; name: string; username: string; bio: string; city: string; neighborhood: string; sportId: string; level: Level; available: boolean } | { action: 'set_connection'; playerId: string; connected: boolean } | { action: 'create_post'; arenaId: string; sportId: string; body: string; imagePath?: string | null } | { action: 'set_like'; postId: string; liked: boolean } | { action: 'create_comment'; postId: string; body: string }
   | { action: 'set_avatar'; path: string | null }
   | { action: 'delete_post'; id: string } | { action: 'delete_comment'; id: string }
   | { action: 'set_block'; playerId: string; blocked: boolean }
@@ -68,11 +68,6 @@ export function parseMutation(value: unknown): Mutation {
     exactKeys(body, ['action', 'postId', 'body']);
     return { action: body.action, postId: uuid(body.postId), body: textField(body.body, 1, 280) };
   }
-  if (body.action === 'start_checkin') {
-    exactKeys(body, ['action', 'arenaId', 'sportId']);
-    return { action: body.action, arenaId: uuid(body.arenaId), sportId: uuid(body.sportId) };
-  }
-  if (body.action === 'end_checkin') { exactKeys(body, ['action']); return { action: body.action }; }
   if (body.action === 'save_profile') {
     exactKeys(body, ['action', 'name', 'username', 'bio', 'city', 'neighborhood', 'sportId', 'level', 'available']);
     const username = textField(body.username, 3, 40).toLowerCase();
@@ -131,14 +126,6 @@ export async function mutateSocial(client: SupabaseClient<Database>, input: Muta
   }
   if (input.action === 'create_comment') {
     const { error } = await client.from('comments').insert({ post_id: input.postId, body: input.body });
-    if (error) mutationFailure(error); return;
-  }
-  if (input.action === 'start_checkin') {
-    const { error } = await client.rpc('start_checkin', { arena_id: input.arenaId, sport_id: input.sportId });
-    if (error) mutationFailure(error); return;
-  }
-  if (input.action === 'end_checkin') {
-    const { error } = await client.rpc('end_checkin');
     if (error) mutationFailure(error); return;
   }
   const { error } = await client.rpc('save_profile', {

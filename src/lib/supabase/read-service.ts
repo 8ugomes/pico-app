@@ -1,6 +1,6 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
-import type { Database } from '../../types/database';
-import type { ReadArena, ReadData, ReadRequest, ReadPresence, ReadProfile } from '../../types/read';
+import type { Database } from '../../types/app-database';
+import type { ReadArena, ReadData, ReadRequest, ReadProfile } from '../../types/read';
 import { ARENA_PAGE_SIZE, getArenaBySlug, getOwnProfile, listPublicArenas, listSports, requireUser, getPublicProfile } from './queries.ts';
 import { levels, uuidPattern } from './mutations.ts';
 import type { Level } from '../../types/social';
@@ -31,9 +31,9 @@ export function parseReadRequest(params: URLSearchParams): ReadRequest {
     const sportId = params.get('sportId') ?? undefined;
     const arenaId = params.get('arenaId') ?? undefined;
     const level = params.get('level') as Level | null;
-    const active = params.get('active') ?? 'false';
-    if (!/^\d{1,5}$/.test(offset) || Number(offset) > 10000 || (sportId && !uuidPattern.test(sportId)) || (arenaId && !uuidPattern.test(arenaId)) || (level && !levels.includes(level)) || !['true', 'false'].includes(active)) throw new ReadError('invalid_request', 400);
-    return { resource, offset: Number(offset), sportId, arenaId, level: level ?? undefined, active: active === 'true' };
+    if (params.has('active')) throw new ReadError('invalid_request', 400);
+    if (!/^\d{1,5}$/.test(offset) || Number(offset) > 10000 || (sportId && !uuidPattern.test(sportId)) || (arenaId && !uuidPattern.test(arenaId)) || (level && !levels.includes(level))) throw new ReadError('invalid_request', 400);
+    return { resource, offset: Number(offset), sportId, arenaId, level: level ?? undefined };
   }
   if (resource === 'feed' || resource === 'comments') {
     const value = params.get('offset') ?? '0';
@@ -41,11 +41,6 @@ export function parseReadRequest(params: URLSearchParams): ReadRequest {
     const id = params.get(resource === 'feed' ? 'arenaId' : 'postId');
     if ((resource === 'comments' && !id) || (id && !uuidPattern.test(id))) throw new ReadError('invalid_request', 400);
     return resource === 'feed' ? { resource, offset: Number(value), arenaId: id ?? undefined } : { resource, offset: Number(value), postId: id! };
-  }
-  if (resource === 'checkin') {
-    const arenaId = params.get('arenaId') ?? undefined;
-    if (arenaId && !uuidPattern.test(arenaId)) throw new ReadError('invalid_request', 400);
-    return { resource, arenaId };
   }
   if (resource === 'sports') return { resource };
   if (resource === 'profile' || resource === 'account') return { resource };
@@ -78,12 +73,12 @@ export async function readSocial(client: SupabaseClient<Database>, request: Read
   }
   if (request.resource === 'discover') {
     await requireUser(client);
-    const { data, error } = await client.rpc('discover_players', { p_offset: request.offset, p_active: request.active, ...(request.sportId ? { p_sport_id: request.sportId } : {}), ...(request.arenaId ? { p_arena_id: request.arenaId } : {}), ...(request.level ? { p_level: request.level } : {}) });
+    const { data, error } = await client.rpc('discover_players', { p_offset: request.offset, ...(request.sportId ? { p_sport_id: request.sportId } : {}), ...(request.arenaId ? { p_arena_id: request.arenaId } : {}), ...(request.level ? { p_level: request.level } : {}) });
     if (error || !data) throw new ReadError('unavailable');
     const rows = data.slice(0,24);
     const avatars = rows.length ? await client.from('profiles').select('id,avatar_path').in('id',rows.map(p=>p.id)) : { data: [], error: null };
     if (avatars.error) throw new ReadError('unavailable');
-    return { kind: 'discover', players: rows.map(p=>({...p,avatar:mediaUrl('avatars',avatars.data?.find(a=>a.id===p.id)?.avatar_path ?? null)})), hasMore: data.length > 24 };
+    return { kind: 'discover', players: rows.map(p=>({id:p.id,username:p.username,display_name:p.display_name,bio:p.bio,city:p.city,neighborhood:p.neighborhood,is_demo:p.is_demo,sport_name:p.sport_name,sport_slug:p.sport_slug,level:p.level,connected:p.connected,avatar:mediaUrl('avatars',avatars.data?.find(a=>a.id===p.id)?.avatar_path ?? null)})), hasMore: data.length > 24 };
   }
   if (request.resource === 'player') {
     const user = await requireUser(client);
@@ -108,17 +103,6 @@ export async function readSocial(client: SupabaseClient<Database>, request: Read
     const { data, error } = await client.from('comments').select('id, author_id, body, created_at, profiles(display_name, username)').eq('post_id', request.postId).order('created_at').order('id').range(request.offset, request.offset + 20);
     if (error || !data) throw new ReadError('unavailable');
     return { kind: 'comments', viewerId: user.id, hasMore: data.length > 20, comments: data.slice(0, 20).flatMap(row => row.profiles ? [{ id: row.id, authorId: row.author_id, body: row.body, createdAt: row.created_at, name: row.profiles.display_name, username: row.profiles.username }] : []) };
-  }
-  if (request.resource === 'checkin') {
-    const user = await requireUser(client);
-    const fields = 'id, player_id, expires_at, profiles(username, display_name), arena_sports(arenas(id, slug, name), sports(id, slug, name))' as const;
-    const base = () => client.from('checkins').select(fields).is('ended_at', null).gt('expires_at', new Date().toISOString());
-    let nearby = base().neq('player_id', user.id).order('started_at', { ascending: false }).order('id').limit(24);
-    if (request.arenaId) nearby = nearby.eq('arena_id', request.arenaId);
-    const [own, presence] = await Promise.all([base().eq('player_id', user.id).maybeSingle(), nearby]);
-    if (own.error || presence.error || !presence.data) throw new ReadError('unavailable');
-    const dto = (row: NonNullable<typeof own.data>): ReadPresence | null => row.profiles && row.arena_sports?.arenas && row.arena_sports.sports ? { id: row.id, playerId: row.player_id, name: row.profiles.display_name, username: row.profiles.username, arena: row.arena_sports.arenas, sport: row.arena_sports.sports, expiresAt: row.expires_at } : null;
-    return { kind: 'checkin', own: own.data ? dto(own.data) : null, presence: presence.data.flatMap(row => { const value = dto(row); return value ? [value] : []; }) };
   }
   if (request.resource === 'sports') {
     const { data, error } = await listSports(client);

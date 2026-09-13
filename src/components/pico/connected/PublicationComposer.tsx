@@ -1,30 +1,78 @@
 'use client';
-import{useEffect,useRef,useState}from'react';
+import { useRef, useState } from 'react';
+import Link from 'next/link';
+import { Plus, PenLine, ArrowUpRight } from 'lucide-react';
 import { Modal } from '@/components/ui/Modal';
 import { ChoiceChip } from '@/components/ui/ChoiceChip';
-import { Plus, PenLine } from 'lucide-react';
-import{Button}from'@/components/ui/Button';import{PhotoUpload}from'./Media';import{useEntity,entityAction}from'./useEntity';import{useRemoteRead}from'./useRemoteRead';import type{PublicationOptions}from'@/types/posts';
-export function PublicationComposer({viewerId,arenaId,communityId,onDone}:{viewerId:string;arenaId?:string;communityId?:string;onDone:()=>void}) {
-  const [open, setOpen] = useState(false);
-  const [published, setPublished] = useState(false);
-  const {data:options,error} = useEntity<PublicationOptions>('/api/posts?kind=options');
+import { Button } from '@/components/ui/Button';
+import { PhotoUpload } from './Media';
+import { useEntity, entityAction } from './useEntity';
+import { useRemoteRead } from './useRemoteRead';
+import { formatGameDate } from '@/lib/game-date';
+import type { PublicationOptions } from '@/types/posts';
+import type { PlayedGame } from '@/types/games';
+
+export function PublicationComposer({ viewerId, arenaId, communityId, onDone }: { viewerId: string; arenaId?: string; communityId?: string; onDone: () => void }) {
+  const [open, setOpen] = useState(false), [busy, setBusy] = useState(false), [published, setPublished] = useState<string | null>(null);
   return <div className="publication-composer">
-    <button type="button" className="composer-trigger" aria-haspopup="dialog" onClick={() => { setPublished(false); setOpen(true); }}><span className="composer-symbol"><PenLine size={20} aria-hidden="true" /></span><span>Compartilhe com sua turma</span><Plus size={20} aria-hidden="true" /></button>
-    <Modal open={open} onClose={() => setOpen(false)} title="Compartilhe com sua turma">
-      {error ? <p className="form-error" role="alert">{error}</p> : options ? <Composer key={`${viewerId}:${arenaId||''}:${communityId||''}`} options={options} arenaId={arenaId} communityId={communityId} onDone={() => { setPublished(true); setOpen(false); onDone(); }} /> : <p role="status">Conferindo onde você pode publicar…</p>}
+    <button type="button" className="composer-trigger" aria-haspopup="dialog" onClick={() => { setPublished(null); setOpen(true); }}><span className="composer-symbol"><PenLine size={20} aria-hidden="true" /></span><span>Compartilhe com sua turma</span><Plus size={20} aria-hidden="true" /></button>
+    <Modal open={open} onClose={() => { if (!busy) setOpen(false); }} title="Compartilhe com sua turma">
+      <PublicationDraft key={`${viewerId}:${arenaId || ''}:${communityId || ''}`} arenaId={arenaId} communityId={communityId} onBusy={setBusy} onDone={id => { setPublished(id); setOpen(false); onDone(); }} />
     </Modal>
-    {published && <p className="inline-success" role="status">Publicado nos destinos escolhidos.</p>}
+    {published && <p className="inline-success" role="status">Publicado nos destinos escolhidos. <Link className="journey-text-link" href={`/publicacoes/${published}`}>Ver publicação <ArrowUpRight size={16} aria-hidden="true" /></Link></p>}
   </div>;
 }
-function Composer({options,arenaId,communityId,onDone}:{options:PublicationOptions;arenaId?:string;communityId?:string;onDone:()=>void}){const initialGroup=options.communities.find(c=>c.id===communityId);const[body,setBody]=useState(''),[photo,setPhoto]=useState<string|null>(null),[audience,setAudience]=useState<'beta'|'private'>(initialGroup?.visibility||'beta'),[wall,setWall]=useState(options.arenas.some(a=>a.id===arenaId)?arenaId||'':''),[groups,setGroups]=useState<string[]>(initialGroup?[initialGroup.id]:[]),[marked,setMarked]=useState(''),[sport,setSport]=useState(''),[busy,setBusy]=useState(false),[uploading,setUploading]=useState(false),[message,setMessage]=useState('');const attempt=useRef<{fingerprint:string;key:string}|null>(null);const{state}=useRemoteRead('resource=arenas&offset=0');const{state:sportState}=useRemoteRead('resource=sports');const arenas=state.status==='success'&&state.data.kind==='arenas'?state.data.arenas:[];const sports=marked?arenas.find(a=>a.id===marked)?.sports||[]:sportState.status==='success'&&sportState.data.kind==='sports'?sportState.data.sports:[];const destinations=(wall?1:0)+groups.length;
- return <div><form className="connected-form" onSubmit={async e=>{e.preventDefault();const payload={action:'publish',body,imagePath:photo,arena:marked||undefined,sport:sport||undefined,audience,wallArena:wall||undefined,groups};const fingerprint=JSON.stringify(payload);if(attempt.current?.fingerprint!==fingerprint)attempt.current={fingerprint,key:crypto.randomUUID()};setBusy(true);setMessage('');try{await entityAction('/api/posts',{...payload,key:attempt.current.key});setBody('');setPhoto(null);attempt.current=null;setMessage('Publicado nos destinos escolhidos.');onDone()}catch(e){setMessage((e instanceof Error?e.message:'Não foi possível confirmar.')+' Em caso de perda de conexão, repetir mantém a mesma publicação.')}finally{setBusy(false)}}}><fieldset disabled={busy}><label className="input-group">Sua publicação<textarea className="input" value={body} onChange={e=>setBody(e.target.value)} maxLength={500} required rows={3} placeholder="Conta do jogo, chama sua turma…"/></label><span className="input-hint">{body.length}/500</span><PhotoUpload bucket="post-media" path={photo} onChange={setPhoto} onBusy={setUploading}/><label className="input-group">Audiência<select className="input" value={audience} onChange={e=>{const next=e.target.value as 'beta'|'private';setAudience(next);setGroups([]);if(next==='private')setWall('')}}><option value="beta">Pessoas aprovadas no beta</option><option value="private">Participantes de uma comunidade privada</option></select></label><label className="input-group">Modalidade (opcional)<select className="input" value={sport} onChange={e=>setSport(e.target.value)}><option value="">Sem modalidade</option>{sports.map(s=><option key={s.id} value={s.id}>{s.name}</option>)}</select></label><details><summary>Marcar onde joguei (opcional)</summary><p>Marcar o local não publica no mural da arena.</p><label className="input-group">Local<select className="input" value={marked} onChange={e=>{setMarked(e.target.value);setSport('')}}><option value="">Sem local marcado</option>{arenas.map(a=><option value={a.id} key={a.id}>{a.name}{a.isDemo?' · demo':''}</option>)}</select></label></details>{audience==='beta'&&!arenaId&&!communityId&&<CheckinSuggestion arenas={options.arenas} selected={wall} onSelect={setWall}/>}<fieldset><legend>Distribuir também para</legend>{audience==='beta'&&<label className="input-group">Mural de arena<select className="input" value={wall} onChange={e=>setWall(e.target.value)}><option value="">Não publicar em mural de arena</option>{options.arenas.map(a=><option key={a.id} value={a.id}>{a.name}</option>)}</select></label>}<div className="choice-chips">{options.communities.filter(c=>c.visibility===audience).map(c=><ChoiceChip key={c.id} checked={groups.includes(c.id)} onChange={e=>setGroups(e.target.checked?(audience==='private'?[c.id]:[...groups,c.id]):groups.filter(id=>id!==c.id))}>{c.name}{c.visibility==='private'?' · privado':''}</ChoiceChip>)}</div>{!options.communities.some(c=>c.visibility===audience)&&<p>Você ainda não participa de uma comunidade com esta audiência.</p>}</fieldset><p className="form-note">{audience==='beta'?'Aparece no seu perfil e feed do beta.':'Visível apenas aos participantes ativos do grupo escolhido, inclusive no seu perfil.'} {destinations?`${destinations} destino(s) adicional(is) selecionado(s).`:'Sem distribuição adicional.'}</p><Button type="submit" disabled={uploading||!body.trim()||groups.length>5||(audience==='private'&&groups.length!==1)}>{busy?'Publicando…':audience==='private'?'Publicar no grupo privado':destinations?`Publicar no perfil e em ${destinations} destino(s)`:'Publicar no meu perfil'}</Button></fieldset></form><p role="status">{message}</p></div>
+
+export function PublicationDraft({ arenaId, communityId, game, onDone, onBusy }: { arenaId?: string; communityId?: string; game?: PlayedGame; onDone: (id: string) => void; onBusy: (busy: boolean) => void }) {
+  const { data: options, error, reload } = useEntity<PublicationOptions>('/api/posts?kind=options');
+  if (error) return <div><p className="form-error" role="alert">{error}</p><Button variant="secondary" onClick={reload}>Tentar novamente</Button></div>;
+  if (!options) return <p role="status">Conferindo onde você pode publicar…</p>;
+  return <Composer options={options} arenaId={arenaId} communityId={communityId} game={game} onDone={onDone} onBusy={onBusy} />;
 }
-// A suggestion never silently changes destinations or submits the publication.
-function CheckinSuggestion({arenas,selected,onSelect}:{arenas:PublicationOptions['arenas'];selected:string;onSelect:(id:string)=>void}) {
- const {state}=useRemoteRead('resource=checkin');
- const [now,setNow]=useState(0);
- useEffect(()=>{const tick=()=>setNow(Date.now());const initial=setTimeout(tick,0);const timer=setInterval(tick,15000);return()=>{clearTimeout(initial);clearInterval(timer)}},[]);
- const own=state.status==='success'&&state.data.kind==='checkin'?state.data.own:null;
- if(!own||!now||Date.parse(own.expiresAt)<=now||selected||!arenas.some(arena=>arena.id===own.arena.id))return null;
- return <aside className="connected-panel"><p>Você fez check-in em <strong>{own.arena.name}</strong>.</p><Button type="button" variant="secondary" onClick={()=>{if(Date.parse(own.expiresAt)>Date.now())onSelect(own.arena.id)}}>Incluir o mural desta arena</Button><p className="input-hint">O destino ficará selecionado abaixo. Você ainda precisa confirmar a publicação.</p></aside>;
+
+function Composer({ options, arenaId, communityId, game, onDone, onBusy }: { options: PublicationOptions; arenaId?: string; communityId?: string; game?: PlayedGame; onDone: (id: string) => void; onBusy: (busy: boolean) => void }) {
+  const initialGroup = options.communities.find(c => c.id === communityId);
+  const [body, setBody] = useState(''), [photo, setPhoto] = useState<string | null>(null);
+  const [audience, setAudience] = useState<'beta' | 'private'>(initialGroup?.visibility || 'beta');
+  const [wall, setWall] = useState(options.arenas.some(a => a.id === arenaId) ? arenaId || '' : '');
+  const [groups, setGroups] = useState<string[]>(initialGroup ? [initialGroup.id] : []);
+  const [marked, setMarked] = useState(''), [sport, setSport] = useState('');
+  const [busy, setBusy] = useState(false), [uploading, setUploading] = useState(false), [message, setMessage] = useState('');
+  const attempt = useRef<{ fingerprint: string; key: string } | null>(null);
+  const { state } = useRemoteRead('resource=arenas&offset=0');
+  const { state: sportState } = useRemoteRead('resource=sports');
+  const arenas = state.status === 'success' && state.data.kind === 'arenas' ? state.data.arenas : [];
+  const sports = marked ? arenas.find(a => a.id === marked)?.sports || [] : sportState.status === 'success' && sportState.data.kind === 'sports' ? sportState.data.sports : [];
+  const destinationNames = [options.arenas.find(a => a.id === wall)?.name, ...options.communities.filter(c => groups.includes(c.id)).map(c => c.name)].filter(Boolean);
+  return <form className="connected-form" onSubmit={async e => {
+    e.preventDefault(); if (busy || uploading) return;
+    const common = { body, imagePath: photo, audience, wallArena: wall || undefined, groups };
+    const payload = game ? { ...common, id: game.id, version: game.version } : { ...common, action: 'publish', arena: marked || undefined, sport: sport || undefined };
+    const fingerprint = JSON.stringify(payload);
+    if (attempt.current?.fingerprint !== fingerprint) attempt.current = { fingerprint, key: crypto.randomUUID() };
+    setBusy(true); onBusy(true); setMessage('');
+    try {
+      const id: unknown = await entityAction(game ? '/api/games/share' : '/api/posts', { ...payload, key: attempt.current.key });
+      if (typeof id !== 'string' || !/^[0-9a-f-]{36}$/i.test(id)) throw new Error('A confirmação da publicação não chegou. Confira antes de tentar novamente.');
+      setBody(''); setPhoto(null); attempt.current = null; onDone(id);
+    } catch (e) { setMessage((e instanceof Error ? e.message : 'Não foi possível confirmar.') + ' Seu rascunho foi mantido. Repetir sem alterar os campos mantém a mesma publicação.'); }
+    finally { setBusy(false); onBusy(false); }
+  }}>
+    <fieldset className="publication-fields" disabled={busy}>
+      {game && <section className="game-share-context"><p>Você escolheu compartilhar este jogo</p><strong>{game.arena_name}</strong><span>{game.sport_name} · Jogado em {formatGameDate(game.played_on)}</span><p>O post mostrará arena, modalidade e data. O registro em Meus jogos continua privado.</p></section>}
+      <label className="input-group">{game ? 'Conta como foi (opcional)' : 'Sua publicação'}<textarea className="input" value={body} onChange={e => setBody(e.target.value)} maxLength={500} required={!game} rows={3} placeholder="Uma história, uma foto, uma conversa depois do jogo…" /></label>
+      <span className="input-hint">{body.length}/500</span>
+      <PhotoUpload bucket="post-media" path={photo} onChange={setPhoto} onBusy={value => { setUploading(value); onBusy(value || busy); }} />
+      <label className="input-group">Audiência<select className="input" value={audience} onChange={e => { const next = e.target.value as 'beta' | 'private'; setAudience(next); setGroups([]); if (next === 'private') setWall(''); }}><option value="beta">Pessoas aprovadas no beta</option><option value="private">Participantes de uma comunidade privada</option></select></label>
+      {!game && <details className="publication-context"><summary>Modalidade e local (opcionais)</summary><p className="input-hint">Marcar um lugar não publica no mural da arena.</p><label className="input-group">Local<select className="input" value={marked} onChange={e => { setMarked(e.target.value); setSport(''); }}><option value="">Sem local marcado</option>{arenas.map(a => <option value={a.id} key={a.id}>{a.name}{a.isDemo ? ' · demo' : ''}</option>)}</select></label><label className="input-group">Modalidade<select className="input" value={sport} onChange={e => setSport(e.target.value)}><option value="">Sem modalidade</option>{sports.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}</select></label>{(state.status === 'error' || sportState.status === 'error') && <p className="form-error">Não foi possível carregar os locais e modalidades. Seu texto continua disponível.</p>}</details>}
+      <fieldset className="form-section"><legend>{audience === 'private' ? 'Escolha o grupo privado' : 'Distribuir também para'}</legend>
+        {audience === 'beta' && <label className="input-group">Mural de arena<select className="input" value={wall} onChange={e => setWall(e.target.value)}><option value="">Não publicar em mural de arena</option>{options.arenas.map(a => <option key={a.id} value={a.id}>{a.name}</option>)}</select></label>}
+        <div className="choice-chips">{options.communities.filter(c => c.visibility === audience).map(c => <ChoiceChip key={c.id} checked={groups.includes(c.id)} onChange={e => setGroups(e.target.checked ? (audience === 'private' ? [c.id] : [...groups, c.id]) : groups.filter(id => id !== c.id))}>{c.name}{c.visibility === 'private' ? ' · privado' : ''}</ChoiceChip>)}</div>
+        {!options.communities.some(c => c.visibility === audience) && <p className="input-hint">Você ainda não participa de uma comunidade com esta audiência.</p>}
+      </fieldset>
+      <div className="publication-audience-summary"><strong>Quem vai ver</strong><p>{audience === 'beta' ? 'Pessoas aprovadas no beta, pelo seu perfil e feed.' : 'Somente participantes ativos do grupo privado escolhido, inclusive no seu perfil.'}</p>{destinationNames.length > 0 ? <p>Destino{destinationNames.length > 1 ? 's' : ''}: {destinationNames.join(' · ')}.</p> : <p>Sem mural adicional.</p>}{game && <p>Corrigir ou excluir o registro privado depois não altera esta publicação.</p>}</div>
+      {message && <p className="form-error" role="alert">{message}</p>}
+      <Button type="submit" disabled={busy || uploading || (!game && !body.trim()) || groups.length > 5 || (audience === 'private' && groups.length !== 1)}>{busy ? 'Publicando…' : audience === 'private' ? 'Publicar no grupo privado' : destinationNames.length ? 'Publicar nos destinos escolhidos' : 'Publicar no meu perfil'}</Button>
+    </fieldset>
+  </form>;
 }

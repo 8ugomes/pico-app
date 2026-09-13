@@ -16,7 +16,7 @@ export function ConnectedSource() {
   return <p className="read-source" role="status"><span className="live-dot" /> Dados conectados</p>;
 }
 export function ReadFailure({ state, retry }: { state: Exclude<ReadResponse, { status: 'success' }>; retry: () => void }) {
-  if (state.status === 'demo') return <section className="read-message"><h2>Demonstração disponível</h2><p>O serviço de dados não está configurado neste momento.</p><Button onClick={() => window.location.reload()}>Abrir demonstração</Button></section>;
+  if (state.status === 'demo') return <section className="read-message"><h2>Confira a conexão</h2><p>A configuração mudou. Recarregue para verificar o acesso aos seus dados.</p><Button onClick={() => window.location.reload()}>Recarregar</Button></section>;
   const login = state.code === 'authentication';
   const missing = state.code === 'not_found';
   return <section className="read-message" role={login || missing ? 'status' : 'alert'}>

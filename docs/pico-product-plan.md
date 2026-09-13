@@ -1,5 +1,27 @@
 # Pico — plano de produto
 
+### Gate integrado hospedado
+
+210 verificações remotas passaram no desenvolvimento exclusivo: Auth/HTTP/Storage/RLS, concorrência de jogos e compartilhamento, correção/exclusão sem alteração do snapshot publicado. Tipos hospedados consolidados; 81 testes locais, lint, types e build passaram. Backups dos dois destinos preservados. Próximo gate: PR/verify/main, migrations principais ausentes e promoção do artefato READY, com inventário comparado e smoke somente leitura.
+
+## Publicação do refino integrado — 2026-09-12 · plano
+
+Responsável autorizou commit, push, integração e publicação do conjunto completo. Baseline remoto `05b6f01`; conjunto local `c66e83e` + `779be54`. Conferir ledger e identidade remotos, preservar backup cifrado, aplicar somente as duas migrations ausentes primeiro em desenvolvimento e validar Auth/HTTP/Storage/RLS com identidades descartáveis rastreadas. Gerar tipos do schema hospedado, executar lint/types/testes/build, PR com `verify` obrigatório e merge sem bypass. Publicar pela main sincronizada no projeto existente `pico-app`, preservando contas, admissão e dados principais. Conferir READY, alias, versão, identidade Supabase e smoke público. Falhas essenciais interrompem a promoção até correção; não fazer downgrade destrutivo nem retornar a um frontend incompatível com os contratos novos. Registrar evidência remota e limpeza; SMTP e aparelhos físicos continuam limites separados.
+
+## Rodada 2026-09-12 — jogos realizados · plano antes de codar
+
+Decisão vigente: retirar presença ao vivo de todo o produto. A pessoa registra depois que jogou; registro privado e publicação são ações distintas. Esta decisão substitui as propostas históricas de check-in abaixo.
+
+Auditoria inicial: presença no demo, navegação, descoberta, detalhe de arena, compositor, API social e RPCs; histórico legado também alimenta resumo compartilhável. Implementar `/jogos` com arena, modalidade e data passada ou atual declarada, correção/exclusão própria e tentativas idempotentes. Preservar legado no banco sem conversão ou exposição. Desativar leitura/escrita legadas e filtros ativos, mantendo admissão, RLS e bloqueios. Descoberta usa interesses e vínculos de participação.
+
+Sequência: contratos/schema mínimos e testes locais; fluxo conectado e demo; auditoria editorial transversal; navegação mobile e estados vazio/erro/sucesso; lint, typecheck, build e smoke; documentação final e commit local. Sem push, merge, deploy ou alteração remota. O briefing de jornada informa contexto; esta execução começa pela correção transversal autorizada.
+
+### Fechamento do incremento de pós-jogo
+
+Entregues `/jogos`, `/api/games`, registro privado com correção/exclusão e proteção de repetição inclusive após excluir. Migration aditiva preserva presença antiga sem expô-la; nenhuma aplicação remota. Navegação, demo, arena, descoberta, perfil, compositor e textos foram revistos para retirar sinais de presença. Compartilhamento estruturado não implementado aqui; publicar continua separado no modelo de audiência existente.
+
+75 testes locais, lint, typecheck, build e smoke de navegador aprovados; 10 verificações HTTP reais sem sessão. [Contratos e integração](POST_GAME.md), [capturas/cobertura/limites](visual-review/post-game/README.md). A tarefa `01a0841a-73d1-71a3-80cb-765920ac0c8c` assume integração e refinamento amplo. Este incremento termina em commit local, sem push/deploy/banco remoto.
+
 > Registro histórico do Ciclo 9: PRONTO PARA REVISÃO INTERNA — NÃO LIBERADO. Preview `e891dca1e741`, 19 migrations em dev/beta e smoke 67/67. [URL, versão e evidências atuais](INTERNAL_REVIEW.md). Os registros abaixo preservam a sequência de auditoria, plano e execução.
 
 
@@ -279,3 +301,15 @@ Refinar a main existente, começando por Criar comunidade: fonte nativa única, 
 ## Refino visual completo — VERIFY
 
 Implementação na main atualizada com o perfil/HEIC do Ciclo 10, preservado durante a rodada. Fonte nativa, tokens, controles, listas, perfil, compositor compacto e diálogos unificados; nenhuma alteração de API, credenciais, configuração de serviços ou banco. Dez telas em cinco larguras (50 medições sem overflow), quinze rotas auxiliares/detalhes em 390 px e fluxos locais de criar/editar comunidade, publicar com dois destinos e salvar perfil. Dez asserções dos quatro envios controlados passaram. Lint, tipagem, 76 testes e build aprovados; contraste mínimo 4,67:1 entre os pares ativos avaliados. CI de Chromium/WebKit ampliada para texto a 200%, movimento reduzido e foco em diálogos aninhados; a integração depende de seu resultado remoto. [Evidências e limites](visual-review/README.md). Envio pelo transporte já existente `unify-primary`, PR para main, sem nova branch ou bypass.
+
+## Jornada integrada e jogos passados — PLAN (2026-09-12)
+
+A decisão atual retira presença ao vivo por segurança e substitui as orientações históricas de check-in central. Implementar o conjunto completo localmente: início contextual previsível, navegação por pessoas/comunidades/arenas/perfil, vínculos e próximas ações, composições distintas por entidade e registros retrospectivos privados com compartilhamento opcional separado. Nomes de trabalho: Joguei aqui / Meus jogos; validar com jogadores.
+
+Comparar três organizações e duas direções visuais em JOURNEY_REFINEMENT.md. Mapear e retirar UI, filtros, timers, comandos e exposição SQL de presença; preservar dados legados em leitura estritamente própria. Criar migration aditiva para jogos com data civil passada, autoria, RLS, versionamento e idempotência; nenhum dado real será migrado nesta rodada. Reutilizar publicação canônica com audiência explícita, distinguindo data do jogo da publicação. Capturar baseline atual e resultado; testar banco descartável com duas identidades, APIs/contratos, demo e UI emulada em 320/390/430/tablet/desktop. Executar lint/typecheck/build e testes; atualizar documentos e fazer commit local. Sem push, merge, deploy, credenciais ou mutation remota.
+
+## Jornada integrada e jogos passados — VERIFY
+
+Conjunto integrado localmente à main: início contextual previsível; navegação fixa; pessoas em linhas abertas, grupos por propósito, arenas por lugar e jogos em cronologia; registros privados com compartilhamento separado e canônico. Legado fechado socialmente e consultável só pelo próprio autor, sem conversão. Escolhas de audiência, datas da experiência/publicação, pedidos pendentes e erros têm consequências distintas e explícitas.
+
+81 testes, lint, typecheck e builds conectado/demo passaram. UI local: criação/edição de comunidade, perfil, vínculo unilateral, jogo com falha/retry/correção/exclusão, compartilhamento idempotente, acesso privado pendente, erros/vazios e jornada demo. 25 medições em cinco larguras, nove auxiliares, seis com texto a 200% e diálogo em altura reduzida. [Evidências](journey-review/README.md). Nenhum resultado remoto, físico ou de pesquisa foi presumido. Duas migrations ainda precisam de aplicação remota autorizada; sem push/deploy nesta rodada.

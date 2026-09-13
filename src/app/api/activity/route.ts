@@ -1,4 +1,23 @@
-import{createClient}from'@/lib/supabase/server';import{requireUser}from'@/lib/supabase/queries';import{apiError,jsonBody,privateHeaders,sameOrigin}from'@/lib/supabase/api';import{exactKeys,MutationError,mutationFailure,uuid}from'@/lib/supabase/mutations';
-export const dynamic='force-dynamic';
-export async function GET(request:Request){try{const q=new URL(request.url).searchParams,c=await createClient();if(!c)throw new MutationError(503,'Configuração indisponível.');const user=await requireUser(c);const kind=q.get('kind')||'history';if(kind==='history'&&q.has('player'))throw new MutationError(400,'O histórico detalhado é privado.');const r=kind==='places'?await c.rpc('profile_places',{p_player:q.get('player')?uuid(q.get('player')):undefined}):kind==='summary'?await c.rpc('activity_summary',{p_player:q.get('player')?uuid(q.get('player')):user.id}):kind==='common'?await c.rpc('discover_common_players',{p_offset:Number(q.get('offset')||0)}):await c.rpc('read_checkin_history',{p_offset:Number(q.get('offset')||0)});if(r.error)mutationFailure(r.error);return Response.json({data:r.data},{headers:privateHeaders});}catch(e){return apiError(e)}}
-export async function POST(request:Request){try{sameOrigin(request);const b=await jsonBody(request);exactKeys(b,['share']);if(typeof b.share!=='boolean')throw new MutationError(400,'Confira sua preferência.');const c=await createClient();if(!c)throw new MutationError(503,'Configuração indisponível.');const u=await requireUser(c);const r=await c.from('profiles').update({share_activity_summary:b.share}).eq('id',u.id).select('id');if(r.error)mutationFailure(r.error);if(!r.data?.length)throw new MutationError(403,'Acesso indisponível.');return Response.json({data:{saved:true}},{headers:privateHeaders});}catch(e){return apiError(e)}}
+import { createClient } from '@/lib/supabase/server';
+import { requireUser } from '@/lib/supabase/queries';
+import { apiError, privateHeaders } from '@/lib/supabase/api';
+import { MutationError, mutationFailure, uuid } from '@/lib/supabase/mutations';
+export const dynamic = 'force-dynamic';
+// Only participation/interests remain here. Legacy history and sharing are retired.
+export async function GET(request: Request) {
+  try {
+    const q = new URL(request.url).searchParams;
+    const kind = q.get('kind');
+    if (!['places', 'common'].includes(kind ?? '')) throw new MutationError(410, 'Esta consulta foi desativada. Seus jogos ficam em Meus jogos.');
+    const client = await createClient();
+    if (!client) throw new MutationError(503, 'Configuração indisponível.');
+    await requireUser(client);
+    const offset = q.get('offset') ?? '0';
+    if (!/^\d{1,5}$/.test(offset) || Number(offset) > 10000) throw new MutationError(400, 'Confira a página solicitada.');
+    const result = kind === 'places'
+      ? await client.rpc('profile_places', { p_player: q.get('player') ? uuid(q.get('player')) : undefined })
+      : await client.rpc('discover_common_players', { p_offset: Number(offset) });
+    if (result.error) mutationFailure(result.error);
+    return Response.json({ data: result.data }, { headers: privateHeaders });
+  } catch (error) { return apiError(error); }
+}

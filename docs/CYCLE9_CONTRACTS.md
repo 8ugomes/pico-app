@@ -1,3 +1,5 @@
+> Atualização vigente: a publicação usa a main no projeto Vercel pico-app, conforme [ENVIRONMENTS.md](ENVIRONMENTS.md). As antigas regras de ambiente interno desta referência histórica foram substituídas. Na rodada local de jornada, [POST_GAME.md](POST_GAME.md) substitui presença/histórico social por jogos privados e compartilhamento explícito. As duas migrations novas ainda não foram aplicadas remotamente. Demais regras de admissão, audiência e autoridade continuam válidas.
+
 # Ciclo 9 — contratos de revisão interna
 
 Fonte das decisões desta rodada; evidências e progresso ficam em CODEX_AUTONOMOUS_LOOP.md. Amplia as limitações históricas sobre comunidades, preservando segurança e stack.
@@ -42,7 +44,7 @@ Mídia privada: reserva vinculada a proprietário e recurso, validação real/no
 
 ## Histórico e privacidade
 
-Check-in mantém arena/esporte/data/estado ativo, encerrado ou expirado; expiração não apaga linha. Histórico detalhado próprio é privado por padrão e paginado; presença ativa continua voluntária até 2h. Preferência de resumo público expõe somente vínculos escolhidos, não timestamps/rotina. Recentes derivam do histórico próprio. Descoberta usa vínculos visíveis e interesses, nunca histórico privado. Exclusão de conta remove histórico pessoal por FK.
+Decisão vigente em 2026-09-12: presença ao vivo retirada. `/jogos` guarda arena/modalidade/data de jogo já realizado, somente para o dono; não distribui posts nem notificações. Correção versionada e exclusão próprias; data futura rejeitada no servidor/banco. Legado de check-ins é preservado sem acesso de clientes, sem resumo social ou conversão. Descoberta usa participação e interesses visíveis, nunca jogos ou presença. Exclusão de conta remove registros pessoais por FK. Contratos e limites em [POST_GAME.md](POST_GAME.md).
 
 ## Validação e continuidade
 

@@ -23,23 +23,23 @@ test('connections protect ownership, deny self-follow, duplicates and anonymous 
   });
   await asUser(db, null, async () => { await assert.rejects(db.query('select * from connections'), e => e.code === '42501'); });
 });
-test('discovery excludes self/incomplete profiles and applies sport, level and active arena filters', async () => {
+test('discovery excludes self/incomplete profiles and applies sport, level and membership filters', async () => {
   await asUser(db, ALICE, async () => {
     const rows = (await db.query('select * from discover_players()')).rows;
     assert.equal(rows.length, 1); assert.equal(rows[0].id, BOB); assert.equal(rows[0].connected, true);
     assert.equal((await db.query('select * from discover_players(0,$1)', [BEACH])).rows.length, 0);
     assert.equal((await db.query(`select * from discover_players(p_level := 'Avançado')`)).rows.length, 0);
-    assert.equal((await db.query('select * from discover_players(p_active := true)')).rows.length, 0);
+    await assert.rejects(db.query('select * from discover_players(p_active := true)'), e=>e.code==='23514');
   });
-  await asUser(db, BOB, () => db.query('select start_checkin($1,$2)', [VILA, FUTEVOLEI]));
+  await db.query('insert into arena_members(arena_id,player_id) values($1,$2)', [VILA, BOB]);
   await asUser(db, ALICE, async () => {
-    assert.equal((await db.query('select * from discover_players(0,$1,$2,$3,true)', [FUTEVOLEI, VILA, 'Intermediário'])).rows.length, 1);
+    assert.equal((await db.query('select * from discover_players(0,$1,$2,$3,false)', [FUTEVOLEI, VILA, 'Intermediário'])).rows.length, 1);
     assert.equal((await db.query('select * from discover_players(p_arena_id := $1)', [PRIVATE])).rows.length, 0);
     await db.query('delete from connections where followed_id=$1', [BOB]);
     assert.equal((await db.query('select * from discover_players()')).rows[0].connected, false);
   });
-  await asUser(db, BOB, () => db.query('select end_checkin()'));
-  await asUser(db, ALICE, () => db.query('select * from discover_players(p_active := true)')).then(r => assert.equal(r.rows.length, 0));
+  await db.query('delete from arena_members where arena_id=$1 and player_id=$2',[VILA,BOB]);
+  await asUser(db, ALICE, () => db.query('select * from discover_players(p_arena_id := $1)',[VILA])).then(r => assert.equal(r.rows.length, 0));
 });
 test('discovery remains bounded and malformed filters/forged follower are rejected', async () => {
   assert.throws(() => parseReadRequest(new URLSearchParams({ resource: 'discover', level: 'Pro' })));

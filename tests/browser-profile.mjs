@@ -33,7 +33,7 @@ const plugins=[{name:'browser-framework-fixtures',setup(api){
 }`,loader:'ts'}));
 }}];
 await build({stdin:{contents:shell,loader:'tsx',resolveDir:root},outdir:join(output,'app'),entryNames:'app',bundle:true,splitting:true,format:'esm',jsx:'automatic',platform:'browser',target:'es2022',plugins,alias:{'@':join(root,'src')},define:{'process.env.NODE_ENV':'"development"','process.env.NEXT_PUBLIC_PICO_ENV':'"demo"','process.env.NEXT_PUBLIC_PICO_VERSION':'"test"','process.env.NEXT_PUBLIC_SUPABASE_URL':'undefined','process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY':'undefined'}});
-const styles=['globals.css','social.css','social-pages.css','forms.css','profile.css'].map(file=>readFileSync(join(root,'src/app',file),'utf8').replace(/^@import.*$/gm,'').replace(/@theme inline\s*\{[^}]*\}/g,'')).join('\n');
+const styles=['globals.css','social.css','social-pages.css','forms.css','profile.css','journey.css'].map(file=>readFileSync(join(root,'src/app',file),'utf8').replace(/^@import.*$/gm,'').replace(/@theme inline\s*\{[^}]*\}/g,'')).join('\n');
 writeFileSync(join(output,'style.css'),styles+'\nbody{max-width:620px;margin:auto}#root{padding-top:20px}a{color:inherit}');
 const html='<!doctype html><html lang="pt-BR"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/style.css"><div id="root"></div><script type="module" src="/app/app.js"></script></html>';
 // Receive image bytes through real loopback HTTP. Browser protocol inspection
@@ -70,7 +70,8 @@ try {
    if(url.pathname==='/api/social/read'){
     if(url.searchParams.get('resource')==='profile'){readCount++;data={status:'success',data:{kind:'profile',profile}};}
     else if(url.searchParams.get('resource')==='sports')data={status:'success',data:{kind:'sports',sports:[sport]}};
-    else data={status:'success',data:{kind:'checkin',own:null,presence:[]}};
+    else if(url.searchParams.get('resource')==='arenas')data={status:'success',data:{kind:'arenas',arenas:[],sports:[sport],hasMore:false,offset:0}};
+    else throw new Error('Unexpected social resource in profile fixture');
    }else if(url.pathname==='/api/social/mutate'){
     const body=request.postDataJSON();if(failSave){await route.fulfill({status:503,json:{status:'error',message:'Falha controlada de teste.'}});return;}
     if(body.action==='save_profile'){saveCount++;profile={...profile,...body,sports:[{sport,level:body.level,isPrimary:true}]};}
@@ -91,7 +92,7 @@ try {
   failSave=true;await page.getByRole('button',{name:'Salvar perfil',exact:true}).click();await expect(page.getByRole('alert')).toContainText('Falha controlada');await expect(page.getByLabel('Nome',{exact:true})).toHaveValue('Rascunho preservado');failSave=false;
   await page.getByRole('button',{name:'Cancelar edição',exact:true}).click();await expect(page.getByRole('dialog',{name:'Descartar alterações?'})).toBeVisible();await page.getByRole('button',{name:'Continuar editando',exact:true}).click();await expect(page.getByLabel('Nome',{exact:true})).toHaveValue('Rascunho preservado');
   await page.getByLabel('Nome',{exact:true}).fill('Alex do Pico');await page.screenshot({path:join(output,`${name}-editor.png`),fullPage:true});await page.getByRole('button',{name:'Salvar perfil',exact:true}).click();await expect(page.getByTestId('profile-editor')).toHaveCount(0);await expect(page.getByRole('heading',{name:'Alex do Pico',exact:true})).toBeVisible();if(saveCount!==1)throw Error('Profile persisted more than once');
-  await page.getByRole('tab',{name:'Meus Picos',exact:true}).click();await expect(page.getByRole('heading',{name:'Picos e comunidades',exact:true})).toBeVisible();await page.getByRole('tab',{name:'Meus Picos',exact:true}).press('ArrowRight');await expect(page.getByRole('heading',{name:'Seu histórico privado',exact:true})).toBeVisible();
+  await page.getByRole('tab',{name:'Meus Picos',exact:true}).click();await expect(page.getByRole('heading',{name:'Vínculos no Pico',exact:true})).toBeVisible();await page.getByRole('tab',{name:'Meus Picos',exact:true}).press('ArrowRight');await expect(page.getByRole('link',{name:'Abrir Meus jogos',exact:true})).toBeVisible();
   for(const width of [320,390,430,768]){await page.setViewportSize({width,height:844});if(await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth))throw Error(`Profile overflow ${width}`);await page.getByRole('button',{name:'Editar perfil',exact:true}).click();if(await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth))throw Error(`Editor overflow ${width}`);await page.getByRole('button',{name:'Cancelar edição',exact:true}).click();}
   await page.setViewportSize({width:390,height:844});
   await page.emulateMedia({reducedMotion:'reduce'});

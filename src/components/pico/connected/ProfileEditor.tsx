@@ -80,7 +80,6 @@ export function ProfileEditor({ profile, done, onAvatarChange = () => {} }: {
             <label className="input-group" htmlFor={`${prefix}-sportId`}>Esporte principal<select className="input" id={`${prefix}-sportId`} name="sportId" value={draft.sportId} onChange={e => field('sportId', e.target.value)} required><option value="" disabled>Escolha seu esporte</option>{state.data.sports.map(sport => <option value={sport.id} key={sport.id}>{sport.name}</option>)}</select></label>
             <label className="input-group" htmlFor={`${prefix}-level`}>Nível<select className="input" id={`${prefix}-level`} name="level" value={draft.level} onChange={e => field('level', e.target.value as Level)}>{['Iniciante', 'Intermediário', 'Avançado'].map(level => <option key={level}>{level}</option>)}</select></label>
           </div>
-          <label className="profile-editor-v2-switch"><span><strong>Disponível para jogar</strong><small>Mostre à sua turma que você está a fim de jogo.</small></span><input type="checkbox" name="available" role="switch" checked={draft.available} onChange={e => field('available', e.target.checked)} /></label>
         </section>
         <section className="profile-editor-v2-section" aria-labelledby={`${prefix}-location`}>
           <h2 id={`${prefix}-location`}><MapPin size={18} aria-hidden="true" />Onde você joga</h2><p>Cidade e bairro aparecem no perfil. Não informe seu endereço completo.</p>

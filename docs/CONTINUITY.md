@@ -20,9 +20,9 @@ O procedimento usa Supabase CLI 2.117.0, PostgreSQL 17 e serviços locais oficia
 
 ## Rollback e operação
 
-A versão pública histórica continua no projeto Vercel `pico-app`. A rodada usa preview do projeto `pico-internal`. Push não equivale a deploy: não há integração Git/Vercel. O wrapper `scripts/deploy-internal.mjs` aceita somente branch limpa `cycle-9-internal`, projeto interno, backend beta, identidade remota e migrations completas. O comando exige `--target=preview` explicitamente. A primeira tentativa implícita foi cancelada em build, sem backend, ao receber alvo Production da Vercel. O primeiro Preview válido é e891dca1e741; não há Preview anterior validado para rollback nesta entrega.
+A publicação vigente usa a main sincronizada e o projeto Vercel existente `pico-app`, em pico-app-sepia.vercel.app. O wrapper `scripts/deploy.mjs` valida identidade beta, projeto, branch e ledger completo; `--stage` prepara Production sem trocar o domínio. Push executa CI e não publica automaticamente. O antigo fluxo interno está aposentado. Procedimento atual em [BETA_OPERATIONS.md](BETA_OPERATIONS.md).
 
-Em regressão essencial desta primeira revisão, suspender sua disponibilização até correção validada. Nas próximas versões, voltar somente a um Preview anterior compatível e verificado, preservando o banco. Corrigir banco por migrations aditivas; não remover colunas/dados para acompanhar rollback de frontend. Antes de restaurar um banco, validar compatibilidade de Auth/Storage e a integridade do backup em isolamento.
+O pós-jogo revoga os contratos antigos de presença sem remover seus dados. Por isso, um artefato anterior que ainda depende de check-in não é rollback compatível após essas migrations. Em falha essencial, interromper a promoção e corrigir por PR validado; preservar artefatos e banco. Banco recebe correções aditivas, nunca reset, remoção de RLS ou restauração sobre dados atuais sem plano próprio e autorização específica.
 
 Logs de falha têm apenas categoria, status, versão e identificador aleatório da ocorrência. Não incluem URL, UID, e-mail, senhas, tokens, post ou localização. A auditoria administrativa permanece em schema privado e é exibida apenas a operadores vigentes.
 

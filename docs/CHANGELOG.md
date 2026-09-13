@@ -1,5 +1,30 @@
 # Changelog — Pico
 
+## 2026-09-12 — validação hospedada e preparação da publicação integrada
+
+- Backups cifrados de desenvolvimento e principal; ledger conferido antes da aplicação das duas migrations novas no desenvolvimento. Tipos completos regenerados do Supabase remoto.
+- Gate real: 210 verificações de Auth, sessão, RLS, jogos privados, compartilhamento concorrente, destinos, moderação e Storage; somente identidades descartáveis de desenvolvimento.
+- Mantidos os 81 testes locais, lint, typecheck e build conectado. Publicação autorizada por PR/CI na main e `scripts/deploy.mjs`, sem bypass das proteções.
+- [Preparação, contratos e limites da entrega](JOURNEY_RELEASE.md). Registros locais anteriores abaixo são históricos.
+
+## 2026-09-12 — jornada integrada, composição e compartilhamento (local)
+
+- Início com vínculos próprios e primeira ação; navegação fixa Início/Pessoas/Comunidades/Arenas/Perfil, sem presença ao vivo. Pessoas, grupos, lugares, posts e jogos recebem composições próprias.
+- Comunidades com propósito/condições e participação pendente distinta; ações contextuais entre pessoas, arena, grupo e publicação; demo local percorre a mesma narrativa.
+- Compartilhamento separado de jogo privado, com audiência/destinos visíveis, texto/foto opcionais, retry idempotente e link canônico; snapshot da data não muda ao corrigir/excluir o registro.
+- Migration local 20260912091000: contexto de post sujeito a RLS, confirmação privada de envio e leitura estritamente própria do legado. Nada aplicado remotamente.
+- 81 testes, lint, typecheck, builds conectado/demo e UI local passaram. 25 medições responsivas, nove telas auxiliares, texto ampliado e teclado/altura reduzida. [Relatório e limitações](journey-review/README.md).
+- Roteiros de teste antigos atualizados para o contrato sem presença; sem execução remota, push, merge ou deploy nesta rodada.
+
+## 2026-09-12 — registro privado depois do jogo (incremento local)
+
+- Retirada transversal de presença: navegação, demo, perfis, descoberta, arena, compositor, textos e contratos HTTP; `/checkin` redireciona para `/jogos`.
+- Jogos privados com arena/modalidade/data civil, correção versionada, exclusão própria e tentativas idempotentes. Chave privada mínima impede recriação por retry depois da exclusão.
+- Migration aditiva 20260912090000: preserva legado sem exposição/conversão; revoga RPCs/leituras de presença e limita descoberta a vínculos/interesses. Tipos RPC gerados em banco local descartável.
+- Lint, typecheck, build, 75 testes locais, 10 checks HTTP sem sessão e smoke Chromium demo/conectado com fixture. [Contratos e limites](POST_GAME.md); [evidências visuais](visual-review/post-game/README.md).
+- Sem push, merge, deploy ou alteração remota. Tarefa integradora assume jornada/design completo e compartilhamento estruturado.
+
+
 ## Refino visual global · 2026-09-09
 
 - Fonte nativa única, escala relativa, superfícies carvão, controles e raios consistentes; acento verde-água e vidro restrito a elevações.

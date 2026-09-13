@@ -8,7 +8,7 @@ description: Revisar a interface e o texto do Pico para manter clareza, personal
 Use após implementar uma tela ou quando a interface perder identidade. Este guia complementa skill_pico_dev.md.
 
 A revisão agora também acontece antes de codar. Critérios e aprendizados por rodada ficam em [deslopify.md](deslopify.md).
-Na rodada 2, priorizar uso social em 390px, check-in central e pessoas reconhecíveis; substituir a apresentação institucional por acesso direto ao feed.
+Critério vigente: uso social em 390px, pessoas reconhecíveis e jogos privados registrados depois da experiência. A decisão de pós-jogo substitui o check-in central da rodada 2.
 
 ## Pergunta central
 
@@ -40,9 +40,9 @@ Remova ou reescreva:
 | Evitar | Preferir |
 | --- | --- |
 | Potencialize seu networking esportivo | Encontre sua próxima dupla. |
-| Gerencie suas experiências esportivas | Quem tá na areia hoje? |
+| Gerencie suas experiências esportivas | Encontre gente do seu esporte. |
 | Explore nosso ecossistema de arenas | Encontre sua arena. |
-| Operação realizada com sucesso | Check-in feito. |
+| Operação realizada com sucesso | Jogo registrado. |
 | Nenhum registro encontrado | Ainda não tem ninguém por aqui. |
 | Erro desconhecido | Não foi possível carregar. Tente novamente. |
 

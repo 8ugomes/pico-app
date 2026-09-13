@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { ArrowLeft, ArrowUpRight, MapPin, Pencil, Settings2, ShieldCheck } from 'lucide-react';
 import type { ReadProfile } from '@/types/read';
 import { Button, buttonVariants } from '@/components/ui/Button';
-import { ActivityHistory, ProfilePlaces } from './ActivityHistory';
+import { ProfilePlaces } from './ActivityHistory';
 import { ConnectedFeed } from './ConnectedFeed';
 import { ProfileEditor } from './ProfileEditor';
 import { RemoteAvatar } from './Media';
@@ -30,7 +30,7 @@ export function ConnectedProfile() {
 const panels = [
   { id: 'posts', label: 'Publicações' },
   { id: 'places', label: 'Meus Picos' },
-  { id: 'activity', label: 'Atividade' },
+  { id: 'activity', label: 'Meus jogos' },
 ] as const;
 type Panel = typeof panels[number]['id'];
 type ManagementOverview = { platformRole: string | null; arenas: unknown[]; communities?: unknown[] };
@@ -82,7 +82,6 @@ function ProfileWorkspace({ profile, refresh }: { profile: ReadProfile; refresh:
         <SportIcon sport={sport.slug} size={18} /><span><strong>{sport.name}</strong><small>{level}{isPrimary ? ' · Principal' : ''}</small></span>
       </span>)}</div>
       <div className="profile-v2-actions">
-        <span className={`profile-v2-availability ${profile.available ? 'is-available' : ''}`}><i aria-hidden="true" />{profile.available ? 'Disponível para jogar' : 'Sem disponibilidade agora'}</span>
         <Button variant="secondary" onClick={() => { setEditing(true); setSaved(false); }}><Pencil size={16} aria-hidden="true" />{profile.onboardingCompleted ? 'Editar perfil' : 'Completar perfil'}</Button>
       </div>
     </section>
@@ -93,7 +92,7 @@ function ProfileWorkspace({ profile, refresh }: { profile: ReadProfile; refresh:
       onClick={() => setPanel(item.id)} onKeyDown={event => moveTab(event, index)}
     >{item.label}</button>)}</div>
     {panels.map(item => <section key={item.id} role="tabpanel" id={`${tabId}-panel-${item.id}`} aria-labelledby={`${tabId}-${item.id}`} hidden={panel !== item.id} tabIndex={0} className="profile-v2-panel">
-      {panel === item.id && (item.id === 'posts' ? <ConnectedFeed authorId={profile.id} readOnly /> : item.id === 'places' ? <ProfilePlaces playerId={profile.id} /> : <><p className="profile-v2-private"><ShieldCheck size={16} aria-hidden="true" />Só você vê seu histórico detalhado.</p><ActivityHistory /></>)}
+      {panel === item.id && (item.id === 'posts' ? <ConnectedFeed authorId={profile.id} readOnly /> : item.id === 'places' ? <ProfilePlaces playerId={profile.id} /> : <><p className="profile-v2-private"><ShieldCheck size={16} aria-hidden="true" />Só você vê seu histórico detalhado.</p><p>Guarde as lembranças dos seus jogos por arena e data.</p><Link className={buttonVariants()} href="/jogos">Abrir Meus jogos</Link></>)}
     </section>)}
     <footer className="profile-v2-footer">
       {canManage && <Link href="/admin" className={buttonVariants({ variant: 'quiet', size: 'small' })}>Gerenciar meus Picos <ArrowUpRight size={15} aria-hidden="true" /></Link>}

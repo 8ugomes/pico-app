@@ -15,3 +15,9 @@ Chromium móvel emulado em 320/390/430 px: login, grupos, feed/perfil/admin, rec
 Validar em Android/Chrome e iPhone/Safari reais: instalação pela tela inicial, teclado/câmera/galeria, orientação EXIF real, safe areas, zoom, relançamento, retomada de sessão e atualização entre versões. Emulação não comprova estes itens. Navegador e PWA podem manter sessões distintas; links externos não transportam sessão entre eles.
 
 Fora da rodada: app nativo, push, geolocalização contínua e estratégia de cache offline social. Avaliar service worker futuro somente com modelo explícito de privacidade e invalidação.
+
+## Pós-jogo · 2026-09-12
+
+`/jogos` precisa de conexão no ambiente conectado. Não há fila de registros, sincronização em segundo plano ou publicação automática. A navegação aposentou presença ao vivo; versão/sessão ainda são verificadas ao retomar o app. Esta rodada local não comprova instalação, teclado ou safe areas em aparelho físico.
+
+Compartilhar um jogo também exige confirmação online e usa chave de tentativa preservada. Fechar/reabrir o diálogo mantém o rascunho enquanto a tela/sessão permanece montada. Recarregar ou trocar de identidade descarta esse estado; não há promessa de armazenamento offline. Na demonstração, jogos/grupos/posts são locais e identificados; o link canônico deixa de encontrar o post ao recarregar a sessão.

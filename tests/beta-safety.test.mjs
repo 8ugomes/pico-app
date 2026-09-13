@@ -4,13 +4,13 @@ import { createTestDatabase, asUser, ALICE, BOB, VILA, FUTEVOLEI } from './helpe
 const denied = promise => assert.rejects(promise,e=>e.code==='42501');
 const invalid = promise => assert.rejects(promise,e=>e.code==='23514');
 
-test('blocking is bilateral across profiles, posts, presence and interactions; unblocking does not reconnect', async () => {
+test('blocking is bilateral across profiles, posts and interactions; unblocking does not reconnect', async () => {
   const db=await createTestDatabase();
   for(const uid of [ALICE,BOB]) await asUser(db,uid,()=>db.query('select public.set_arena_membership($1,true)',[VILA]));
   try {
     const post=await asUser(db,ALICE,async()=>{
       await db.query('insert into connections(followed_id) values ($1)',[BOB]);
-      await db.query('select start_checkin($1,$2)',[VILA,FUTEVOLEI]);
+      await db.query("select save_played_game(gen_random_uuid(),$1,$2,'2026-01-01')",[VILA,FUTEVOLEI]);
       return (await db.query('insert into posts(arena_id,sport_id,body) values ($1,$2,$3) returning id',[VILA,FUTEVOLEI,'Na areia'])).rows[0].id;
     });
     await asUser(db,BOB,async()=>{
@@ -20,7 +20,7 @@ test('blocking is bilateral across profiles, posts, presence and interactions; u
       assert.equal((await db.query('select * from blocks')).rows[0].blocked_name,'Alice Teste');
       assert.equal((await db.query('select * from posts where id=$1',[post])).rows.length,0);
       assert.equal((await db.query('select * from profiles where id=$1',[ALICE])).rows.length,0);
-      assert.equal((await db.query('select * from checkins where player_id=$1',[ALICE])).rows.length,0);
+      assert.equal((await db.query('select * from played_games where player_id=$1',[ALICE])).rows.length,0);
       await denied(db.query('insert into connections(followed_id) values ($1)',[ALICE]));
       await denied(db.query('insert into post_likes(post_id) values ($1)',[post]));
       await denied(db.query('insert into comments(post_id,body) values ($1,$2)',[post,'Blocked']));

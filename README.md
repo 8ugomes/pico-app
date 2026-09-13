@@ -10,6 +10,8 @@ O refino visual global consolida fonte nativa, cores, formulários e diálogos s
 
 Endereço principal: [Pico](https://pico-app-sepia.vercel.app). O Ciclo 9 está integrado à `main`; publicação por `npm run deploy` no projeto Vercel `pico-app`. O endereço antigo `pico-internal.vercel.app` encaminha ao principal. [Ambientes](docs/ENVIRONMENTS.md) descreve a configuração, [operação](docs/BETA_OPERATIONS.md) explica publicação e rollback e [contratos](docs/CYCLE9_CONTRACTS.md) define permissões. A versão efetivamente servida pode ser consultada em [/api/version](https://pico-app-sepia.vercel.app/api/version). O relatório [INTERNAL_REVIEW.md](docs/INTERNAL_REVIEW.md) preserva a validação anterior à unificação.
 
+**Jornada e pós-jogo:** início com acesso aos próprios grupos/arenas, navegação fixa Início/Pessoas/Comunidades/Arenas/Perfil, composições específicas e jogos privados com compartilhamento explícito separado. [Decisões de jornada](docs/JOURNEY_REFINEMENT.md) · [contratos](docs/POST_GAME.md) · [evidências](docs/journey-review/README.md). Publicação do conjunto completo autorizada pelo responsável. [Gate remoto, migrations e entrega](docs/JOURNEY_RELEASE.md); consulte `/api/version` para a revisão efetivamente servida.
+
 ## Executar
 
 Node.js 24, npm 11 e dependências do lockfile:
@@ -34,8 +36,9 @@ Demonstração exige `NEXT_PUBLIC_PICO_ENV=demo` e `PICO_ENV=demo`, sem chaves S
 | /arenas/[slug]/gestao | Edição versionada, imagens, modalidades, equipe, convites e transferência conforme papel |
 | /comunidades | Criar/encontrar comunidades independentes ou vinculadas; entrada aberta, aprovada ou por convite |
 | /comunidades/[slug]/gestao | Informações, participantes, papéis, fotos, convites e vínculo de arena |
-| /feed | Post canônico: perfil, mural e grupos selecionados; audiência explícita, curtidas/comentários/denúncia; sugestão opcional do mural do check-in ativo |
-| /checkin | Presença voluntária até duas horas, encerramento, histórico próprio e arenas recentes |
+| /feed | Início com atalhos aos próprios grupos/arenas e estado inicial orientado à descoberta. Post canônico: perfil, mural e grupos selecionados; audiência explícita, curtidas/comentários/denúncia; sem sugestão derivada de presença |
+| /jogos | Registro privado de jogo realizado: arena, modalidade e data; correção/exclusão própria; compartilhar é uma ação separada com audiência/destinos explícitos; sem publicação ou aviso automático |
+| /checkin | Compatibilidade de links: redireciona para /jogos |
 | /perfil e /perfil/[username] | Perfil, esportes, avatar com recorte, publicações e vínculos visíveis; perfil próprio com abas e editor organizado separado; sem e-mail alheio |
 | /descobrir | Interesses, vínculos permitidos e conexões unilaterais; sem usar histórico privado |
 | /conta | Bloqueios, denúncias próprias, fotos sem uso e exclusão com senha; recursos geridos entram em custódia |
@@ -46,7 +49,7 @@ Arenas de demonstração continuam rotuladas mesmo após renomear. Comunidade pr
 
 ## Banco e comandos
 
-19 migrations versionadas, aditivas, com backfill de posts antigos. O Ciclo 10 não acrescenta migrations. Tipos são gerados, não editados manualmente. Não recriar projetos corretos, reaplicar SQL registrado nem resetar banco remoto.
+21 migrations versionadas no código local. As novas migrations `20260912090000_played_games.sql` e `20260912091000_game_sharing.sql` não foram aplicadas a nenhum banco remoto nesta rodada. O backfill histórico de posts não se aplica aos jogos: o legado de presença é preservado sem conversão. O Ciclo 10 não acrescentou migrations. Tipos são gerados, não editados manualmente. Não recriar projetos corretos, reaplicar SQL registrado nem resetar banco remoto.
 
 ```bash
 node --env-file=.env.local --env-file=.env.hosted-admin scripts/database.mjs dry-run
@@ -58,7 +61,7 @@ npm test
 npm run build
 ```
 
-`seed` e `test:hosted` recusam beta/produção. O teste remoto atual usa desenvolvimento exclusivo e app local correspondente em localhost:3002; cria e limpa somente identidades/recursos rastreados:
+`seed` e `test:hosted` recusam beta/produção. O gate remoto do Ciclo 9 usa desenvolvimento exclusivo e app local correspondente em localhost:3002; cria e limpa somente identidades/recursos rastreados:
 
 ```bash
 # Terminal separado: build/start com os envs de desenvolvimento.
@@ -68,7 +71,7 @@ PICO_BUILD_DIR=.next-verify npm run start -- -p 3002
 npm run test:hosted
 ```
 
-`--keep` reserva fixtures protegidas para QA; finalizar com `npm run test:hosted -- --cleanup`. Não iniciar outra execução antes de limpar as fixtures anteriores. Scripts Cycle 8 são registros históricos e não são o gate atual. Testes locais usam PostgreSQL/PGlite descartável e independem do remoto.
+`--keep` reserva fixtures protegidas para QA; finalizar com `npm run test:hosted -- --cleanup`. Não iniciar outra execução antes de limpar as fixtures anteriores. Scripts Cycle 8 e a fixture HTTP antiga são roteiros auxiliares, não o gate atual. Expectativas de presença foram substituídas por jogos/rejeição do legado; esses roteiros não foram executados contra infraestrutura nesta rodada. O helper SQL inicia com as migrations atuais, mas sua antiga instrução de build em loopback antecede a guarda de identidade: não altere a guarda nem a configuração para executá-lo. Testes locais usam PostgreSQL/PGlite descartável e independem do remoto.
 
 ## Segurança, fotos e operação
 

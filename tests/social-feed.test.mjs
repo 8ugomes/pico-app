@@ -53,6 +53,6 @@ test('SDK writes omit author and unlike filters by verified caller; auth failure
   await mutateSocial(client, parseMutation({ action: 'set_like', postId: BOB, liked: false }));
   assert.equal(new URL(calls[1].url).searchParams.get('player_id'), `eq.${ALICE}`);
   client.auth.getUser = async () => ({ data: { user: null }, error: null });
-  await assert.rejects(mutateSocial(client, { action: 'end_checkin' }), e => e.status === 401);
+  await assert.rejects(mutateSocial(client, { action: 'set_like', postId: BOB, liked: true }), e => e.status === 401);
   assert.equal(calls.length, 2);
 });

@@ -6,6 +6,7 @@ import { Heart, MessageCircle, Send, ArrowUpRight } from "lucide-react";
 import { useDemo } from "./DemoProvider";
 import { PlayerAvatar } from "./PlayerAvatar";
 import { SportLabel } from "./SocialUI";
+import { formatGameDate } from '@/lib/game-date';
 import { timeAgo } from "@/lib/demo-state";
 import type { Post } from "@/types/social";
 
@@ -25,14 +26,17 @@ export function PostCard({ post }: { post: Post }) {
   }
   return <article className="post-card">
     <header className="post-header">
-      <Link href={author.id === me.id ? "/perfil" : `/perfil/${author.username}`} className="post-person"><PlayerAvatar player={author} /><span><strong>{author.name}</strong><small>{timeAgo(post.createdAt, now)}</small></span></Link>
+      <Link href={author.id === me.id ? "/perfil" : `/perfil/${author.username}`} className="post-person"><PlayerAvatar player={author} /><span><strong>{author.name}</strong><small>Publicado {timeAgo(post.createdAt, now)} · Demo</small></span></Link>
       <SportLabel sport={post.sportId} />
     </header>
+    <p className="form-note">{post.audience === 'private' ? 'Grupo privado · simulação' : 'Pessoas aprovadas no beta · simulação'} · <Link href={`/publicacoes/${post.id}`}>Abrir publicação</Link></p>
+    {post.gamePlayedOn && <p className="post-game-date">Jogado em <time dateTime={post.gamePlayedOn}>{formatGameDate(post.gamePlayedOn)}</time> · relato de quem publicou</p>}
     <p className="post-copy">{post.content}</p>
     {post.photo && <Link className="post-photo" href={`/arenas/${arena.slug}`} aria-label={`Conhecer ${arena.name}`}>
       <Image src={post.photo} alt="Ilustração de uma arena de areia urbana ao pôr do sol." width={1440} height={960} sizes="(max-width: 700px) 100vw, 620px" />
       <span className="photo-arena-label">{arena.name} <ArrowUpRight size={15} aria-hidden="true" /></span>
     </Link>}
+    {post.communityIds?.length ? <div className="post-context-links">{state.communities.filter(c => post.communityIds?.includes(c.id)).map(c => <Link href={`/comunidades/${c.slug}`} key={c.id}>{c.name}</Link>)}</div> : null}
     <footer className="post-actions">
       <div><button type="button" className={liked ? "post-action is-liked" : "post-action"} aria-label={liked ? `Descurtir post de ${author.name}` : `Curtir post de ${author.name}`} aria-pressed={liked} onClick={() => dispatch({ type: "like", postId: post.id })}><Heart size={21} fill={liked ? "currentColor" : "none"} aria-hidden="true" /><span>{post.likes + Number(liked)}</span></button>
       <button type="button" className="post-action" onClick={() => setExpanded(!expanded)} aria-expanded={expanded} aria-label={`Comentários do post de ${author.name}`}><MessageCircle size={21} aria-hidden="true" /><span>{comments.length}</span></button></div>
