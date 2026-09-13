@@ -10,6 +10,7 @@ import { useRemoteRead } from './useRemoteRead';
 import { useMutation, MutationNotice } from './useMutation';
 import { ReadLoading, ReadFailure } from './ReadState';
 import { removePhoto } from './Media';
+import { AccountExport } from '../AccountExport';
 
 function DeleteAccount() {
   const [open,setOpen]=useState(false), [busy,setBusy]=useState(false), [error,setError]=useState<string|null>(null);
@@ -27,7 +28,7 @@ function DeleteAccount() {
   return <section className="connected-panel"><h2>Excluir minha conta</h2><p className="form-note">Remove seu perfil, fotos, publicações, comentários, conexões e registros de jogos. A exclusão é definitiva.</p><Button variant="quiet" onClick={()=>setOpen(true)}>Quero excluir minha conta</Button>
     <Modal open={open} onClose={()=>{if(!busy)setOpen(false);}} title="Excluir sua conta?">
       <p className="form-note">Confirme a senha da conta atual. Se a conexão cair após iniciar, repita aqui para concluir. Dados já removidos não poderão ser recuperados.</p>
-      <form className="connected-form" onSubmit={submit}><fieldset disabled={busy}><Input id="delete-password" name="password" type="password" label="Sua senha atual" autoComplete="current-password" minLength={8} maxLength={128} required /><Input id="delete-confirmation" name="confirmation" label="Digite EXCLUIR para confirmar" autoComplete="off" pattern="EXCLUIR" required /><Button type="submit">{busy?'Excluindo…':'Excluir definitivamente'}</Button></fieldset>{error && <p role="alert" className="auth-notice notice-error">{error}</p>}</form>
+      <form className="connected-form" onSubmit={submit}><fieldset disabled={busy}><Input id="delete-password" name="password" type="password" label="Sua senha atual" autoComplete="current-password" minLength={1} maxLength={128} required /><Input id="delete-confirmation" name="confirmation" label="Digite EXCLUIR para confirmar" autoComplete="off" pattern="EXCLUIR" required /><Button type="submit">{busy?'Excluindo…':'Excluir definitivamente'}</Button></fieldset>{error && <p role="alert" className="auth-notice notice-error">{error}</p>}</form>
     </Modal></section>;
 }
 export function ConnectedAccount() {
@@ -46,6 +47,7 @@ export function ConnectedAccount() {
       }}>{removing===m.path?'Removendo…':'Remover'}</Button>}</div>)}{photoError && <p role="alert" className="auth-notice notice-error">{photoError}</p>}</section>
     </div>}
     {/* Kept available when a deletion is pending and social reads are denied. */}
+    <AccountExport />
     <DeleteAccount />
   </>;
 }

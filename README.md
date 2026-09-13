@@ -1,3 +1,5 @@
+> Preparação para beta: [segurança, testes e pendências de abertura](docs/BETA_SECURITY.md). As correções podem ser publicadas; novos cadastros dependem de SMTP e da definição operacional de privacidade.
+
 # Pico
 
 **Republicações:** publicações alheias podem aparecer no seu perfil e no Início de quem acompanha você, com autoria, curtidas, comentários e audiência originais preservados. É possível desfazer; grupos privados continuam restritos. [Contrato e verificação](docs/REPOSTS.md).

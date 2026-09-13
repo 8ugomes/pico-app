@@ -1,3 +1,5 @@
+> Preparação do beta: responsável reiterou cadastro pelo link, sem convite obrigatório. [Reforços de segurança e pendências atuais](BETA_SECURITY.md). Registros de ambiente/versão abaixo preservam etapas anteriores.
+
 > Atualização de publicação: sincronização com produção autorizada em 13/09/2026; migration e política de senha já aplicadas no principal. [Preparação, destino e verificação da revisão servida](ONBOARDING_RELEASE.md). SMTP continua pendente. As referências abaixo a “somente desenvolvimento”/“não publicado” registram a etapa anterior.
 
 # Comunidade oficial, cadastro aberto e revisão de autenticação

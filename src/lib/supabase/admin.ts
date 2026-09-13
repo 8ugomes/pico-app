@@ -4,7 +4,7 @@ import type { Database } from '@/types/database';
 import { getSupabaseEnvironment } from './config';
 import { MutationError } from './mutations';
 
-// Only media processing and verified account deletion use this client.
+// Only media processing and verified account privacy operations use this client.
 // Never inherit a browser session or expose this credential in a response.
 export function createAdminClient() {
   const config = getSupabaseEnvironment();

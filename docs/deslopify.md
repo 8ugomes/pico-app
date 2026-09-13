@@ -1,5 +1,21 @@
 # Pico — Deslopify
 
+## Landing pública — critérios antes de codar · 13/09/2026
+
+A abertura deve comunicar rede social de esportes de areia, pertencimento e cadastro em poucos segundos. Hierarquia editorial, foto contextual e interface demonstrativa; dar forma concreta a pessoas, lugares e conversa. Manteiga/Cacau/Papel e apoio Lavanda, logo original e Syne/Manrope. Uma ação principal: criar conta.
+
+Todas as prévias e fotografias sintéticas recebem identificação; não inventar base de usuários, depoimentos, presença ao vivo ou promessas de funcionalidades. Jogos são privados e compartilhar é separado. Recursos exploráveis por teclado, conteúdo disponível com movimento reduzido, alvos de toque e responsividade. Verificar o conjunto em lote, preservando o cadastro e as alterações de segurança existentes.
+
+## Preparação do beta e privacidade — PLAN · 13/09/2026
+
+Preservar Aura Manteiga e o cadastro simples pelo link, com confirmação de e-mail. Explicar dados, audiência, republicações, direitos e limites com linguagem concreta. A conta deve permitir baixar dados próprios, corrigir e excluir sem expor dados de terceiros ou exigir uma senha nova de quem usa credenciais anteriores. Não inventar responsável, contato, prazo de retenção vigente ou selo de conformidade.
+
+Revisar conta/privacidade e entrada em mobile, teclado e dois temas após ajustes. Segurança deve ser comprovada por autorização, isolamento e comportamento real; mensagens honestas de falha e retomada, sem transformar requisitos técnicos em etapas extras para o jogador. Distinguir teste concorrente controlado, disponibilidade do servidor, entrega de e-mail e validação em aparelho físico.
+
+### Fechamento da revisão de segurança
+
+Download e exclusão usam os controles existentes e confirmação de senha, com erros explícitos; privacidade explica finalidades, republicações, direitos e limites sem inventar contato ou responsável. Conta em 320 px escuro e 390 px claro sem overflow, download real no navegador. Teste de rede revelou que a chegada tardia das preferências remontava a tela e perdia o formulário: a identidade inicial agora mantém a árvore; troca entre contas conhecidas continua isolada. Teste com resposta atrasada preserva diálogo e senha digitada. Regressão do guia em oito layouts, erro de perfil, localStorage indisponível e conta diferente passou. Aprendizado: estado de assistência opcional não deve reiniciar trabalho em andamento.
+
 ## Republicações — critérios antes de codar · 13/09/2026
 
 Adicionar “Republicar” junto de curtir/comentar, com ícone Lucide, estado textual e `aria-pressed`; desfazer pela mesma ação. Explicar a audiência antes do envio, especialmente em grupo privado. Acima do autor original, atribuição curta “Nome republicou” com link ao perfil. Não criar cópia visual encaixada, métrica inventada ou novo compositor. O original mantém sua data e autoria.

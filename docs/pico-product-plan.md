@@ -1,5 +1,25 @@
 # Pico — plano de produto
 
+## Landing pública de divulgação — PLAN · 13/09/2026
+
+Criar uma landing objetiva em `/`, substituindo o redirecionamento para `/feed`, com identidade Aura Manteiga e conversão para `/signup`. Apresentar pessoas/perfis, arenas, comunidades, publicações/republicações e jogos privados em prévias ilustrativas, sem consultar dados sociais. Manter entrada por `/login`, instalação e confirmação de e-mail existentes; PWA continua abrindo `/feed`.
+
+Composição editorial com fotografia do acervo aprovado, app em destaque, navegação de funcionalidades acessível e fechamento de cadastro. Reusar logo, fontes e tokens; isolar estilos da nova superfície. Antes da entrega: revisão desktop/mobile e escuro/texto ampliado, navegação/teclado, lint/typecheck/build, documentação e commit só do escopo. Preservar mudanças de segurança já presentes; nenhuma publicação solicitada nesta rodada.
+
+## Preparação do beta e segurança — PLAN · 13/09/2026
+
+Pedido atual autoriza auditar, corrigir, validar e publicar a preparação para um beta pequeno. O responsável confirmou entrada pelo link e cadastro, sem convite individual nem aprovação: manter confirmação de e-mail, admissões existentes e suspensões. A exclusividade depende da divulgação do link.
+
+Auditar histórico/bundles/segredos, Auth, RLS/grants, Storage, sessão/origem, dependências, exclusão e direitos do titular. Corrigir falhas encontradas, oferecer acesso aos próprios dados sem credenciais e reforçar proteção HTTP. Exercitar concorrência moderada e isolamento com identidades controladas no desenvolvimento; não fazer carga nem criar contas fictícias no principal. Preparar operação, retenção, incidentes e evidências com fontes oficiais de LGPD/ANPD, sem declarar certificação jurídica.
+
+Antes de codar: confirmar contratos e registrar critérios no Deslopify. Fechamento: lint/typecheck/testes/build, auditoria remota de leitura, testes funcionais, PR/CI e publicação pela main protegida. Preservar dados e release `06f172880a6e` para rollback. Envio SMTP, responsável e canal público de privacidade precisam de dados reais do responsável; concluir todo trabalho independente enquanto essas informações estão pendentes. A existência de um deploy não comprova prontidão para novos cadastros.
+
+### Fechamento da implementação de segurança
+
+Auditoria do principal por agregados (26 tabelas públicas com RLS, Auth negado a clientes, buckets privados e 37 tabelas existentes preservadas) e do histórico Git sem segredos encontrados pelos padrões/valores examinados. TLS obrigatório ativado nos dois bancos; GitHub secret scanning, push protection e Dependabot ativos. CSP com nonce, proteção de sensores, exportação reautenticada, exclusão paginada/convites pessoais e guarda de último operador. O teste encontrou e corrigiu remount do conteúdo quando a identidade do tutorial chegava tarde: preferências só são exibidas para a identidade carregada; mudança real de conta continua descartando a árvore anterior.
+
+97 testes locais (suíte de 96 mais a nova verificação de arquivo grande), lint/types/build; 412 verificações no desenvolvimento com limpeza, incluindo oito sessões concorrentes/96 leituras, oito republicações idempotentes, formulário preservado, download, suspensão e remoção de 101 fotos. P95 observado no ensaio final: 217 ms, sem extrapolar para capacidade Vercel. Regressão de onboarding em oito layouts com troca de identidade e erros passou. Backup cifrado principal feito e dados preservados após migration. Evidências e requisitos de abertura em [BETA_SECURITY.md](BETA_SECURITY.md). PR/CI e promoção registradas no recibo e no PR; SMTP, controlador/canal, retenção/backup externo e MFA administrativo ainda precisam de conclusão operacional. Não declarar o beta aberto nem conformidade jurídica integral.
+
 ## Republicações — plano antes de desenvolver · 13/09/2026
 
 Pedido autoriza implementar e publicar republicações após o redesign entregue na main `308b86b`. Uma pessoa poderá republicar uma publicação alheia e desfazer essa ação. O feed de quem a acompanha e seu perfil passam a incluir a referência ao original, com autoria preservada; curtidas, comentários, mídia e edição permanecem no post canônico. Uma publicação aparece uma vez por contexto, ordenada pela publicação ou republicação elegível mais recente. Murais e permalink continuam apontando ao original, sem redistribuição automática.

@@ -1,5 +1,12 @@
 # Changelog — Pico
 
+## 2026-09-13 — segurança, direitos e preparação do beta
+
+- Download dos dados da própria conta com senha verificada; serviço protegido, sem credenciais ou conteúdo de terceiros. Exclusão aceita senhas anteriores, remove todas as páginas de fotos com retomada e limpa convites pessoais.
+- CSP com nonce por documento, sensores desativados e HTML privado sem cache. Corrigida reinicialização de formulários quando o tutorial termina de carregar; troca de conta permanece isolada.
+- TLS obrigatório nos bancos dev/principal, secret scanning/push protection e Dependabot ativos. Auditoria de histórico/bundles, RLS, Auth e Storage; dependências sem vulnerabilidades conhecidas. CI inclui npm audit.
+- 97 testes locais, 412 verificações hospedadas com limpeza, concorrência de oito sessões, onboarding e smoke de privacidade. Backup cifrado e 37 tabelas, identidade e três arquivos existentes preservados. [Resultados e pendências de abertura](BETA_SECURITY.md).
+
 ## 2026-09-13 — republicações para seguidores e perfil
 
 - Republicar/desfazer publicação alheia, com audiência confirmada e identificação de quem republicou. Conteúdo, autoria, mídia, curtidas e comentários ficam no original; murais não ganham distribuição automática.
