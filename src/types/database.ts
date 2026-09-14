@@ -713,6 +713,7 @@ export type Database = {
           created_at: string
           id: string
           kind: string
+          post_id: string | null
           read_at: string | null
           recipient_id: string
         }
@@ -722,6 +723,7 @@ export type Database = {
           created_at?: string
           id?: string
           kind?: string
+          post_id?: string | null
           read_at?: string | null
           recipient_id: string
         }
@@ -731,6 +733,7 @@ export type Database = {
           created_at?: string
           id?: string
           kind?: string
+          post_id?: string | null
           read_at?: string | null
           recipient_id?: string
         }
@@ -747,6 +750,13 @@ export type Database = {
             columns: ["community_id"]
             isOneToOne: false
             referencedRelation: "communities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notifications_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "posts"
             referencedColumns: ["id"]
           },
           {
@@ -1263,6 +1273,10 @@ export type Database = {
         }
         Returns: undefined
       }
+      community_mention_candidates: {
+        Args: { p_community: string; p_search?: string }
+        Returns: Json
+      }
       community_page: { Args: { p_slug: string }; Returns: Json }
       create_community: { Args: { p_data: Json }; Returns: Json }
       create_official_community: { Args: { p_arena: string }; Returns: string }
@@ -1351,6 +1365,22 @@ export type Database = {
           p_groups?: string[]
           p_image_path?: string
           p_key: string
+          p_sport?: string
+          p_wall_arena?: string
+        }
+        Returns: string
+      }
+      publish_post_with_mentions: {
+        Args: {
+          p_arena?: string
+          p_audience?: string
+          p_body: string
+          p_everyone?: boolean
+          p_groups?: string[]
+          p_image_path?: string
+          p_key: string
+          p_mention_community?: string
+          p_people?: string[]
           p_sport?: string
           p_wall_arena?: string
         }

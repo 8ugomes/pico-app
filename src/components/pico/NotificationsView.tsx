@@ -13,16 +13,16 @@ export function NotificationsView() {
   const unread = data?.unreadCount ?? 0;
   return <section className="notifications-page" aria-labelledby="notifications-title">
     <div className="page-heading"><h1 id="notifications-title">Notificações</h1><Button variant="quiet" size="small" onClick={refresh} disabled={refreshing || demo} aria-label="Atualizar notificações"><RefreshCw size={18} aria-hidden="true" /></Button></div>
-    <p className="notifications-intro">Quem chegou às suas comunidades.</p>
+    <p className="notifications-intro">Entradas e menções nas suas comunidades.</p>
     {unread > 0 && <div className="notifications-toolbar"><span>{unread} não {unread === 1 ? 'lida' : 'lidas'}</span><Button variant="quiet" size="small" disabled={busy || refreshing} onClick={() => void markRead()}><CheckCheck size={18} aria-hidden="true" />Marcar todas como lidas</Button></div>}
     <MutationNotice message={notice} />
     {loading && <p className="read-source" role="status">Carregando notificações…</p>}
     {error && <div className="read-message" role="alert"><h2>Não deu para carregar.</h2><p>{error}</p><Button onClick={refresh}>Tentar novamente</Button></div>}
-    {data && data.items.length === 0 && <div className="social-empty"><Bell size={28} aria-hidden="true" /><h2>{cursor ? 'Fim das notificações.' : 'Nenhuma notificação por enquanto.'}</h2><p>{demo ? 'Na demonstração, ninguém entra de verdade. Suas notificações aparecem quando você usa sua conta.' : 'Quando alguém entrar em uma comunidade da qual você participa, o aviso aparece aqui.'}</p></div>}
+    {data && data.items.length === 0 && <div className="social-empty"><Bell size={28} aria-hidden="true" /><h2>{cursor ? 'Fim das notificações.' : 'Nenhuma notificação por enquanto.'}</h2><p>{demo ? 'Na demonstração, ninguém entra ou marca pessoas de verdade. Suas notificações aparecem quando você usa sua conta.' : 'Entradas e menções nas suas comunidades aparecem aqui.'}</p></div>}
     {data && data.items.length > 0 && <ul className="notifications-list" aria-label="Atividade nas suas comunidades">
       {data.items.map(item => <li key={item.id} className={`notification-row ${item.read_at ? '' : 'notification-unread'}`}>
         <span className="notification-person" aria-hidden="true"><UsersRound size={22} /></span>
-        <div className="notification-content"><p><strong>{item.actor_name}</strong> entrou na comunidade <Link href={'/comunidades/' + item.community_slug}>{item.community_name}</Link>.</p>
+        <div className="notification-content"><p><strong>{item.actor_name}</strong> {item.kind === 'community_join' ? <>entrou na comunidade <Link href={'/comunidades/' + item.community_slug}>{item.community_name}</Link>.</> : <>{item.kind === 'community_mention_all' ? 'marcou @todos' : 'marcou você'} em <Link href={'/publicacoes/' + item.post_id}>{item.community_name}</Link>.</>}</p>
           <div className="notification-meta"><time dateTime={item.created_at}>{new Date(item.created_at).toLocaleString('pt-BR', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</time><span>{item.read_at ? 'Lida' : 'Não lida'}</span></div>
           {!item.read_at && <Button variant="quiet" size="small" disabled={busy || refreshing} onClick={() => void markRead([item.id])} aria-label={`Marcar como lida: ${item.actor_name} em ${item.community_name}`}><Check size={16} aria-hidden="true" />Marcar como lida</Button>}
         </div>

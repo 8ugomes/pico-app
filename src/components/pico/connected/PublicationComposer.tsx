@@ -1,7 +1,7 @@
 'use client';
 import { useRef, useState } from 'react';
 import Link from 'next/link';
-import { Plus, PenLine, ArrowUpRight } from 'lucide-react';
+import { Plus, PenLine, ArrowUpRight, X } from 'lucide-react';
 import { Modal } from '@/components/ui/Modal';
 import { ChoiceChip } from '@/components/ui/ChoiceChip';
 import { Button } from '@/components/ui/Button';
@@ -38,16 +38,23 @@ function Composer({ options, arenaId, communityId, game, onDone, onBusy }: { opt
   const [audience, setAudience] = useState<'beta' | 'private'>(initialGroup?.visibility || 'beta');
   const [wall, setWall] = useState(options.arenas.some(a => a.id === arenaId) ? arenaId || '' : '');
   const [groups, setGroups] = useState<string[]>(initialGroup ? [initialGroup.id] : []);
+  const [mentionCommunity, setMentionCommunity] = useState(initialGroup?.id || '');
+  const [mentionPeople, setMentionPeople] = useState<MentionCandidate[]>([]);
+  const [mentionEveryone, setMentionEveryone] = useState(false);
   const [marked, setMarked] = useState<ReadArena | null>(null), [sport, setSport] = useState('');
   const [busy, setBusy] = useState(false), [uploading, setUploading] = useState(false), [message, setMessage] = useState('');
   const attempt = useRef<{ fingerprint: string; key: string } | null>(null);
   const { state: sportState } = useRemoteRead('resource=sports');
   const sports = marked ? marked.sports : sportState.status === 'success' && sportState.data.kind === 'sports' ? sportState.data.sports : [];
   const destinationNames = [options.arenas.find(a => a.id === wall)?.name, ...options.communities.filter(c => groups.includes(c.id)).map(c => c.name)].filter(Boolean);
+  const mentionGroup = groups.includes(mentionCommunity) ? mentionCommunity : groups[0] || '';
+  const mentionLabels = mentionEveryone ? '@todos' : mentionPeople.map(person => '@' + person.username).join(' ');
+  const completeBodyLength = body.trim().length + (mentionLabels ? mentionLabels.length + 2 : 0);
   return <form className="connected-form" onSubmit={async e => {
     e.preventDefault(); if (busy || uploading) return;
     const common = { body, imagePath: photo, audience, wallArena: wall || undefined, groups };
-    const payload = game ? { ...common, id: game.id, version: game.version } : { ...common, action: 'publish', arena: marked?.id, sport: sport || undefined };
+    const mentions = { mentionCommunity: mentionLabels ? mentionGroup : undefined, mentionPeople: mentionEveryone ? [] : mentionPeople.map(person => person.id), mentionEveryone };
+    const payload = game ? { ...common, id: game.id, version: game.version } : { ...common, ...mentions, action: 'publish', arena: marked?.id, sport: sport || undefined };
     const fingerprint = JSON.stringify(payload);
     if (attempt.current?.fingerprint !== fingerprint) attempt.current = { fingerprint, key: crypto.randomUUID() };
     setBusy(true); onBusy(true); setMessage('');
@@ -63,16 +70,39 @@ function Composer({ options, arenaId, communityId, game, onDone, onBusy }: { opt
       <label className="input-group">{game ? 'Conta como foi (opcional)' : 'Sua publicação'}<textarea className="input" value={body} onChange={e => setBody(e.target.value)} maxLength={500} required={!game} rows={3} placeholder="O que você quer compartilhar?" /></label>
       <span className="input-hint">{body.length}/500</span>
       <PhotoUpload bucket="post-media" path={photo} onChange={setPhoto} onBusy={value => { setUploading(value); onBusy(value || busy); }} />
-      <label className="input-group">Audiência<select className="input" value={audience} onChange={e => { const next = e.target.value as 'beta' | 'private'; setAudience(next); setGroups([]); if (next === 'private') setWall(''); }}><option value="beta">Pessoas do Pico</option><option value="private">Participantes de uma comunidade privada</option></select></label>
+      <label className="input-group">Audiência<select className="input" value={audience} onChange={e => { const next = e.target.value as 'beta' | 'private'; setAudience(next); setGroups([]); setMentionCommunity(''); setMentionPeople([]); setMentionEveryone(false); if (next === 'private') setWall(''); }}><option value="beta">Pessoas do Pico</option><option value="private">Participantes de uma comunidade privada</option></select></label>
       {!game && <details className="publication-context"><summary>Modalidade e local (opcionais)</summary><p className="input-hint">Marcar um lugar não publica no mural da arena.</p><ArenaSelect label="Local" emptyLabel="Sem local marcado" value={marked} onChange={arena => { setMarked(arena); setSport(''); }} /><label className="input-group">Modalidade<select className="input" value={sport} onChange={e => setSport(e.target.value)}><option value="">Sem modalidade</option>{sports.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}</select></label>{sportState.status === 'error' && <p className="form-error">Não foi possível carregar os locais e modalidades. Seu texto continua disponível.</p>}</details>}
       <fieldset className="form-section"><legend>{audience === 'private' ? 'Escolha o grupo privado' : 'Distribuir também para'}</legend>
         {audience === 'beta' && <label className="input-group">Mural de arena<select className="input" value={wall} onChange={e => setWall(e.target.value)}><option value="">Não publicar em mural de arena</option>{options.arenas.map(a => <option key={a.id} value={a.id}>{a.name}</option>)}</select></label>}
-        <div className="choice-chips">{options.communities.filter(c => c.visibility === audience).map(c => <ChoiceChip key={c.id} checked={groups.includes(c.id)} onChange={e => setGroups(e.target.checked ? (audience === 'private' ? [c.id] : [...groups, c.id]) : groups.filter(id => id !== c.id))}>{c.name}{c.visibility === 'private' ? ' · privado' : ''}</ChoiceChip>)}</div>
+        <div className="choice-chips">{options.communities.filter(c => c.visibility === audience).map(c => <ChoiceChip key={c.id} checked={groups.includes(c.id)} onChange={e => { const next = e.target.checked ? (audience === 'private' ? [c.id] : [...groups, c.id]) : groups.filter(id => id !== c.id); setGroups(next); setMentionCommunity(next.includes(mentionCommunity) ? mentionCommunity : next[0] || ''); setMentionPeople([]); setMentionEveryone(false); }}>{c.name}{c.visibility === 'private' ? ' · privado' : ''}</ChoiceChip>)}</div>
         {!options.communities.some(c => c.visibility === audience) && <p className="input-hint">Você ainda não participa de uma comunidade com esta audiência.</p>}
       </fieldset>
+      {!game && groups.length > 0 && <fieldset className="form-section mention-section"><legend>Marcar pessoas (opcional)</legend>
+        {groups.length > 1 && <label className="input-group">Comunidade da menção<select className="input" value={mentionGroup} onChange={e => { setMentionCommunity(e.target.value); setMentionPeople([]); setMentionEveryone(false); }}>{options.communities.filter(c => groups.includes(c.id)).map(c => <option key={c.id} value={c.id}>{c.name}</option>)}</select></label>}
+        <MentionPicker key={mentionGroup} communityId={mentionGroup} people={mentionPeople} everyone={mentionEveryone} onPeople={setMentionPeople} onEveryone={value => { setMentionEveryone(value); if (value) setMentionPeople([]); }} />
+        <p className="input-hint">{mentionLabels ? `Esta publicação vai avisar ${mentionEveryone ? 'todos os participantes ativos' : mentionPeople.map(p => p.name).join(', ')} de ${options.communities.find(c => c.id === mentionGroup)?.name}.` : 'Só as pessoas marcadas recebem um aviso no Pico.'}</p>
+        {mentionLabels && <p className="input-hint">A publicação termina com {mentionLabels}.</p>}
+      </fieldset>}
       <div className="publication-audience-summary"><strong>Quem vai ver</strong><p>{audience === 'beta' ? 'Pessoas do Pico, pelo seu perfil e feed.' : 'Somente participantes ativos do grupo privado escolhido, inclusive no seu perfil.'}</p>{destinationNames.length > 0 ? <p>Destino{destinationNames.length > 1 ? 's' : ''}: {destinationNames.join(' · ')}.</p> : <p>Sem mural adicional.</p>}{game && <p>Corrigir ou excluir o registro privado depois não altera esta publicação.</p>}</div>
       {message && <p className="form-error" role="alert">{message}</p>}
-      <Button type="submit" disabled={busy || uploading || (!game && !body.trim()) || groups.length > 5 || (audience === 'private' && groups.length !== 1)}>{busy ? 'Publicando…' : audience === 'private' ? 'Publicar no grupo privado' : destinationNames.length ? 'Publicar nos destinos escolhidos' : 'Publicar no meu perfil'}</Button>
+      {completeBodyLength > 500 && <p className="form-error" role="alert">O texto com as menções passou de 500 caracteres.</p>}
+      <Button type="submit" disabled={busy || uploading || (!game && !body.trim()) || completeBodyLength > 500 || groups.length > 5 || (audience === 'private' && groups.length !== 1)}>{busy ? 'Publicando…' : audience === 'private' ? 'Publicar no grupo privado' : destinationNames.length ? 'Publicar nos destinos escolhidos' : 'Publicar no meu perfil'}</Button>
     </fieldset>
   </form>;
+}
+
+type MentionCandidate = { id: string; name: string; username: string };
+function MentionPicker({ communityId, people, everyone, onPeople, onEveryone }: { communityId: string; people: MentionCandidate[]; everyone: boolean; onPeople: (people: MentionCandidate[]) => void; onEveryone: (value: boolean) => void }) {
+  const [search, setSearch] = useState('');
+  const { data, error, reload } = useEntity<MentionCandidate[]>(`/api/communities?kind=mentions&id=${communityId}&search=${encodeURIComponent(search)}`);
+  return <>
+    <ChoiceChip checked={everyone} onChange={event => onEveryone(event.target.checked)}>@todos · toda a comunidade</ChoiceChip>
+    {!everyone && <>
+      <label className="input-group">Buscar participante<input className="input" type="search" value={search} maxLength={80} onChange={event => setSearch(event.target.value)} placeholder="Nome ou @usuário" /></label>
+      {error && <p className="form-error" role="alert">Não foi possível carregar participantes. <Button type="button" size="small" variant="quiet" onClick={reload}>Tentar novamente</Button></p>}
+      {data && <div className="mention-candidates" aria-label="Participantes para marcar">{data.filter(person => !people.some(selected => selected.id === person.id)).map(person => <button type="button" key={person.id} onClick={() => { if (people.length < 20) { onPeople([...people, person]); setSearch(''); } }} disabled={people.length >= 20}><strong>{person.name}</strong><span>@{person.username}</span></button>)}{data.length === 0 && <p className="input-hint">Nenhum participante encontrado.</p>}</div>}
+      {people.length > 0 && <div className="mention-selected" aria-label="Pessoas marcadas">{people.map(person => <button type="button" key={person.id} onClick={() => onPeople(people.filter(selected => selected.id !== person.id))} aria-label={`Retirar ${person.name} da menção`}>@{person.username}<X size={14} aria-hidden="true" /></button>)}</div>}
+      {people.length >= 20 && <p className="input-hint">Limite de 20 menções individuais por publicação.</p>}
+    </>}
+  </>;
 }
