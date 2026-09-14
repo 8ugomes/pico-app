@@ -8,6 +8,8 @@ A integração manteve menções inline, navegação ao post, busca global e fot
 
 Na revisão de revogação, a conta ganhou uma lista própria das declarações, incluindo arena fora do perfil público, com ação direta de remover e retorno após confirmação. O controle usa as linhas e botões existentes, sem novo tratamento decorativo; foi conferido em navegador conectado a 320 px, incluindo remoção. A privacidade não fica refém da cota de novas marcações.
 
+Na publicação, o artefato staged e o domínio principal conservaram a versão, saúde e proteções anônimas. A amostra de layout foi feita no desenvolvimento conectado, não numa sessão pessoal do principal; reprodução física e outros perfis/decodificadores MP4 continuam fora da evidência visual desta rodada.
+
 ## Revisão Agent Harness Kit na main — critérios antes de codar · 14/09/2026
 
 A mudança de CSS deve ser invisível na interface: preservar Aura Manteiga, leitura, contraste, foco, temas, menu e chamadas de instalação. Rotas públicas não devem carregar estilos sociais desnecessários, enquanto rotas sociais mantêm exatamente as regras existentes. Conferir uma amostra mobile/desktop nos dois temas e evitar atribuir a redução de bytes a melhora de métricas de campo sem medição.
