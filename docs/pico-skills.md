@@ -1,6 +1,6 @@
 # Pico — skills do projeto
 
-Conjunto local em `.agents/skills`: **13 skills**, sendo oito referências externas contextualizadas e cinco skills próprias. A revisão de 13/09/2026 consolida Aura Manteiga, empresa/produto e redesign com onboarding assistido. Não atualiza skills globais, plugins de outros projetos ou as revisões upstream das oito referências.
+Conjunto local em `.agents/skills`: **16 skills**, sendo oito referências externas contextualizadas e oito skills próprias. A revisão de 13/09/2026 consolida Aura Manteiga, empresa/produto e redesign com onboarding assistido; a de 14/09/2026 acrescenta três adaptações operacionais do Agent Harness Kit. Não atualiza skills globais, plugins de outros projetos ou as revisões upstream das oito referências.
 
 ## Entrada principal
 
@@ -13,6 +13,9 @@ Para redesenhar o app inteiro, use **[pico-redesign](../.agents/skills/pico-rede
 | [pico-product-plan](../.agents/skills/pico-product-plan/SKILL.md) | Plano corrente, prioridades, dependências, aceite e estado de entrega. |
 | [pico-dev](../.agents/skills/pico-dev/SKILL.md) | Implementação na stack e preservação dos contratos. |
 | [pico-deslopify](../.agents/skills/pico-deslopify/SKILL.md) | Clareza, densidade, personalidade, acessibilidade e revisão proporcional. |
+| [pico-slice-plan](../.agents/skills/pico-slice-plan/SKILL.md) | Delimita uma mudança verificável no plano corrente, sem grafo de tarefas paralelo. |
+| [pico-test-cycle](../.agents/skills/pico-test-cycle/SKILL.md) | Caracteriza/refina testes locais e regressão proporcional, distinguindo ambiente real. |
+| [pico-screen-check](../.agents/skills/pico-screen-check/SKILL.md) | Confere CSS e telas compiladas em rotas, larguras e temas representativos. |
 | [brand-discovery](../.agents/skills/brand-discovery/SKILL.md) | Pesquisa de lacunas reais de audiência/categoria; não reinicia a escolha de marca. |
 | [brand-ideation](../.agents/skills/brand-ideation/SKILL.md) | Exploração de aplicações; nova identidade/naming apenas se solicitado. |
 | [creative-direction](../.agents/skills/creative-direction/SKILL.md) | Mantém os quatro eixos do brief quando for necessário revisá-lo. |
@@ -32,7 +35,7 @@ Cobertura integral do produto não significa teste exaustivo a cada ajuste. Cria
 
 ## Manutenção e procedência
 
-As oito skills externas mantêm corpo upstream, referências, scripts e licenças; o bloco inicial contém o contexto Pico. Os campos de catálogo das seis skills Ramp foram movidos para `metadata` para compatibilidade do frontmatter. `UPSTREAM.json` preserva revisão/hash de origem e registra hash local da adaptação. O [manifesto](branding-skills-sources.json) registra ambas as versões e as cinco skills locais; não tratar o hash de origem como se ainda descrevesse o arquivo personalizado.
+As oito skills externas mantêm corpo upstream, referências, scripts e licenças; o bloco inicial contém o contexto Pico. Os campos de catálogo das seis skills Ramp foram movidos para `metadata` para compatibilidade do frontmatter. `UPSTREAM.json` preserva revisão/hash de origem e registra hash local da adaptação. O [manifesto de branding](branding-skills-sources.json) registra ambas as versões e as cinco skills locais daquele conjunto; as três skills operacionais novas têm [análise e procedência próprias](AGENT_HARNESS_KIT_REVIEW.md). Não tratar o hash de origem como se ainda descrevesse o arquivo personalizado.
 
 Ao atualizar um upstream, preservar/reaplicar o contexto local após revisão. Ao mudar uma decisão de marca, atualizar primeiro a fonte canônica, depois entradas e índices afetados. O PDF histórico e seus resultados permanecem históricos. Use o validador da skill-creator para formato, confira referências e faça revisão de escopo; validação sintática não prova qualidade de decisões.
 

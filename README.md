@@ -16,7 +16,7 @@ Rede social PWA mobile-first para futevôlei, beach tennis e vôlei de praia. O 
 
 **Identidade escolhida: Aura Manteiga.** Pico Social adota a direção editorial jovem, artística e refinada, com Syne/Manrope e Manteiga/Cacau/Papel/Lavanda. [Manual completo e ativos](docs/brand-exploration/aura-manteiga/README.md) aplicados ao aplicativo: temas claro/escuro, duas fontes locais, marca em contornos, controles, composições por domínio e onboarding assistido. [Cobertura, capturas e verificações](docs/aura-redesign-review/README.md). [Design system e estado](docs/pico-design-system.md).
 
-**Contexto para próximas tarefas:** [empresa/produto/marca](docs/pico-company-context.md), [domínios](docs/pico-domains.md), [13 skills locais](docs/pico-skills.md) e [plano corrente](docs/pico-product-plan.md). A skill principal [pico-redesign](.agents/skills/pico-redesign/SKILL.md) e o [prompt de execução](docs/brand-exploration/aura-manteiga/PROMPT-PRODUCAO.md) cobrem todo o aplicativo, onboarding assistido e validação proporcional durante criação. A preparação desses arquivos não executa o redesign nem publica o app.
+**Contexto para próximas tarefas:** [empresa/produto/marca](docs/pico-company-context.md), [domínios](docs/pico-domains.md), [16 skills locais](docs/pico-skills.md) e [plano corrente](docs/pico-product-plan.md). A skill principal [pico-redesign](.agents/skills/pico-redesign/SKILL.md) e o [prompt de execução](docs/brand-exploration/aura-manteiga/PROMPT-PRODUCAO.md) cobrem todo o aplicativo, onboarding assistido e validação proporcional durante criação. A preparação desses arquivos não executa o redesign nem publica o app.
 
 Endereço principal: [Pico](https://pico-app-sepia.vercel.app). O Ciclo 9 está integrado à `main`; publicação por `npm run deploy` no projeto Vercel `pico-app`. O endereço antigo `pico-internal.vercel.app` encaminha ao principal. [Ambientes](docs/ENVIRONMENTS.md) descreve a configuração, [operação](docs/BETA_OPERATIONS.md) explica publicação e rollback e [contratos](docs/CYCLE9_CONTRACTS.md) define permissões. A versão efetivamente servida pode ser consultada em [/api/version](https://pico-app-sepia.vercel.app/api/version). O relatório [INTERNAL_REVIEW.md](docs/INTERNAL_REVIEW.md) preserva a validação anterior à unificação.
 
@@ -75,6 +75,8 @@ npm run typecheck
 npm test
 npm run build
 ```
+
+Para comparar o CSS de primeira carga no build compilado, inicie `npm run start -- -p 3217` em outro terminal e execute `npm run measure:css`. A [revisão do Agent Harness Kit](docs/AGENT_HARNESS_KIT_REVIEW.md) documenta procedência, escopo e limites da medição.
 
 `seed` e `test:hosted` recusam beta/produção. O gate remoto do Ciclo 9 usa desenvolvimento exclusivo e app local correspondente em localhost:3002; cria e limpa somente identidades/recursos rastreados:
 

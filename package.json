@@ -9,6 +9,7 @@
     "deploy": "node --env-file=.env.beta.local --env-file=.env.beta-admin scripts/deploy.mjs",
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit",
+    "measure:css": "node scripts/measure-route-css.mjs",
     "test": "node --experimental-strip-types --test tests/*.test.mjs",
     "test:db": "node --test tests/database.test.mjs",
     "test:hosted": "node --env-file=.env.local --env-file=.env.hosted-admin scripts/guarded-hosted-test.mjs",

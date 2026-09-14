@@ -1,3 +1,15 @@
+## Publicação da revisão Agent Harness Kit — PLAN · 14/09/2026
+
+Integrar sobre a main atual somente as três skills locais de planejamento de fatia, ciclo de testes e conferência de telas, mais a divisão de CSS das rotas sociais. Preservar o guia de instalação, menções, autenticação, admissões e dados da beta aberta. A landing não integrada permanece fora desta entrega; na main, `/` redireciona para `/feed`.
+
+Medir CSS antes/depois nas rotas públicas e sociais da main, verificar carregamento de estilos, lint, typecheck, testes e build. Publicar por PR com CI, stage, smoke de saúde/acesso e promoção controlada; interromper se a beta ou o isolamento de dados falhar. Sem migration e sem mudança de contratos sociais.
+
+### Implementação e verificação local
+
+Três skills adaptadas e validadas, sem CLI upstream. CSS social movido ao layout correspondente; na primeira carga de `/login`, `/signup` e `/instalar`, 162.467 → 108.936 B não comprimidos (−32,9%). `/feed`, `/notificacoes` e `/perfil` ficaram em 170.944 → 171.212 B. Conferência de CSS confirmou `.social-app` ausente nas rotas públicas e presente no feed. O avatar de demonstração do editor, esticado por seletor anterior, voltou a 38×38 px.
+
+`npm ci`, audit sem vulnerabilidades reportadas, lint, typecheck e build em demo, e 148/148 testes locais aprovados. Login, instalação e feed revisados em 390 px, feed em 1280 px no tema escuro; sem overflow horizontal. Tema claro compilado mas não inspecionado visualmente nesta sessão. A [análise completa](AGENT_HARNESS_KIT_REVIEW.md) separa medição local, limites e gates externos ainda exigidos para publicar. Nenhuma migration ou dado real alterado nesta etapa.
+
 ## Arenas de Caieiras e eixo noroeste/oeste — PLAN · 14/09/2026
 
 Revisar o catálogo conectado e pesquisar arenas de Caieiras, Vila Aurora, Jaraguá, Pirituba e arredores, com fontes públicas verificáveis e fotografias do próprio local. Conferir a busca global já implementada na main e corrigir a prioridade/recuperação das fotos reais. Registrar cobertura, pendências e procedência em relatório próprio; não afirmar censo completo sem evidência.
