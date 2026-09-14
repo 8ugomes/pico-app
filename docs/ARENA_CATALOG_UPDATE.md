@@ -15,4 +15,6 @@ O catálogo conectado já continha outras arenas da região, incluindo Arena 360
 
 Os dados novos são inseridos por slug estável com checagem adicional de nome/cidade e `on conflict do nothing`. A reaplicação não cria duplicatas nem altera fichas existentes; os vínculos esporte–arena só são acrescentados às três fichas verificadas. Antes da aplicação remota, conferir novamente a lista do principal para detectar cadastros surgidos após esta pesquisa. Fotos e logotipos de terceiros não foram copiados.
 
+No preflight do principal, apenas Arena Jaraguá Beach correspondia aos nomes pesquisados. Após a migration, consulta read-only confirmou as três novas fichas e a existente, sem duplicata.
+
 Uma divergência de endereço já existente ficou fora desta migration: Arena 360 Beach aparece no principal com Rua Sumagre, 219, enquanto a [página de agendamento da arena](https://arena-3602.reservio.com/) informa 213. Confirmar diretamente com a arena antes de corrigir a ficha.
