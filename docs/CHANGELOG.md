@@ -397,3 +397,9 @@ Após autenticação do responsável, rulesets 22706380 e 22706456 salvos como a
 - Migration aditiva com RLS e validação transacional; `@todos` limitado a três publicações por autor ao dia.
 - Lint, typecheck, build, 144 testes locais e smoke hospedado com três contas controladas passaram. [Contrato e revisão](COMMUNITY_MENTIONS.md).
 - PR #27 integrado; migration única aplicada ao principal, 103 registros acompanhados preservados e versão `b74208012480` promovida em `pico-app-sepia.vercel.app`. [Recibo e limite do backup](COMMUNITY_MENTIONS.md).
+
+## 2026-09-14: editor de publicação e mural pesquisável
+
+- Editor inline mais curto nos modos conectado e demonstração, com escrita prioritária, foto e publicação no rodapé; audiência e destinos continuam disponíveis antes do envio.
+- “Mural de arena” oferece busca por nome sem exigir acentos, resultados em ordem alfabética, seleção explícita e remoção do destino.
+- Teste de navegador para ordenação, busca, persistência da seleção e destino publicado; 148 testes locais, lint, tipagem e build aprovados. Publicação principal registrada separadamente após CI.

@@ -24,6 +24,7 @@ await new Promise(done => server.listen(0, '127.0.0.1', done));
 const origin = `http://127.0.0.1:${server.address().port}`;
 const communityId = '33333333-3333-4333-8333-333333333333', personId = '44444444-4444-4444-8444-444444444444';
 const arena = { id: '22222222-2222-4222-8222-222222222222', slug: 'areia', name: 'Areia da Vila', city: 'São Paulo', neighborhood: 'Vila Mariana', description: '', image: null, isDemo: false, sports: [{ id: '55555555-5555-4555-8555-555555555555', slug: 'futevolei', name: 'Futevôlei' }] };
+const wallArenas = [{ id: '77777777-7777-4777-8777-777777777777', name: 'Zênite Beach' }, { id: arena.id, name: arena.name }, { id: '88888888-8888-4888-8888-888888888888', name: 'Água Clara' }];
 const posts = [], games = [], errors = [];
 let failGame = true;
 const browser = await chromium.launch();
@@ -36,7 +37,7 @@ try {
     const reply = (data, status = 200) => route.fulfill({ status, json: data });
     if (url.pathname === '/api/posts') {
       if (request.method() === 'POST') { posts.push(body); return reply({ data: '66666666-6666-4666-8666-666666666666' }); }
-      return reply({ data: { arenas: [], communities: [{ id: communityId, name: 'Turma da Areia', visibility: 'beta' }] } });
+      return reply({ data: { arenas: wallArenas, communities: [{ id: communityId, name: 'Turma da Areia', visibility: 'beta' }] } });
     }
     if (url.pathname === '/api/communities') return reply({ data: 'paula'.includes(url.searchParams.get('search')?.toLowerCase() ?? '') ? [{ id: personId, name: 'Paula Silva', username: 'paula' }] : [] });
     if (url.pathname === '/api/games') {
@@ -54,6 +55,7 @@ try {
   const draft = page.getByRole('textbox', { name: 'Texto da publicação' });
   await draft.waitFor();
   assert.equal(await draft.evaluate(element => element === document.activeElement), true);
+  await page.screenshot({ path: join(output, 'composer-390-light.png'), fullPage: true });
   await draft.fill('Oi @p');
   await page.getByRole('button', { name: /Paula Silva/ }).click();
   assert.match(await draft.inputValue(), /^Oi @paula /);
@@ -70,6 +72,41 @@ try {
   assert.equal(posts[1].mentionEveryone, true);
   assert.equal(posts[1].body.trim(), 'Ei @todos');
 
+  await page.getByRole('button', { name: 'O que aconteceu na areia?' }).click();
+  await page.locator('.compose-settings > summary').click();
+  await page.locator('.compose-wall > summary').click();
+  const wallSearch = page.getByRole('searchbox', { name: 'Buscar arena para o mural' });
+  await wallSearch.waitFor();
+  await page.waitForFunction(() => document.activeElement?.getAttribute('placeholder') === 'Busque pelo nome da arena');
+  assert.equal(await wallSearch.evaluate(element => element === document.activeElement), true);
+  const wallResults = page.getByRole('group', { name: 'Arenas para o mural' });
+  assert.deepEqual(await wallResults.locator('button').allTextContents(), ['Água Clara', 'Areia da Vila', 'Zênite Beach']);
+  await wallSearch.fill('agua');
+  assert.deepEqual(await wallResults.locator('button').allTextContents(), ['Água Clara']);
+  await wallResults.getByRole('button', { name: 'Água Clara' }).click();
+  assert.match(await page.locator('.compose-settings > summary').textContent(), /Água Clara/);
+  await page.waitForFunction(() => document.activeElement?.matches('.compose-wall > summary'));
+  assert.equal(await page.locator('.compose-wall > summary').evaluate(element => element === document.activeElement), true);
+  await page.locator('.compose-wall > summary').click();
+  await wallSearch.fill('zen');
+  assert.match(await page.locator('.compose-settings > summary').textContent(), /Água Clara/);
+  await wallSearch.fill('nada aqui');
+  await page.getByText('Nenhuma arena com esse nome.').waitFor();
+  assert.match(await page.locator('.compose-settings > summary').textContent(), /Água Clara/);
+  await wallSearch.fill('zen');
+  for (const [width, scheme] of [[320, 'dark'], [1280, 'light']]) {
+    await page.setViewportSize({ width, height: 844 }); await page.emulateMedia({ colorScheme: scheme });
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true);
+    await page.screenshot({ path: join(output, `composer-wall-${width}-${scheme}.png`), fullPage: true });
+  }
+  await draft.fill('Jogo de hoje');
+  await page.getByRole('button', { name: 'Publicar', exact: true }).click();
+  assert.equal(posts[2].wallArena, wallArenas[2].id);
+  await page.getByRole('button', { name: 'O que aconteceu na areia?' }).click();
+  await page.getByRole('button', { name: 'Fechar editor' }).click();
+  await page.waitForFunction(() => document.activeElement?.classList.contains('composer-trigger'));
+  assert.equal(await page.getByRole('button', { name: 'O que aconteceu na areia?' }).evaluate(element => element === document.activeElement), true);
+
   await page.goto(origin + '/?games');
   await page.getByRole('button', { name: 'Registrar jogo' }).click();
   assert.equal(await page.getByRole('dialog').count(), 0);
@@ -85,7 +122,7 @@ try {
   assert.ok(await page.getByRole('combobox', { name: 'Modalidade' }).inputValue());
   await page.getByRole('button', { name: 'Guardar só para mim' }).click();
   assert.equal(games.length, 1);
-  assert.equal(posts.length, 2);
+  assert.equal(posts.length, 3);
   assert.deepEqual(errors, []);
   writeFileSync(join(output, 'result.json'), JSON.stringify({ posts: posts.length, games: games.length, fixture: true, hosted: false, errors }, null, 2));
   console.log('Inline composer, mentions, private game retry and 3 visual sizes passed.');
