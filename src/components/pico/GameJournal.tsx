@@ -7,7 +7,11 @@ import { formatGameDate, gameToday } from '@/lib/game-date';
 import { Button } from '@/components/ui/Button';
 import { EmptyState } from './SocialUI';
 export function GameDateField({ value, onChange }: { value: string; onChange: (date: string) => void }) {
-  return <label className="input-group">Data do jogo<input className="input" type="date" required min="1900-01-01" max={gameToday()} value={value} onChange={e => onChange(e.target.value)} /><span className="input-hint">Escolha um jogo que já terminou. Esta é a data em que você jogou.</span></label>;
+  const today = gameToday();
+  const date = new Date(`${today}T00:00:00Z`);
+  date.setUTCDate(date.getUTCDate() - 1);
+  const yesterday = date.toISOString().slice(0, 10);
+  return <div className="game-date-choice"><label className="input-group">Quando foi?<input className="input" type="date" required min="1900-01-01" max={today} value={value} onChange={e => onChange(e.target.value)} /></label><div className="game-date-shortcuts"><button type="button" aria-pressed={value === today} onClick={() => onChange(today)}>Hoje</button><button type="button" aria-pressed={value === yesterday} onClick={() => onChange(yesterday)}>Ontem</button></div></div>;
 }
 export function JournalPrivacy() {
   return <p className="journal-privacy"><LockKeyhole size={17} aria-hidden="true" /><span>Só você vê. Registrar um jogo não cria uma publicação.</span></p>;

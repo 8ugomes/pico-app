@@ -8,7 +8,7 @@ import sharp from 'sharp';
 import { assertRemoteIdentity } from '../scripts/environment-guard.mjs';
 await assertRemoteIdentity(process.env, 'hosted-test');
 process.umask(0o077);
-const origin = 'http://localhost:3002';
+const origin = process.env.PICO_HOSTED_ORIGIN || 'http://localhost:3002';
 const admin = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SECRET_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 const users = [], groups = [], posts = [], avatars = [], checks = [];
 const ledger = '.vercel/community-mentions-fixture.json';
@@ -72,6 +72,10 @@ try {
   check(individual === await api(ana, '/api/posts', publication(key, group.id, [bia.id])), 'retry keeps canonical post');
   check((await api(bia, '/api/notifications')).items.filter(item => item.post_id === individual).length === 1, 'individual recipient notified once');
   check((await api(caio, '/api/notifications')).items.filter(item => item.post_id === individual).length === 0, 'other member not individually notified');
+  const inline = await api(ana, '/api/posts', publication(randomUUID(), group.id, [bia.id], false, 'Bora com @bia_mencao amanhã?'));
+  posts.push(inline); track();
+  check((await admin.from('posts').select('body').eq('id', inline).single()).data?.body === 'Bora com @bia_mencao amanhã?', 'inline mention stays at cursor position');
+  check((await api(bia, '/api/notifications')).items.filter(item => item.post_id === inline).length === 1, 'inline mention notifies once');
   await api(ana, '/api/posts', publication(key, group.id, [caio.id]), 409);
   const all = await api(ana, '/api/posts', publication(randomUUID(), group.id, [], true, 'Encontro da comunidade'));
   posts.push(all); track();
@@ -80,22 +84,24 @@ try {
   check((await api(ana, '/api/notifications')).items.every(item => item.post_id !== all), 'no self notice');
   if (process.env.PLAYWRIGHT_MODULE) {
     const { chromium } = await import(process.env.PLAYWRIGHT_MODULE);
-    browser = await chromium.launch({ headless: true, channel: process.env.PLAYWRIGHT_CHANNEL || 'chrome' });
+    browser = await chromium.launch({ headless: true, ...(process.env.PLAYWRIGHT_CHANNEL ? { channel: process.env.PLAYWRIGHT_CHANNEL } : {}) });
     const context = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' });
     await context.addCookies([...ana.jar].map(([name, value]) => ({ name, value, url: origin })));
     const page = await context.newPage(), errors = [];
     page.on('pageerror', error => errors.push(error.message));
     await page.goto(origin + '/comunidades/' + group.slug);
-    await page.getByRole('button', { name: /Compartilhe com sua turma/ }).click();
-    await page.getByText('Marcar pessoas (opcional)').waitFor();
-    await page.getByRole('searchbox', { name: 'Buscar participante' }).fill('bia');
+    await page.getByRole('button', { name: 'O que aconteceu na areia?' }).click();
+    const draft = page.getByRole('textbox', { name: 'Texto da publicação' });
+    await draft.fill('Vamos com @bi');
     await page.getByRole('button', { name: /Bia de teste.*@bia_mencao/ }).click();
-    check(await page.getByText(/vai avisar Bia de teste/).isVisible(), 'composer previews individual recipient');
+    check((await draft.inputValue()).includes('@bia_mencao'), 'composer inserts chosen person in text');
+    check(await page.getByText(/Aviso para @bia_mencao/).isVisible(), 'composer previews individual recipient');
     for (const [theme, width] of [['light', 390], ['dark', 320], ['light', 1280]]) {
       await page.setViewportSize({ width, height: 844 }); await page.emulateMedia({ colorScheme: theme });
-      const layout = await page.evaluate(() => ({ viewport: innerWidth, document: document.documentElement.scrollWidth }));
-      check(layout.document <= width + 1, `composer fits ${theme} ${width}`);
+      const layout = await page.evaluate(() => ({ viewport: innerWidth, document: document.documentElement.scrollWidth, offenders: [...document.querySelectorAll('body *')].map(element => ({ tag: element.tagName, className: typeof element.className === 'string' ? element.className : '', right: Math.round(element.getBoundingClientRect().right) })).filter(element => element.right > innerWidth + 1).slice(0, 12) }));
       await page.screenshot({ path: `.vercel/mentions-review/composer-${theme}-${width}.png`, fullPage: true });
+      if (layout.document > width + 1) console.log('Composer overflow', layout);
+      check(layout.document <= width + 1, `composer fits ${theme} ${width}`);
     }
     await context.close();
     const inboxContext = await browser.newContext({ viewport: { width: 390, height: 844 } });

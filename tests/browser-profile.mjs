@@ -63,7 +63,7 @@ const id='11111111-1111-4111-8111-111111111111',sport={id:'22222222-2222-4222-82
 const original={id,name:'Alex da Areia',username:'alex_teste',bio:'Futevôlei, amigos e um jogo no fim do dia.',city:'São Paulo',neighborhood:'Vila Mariana',avatar:'/api/media?bucket=avatars&path='+id+'/aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa.webp',avatarPath:id+'/aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa.webp',available:true,isDemo:false,onboardingCompleted:true,sports:[{sport,level:'Intermediário',isPrimary:true}]};
 const summary=[];let currentBrowser=null,currentPage=null;
 try {
- for(const [name,engine] of [['chromium',chromium],['webkit',webkit]]){
+ for(const [name,engine] of (process.env.PICO_BROWSER_ENGINE === 'chromium' ? [['chromium',chromium]] : [['chromium',chromium],['webkit',webkit]])){
   const browser=await engine.launch();currentBrowser=browser;const context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});const page=await context.newPage();currentPage=page;
   let profile=structuredClone(original),readCount=0,saveCount=0,failSave=false;mediaFixture.stored=await sharp({create:{width:64,height:64,channels:3,background:'#44342f'}}).webp().toBuffer();mediaFixture.uploads=0;mediaFixture.wireFormat=null;const errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error'&&!(m.text().includes('503')&&m.location().url.includes('/api/social/mutate')))errors.push(m.text())});
   await page.route(/\/api\/(?!media(?:\?|$)).*/,async route=>{const request=route.request(),url=new URL(request.url());let data={};
@@ -111,26 +111,28 @@ try {
   // Account changes must remount the single editor identity, clearing its draft.
   await page.getByRole('button',{name:'Editar perfil',exact:true}).click();await page.getByLabel('Bio',{exact:true}).fill('PRIVATE DRAFT');profile={...structuredClone(original),id:'44444444-4444-4444-8444-444444444444',name:'Outra conta'};
   await page.evaluate(id=>window.dispatchEvent(new CustomEvent('fixture-auth',{detail:{event:'SIGNED_IN',session:{user:{id}}}})),profile.id);await expect(page.getByRole('heading',{name:'Outra conta',exact:true})).toBeVisible();await expect(page.getByText('PRIVATE DRAFT',{exact:true})).toHaveCount(0);
-  // Regression: the photo dialog is nested inside the publication dialog.
-  // Escape must close only the photo editor, restore focus, and preserve the draft.
+  // The inline composer keeps the draft while its photo editor is open.
   await page.goto(origin+'?fixture=composer');
-  await page.getByRole('button',{name:'Compartilhe com sua turma',exact:true}).click();
-  await page.getByRole('textbox',{name:'Sua publicação',exact:true}).fill('Rascunho preservado.');
+  await page.getByRole('button',{name:'O que aconteceu na areia?',exact:true}).click();
+  const draft=page.getByRole('textbox',{name:'Texto da publicação',exact:true});
+  await expect(draft).toBeFocused();
+  await draft.fill('Rascunho preservado.');
+  await page.screenshot({path:join(output,`${name}-composer-light-390.png`),fullPage:true});
+  await page.emulateMedia({colorScheme:'dark'});
+  await page.screenshot({path:join(output,`${name}-composer-dark-390.png`),fullPage:true});
+  await page.emulateMedia({colorScheme:'light'});
+  await page.setViewportSize({width:320,height:620});
+  await page.screenshot({path:join(output,`${name}-composer-light-320.png`),fullPage:true});
+  await page.setViewportSize({width:390,height:844});
   await page.locator('input[type=file]').setInputFiles({name:'crop-test.png',mimeType:'image/png',buffer:await sharp({create:{width:600,height:400,channels:3,background:'#182e2a'}}).png().toBuffer()});
   await expect(page.getByRole('dialog',{name:'Ajustar foto',exact:true})).toBeVisible();
   await page.keyboard.press('Escape');
   await expect(page.getByRole('dialog',{name:'Ajustar foto',exact:true})).toHaveCount(0);
-  await expect(page.getByRole('dialog',{name:'Compartilhe com sua turma',exact:true})).toBeVisible();
+  await expect(draft).toHaveValue('Rascunho preservado.');
   await expect(page.locator('input[type=file]')).toBeFocused();
-  await expect(page.getByRole('textbox',{name:'Sua publicação',exact:true})).toHaveValue('Rascunho preservado.');
-  await page.keyboard.press('Escape');
-  await expect(page.getByRole('button',{name:'Compartilhe com sua turma',exact:true})).toBeFocused();
-  await page.getByRole('button',{name:'Compartilhe com sua turma',exact:true}).click();
-  await expect(page.getByRole('textbox',{name:'Sua publicação',exact:true})).toHaveValue('Rascunho preservado.');
-  await page.getByRole('button',{name:'Fechar',exact:true}).focus();
-  await page.keyboard.press('Shift+Tab');
-  await expect(page.getByRole('button',{name:'Publicar no meu perfil',exact:true})).toBeFocused();
-  if(errors.length)throw Error(errors.join('\n'));summary.push({browser:name,textScale200:true,reducedMotion:true,nestedPhotoDialog:true,photoFocusReturn:true,publicationDraftPreserved:true,dialogFocusTrap:true,editToggles:20,singleEditor:true,draftOnFocus:true,failedSavePreservesDraft:true,discardDialog:true,oneWrite:true,tabKeyboard:true,viewports:[320,390,430,768],realHeicDecode:true,wireFormat:mediaFixture.wireFormat,crop:meta.width+'x'+meta.height,privateMetadataStripped:true,accountSwitch:true});await browser.close();
+  await page.getByRole('button',{name:'Cancelar',exact:true}).click();
+  await expect(page.getByRole('button',{name:'O que aconteceu na areia?',exact:true})).toBeFocused();
+  if(errors.length)throw Error(errors.join('\n'));summary.push({browser:name,textScale200:true,reducedMotion:true,inlineComposer:true,photoFocusReturn:true,publicationDraftPreserved:true,editToggles:20,singleEditor:true,draftOnFocus:true,failedSavePreservesDraft:true,discardDialog:true,oneWrite:true,tabKeyboard:true,viewports:[320,390,430,768],realHeicDecode:true,wireFormat:mediaFixture.wireFormat,crop:meta.width+'x'+meta.height,privateMetadataStripped:true,accountSwitch:true});await browser.close();
  }
  writeFileSync(join(output,'results.json'),JSON.stringify({scope:'Isolated real React components; synthetic API, account and Storage. Chromium/WebKit, not physical devices.',results:summary},null,2));console.log(JSON.stringify(summary,null,2));
 }catch(error){if(currentPage)await currentPage.screenshot({path:join(output,'failure.png'),fullPage:true}).catch(()=>{});writeFileSync(join(output,'failure.txt'),String(error.stack||error));throw error;}finally{await currentBrowser?.close();server.close();}

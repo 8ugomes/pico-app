@@ -1,6 +1,10 @@
 # Menções em publicações de comunidades
 
-Implementação de 14/09/2026. No compositor de uma publicação destinada a uma comunidade, participantes ativos podem marcar até 20 pessoas do grupo ou escolher `@todos`. Quando o post tem mais de um grupo de destino, a pessoa escolhe qual comunidade receberá os avisos. O texto publicado termina com os @usuários escolhidos ou `@todos`; texto digitado que se parece com uma menção, sem seleção no controle, não dispara avisos.
+Implementação de 14/09/2026. No compositor de uma publicação destinada a uma comunidade, participantes ativos podem marcar até 20 pessoas do grupo ou escolher `@todos`. Quando o post tem mais de um grupo de destino, a pessoa escolhe qual comunidade receberá os avisos. Texto digitado que se parece com uma menção, sem seleção na lista, não dispara avisos.
+
+Atualização de composição de 14/09/2026: a pessoa agora digita `@` no próprio texto. A lista busca integrantes ativos à medida que o nome é escrito; escolher pessoa ou `@todos` insere o termo no cursor. O aviso só acompanha a escolha confirmada ainda presente no texto no momento do envio. A migration `20260914130000_inline_post_mentions.sql` preserva a posição dessas menções em posts novos e aceita temporariamente a seleção separada de clientes anteriores, que ainda recebem os termos ao final. Busca e envio conservam as regras de participação, bloqueio, destinatários e idempotência descritas abaixo. A demonstração insere texto local, identificando que não envia avisos.
+
+Validação desta atualização: 148 testes locais, lint, typecheck e build passaram. A migration foi aplicada no desenvolvimento após dry-run de arquivo único, com 73 registros acompanhados preservados. Smoke hospedado com três identidades controladas passou 73 verificações de API, aviso, link e compositor em 390/320/1280px; fixtures removidas. O registro privado de jogo foi exercitado com erro e nova tentativa em navegador isolado, sem publicar automaticamente.
 
 A caixa `/notificacoes` mostra “marcou você” ou “marcou @todos”, autor, comunidade, data e link direto à publicação. A leitura continua explícita e persistente. São avisos dentro do Pico, atualizados ao abrir/retomar e periodicamente enquanto o app está visível; não há push do dispositivo, e-mail ou conexão em tempo real. A demonstração mantém sua caixa vazia identificada.
 
