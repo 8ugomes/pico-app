@@ -412,3 +412,8 @@ Após autenticação do responsável, rulesets 22706380 e 22706456 salvos como a
 - “Mural de arena” oferece busca por nome sem exigir acentos, resultados em ordem alfabética, seleção explícita e remoção do destino.
 - Teste de navegador para ordenação, busca, persistência da seleção e destino publicado; 148 testes locais, lint, tipagem, build e CI aprovados.
 - [PR #33](https://github.com/8ugomes/pico-app/pull/33) integrado e artefato `dpl_DZ7g7hgJetngRm2x7wNveVJYoHCT` promovido ao endereço principal, versão pública `46b3b1c81c3e`; 104 registros acompanhados preservados no deploy.
+## 2026-09-14: correção do upload de vídeo no navegador
+
+- A CSP agora permite a origem exata do Storage Supabase usada pelo TUS assinado; mantém bloqueio para origens não autorizadas. O defeito impedia o envio no navegador, embora a reserva e o teste TUS em Node funcionassem.
+- Gate conectado passou a selecionar MP4 real no compositor Chrome móvel emulado com CSP ativa, confirmar envio/prévia e preservar o texto sem publicar. 251 verificações hospedadas, 160 testes locais, lint, typecheck, build e audit passaram; fixtures do desenvolvimento removidas. Android físico ainda não testado.
+- Publicação em produção pendente de PR/CI, stage e promoção; sem migration ou conteúdo de teste no principal.
