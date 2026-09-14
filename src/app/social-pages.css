@@ -214,3 +214,5 @@
 .people-discovery { margin: 1rem 0 2rem; }
 .people-discovery-row { display: flex; gap: 1.4rem; padding: 1rem 0; overflow-x: auto; }
 .person-preview { display: flex; flex-direction: column; align-items: center; gap: .6rem; font-size: .875rem; }
+
+.arena-photo-retry { padding: 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; color: var(--text-secondary); }

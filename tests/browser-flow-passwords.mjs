@@ -92,13 +92,17 @@ try {
   const portrait = await sharp({ create: { width: 400, height: 1000, channels: 3, background: '#F2E3B5' } }).png().toBuffer();
   await page.route('**/api/arenas?slug=*', async route => { const r = await route.fetch(); const data = await r.json(); data.data.cover_path = 'flow-fixture-portrait'; await route.fulfill({ response: r, json: data }); });
   await page.route('**/api/media?bucket=entity-media&path=flow-fixture-portrait', route => route.fulfill({ contentType: 'image/png', body: portrait }));
-  await page.reload(); await page.locator('.arena-detail-photo img').waitFor();
-  check(await page.locator('.arena-detail-photo img').evaluate(e => getComputedStyle(e).objectFit === 'contain'), 'team portrait cover preserves full image');
+  await page.reload(); await page.locator('.arena-gallery-frame img').waitFor();
+  check(await page.locator('.arena-gallery-frame img').evaluate(e => getComputedStyle(e).objectFit === 'contain'), 'team portrait cover preserves full image');
   await shot('portrait-fixture', 320, 'dark');
   await page.unroute('**/api/media?bucket=entity-media&path=flow-fixture-portrait');
   await page.route('**/api/media?bucket=entity-media&path=flow-fixture-portrait', route => route.fulfill({ status: 404 }));
-  await page.reload(); await page.locator('.arena-detail-photo').getByText('Foto indisponível').waitFor();
-  checks.push('missing image has explicit fallback');
+  await page.reload();
+  await page.waitForFunction(() => {
+    const image = document.querySelector('.arena-gallery-frame img');
+    return image?.complete && image.naturalWidth > 0 && image.currentSrc.includes('%2Fimages%2Farenas%2F');
+  });
+  checks.push('failed team cover recovers a real catalog photo of the same arena');
   await page.unroute('**/api/arenas?slug=*');
   await page.goto(origin + '/perfil');
   await page.getByRole('button', { name: 'Editar perfil', exact: true }).waitFor();

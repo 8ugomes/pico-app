@@ -1,5 +1,14 @@
-## Notificações — critérios antes de codar · 13/09/2026
+## Arenas — critérios antes de codar · 14/09/2026
 
+Busca por nome/bairro/cidade deve considerar o catálogo inteiro, com modalidades e paginação coerentes. Foto reconhecível do lugar na lista e no perfil, preservando foto enviada pela gestão e origem verificável da alternativa de catálogo. Falha de uma imagem deve tentar outra foto verificada do mesmo local; nenhuma foto sintética/genérica pode se passar pela arena real. Evitar blocos grandes de “foto indisponível”; manter leitura, nome, localização e ação úteis. Revisar amostra móvel/desktop e temas existentes, sem alterar contratos de audiência, admissão ou histórico.
+
+### Fechamento e aprendizados das arenas
+
+As nove inclusões e Ma Kai têm fotos da unidade. Mantidos enquadramento completo, crédito e prioridade da capa da gestão; falha tenta outra imagem do mesmo local. Não há botão dentro do link dos cartões nem bloco genérico de foto ausente. Navegação da galeria e recuperação após erro foram exercitadas em amostra local; claro/escuro e 390/1100px conferidos. Carregamento sob demanda preservado; arquivos e metadados também foram validados separadamente.
+
+Não basta a imagem estar em um site oficial: Raposo reutilizava Alto do Ipiranga, e uma imagem na página Ma Kai também era da unidade Jardins. Conferir a unidade na própria fotografia, no caminho de origem e no endereço evitou atribuições erradas. As 21 pendências estaduais ficam documentadas, sem apagar históricos ou usar outra arena como substituta. [Evidências](arena-regional-review/README.md).
+
+## Notificações — critérios antes de codar · 13/09/2026
 Lista cronológica com “Nome entrou na comunidade X”, data e estado não lido identificado também por texto. Nome da comunidade leva ao grupo; leitura explícita individual ou em lote, sem marcar automaticamente ao abrir a aba. Sino com nome acessível e contador discreto. Preservar as cinco posições da navegação inferior; acesso móvel pelo cabeçalho, desktop pela lateral. Texto longo quebra, controles de 44px, temas existentes e nenhuma nova ilustração ou fotografia fictícia. Vazio, carregamento, erro recuperável e demo honesto. Amostra visual móvel/desktop e dois temas, com confirmação dos comportamentos novos.
 
 ### Fechamento e aprendizado das notificações

@@ -8,8 +8,8 @@ import { arenaCatalog, buildArenaCatalogSql, retiredDemoIds } from '../scripts/a
 import { getArenaDirectory } from '../src/lib/arena-catalog.ts';
 
 test('reviewed catalog assets exist, match provenance and never attach to another identity', async () => {
-  assert.equal(arenaCatalog.arenas.length, 60);
-  assert.equal(new Set(arenaCatalog.arenas.map(a=>a.city)).size,25);
+  assert.equal(arenaCatalog.arenas.length, 69);
+  assert.equal(new Set(arenaCatalog.arenas.map(a=>a.city)).size,27);
   for (const a of arenaCatalog.arenas) {
     assert.ok(a.sources.some(s => s.supports.includes('address')));
     assert.ok(a.sources.some(s => s.supports.includes('sports')) || a.sourceUrl === 'https://arenaace.com.br/' || a.sourceUrl === 'https://nossaarenasp.com.br/');
@@ -27,6 +27,15 @@ test('reviewed catalog assets exist, match provenance and never attach to anothe
       assert.equal(metadata.exif, undefined);
     }
   }
+});
+
+test('northwest expansion has venue photos and keeps Vila Aurora discoverable', () => {
+  const slugs=['arena-sun7-caieiras','kanoa-beach-caieiras','arena-jaragua-beach','pirituba-beach-sports','arena-360-beach','arena-cfr-franco-da-rocha','porto-maya-beach-sports','portela-beach-club','frega-beach'];
+  for(const slug of slugs) {
+    const venue=arenaCatalog.arenas.find(a=>a.slug===slug);
+    assert.ok(venue?.photos.length, slug);
+  }
+  assert.match(arenaCatalog.arenas.find(a=>a.slug==='arena-jaragua-beach').note,/Vila Aurora/);
 });
 
 test('catalog import is atomic, preserves history and owner edits, creates no fake participation', async () => {
@@ -52,10 +61,13 @@ test('catalog import is atomic, preserves history and owner edits, creates no fa
     });
     await asUser(db, null, async () => assert.equal((await db.query('select * from public.arenas')).rows.length, 0));
     // Reapplying the directory must not revert a manager's later changes.
-    await db.query("update public.arenas set description='Descrição da gestão',owner_id=$1 where id=$2", [ALICE,real.id]);
+    const coverPath = `${real.id}/${randomUUID()}.webp`;
+    await db.query("insert into public.entity_media_assets(path,arena_id,slot,ready) values($1,$2,'cover',true)",[coverPath,real.id]);
+    await db.query("update public.arenas set description='Descrição da gestão',owner_id=$1,cover_path=$3 where id=$2", [ALICE,real.id,coverPath]);
     await db.query('update public.arena_sports set enabled=false where arena_id=$1', [real.id]);
     await db.exec(buildArenaCatalogSql());
     assert.equal((await db.query('select description from public.arenas where id=$1', [real.id])).rows[0].description, 'Descrição da gestão');
+    assert.equal((await db.query('select cover_path from public.arenas where id=$1', [real.id])).rows[0].cover_path, coverPath);
     assert.ok((await db.query('select enabled from public.arena_sports where arena_id=$1', [real.id])).rows.every(s => !s.enabled));
     assert.equal((await db.query('select * from public.arena_members where arena_id=$1 and player_id=$2',[real.id,BOB])).rows.length,1);
   } finally { await db.close(); }

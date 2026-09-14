@@ -1,3 +1,11 @@
+## 2026-09-14: arenas de Caieiras, Jaraguá e Pirituba
+
+- Nove arenas incluídas com endereço, modalidades, procedência e fotos reais; notas tornam Vila Aurora, Pirituba e Freguesia do Ó encontráveis na busca global.
+- Fotos recuperadas para 22 arenas antigas. Catálogo de 69 arenas em 27 municípios, com 149 fotos em 48 unidades; 21 pendências estaduais preservadas e documentadas.
+- Capa da gestão priorizada na lista e no perfil; falha tenta outra foto da mesma unidade. Removido bloco genérico de foto indisponível.
+- Inventário de preservação ampliado a arenas, participações, comunidades, vínculos e mídia de recursos. Importação idempotente conserva IDs, slugs, conteúdo e alterações da gestão.
+- Lint/typecheck/build, 142 testes, regressões finais e smoke real de busca/arquivos em desenvolvimento passaram. [Pesquisa, evidências e limites](arena-regional-review/README.md).
+
 ## 2026-09-14: notificações publicadas e base revisada
 
 - PR #23 integrado e artefato `a4aa9628fbcb` promovido ao Pico principal; versão e saúde confirmadas.

@@ -9,7 +9,7 @@ import { mediaUrl } from './media.ts';
 import { getArenaDirectory } from '../arena-catalog.ts';
 
 type ArenaResult = NonNullable<Awaited<ReturnType<typeof getArenaBySlug>>['data']>;
-// Only bundled illustration paths are ready; remote/private Storage images arrive later.
+// Legacy artwork is demo-only. Real covers use the authorized media endpoint.
 export function safeArenaImage(path: string | null, isDemo: boolean) {
   return isDemo && path === '/images/urban-court.webp' ? path : null;
 }
@@ -17,7 +17,7 @@ function arenaDto(row: ArenaResult): ReadArena {
   const directory = row.is_demo ? undefined : getArenaDirectory(row.id, row.slug);
   return {
     id: row.id, slug: row.slug, name: row.name, description: row.description,
-    neighborhood: row.neighborhood, city: row.city, image: directory?.photos[0]?.src ?? safeArenaImage(row.image_path, row.is_demo), isDemo: row.is_demo,
+    neighborhood: row.neighborhood, city: row.city, image: mediaUrl('entity-media', row.cover_path) ?? directory?.photos[0]?.src ?? safeArenaImage(row.image_path, row.is_demo), isDemo: row.is_demo,
     directory,
     sports: row.arena_sports.flatMap(link => link.enabled !== false && link.sports ? [link.sports] : []),
   };
