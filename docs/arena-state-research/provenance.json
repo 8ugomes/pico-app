@@ -10,5 +10,15 @@
     "beach sports"
   ],
   "googleSearchesExecuted": 0,
-  "arenasImported": 0
+  "arenasImported": 43,
+  "publicResearchMunicipalities": 37,
+  "validatedNewArenas": 43,
+  "catalogMunicipalities": 25,
+  "catalogAfterImport": 60,
+  "allGoogleArenas": false,
+  "photoImports": 0,
+  "existingPhotosPreserved": 76,
+  "importedOn": "2026-09-14T00:08:01.298Z",
+  "developmentImportApplied": true,
+  "primaryImportApplied": true
 }

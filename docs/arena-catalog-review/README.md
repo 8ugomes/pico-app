@@ -1,3 +1,5 @@
+> Catálogo ampliado em 13/09/2026: [lote estadual, fontes e limites](../arena-state-research/lote-publicado.md). Esta revisão preserva as evidências das 17 unidades iniciais e suas 76 fotos.
+
 # Arenas reais e revisão editorial — 13/09/2026
 
 O catálogo reúne **17 arenas de São Paulo, com 76 fotos revisadas**: nove na Zona Sul e oito na Zona Oeste. Inclui Riplay Alto do Ipiranga, Villa Beach Sports e Posto 011 Klabin. Nome, endereço, modalidades, origem das imagens e data de consulta estão no [manifesto versionado](../../src/data/arena-catalog.json); a [tabela de unidades e fontes](catalog-table.md) permite conferir cada registro.

@@ -1,7 +1,6 @@
 {
-  "version": 1,
+  "version": 2,
   "checkedOn": "2026-09-13",
-  "city": "São Paulo",
   "arenas": [
     {
       "id": "636e608f-9504-5cf7-92cc-39a3d34e9cfe",
@@ -104,7 +103,8 @@
           "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvZzhmNGRxbHVtZzZzZmYxb3A5NTI3czc4ODFpNWhjNWF3OTM2YXFkazE3dGUxcnZkaWJ6MWphMXk5aWtr",
           "sourcePage": "https://totalpass.com/br/academias/riplay-alto-do-ipiranga/"
         }
-      ]
+      ],
+      "municipalityId": "3550308"
     },
     {
       "id": "3c1d0409-8bf4-5131-b2c8-a2410a58b46d",
@@ -187,7 +187,8 @@
           "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvZ21jZGNjZDY1bjd1NHVjZWRvcTQyZGswYzAyYjltNnE0dDR6M3NxdndwOXFhbWNweW9ycDc1N2wwa2ht",
           "sourcePage": "https://totalpass.com/br/academias/arena-riplayy-beach-tennis/"
         }
-      ]
+      ],
+      "municipalityId": "3550308"
     },
     {
       "id": "93e115bd-e86b-50d5-9a86-57e42a7398fc",
@@ -263,7 +264,8 @@
           "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvZjU2d2Q3a2pjaGNnaTJhMmh1OTVxZWZoNmF0Y2V2d2szZmJ2ZDlzb3djMWJrbjA3NjhuaDIwa2pncmJ1",
           "sourcePage": "https://totalpass.com/br/academias/riplay-jardins/"
         }
-      ]
+      ],
+      "municipalityId": "3550308"
     },
     {
       "id": "79b0498d-99ac-50de-a69d-6db7e2f35961",
@@ -356,7 +358,8 @@
           "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvNDVqazB1ejd0NDRybHplaWhoc2E1eWpnZjJubGNkcXR1dW9neW1sMXc0YnZiOXYzcmk5OGozem5neHFt",
           "sourcePage": "https://totalpass.com/br/academias/riplay-sports-pompeia/"
         }
-      ]
+      ],
+      "municipalityId": "3550308"
     },
     {
       "id": "007313a5-de2f-5133-9ded-3828459ee5c1",
@@ -464,7 +467,8 @@
           "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvNGRlc3htZjQ0NW5rbmx6YWp3cjFsaXNsNHZmNG9hc3owMW8xZmgzNDQxMnlhbXplMmNucnNoNTJreWgx",
           "sourcePage": "https://totalpass.com/br/academias/villa-beach-sports/"
         }
-      ]
+      ],
+      "municipalityId": "3550308"
     },
     {
       "id": "89a6c234-34bc-5b52-9f71-efaecd90a14f",
@@ -531,7 +535,8 @@
           "sourceUrl": "https://assets-cdn.wellhub.com/images/?su=https%3A%2F%2Fimages.partners.gympass.com%2Fimage%2Fpartners%2Fv1_ziF2-lCNEqNkgMx0xJw0CQ%2Flg_bc0a1ecc-380c-4b73-90df-009e205be9a4_Klabin.jpg&h=360",
           "sourcePage": "https://wellhub.com/pt-br/search/partners/arena-imigrantes-beach-zone-vila-mariana/"
         }
-      ]
+      ],
+      "municipalityId": "3550308"
     },
     {
       "id": "f712864e-d1bf-533e-b2f2-d0cf19e20daf",
@@ -616,7 +621,8 @@
           "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvbmdvc25hcDFxY2JnZmV1ZGt5bXBob3djd2M1cjhuNG12OGozZnBhMHFydHhoaDEyOHBqbmY2bHUzdHgw",
           "sourcePage": "https://totalpass.com/br/academias/posto011-perdizes/"
         }
-      ]
+      ],
+      "municipalityId": "3550308"
     },
     {
       "id": "ae915b05-1029-5e15-afa8-813f727178cc",
@@ -666,7 +672,8 @@
           "sourceUrl": "https://posto011.com.br/wp-content/uploads/2024/07/FUN-BROOKLIN-1024x576.jpeg",
           "sourcePage": "https://posto011.com.br/unidade/brooklin/"
         }
-      ]
+      ],
+      "municipalityId": "3550308"
     },
     {
       "id": "6a8563dc-aa17-5d6a-b059-fc9158420624",
@@ -760,7 +767,8 @@
           "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvYndiaHlzb3B3ZjhjaXJsaHNjdTY4bThwNzEwYzNianU5dmZnYXFrbzBlM3I2cHUzczZ1MGtmcTl5MDBp",
           "sourcePage": "https://totalpass.com/br/academias/posto011-butanta/"
         }
-      ]
+      ],
+      "municipalityId": "3550308"
     },
     {
       "id": "9c4d5d0a-1024-5f5b-873d-ad9358d2fd02",
@@ -836,7 +844,8 @@
           "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvenVhNW53cGQ5bXV3a3d4MzlmYmF0ZTg0ZGJoOW1iajJzamVjamRvMTZwN3Q1eGRmd3p0OGo5cjdhcHdo",
           "sourcePage": "https://totalpass.com/br/academias/posto011-lapa/"
         }
-      ]
+      ],
+      "municipalityId": "3550308"
     },
     {
       "id": "b18c5824-8b84-5035-9f29-9710613e9000",
@@ -939,7 +948,8 @@
           "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvankzdmN2Z2Q4cmM0NWFjaXF2azdpaGZlYWtwNTdsZmI3eGwzM3lsYjl2YW01aXM4d2xucDVzOG4zbmls",
           "sourcePage": "https://totalpass.com/br/academias/praiana-beach-sports/"
         }
-      ]
+      ],
+      "municipalityId": "3550308"
     },
     {
       "id": "84fc0ae5-3e47-5b1e-904f-dcdd027e00b3",
@@ -989,7 +999,8 @@
           "sourceUrl": "https://posto011.com.br/wp-content/uploads/2025/09/JURUBATUBA-09-2025-DRONE-FOTOS-041-scaled-e1760458061414-1024x579.jpg",
           "sourcePage": "https://posto011.com.br/unidade/jurubatuba/"
         }
-      ]
+      ],
+      "municipalityId": "3550308"
     },
     {
       "id": "a35b74d9-cfa9-5be7-8857-e2afde4dbd08",
@@ -1074,7 +1085,8 @@
           "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvbmt0a3Mzd2gyNGljMmtvbWFhd2ZmdDN6aXh2ZzF5djI5aHgwZnF0bW5rMzV4YWZ0bTk3aDZ5ZDVwemVo",
           "sourcePage": "https://totalpass.com/br/academias/posto-011-barra-funda/"
         }
-      ]
+      ],
+      "municipalityId": "3550308"
     },
     {
       "id": "1d4935a2-c706-574b-9251-973d854107f7",
@@ -1159,7 +1171,8 @@
           "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvd2wzdW5ra2N4NHB5ZjVkYXVsZ2UwZjVkOWt3bmJyZ3c4YnFyODdnMnE0bDZlZHZ1cDBuZWFkenQ4aGR2",
           "sourcePage": "https://totalpass.com/br/academias/posto011-planalto-paulista/"
         }
-      ]
+      ],
+      "municipalityId": "3550308"
     },
     {
       "id": "a5caf9a8-b081-5edb-91e3-56b017870067",
@@ -1226,7 +1239,8 @@
           "sourceUrl": "https://assets-cdn.wellhub.com/images/?su=https%3A%2F%2Fimages.partners.gympass.com%2Fimage%2Ffilename%2F4609069%2Flg_XcJThe0ufQUmZdIe1TbsUpv63RfLI7sY.jpeg&h=360",
           "sourcePage": "https://wellhub.com/pt-br/search/partners/arena-ace/"
         }
-      ]
+      ],
+      "municipalityId": "3550308"
     },
     {
       "id": "76a71088-4215-5fc4-ac8a-e14cea9d7883",
@@ -1300,7 +1314,8 @@
           "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvdmo2and3M2EwNTNuMG95YmV4dDJ3ejJ4bXBmNjNtZXJ4dzlvdGNuNGl1OGVudWFyZXVmOXN0Nnd1NThj",
           "sourcePage": "https://totalpass.com/br/academias/arena-ace-beach-indoor/"
         }
-      ]
+      ],
+      "municipalityId": "3550308"
     },
     {
       "id": "767b3b8a-cf7e-51d7-b8e4-7a2d8683753d",
@@ -1385,7 +1400,1425 @@
           "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvM2V0NG9zdDNrMTlvc205dGFsN3Z3YW9oYTM1c3c2ZjNkczU2ZWs3aHR0ZjlydWZ5OXNpNzh1dm11ZXI4",
           "sourcePage": "https://totalpass.com/br/academias/nossa-arena/"
         }
-      ]
+      ],
+      "municipalityId": "3550308"
+    },
+    {
+      "id": "2e872182-9350-5d68-96e7-afc73e3c257b",
+      "slug": "arena-aveiro-campinas",
+      "name": "Arena Aveiro",
+      "city": "Campinas",
+      "municipalityId": "3509502",
+      "region": "Campinas",
+      "neighborhood": "Jardim Andorinhas",
+      "address": "Estrada Municipal dos Aveiros, 11",
+      "sports": [
+        "beach-tennis"
+      ],
+      "description": "Beach tennis em Campinas.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://arenaaveiro.com.br/contato/",
+      "sources": [
+        {
+          "url": "https://arenaaveiro.com.br/contato/",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "6ab9f6e1-947f-50f4-a213-49ece13d45f7",
+      "slug": "arena-beach-ribeirao-ribeirao-preto",
+      "name": "Arena Beach Ribeirão",
+      "city": "Ribeirão Preto",
+      "municipalityId": "3543402",
+      "region": "Ribeirão Preto",
+      "neighborhood": "Quintas de São José",
+      "address": "Rua Padre Modesto Nones, 115",
+      "sports": [
+        "beach-tennis"
+      ],
+      "description": "Beach tennis em Ribeirão Preto.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://www.arenabeachribeirao.com.br/",
+      "sources": [
+        {
+          "url": "https://www.arenabeachribeirao.com.br/",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        },
+        {
+          "url": "https://www.ribeiraopreto.sp.gov.br/portal/pdf/cultura849.pdf",
+          "kind": "corroboration",
+          "supports": [
+            "name",
+            "address"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "136543b0-8668-5480-a375-d3f83bd6dfaa",
+      "slug": "indoor-beach-tennis-bauru",
+      "name": "Indoor Beach Tennis",
+      "city": "Bauru",
+      "municipalityId": "3506003",
+      "region": "Bauru",
+      "neighborhood": "Jardim Pagani",
+      "address": "Rua Professora Prosperina de Queirós, Quadra 2",
+      "sports": [
+        "futevolei",
+        "beach-tennis",
+        "volei-praia"
+      ],
+      "description": "Esportes de areia em Bauru.",
+      "note": "O site informa a quadra do logradouro. Confirme o número da entrada diretamente com a arena.",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://indoorbeachtennis.com.br/",
+      "sources": [
+        {
+          "url": "https://indoorbeachtennis.com.br/",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "1e1c79c5-fd0c-5565-98ad-9b4876879a09",
+      "slug": "beach-bauru-bauru",
+      "name": "Beach Bauru",
+      "city": "Bauru",
+      "municipalityId": "3506003",
+      "region": "Bauru",
+      "neighborhood": "Jardim Vitória",
+      "address": "Rua Wilson Pedro Speridião, 126",
+      "sports": [
+        "futevolei",
+        "beach-tennis",
+        "volei-praia"
+      ],
+      "description": "Esportes de areia em Bauru.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://www.beachbauru.com.br/",
+      "sources": [
+        {
+          "url": "https://www.beachbauru.com.br/",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "8b42540f-55e7-5233-8394-4c9edbf90baa",
+      "slug": "aranda-beach-tennis-bauru",
+      "name": "Aranda Beach Tennis",
+      "city": "Bauru",
+      "municipalityId": "3506003",
+      "region": "Bauru",
+      "neighborhood": "Vila Aviação",
+      "address": "Rua Severino Lins, 1-99",
+      "sports": [
+        "beach-tennis"
+      ],
+      "description": "Beach tennis em Bauru.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://www.tfsports.com.br/open-beach-tennis/bauru2025",
+      "sources": [
+        {
+          "url": "https://www.tfsports.com.br/open-beach-tennis/bauru2025",
+          "kind": "event-organizer",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        },
+        {
+          "url": "https://socialbauru.com.br/11-arenas-para-jogar-beach-tennis-em-bauru/",
+          "kind": "corroboration",
+          "supports": [
+            "name",
+            "address"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "396be7d3-4f5d-5f85-8ee6-b63be5c71a07",
+      "slug": "arena-pompeu-beach-tennis-aracatuba",
+      "name": "Arena Pompeu Beach Tennis",
+      "city": "Araçatuba",
+      "municipalityId": "3502804",
+      "region": "Araçatuba",
+      "neighborhood": "Centro",
+      "address": "Rua Duque de Caxias, 1778",
+      "sports": [
+        "beach-tennis"
+      ],
+      "description": "Beach tennis em Araçatuba.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://turismo.aracatuba.sp.gov.br/turismo/mapaturistico.pdf",
+      "sources": [
+        {
+          "url": "https://turismo.aracatuba.sp.gov.br/turismo/mapaturistico.pdf",
+          "kind": "municipality",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        },
+        {
+          "url": "https://www.listamais.com.br/local/cad_idfBfQ00f/arena-pompeu-beach-tennis-beach-tennis-em-aracatuba-sp",
+          "kind": "corroboration",
+          "supports": [
+            "name",
+            "address"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "74eebe61-4330-5cb1-892c-8a47217ca7dc",
+      "slug": "arena-nrt-beach-tennis-franca",
+      "name": "Arena NRT Beach Tennis",
+      "city": "Franca",
+      "municipalityId": "3516200",
+      "region": "Ribeirão Preto",
+      "neighborhood": "Núcleo Agrícola Alpha",
+      "address": "Rua Alfredo Tosi, 1960",
+      "sports": [
+        "beach-tennis"
+      ],
+      "description": "Beach tennis em Franca.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://www.itftennis.com/en/tournament/bt10-franca-1/bra/2026/b-tour-bra-2026-197/fact-sheet/",
+      "sources": [
+        {
+          "url": "https://www.itftennis.com/en/tournament/bt10-franca-1/bra/2026/b-tour-bra-2026-197/fact-sheet/",
+          "kind": "federation",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "65a3d973-40b6-59fc-8322-058cc42b97e6",
+      "slug": "sharx-arena-piracicaba",
+      "name": "Sharx Arena",
+      "city": "Piracicaba",
+      "municipalityId": "3538709",
+      "region": "Campinas",
+      "neighborhood": "Parque Santa Cecília",
+      "address": "Rua Nicola Nardo, 199",
+      "sports": [
+        "beach-tennis"
+      ],
+      "description": "Beach tennis em Piracicaba.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://sharxarena.com.br/",
+      "sources": [
+        {
+          "url": "https://sharxarena.com.br/",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "daf894c8-d97e-51c6-a29b-ec91641a3ea9",
+      "slug": "tamega-sport-club-jundiai",
+      "name": "Tâmega Sport Club",
+      "city": "Jundiaí",
+      "municipalityId": "3525904",
+      "region": "Campinas",
+      "neighborhood": "Vila Angélica",
+      "address": "Rua Cica, 2075",
+      "sports": [
+        "futevolei",
+        "beach-tennis",
+        "volei-praia"
+      ],
+      "description": "Esportes de areia em Jundiaí.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://tamegasportclub.com.br/",
+      "sources": [
+        {
+          "url": "https://tamegasportclub.com.br/",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "e987535d-253d-551c-af30-df38956fa0c9",
+      "slug": "arena-mare-beach-guarulhos",
+      "name": "Arena Maré Beach",
+      "city": "Guarulhos",
+      "municipalityId": "3518800",
+      "region": "São Paulo",
+      "neighborhood": "Macedo",
+      "address": "Rua Alberto Hinoto Bento, 118",
+      "sports": [
+        "beach-tennis"
+      ],
+      "description": "Beach tennis em Guarulhos.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://wellhub.com/pt-br/search/partners/arena-mare-beach/",
+      "sources": [
+        {
+          "url": "https://wellhub.com/pt-br/search/partners/arena-mare-beach/",
+          "kind": "venue-partner",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        },
+        {
+          "url": "https://letzplay.me/marebeach",
+          "kind": "corroboration",
+          "supports": [
+            "name",
+            "address"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "aa98d2d0-d737-5f14-b61e-9ae41ef15659",
+      "slug": "arena-pappi-santo-andre",
+      "name": "Arena Pappi",
+      "city": "Santo André",
+      "municipalityId": "3547809",
+      "region": "São Paulo",
+      "neighborhood": "Vila América",
+      "address": "Avenida Queirós Filho, 510",
+      "sports": [
+        "futevolei",
+        "beach-tennis",
+        "volei-praia"
+      ],
+      "description": "Esportes de areia em Santo André.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://arenapappi.com.br/",
+      "sources": [
+        {
+          "url": "https://arenapappi.com.br/",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "0bede924-7769-5cbb-bb6a-5f596c2655dc",
+      "slug": "arena-pe-na-areia-sao-bernardo-do-campo",
+      "name": "Arena Pé na Areia",
+      "city": "São Bernardo do Campo",
+      "municipalityId": "3548708",
+      "region": "São Paulo",
+      "neighborhood": "Rudge Ramos",
+      "address": "Avenida Winston Churchill, 452",
+      "sports": [
+        "futevolei",
+        "beach-tennis",
+        "volei-praia"
+      ],
+      "description": "Esportes de areia em São Bernardo do Campo.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://arenapenareia.com.br/",
+      "sources": [
+        {
+          "url": "https://arenapenareia.com.br/",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "483243da-ff95-5901-a1df-82d4ed01a0c9",
+      "slug": "arena-do-momento-sao-bernardo-do-campo",
+      "name": "Arena do Momento",
+      "city": "São Bernardo do Campo",
+      "municipalityId": "3548708",
+      "region": "São Paulo",
+      "neighborhood": "Rudge Ramos",
+      "address": "Avenida Winston Churchill, 1502",
+      "sports": [
+        "futevolei",
+        "beach-tennis"
+      ],
+      "description": "Esportes de areia em São Bernardo do Campo.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://arenadomomento.com.br/agendamento/",
+      "sources": [
+        {
+          "url": "https://arenadomomento.com.br/agendamento/",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "ecbdf985-2090-58e2-b392-c8cecac7fee1",
+      "slug": "arena-pro-beach-sao-bernardo-do-campo",
+      "name": "Arena Pro Beach",
+      "city": "São Bernardo do Campo",
+      "municipalityId": "3548708",
+      "region": "São Paulo",
+      "neighborhood": "Paulicéia",
+      "address": "Avenida Cézar Magnani, 840",
+      "sports": [
+        "futevolei",
+        "beach-tennis",
+        "volei-praia"
+      ],
+      "description": "Esportes de areia em São Bernardo do Campo.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://arenaprobeach.com/",
+      "sources": [
+        {
+          "url": "https://arenaprobeach.com/",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "6a65c9a5-c383-5a3f-aa9c-f6f90dc213c5",
+      "slug": "arena-abc-beach-sports-sao-bernardo-do-campo",
+      "name": "Arena ABC Beach Sports",
+      "city": "São Bernardo do Campo",
+      "municipalityId": "3548708",
+      "region": "São Paulo",
+      "neighborhood": "Vila Jordanópolis",
+      "address": "Rua Haydee, 49",
+      "sports": [
+        "beach-tennis"
+      ],
+      "description": "Beach tennis em São Bernardo do Campo.",
+      "note": "Entrada divulgada pelo clube e pela TotalPass: 49. O registro empresarial informa 61 no mesmo logradouro.",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://abcbeachsports-br.matchpoint.com.es/Pages/11-o_clube_arena_abc_beach_sports",
+      "sources": [
+        {
+          "url": "https://abcbeachsports-br.matchpoint.com.es/Pages/11-o_clube_arena_abc_beach_sports",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        },
+        {
+          "url": "https://totalpass.com/br/academias/arena-abc-beach-tennis-d2371436-ebae-4384-a6f1-e7b92f4a9116/",
+          "kind": "corroboration",
+          "supports": [
+            "name",
+            "address"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "4e06fc52-1f5f-5723-9a43-8765913a64ef",
+      "slug": "arena-beach-sao-caetano-sao-caetano-do-sul",
+      "name": "Arena Beach São Caetano",
+      "city": "São Caetano do Sul",
+      "municipalityId": "3548807",
+      "region": "São Paulo",
+      "neighborhood": "Santo Antônio",
+      "address": "Rua Rafael Corrêa Sampaio, 485",
+      "sports": [
+        "beach-tennis"
+      ],
+      "description": "Beach tennis em São Caetano do Sul.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://arenasaocaetano.net.br/",
+      "sources": [
+        {
+          "url": "https://arenasaocaetano.net.br/",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "291772aa-d85b-5077-87d7-9ee4f01943cc",
+      "slug": "estacao-praia-mar-osasco",
+      "name": "Estação Praia Mar",
+      "city": "Osasco",
+      "municipalityId": "3534401",
+      "region": "São Paulo",
+      "neighborhood": "Centro",
+      "address": "Rua General Bittencourt, 363",
+      "sports": [
+        "futevolei",
+        "volei-praia"
+      ],
+      "description": "Esportes de areia em Osasco.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://www.estacaopraiamar.com.br/",
+      "sources": [
+        {
+          "url": "https://www.estacaopraiamar.com.br/",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "286b79d9-875e-51a9-89cd-5b91093f930a",
+      "slug": "arena-santista-de-beach-tennis-santos",
+      "name": "Arena Santista de Beach Tennis",
+      "city": "Santos",
+      "municipalityId": "3548500",
+      "region": "São Paulo",
+      "neighborhood": "Macuco",
+      "address": "Rua Doutor Batista Pereira, 313",
+      "sports": [
+        "beach-tennis"
+      ],
+      "description": "Beach tennis em Santos.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://arenasantista.com.br/page.aspx?id=9&title=o_clube_arena_santista_de_beach_tennis",
+      "sources": [
+        {
+          "url": "https://arenasantista.com.br/page.aspx?id=9&title=o_clube_arena_santista_de_beach_tennis",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "0dde66e9-1913-57de-890a-f779dfb27e2a",
+      "slug": "riplay-ma-kai-sao-paulo",
+      "name": "Riplay Ma Kai",
+      "city": "São Paulo",
+      "municipalityId": "3550308",
+      "region": "São Paulo",
+      "neighborhood": "Jardim Cidade Pirituba",
+      "address": "Avenida Menotti Laudisio, 734",
+      "sports": [
+        "futevolei",
+        "beach-tennis",
+        "volei-praia"
+      ],
+      "description": "Esportes de areia em São Paulo.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://riplaysports.com.br/makai/",
+      "sources": [
+        {
+          "url": "https://riplaysports.com.br/makai/",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "245fd332-a864-5fc1-a56f-0264cdb350b0",
+      "slug": "riplay-aclimacao-sao-paulo",
+      "name": "Riplay Aclimação",
+      "city": "São Paulo",
+      "municipalityId": "3550308",
+      "region": "São Paulo",
+      "neighborhood": "Cambuci",
+      "address": "Rua Robertson, 303",
+      "sports": [
+        "futevolei",
+        "beach-tennis",
+        "volei-praia"
+      ],
+      "description": "Esportes de areia em São Paulo.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://totalpass.com/br/academias/riplay-aclimacao-b5f37fc6-9c32-4057-8a12-1025bf05a06f/",
+      "sources": [
+        {
+          "url": "https://totalpass.com/br/academias/riplay-aclimacao-b5f37fc6-9c32-4057-8a12-1025bf05a06f/",
+          "kind": "venue-partner",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        },
+        {
+          "url": "https://riplaysports.com.br/unidades/",
+          "kind": "corroboration",
+          "supports": [
+            "name",
+            "address"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "415223fa-3b4f-5d97-9784-12db15b63966",
+      "slug": "riplay-granja-viana-cotia",
+      "name": "Riplay Granja Viana",
+      "city": "Cotia",
+      "municipalityId": "3513009",
+      "region": "São Paulo",
+      "neighborhood": "Granja Viana",
+      "address": "Estrada da Aldeia, 699",
+      "sports": [
+        "futevolei",
+        "beach-tennis",
+        "volei-praia"
+      ],
+      "description": "Esportes de areia em Cotia.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://embed.letzplay.me/open-riplay/tourneys/57839",
+      "sources": [
+        {
+          "url": "https://embed.letzplay.me/open-riplay/tourneys/57839",
+          "kind": "event-organizer",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        },
+        {
+          "url": "https://riplaysports.com.br/unidades/",
+          "kind": "corroboration",
+          "supports": [
+            "name",
+            "address"
+          ]
+        },
+        {
+          "url": "https://bio.site/riplaygranjaviana",
+          "kind": "venue",
+          "supports": [
+            "sports"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "8f0b1640-b68e-5aa3-af83-f12f2e8c7683",
+      "slug": "riplay-raposo-cotia",
+      "name": "Riplay Raposo",
+      "city": "Cotia",
+      "municipalityId": "3513009",
+      "region": "São Paulo",
+      "neighborhood": "Granja Viana",
+      "address": "Rua Dom Joaquim, 1148",
+      "sports": [
+        "beach-tennis"
+      ],
+      "description": "Beach tennis em Cotia.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://riplaysports.com.br/unidades/",
+      "sources": [
+        {
+          "url": "https://riplaysports.com.br/unidades/",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address"
+          ]
+        },
+        {
+          "url": "https://app.letzplay.me/LBA/tourneys/62108",
+          "kind": "corroboration",
+          "supports": [
+            "name",
+            "sports"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "d374e6c1-867b-56dd-a65a-5d1755253bd5",
+      "slug": "arena-higienopolis-sao-paulo",
+      "name": "Arena Higienópolis",
+      "city": "São Paulo",
+      "municipalityId": "3550308",
+      "region": "São Paulo",
+      "neighborhood": "Santa Cecília",
+      "address": "Rua Rosa e Silva, 222",
+      "sports": [
+        "beach-tennis"
+      ],
+      "description": "Beach tennis em São Paulo.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://arenahigienopolis.com.br/",
+      "sources": [
+        {
+          "url": "https://arenahigienopolis.com.br/",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "17769803-f6d0-5a51-9e7d-3b4f27596677",
+      "slug": "winner-tennis-beach-saude-sao-paulo",
+      "name": "Winner Tennis & Beach Saúde",
+      "city": "São Paulo",
+      "municipalityId": "3550308",
+      "region": "São Paulo",
+      "neighborhood": "Saúde",
+      "address": "Rua Caramuru, 1606",
+      "sports": [
+        "beach-tennis"
+      ],
+      "description": "Beach tennis em São Paulo.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://winnertennis.com.br/",
+      "sources": [
+        {
+          "url": "https://winnertennis.com.br/",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "8fdcee9e-a9df-5486-83b6-ef0e1dc44053",
+      "slug": "arena-peruibe-peruibe",
+      "name": "Arena Peruíbe",
+      "city": "Peruíbe",
+      "municipalityId": "3537602",
+      "region": "São Paulo",
+      "neighborhood": "Centro",
+      "address": "Rua Professora Rosa Emília Neves Costa, 139",
+      "sports": [
+        "beach-tennis"
+      ],
+      "description": "Beach tennis em Peruíbe.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://spbttour.com.br/onde-tem-play/",
+      "sources": [
+        {
+          "url": "https://spbttour.com.br/onde-tem-play/",
+          "kind": "federation",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "6f0da469-a8d8-5663-9a0c-a54d62ec2beb",
+      "slug": "arena-nfp-tatuape-sao-paulo",
+      "name": "Arena NFP Tatuapé",
+      "city": "São Paulo",
+      "municipalityId": "3550308",
+      "region": "São Paulo",
+      "neighborhood": "Tatuapé",
+      "address": "Rua São Jorge, 400",
+      "sports": [
+        "beach-tennis"
+      ],
+      "description": "Beach tennis em São Paulo.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://spbttour.com.br/onde-tem-play/",
+      "sources": [
+        {
+          "url": "https://spbttour.com.br/onde-tem-play/",
+          "kind": "federation",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "2df75f61-b89e-5b34-bceb-028e50223e14",
+      "slug": "personalytte-beach-sports-praia-grande",
+      "name": "Personalytte Beach Sports",
+      "city": "Praia Grande",
+      "municipalityId": "3541000",
+      "region": "São Paulo",
+      "neighborhood": "Não informado",
+      "address": "Rua Rio de Janeiro, 45",
+      "sports": [
+        "beach-tennis"
+      ],
+      "description": "Beach tennis em Praia Grande.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://spbttour.com.br/onde-tem-play/",
+      "sources": [
+        {
+          "url": "https://spbttour.com.br/onde-tem-play/",
+          "kind": "federation",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "d6bbaa39-33c8-56cf-901f-cea864d0616c",
+      "slug": "arena-guaruja-esportes-guaruja",
+      "name": "Arena Guarujá Esportes",
+      "city": "Guarujá",
+      "municipalityId": "3518701",
+      "region": "São Paulo",
+      "neighborhood": "Jardim Primavera",
+      "address": "Avenida Primavera, 214",
+      "sports": [
+        "beach-tennis"
+      ],
+      "description": "Beach tennis em Guarujá.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://spbttour.com.br/onde-tem-play/",
+      "sources": [
+        {
+          "url": "https://spbttour.com.br/onde-tem-play/",
+          "kind": "federation",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "098674b3-214c-5ba3-81a8-a434ecca904e",
+      "slug": "g3-beach-tennis-santos",
+      "name": "G3 Beach Tennis",
+      "city": "Santos",
+      "municipalityId": "3548500",
+      "region": "São Paulo",
+      "neighborhood": "José Menino",
+      "address": "Avenida Presidente Wilson, s/n",
+      "sports": [
+        "beach-tennis"
+      ],
+      "description": "Beach tennis em Santos.",
+      "note": "Quadras na praia; a fonte não informa número de entrada.",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://spbttour.com.br/onde-tem-play/",
+      "sources": [
+        {
+          "url": "https://spbttour.com.br/onde-tem-play/",
+          "kind": "federation",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "d6a820bf-6473-5494-8361-ff1fa7083a22",
+      "slug": "arena-vigna-sao-jose-do-rio-preto",
+      "name": "Arena Vigna",
+      "city": "São José do Rio Preto",
+      "municipalityId": "3549805",
+      "region": "São José do Rio Preto",
+      "neighborhood": "Estância Jockey Clube",
+      "address": "Rua Waldivino Borges de Carvalho, 535",
+      "sports": [
+        "futevolei",
+        "beach-tennis"
+      ],
+      "description": "Esportes de areia em São José do Rio Preto.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://letzplay.me/arenavignabeachsports/tourneys/60224",
+      "sources": [
+        {
+          "url": "https://letzplay.me/arenavignabeachsports/tourneys/60224",
+          "kind": "event-organizer",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        },
+        {
+          "url": "https://futevoleisp.com.br/onde-jogar/",
+          "kind": "corroboration",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "66d3221e-7349-58de-be92-37d76eab7199",
+      "slug": "ts2-brasil-campinas",
+      "name": "TS2 Brasil",
+      "city": "Campinas",
+      "municipalityId": "3509502",
+      "region": "Campinas",
+      "neighborhood": "Parque das Universidades",
+      "address": "Rua Josefina Gori Fiorani, 135",
+      "sports": [
+        "futevolei"
+      ],
+      "description": "Futevôlei em Campinas.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://futevoleisp.com.br/onde-jogar/",
+      "sources": [
+        {
+          "url": "https://futevoleisp.com.br/onde-jogar/",
+          "kind": "federation",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "8ee5c8ba-551d-52bd-bcd6-00d2cc59d31e",
+      "slug": "arena-futevolei-peruibe-peruibe",
+      "name": "Arena Futevôlei Peruíbe",
+      "city": "Peruíbe",
+      "municipalityId": "3537602",
+      "region": "São Paulo",
+      "neighborhood": "Jardim Marina",
+      "address": "Avenida Governador Mário Covas Júnior, 2390",
+      "sports": [
+        "futevolei"
+      ],
+      "description": "Futevôlei em Peruíbe.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://futevoleisp.com.br/onde-jogar/",
+      "sources": [
+        {
+          "url": "https://futevoleisp.com.br/onde-jogar/",
+          "kind": "federation",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "abfc0d44-6916-519e-87d9-43dd7832ca64",
+      "slug": "arena-marco-zero-sao-bernardo-do-campo",
+      "name": "Arena Marco Zero",
+      "city": "São Bernardo do Campo",
+      "municipalityId": "3548708",
+      "region": "São Paulo",
+      "neighborhood": "Parque Anchieta",
+      "address": "Avenida Kennedy, 1155",
+      "sports": [
+        "futevolei"
+      ],
+      "description": "Futevôlei em São Bernardo do Campo.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://futevoleisp.com.br/onde-jogar/",
+      "sources": [
+        {
+          "url": "https://futevoleisp.com.br/onde-jogar/",
+          "kind": "federation",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "60baca71-6fa4-59bf-acde-018efeaf9a6c",
+      "slug": "planet-society-rudge-ramos-sao-bernardo-do-campo",
+      "name": "Planet Society Rudge Ramos",
+      "city": "São Bernardo do Campo",
+      "municipalityId": "3548708",
+      "region": "São Paulo",
+      "neighborhood": "Rudge Ramos",
+      "address": "Rua do Sacramento, 833",
+      "sports": [
+        "futevolei"
+      ],
+      "description": "Futevôlei em São Bernardo do Campo.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://futevoleisp.com.br/onde-jogar/",
+      "sources": [
+        {
+          "url": "https://futevoleisp.com.br/onde-jogar/",
+          "kind": "federation",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "f5c49cf0-7dfe-587e-8b6d-4a03de978be6",
+      "slug": "planet-society-centro-sao-bernardo-do-campo",
+      "name": "Planet Society Centro",
+      "city": "São Bernardo do Campo",
+      "municipalityId": "3548708",
+      "region": "São Paulo",
+      "neighborhood": "Centro",
+      "address": "Rua André Coppini, 105",
+      "sports": [
+        "futevolei"
+      ],
+      "description": "Futevôlei em São Bernardo do Campo.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://futevoleisp.com.br/onde-jogar/",
+      "sources": [
+        {
+          "url": "https://futevoleisp.com.br/onde-jogar/",
+          "kind": "federation",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "0237f8d6-ec0a-586a-ae94-05afb57e67d1",
+      "slug": "orra-meu-beach-sao-paulo",
+      "name": "Orra Meu Beach",
+      "city": "São Paulo",
+      "municipalityId": "3550308",
+      "region": "São Paulo",
+      "neighborhood": "Mooca",
+      "address": "Rua Barretos, 695",
+      "sports": [
+        "futevolei"
+      ],
+      "description": "Futevôlei em São Paulo.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://futevoleisp.com.br/onde-jogar/",
+      "sources": [
+        {
+          "url": "https://futevoleisp.com.br/onde-jogar/",
+          "kind": "federation",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "acae79c5-3978-588f-b176-fffb1295b7fa",
+      "slug": "operarios-beach-sports-sao-paulo",
+      "name": "Operários Beach Sports",
+      "city": "São Paulo",
+      "municipalityId": "3550308",
+      "region": "São Paulo",
+      "neighborhood": "Vila Maria",
+      "address": "Rua Juvenal Gomes Coimbra, 64",
+      "sports": [
+        "futevolei"
+      ],
+      "description": "Futevôlei em São Paulo.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://futevoleisp.com.br/onde-jogar/",
+      "sources": [
+        {
+          "url": "https://futevoleisp.com.br/onde-jogar/",
+          "kind": "federation",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "a5b82aad-5783-5c75-bf29-97ef9fa5b4b9",
+      "slug": "ct-futevolei-sv-sao-vicente",
+      "name": "CT Futevôlei SV",
+      "city": "São Vicente",
+      "municipalityId": "3551009",
+      "region": "São Paulo",
+      "neighborhood": "Gonzaguinha",
+      "address": "Avenida Embaixador Pedro de Toledo, 53",
+      "sports": [
+        "futevolei"
+      ],
+      "description": "Futevôlei em São Vicente.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://futevoleisp.com.br/onde-jogar/",
+      "sources": [
+        {
+          "url": "https://futevoleisp.com.br/onde-jogar/",
+          "kind": "federation",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "37a802eb-5503-57fe-93c7-69b455b7a170",
+      "slug": "rs-sand-sports-vinhedo",
+      "name": "RS Sand Sports",
+      "city": "Vinhedo",
+      "municipalityId": "3556701",
+      "region": "Campinas",
+      "neighborhood": "Marambaia",
+      "address": "Rua Bangu, 208",
+      "sports": [
+        "futevolei"
+      ],
+      "description": "Futevôlei em Vinhedo.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://futevoleisp.com.br/onde-jogar/",
+      "sources": [
+        {
+          "url": "https://futevoleisp.com.br/onde-jogar/",
+          "kind": "federation",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "98d5147a-7e3a-53f3-92b0-cb7d2859c95a",
+      "slug": "haka-beach-sports-botucatu",
+      "name": "Haka Beach Sports",
+      "city": "Botucatu",
+      "municipalityId": "3507506",
+      "region": "Bauru",
+      "neighborhood": "Jardim Tropical",
+      "address": "Rua José Benedito Nogueira, 10",
+      "sports": [
+        "beach-tennis"
+      ],
+      "description": "Beach tennis em Botucatu.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://www.botucatu.sp.gov.br/arquivos/jogos_regionais_btu_2024_boletim_01_28-06_com_mascote_11023501.pdf",
+      "sources": [
+        {
+          "url": "https://www.botucatu.sp.gov.br/arquivos/jogos_regionais_btu_2024_boletim_01_28-06_com_mascote_11023501.pdf",
+          "kind": "municipality",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        },
+        {
+          "url": "https://www.solutudo.com.br/empresas/sp/botucatu/beach%2Btennis",
+          "kind": "corroboration",
+          "supports": [
+            "name",
+            "address"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "c70b198b-2c49-5a2e-935d-ae4d1effb447",
+      "slug": "arena-nacional-caraguatatuba-caraguatatuba",
+      "name": "Arena Nacional Caraguatatuba",
+      "city": "Caraguatatuba",
+      "municipalityId": "3510500",
+      "region": "São José dos Campos",
+      "neighborhood": "Pontal de Santa Marina",
+      "address": "Avenida José Herculano, 1086 — Serramar Shopping",
+      "sports": [
+        "futevolei",
+        "beach-tennis",
+        "volei-praia"
+      ],
+      "description": "Esportes de areia em Caraguatatuba.",
+      "note": "Localização no Serramar Shopping confirmada na ficha da Federação Paulista. A TotalPass usa Jardim Britânia para o bairro.",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://totalpass.com/br/academias/arena-nacional-caraguatatuba/",
+      "sources": [
+        {
+          "url": "https://totalpass.com/br/academias/arena-nacional-caraguatatuba/",
+          "kind": "venue-partner",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        },
+        {
+          "url": "https://tenis-integrado-prod.s3.amazonaws.com/sync-prod/id278108/anexos/anexo_1756748465.pdf",
+          "kind": "corroboration",
+          "supports": [
+            "name",
+            "address"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "bec49b11-bb6a-5bc9-8912-9c1e5ae8d9ce",
+      "slug": "arena-ubatuba-sand-sports-ubatuba",
+      "name": "Arena Ubatuba Sand Sports",
+      "city": "Ubatuba",
+      "municipalityId": "3555406",
+      "region": "São José dos Campos",
+      "neighborhood": "Centro",
+      "address": "Rua Cunhambebe, 179",
+      "sports": [
+        "beach-tennis"
+      ],
+      "description": "Beach tennis em Ubatuba.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://www.ubatuba.sp.gov.br/noticias/circuito-arena-ubatuba/",
+      "sources": [
+        {
+          "url": "https://www.ubatuba.sp.gov.br/noticias/circuito-arena-ubatuba/",
+          "kind": "municipality",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        },
+        {
+          "url": "https://app.letzplay.me/SmashSports/tourneys/21036",
+          "kind": "corroboration",
+          "supports": [
+            "name",
+            "address"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
+    },
+    {
+      "id": "7d8538cd-a206-5016-af39-b1e565387a61",
+      "slug": "arena-ilhabela-ilhabela",
+      "name": "Arena Ilhabela",
+      "city": "Ilhabela",
+      "municipalityId": "3520400",
+      "region": "São José dos Campos",
+      "neighborhood": "Não informado",
+      "address": "Avenida Ernesto de Oliveira, 847",
+      "sports": [
+        "beach-tennis"
+      ],
+      "description": "Beach tennis em Ilhabela.",
+      "note": "",
+      "checkedOn": "2026-09-13",
+      "sourceUrl": "https://letzplay.me/ilhabela/tourneys/37904",
+      "sources": [
+        {
+          "url": "https://letzplay.me/ilhabela/tourneys/37904",
+          "kind": "venue",
+          "supports": [
+            "name",
+            "address",
+            "sports"
+          ]
+        }
+      ],
+      "photoStatus": "pending-rights-review",
+      "photos": []
     }
-  ]
+  ],
+  "state": "SP"
 }

@@ -17,7 +17,9 @@ function clientWith({tableData={}, auth='verified', failTable, networkError=fals
     global: {fetch: async (input,init) => {
       const url = new URL(String(input)); requests.push({url,headers:new Headers(init?.headers)});
       if(networkError) throw new Error('Internal credential must not reach UI');
-      const table = url.pathname.split('/').at(-1);
+      const operation = url.pathname.split('/').at(-1);
+      const table = operation === 'search_arenas' ? 'arenas' : operation;
+      requests.at(-1).body = init?.body ? JSON.parse(init.body) : null;
       if(table===failTable) return Response.json({message:'Internal SQL/credential detail',code:'42P01'},{status:400});
       const value = tableData[table] ?? (table==='sports'?[sport]:table==='profiles'?[profile]:[arena]);
       // maybeSingle in the SDK expects an array response; the SDK validates cardinality.
@@ -53,10 +55,10 @@ test('arena list uses public filter, stable pagination, sports join and carries 
   const data=await readSocial(client,{resource:'arenas',offset:24});
   assert.equal(data.kind,'arenas'); assert.equal(data.arenas[0].isDemo,true);
   assert.deepEqual(data.arenas[0].sports,[sport]);
-  const query=requests.find(r=>r.url.pathname.endsWith('/arenas')).url.searchParams;
-  assert.equal(query.get('is_public'),'eq.true');
-  assert.equal(query.get('order'),'name.asc,id.asc');
-  assert.equal(query.get('offset'),'24'); assert.equal(Number(query.get('limit')),ARENA_PAGE_SIZE+1);
+  const request=requests.find(r=>r.url.pathname.endsWith('/search_arenas'));
+  const query=request.url.searchParams;
+  assert.deepEqual(request.body,{p_search:'',p_offset:24});
+  assert.equal(ARENA_PAGE_SIZE,24);
   assert.match(query.get('select'),/arena_sports\(enabled,sports\(id,slug,name\)\)/);
   assert.equal(data.offset,24); assert.equal(data.hasMore,false);
   assert.throws(()=>listPublicArenas(client,-1), e=>e.code==='invalid_request');
@@ -90,10 +92,10 @@ test('own profile query uses verified identity and DTO excludes email, role and 
   await assert.rejects(readSocial(clientWith({tableData:{profiles:[]}}).client,{resource:'profile'}),e=>e.code==='profile_missing');
 });
 
-test('no profile query runs for absent/expired identity, while Auth outages remain errors', async () => {
-  for(const auth of ['missing','expired','unavailable']) {
+test('no profile or directory query runs for absent/expired identity, while Auth outages remain errors', async () => {
+  for(const auth of ['missing','expired','unavailable']) for (const resource of ['profile','arenas']) {
     const {client,requests}=clientWith({auth});
-    await assert.rejects(readSocial(client,{resource:'profile'}),e=>e.code===(auth==='unavailable'?'unavailable':'authentication'));
+    await assert.rejects(readSocial(client,{resource,offset:0}),e=>e.code===(auth==='unavailable'?'unavailable':'authentication'));
     assert.equal(requests.length,0);
   }
 });

@@ -1,3 +1,11 @@
+## 2026-09-13 — Importação de arenas e busca estadual
+
+- 43 arenas importadas no desenvolvimento e principal; total de 60 unidades em 25 municípios. Fontes, endereço/modalidade, divergências e pendências documentados. Cobertura Google ainda parcial.
+- Busca no servidor antes de paginar, com nome, bairro, endereço, cidade e esporte; rótulos de cidade substituem o recorte fixo Sul/Oeste.
+- Seletores pesquisáveis em jogos, publicações, pessoas e vínculo de comunidades, mantendo a escolha durante novas buscas.
+- Migration aditiva com admissão/RLS e 401 para acesso sem login; importação preserva arenas anteriores, modalidades, conteúdo e 76 fotos. Novas imagens pendentes usam estado neutro.
+- 132 testes locais, lint/typecheck/build e 50 verificações hospedadas aprovados. [Pesquisa, operação e limites](arena-state-research/validacao.md). Publicação autorizada via PR/CI/main e script oficial.
+
 ## 2026-09-13 — checagem de saúde para monitor gratuito na nuvem
 
 - Nova rota `/api/health`: verifica identidade do banco e disponibilidade de Auth com chave pública, sem sessão, dados pessoais ou gravações.

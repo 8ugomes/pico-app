@@ -1,3 +1,9 @@
+## Catálogo estadual — revisão e aprendizados · 13/09/2026
+
+A cidade deve distinguir unidades de mesmo nome e orientar a busca. Remover a limitação visual Sul/Oeste e a busca apenas na página; uma pesquisa por nome, bairro ou cidade precisa servir ao catálogo inteiro e aos seletores de jogos/publicações/perfil. Manter texto curto, estados de erro/vazio e fotos inteiras. Arena sem foto confirmada usa superfície neutra, nunca imagem de outra unidade. Conferir amostra mobile, desktop e ambos os temas; não simular exaustividade do Google nem parceria das arenas importadas.
+
+A cidade agora acompanha o bairro e distingue unidades; remover o filtro Sul/Oeste evitou apresentar o interior como zona da capital. O campo visível pesquisa o catálogo inteiro. Seleção e busca são estados distintos: procurar outro lugar não apaga uma arena já escolhida. Foto ausente permanece explicitamente indisponível. Revisão em 390px/claro e 1280px/escuro, sem overflow; navegação e registro privado reais confirmados. [Capturas e limites](arena-state-research/validacao.md).
+
 ## Monitoramento na nuvem — revisão · 13/09/2026
 
 ### Implementação e aprendizados

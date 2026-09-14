@@ -8,6 +8,8 @@ import { SafetyActions } from './SafetyActions';
 import { Button } from '@/components/ui/Button';
 import { PageHeading, EmptyState, SportIcon, SearchField } from '../SocialUI';
 import { useSearchInput } from '../useSearchInput';
+import type { ReadArena } from '@/types/read';
+import { ArenaSelect } from './ArenaSelect';
 import { useRemoteRead } from './useRemoteRead';
 import { ReadFailure, ReadLoading } from './ReadState';
 import { MutationNotice, useMutation } from './useMutation';
@@ -18,19 +20,18 @@ export function ConnectionButton({ playerId, connected, refresh }: { playerId: s
 export function ConnectedDiscovery() {
   const { search, setSearch, settled, pending } = useSearchInput();
   const [sport, setSport] = useState('');
-  const [arena, setArena] = useState('');
+  const [arena, setArena] = useState<ReadArena | null>(null);
   const [level, setLevel] = useState('');
   const [offset, setOffset] = useState(0);
-  const [arenaOffset, setArenaOffset] = useState(0);
-  const catalog = useRemoteRead(`resource=arenas&offset=${arenaOffset}`);
+  const catalog = useRemoteRead('resource=sports');
   const query = new URLSearchParams({ resource: 'discover', offset: String(offset), search: settled });
   if (sport) query.set('sportId', sport);
-  if (arena) query.set('arenaId', arena);
+  if (arena) query.set('arenaId', arena.id);
   if (level) query.set('level', level);
   const { state, retry, refresh, refreshing } = useRemoteRead(query.toString(), !pending);
   const data = !pending && state.status === 'success' && state.data.kind === 'discover' ? state.data : null;
   const players = data?.players ?? [];
-  const options = catalog.state.status === 'success' && catalog.state.data.kind === 'arenas' ? catalog.state.data : null;
+  const options = catalog.state.status === 'success' && catalog.state.data.kind === 'sports' ? catalog.state.data : null;
   return <>
     <PageHeading title="Pessoas"><Link className="journey-text-link" href="/comunidades">Buscar comunidades</Link></PageHeading>
     <SearchField tourId="people-search" label="Buscar pessoas por nome ou usuário" placeholder="Nome ou @usuário" maxLength={100} value={search} onChange={value => { setSearch(value); setOffset(0); }} />
@@ -39,10 +40,9 @@ export function ConnectedDiscovery() {
     {(catalog.state.status === 'error' || catalog.state.status === 'demo') && <ReadFailure state={catalog.state} retry={catalog.retry} />}
     {options && <details className="discovery-filters"><summary data-tour="people-filters">Filtrar pessoas{(sport || arena || level) ? ` · ${[sport,arena,level].filter(Boolean).length} filtro(s)` : ""}</summary><div className="connected-form"><fieldset>
       <label className="input-group">Esporte<select className="input" value={sport} onChange={e => { setSport(e.target.value); setOffset(0); }}><option value="">Todos os esportes</option>{options.sports.map(s => <option value={s.id} key={s.id}>{s.name}</option>)}</select></label>
-      <label className="input-group">Arena acompanhada<select data-tour="people-arena" className="input" value={arena} onChange={e => { setArena(e.target.value); setOffset(0); }}><option value="">Todas as arenas</option>{options.arenas.map(a => <option value={a.id} key={a.id}>{a.name}{a.isDemo ? ' · Demo' : ''}</option>)}</select></label>
-      {(arenaOffset > 0 || options.hasMore) && <nav className="read-pagination" aria-label="Catálogo de arenas"><Button variant="quiet" size="small" disabled={!arenaOffset} onClick={() => { setArenaOffset(arenaOffset - 24); setArena(''); setOffset(0); }}>Arenas anteriores</Button><Button variant="quiet" size="small" disabled={!options.hasMore} onClick={() => { setArenaOffset(arenaOffset + 24); setArena(''); setOffset(0); }}>Mais arenas</Button></nav>}
+      <ArenaSelect label="Arena acompanhada" emptyLabel="Todas as arenas" tourId="people-arena" value={arena} onChange={value => { setArena(value); setOffset(0); }} />
       <label className="input-group">Nível<select className="input" value={level} onChange={e => { setLevel(e.target.value); setOffset(0); }}><option value="">Todos os níveis</option>{['Iniciante', 'Intermediário', 'Avançado'].map(l => <option key={l}>{l}</option>)}</select></label>
-      {(sport || arena || level) && <Button variant="quiet" size="small" onClick={() => { setSport(''); setArena(''); setLevel(''); setOffset(0); }}>Limpar filtros</Button>}
+      {(sport || arena || level) && <Button variant="quiet" size="small" onClick={() => { setSport(''); setArena(null); setLevel(''); setOffset(0); }}>Limpar filtros</Button>}
     </fieldset></div></details>}
     {(pending || state.status === 'loading') && <ReadLoading />}
     {!pending && (state.status === 'error' || state.status === 'demo') && <ReadFailure state={state} retry={retry} />}

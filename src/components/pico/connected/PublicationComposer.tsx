@@ -7,6 +7,8 @@ import { ChoiceChip } from '@/components/ui/ChoiceChip';
 import { Button } from '@/components/ui/Button';
 import { PhotoUpload } from './Media';
 import { useEntity, entityAction } from './useEntity';
+import { ArenaSelect } from './ArenaSelect';
+import type { ReadArena } from '@/types/read';
 import { useRemoteRead } from './useRemoteRead';
 import { formatGameDate } from '@/lib/game-date';
 import type { PublicationOptions } from '@/types/posts';
@@ -36,18 +38,16 @@ function Composer({ options, arenaId, communityId, game, onDone, onBusy }: { opt
   const [audience, setAudience] = useState<'beta' | 'private'>(initialGroup?.visibility || 'beta');
   const [wall, setWall] = useState(options.arenas.some(a => a.id === arenaId) ? arenaId || '' : '');
   const [groups, setGroups] = useState<string[]>(initialGroup ? [initialGroup.id] : []);
-  const [marked, setMarked] = useState(''), [sport, setSport] = useState('');
+  const [marked, setMarked] = useState<ReadArena | null>(null), [sport, setSport] = useState('');
   const [busy, setBusy] = useState(false), [uploading, setUploading] = useState(false), [message, setMessage] = useState('');
   const attempt = useRef<{ fingerprint: string; key: string } | null>(null);
-  const { state } = useRemoteRead('resource=arenas&offset=0');
   const { state: sportState } = useRemoteRead('resource=sports');
-  const arenas = state.status === 'success' && state.data.kind === 'arenas' ? state.data.arenas : [];
-  const sports = marked ? arenas.find(a => a.id === marked)?.sports || [] : sportState.status === 'success' && sportState.data.kind === 'sports' ? sportState.data.sports : [];
+  const sports = marked ? marked.sports : sportState.status === 'success' && sportState.data.kind === 'sports' ? sportState.data.sports : [];
   const destinationNames = [options.arenas.find(a => a.id === wall)?.name, ...options.communities.filter(c => groups.includes(c.id)).map(c => c.name)].filter(Boolean);
   return <form className="connected-form" onSubmit={async e => {
     e.preventDefault(); if (busy || uploading) return;
     const common = { body, imagePath: photo, audience, wallArena: wall || undefined, groups };
-    const payload = game ? { ...common, id: game.id, version: game.version } : { ...common, action: 'publish', arena: marked || undefined, sport: sport || undefined };
+    const payload = game ? { ...common, id: game.id, version: game.version } : { ...common, action: 'publish', arena: marked?.id, sport: sport || undefined };
     const fingerprint = JSON.stringify(payload);
     if (attempt.current?.fingerprint !== fingerprint) attempt.current = { fingerprint, key: crypto.randomUUID() };
     setBusy(true); onBusy(true); setMessage('');
@@ -64,7 +64,7 @@ function Composer({ options, arenaId, communityId, game, onDone, onBusy }: { opt
       <span className="input-hint">{body.length}/500</span>
       <PhotoUpload bucket="post-media" path={photo} onChange={setPhoto} onBusy={value => { setUploading(value); onBusy(value || busy); }} />
       <label className="input-group">Audiência<select className="input" value={audience} onChange={e => { const next = e.target.value as 'beta' | 'private'; setAudience(next); setGroups([]); if (next === 'private') setWall(''); }}><option value="beta">Pessoas do Pico</option><option value="private">Participantes de uma comunidade privada</option></select></label>
-      {!game && <details className="publication-context"><summary>Modalidade e local (opcionais)</summary><p className="input-hint">Marcar um lugar não publica no mural da arena.</p><label className="input-group">Local<select className="input" value={marked} onChange={e => { setMarked(e.target.value); setSport(''); }}><option value="">Sem local marcado</option>{arenas.map(a => <option value={a.id} key={a.id}>{a.name}{a.isDemo ? ' · demo' : ''}</option>)}</select></label><label className="input-group">Modalidade<select className="input" value={sport} onChange={e => setSport(e.target.value)}><option value="">Sem modalidade</option>{sports.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}</select></label>{(state.status === 'error' || sportState.status === 'error') && <p className="form-error">Não foi possível carregar os locais e modalidades. Seu texto continua disponível.</p>}</details>}
+      {!game && <details className="publication-context"><summary>Modalidade e local (opcionais)</summary><p className="input-hint">Marcar um lugar não publica no mural da arena.</p><ArenaSelect label="Local" emptyLabel="Sem local marcado" value={marked} onChange={arena => { setMarked(arena); setSport(''); }} /><label className="input-group">Modalidade<select className="input" value={sport} onChange={e => setSport(e.target.value)}><option value="">Sem modalidade</option>{sports.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}</select></label>{sportState.status === 'error' && <p className="form-error">Não foi possível carregar os locais e modalidades. Seu texto continua disponível.</p>}</details>}
       <fieldset className="form-section"><legend>{audience === 'private' ? 'Escolha o grupo privado' : 'Distribuir também para'}</legend>
         {audience === 'beta' && <label className="input-group">Mural de arena<select className="input" value={wall} onChange={e => setWall(e.target.value)}><option value="">Não publicar em mural de arena</option>{options.arenas.map(a => <option key={a.id} value={a.id}>{a.name}</option>)}</select></label>}
         <div className="choice-chips">{options.communities.filter(c => c.visibility === audience).map(c => <ChoiceChip key={c.id} checked={groups.includes(c.id)} onChange={e => setGroups(e.target.checked ? (audience === 'private' ? [c.id] : [...groups, c.id]) : groups.filter(id => id !== c.id))}>{c.name}{c.visibility === 'private' ? ' · privado' : ''}</ChoiceChip>)}</div>
