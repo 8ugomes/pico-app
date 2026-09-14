@@ -1,4 +1,4 @@
-import assert from'node:assert/strict';import{randomBytes,randomUUID}from'node:crypto';import{spawnSync}from'node:child_process';import{readFileSync,writeFileSync}from'node:fs';import{createClient}from'@supabase/supabase-js';import{createServerClient}from'@supabase/ssr';import{chromium}from'@playwright/test';import sharp from'sharp';import{Upload}from'tus-js-client';import{realMp4Fixture}from'./helpers/mp4-fixture.mjs';import{assertRemoteIdentity}from'../scripts/environment-guard.mjs';
+import assert from'node:assert/strict';import{randomBytes,randomUUID}from'node:crypto';import{spawnSync}from'node:child_process';import{readFileSync,writeFileSync}from'node:fs';import{createClient}from'@supabase/supabase-js';import{createServerClient}from'@supabase/ssr';import{chromium}from'@playwright/test';import sharp from'sharp';import{realMp4Fixture}from'./helpers/mp4-fixture.mjs';import{assertRemoteIdentity}from'../scripts/environment-guard.mjs';
 await assertRemoteIdentity(process.env,'hosted-test');process.umask(0o077);
 const origin=process.env.PICO_TEST_ORIGIN||'http://localhost:3002',url=process.env.NEXT_PUBLIC_SUPABASE_URL,key=process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,secret=process.env.SUPABASE_SECRET_KEY,ref=process.env.PICO_PROJECT_REF;
 assert.ok(['http://localhost:3002','http://localhost:3000'].includes(origin),'Full destructive suite runs only against the exclusive dev app');
@@ -26,6 +26,7 @@ try{
  ok(await rpc(root,'operator_action',{p_action:'platform_role',p_target_id:mod.id,p_value:'moderator'}),'assign moderator');
  for(const a of all.filter(a=>a!==pending)){const r=await a.client.from('profiles').update({display_name:'Teste C9 '+a.label,username:'c9_'+a.id.replaceAll('-','').slice(0,12),city:'Teste',neighborhood:'Teste',onboarding_completed:true}).eq('id',a.id).select('username').single();a.username=ok(r,'complete profile').username;fixture.users.find(u=>u.id===a.id).username=a.username}
  const sports=ok(await owner.client.from('sports').select('id').limit(1),'sports'),sport=sports[0].id;
+ ok(await owner.client.from('player_sports').insert({player_id:owner.id,sport_id:sport,level:'Iniciante',is_primary:true}),'browser fixture primary sport');
  for(const a of[owner,other]){const id=randomUUID();fixture.arenas.push(id);persist();sql(`insert into public.arenas(id,slug,name,city,neighborhood,is_demo,owner_id) values('${id}','c9-${id.slice(0,8)}','Arena teste C9 ${a.label}','Teste','Teste',true,'${a.id}');insert into public.arena_sports(arena_id,sport_id) values('${id}','${sport}');insert into public.arena_members(arena_id,player_id) values('${id}','${a.id}')`);a.arena=id;a.slug='c9-'+id.slice(0,8)}
  console.log('Seven identities prepared; testing scopes');const arena=await api(owner,'/api/arenas?slug='+owner.slug);await api(owner,'/api/arenas',{action:'edit',id:owner.arena,version:arena.version,data:{name:'Arena C9 editada',city:'Teste',neighborhood:'Teste',description:'Edição confirmada',public_info:'',sports:[sport]}});check((await api(owner,'/api/arenas?slug='+owner.slug)).name==='Arena C9 editada','arena persisted');
  await api(member,'/api/arenas',{action:'edit',id:owner.arena,version:2,data:{name:'Ataque',sports:[]}},403);denied(await rpc(other,'save_arena',{p_id:owner.arena,p_version:2,p_data:{name:'Cruzado',sports:[]}}),'other arena owner');denied(await rpc(member,'operator_action',{p_action:'arena_role',p_scope_id:owner.arena,p_target_id:member.id,p_value:'admin'}),'self promotion');
@@ -46,14 +47,35 @@ try{
  check(ok(await admin.from('posts').select('id').eq('author_id',owner.id),'posts after played mark').length===originalPosts,'played mark publishes nothing');
  await api(owner,'/api/activity',{action:'set_played_arena_mark',arenaId:catalogArena,marked:false});
  check(!(await api(member,'/api/activity?kind=played&player='+owner.id)).some(item=>item.id===catalogArena),'played arena unmark is visible');
- // Exercise the browser's signed TUS path, the hosted Storage range response,
- // and the same private-audience/mention contract used by the composer.
+ // Select the file in a real browser with the app's CSP active. A Node TUS
+ // client bypasses CSP and cannot detect a blocked direct Storage origin.
  const videoBytes=await realMp4Fixture();check(videoBytes.length>32&&videoBytes.subarray(4,8).toString()==='ftyp','real browser-recorded MP4 fixture');
- const videoReserved=await api(owner,'/api/post-video',{action:'reserve',size:videoBytes.length});
- fixture.files.push({bucket:'post-videos',path:videoReserved.path});persist();
- const videoOrigin=new URL(url),tusEndpoint=`${videoOrigin.protocol}//${videoOrigin.hostname.replace(/\.supabase\.co$/,'.storage.supabase.co')}/storage/v1/upload/resumable/sign`;
- await new Promise((resolve,reject)=>{const transfer=new Upload(videoBytes,{endpoint:tusEndpoint,headers:{'x-signature':videoReserved.token,apikey:key},metadata:{bucketName:'post-videos',objectName:videoReserved.path,contentType:'video/mp4',cacheControl:'0'},chunkSize:6*1024*1024,uploadDataDuringCreation:true,retryDelays:[0,1000],onSuccess:resolve,onError:()=>reject(Error('Hosted TUS upload rejected; credentials and response withheld.'))});transfer.start()});
- check((await api(owner,'/api/post-video',{action:'finalize',path:videoReserved.path,size:videoBytes.length})).path===videoReserved.path,'hosted TUS video finalized');
+ const uploadBrowser=await chromium.launch({channel:'chrome',headless:true});let videoReserved;
+ try{
+  const context=await uploadBrowser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+  await context.addCookies([...owner.jar].map(([name,value])=>({name,value,url:origin})));
+  const page=await context.newPage(),browserErrors=[];
+  page.on('pageerror',error=>browserErrors.push(error.name));
+  page.on('console',message=>{if(message.type()==='error')browserErrors.push(message.text().includes('Content Security Policy')?'csp':'console')});
+  const feedResponse=await page.goto(origin+'/feed');
+  check(feedResponse?.status()===200,'browser feed served');
+  check(feedResponse.headers()['content-security-policy']?.includes(`${new URL(url).hostname.replace(/\.supabase\.co$/,'.storage.supabase.co')}`),'browser document permits the exact Storage host');
+  const trigger=page.getByRole('button',{name:'O que aconteceu na areia?'});
+  await trigger.waitFor({timeout:30000}).catch(()=>{throw Error(`Browser composer missing at ${new URL(page.url()).pathname}; errors: ${browserErrors.join(',')||'none'}`)});
+  await trigger.click();
+  await page.getByRole('textbox',{name:'Texto da publicação'}).fill('Vídeo de teste em rascunho');
+  await page.getByRole('radio',{name:'Vídeo'}).click();
+  const reservation=page.waitForResponse(response=>response.url().endsWith('/api/post-video')&&response.request().method()==='POST'&&response.request().postDataJSON()?.action==='reserve');
+  await page.getByLabel('Vídeo da publicação (opcional)').setInputFiles({name:'fixture.mp4',mimeType:'video/mp4',buffer:videoBytes});
+  videoReserved=(await (await reservation).json()).data;
+  check(Boolean(videoReserved?.path),'browser reserved private video path');
+  fixture.files.push({bucket:'post-videos',path:videoReserved.path});persist();
+  await page.getByText('Vídeo selecionado. Reproduza para conferir antes de publicar.').waitFor({timeout:120000});
+  check(await page.getByRole('button',{name:'Publicar',exact:true}).isEnabled(),'browser completed TUS and finalization without publishing');
+  check(await page.locator('.video-upload [role="alert"]').count()===0,'browser video upload has no error');
+  check(await page.getByRole('textbox',{name:'Texto da publicação'}).inputValue()==='Vídeo de teste em rascunho','browser upload preserves unposted text');
+ }finally{await uploadBrowser.close()}
+ check(ok(await admin.from('post_video_assets').select('ready').eq('path',videoReserved.path).single(),'browser video row').ready===true,'browser finalized private video');
  await http(member,'/api/post-video?path='+encodeURIComponent(videoReserved.path),'GET',undefined,404);
  const videoPost=await api(owner,'/api/posts',{action:'publish',key:randomUUID(),body:'Vídeo C9 @'+member.username,imagePath:null,videoPath:videoReserved.path,audience:'private',groups:[privateGroup.id],mentionCommunity:privateGroup.id,mentionPeople:[member.id],mentionEveryone:false});
  const videoRead=await http(member,'/api/post-video?path='+encodeURIComponent(videoReserved.path),'GET',undefined,206);

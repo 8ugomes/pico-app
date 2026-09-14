@@ -577,3 +577,10 @@ O editor aberto ainda parece uma ficha: texto, ferramentas, configurações e a�
 ### Aprendizados da revisão
 
 O texto ficou livre de instrução longa no placeholder; a confirmação de audiência permanece na linha abaixo, e a ação principal está ao lado da foto e do contador. Na abertura das opções, o mural mostra apenas uma linha até ser acionado; a busca recebe foco e os resultados são ordenados. A arena escolhida aparece tanto no próprio controle quanto no resumo do público, sem mudar por uma nova busca. O fixture de CSS revelou um rótulo oculto vazando para dentro do campo e botões com estilo nativo; ambos foram corrigidos antes da conferência final. Amostra de componente em 320/390/1280 px e rota demo real em 320/390 px, claro/escuro, sem rolagem horizontal na amostra. CI de navegador Chromium/WebKit passou no head final, e a versão pública foi conferida após promoção. O modo demo e o smoke de saúde não comprovam uma publicação autenticada em produção; nenhuma foi criada para evitar atividade artificial na comunidade.
+## Envio de vídeo no navegador · critérios antes de codar · 14/09/2026
+
+A correção é de conectividade: manter o compositor, a prévia, a escolha de audiência e os estados atuais, sem adicionar uma promessa visual de envio antes da confirmação. Uma falha deve ser recuperável sem publicar ou perder o texto. A política de segurança deve admitir apenas a origem de Storage necessária ao TUS, não domínios genéricos. Revisar o estado final em celular estreito e tema escuro, como no relato, e uma amostra clara; validar a seleção de arquivo e a prévia em navegador com CSP real, não só a aparência do controle.
+
+### Aprendizado da rodada
+
+O controle de vídeo e sua mensagem de erro estavam corretos visualmente, mas o documento bloqueava o destino efetivo do upload; uma revisão só da tela ou um TUS em Node não perceberia isso. O navegador móvel emulado confirmou a seleção, a prévia e o rascunho intacto após o envio, sem publicar. A apresentação não mudou nesta correção; tema e geometria existentes foram preservados. Ainda falta exercício em Android físico e com vídeos de câmera variados.
