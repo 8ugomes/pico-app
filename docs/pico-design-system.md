@@ -1,5 +1,10 @@
 # Pico Social — design system Aura Manteiga
 
+## Capa Pico Club · 13/09/2026
+
+Ícone de instalação atualizado por pedido do responsável: wordmark Pico original + Clube em Manrope leve, sobre grão Manteiga/Lavanda. Os arquivos antigos do monograma no manual preservam a edição anterior; a versão corrente do app está em [pico-club](brand-exploration/aura-manteiga/pico-club/README.md). Manifesto com nome Pico Club e ícones em URLs novas; ícones antigos públicos também recebem a nova arte para consumidores existentes. Favicon mantém apenas o wordmark, sem a linha secundária ilegível em 16/32px. Marca no cabeçalho e tokens operacionais preservados.
+
+
 Refino social de 13/09/2026: posts usam contorno funcional; a área de comentários e os balões têm superfícies distintas. Nome forte, avatar e pequeno acento por pessoa orientam a autoria; Você identifica a própria participação sem depender da cor. Ações contextuais ficam no ••• de 44 px e no diálogo acessível compartilhado. A solicitação explícita de mais separação prevalece sobre a orientação genérica de reduzir caixas. [Revisão](social-refinement-review/README.md).
 
 **Aura Manteiga está implementada no aplicativo em 13/09/2026.** Este documento traduz a identidade escolhida em decisões presentes no código. A [cobertura](aura-redesign-review/coverage.md) e a [revisão local](aura-redesign-review/README.md) registram superfícies e evidências. Publicação e CI remota não são comprovadas por esta consolidação.

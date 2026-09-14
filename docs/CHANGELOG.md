@@ -1,3 +1,10 @@
+## 2026-09-13: capa Pico Club
+
+- Ícone P/ponto substituído por logo Pico original, Clube em Manrope leve e fundo granulado Manteiga/Lavanda.
+- Exportações PWA, máscara Android, Apple e favicon atualizadas; nome de instalação Pico Club e URLs novas para os ícones. Identidade, escopo e destino da PWA preservados.
+- Prévia de instalação atualizada e instrução de acesso alinhada ao cadastro com e-mail/senha, sem confirmação de e-mail.
+- Mestres, script reproduzível e prancha de reduções documentados. Lint, typecheck, 133 testes, build conectado e smoke dos assets aprovados. Publicação autorizada pelo responsável via PR/CI/main, com inventário de conteúdo pelo script oficial.
+
 ## 2026-09-13 · Escrita natural no Pico
 
 - Comunidade institucional renomeada para Comunidade oficial do Pico, mantendo ID, slug, histórico e participantes. Migration transacional restaura a proteção do nome antes do commit.
