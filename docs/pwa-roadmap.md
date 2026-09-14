@@ -11,7 +11,7 @@ Pico Club substitui o nome Pico na identificação de instalação; desenvolvime
 
 # Pico — PWA no Ciclo 9
 
-Notificações internas de comunidade disponíveis em `/notificacoes`: atualização ao abrir/retomar e a cada 30s com aba visível, sem push do dispositivo ou service worker. Entradas na comunidade já estão no principal; a extensão para menções em publicações segue o [contrato da rodada](COMMUNITY_MENTIONS.md). [Contrato da caixa](NOTIFICATIONS.md).
+Notificações internas de comunidade disponíveis no principal em `/notificacoes`: entradas e menções em publicações, com atualização ao abrir/retomar e a cada 30s com aba visível, sem push do dispositivo ou service worker. [Menções e publicação](COMMUNITY_MENTIONS.md); [contrato da caixa](NOTIFICATIONS.md).
 
 ## Aura Manteiga integrada · 13/09/2026
 
