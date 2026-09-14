@@ -1,5 +1,10 @@
 # Pico Social — contexto institucional, produto e marca
 
+## Atualização da capa do app: Pico Club · 13/09/2026
+
+Por pedido do responsável, a apresentação de instalação passa a **Pico Club**. O ícone usa o wordmark Pico original em destaque e a palavra **Clube** abaixo, em Manrope 300, sobre fundo Manteiga/Lavanda granulado. Essa grafia na arte segue o pedido literal. Substitui o P com ponto na capa do aplicativo, Apple e favicon. O cabeçalho continua com a assinatura curta Pico; publicações, comunidades e outros conteúdos existentes não são renomeados. Mestres e uso em [Pico Club](brand-exploration/aura-manteiga/pico-club/README.md).
+
+
 Referência vigente desde 13/09/2026. Usar em estratégia, design, conteúdo, planejamento e desenvolvimento do projeto. Este documento registra decisões do responsável; não representa pesquisa com jogadores nem comprovação de resultados comerciais.
 
 ## Quem somos

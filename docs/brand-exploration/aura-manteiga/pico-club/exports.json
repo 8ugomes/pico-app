@@ -1,0 +1,56 @@
+{
+  "label": "Pico / Clube",
+  "installName": "Pico Club",
+  "originalWordmark": "logo/wordmark-cacau.svg",
+  "secondaryTypeface": "Manrope 300",
+  "maskableWordmarkBounds": {
+    "x": 147,
+    "y": 349,
+    "width": 730,
+    "height": 211.80777342573063
+  },
+  "icons": [
+    {
+      "path": "public/icons/pico-club-192.png",
+      "width": 192,
+      "height": 192,
+      "opaque": true
+    },
+    {
+      "path": "public/icons/pico-club-512.png",
+      "width": 512,
+      "height": 512,
+      "opaque": true
+    },
+    {
+      "path": "public/icons/pico-club-maskable-512.png",
+      "width": 512,
+      "height": 512,
+      "opaque": true
+    },
+    {
+      "path": "public/icons/pico-192.png",
+      "width": 192,
+      "height": 192,
+      "opaque": true
+    },
+    {
+      "path": "public/icons/pico-512.png",
+      "width": 512,
+      "height": 512,
+      "opaque": true
+    },
+    {
+      "path": "public/icons/pico-maskable-512.png",
+      "width": 512,
+      "height": 512,
+      "opaque": true
+    },
+    {
+      "path": "src/app/apple-icon.png",
+      "width": 180,
+      "height": 180,
+      "opaque": true
+    }
+  ]
+}

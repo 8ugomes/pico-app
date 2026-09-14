@@ -1,5 +1,10 @@
 > Segurança de documentos: HTML dinâmico com nonce único e `no-store`; assets de build continuam cacheáveis. Sem service worker ou armazenamento offline privado. [Revisão do beta](BETA_SECURITY.md).
 
+## Capa de instalação Pico Club · 13/09/2026
+
+Pico Club substitui o nome Pico na identificação de instalação; desenvolvimento mantém sufixo próprio. A arte exibe Pico / Clube com grão. PWA 192/512, maskable 512, Apple 180, favicon SVG e ICO atualizados. Id `/`, scope `/`, start_url `/feed`, modo standalone e dados do usuário permanecem iguais. URLs novas no manifesto permitem detectar os novos arquivos; Apple recebe o identificador de conteúdo gerado pelo Next.js. A troca do ícone de instalações existentes depende do navegador/sistema e não é garantida imediatamente, especialmente no iOS. Não apagar dados ou encerrar sessão para atualizar a capa. [Mestres e redução](brand-exploration/aura-manteiga/pico-club/README.md).
+
+
 # Pico — PWA no Ciclo 9
 
 ## Aura Manteiga integrada · 13/09/2026

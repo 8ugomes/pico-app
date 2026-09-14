@@ -1,3 +1,15 @@
+## Ícone Pico Club: implementação · 13/09/2026
+
+Pedido do responsável: substituir o monograma P/ponto por wordmark Pico original com “Clube” fino abaixo e fundo granulado Aura Manteiga; publicar no aplicativo principal. A composição usa a grafia literal “Clube” na arte e “Pico Club” na identificação da instalação. Manter os contornos canônicos do Pico e preservar id, scope, start_url, sessões e dados existentes.
+
+Executar em branch isolada da main atual: novos mestres e exports PWA/Apple/favicon, paths versionados no manifesto e prévia de instalação. Conferir redução, máscara circular, opacidade e leitura, rodar lint/types/build e regressões pertinentes, integrar por PR/CI e publicar pelo script oficial com preservação de conteúdo. Não transportar a branch da landing para a main.
+
+### Implementação e validação da capa
+
+Mestres vetoriais preservam o wordmark original e compõem Clube em Manrope 300. Exportados PWA 192/512, maskable 512, Apple 180 e favicons; manifesto e metadados anunciam Pico Club, com URLs novas e identidade estável. A tela de instalação usa a capa nova e sua orientação de login foi alinhada ao cadastro atual com e-mail/senha, sem pedir confirmação de e-mail.
+
+Prancha de 180/120/80/60px e máscara circular revisada; sete PNGs opacos e favicon carregados no build conectado. O decoder ICO do Next exige RGBA: corrigida a exportação mantendo alpha totalmente opaco. Lint, typecheck, 133 testes e build conectado aprovados; smoke verificou identidade do manifesto, metadados, carregamento e igualdade dos seis arquivos servidos. Base atualizada para d5369de, preservando o PR #20. Publicação segue PR/CI/main e script oficial; recibo operacional registra a versão efetivamente promovida. [Mestres e limites](brand-exploration/aura-manteiga/pico-club/README.md).
+
 ## Escrita natural no Pico · 13/09/2026
 
 ### Implementação e validação

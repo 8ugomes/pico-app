@@ -1,5 +1,10 @@
 # Pico Social — Manual Aura Manteiga
 
+## Atualização do ícone de app · 13/09/2026
+
+Pedido posterior do responsável substitui o monograma P/ponto na capa por **Pico** original em destaque e **Clube** fino abaixo, com grão Manteiga/Lavanda. Nome apresentado na instalação: **Pico Club**. Esta aplicação prevalece sobre a recomendação anterior de símbolo para ícones; o desenho do wordmark permanece intacto. A versão corrente, arquivos e regras de redução estão em [pico-club/README.md](pico-club/README.md). Os mestres anteriores preservam o histórico, sem orientar a próxima exportação do app.
+
+
 **Versão 1.0 · 13/09/2026 · estética e paleta escolhidas pelo responsável.**
 
 Referência para implementação; a edição não altera o aplicativo em produção. [Visualizar manual](manual.html) · [Prompt de produção](PROMPT-PRODUCAO.md) · [Mapa de implementação](IMPLEMENTACAO.md)

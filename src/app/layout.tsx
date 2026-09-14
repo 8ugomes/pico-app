@@ -12,8 +12,8 @@ export const metadata: Metadata = {
   title: { default: "Pico. O ponto de encontro da areia.", template: "%s | Pico" },
   description: "Me acha no Pico. Descubra quem joga onde você joga, acompanhe suas arenas e encontre sua próxima dupla.",
   robots: { index: false, follow: false },
-  applicationName: "Pico",
-  appleWebApp: { capable: true, statusBarStyle: "default", title: "Pico" },
+  applicationName: "Pico Club",
+  appleWebApp: { capable: true, statusBarStyle: "default", title: "Pico Club" },
 };
 
 export const viewport: Viewport = { themeColor: [{ media: "(prefers-color-scheme: light)", color: "#F8F3E7" }, { media: "(prefers-color-scheme: dark)", color: "#282121" }], colorScheme: "light dark", width: "device-width", initialScale: 1, viewportFit: "cover" };

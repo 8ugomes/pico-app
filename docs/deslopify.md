@@ -1,3 +1,11 @@
+## Ícone Pico Club: critérios · 13/09/2026
+
+Pico ocupa a maior parte da área segura; “Clube” vem abaixo em Manrope leve. Usar o wordmark original sem redigitar, sem monograma, slogan ou efeitos sobre as letras. Campos Manteiga/Lavanda com grão fino criam o fundo; contraste Cacau permanece estável. Ícones PWA e Apple opacos, sem cantos transparentes ou moldura de telefone; versão maskable mantém a assinatura dentro do círculo seguro. No favicon de 16/32px, priorizar o wordmark Pico e omitir a linha secundária que não teria leitura. Checar uma prancha de reduções e a tela de instalação, sem reabrir o design do app.
+
+### Revisão e aprendizado
+
+Capa revisada na prancha e na página de instalação do build conectado, sem erro de console. O wordmark mantém reconhecimento em 60px; Clube funciona como assinatura secundária e foi retirado apenas do favicon, onde não teria leitura. Fundo granular fica atrás das letras, maskable aceita recorte circular e arquivos de instalação permanecem opacos. A redução precisa ser tratada por contexto, sem retornar ao monograma rejeitado. A cópia de instalação ainda pedia confirmação de e-mail; alinhada ao acesso atual por e-mail/senha. A validação de pixels/rotas não comprova atualização de uma instalação já existente no iPhone.
+
 ## Escrita natural sem travessões decorativos · 13/09/2026
 
 ### Critério permanente do responsável
