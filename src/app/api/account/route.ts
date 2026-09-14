@@ -21,18 +21,18 @@ export async function DELETE(request: Request) {
     if (pending.error) mutationFailure(pending.error);
     // A pending marker denies further client writes while cleanup is retried.
     // Storage must be deleted through its API, never by deleting its SQL rows.
-    for (const bucket of ['avatars','post-media']) {
+    for (const bucket of ['avatars','post-media','post-videos']) {
       // Always remove the first page. Advancing an offset after deletion skips
       // objects. Bound each attempt; the pending marker allows safe resumption.
       let empty = false;
       for (let page = 0; page < 10; page++) {
         const list = await admin.storage.from(bucket).list(user.id, {limit:100, sortBy:{column:'name',order:'asc'}});
-        if (list.error) throw new MutationError(503,'A exclusão foi iniciada. Tente novamente para concluir a remoção das fotos.');
+        if (list.error) throw new MutationError(503,'A exclusão foi iniciada. Tente novamente para concluir a remoção da mídia.');
         if (!list.data.length) { empty = true; break; }
         const removed = await admin.storage.from(bucket).remove(list.data.map(file=>`${user.id}/${file.name}`));
-        if (removed.error) throw new MutationError(503,'A exclusão foi iniciada. Tente novamente para concluir a remoção das fotos.');
+        if (removed.error) throw new MutationError(503,'A exclusão foi iniciada. Tente novamente para concluir a remoção da mídia.');
       }
-      if (!empty) throw new MutationError(503,'Uma parte das fotos foi removida. Repita a exclusão para concluir.');
+      if (!empty) throw new MutationError(503,'Uma parte da mídia foi removida. Repita a exclusão para concluir.');
     }
     // Remove invitations addressed to this verified account, including expired
     // ones. Recipient emails are private data, not part of entity custody.

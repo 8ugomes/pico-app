@@ -6,6 +6,9 @@ import{useState}from'react';import Link from'next/link';import{Button}from'@/com
 export type ArenaProfile={id:string;slug:string;name:string;description:string;city:string;neighborhood:string;public_info:string;avatar_path:string|null;cover_path:string|null;version:number;rank:number;is_demo:boolean;membership:'active'|'suspended'|null;sports:ReadSport[];owner:{id:string;name:string;username:string}|null;staff:{id:string;name:string;username:string;role:string}[]};
 export function ArenaExtras({ data, directory, reload }: { data: ArenaProfile; directory?: ArenaDirectory; reload: () => void }) {
   const [message, setMessage] = useState(''), [busy, setBusy] = useState(false);
+  const [confirmedMark, setConfirmedMark] = useState<boolean | null>(null);
+  const playedRead = useEntity<{id:string;name:string;slug:string}[]>('/api/activity?kind=played');
+  const marked = confirmedMark ?? (playedRead.data?.some(arena => arena.id === data.id) ?? false);
   return <section className="arena-participation">
     <div className="arena-join-actions"><Button data-tour="arena-follow" disabled={busy || data.membership === 'suspended'} variant={data.membership === 'active' ? 'secondary' : 'primary'} aria-pressed={data.membership === 'active'} onClick={async () => {
       setBusy(true); setMessage('');
@@ -13,7 +16,16 @@ export function ArenaExtras({ data, directory, reload }: { data: ArenaProfile; d
       catch (e) { setMessage(e instanceof Error ? e.message : 'Não foi possível confirmar.'); }
       finally { setBusy(false); }
     }}>{busy ? 'Salvando…' : data.membership === 'active' ? 'Deixar de acompanhar' : data.membership === 'suspended' ? 'Participação suspensa' : 'Acompanhar arena'}</Button><Link href={`/jogos?arena=${data.slug}`}>Joguei aqui</Link></div>
-    <p className="form-note">Acompanhar salva nos seus Picos. Seus jogos continuam privados.</p>
+    <div className="arena-played-declaration"><Button variant="secondary" aria-pressed={marked} disabled={busy || playedRead.loading || Boolean(playedRead.error) || (data.is_demo && !marked)} onClick={async () => {
+      setBusy(true); setMessage('');
+      try { await entityAction('/api/activity', { action: 'set_played_arena_mark', arenaId: data.id, marked: !marked }); setConfirmedMark(!marked); setMessage(marked ? 'Declaração removida do seu perfil.' : 'Arena marcada em seu perfil. Outras pessoas podem ver esta declaração.'); }
+      catch (error) { setMessage(error instanceof Error ? error.message : 'Não foi possível confirmar. Tente novamente.'); }
+      finally { setBusy(false); }
+    }}>{busy ? 'Salvando…' : playedRead.loading ? 'Carregando declaração…' : marked ? 'Desmarcar “Já joguei”' : 'Marcar “Já joguei”'}</Button>
+      {playedRead.error && <p role="alert">{playedRead.error} <Button size="small" variant="quiet" onClick={playedRead.reload}>Tentar novamente</Button></p>}
+      <p className="form-note">{data.is_demo ? 'Arena fictícia: não é possível declarar publicamente que você jogou aqui.' : 'Declaração pública no seu perfil, sem data, presença ou publicação. Você pode desmarcar quando quiser.'}</p>
+    </div>
+    <p className="form-note">Acompanhar salva a arena nos seus Picos. Joguei aqui guarda um jogo passado só para você.</p>
     <p role="status">{message}</p>
     <details className="arena-practical"><summary>Sobre e gestão</summary><EntityImages avatar={data.avatar_path} cover={null} name={data.name} />{data.description && <p>{data.description}</p>}{data.public_info && data.public_info !== [directory?.address, directory?.note].filter(Boolean).join('\n') && <p>{data.public_info}</p>}{directory?.note && <p>{directory.note}</p>}{directory && <p className="arena-source">Cadastro a partir de <a href={directory.sourceUrl} target="_blank" rel="noopener noreferrer">informações públicas</a>, consultadas em {directory.checkedOn.split('-').reverse().join('/')}.</p>}{data.owner && <p><Link href={`/perfil/${data.owner.username}`}>{data.owner.name}</Link> · responsável</p>}{data.staff.map(person => <p key={person.id}><Link href={`/perfil/${person.username}`}>{person.name}</Link> · {person.role === 'admin' ? 'Administrador' : 'Moderador'}</p>)}{data.rank >= 20 && <Link className="journey-text-link" href={`/arenas/${data.slug}/gestao`}>Gerenciar arena</Link>}<details><summary>Corrigir informações ou solicitar gestão</summary>{!data.owner && <p>Responsável pela arena? Solicite a gestão. Após a análise, você pode criar a comunidade oficial.</p>}<ArenaRequest arena={data} /></details></details>
   </section>;

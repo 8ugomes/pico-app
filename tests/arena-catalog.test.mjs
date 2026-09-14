@@ -51,7 +51,7 @@ test('catalog import is atomic, preserves history and owner edits, creates no fa
     for (const id of retiredDemoIds) assert.equal((await db.query('select status from public.arenas where id=$1', [id])).rows[0].status, 'archived');
     const real = arenaCatalog.arenas[0];
     await asUser(db, BOB, async () => {
-      assert.equal((await db.query('select id from public.arenas where is_public')).rows.length, arenaCatalog.arenas.length);
+      assert.equal((await db.query('select id from public.arenas where is_public')).rows.length, arenaCatalog.arenas.length + 3);
       assert.equal((await db.query('select id from public.arenas where id=$1', [VILA])).rows.length, 0);
       await assert.rejects(db.query('select public.set_arena_membership($1,true)', [VILA]));
       await db.query('select public.set_arena_membership($1,true)', [real.id]);

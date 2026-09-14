@@ -5,6 +5,7 @@ export type CommunityNotification = {
   created_at: string;
   read_at: string | null;
   actor_name: string;
+  actor_avatar_path: string | null;
   community_name: string;
   community_slug: string;
 };

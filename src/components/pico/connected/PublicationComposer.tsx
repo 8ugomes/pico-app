@@ -6,6 +6,7 @@ import { ArrowUpRight, ChevronDown, PenLine, Search, X } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { findMentionQuery, insertMention, selectedMentionsInText, type MentionQuery } from '@/lib/inline-mentions';
 import type { ReadArena } from '@/types/read';
+import { VideoUpload } from './VideoUpload';
 import type { PublicationOptions } from '@/types/posts';
 import type { PlayedGame } from '@/types/games';
 import { formatGameDate } from '@/lib/game-date';
@@ -35,6 +36,7 @@ export function PublicationDraft({ arenaId, communityId, game, onDone, onBusy, o
 
 function Composer({ options, optionsError, reloadOptions, arenaId, communityId, game, onDone, onBusy, onCancel }: { options: PublicationOptions | null; optionsError: string; reloadOptions: () => void; arenaId?: string; communityId?: string; game?: PlayedGame; onDone: (id: string) => void; onBusy: (busy: boolean) => void; onCancel?: () => void }) {
   const [body, setBody] = useState(''), [caret, setCaret] = useState(0), [photo, setPhoto] = useState<string | null>(null);
+  const [video, setVideo] = useState<string | null>(null), [mediaKind, setMediaKind] = useState<'photo' | 'video'>('photo');
   const [audienceChoice, setAudience] = useState<'beta' | 'private' | null>(null), [wallChoice, setWall] = useState<string | null>(null), [groupChoice, setGroups] = useState<string[] | null>(null);
   const [mentionCommunity, setMentionCommunity] = useState(''), [mentionPeople, setMentionPeople] = useState<Person[]>([]), [mentionEveryone, setMentionEveryone] = useState(false);
   const [marked, setMarked] = useState<ReadArena | null>(null), [sport, setSport] = useState('');
@@ -71,7 +73,7 @@ function Composer({ options, optionsError, reloadOptions, arenaId, communityId, 
 
   return <form className="connected-form compose-form" onSubmit={async event => {
     event.preventDefault(); if (!canPublish) return;
-    const common = { body, imagePath: photo, audience, wallArena: wall || undefined, groups };
+    const common = { body, imagePath: mediaKind === 'photo' ? photo : null, videoPath: mediaKind === 'video' ? video : null, audience, wallArena: wall || undefined, groups };
     const mentions = { mentionCommunity: active.everyone || active.people.length ? mentionGroup : undefined, mentionPeople: active.people.map(person => person.id), mentionEveryone: active.everyone };
     const payload = game ? { ...common, id: game.id, version: game.version } : { ...common, ...mentions, action: 'publish', arena: marked?.id, sport: sport || undefined };
     const fingerprint = JSON.stringify(payload);
@@ -80,7 +82,7 @@ function Composer({ options, optionsError, reloadOptions, arenaId, communityId, 
     try {
       const id: unknown = await entityAction(game ? '/api/games/share' : '/api/posts', { ...payload, key: attempt.current.key });
       if (typeof id !== 'string' || !/^[0-9a-f-]{36}$/i.test(id)) throw new Error('A confirmação da publicação não chegou. Confira antes de tentar novamente.');
-      setBody(''); setPhoto(null); attempt.current = null; onDone(id);
+      setBody(''); setPhoto(null); setVideo(null); attempt.current = null; onDone(id);
     } catch (error) { setMessage((error instanceof Error ? error.message : 'Não foi possível confirmar.') + ' Seu rascunho foi mantido.'); }
     finally { setBusy(false); onBusy(false); }
   }}>
@@ -107,7 +109,8 @@ function Composer({ options, optionsError, reloadOptions, arenaId, communityId, 
     {!options && !optionsError && <p role="status" className="compose-loading">Conferindo onde você pode publicar…</p>}
     {message && <p className="form-error" role="alert">{message}</p>}
     {audience === 'private' && groups.length !== 1 && <p className="compose-privacy-note">Escolha um grupo privado antes de publicar.</p>}
-    <div className="compose-footer"><div className="compose-footer-tools"><PhotoUpload compact bucket="post-media" path={photo} onChange={setPhoto} onBusy={value => { setUploading(value); onBusy(value || busy); }} /><span className="compose-count">{body.length}/500</span></div><Button type="submit" disabled={!canPublish}>{busy ? 'Publicando…' : 'Publicar'}</Button></div>
+    {mediaKind === 'video' && <VideoUpload path={video} onChange={setVideo} onBusy={value => { setUploading(value); onBusy(value || busy); }} />}
+    <div className="compose-footer"><div className="compose-footer-tools"><div className="compose-media-choice" role="radiogroup" aria-label="Tipo de mídia"><label><input type="radio" name="media-kind" checked={mediaKind === 'photo'} disabled={busy || uploading} onChange={() => setMediaKind('photo')} /> Foto</label><label><input type="radio" name="media-kind" checked={mediaKind === 'video'} disabled={busy || uploading} onChange={() => setMediaKind('video')} /> Vídeo</label></div>{mediaKind === 'photo' && <PhotoUpload compact bucket="post-media" path={photo} onChange={setPhoto} onBusy={value => { setUploading(value); onBusy(value || busy); }} />}<span className="compose-count">{body.length}/500</span></div><Button type="submit" disabled={!canPublish}>{busy ? 'Publicando…' : 'Publicar'}</Button></div>
   </form>;
 }
 

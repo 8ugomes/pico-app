@@ -16,11 +16,18 @@ test('join notifies existing active members once, persists reads, prevents forge
     await carol(db);
     const g = await group(db);
     assert.equal((await asUser(db, ALICE, () => read(db))).items.length, 0);
+    const avatarPath = (await asUser(db, BOB, () => db.query("select public.reserve_media('avatars') as path"))).rows[0].path;
+    await db.query('update public.media_assets set ready=true where path=$1', [avatarPath]);
+    await db.query("insert into storage.objects(bucket_id,name) values('avatars',$1)", [avatarPath]);
+    await asUser(db, BOB, () => db.query('update public.profiles set avatar_path=$1 where id=$2', [avatarPath, BOB]));
     await member(db, BOB, g.id);
     await member(db, BOB, g.id);
     let inbox = await asUser(db, ALICE, () => read(db));
     assert.equal(inbox.unreadCount, 1);
     assert.equal(inbox.items[0].community_slug, g.slug);
+    assert.equal(inbox.items[0].actor_avatar_path, avatarPath);
+    await asUser(db, BOB, () => db.query('update public.profiles set avatar_path=null where id=$1', [BOB]));
+    assert.equal((await asUser(db, ALICE, () => read(db))).items[0].actor_avatar_path, null);
     assert.equal((await asUser(db, BOB, () => read(db))).items.length, 0);
     assert.equal((await asUser(db, CAROL, () => read(db))).items.length, 0);
     await asUser(db, CAROL, async () => {

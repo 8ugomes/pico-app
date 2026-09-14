@@ -39,6 +39,19 @@ test("following an arena is reversible and rejects unknown arenas", () => {
   assert.ok(!state.followedArenaIds.includes("ipanema"));
 });
 
+test("played arena declaration is explicit, reversible and independent of games and follows", () => {
+  const original = initial();
+  const game = demoReducer(original, { type: 'save_game', arenaId: 'vila', sportId: 'futevolei', id: 'game', playedOn: '2026-01-01' });
+  assert.deepEqual(game.playedArenaIds, []);
+  assert.equal(demoReducer(game, { type: 'mark_played', arenaId: 'missing' }), game);
+  const marked = demoReducer(game, { type: 'mark_played', arenaId: 'vila' });
+  assert.deepEqual(marked.playedArenaIds, ['vila']);
+  assert.deepEqual(marked.games, game.games);
+  assert.deepEqual(marked.posts, game.posts);
+  assert.deepEqual(marked.followedArenaIds, game.followedArenaIds);
+  assert.deepEqual(demoReducer(marked, { type: 'mark_played', arenaId: 'vila' }).playedArenaIds, []);
+});
+
 test("posts enforce body and arena/sport compatibility", () => {
   const state = initial();
   const valid = { arenaId: "vila", sportId: "futevolei", content: " Bora jogar? " };

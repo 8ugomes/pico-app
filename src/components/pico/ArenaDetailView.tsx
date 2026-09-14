@@ -17,6 +17,7 @@ export function ArenaDetailView({ arena }: { arena: Arena }) {
   const { state, dispatch } = useDemo();
   const [tab, setTab] = useState<"posts" | "people" | "about">("posts");
   const following = state.followedArenaIds.includes(arena.id);
+  const played = state.playedArenaIds.includes(arena.id);
   const people = state.players.filter(p => (p.id === state.currentUserId ? state.followedArenaIds : p.arenaIds).includes(arena.id));
   const posts = visibleDemoPosts(state).filter(p => p.arenaId === arena.id && p.distributedToArena !== false);
   return <>
@@ -24,6 +25,7 @@ export function ArenaDetailView({ arena }: { arena: Arena }) {
     <div className="arena-detail-photo"><Image src={arena.image} alt={`Ilustração de ${arena.name} em São Paulo.`} width={1440} height={960} sizes="(max-width: 700px) 100vw, 620px" preload /><span className="arena-label-badge">Arena de demonstração</span></div>
     <header className="arena-detail-header"><p className="location-line"><MapPin size={14} aria-hidden="true" />{arena.neighborhood} · São Paulo</p><h1>{arena.name}</h1><div className="arena-sports">{arena.sports.map(s => <SportLabel sport={s} key={s} />)}</div><p className="community-count">{people.length} pessoas acompanham esta arena · demo</p></header>
     <div className="arena-join-actions"><button data-tour="arena-follow" type="button" className={buttonVariants({ variant: following ? "secondary" : "primary" })} aria-pressed={following} onClick={() => dispatch({ type: "follow", arenaId: arena.id })}>{following ? <Check size={17} aria-hidden="true" /> : <Plus size={17} aria-hidden="true" />}{following ? "Deixar de acompanhar" : "Acompanhar arena"}</button><Link href={`/jogos?arena=${arena.slug}`}>Joguei aqui</Link></div>
+    <div className="arena-played-declaration"><button type="button" className={buttonVariants({ variant: "secondary" })} aria-pressed={played} onClick={() => dispatch({ type: "mark_played", arenaId: arena.id })}>{played ? 'Desmarcar “Já joguei”' : 'Marcar “Já joguei”'}</button><p className="form-note">Demonstração: esta declaração fica só nesta sessão. No aplicativo conectado, aparece publicamente no perfil, sem criar post.</p></div>
     <section className="arena-about"><h2>Comunidades deste lugar</h2><DemoCommunities arenaId={arena.id} /></section>
     <div className="feed-tabs detail-tabs" role="group" aria-label="Conteúdo da arena">{([{ id: "posts", label: "Publicações" }, { id: "people", label: `Pessoas (${people.length})` }, { id: "about", label: "Sobre" }] as const).map(t => <button type="button" key={t.id} className={tab === t.id ? "active-tab" : ""} aria-pressed={tab === t.id} onClick={() => setTab(t.id)}>{t.label}</button>)}</div>
     {tab === "posts" && <div className="detail-content"><PostComposer fixedArenaId={arena.id} /><div className="post-list">{posts.map(p => <PostCard post={p} key={p.id} />)}{!posts.length && <EmptyState title="A comunidade começa com você.">Compartilhe o primeiro encontro nessa arena.</EmptyState>}</div></div>}

@@ -12,7 +12,36 @@ import { useMutation, MutationNotice } from './useMutation';
 import { ReadLoading, ReadFailure } from './ReadState';
 import { removePhoto } from './Media';
 import { SignOutButton } from '../SignOutButton';
+import { removeVideo } from './VideoUpload';
 import { AccountExport } from '../AccountExport';
+import { entityAction, useEntity } from './useEntity';
+
+type OwnPlayedArenaMark = { id: string; name: string; visible: boolean };
+
+function PlayedArenaDeclarations() {
+  const { data, error, loading, reload } = useEntity<OwnPlayedArenaMark[]>('/api/activity?kind=played-own');
+  const [removing, setRemoving] = useState<string | null>(null);
+  const [removed, setRemoved] = useState<string[]>([]);
+  const [message, setMessage] = useState('');
+  const marks = data?.filter(mark => !removed.includes(mark.id));
+  return <section className="connected-panel"><h2>Declarações “Já joguei”</h2>
+    <p className="form-note">Você pode remover uma declaração mesmo se a arena não estiver mais pública. Nenhuma data ou jogo privado aparece no perfil.</p>
+    {loading && <p role="status">Carregando declarações…</p>}
+    {error && <p role="alert">{error} <Button size="small" variant="quiet" onClick={reload}>Tentar novamente</Button></p>}
+    {marks && !marks.length && <p className="form-note">Você não declarou nenhuma arena.</p>}
+    {marks?.map(mark => <div className="account-row" key={mark.id}><span>{mark.name}{!mark.visible && <small> · Fora do perfil</small>}</span><Button size="small" variant="quiet" aria-label={`Remover declaração de ${mark.name}`} disabled={Boolean(removing)} onClick={async () => {
+      setRemoving(mark.id); setMessage('');
+      try {
+        await entityAction('/api/activity', { action: 'set_played_arena_mark', arenaId: mark.id, marked: false });
+        setRemoved(previous => [...previous, mark.id]);
+        setMessage('Declaração removida.');
+        reload();
+      } catch (failure) { setMessage(failure instanceof Error ? failure.message : 'Não foi possível remover. Tente novamente.'); }
+      finally { setRemoving(null); }
+    }}>{removing === mark.id ? 'Removendo…' : 'Remover'}</Button></div>)}
+    {message && <p role="status">{message}</p>}
+  </section>;
+}
 
 function DeleteAccount() {
   const [open,setOpen]=useState(false), [busy,setBusy]=useState(false), [error,setError]=useState<string|null>(null);
@@ -43,9 +72,10 @@ export function ConnectedAccount() {
     {data && !data.deletionPending && <div key={data.viewerId}>
       <section className="connected-panel"><h2>Pessoas bloqueadas</h2><p className="form-note">O bloqueio vale nos dois sentidos. Desbloquear não recria conexões.</p>{!data.blocks.length && <p className="form-note">Você ainda não bloqueou ninguém.</p>}{data.blocks.map(b=><div className="account-row" key={b.blocked_id}><span>{b.blocked_name}</span><Button variant="quiet" size="small" disabled={mutation.busy} onClick={async()=>{if(await mutation.run({action:'set_block',playerId:b.blocked_id,blocked:false},'Jogador desbloqueado.'))refresh();}}>Desbloquear</Button></div>)}<MutationNotice message={mutation.message} /></section>
       <section className="connected-panel"><h2>Suas denúncias</h2><p className="form-note">As 20 mais recentes. Denunciar não revela sua identidade para a pessoa denunciada.</p>{!data.reports.length && <p className="form-note">Nenhuma denúncia registrada.</p>}{data.reports.map(r=><div className="account-row" key={r.id}><span>{({spam:'Spam',harassment:'Assédio ou ofensa',unsafe:'Conteúdo indevido',other:'Outro motivo'} as Record<string,string>)[r.reason]} · {new Date(r.created_at).toLocaleDateString('pt-BR')}</span><span>{r.status==='pending'?'Aguardando análise':r.status==='action_taken'?'Medida aplicada':'Análise concluída'}</span></div>)}</section>
-      <section className="connected-panel"><h2>Suas fotos</h2><p className="form-note">Fotos enviadas e ainda não publicadas ficam visíveis só para você. Remova as que não usa para liberar espaço.</p>{!data.media.length && <p className="form-note">Você ainda não enviou fotos.</p>}{data.media.map((m,i)=><div className="account-row" key={m.path}><span>{m.bucket==='avatars'?'Foto de perfil':'Foto de publicação'} {i+1} · {m.inUse?'Em uso':m.ready?'Sem uso':'Envio incompleto'}</span>{!m.inUse && <Button size="small" variant="quiet" disabled={Boolean(removing)} onClick={async()=>{
+      <PlayedArenaDeclarations />
+      <section className="connected-panel"><h2>Suas fotos e vídeos</h2><p className="form-note">Mídia enviada e ainda não publicada fica visível só para você. Remova o que não usa para liberar espaço.</p>{!data.media.length && <p className="form-note">Você ainda não enviou fotos ou vídeos.</p>}{data.media.map((m,i)=><div className="account-row" key={m.path}><span>{m.bucket==='avatars'?'Foto de perfil':m.bucket==='post-videos'?'Vídeo de publicação':'Foto de publicação'} {i+1} · {m.inUse?'Em uso':m.ready?'Sem uso':'Envio incompleto'}</span>{!m.inUse && <Button size="small" variant="quiet" disabled={Boolean(removing)} onClick={async()=>{
         setRemoving(m.path);setPhotoError(null);
-        try {await removePhoto(m.bucket as 'avatars'|'post-media',m.path);refresh();}catch(failure){setPhotoError(failure instanceof Error?failure.message:'Não foi possível remover.');}finally{setRemoving(null);}
+        try {if(m.bucket==='post-videos')await removeVideo(m.path);else await removePhoto(m.bucket as 'avatars'|'post-media',m.path);refresh();}catch(failure){setPhotoError(failure instanceof Error?failure.message:'Não foi possível remover.');}finally{setRemoving(null);}
       }}>{removing===m.path?'Removendo…':'Remover'}</Button>}</div>)}{photoError && <p role="alert" className="auth-notice notice-error">{photoError}</p>}</section>
     </div>}
     {/* Kept available when a deletion is pending and social reads are denied. */}

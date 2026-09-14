@@ -129,6 +129,8 @@
 @media (max-width: 359px) {
   .social-main { padding-inline: 16px; }
   .mobile-app-header { padding-inline: 16px; }
+  .mobile-app-header .header-search { padding-inline: .35rem; }
+  .mobile-app-header .header-search span { display: none; }
   .demo-banner { margin-inline: 14px; }
   .header-location { font-size: var(--text-caption); }
   .post-header { flex-wrap: wrap; }

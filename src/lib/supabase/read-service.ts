@@ -67,17 +67,20 @@ export function parseReadRequest(params: URLSearchParams): ReadRequest {
 export async function readSocial(client: SupabaseClient<Database>, request: ReadRequest): Promise<ReadData> {
   if (request.resource === 'account') {
     const user = await requireUser(client);
-    const [blocks, reports, media, profile, posts, deletion] = await Promise.all([
+    const [blocks, reports, media, profile, posts, videos, deletion] = await Promise.all([
       client.from('blocks').select('blocked_id,blocked_name').eq('blocker_id',user.id).order('created_at',{ascending:false}).limit(500),
       client.from('reports').select('id,reason,status,created_at').eq('reporter_id',user.id).order('created_at',{ascending:false}).limit(20),
       client.from('media_assets').select('path,bucket,ready').eq('player_id',user.id).order('created_at',{ascending:false}).limit(50),
       client.from('profiles').select('avatar_path').eq('id',user.id).maybeSingle(),
       client.from('posts').select('image_path').eq('author_id',user.id).not('image_path','is',null).limit(50),
+      client.rpc('read_unused_post_videos'),
       client.from('account_deletions').select('player_id').eq('player_id',user.id).maybeSingle(),
     ]);
-    if (blocks.error || reports.error || media.error || profile.error || posts.error || deletion.error) throw new ReadError('unavailable');
+    if (blocks.error || reports.error || media.error || profile.error || posts.error || videos.error || deletion.error) throw new ReadError('unavailable');
     const inUse = new Set([profile.data?.avatar_path,...(posts.data ?? []).map(p=>p.image_path)]);
-    return { kind: 'account', viewerId: user.id, deletionPending: Boolean(deletion.data), blocks: blocks.data ?? [], reports: reports.data ?? [], media: (media.data ?? []).map(m=>({...m,inUse:inUse.has(m.path)})) };
+    const draftVideos = Array.isArray(videos.data) ? videos.data.filter((item): item is { path: string; ready: boolean } =>
+      Boolean(item && typeof item === 'object' && !Array.isArray(item) && typeof item.path === 'string' && typeof item.ready === 'boolean')) : [];
+    return { kind: 'account', viewerId: user.id, deletionPending: Boolean(deletion.data), blocks: blocks.data ?? [], reports: reports.data ?? [], media: [...(media.data ?? []),...draftVideos.map(m=>({...m,bucket:'post-videos',deleting:false}))].map(m=>({...m,inUse:inUse.has(m.path)})) };
   }
   if (request.resource === 'discover') {
     await requireUser(client);

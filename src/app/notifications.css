@@ -8,7 +8,8 @@
 .notifications-list { list-style: none; margin: 0; padding: 0; container-type: inline-size; }
 .notification-row { display: flex; gap: .85rem; padding: 1.25rem .75rem; border-bottom: 1px solid var(--border-subtle); }
 .notification-unread { background: var(--accent-soft); border-radius: var(--radius-control); }
-.notification-person { width: 44px; height: 44px; display: grid; place-items: center; flex-shrink: 0; border-radius: 50%; color: var(--text-secondary); background: var(--surface); }
+.notification-person { width: 44px; height: 44px; display: grid; place-items: center; flex-shrink: 0; overflow: hidden; border-radius: 50%; color: var(--text-secondary); background: var(--surface); }
+.notification-person img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .notification-content { min-width: 0; flex: 1; }
 .notification-content p { margin: 0; line-height: 1.6; overflow-wrap: anywhere; }
 .notification-content p a { font-weight: 600; text-decoration: underline; text-underline-offset: .18em; }
@@ -18,4 +19,4 @@
 .notification-content button { text-align: left; white-space: normal; justify-content: flex-start; padding-inline: 0; }
 .notifications-page .social-empty h2 { font-size: var(--text-section); color: var(--foreground); margin-block: 1rem; }
 .notifications-pagination { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem; margin-top: 1.5rem; }
-@container (max-width: 20em) { .notification-person { display: none; } }
+@container (max-width: 20em) { .notification-row { gap: .5rem; padding-inline: .25rem; } .notification-person { width: 36px; height: 36px; } }
