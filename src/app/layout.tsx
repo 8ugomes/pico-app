@@ -9,7 +9,7 @@ const syne = localFont({ src: './fonts/syne.woff2', variable: '--font-syne', wei
 const manrope = localFont({ src: './fonts/manrope.woff2', variable: '--font-manrope', weight: '200 800', display: 'swap', fallback: ['system-ui', 'sans-serif'], adjustFontFallback: false });
 
 export const metadata: Metadata = {
-  title: { default: "Pico — O ponto de encontro da areia.", template: "%s | Pico" },
+  title: { default: "Pico. O ponto de encontro da areia.", template: "%s | Pico" },
   description: "Me acha no Pico. Descubra quem joga onde você joga, acompanhe suas arenas e encontre sua próxima dupla.",
   robots: { index: false, follow: false },
   applicationName: "Pico",

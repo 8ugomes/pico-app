@@ -1,0 +1,14 @@
+{
+  "fixture": true,
+  "checks": [
+    "signup 390 light",
+    "signup 320 light",
+    "home institutional name 320",
+    "community 320 light",
+    "community 390 light",
+    "community 1280 dark",
+    "games empty 390 dark",
+    "tutorial 390 dark"
+  ],
+  "errors": []
+}

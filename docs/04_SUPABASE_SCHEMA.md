@@ -1,3 +1,5 @@
+> Revisão editorial · 13/09/2026: `20260913233000_natural_product_copy.sql` renomeia a comunidade institucional mantendo sua identidade e ajusta pontuação em dois textos originais do catálogo. Sem mudança de schema, tipos, RLS ou permissões. Aplicada e verificada em desenvolvimento; execução principal e preservação registradas no recibo de publicação. [Evidências](editorial-review/README.md).
+
 > Catálogo estadual · 13/09/2026: `20260913230000_arena_directory_search.sql` adiciona busca autorizada antes da paginação por local/modalidade. Aplicada em desenvolvimento e principal; tipos gerados, importação aditiva e histórico preservado. [Validação](arena-state-research/validacao.md).
 
 > Histórico · 13/09/2026: `20260913210000_preserve_retired_arena_posts.sql` corrige visibilidade de originais/republicações ligados somente às três arenas demonstrativas conhecidas, arquivadas e não públicas. Nenhuma linha de conteúdo é alterada; catálogo, grupos privados, bloqueios, moderação e admissão permanecem protegidos. Validada/aplicada no desenvolvimento; principal pendente. [Evidências](social-refinement-review/README.md).

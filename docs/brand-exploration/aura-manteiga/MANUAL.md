@@ -421,6 +421,8 @@ São parâmetros de implementação, não medição de desempenho. Verificar flu
 
 O tom editorial aparece nas aberturas. A interface usa verbos concretos e explica o que acontece com os dados.
 
+Preferência do responsável em 13/09/2026: nomes e textos do Pico sem travessões decorativos. Reescrever com palavras e pontos, sem substituir cada traço por outro ornamento. Evitar slogans em sequência, enumerações poéticas e frases simétricas em controles, estados e tutoriais. Conteúdo de usuários, nomes oficiais de terceiros e hífens ortográficos/técnicos preservam sua forma. Exemplos e revisão permanente em [Deslopify](../../deslopify.md).
+
 
 ### Assinaturas
 

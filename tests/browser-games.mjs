@@ -55,7 +55,7 @@ try{
   return send({message:'API não prevista na fixture '+url.pathname},400);
  });
  await page.goto(connectedUrl+'/jogos');await visible(page.getByText('Falha controlada ao carregar os jogos.',{exact:true}));await page.screenshot({path:`${out}/connected-error-390.png`,fullPage:true});
- failRead=false;await page.getByRole('button',{name:'Tentar novamente',exact:true}).click();await visible(page.getByRole('heading',{name:'As lembranças começam com um jogo.'}));
+ failRead=false;await page.getByRole('button',{name:'Tentar novamente',exact:true}).click();await visible(page.getByRole('heading',{name:'Você ainda não registrou jogos.'}));
  await page.getByRole('button',{name:'Registrar jogo',exact:true}).click();await dialog.getByLabel(/^Arena/).selectOption(arena.id);await dialog.getByLabel('Data do jogo').fill('2026-01-01');
  await dialog.getByRole('button',{name:'Guardar só para mim'}).click();await visible(dialog.getByRole('alert'));assert.equal(await dialog.getByLabel('Data do jogo').inputValue(),'2026-01-01');
  await page.screenshot({path:`${out}/connected-draft-error-390.png`,fullPage:true});

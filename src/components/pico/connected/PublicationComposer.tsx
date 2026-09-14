@@ -60,7 +60,7 @@ function Composer({ options, arenaId, communityId, game, onDone, onBusy }: { opt
   }}>
     <fieldset className="publication-fields" disabled={busy}>
       {game && <section className="game-share-context"><p>Você escolheu compartilhar este jogo</p><strong>{game.arena_name}</strong><span>{game.sport_name} · Jogado em {formatGameDate(game.played_on)}</span><p>O post mostrará arena, modalidade e data. O registro em Meus jogos continua privado.</p></section>}
-      <label className="input-group">{game ? 'Conta como foi (opcional)' : 'Sua publicação'}<textarea className="input" value={body} onChange={e => setBody(e.target.value)} maxLength={500} required={!game} rows={3} placeholder="Uma história, uma foto, uma conversa depois do jogo…" /></label>
+      <label className="input-group">{game ? 'Conta como foi (opcional)' : 'Sua publicação'}<textarea className="input" value={body} onChange={e => setBody(e.target.value)} maxLength={500} required={!game} rows={3} placeholder="O que você quer compartilhar?" /></label>
       <span className="input-hint">{body.length}/500</span>
       <PhotoUpload bucket="post-media" path={photo} onChange={setPhoto} onBusy={value => { setUploading(value); onBusy(value || busy); }} />
       <label className="input-group">Audiência<select className="input" value={audience} onChange={e => { const next = e.target.value as 'beta' | 'private'; setAudience(next); setGroups([]); if (next === 'private') setWall(''); }}><option value="beta">Pessoas do Pico</option><option value="private">Participantes de uma comunidade privada</option></select></label>

@@ -10,7 +10,7 @@ export function AuthPage({ mode, confirmationError = false, passwordUpdated = fa
   return (
     <div className="landing-shell auth-shell">
       <header className="site-header"><Brand /><Link className="back-link" href="/"><ArrowLeft size={16} aria-hidden="true" /> Voltar ao início</Link></header>
-      <div className="auth-layout"><aside className="auth-story"><h2>O ponto de encontro da areia.</h2><p>Gente do seu esporte. Lugares em comum. A conversa depois do jogo.</p><p>Futevôlei · Beach tennis · Vôlei de praia</p></aside>
+      <div className="auth-layout"><aside className="auth-story"><h2>O ponto de encontro da areia.</h2><p>Encontre quem joga nas suas arenas.</p><p>Futevôlei · Beach tennis · Vôlei de praia</p></aside>
       <main id="main-content" className="auth-main">
         <GlassPanel className="auth-panel">
           <h1>{signup ? "Crie sua conta." : "Entre no Pico."}</h1>

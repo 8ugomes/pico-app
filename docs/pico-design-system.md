@@ -4,6 +4,10 @@ Refino social de 13/09/2026: posts usam contorno funcional; a área de comentár
 
 **Aura Manteiga está implementada no aplicativo em 13/09/2026.** Este documento traduz a identidade escolhida em decisões presentes no código. A [cobertura](aura-redesign-review/coverage.md) e a [revisão local](aura-redesign-review/README.md) registram superfícies e evidências. Publicação e CI remota não são comprovadas por esta consolidação.
 
+## Escrita no produto
+
+Nomes, títulos, mensagens e rótulos acessíveis usam frases naturais, sem travessões decorativos, slogans empilhados ou enumerações poéticas. Exemplos e exceções no [Deslopify](deslopify.md) e no [guia de revisão](skill_pico_deslopify.md). A mesma regra vale para conteúdo oficial persistido, metadados e materiais de divulgação. Não normalizar publicações de usuários nem nomes de terceiros.
+
 ## Autoridade e manutenção
 
 O [contexto institucional](pico-company-context.md) e o [brief](../BRIEF.md) definem direção e limites. O [manual completo](brand-exploration/aura-manteiga/MANUAL.md), [tokens.json](brand-exploration/aura-manteiga/tokens.json), mestres em `logo/` e fontes em `fonts/` são a referência canônica de identidade. O [mapa de domínios](pico-domains.md) define contratos funcionais.

@@ -1,3 +1,17 @@
+## Escrita natural no Pico · 13/09/2026
+
+### Implementação e validação
+
+Revisão do texto no título/metadados, marca acessível, autenticação, guia, estados vazios, publicações e catálogo. Regra permanente incorporada às referências usadas pelas outras tarefas. Migration 20260913233000 aplicada no desenvolvimento: nome institucional atualizado e proteção ativa. Seis testes pertinentes aprovados, incluindo upgrade com membros/posts existentes, escrita de usuários intacta, edição de gestão preservada, reaplicação sem efeito e rejeição de renomeação. Lint/typecheck/build conectado aprovados; suíte completa com 133 testes após ajustar a expectativa antiga de ordenação. Revisão da landing e dos materiais concluída separadamente em e2f8ec6, sem deploy concorrente. [Evidências e estado do release](editorial-review/README.md).
+
+### Plano registrado antes de implementar
+
+Pedido do responsável: retirar travessões decorativos e escrita com aparência artificial, coordenando com as entregas já publicadas de fluxo, arenas e estabilidade. Base main a88cec8 em checkout isolado. Revisar títulos, nomes institucionais, rótulos acessíveis, tutorial, estados e conteúdo editorial. Registrar a preferência permanente no Deslopify, guia de revisão e orientações de marca.
+
+Renomear a comunidade institucional para Comunidade oficial do Pico por migration transacional, preservando ID, slug, participantes, publicações e proteção contra renomeação por usuários. Reescrever frases que empilham slogans e simplificar os dois complementos de endereço do catálogo, sem alterar fontes ou identidades. Não normalizar texto de usuários nem remover hífens ortográficos, URLs, operadores ou controles de interface.
+
+Validar a preservação e a proteção da comunidade no banco descartável e nos ambientes conectados. Rodar lint, typecheck, build e smoke representativo em celular/desktop e claro/escuro. Commit, PR/CI e publicação coordenada pela main no projeto pico-app, com inventários privados antes/depois. Sem alterações de Auth, RLS, monitor, audiência ou dados pessoais.
+
 ## Importação estadual — implementação e validação · 13/09/2026
 
 Executar o levantamento para o estado de São Paulo, registrar fontes e pendências por município e importar somente unidades identificadas com endereço e modalidade comprovados. Nenhuma chave Places configurada no ambiente atual; a pesquisa pública não comprova inventário exaustivo do Google. Preservar identidades, edições da gestão e conteúdo do catálogo existente. Fotos sem autorização documentada permanecem ausentes com apresentação neutra.

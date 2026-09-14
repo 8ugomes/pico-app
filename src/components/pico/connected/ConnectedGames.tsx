@@ -28,7 +28,7 @@ export function ConnectedGames({ initialSlug }: { initialSlug?: string }) {
   return <>
     <Link href="/perfil" className="detail-back">Voltar ao perfil</Link>
     <PageHeading title="Meus jogos" />
-    <p className="page-intro">Um lugar para guardar onde você jogou e as datas de cada encontro.</p>
+    <p className="page-intro">Guarde a arena e a data dos seus jogos.</p>
     <JournalPrivacy />
     <Button data-tour="register-game" onClick={() => { setMessage(''); setForm(previous => previous && !previous.game ? previous : {}); setEditorOpen(true); }}>Registrar jogo</Button>
     {message && <p role="status" className="inline-success">{message}</p>}

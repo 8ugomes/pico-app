@@ -1,3 +1,21 @@
+## Escrita natural sem travessões decorativos · 13/09/2026
+
+### Critério permanente do responsável
+
+Não usar travessão, meia-risca ou hífen isolado para ornamentar nomes, títulos, botões, rótulos acessíveis e mensagens do Pico. Escrever uma frase curta, com verbo concreto, ou separar ideias por ponto. Não trocar automaticamente cada traço por outro separador; reescrever a frase. Nomes oficiais de terceiros, texto de usuários, hífens ortográficos, intervalos, URLs e código mantêm o significado original.
+
+Evitar slogans em sequência, frases simétricas de campanha em controles e tutoriais, enumerações poéticas, perguntas retóricas seguidas da própria resposta, superlativos e promessas genéricas. A personalidade vem das palavras, pessoas e situações do esporte. Preservar a assinatura institucional em momentos de marca, informações de privacidade, rótulos e consequências das ações. Uma frase operacional não precisa terminar com um slogan.
+
+### Implementação e aprendizados
+
+A varredura não encontrou travessões ou meias-riscas restantes em textos de `src` e `public`. O nome institucional vinha do banco e era reutilizado no Início, diretório, busca, detalhe, vínculos e destinos de posts; corrigir apenas um componente deixaria a inconsistência. A migration altera a mesma comunidade, sem recriar participantes ou conteúdo. O novo nome também muda a ordem alfabética; verificações de identidade devem usar o ID, sem depender da primeira posição do catálogo.
+
+Amostra visual aprovada em 320/390px e 1280px, claro/escuro, com oito verificações de navegador e sem overflow. O tutorial agora orienta ações, como Encontre suas arenas e Edite seu perfil. Estados vazios dizem o que falta; o campo de publicação usa uma pergunta direta. A revisão coordenada da landing e Instagram foi concluída em e2f8ec6: apoios abstratos substituídos por ações concretas, legendas sem abertura repetitiva e derivados sincronizados. Hífens em e-mail, boas-vindas, operadores e URLs continuam válidos. Documentos históricos e SQL de comparação preservam o texto antigo para registrar a evolução e selecionar somente os valores autorizados. [Revisão](editorial-review/README.md).
+
+### Revisão planejada
+
+Conferir código, metadados, acessibilidade e conteúdo oficial persistido. Comunidade oficial do Pico deve ter um único nome no Início, lista, busca, detalhe e boas-vindas. Manter a mesma comunidade e seu histórico. Simplificar o tutorial e mensagens promocionais redundantes; não reiniciar o redesign nem eliminar contornos que ajudam a distinguir posts e comentários. Conferir amostra de leitura, quebra de nomes e teclado nos dois temas. Entregas de arenas/estabilidade integradas antes desta rodada; coordenação registrada com as tarefas responsáveis.
+
 ## Catálogo estadual — revisão e aprendizados · 13/09/2026
 
 A cidade deve distinguir unidades de mesmo nome e orientar a busca. Remover a limitação visual Sul/Oeste e a busca apenas na página; uma pesquisa por nome, bairro ou cidade precisa servir ao catálogo inteiro e aos seletores de jogos/publicações/perfil. Manter texto curto, estados de erro/vazio e fotos inteiras. Arena sem foto confirmada usa superfície neutra, nunca imagem de outra unidade. Conferir amostra mobile, desktop e ambos os temas; não simular exaustividade do Google nem parceria das arenas importadas.
