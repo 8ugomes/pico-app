@@ -48,7 +48,7 @@ export async function POST(request: Request) {
       }
       const info = await admin.storage.from(bucket).info(path);
       if (info.error || !info.data) throw new MutationError(503, 'Envio ainda não confirmado. Tente novamente.');
-      if (info.data.size !== size || info.data.contentType !== 'video/mp4') throw new MutationError(415, 'O arquivo enviado não é um MP4 válido de até 30 MB.');
+      if (info.data.size !== size || info.data.contentType !== 'video/mp4') throw new MutationError(415, 'O arquivo enviado não é um MP4 válido de até 45 MB.');
       if (size < 32) throw new MutationError(415, 'O arquivo enviado não é um MP4 válido.');
       const first = await signedVideoRange(path, 0, 31, size);
       const header = new Uint8Array(await first.arrayBuffer());

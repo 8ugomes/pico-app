@@ -417,3 +417,8 @@ Após autenticação do responsável, rulesets 22706380 e 22706456 salvos como a
 - A CSP agora permite a origem exata do Storage Supabase usada pelo TUS assinado; mantém bloqueio para origens não autorizadas. O defeito impedia o envio no navegador, embora a reserva e o teste TUS em Node funcionassem.
 - Gate conectado passou a selecionar MP4 real no compositor Chrome móvel emulado com CSP ativa, confirmar envio/prévia e preservar o texto sem publicar. 251 verificações hospedadas, 160 testes locais, lint, typecheck, build e audit passaram; fixtures do desenvolvimento removidas. Android físico ainda não testado.
 - [PR #37](https://github.com/8ugomes/pico-app/pull/37) integrado com CI verde. Stage `dpl_BEAmg2pDbMN2ENinDYyYKMSyBtpU` foi promovido ao `pico-app-sepia.vercel.app` na versão `8b93147f07b3`; saúde, acesso e CSP confirmados, inventário 122/122 preservado. Sem migration ou conteúdo de teste no principal.
+## 2026-09-14: limite de vídeo ampliado para 45 MiB
+
+- Compositor, API, bucket privado e restrição do banco passam a concordar em 45 MiB (47.185.920 bytes), dentro do máximo global de 50 MB dos projetos Supabase Free. MP4 maior que isso é recusado antes de reservar; TUS, audiência, reprodução privada e limpeza permanecem iguais.
+- Migration aditiva aplicada somente no desenvolvimento exclusivo: inventário 76/76 preservado. Teste hospedado enviou MP4 válido acima de 30 MiB pelo navegador, confirmou prévia, publicação privada e acesso por faixas; 253 verificações, 162 testes locais, lint, typecheck, build e audit passaram. Dispositivo físico/arquivo de câmera longo ainda não testados.
+- Produção pendente de PR/CI, migration com inventário e deploy stage/promovido; nenhum plano pago contratado.

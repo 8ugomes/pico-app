@@ -34,7 +34,7 @@ export function VideoUpload({ path, onChange, onBusy }: { path: string | null; o
         if (!file || busy) return;
         setError(null);
         if (file.size < 32 || file.size > POST_VIDEO_LIMIT || file.type !== 'video/mp4' || !isMp4Header(new Uint8Array(await file.slice(0, 32).arrayBuffer()))) {
-          setError('Escolha um vídeo MP4 válido de até 30 MB.'); return;
+          setError('Escolha um vídeo MP4 válido de até 45 MB.'); return;
         }
         const config = getSupabaseConfig();
         if (!config) { setError('O envio de vídeo está indisponível agora.'); return; }
@@ -77,7 +77,7 @@ export function VideoUpload({ path, onChange, onBusy }: { path: string | null; o
         }
         finally { uploadRef.current = null; setBusy(false); onBusy(false); setProgress(''); }
       }} />
-      <span className="input-hint">MP4 de até 30 MB. O envio é retomado automaticamente em uma falha breve de rede. O vídeo só aparece para a audiência escolhida após publicar.</span>
+      <span className="input-hint">MP4 de até 45 MB. O envio é retomado automaticamente em uma falha breve de rede. O vídeo só aparece para a audiência escolhida após publicar.</span>
     </label>
     {busy && <p role="status">{progress}</p>}
     {url && <><p className="input-hint">Vídeo selecionado. Reproduza para conferir antes de publicar.</p><video className="post-video" controls preload="metadata" playsInline src={url} aria-label="Prévia do vídeo selecionado" /><Button type="button" variant="quiet" disabled={busy} onClick={async () => {
