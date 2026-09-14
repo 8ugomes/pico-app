@@ -4,6 +4,7 @@
 - `@` busca participantes no próprio texto e permite escolher pessoa ou `@todos`; nova migration preserva a posição escrita e os avisos existentes.
 - O registro privado de jogo abre no diário, com arena, modalidade e data, sem postagem automática.
 - Lint, typecheck, build, 148 testes locais e 73 verificações hospedadas de desenvolvimento passaram; identidades e publicações de teste foram removidas.
+- PR #29 integrado após CI completa; migration única aplicada no principal com 104 registros acompanhados preservados. Artefato `cd1feddad0f9` promovido e verificado em `pico-app-sepia.vercel.app`.
 
 ## 2026-09-14: arenas de Caieiras, Jaraguá e Pirituba
 
