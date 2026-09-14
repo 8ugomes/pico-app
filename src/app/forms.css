@@ -82,9 +82,6 @@ select.input option { background: var(--surface-overlay); color: var(--foregroun
 .standalone-panel > p { margin-block: var(--space-5); color: var(--text-secondary); line-height: 1.65; overflow-wrap: anywhere; }
 .standalone-panel > p a { display: inline-flex; align-items: center; min-height: 44px; color: var(--accent); font-size: var(--text-label); }
 .standalone-panel > details { border-top: 1px solid var(--border-subtle); margin-top: var(--space-5); padding-top: var(--space-3); }
-.install-page h1 { font-size: var(--text-title); line-height: 1.2; font-weight: 600; letter-spacing: -.025em; }
-.install-page h2 { font-size: var(--text-section); font-weight: 600; }
-.install-page > p, .install-page li { color: var(--text-secondary); line-height: 1.65; }
 .discovery-filters > summary { color: var(--foreground); font-weight: 500; }
 
 .form-note > a, .auth-footnote > a { display: inline-flex; align-items: center; min-height: 44px; }

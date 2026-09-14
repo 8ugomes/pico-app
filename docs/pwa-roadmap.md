@@ -1,5 +1,9 @@
 > Segurança de documentos: HTML dinâmico com nonce único e `no-store`; assets de build continuam cacheáveis. Sem service worker ou armazenamento offline privado. [Revisão do beta](BETA_SECURITY.md).
 
+## Guia visual depois do onboarding · 13/09/2026
+
+`/instalar` agora usa figuras de iPhone/Safari e Android/Chrome, com animação controlável, variantes de Safari e alternativa estática. O convite imediato foi retirado: perfil completo, boas-vindas conferidas e tutorial concluído/dispensado liberam uma chamada discreta após 15 segundos de pausa no Início. Edição, formulário, diálogo, aba oculta, offline e modo instalado suspendem a oferta. Recusa e abertura ficam registradas por conta/navegador. Instalar continua opcional e a página pode ser aberta manualmente. [Implementação, fontes e evidências](install-guide-review/README.md).
+
 ## Capa de instalação Pico Club · 13/09/2026
 
 Pico Club substitui o nome Pico na identificação de instalação; desenvolvimento mantém sufixo próprio. A arte exibe Pico / Clube com grão. PWA 192/512, maskable 512, Apple 180, favicon SVG e ICO atualizados. Id `/`, scope `/`, start_url `/feed`, modo standalone e dados do usuário permanecem iguais. URLs novas no manifesto permitem detectar os novos arquivos; Apple recebe o identificador de conteúdo gerado pelo Next.js. A troca do ícone de instalações existentes depende do navegador/sistema e não é garantida imediatamente, especialmente no iOS. Não apagar dados ou encerrar sessão para atualizar a capa. [Mestres e redução](brand-exploration/aura-manteiga/pico-club/README.md).
@@ -13,7 +17,7 @@ Pico Club substitui o nome Pico na identificação de instalação; desenvolvime
 
 ## Base implementada
 
-Implementado: manifesto com id estável, nome Pico no principal e identificação distinta no desenvolvimento, ícones 192/512/maskable/apple, standalone, safe areas, alvos de toque e navegação móvel. `/instalar` orienta Chrome/Android, Safari/iOS e saída de navegadores internos. O convite de instalação é dispensável e o prompt nativo só aparece quando disponível.
+Implementado: manifesto com id estável, nome Pico Club no principal e identificação distinta no desenvolvimento, ícones 192/512/maskable/apple, standalone, safe areas, alvos de toque e navegação móvel. `/instalar` orienta Chrome/Android, Safari/iOS e saída de navegadores internos. O convite de instalação é dispensável e o prompt nativo só aparece quando disponível.
 
 Versão compilada é exposta por endpoint sem dados pessoais; foco/retomada verificam versão e sessão. Atualizar exige ação explícita e avisa sobre edição não salva. Identidade trocada/logout descartam a árvore anterior; bfcache recarrega. Falha temporária preserva rascunho e indica rede indisponível, sem anunciar sucesso nem agendar publicação.
 

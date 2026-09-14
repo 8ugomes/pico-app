@@ -3,11 +3,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
+import { useWelcomeProgress } from './GuidedOnboarding';
 import { entityAction } from './connected/useEntity';
 
 type Welcome = { id: string; slug: string; name: string; pending: boolean };
 
 export function OfficialWelcome() {
+  const reportSettled = useWelcomeProgress();
   const requestVersion = useRef(0);
   const heading = useRef<HTMLHeadingElement>(null);
   const path = usePathname(), router = useRouter();
@@ -21,11 +23,12 @@ export function OfficialWelcome() {
   useEffect(() => {
     let live = true;
     const version = ++requestVersion.current;
+    reportSettled?.(false);
     entityAction('/api/welcome', { action: 'check' }).then(data => {
-      if (live && version === requestVersion.current) { setWelcome(data?.pending ? data : null); setError(''); }
+      if (live && version === requestVersion.current) { setWelcome(data?.pending ? data : null); setError(''); reportSettled?.(!data?.pending); }
     }).catch(() => { if (live && version === requestVersion.current) setError('Não foi possível conferir suas boas-vindas.'); });
     return () => { live = false; };
-  }, [path, revision]);
+  }, [path, revision, reportSettled]);
   useEffect(() => {
     if (welcome?.pending && revision > 0) { heading.current?.scrollIntoView({ block: 'start' }); heading.current?.focus({ preventScroll: true }); }
   }, [welcome?.pending, revision]);
@@ -36,6 +39,7 @@ export function OfficialWelcome() {
     try {
       await entityAction('/api/welcome', { action: 'acknowledge' });
       setWelcome(null);
+      reportSettled?.(true);
       if (visit) router.push('/comunidades/' + welcome.slug);
     } catch { setError('Não foi possível confirmar. Tente novamente.'); }
     finally { setBusy(false); }

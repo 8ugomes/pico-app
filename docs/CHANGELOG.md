@@ -1,3 +1,11 @@
+## 2026-09-13: guia visual de instalação
+
+- Página de instalação do Pico Club com figuras animadas para iPhone/Safari e Android/Chrome, seletor de aparelho, variantes do Safari, pausa/avanço/retorno e modo sem movimento.
+- Convite imediato retirado. Nova chamada opcional só após perfil, boas-vindas e tutorial inicial concluído ou dispensado; aguarda pausa de uso e não compete com edição ou diálogos. Recusa e abertura memorizadas por conta/navegador.
+- Prompt nativo explícito, orientações curtas para navegador interno e resultado ilustrativo separado da confirmação real de instalação.
+- Lint, typecheck, build conectado, 136 testes e 46 verificações de navegador aprovados.
+- Ativos Pico Club e dados preservados, sem migration, Auth/RLS ou cache social offline. [Fontes, testes e limites](install-guide-review/README.md).
+
 ## 2026-09-13: capa Pico Club
 
 - Ícone P/ponto substituído por logo Pico original, Clube em Manrope leve e fundo granulado Manteiga/Lavanda.

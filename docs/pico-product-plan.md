@@ -1,3 +1,19 @@
+## Instalação visual do Pico Club · 13/09/2026
+
+### Implementação
+
+Guia visual entregue com seis cenas no Safari compacto, cinco no Safari com Compartilhar direto e cinco no Chrome. A página detecta o aparelho, mantém seleção manual, ajuda recolhida, descrição acessível, pausa e avanço por teclado. O convite global foi substituído por elegibilidade explícita ligada às etapas anteriores, sem chamadas extras de boas-vindas ou alteração de admissão. Preferência separada por conta e desmontagem ao sair da rota evitam reapresentação. [Evidências e limites](install-guide-review/README.md).
+
+Lint, typecheck e build conectado finais aprovados; 136 testes e 46 verificações de navegador com APIs simuladas, sem erros de execução. Convite confirmado somente após resolver etapas e aguardar pausa; variantes, controle da animação e recusa conferidos. Nenhuma validação de instalação física foi inferida da emulação.
+
+### Plano antes da implementação
+
+Substituir a lista de instalação por figuras animadas que mostram onde tocar no iPhone/Safari e Android/Chrome. Usar a capa Pico Club atual, rótulos nativos curtos, seleção de plataforma, reprodução/pausa, avançar/voltar e alternativa sem movimento. Animação ilustrativa nunca declara instalação concluída; prompt nativo permanece explícito quando disponível. Navegadores internos orientam a abertura no navegador do aparelho.
+
+Pedido adicional do responsável: não atropelar etapas. Retirar o convite global imediato. Oferecer uma única chamada discreta no Início, após perfil completo, boas-vindas conferidas/dispensadas e guia inicial concluído ou dispensado. Guia pausado continua pendente. Aguardar uma pausa de uso sem edição, diálogo ou rede indisponível; não abrir animação automaticamente, não exigir instalação e não repetir após recusa. A página de ajuda continua acessível por escolha do usuário.
+
+Validar elegibilidade, erros/atrasos de boas-vindas, identidade, recusa, standalone, movimento reduzido, pausa/retomada, Safari compacto/clássico e Chrome. Revisão visual representativa em mobile/desktop e ambos os temas, lint/typecheck/build e regressões pertinentes. PR/CI e publicação pela main, sem migration ou alteração dos dados, com preservação conferida no release.
+
 ## Ícone Pico Club: implementação · 13/09/2026
 
 Pedido do responsável: substituir o monograma P/ponto por wordmark Pico original com “Clube” fino abaixo e fundo granulado Aura Manteiga; publicar no aplicativo principal. A composição usa a grafia literal “Clube” na arte e “Pico Club” na identificação da instalação. Manter os contornos canônicos do Pico e preservar id, scope, start_url, sessões e dados existentes.

@@ -4,6 +4,7 @@
 @import "./forms.css";
 @import "./journey.css";
 @import "./onboarding.css";
+@import "./install.css";
 
 /* Aura Manteiga 1.0: canonical roles from the approved manual. */
 :root {
@@ -198,10 +199,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .privacy-page p { margin-bottom: 16px; color: var(--text-secondary); }
 .privacy-page a { color: var(--accent); text-decoration: underline; }
 
-.install-page { max-width: 620px; margin: 0 auto; padding: max(28px,env(safe-area-inset-top)) 20px max(32px,env(safe-area-inset-bottom)); display: grid; gap: 20px; }
-.install-page ol { padding-left: 22px; display: grid; gap: 14px; }
-.pwa-notice,.install-hint { padding: 12px 20px; background: var(--info-bg); color: var(--info); font-size: var(--text-label); }
-.install-hint { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: transparent; }
+.pwa-notice { padding: 12px 20px; background: var(--info-bg); color: var(--info); font-size: var(--text-label); }
 
 
 /* Institutional welcome uses the same editorial surfaces as the tour. */

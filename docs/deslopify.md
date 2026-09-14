@@ -1,3 +1,19 @@
+## Instalação visual sem sobrepor etapas · 13/09/2026
+
+### Critérios antes da implementação
+
+Ensinar por posição, figura e gesto, com o telefone ilustrado como foco. Cada cena destaca um botão real do navegador; texto visível se limita ao título, legenda curta e rótulos necessários. Preservar leitura equivalente para tecnologia assistiva e opção sem movimento. Identificar a sequência como demonstração e usar Assim fica no último quadro, sem simular instalação real.
+
+O convite vem depois do perfil, aviso institucional e guia concluído/dispensado. Não competir com edição, diálogos, guia ativo/pausado ou falha de carregamento. Convite discreto no final do Início, sem modal automático, com Agora não e memória por conta/navegador. O tutorial só começa quando a pessoa escolhe Ver como. Movimento explica menu, compartilhamento e adição à tela inicial; não acrescentar enfeites ou narração de campanha.
+
+### Resultado da revisão
+
+Revisão independente pediu indicador dentro do alvo, preservação de safe-area e entrada superior do menu Chrome em 220ms. Os três ajustes receberam resolved no verdict pass, disposition ship limitado a esse lote. Detector sem achados; 46 verificações de navegador aprovadas. [Registro e limites](install-guide-review/finish-review.md).
+
+### Aprendizados da implementação
+
+A figura pode mostrar o botão do sistema com precisão e manter texto mínimo fora dela. A variação do Safari precisa ser selecionável, pois o mesmo aparelho pode usar barras diferentes. O marcador de toque deve preservar a leitura do ícone nativo. A legenda final descreve o resultado esperado e não confirma instalação. A ajuda fica recolhida; Assistir preserva leitura dos controles em 320px e com texto ampliado. Convite e instalação são estados distintos do perfil e das boas-vindas. [Revisão e fontes](install-guide-review/README.md).
+
 ## Ícone Pico Club: critérios · 13/09/2026
 
 Pico ocupa a maior parte da área segura; “Clube” vem abaixo em Manrope leve. Usar o wordmark original sem redigitar, sem monograma, slogan ou efeitos sobre as letras. Campos Manteiga/Lavanda com grão fino criam o fundo; contraste Cacau permanece estável. Ícones PWA e Apple opacos, sem cantos transparentes ou moldura de telefone; versão maskable mantém a assinatura dentro do círculo seguro. No favicon de 16/32px, priorizar o wordmark Pico e omitir a linha secundária que não teria leitura. Checar uma prancha de reduções e a tela de instalação, sem reabrir o design do app.
