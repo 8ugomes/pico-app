@@ -13,7 +13,7 @@ export function JournalPrivacy() {
   return <p className="journal-privacy"><LockKeyhole size={17} aria-hidden="true" /><span>Só você vê. Registrar um jogo não cria uma publicação.</span></p>;
 }
 export function GameEntries({ games, onEdit, onDelete, onShare, shareControl, busy = false }: { games: PlayedGame[]; onEdit: (game: PlayedGame) => void; onDelete: (game: PlayedGame) => void; onShare?: (game: PlayedGame) => void; shareControl?: (game: PlayedGame) => ReactNode; busy?: boolean }) {
-  if (!games.length) return <EmptyState title="As lembranças começam com um jogo.">Depois de jogar, guarde a arena, a modalidade e a data em “Registrar jogo”.</EmptyState>;
+  if (!games.length) return <EmptyState title="Você ainda não registrou jogos.">Depois de jogar, guarde a arena, a modalidade e a data em “Registrar jogo”.</EmptyState>;
   return <div className="game-journal">{games.map(game => <article className="game-entry" key={game.id}>
     <CalendarDays size={22} aria-hidden="true" /><div className="game-entry-content">
       <p className="game-entry-date">Jogado em <time dateTime={game.played_on}>{formatGameDate(game.played_on)}</time></p>

@@ -1324,7 +1324,7 @@
       "city": "São Paulo",
       "region": "Oeste",
       "neighborhood": "Barra Funda",
-      "address": "Avenida Nicolas Boer, 100 — acesso à rua sem saída, 200",
+      "address": "Avenida Nicolas Boer, 100 (acesso à rua sem saída, 200)",
       "sports": [
         "futevolei",
         "beach-tennis",
@@ -2719,7 +2719,7 @@
       "municipalityId": "3510500",
       "region": "São José dos Campos",
       "neighborhood": "Pontal de Santa Marina",
-      "address": "Avenida José Herculano, 1086 — Serramar Shopping",
+      "address": "Avenida José Herculano, 1086 (Serramar Shopping)",
       "sports": [
         "futevolei",
         "beach-tennis",

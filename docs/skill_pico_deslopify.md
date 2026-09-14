@@ -35,11 +35,18 @@ Remova ou reescreva:
 - Emojis decorativos em toda frase, ícones inconsistentes e animação constante.
 - Modais ou etapas que só aumentam o caminho até a ação.
 - Texto técnico sobre banco, infraestrutura ou implementação em fluxos de jogador.
+- Travessões, meias-riscas e hífens isolados usados como ornamento em nomes, títulos, rótulos e frases. Reescrever com palavras ou ponto, sem trocar cada traço por outro separador.
+- Slogans em sequência, enumerações poéticas, perguntas respondidas logo em seguida e frases simétricas que tornam controles e tutoriais artificiais.
+
+Preservar texto de usuários, nomes oficiais de terceiros, hífens ortográficos, intervalos, URLs e operadores. Não aplicar substituição global ao conteúdo salvo. A preferência editorial registrada em [Deslopify](deslopify.md) vale também para metadados e acessibilidade.
 
 ## Exemplos de texto
 
 | Evitar | Preferir |
 | --- | --- |
+| Pico seguido de traço e comunidade oficial | Comunidade oficial do Pico |
+| Um lugar em comum aproxima. | Conheça quem joga por perto. |
+| As lembranças começam com um jogo. | Você ainda não registrou jogos. |
 | Potencialize seu networking esportivo | Encontre sua próxima dupla. |
 | Gerencie suas experiências esportivas | Encontre gente do seu esporte. |
 | Explore nosso ecossistema de arenas | Encontre sua arena. |
@@ -68,7 +75,7 @@ Quando o pedido for redesign integral, aplicar [pico-redesign](../.agents/skills
 ## Checklist de conclusão
 
 - [ ] Tem cara de Pico e mantém o foco em pessoas, arenas e encontros.
-- [ ] Texto soa natural em português.
+- [ ] Texto soa natural em português, sem travessões decorativos ou slogans repetidos.
 - [ ] Não há reservas, pagamentos ou recursos fora do MVP.
 - [ ] Nada sugere dados ao vivo quando os dados são ilustrativos.
 - [ ] A ação principal tem destino e feedback adequados.

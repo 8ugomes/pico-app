@@ -21,7 +21,7 @@ O Pico ajuda a responder: quem joga onde eu jogo, quais comunidades combinam com
 - Tipografia: Syne 600–800 nos títulos e momentos de marca; Manrope 400–700 na leitura e operação. Logo vetorial em contornos entregue no pacote; não redigitar ou regenerar.
 - Direção de arte: luz difusa, textura de pele e areia, pessoas e gestos reconhecíveis dos esportes. Fotografia protagonista, curvas editoriais pontuais, ritmo e espaço livre. Superfícies calmas, contraste e legibilidade nas tarefas.
 - Claro como referência editorial e escuro próprio. A implementação acompanha `prefers-color-scheme`, sem preferência remota ou novo ajuste de conta.
-- Voz: pt-BR próximo, adulto, breve e concreto. Ação clara e feedback honesto; sem linguagem de infraestrutura nos fluxos do jogador.
+- Voz: pt-BR próximo, adulto, breve e concreto. Ação clara e feedback honesto; sem linguagem de infraestrutura nos fluxos do jogador. Preferência expressa de 13/09/2026: sem travessões decorativos, slogans empilhados ou frases artificiais; usar nomes e mensagens naturais. Preservar a escrita dos usuários e os hífens ortográficos/técnicos. Critérios em [Deslopify](deslopify.md).
 
 Os [ativos e o manual](brand-exploration/aura-manteiga/README.md) consolidam a decisão. O [design system](pico-design-system.md) traduz a identidade para o produto. Ritual, Pulso, Pistache e a Aura lavanda pertencem à exploração anterior; não reabrir a direção salvo pedido do responsável.
 
