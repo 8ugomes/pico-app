@@ -1,3 +1,7 @@
+## Notificações na main e revisão geral · 13/09/2026
+
+Integrar o sino ao cabeçalho atual sem perder busca e avatar real. A aba lateral respeita as cinco posições móveis. Preservar gates de perfil, tutorial e convite de instalação, textos naturais e contraste Aura Manteiga. Conferir a tela principal com a sessão disponível, destinos e estados, sem fabricar notificações para demonstrar resultado. A revisão da base deve distinguir pessoas recém-cadastradas, perfis completos e membros ativos; não chamar vínculo de presença ou contagem de sucesso sem dados.
+
 ## Instalação visual sem sobrepor etapas · 13/09/2026
 
 ### Critérios antes da implementação

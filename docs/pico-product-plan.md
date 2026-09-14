@@ -1,3 +1,9 @@
+## Publicação das notificações e revisão da base · 13/09/2026
+
+Pedido autorizado: integrar o commit 36b0a30 à main vigente, publicar no projeto pico-app e revisar cadastros, perfis, comunidades e participações reais. Preservar busca, identidade do perfil, configuração inicial, guia de instalação e textos já publicados. PR com CI, lint/typecheck/build e testes pertinentes; duas migrations aditivas com inventário privado antes/depois, publicação por scripts/deploy.mjs e verificação da versão principal.
+
+Depois da publicação, leitura autorizada da base para quantidades, completude de cadastro e vínculos, sem alterar contas, disparar avisos retroativos ou criar atividade de teste no principal. Achados agregados no relatório; nomes individuais apenas no inventário privado local se necessários à conferência. Corrigir falhas comprovadas de funcionamento dentro do escopo e registrar limites.
+
 ## Instalação visual do Pico Club · 13/09/2026
 
 ### Implementação
