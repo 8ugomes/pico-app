@@ -8,6 +8,8 @@ Atualizações aditivas e idempotentes, preservando IDs/slugs existentes, contas
 
 Implementadas nove inclusões regionais, todas com fotos, e recuperação das imagens de 22 registros antigos: 69 arenas/27 municípios, 149 fotos em 48 arenas. Busca real por Caieiras, Vila Aurora, Pirituba e Freguesia do Ó passou no Supabase de desenvolvimento; 149 arquivos responderam HTTP 200. Lint, typecheck, build e 142 testes passaram; regressões finais de importação/capa e inventário foram reconfirmadas após o ajuste dos testes. Amostra móvel de 390px e desktop de 1100px, claro/escuro e fallback de galeria conferidos. Importação aditiva de desenvolvimento preservou 64 linhas e acrescentou somente nove, sem edições/perdas. Publicação coordenada pela main e importador protegido, com recibos privados do principal. [Relatório, fontes e limites](arena-regional-review/README.md).
 
+Publicação concluída: PR #25, versão 46795683d0e5 no principal. Inventário de 89 para 98 linhas, apenas nove inclusões, sem perda/edição; sete mídias anteriores idênticas e 149 arquivos do catálogo validados em produção. [Recibo público da rodada](arena-regional-review/release.md).
+
 Não declarar censo completo: 21 arenas antigas do lote estadual ainda precisam de foto verificável; a identidade exata de “Arena Caienas” permanece a confirmar. Nenhum cadastro histórico foi removido por falta de foto.
 
 ## Notificações de comunidades — PLAN · 13/09/2026
