@@ -85,6 +85,20 @@ Publicação autorizada após o commit de implementação; promoção pela main/
 
 # Changelog — Pico
 
+## 2026-09-14 — integração das notificações à main
+
+- Integrado o recurso à busca, avatar e gates atuais de perfil/instalação; preservado todo o trabalho posterior à implementação inicial.
+- Lint/typecheck/build e 140 testes aprovados, mais 85 verificações hospedadas do fluxo e limpeza de fixtures. Release principal autorizado; migrations e preservação serão conferidas pelo script oficial.
+
+
+## 2026-09-13 — notificações de novas participações
+
+- Aba `/notificacoes`, sino com contador e leitura individual/todas persistente. Avisos com pessoa, comunidade e data; paginação e atualização em primeiro plano.
+- Trigger transacional para entrada aberta, aprovação e convite; sem autoaviso, pendência ou duplicação por retry. RLS, bloqueios, admissão, saída e exclusão preservados.
+- Duas migrations novas aplicadas no desenvolvimento; sem deploy principal. Lint/typecheck/build, 101 testes locais e 100 verificações hospedadas aprovados, mais estados de navegador e revisão visual. [Contrato e evidências](NOTIFICATIONS.md).
+
+
+
 ## 2026-09-13 — segurança, direitos e preparação do beta
 
 - Download dos dados da própria conta com senha verificada; serviço protegido, sem credenciais ou conteúdo de terceiros. Exclusão aceita senhas anteriores, remove todas as páginas de fotos com retomada e limpa convites pessoais.

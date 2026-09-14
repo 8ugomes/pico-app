@@ -1,6 +1,18 @@
-## Publicação das notificações e revisão da base · 13/09/2026
+## Notificações de comunidades — PLAN · 13/09/2026
+
+Adicionar `/notificacoes`, com sino no cabeçalho móvel e aba lateral no desktop, contador de não lidas e leitura individual/em lote. Avisar membros ativos quando outra pessoa passa a participar da comunidade (entrada aberta, aprovação ou convite), com pessoa, comunidade e data. Pedidos pendentes, alterações de papel e repetição de uma entrada já confirmada não geram avisos; sem autoaviso ou histórico retroativo. Notificações internas ao app, atualizadas ao abrir/retomar e periodicamente enquanto visível.
+
+Persistência por destinatário, trigger transacional, RLS, bloqueio bilateral e admissão atual; sair da comunidade apaga os próprios avisos daquele grupo. Demo explicitamente local e vazio, sem atividade fabricada. Validar isolamento, idempotência, entrada/aprovação/convite e leitura com testes SQL, API e navegador; lint/typecheck/build, documentação e commit. Migration de desenvolvimento para validação/tipos; publicação principal depende de pedido específico.
+
+### Fechamento das notificações
+
+Aba, sino/contador, paginação e leitura individual/em lote implementados. Trigger único cobre participação confirmada; RLS preserva conta, grupo e bloqueios. Duas migrations aplicadas somente em desenvolvimento, tipos gerados e fixtures limpas. Lint/typecheck/build, 101 testes locais e 100 verificações hospedadas aprovados; navegador e estados finais conferidos. [Contrato, evidências e limites](NOTIFICATIONS.md). Publicação principal permanece pendente de solicitação.
+
+## Publicação das notificações e revisão da base · 14/09/2026
 
 Pedido autorizado: integrar o commit 36b0a30 à main vigente, publicar no projeto pico-app e revisar cadastros, perfis, comunidades e participações reais. Preservar busca, identidade do perfil, configuração inicial, guia de instalação e textos já publicados. PR com CI, lint/typecheck/build e testes pertinentes; duas migrations aditivas com inventário privado antes/depois, publicação por scripts/deploy.mjs e verificação da versão principal.
+
+Integração preparada sobre 7cc4352: busca e avatar reais, OwnProfileProvider, ProfileSetupGate e convite de instalação preservados. Lint/typecheck/build e 140 testes locais passaram; 85 verificações hospedadas do fluxo de notificações, incluindo limpeza, passaram sem criar inscrições no grupo institucional.
 
 Depois da publicação, leitura autorizada da base para quantidades, completude de cadastro e vínculos, sem alterar contas, disparar avisos retroativos ou criar atividade de teste no principal. Achados agregados no relatório; nomes individuais apenas no inventário privado local se necessários à conferência. Corrigir falhas comprovadas de funcionamento dentro do escopo e registrar limites.
 

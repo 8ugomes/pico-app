@@ -11,6 +11,8 @@ Pico Club substitui o nome Pico na identificação de instalação; desenvolvime
 
 # Pico — PWA no Ciclo 9
 
+Notificações internas de comunidade disponíveis no código em `/notificacoes`: atualização ao abrir/retomar e a cada 30s com aba visível, sem push do dispositivo ou service worker. Migration aplicada somente no desenvolvimento. [Contrato e estado](NOTIFICATIONS.md).
+
 ## Aura Manteiga integrada · 13/09/2026
 
 [Aura Manteiga](brand-exploration/aura-manteiga/README.md) aplicada a favicon, Apple, ícones 192/512, maskable, manifesto, metadados de tema e telas de instalação/retomada. Os arquivos entregues foram copiados e comparados byte a byte; maskable 512 com fundo totalmente opaco. `id`, `scope`, `start_url`, nomes por ambiente e instalação existente preservados. Metadados claro/escuro seguem o dispositivo; manifesto usa Papel. [Auditoria de assets](aura-redesign-review/assets-contrast.json). Instalação em aparelho físico continua sem nova validação. O onboarding assistido pode explicar instalação quando pertinente, sem transformar o convite dispensável em requisito de acesso. Seguir [domínios](pico-domains.md) e [skill principal](../.agents/skills/pico-redesign/SKILL.md).

@@ -1,0 +1,23 @@
+{
+  "checks": [
+    {
+      "theme": "dark",
+      "scale": 1,
+      "width": 320,
+      "document": 320,
+      "iconVisible": false
+    },
+    {
+      "theme": "light",
+      "scale": 2,
+      "width": 320,
+      "document": 320,
+      "iconVisible": false
+    },
+    "next and previous page",
+    "read error clears stale private data and counter",
+    "retry and empty state",
+    "loading state"
+  ],
+  "errors": []
+}

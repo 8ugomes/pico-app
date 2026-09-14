@@ -1,4 +1,14 @@
-## Notificações na main e revisão geral · 13/09/2026
+## Notificações — critérios antes de codar · 13/09/2026
+
+Lista cronológica com “Nome entrou na comunidade X”, data e estado não lido identificado também por texto. Nome da comunidade leva ao grupo; leitura explícita individual ou em lote, sem marcar automaticamente ao abrir a aba. Sino com nome acessível e contador discreto. Preservar as cinco posições da navegação inferior; acesso móvel pelo cabeçalho, desktop pela lateral. Texto longo quebra, controles de 44px, temas existentes e nenhuma nova ilustração ou fotografia fictícia. Vazio, carregamento, erro recuperável e demo honesto. Amostra visual móvel/desktop e dois temas, com confirmação dos comportamentos novos.
+
+### Fechamento e aprendizado das notificações
+
+Lista com pessoa/comunidade/data e estado textual, contador acessível e confirmação persistida. Revisadas amostras em 390/320/1280px, claro/escuro e texto 200%. Na amostra ampliada, retirar o ícone decorativo do contêiner estreito e reduzir o espaço lateral do botão melhorou a leitura sem ocultar nomes ou ações. Falha limpa dados antigos; retry, vazio, carregamento e páginas conferidos. [Evidências](notifications-review/README.md).
+
+## Notificações na main e revisão geral · 14/09/2026
+
+Integração preserva busca e avatar no cabeçalho atual, leitor compartilhado do perfil, gates e convite de instalação. Suprimida apenas a regra antiga de cabeçalho estreito que pertencia à versão sem busca.
 
 Integrar o sino ao cabeçalho atual sem perder busca e avatar real. A aba lateral respeita as cinco posições móveis. Preservar gates de perfil, tutorial e convite de instalação, textos naturais e contraste Aura Manteiga. Conferir a tela principal com a sessão disponível, destinos e estados, sem fabricar notificações para demonstrar resultado. A revisão da base deve distinguir pessoas recém-cadastradas, perfis completos e membros ativos; não chamar vínculo de presença ou contagem de sucesso sem dados.
 

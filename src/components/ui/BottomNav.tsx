@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { House, UsersRound, Compass, UserRound, MapPin } from "lucide-react";
+import { NotificationLink } from '@/components/pico/NotificationLink';
 
 export const socialLinks = [
   { href: "/feed", label: "Início", icon: House },
@@ -31,5 +32,6 @@ export function BottomNav({ desktop = false }: { desktop?: boolean }) {
         <span className="nav-icon"><Icon size={22} strokeWidth={current ? 2 : 1.7} aria-hidden="true" /></span><span>{label}</span>
       </Link>;
     })}
+    {desktop && <NotificationLink desktop />}
   </nav>;
 }
