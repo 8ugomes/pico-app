@@ -70,7 +70,7 @@ select.input option { background: var(--surface-overlay); color: var(--foregroun
 .dialog-body [role=alert] { color: var(--error); }
 .publication-composer { margin: 0 0 var(--space-6); }
 .publication-composer .composer-trigger { min-height: 76px; background: var(--graphite); border-radius: var(--radius-card); padding: var(--space-4); }
-.publication-composer .composer-trigger > span { font-size: var(--text-body); flex: 1; }
+.publication-composer .composer-trigger > span:nth-child(2) { font-size: var(--text-body); flex: 1; }
 .publication-composer .composer-trigger > .composer-symbol { display: grid; place-items: center; flex: 0 0 40px; width: 40px; height: 40px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); }
 
 /* Writing starts in the page. Settings are available without interrupting the draft. */

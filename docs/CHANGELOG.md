@@ -1,3 +1,9 @@
+## 2026-09-14: Agent Harness Kit e CSS por rota
+
+- Analisado o Kit v0.7.2 e adaptadas três skills locais de planejamento, teste e conferência visual; não instalada a CLI nem substituídas as regras do Pico. [Procedência e critérios](AGENT_HARNESS_KIT_REVIEW.md).
+- CSS social passa a carregar no layout social. Primeira carga de login/cadastro/instalação: −53.531 B de CSS não comprimido no build demo da main atual; rotas sociais preservadas. O avatar ilustrativo do editor voltou ao formato circular.
+- Audit, lint, typecheck, build e 148 testes locais passaram. Smoke visual amostral mobile/desktop no tema escuro; publicação condicionada a PR/CI, stage e verificação da beta.
+
 ## 2026-09-14: composição direta
 
 - Publicações começam na escrita, com foto e audiência compactas, em vez de um diálogo de formulário; o mesmo padrão atende feed, comunidades, arenas, perfil, demonstração e compartilhamento de jogo.

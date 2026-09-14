@@ -1,3 +1,4 @@
+import '../social-bundle.css';
 import { OfficialWelcome } from '@/components/pico/OfficialWelcome';
 import { GuidedOnboarding } from '@/components/pico/GuidedOnboarding';
 import { AccessGate } from '@/components/pico/AccessGate';
