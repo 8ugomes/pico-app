@@ -102,6 +102,10 @@ try {
   await draft.fill('Jogo de hoje');
   await page.getByRole('button', { name: 'Publicar', exact: true }).click();
   assert.equal(posts[2].wallArena, wallArenas[2].id);
+  await page.getByRole('button', { name: 'O que aconteceu na areia?' }).click();
+  await page.getByRole('button', { name: 'Fechar editor' }).click();
+  await page.waitForFunction(() => document.activeElement?.classList.contains('composer-trigger'));
+  assert.equal(await page.getByRole('button', { name: 'O que aconteceu na areia?' }).evaluate(element => element === document.activeElement), true);
 
   await page.goto(origin + '/?games');
   await page.getByRole('button', { name: 'Registrar jogo' }).click();

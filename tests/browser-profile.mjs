@@ -130,7 +130,7 @@ try {
   await expect(page.getByRole('dialog',{name:'Ajustar foto',exact:true})).toHaveCount(0);
   await expect(draft).toHaveValue('Rascunho preservado.');
   await expect(page.locator('input[type=file]')).toBeFocused();
-  await page.getByRole('button',{name:'Cancelar',exact:true}).click();
+  await page.getByRole('button',{name:'Fechar editor',exact:true}).click();
   await expect(page.getByRole('button',{name:'O que aconteceu na areia?',exact:true})).toBeFocused();
   if(errors.length)throw Error(errors.join('\n'));summary.push({browser:name,textScale200:true,reducedMotion:true,inlineComposer:true,photoFocusReturn:true,publicationDraftPreserved:true,editToggles:20,singleEditor:true,draftOnFocus:true,failedSavePreservesDraft:true,discardDialog:true,oneWrite:true,tabKeyboard:true,viewports:[320,390,430,768],realHeicDecode:true,wireFormat:mediaFixture.wireFormat,crop:meta.width+'x'+meta.height,privateMetadataStripped:true,accountSwitch:true});await browser.close();
  }
