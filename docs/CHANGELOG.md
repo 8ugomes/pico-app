@@ -1,3 +1,10 @@
+## 2026-09-14: notificações publicadas e base revisada
+
+- PR #23 integrado e artefato `a4aa9628fbcb` promovido ao Pico principal; versão e saúde confirmadas.
+- Duas migrations aplicadas, com os 15 registros de conteúdo acompanhados preservados antes/depois, sem perda ou edição.
+- Revisão somente de leitura: 2 perfis completos, ambos na comunidade oficial; catálogo de 60 arenas e conteúdo existente coerentes com a interface. Fotos presentes em 17 arenas, pendentes em 43.
+- Sem notificações retroativas, novas contas de teste ou alterações de dados reais. [Relatório e limites](notifications-review/release.md).
+
 ## 2026-09-13: guia visual de instalação
 
 - Página de instalação do Pico Club com figuras animadas para iPhone/Safari e Android/Chrome, seletor de aparelho, variantes do Safari, pausa/avanço/retorno e modo sem movimento.

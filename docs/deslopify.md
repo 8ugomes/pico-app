@@ -12,6 +12,10 @@ Integração preserva busca e avatar no cabeçalho atual, leitor compartilhado d
 
 Integrar o sino ao cabeçalho atual sem perder busca e avatar real. A aba lateral respeita as cinco posições móveis. Preservar gates de perfil, tutorial e convite de instalação, textos naturais e contraste Aura Manteiga. Conferir a tela principal com a sessão disponível, destinos e estados, sem fabricar notificações para demonstrar resultado. A revisão da base deve distinguir pessoas recém-cadastradas, perfis completos e membros ativos; não chamar vínculo de presença ou contagem de sucesso sem dados.
 
+### Revisão no principal e aprendizado
+
+Sino, aba e estado vazio conferidos com sessão real; navegação, perfis e comunidade mantêm as identidades existentes. A descoberta mostra a outra pessoa e omite a própria. Ausência de notificações anteriores é correta, pois não há backfill. Fotos de catálogo e uploads são fontes distintas: cruzar a interface e o manifesto com os campos do banco evita diagnosticar ausência de imagens já publicadas. [Revisão da base](notifications-review/release.md).
+
 ## Instalação visual sem sobrepor etapas · 13/09/2026
 
 ### Critérios antes da implementação
