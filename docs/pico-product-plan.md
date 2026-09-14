@@ -2,7 +2,7 @@
 
 ### Implementação e validação
 
-Revisão do texto no título/metadados, marca acessível, autenticação, guia, estados vazios, publicações e catálogo. Regra permanente incorporada às referências usadas pelas outras tarefas. Migration 20260913233000 aplicada no desenvolvimento: nome institucional atualizado e proteção ativa. Seis testes pertinentes aprovados, incluindo upgrade com membros/posts existentes, escrita de usuários intacta, edição de gestão preservada, reaplicação sem efeito e rejeição de renomeação. Lint/typecheck/build conectado aprovados. [Evidências e estado do release](editorial-review/README.md).
+Revisão do texto no título/metadados, marca acessível, autenticação, guia, estados vazios, publicações e catálogo. Regra permanente incorporada às referências usadas pelas outras tarefas. Migration 20260913233000 aplicada no desenvolvimento: nome institucional atualizado e proteção ativa. Seis testes pertinentes aprovados, incluindo upgrade com membros/posts existentes, escrita de usuários intacta, edição de gestão preservada, reaplicação sem efeito e rejeição de renomeação. Lint/typecheck/build conectado aprovados; suíte completa com 133 testes após ajustar a expectativa antiga de ordenação. Revisão da landing e dos materiais concluída separadamente em e2f8ec6, sem deploy concorrente. [Evidências e estado do release](editorial-review/README.md).
 
 ### Plano registrado antes de implementar
 

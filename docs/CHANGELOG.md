@@ -4,7 +4,7 @@
 - Travessões decorativos retirados do título do app, rótulo acessível da marca e dois complementos de endereço do catálogo. Atualização dos endereços condicionada ao conteúdo original, sem sobrescrever edições da gestão.
 - Textos mais diretos na entrada, no tutorial, nos estados vazios e no campo de publicação. Conteúdo dos jogadores, hífens ortográficos, controles e regras de privacidade preservados.
 - Critério permanente documentado no Deslopify, skill de revisão, manual, contexto, design system e AGENTS. Coordenação com fluxo/arenas, estabilidade e materiais de divulgação.
-- Lint, typecheck, build conectado e seis testes pertinentes aprovados. [Revisão, evidências e limites](editorial-review/README.md). Publicação via PR/CI/main e script oficial, com recibos privados de preservação.
+- Lint, typecheck, build conectado e 133 testes aprovados. Teste antigo de custódia passa a localizar a comunidade pelo ID, pois o nome novo altera a ordem alfabética. [Revisão, evidências e limites](editorial-review/README.md). Publicação via PR/CI/main e script oficial, com recibos privados de preservação.
 
 ## 2026-09-13 — Importação de arenas e busca estadual
 

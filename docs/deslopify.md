@@ -8,9 +8,9 @@ Evitar slogans em sequência, frases simétricas de campanha em controles e tuto
 
 ### Implementação e aprendizados
 
-A varredura não encontrou travessões ou meias-riscas restantes em textos de `src` e `public`. O nome institucional vinha do banco e era reutilizado no Início, diretório, busca, detalhe, vínculos e destinos de posts; corrigir apenas um componente deixaria a inconsistência. A migration altera a mesma comunidade, sem recriar participantes ou conteúdo.
+A varredura não encontrou travessões ou meias-riscas restantes em textos de `src` e `public`. O nome institucional vinha do banco e era reutilizado no Início, diretório, busca, detalhe, vínculos e destinos de posts; corrigir apenas um componente deixaria a inconsistência. A migration altera a mesma comunidade, sem recriar participantes ou conteúdo. O novo nome também muda a ordem alfabética; verificações de identidade devem usar o ID, sem depender da primeira posição do catálogo.
 
-Amostra visual aprovada em 320/390px e 1280px, claro/escuro, com oito verificações de navegador e sem overflow. O tutorial agora orienta ações, como Encontre suas arenas e Edite seu perfil. Estados vazios dizem o que falta; o campo de publicação usa uma pergunta direta. Hífens em e-mail, boas-vindas, operadores e URLs continuam válidos. Documentos históricos e SQL de comparação preservam o texto antigo para registrar a evolução e selecionar somente os valores autorizados. [Revisão](editorial-review/README.md).
+Amostra visual aprovada em 320/390px e 1280px, claro/escuro, com oito verificações de navegador e sem overflow. O tutorial agora orienta ações, como Encontre suas arenas e Edite seu perfil. Estados vazios dizem o que falta; o campo de publicação usa uma pergunta direta. A revisão coordenada da landing e Instagram foi concluída em e2f8ec6: apoios abstratos substituídos por ações concretas, legendas sem abertura repetitiva e derivados sincronizados. Hífens em e-mail, boas-vindas, operadores e URLs continuam válidos. Documentos históricos e SQL de comparação preservam o texto antigo para registrar a evolução e selecionar somente os valores autorizados. [Revisão](editorial-review/README.md).
 
 ### Revisão planejada
 
