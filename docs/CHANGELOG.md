@@ -375,3 +375,9 @@ Após autenticação do responsável, rulesets 22706380 e 22706456 salvos como a
 - Nome Pico na instalação, textos de acesso atualizados, encaminhamento do endereço antigo e Site URL Auth principal.
 - Mesmo Supabase e dados existentes; sem migrations novas, mudança de RLS/admissão ou compra. Desenvolvimento segue exclusivo dos testes destrutivos.
 - 73 testes locais, lint, types e build aprovados; variáveis Production e 19 migrations conferidas. Evidência da publicação registrada no PR da alteração.
+## 2026-09-14: menções em publicações de comunidades
+
+- Publicações destinadas a comunidades podem marcar até 20 participantes ativos ou usar `@todos`, com escolha explícita da comunidade quando há vários destinos.
+- Avisos internos apontam ao post e acompanham acesso, participação, bloqueios e retirada do destino; sem autoaviso ou duplicidade na repetição do envio.
+- Migration aditiva com RLS e validação transacional; `@todos` limitado a três publicações por autor ao dia.
+- Lint, typecheck, build, 144 testes locais e smoke hospedado com três contas controladas passaram. [Contrato e revisão](COMMUNITY_MENTIONS.md).

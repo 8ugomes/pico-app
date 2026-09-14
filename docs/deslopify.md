@@ -535,3 +535,8 @@ Conferir em produção identidade oficial, textos de cadastro sem aprovação, a
 ### VERIFY da preparação de publicação
 
 Nenhuma nova mudança visual nesta etapa. Mantidos tutorial opcional, confirmação real de entrada e textos de audiência. Verificações locais passaram; confirmação de interface no domínio final integra o smoke de promoção. Não usar a existência da build como evidência de entrega de e-mail ou teste físico. Recibo final em .vercel e versão servida permitem conferir a entrega sem deixar documentação comitada depois do deploy.
+## Menções nas comunidades — revisão · 14/09/2026
+
+O compositor mantém publicação como ação principal e expõe menções somente após escolher uma comunidade. `@todos` é escolha explícita, sem seleção silenciosa de destinatários; a busca identifica nome e @usuário, e a prévia informa quem receberá aviso interno. A publicação mostra as marcações no final do texto. No inbox, entrada, marcação individual e `@todos` têm frases distintas e link ao post, preservando data e estado de leitura. Não há atividade fabricada na demonstração.
+
+Revisão no navegador conectado com identidades controladas: compositor em 390 px claro, 320 px escuro e desktop 1280 px, sem rolagem horizontal; escolha individual e prévia visíveis, notificação abre a publicação. O diálogo conserva rolagem e alvos de 44 px. Aprendizado: incluir a prévia de audiência perto da marcação evita confundir quem pode ver o post com quem será avisado. Conteúdo da lista e do compositor permanece em fluxo vertical no celular; nenhuma nova tela ou etapa obrigatória foi criada.

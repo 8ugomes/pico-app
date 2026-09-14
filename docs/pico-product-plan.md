@@ -645,3 +645,14 @@ Responsável autorizou comitar tudo e sincronizar com produção. Publicar o con
 ### Fechamento da preparação para publicação
 
 Backup principal concluído; migration aplicada e política de senha sincronizada. Comparação confirmou preservação das 33 tabelas anteriores, da conta e dos três arquivos, descontando os registros oficiais adicionados. 87 testes, lint, types e build passaram novamente. Ajustado o cwd do comando que exporta configuração para garantir sua inclusão no backup. PR/CI e artefato serão verificados antes da promoção; o resultado final fica no recibo operacional e em /api/version, evitando commit documental divergente da produção. [Registro](ONBOARDING_RELEASE.md). SMTP é pendência de divulgação, não impedimento à publicação agora autorizada.
+## Menções nas publicações de comunidades — 14/09/2026
+
+Pedido do responsável: marcar participantes da comunidade individualmente ou usar `@todos`, entregar avisos na caixa de notificações do Pico Club e publicar no ambiente principal. Na composição de uma publicação com destino em comunidade, oferecer busca de participantes ativos, escolha explícita de `@todos` e prévia de quem será avisado. Quando houver vários destinos, selecionar uma comunidade para a menção. O texto recebe as marcações somente após envio confirmado.
+
+Persistir menções e avisos na mesma transação do post, com chave de tentativa idempotente. O banco confere participação de quem publica e dos destinatários, bloqueios bilaterais, admissão, audiência e destino atual. Sem autoaviso; `@todos` inclui os participantes ativos elegíveis do grupo, com limite de três envios por dia por autor. Remoção do post/destino, saída do grupo, bloqueio e suspensão revogam a leitura pertinente. Notificações são internas ao app; comentários e compartilhamento de jogos mantêm os fluxos atuais.
+
+### Resultado local e validação
+
+Migration aditiva `20260914120000_community_post_mentions.sql`, RPCs de candidatos/publicação e extensão das notificações implementadas. Lint, typecheck, build e 144 testes locais passaram na integração sobre a main. A migration foi aplicada somente no desenvolvimento exclusivo após dry-run de arquivo único. Smoke hospedado com três identidades controladas, APIs e navegador passou 66 verificações, incluindo menção individual, `@todos`, idempotência, caixa, link ao post, layouts 320/390/1280 px e limpeza das fixtures. [Contrato e limites](COMMUNITY_MENTIONS.md).
+
+Publicação principal autorizada nesta rodada: integrar esta branch via PR/CI, fazer backup protegido, aplicar apenas a migration nova no Supabase principal, publicar a main pelo `scripts/deploy.mjs` no projeto `pico-app` e confirmar versão e smoke sem gerar avisos para pessoas reais de teste.
