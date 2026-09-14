@@ -1,5 +1,16 @@
-## Notificações de comunidades — PLAN · 13/09/2026
+## Arenas de Caieiras e eixo noroeste/oeste — PLAN · 14/09/2026
 
+Revisar o catálogo conectado e pesquisar arenas de Caieiras, Vila Aurora, Jaraguá, Pirituba e arredores, com fontes públicas verificáveis e fotografias do próprio local. Conferir a busca global já implementada na main e corrigir a prioridade/recuperação das fotos reais. Registrar cobertura, pendências e procedência em relatório próprio; não afirmar censo completo sem evidência.
+
+Atualizações aditivas e idempotentes, preservando IDs/slugs existentes, contas, vínculos, comunidades, jogos privados, publicações e fotos dos usuários. Conferir o estado remoto antes de planejar a aplicação; nunca reset/seed no principal. Validar pesquisa/paginação, leitura de fotos, preservação de histórico e amostra visual; lint/typecheck/build, documentação, changelog e commit. Publicar somente no destino principal já estabelecido quando a atualização estiver validada.
+
+### Fechamento da revisão de arenas
+
+Implementadas nove inclusões regionais, todas com fotos, e recuperação das imagens de 22 registros antigos: 69 arenas/27 municípios, 149 fotos em 48 arenas. Busca real por Caieiras, Vila Aurora, Pirituba e Freguesia do Ó passou no Supabase de desenvolvimento; 149 arquivos responderam HTTP 200. Lint, typecheck, build e 142 testes passaram; regressões finais de importação/capa e inventário foram reconfirmadas após o ajuste dos testes. Amostra móvel de 390px e desktop de 1100px, claro/escuro e fallback de galeria conferidos. Importação aditiva de desenvolvimento preservou 64 linhas e acrescentou somente nove, sem edições/perdas. Publicação coordenada pela main e importador protegido, com recibos privados do principal. [Relatório, fontes e limites](arena-regional-review/README.md).
+
+Não declarar censo completo: 21 arenas antigas do lote estadual ainda precisam de foto verificável; a identidade exata de “Arena Caienas” permanece a confirmar. Nenhum cadastro histórico foi removido por falta de foto.
+
+## Notificações de comunidades — PLAN · 13/09/2026
 Adicionar `/notificacoes`, com sino no cabeçalho móvel e aba lateral no desktop, contador de não lidas e leitura individual/em lote. Avisar membros ativos quando outra pessoa passa a participar da comunidade (entrada aberta, aprovação ou convite), com pessoa, comunidade e data. Pedidos pendentes, alterações de papel e repetição de uma entrada já confirmada não geram avisos; sem autoaviso ou histórico retroativo. Notificações internas ao app, atualizadas ao abrir/retomar e periodicamente enquanto visível.
 
 Persistência por destinatário, trigger transacional, RLS, bloqueio bilateral e admissão atual; sair da comunidade apaga os próprios avisos daquele grupo. Demo explicitamente local e vazio, sem atividade fabricada. Validar isolamento, idempotência, entrada/aprovação/convite e leitura com testes SQL, API e navegador; lint/typecheck/build, documentação e commit. Migration de desenvolvimento para validação/tipos; publicação principal depende de pedido específico.

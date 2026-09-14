@@ -12,10 +12,16 @@ const tables = [
   ['profiles', 'id', "jsonb_build_array(t.id)"],
   ['post_game_context', 'post_id', "jsonb_build_array(t.post_id)"],
   ['media_assets', 'path', "jsonb_build_array(t.player_id,t.bucket,t.path)"],
+  ['entity_media_assets', 'path', "jsonb_build_array(t.path,t.arena_id,t.community_id,t.slot)"],
+  ['arenas', 'id', "jsonb_build_array(t.id,t.slug,t.created_at)"],
+  ['arena_members', ['arena_id','player_id'], "jsonb_build_array(t.arena_id,t.player_id,t.created_at)"],
+  ['communities', 'id', "jsonb_build_array(t.id,t.created_at)"],
+  ['community_members', ['community_id','player_id'], "jsonb_build_array(t.community_id,t.player_id,t.created_at)"],
+  ['community_arena_links', 'community_id', "jsonb_build_array(t.community_id,t.arena_id)"],
 ];
 export const snapshotSql = `begin read only;
 set local statement_timeout = '30s';
-${tables.map(([table,key,identity]) => `select '${table}' as entity, t.${key}::text as key,
+${tables.map(([table,key,identity]) => `select '${table}' as entity, ${Array.isArray(key) ? `jsonb_build_array(${key.map(column=>`t.${column}`).join(',')})` : `t.${key}`}::text as key,
   md5((${identity})::text) as identity, md5(row_to_json(t)::text) as digest
   from public.${table} t`).join('\nunion all\n')} order by entity,key;
 commit;`;

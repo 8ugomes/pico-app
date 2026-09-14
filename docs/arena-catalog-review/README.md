@@ -1,3 +1,5 @@
+> Revisão atual: [Caieiras e eixo noroeste/oeste — 14/09/2026](../arena-regional-review/README.md). As contagens abaixo preservam o lote inicial.
+
 > Catálogo ampliado em 13/09/2026: [lote estadual, fontes e limites](../arena-state-research/lote-publicado.md). Esta revisão preserva as evidências das 17 unidades iniciais e suas 76 fotos.
 
 # Arenas reais e revisão editorial — 13/09/2026

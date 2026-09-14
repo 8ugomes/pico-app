@@ -1,37 +1,44 @@
 'use client';
 import { useState } from 'react';
 import Image from 'next/image';
-import { ArrowLeft, ArrowRight, Volleyball } from 'lucide-react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
+import { arenaPhotoSources } from '@/lib/arena-photos';
 import type { ReadArena } from '@/types/read';
+
 export function ArenaImage({ arena, detail = false, cover }: { arena: ReadArena; detail?: boolean; cover?: string | null }) {
-  const source = cover || arena.image;
-  const [failedSource, setFailedSource] = useState<string | null>(null);
-  return <div className={detail ? 'arena-detail-photo' : 'arena-card-photo'}>
-    {source && failedSource !== source ? <Image unoptimized={Boolean(cover) || source.startsWith('/api/')} src={source} onError={() => setFailedSource(source)} alt={arena.isDemo ? `Imagem ilustrativa de ${arena.name}.` : `Foto de ${arena.name}.`} width={1440} height={960} sizes={detail ? '(max-width: 700px) 100vw, 700px' : '(max-width: 599px) 100vw, 350px'} /> : <div className="read-arena-placeholder"><Volleyball size={40} strokeWidth={1} aria-hidden="true" /><span>Foto indisponível</span></div>}
-    {arena.isDemo && <span className="arena-label-badge">Arena de demonstração</span>}
-  </div>;
+  return <ArenaPhotos key={`${arena.id}:${cover ?? ''}:${arena.image ?? ''}`} arena={arena} detail={detail} cover={cover} />;
 }
 
+function ArenaPhotos({ arena, detail, cover, gallery = false }: { arena: ReadArena; detail: boolean; cover?: string | null; gallery?: boolean }) {
+  const [failedSources, setFailedSources] = useState<string[]>([]);
+  const [index, setIndex] = useState(0);
+  const sources = arenaPhotoSources(arena, cover);
+  const available = sources.filter(photo => !failedSources.includes(photo.src));
+  const currentIndex = Math.min(index, Math.max(0, available.length - 1));
+  const photo = available[currentIndex];
+  if (!sources.length) return null;
+  if (!photo) return detail ? <div className="arena-photo-retry"><p>As fotos não carregaram.</p><Button variant="quiet" size="small" onClick={() => { setFailedSources([]); setIndex(0); }}>Tentar novamente</Button></div> : null;
+  // A working team cover takes priority. A failure tries another photo of this same arena.
+  const showControls = gallery && !photo.src.startsWith('/api/') && available.length > 1;
+  const frame = <div className={detail ? 'arena-gallery-frame' : 'arena-card-photo'}>
+    <Image key={photo.src} unoptimized={photo.src.startsWith('/api/')} src={photo.src} alt={arena.isDemo ? `Imagem ilustrativa de ${arena.name}.` : `Foto de ${arena.name}.`} width={photo.width} height={photo.height} sizes={detail ? '(max-width: 700px) 100vw, 700px' : '(max-width: 599px) 100vw, 350px'} loading={detail ? 'eager' : 'lazy'} onError={() => setFailedSources(previous => [...previous, photo.src])} />
+    {arena.isDemo && <span className="arena-label-badge">Arena de demonstração</span>}
+  </div>;
+  if (!detail) return frame;
+  return <figure className="arena-gallery">
+    {frame}
+    {(photo.sourcePage || showControls) && <figcaption className="arena-gallery-caption">
+      {photo.sourcePage && <a href={photo.sourcePage} target="_blank" rel="noopener noreferrer">Fotos divulgadas pela arena</a>}
+      {showControls && <div className="arena-gallery-controls">
+        <Button variant="quiet" size="small" aria-label="Foto anterior" disabled={currentIndex === 0} onClick={() => setIndex(currentIndex - 1)}><ArrowLeft size={18} aria-hidden="true" /></Button>
+        <span role="status" aria-live="polite">{currentIndex + 1} / {available.length}</span>
+        <Button variant="quiet" size="small" aria-label="Próxima foto" disabled={currentIndex >= available.length - 1} onClick={() => setIndex(currentIndex + 1)}><ArrowRight size={18} aria-hidden="true" /></Button>
+      </div>}
+    </figcaption>}
+  </figure>;
+}
 
 export function ArenaGallery({ arena, cover }: { arena: ReadArena; cover?: string | null }) {
-  const [index, setIndex] = useState(0);
-  const [failedPhoto, setFailedPhoto] = useState<string | null>(null);
-  const photos = arena.directory?.photos ?? [];
-  const photo = photos[index] ?? photos[0];
-  // A photo confirmed by the arena team replaces the imported gallery.
-  if (cover || !photo) return <ArenaImage arena={arena} detail cover={cover} />;
-  return <figure className="arena-gallery">
-    <div className="arena-gallery-frame">
-      {failedPhoto === photo.src ? <div className="read-arena-placeholder"><Volleyball size={40} aria-hidden="true" /><span>Foto indisponível</span></div> : <Image src={photo.src} alt={`${arena.name}: foto ${index + 1} do espaço.`} width={photo.width} height={photo.height} sizes="(max-width: 700px) 100vw, 700px" loading="eager" onError={() => setFailedPhoto(photo.src)} />}
-    </div>
-    <figcaption className="arena-gallery-caption">
-      <a href={photo.sourcePage} target="_blank" rel="noopener noreferrer">Fotos divulgadas pela arena</a>
-      {photos.length > 1 && <div className="arena-gallery-controls">
-        <Button variant="quiet" size="small" aria-label="Foto anterior" disabled={index === 0} onClick={() => setIndex(index - 1)}><ArrowLeft size={18} aria-hidden="true" /></Button>
-        <span role="status" aria-live="polite">{index + 1} / {photos.length}</span>
-        <Button variant="quiet" size="small" aria-label="Próxima foto" disabled={index >= photos.length - 1} onClick={() => setIndex(index + 1)}><ArrowRight size={18} aria-hidden="true" /></Button>
-      </div>}
-    </figcaption>
-  </figure>;
+  return <ArenaPhotos key={`${arena.id}:${cover ?? ''}:${arena.image ?? ''}`} arena={arena} detail cover={cover} gallery />;
 }

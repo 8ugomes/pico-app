@@ -4,6 +4,8 @@ import { createClient } from '@supabase/supabase-js';
 import { resolveSupabaseEnvironment } from '../src/lib/supabase/config.ts';
 import { parseReadRequest, readSocial, safeArenaImage } from '../src/lib/supabase/read-service.ts';
 import { listPublicArenas, ARENA_PAGE_SIZE } from '../src/lib/supabase/queries.ts';
+import { arenaPhotoSources } from '../src/lib/arena-photos.ts';
+import { arenaCatalog } from '../scripts/arena-catalog-data.mjs';
 
 const sport = {id:'10000000-0000-4000-8000-000000000001',slug:'futevolei',name:'Futevôlei'};
 const uid = '30000000-0000-4000-8000-000000000001';
@@ -110,6 +112,24 @@ test('arena images cannot pretend bundled demo artwork is a real venue or fetch 
   assert.equal(safeArenaImage('/images/urban-court.webp',true),'/images/urban-court.webp');
   for(const path of ['/images/urban-court.webp','https://external.invalid/pixel','//external.invalid/pixel','/api/private','javascript:alert(1)',null]) assert.equal(safeArenaImage(path,false),null);
   assert.equal(safeArenaImage('https://external.invalid/pixel',true),null);
+});
+
+test('manager cover leads the list and has distinct same-venue catalog fallbacks', async () => {
+  const catalog=arenaCatalog.arenas.find(a=>a.slug==='arena-jaragua-beach');
+  const coverPath=uid+'/'+uid+'.webp';
+  const record={...arena,id:catalog.id,slug:catalog.slug,name:catalog.name,is_demo:false,cover_path:coverPath};
+  const {client,requests}=clientWith({tableData:{arenas:[record]}});
+  const result=await readSocial(client,{resource:'arenas',offset:0});
+  const venue=result.arenas[0];
+  assert.match(venue.image,/^\/api\/media\?bucket=entity-media&path=/);
+  assert.ok(requests.find(r=>r.url.pathname.endsWith('/search_arenas')).url.searchParams.get('select').includes('cover_path'));
+  const photos=arenaPhotoSources(venue,venue.image);
+  assert.equal(photos[0].src,venue.image);
+  assert.equal(photos[1].src,catalog.photos[0].src);
+  assert.equal(photos.length,catalog.photos.length+1);
+  assert.equal(new Set(photos.map(p=>p.src)).size,photos.length);
+  const fallback=await readSocial(clientWith({tableData:{arenas:[{...record,cover_path:null}]}}).client,{resource:'arenas',offset:0});
+  assert.equal(fallback.arenas[0].image,catalog.photos[0].src);
 });
 
 test('comment identity carries the authorized avatar URL without profile secrets', async () => {

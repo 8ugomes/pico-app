@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "checkedOn": "2026-09-13",
+  "checkedOn": "2026-09-14",
   "arenas": [
     {
       "id": "636e608f-9504-5cf7-92cc-39a3d34e9cfe",
@@ -1428,10 +1428,36 @@
             "address",
             "sports"
           ]
+        },
+        {
+          "url": "https://arenaaveiro.com.br/",
+          "kind": "venue",
+          "supports": [
+            "photos"
+          ]
         }
       ],
-      "photoStatus": "pending-rights-review",
-      "photos": []
+      "photos": [
+        {
+          "src": "/images/arenas/arena-aveiro-campinas-5-d39b494dc9.webp",
+          "width": 960,
+          "height": 960,
+          "bytes": 149020,
+          "sha256": "d39b494dc996f8432dc2fcf54d29708d0234bdc876c85c982416ad0a57f0f4ab",
+          "sourceUrl": "https://arenaaveiro.com.br/wp-content/uploads/2024/10/Prancheta-1_21-1024x1024.png",
+          "sourcePage": "https://arenaaveiro.com.br/"
+        },
+        {
+          "src": "/images/arenas/arena-aveiro-campinas-4-10d42f0095.webp",
+          "width": 800,
+          "height": 600,
+          "bytes": 136228,
+          "sha256": "10d42f0095cba4018071e6aae3f875056293da42a470b8dbb992af737cae3e2f",
+          "sourceUrl": "https://arenaaveiro.com.br/wp-content/uploads/2024/10/AVEIRO.jpeg",
+          "sourcePage": "https://arenaaveiro.com.br/"
+        }
+      ],
+      "photoPage": "https://arenaaveiro.com.br/"
     },
     {
       "id": "6ab9f6e1-947f-50f4-a213-49ece13d45f7",
@@ -1456,7 +1482,8 @@
           "supports": [
             "name",
             "address",
-            "sports"
+            "sports",
+            "photos"
           ]
         },
         {
@@ -1468,8 +1495,18 @@
           ]
         }
       ],
-      "photoStatus": "pending-rights-review",
-      "photos": []
+      "photos": [
+        {
+          "src": "/images/arenas/arena-beach-ribeirao-ribeirao-preto-bg1-ab1f00c8e0.webp",
+          "width": 1280,
+          "height": 853,
+          "bytes": 114622,
+          "sha256": "ab1f00c8e0bc8e4ca1bf28cf6ea7f8ea7876d57a7c532a7eb60a7e9e3c5b7ca7",
+          "sourceUrl": "https://static.wixstatic.com/media/95e081_f58d74291f504f80b127a356b576d9b5~mv2.jpg/v1/fill/w_1920,h_1280,al_c/95e081_f58d74291f504f80b127a356b576d9b5~mv2.jpg",
+          "sourcePage": "https://www.arenabeachribeirao.com.br/"
+        }
+      ],
+      "photoPage": "https://www.arenabeachribeirao.com.br/"
     },
     {
       "id": "136543b0-8668-5480-a375-d3f83bd6dfaa",
@@ -1496,12 +1533,23 @@
           "supports": [
             "name",
             "address",
-            "sports"
+            "sports",
+            "photos"
           ]
         }
       ],
-      "photoStatus": "pending-rights-review",
-      "photos": []
+      "photos": [
+        {
+          "src": "/images/arenas/indoor-beach-tennis-bauru-1-cc0c1995e3.webp",
+          "width": 540,
+          "height": 960,
+          "bytes": 48154,
+          "sha256": "cc0c1995e3a39f9e340b00b927af4c60887e3cfd99e47cb54b278ca6a6860d42",
+          "sourceUrl": "https://indoorbeachtennis.com.br/_next/image?url=%2Fdog1.jpeg&w=3840&q=75",
+          "sourcePage": "https://indoorbeachtennis.com.br/"
+        }
+      ],
+      "photoPage": "https://indoorbeachtennis.com.br/"
     },
     {
       "id": "1e1c79c5-fd0c-5565-98ad-9b4876879a09",
@@ -1666,10 +1714,36 @@
             "address",
             "sports"
           ]
+        },
+        {
+          "url": "https://portal.superpadel.com.br/super/sharx-arena/",
+          "kind": "venue-partner",
+          "supports": [
+            "photos"
+          ]
         }
       ],
-      "photoStatus": "pending-rights-review",
-      "photos": []
+      "photos": [
+        {
+          "src": "/images/arenas/sharx-arena-piracicaba-8-ad720d6ca1.webp",
+          "width": 710,
+          "height": 400,
+          "bytes": 59278,
+          "sha256": "ad720d6ca1012b58959d6d449dd09ee3fe646ecf024a4a923c7435f9e1b7130f",
+          "sourceUrl": "https://portal.superpadel.com.br/wp-content/uploads/elementor/thumbs/112-q3o3xekpolbjk6wftmwm205ptb2dh6t8ogmrcgb1nk.webp",
+          "sourcePage": "https://portal.superpadel.com.br/super/sharx-arena/"
+        },
+        {
+          "src": "/images/arenas/sharx-arena-piracicaba-1-70e58cdbc8.webp",
+          "width": 710,
+          "height": 400,
+          "bytes": 16696,
+          "sha256": "70e58cdbc8599fc663a9250ba89be03703076a87ff24b224bdd30a88cdbb5a55",
+          "sourceUrl": "https://portal.superpadel.com.br/wp-content/uploads/elementor/thumbs/Screenshot_1-3-q3o3xl5l0fkjtgmvr7r01ghxz05xz2jd1d75pe1ag0.jpg",
+          "sourcePage": "https://portal.superpadel.com.br/super/sharx-arena/"
+        }
+      ],
+      "photoPage": "https://portal.superpadel.com.br/super/sharx-arena/"
     },
     {
       "id": "daf894c8-d97e-51c6-a29b-ec91641a3ea9",
@@ -1696,12 +1770,41 @@
           "supports": [
             "name",
             "address",
-            "sports"
+            "sports",
+            "photos"
           ]
         }
       ],
-      "photoStatus": "pending-rights-review",
-      "photos": []
+      "photos": [
+        {
+          "src": "/images/arenas/tamega-sport-club-jundiai-3-bc472220a9.webp",
+          "width": 768,
+          "height": 960,
+          "bytes": 79998,
+          "sha256": "bc472220a926d3ef7a2b9b6259d4d19f3a322c48c8b2d66a4f813eaf3f3eacb4",
+          "sourceUrl": "https://tamegasportclub.com.br/wp-content/uploads/2024/09/tamega-sport-club-3.webp",
+          "sourcePage": "https://tamegasportclub.com.br/"
+        },
+        {
+          "src": "/images/arenas/tamega-sport-club-jundiai-9-2034914011.webp",
+          "width": 768,
+          "height": 960,
+          "bytes": 147596,
+          "sha256": "2034914011a57df1d1d0cf7155f52c7118ac621c680fd1bc0cf1db265ab10955",
+          "sourceUrl": "https://tamegasportclub.com.br/wp-content/uploads/2026/02/006.png",
+          "sourcePage": "https://tamegasportclub.com.br/"
+        },
+        {
+          "src": "/images/arenas/tamega-sport-club-jundiai-12-31e19f1e12.webp",
+          "width": 768,
+          "height": 960,
+          "bytes": 45062,
+          "sha256": "31e19f1e12e4bcf45b8cf198f3c6772f0300f5f9d2a259aedfa950119a8d87f6",
+          "sourceUrl": "https://tamegasportclub.com.br/wp-content/uploads/2026/02/009.png",
+          "sourcePage": "https://tamegasportclub.com.br/"
+        }
+      ],
+      "photoPage": "https://tamegasportclub.com.br/"
     },
     {
       "id": "e987535d-253d-551c-af30-df38956fa0c9",
@@ -1726,7 +1829,8 @@
           "supports": [
             "name",
             "address",
-            "sports"
+            "sports",
+            "photos"
           ]
         },
         {
@@ -1738,8 +1842,36 @@
           ]
         }
       ],
-      "photoStatus": "pending-rights-review",
-      "photos": []
+      "photos": [
+        {
+          "src": "/images/arenas/arena-mare-beach-guarulhos-2-db158ba544.webp",
+          "width": 454,
+          "height": 360,
+          "bytes": 21508,
+          "sha256": "db158ba544bbacdeaae7b96bdd3f096d5eddf60ea91f2fd75e15acd85df0da9a",
+          "sourceUrl": "https://assets-cdn.wellhub.com/images/?su=https%3A%2F%2Fimages.partners.gympass.com%2Fimage%2Ffilename%2F4965604%2Flg_vf2WzuzQyBrszcPYGs5Tuk-omeuFs8nj.png&h=360",
+          "sourcePage": "https://wellhub.com/pt-br/search/partners/arena-mare-beach/"
+        },
+        {
+          "src": "/images/arenas/arena-mare-beach-guarulhos-3-20861a0c76.webp",
+          "width": 428,
+          "height": 360,
+          "bytes": 18464,
+          "sha256": "20861a0c76f21f8562ea5a61dfdb9996ff2096a8273bba275ae447a7fe85c2a8",
+          "sourceUrl": "https://assets-cdn.wellhub.com/images/?su=https%3A%2F%2Fimages.partners.gympass.com%2Fimage%2Ffilename%2F4960519%2Flg_CGKmCYtBsDpsZwi6ZmWLThebKlTHzETd.jpg&h=360",
+          "sourcePage": "https://wellhub.com/pt-br/search/partners/arena-mare-beach/"
+        },
+        {
+          "src": "/images/arenas/arena-mare-beach-guarulhos-1-cc7dbb8b0c.webp",
+          "width": 416,
+          "height": 360,
+          "bytes": 23492,
+          "sha256": "cc7dbb8b0c3306f18bf8fd48c5cddcac44382a351a44cf74af36c6491a78be99",
+          "sourceUrl": "https://assets-cdn.wellhub.com/images/?su=https%3A%2F%2Fimages.partners.gympass.com%2Fimage%2Ffilename%2F4965603%2Flg_WXQ4Cl2CTlMZNz81N267LI_48Uf8Nhxv.png&h=360",
+          "sourcePage": "https://wellhub.com/pt-br/search/partners/arena-mare-beach/"
+        }
+      ],
+      "photoPage": "https://wellhub.com/pt-br/search/partners/arena-mare-beach/"
     },
     {
       "id": "aa98d2d0-d737-5f14-b61e-9ae41ef15659",
@@ -1766,12 +1898,23 @@
           "supports": [
             "name",
             "address",
-            "sports"
+            "sports",
+            "photos"
           ]
         }
       ],
-      "photoStatus": "pending-rights-review",
-      "photos": []
+      "photos": [
+        {
+          "src": "/images/arenas/arena-pappi-santo-andre-1-fb10df1bee.webp",
+          "width": 1200,
+          "height": 900,
+          "bytes": 203650,
+          "sha256": "fb10df1bee55c91d8ddc03afb26773a6bf3a9a402c004de2e2ae961a6b45dacc",
+          "sourceUrl": "https://arenapappi.com.br/_next/image?url=%2Fimages%2Farena%2Ffrente-arena-pappi-carousel-01.webp&w=3840&q=72",
+          "sourcePage": "https://arenapappi.com.br/"
+        }
+      ],
+      "photoPage": "https://arenapappi.com.br/"
     },
     {
       "id": "0bede924-7769-5cbb-bb6a-5f596c2655dc",
@@ -1798,12 +1941,23 @@
           "supports": [
             "name",
             "address",
-            "sports"
+            "sports",
+            "photos"
           ]
         }
       ],
-      "photoStatus": "pending-rights-review",
-      "photos": []
+      "photos": [
+        {
+          "src": "/images/arenas/arena-pe-na-areia-sao-bernardo-do-campo-bg1-b8db02236b.webp",
+          "width": 270,
+          "height": 337,
+          "bytes": 13748,
+          "sha256": "b8db02236b3d281ecc368c33ede9ad0fd83599634e031a735e7502792f85f944",
+          "sourceUrl": "https://arenapenareia.com.br/wp-content/uploads/2024/07/mesa-1.jpg",
+          "sourcePage": "https://arenapenareia.com.br/"
+        }
+      ],
+      "photoPage": "https://arenapenareia.com.br/"
     },
     {
       "id": "483243da-ff95-5901-a1df-82d4ed01a0c9",
@@ -1831,10 +1985,45 @@
             "address",
             "sports"
           ]
+        },
+        {
+          "url": "https://totalpass.com/br/academias/arena-do-momento/",
+          "kind": "venue-partner",
+          "supports": [
+            "photos"
+          ]
         }
       ],
-      "photoStatus": "pending-rights-review",
-      "photos": []
+      "photos": [
+        {
+          "src": "/images/arenas/arena-do-momento-sao-bernardo-do-campo-3-fccceee477.webp",
+          "width": 1080,
+          "height": 720,
+          "bytes": 113736,
+          "sha256": "fccceee47774b96d6bfeb105324326e2a25252041523c697a0f0ba528841c6da",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvY2VlZ2k1azltNmdranIwbGR4cTF6YnB2dDF0ZmNvNWpoeXV4MnRnMDI3dW81bnMwMXo0Nm80azI0azk2",
+          "sourcePage": "https://totalpass.com/br/academias/arena-do-momento/"
+        },
+        {
+          "src": "/images/arenas/arena-do-momento-sao-bernardo-do-campo-5-d342f6c970.webp",
+          "width": 960,
+          "height": 720,
+          "bytes": 121696,
+          "sha256": "d342f6c970cdd2ea1e552c4a9d1b3ccde596e7aba6b35f90ec2056be9bbeb870",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvZmQ0ZzhteWd6NGl1czQzMW54dGxqandjZDFzZTZxdGExaDhuaTk5bW9sMWVkZ3BvYnY0d3lkNXB2YTk1",
+          "sourcePage": "https://totalpass.com/br/academias/arena-do-momento/"
+        },
+        {
+          "src": "/images/arenas/arena-do-momento-sao-bernardo-do-campo-2-a795dffd98.webp",
+          "width": 960,
+          "height": 720,
+          "bytes": 111622,
+          "sha256": "a795dffd98bd4a0b5562c7fe957e39f7bb89a3d3644ff190aff1bca91a09a9be",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvZGE4bGhsMXBldDN2YTB3Z3QxdXk1MG4zdTJ1cWJ2amlhbmdweG82azQyMnJvZWl4ZGpsc2g5aGw3bGdi",
+          "sourcePage": "https://totalpass.com/br/academias/arena-do-momento/"
+        }
+      ],
+      "photoPage": "https://totalpass.com/br/academias/arena-do-momento/"
     },
     {
       "id": "ecbdf985-2090-58e2-b392-c8cecac7fee1",
@@ -1861,12 +2050,41 @@
           "supports": [
             "name",
             "address",
-            "sports"
+            "sports",
+            "photos"
           ]
         }
       ],
-      "photoStatus": "pending-rights-review",
-      "photos": []
+      "photos": [
+        {
+          "src": "/images/arenas/arena-pro-beach-sao-bernardo-do-campo-2-612f19066d.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 458316,
+          "sha256": "612f19066d46d54dfaed0f82b4d2547ebbfc36146a1ffba96fce9d036e35a745",
+          "sourceUrl": "https://arenaprobeach.com/assets/quadras-futevolei.jpg",
+          "sourcePage": "https://arenaprobeach.com/"
+        },
+        {
+          "src": "/images/arenas/arena-pro-beach-sao-bernardo-do-campo-3-623a145c0d.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 233576,
+          "sha256": "623a145c0d4b032dcd9f8cb88b7fe0931cec0ecacf010c255b82b70c74dae89e",
+          "sourceUrl": "https://arenaprobeach.com/assets/churrasqueira-iphone.jpg",
+          "sourcePage": "https://arenaprobeach.com/"
+        },
+        {
+          "src": "/images/arenas/arena-pro-beach-sao-bernardo-do-campo-4-a33289eb90.webp",
+          "width": 1280,
+          "height": 960,
+          "bytes": 179760,
+          "sha256": "a33289eb904c15981426853c44ad042561a4d82743fe73429e4eceb27822e751",
+          "sourceUrl": "https://arenaprobeach.com/assets/lanchonete.jpg",
+          "sourcePage": "https://arenaprobeach.com/"
+        }
+      ],
+      "photoPage": "https://arenaprobeach.com/"
     },
     {
       "id": "6a65c9a5-c383-5a3f-aa9c-f6f90dc213c5",
@@ -1899,12 +2117,41 @@
           "kind": "corroboration",
           "supports": [
             "name",
-            "address"
+            "address",
+            "photos"
           ]
         }
       ],
-      "photoStatus": "pending-rights-review",
-      "photos": []
+      "photos": [
+        {
+          "src": "/images/arenas/arena-abc-beach-sports-sao-bernardo-do-campo-3-b44218ba2e.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 250826,
+          "sha256": "b44218ba2e495b445428f70ce330333df178275497c19cedd93c1ecc62ff29c6",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvZGFrcnBla2V0N3Aycnl1dHoxNzk3ZDQ4c21ldnc1MTI4a3RoNmIwc3Vocm0yYnUwbTBiZG90OGJ5c3Ux",
+          "sourcePage": "https://totalpass.com/br/academias/arena-abc-beach-tennis-d2371436-ebae-4384-a6f1-e7b92f4a9116/"
+        },
+        {
+          "src": "/images/arenas/arena-abc-beach-sports-sao-bernardo-do-campo-2-90c153a97d.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 180078,
+          "sha256": "90c153a97db2ebefb412ea1231ed28bd766b53829fae876463b5e8b6389a0cab",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvMmMyZDF0aGo2eTVvbzlibWQ2ZmU0cHp3Z3Axc2EzOW9reTNwZXpqdGJiaWRkNXNndmMzNGl1ZDJ4MzZi",
+          "sourcePage": "https://totalpass.com/br/academias/arena-abc-beach-tennis-d2371436-ebae-4384-a6f1-e7b92f4a9116/"
+        },
+        {
+          "src": "/images/arenas/arena-abc-beach-sports-sao-bernardo-do-campo-1-d6049dec81.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 269144,
+          "sha256": "d6049dec81b1389c6908c6c629e19f54399c90a4c2816fe1b3dbaf21aedf194a",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvcTU3Mm1jeDlpN3hkMTA3c24zaTc3c2FsemZ5ejFxOWxsaG5sM2g0Nms2cDR2OXF6ZDV3ZWZhODRweHBj",
+          "sourcePage": "https://totalpass.com/br/academias/arena-abc-beach-tennis-d2371436-ebae-4384-a6f1-e7b92f4a9116/"
+        }
+      ],
+      "photoPage": "https://totalpass.com/br/academias/arena-abc-beach-tennis-d2371436-ebae-4384-a6f1-e7b92f4a9116/"
     },
     {
       "id": "4e06fc52-1f5f-5723-9a43-8765913a64ef",
@@ -1929,12 +2176,41 @@
           "supports": [
             "name",
             "address",
-            "sports"
+            "sports",
+            "photos"
           ]
         }
       ],
-      "photoStatus": "pending-rights-review",
-      "photos": []
+      "photos": [
+        {
+          "src": "/images/arenas/arena-beach-sao-caetano-sao-caetano-do-sul-2-cab4bf98e5.webp",
+          "width": 1280,
+          "height": 595,
+          "bytes": 52766,
+          "sha256": "cab4bf98e5d84bfa8296266f72be997991014cd0c82aa611062ecd4d23f7a7d3",
+          "sourceUrl": "https://arenasaocaetano.net.br/assets/img/about/play-bg.png",
+          "sourcePage": "https://arenasaocaetano.net.br/"
+        },
+        {
+          "src": "/images/arenas/arena-beach-sao-caetano-sao-caetano-do-sul-3-90d2b1a44e.webp",
+          "width": 631,
+          "height": 456,
+          "bytes": 67172,
+          "sha256": "90d2b1a44ed643ee71cb765683c67da799f13e28450569f556d306ff958f5155",
+          "sourceUrl": "https://arenasaocaetano.net.br/assets/img/about/ser.png",
+          "sourcePage": "https://arenasaocaetano.net.br/"
+        },
+        {
+          "src": "/images/arenas/arena-beach-sao-caetano-sao-caetano-do-sul-8-6967fb76a0.webp",
+          "width": 410,
+          "height": 488,
+          "bytes": 55102,
+          "sha256": "6967fb76a0d5e444822d311f9e8b1afb50d8be6c57df07100d4cd6d5fa10d6fa",
+          "sourceUrl": "https://arenasaocaetano.net.br/assets/img/service/loca.png",
+          "sourcePage": "https://arenasaocaetano.net.br/"
+        }
+      ],
+      "photoPage": "https://arenasaocaetano.net.br/"
     },
     {
       "id": "291772aa-d85b-5077-87d7-9ee4f01943cc",
@@ -1962,10 +2238,45 @@
             "address",
             "sports"
           ]
+        },
+        {
+          "url": "https://totalpass.com/br/academias/estacao-praia-mar/",
+          "kind": "venue-partner",
+          "supports": [
+            "photos"
+          ]
         }
       ],
-      "photoStatus": "pending-rights-review",
-      "photos": []
+      "photos": [
+        {
+          "src": "/images/arenas/estacao-praia-mar-osasco-4-0ee194ec6d.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 213376,
+          "sha256": "0ee194ec6d37812b5bd2cfbe26726813b7b8fbaf67237dec094c3a3994353da2",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvaGozazhvYmZiNGU4c3FtYWN2dmd6Y3phaW9hdDdxdTBuaW1jZ3dkaDhxcG9hZm95c3N1bHFsNTQ5OHV5",
+          "sourcePage": "https://totalpass.com/br/academias/estacao-praia-mar/"
+        },
+        {
+          "src": "/images/arenas/estacao-praia-mar-osasco-3-70e8a22415.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 140590,
+          "sha256": "70e8a224150d55bf22d5466d672f7ce345d1a1342de9de6fa81bc1d197cd2d96",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvbmRxdDAzOWxvMHlsMTQ3N2h4cHJkcmpmcXZjc3U4NGdocWRpem9vazVpcGQ0bjJsbjZubGZ4ZXYzZm01",
+          "sourcePage": "https://totalpass.com/br/academias/estacao-praia-mar/"
+        },
+        {
+          "src": "/images/arenas/estacao-praia-mar-osasco-2-06dd1ece20.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 209704,
+          "sha256": "06dd1ece209a66a5b1aac764532201746480ff734d07bb8143be88c94b4ef1f9",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvOGt3ZGR6dWUxdnB0dHRpcjMzOTRhenJjaGJ4eGE2eXFzamx6MzdtYnVoOWZtOG9lemJ5c21ybXZqbzky",
+          "sourcePage": "https://totalpass.com/br/academias/estacao-praia-mar/"
+        }
+      ],
+      "photoPage": "https://totalpass.com/br/academias/estacao-praia-mar/"
     },
     {
       "id": "286b79d9-875e-51a9-89cd-5b91093f930a",
@@ -2022,12 +2333,48 @@
           "supports": [
             "name",
             "address",
-            "sports"
+            "sports",
+            "photos"
+          ]
+        },
+        {
+          "url": "https://wellhub.com/pt-br/search/partners/riplay-ma-kai-jardim-cidade-pirituba/",
+          "kind": "venue-partner",
+          "supports": [
+            "photos"
           ]
         }
       ],
-      "photoStatus": "pending-rights-review",
-      "photos": []
+      "photos": [
+        {
+          "src": "/images/arenas/riplay-ma-kai-sao-paulo-3-933414db94.webp",
+          "width": 540,
+          "height": 360,
+          "bytes": 50708,
+          "sha256": "933414db94326bb2a9a09114de5eb0aa83f2e3b83a202ce954fe6ab0f9142b58",
+          "sourceUrl": "https://assets-cdn.wellhub.com/images/?su=https%3A%2F%2Fimages.partners.gympass.com%2Fimage%2Ffilename%2F5913617%2Flg_zvMEKo8ty0nzUodepNf6LVwW_ym3fPo2.jpg&h=360",
+          "sourcePage": "https://wellhub.com/pt-br/search/partners/riplay-ma-kai-jardim-cidade-pirituba/"
+        },
+        {
+          "src": "/images/arenas/riplay-ma-kai-sao-paulo-1-7918e7b424.webp",
+          "width": 639,
+          "height": 360,
+          "bytes": 49606,
+          "sha256": "7918e7b424ca6a5c00dd3bc7534d0affb7c5e4f5e8474a0293649867821716ed",
+          "sourceUrl": "https://assets-cdn.wellhub.com/images/?su=https%3A%2F%2Fimages.partners.gympass.com%2Fimage%2Fpartners%2Fv1_xNnqRhwucjKacANHha8ymw%2Flg_49228901-3e9e-4bb4-ae3f-c217cec7c0f2_5437111.jpg&h=360",
+          "sourcePage": "https://wellhub.com/pt-br/search/partners/riplay-ma-kai-jardim-cidade-pirituba/"
+        },
+        {
+          "src": "/images/arenas/riplay-ma-kai-sao-paulo-2-14a9268e0b.webp",
+          "width": 639,
+          "height": 360,
+          "bytes": 61288,
+          "sha256": "14a9268e0bd9d4d3ece6a5fe144e2682d523342050ba3858abd6fd49ce3ab7e8",
+          "sourceUrl": "https://assets-cdn.wellhub.com/images/?su=https%3A%2F%2Fimages.partners.gympass.com%2Fimage%2Fpartners%2Fv1_xNnqRhwucjKacANHha8ymw%2Flg_8eaca717-7758-4d93-9437-4e5faf0886e0_5437112.jpg&h=360",
+          "sourcePage": "https://wellhub.com/pt-br/search/partners/riplay-ma-kai-jardim-cidade-pirituba/"
+        }
+      ],
+      "photoPage": "https://wellhub.com/pt-br/search/partners/riplay-ma-kai-jardim-cidade-pirituba/"
     },
     {
       "id": "245fd332-a864-5fc1-a56f-0264cdb350b0",
@@ -2054,7 +2401,8 @@
           "supports": [
             "name",
             "address",
-            "sports"
+            "sports",
+            "photos"
           ]
         },
         {
@@ -2066,8 +2414,36 @@
           ]
         }
       ],
-      "photoStatus": "pending-rights-review",
-      "photos": []
+      "photos": [
+        {
+          "src": "/images/arenas/riplay-aclimacao-sao-paulo-5-ea5a5a26a2.webp",
+          "width": 1080,
+          "height": 720,
+          "bytes": 133176,
+          "sha256": "ea5a5a26a2d016b1a776a01fbfa436a89a6e13b4e9a0e9400ccc91fd2498beef",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvemg0ajNmMDlwcTNsZjBlc2JuanN2dDM0NnEwZTdreHZjdGNla2owcWozbjJoZGphdDJjd2x3eTMybGdu",
+          "sourcePage": "https://totalpass.com/br/academias/riplay-aclimacao-b5f37fc6-9c32-4057-8a12-1025bf05a06f/"
+        },
+        {
+          "src": "/images/arenas/riplay-aclimacao-sao-paulo-4-79e88cd39a.webp",
+          "width": 1080,
+          "height": 720,
+          "bytes": 260284,
+          "sha256": "79e88cd39a0dff427b4c5f142d7a8539c392e78a587b8187a5e83ff8fd59f0d7",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvdGg5aXRubWhsdHN1YWw5MzRrNjRnaHBxc2tqcG4yY3RtNTN0cDBqam55b29qY21lMDRkc3ZvM3FhdDNy",
+          "sourcePage": "https://totalpass.com/br/academias/riplay-aclimacao-b5f37fc6-9c32-4057-8a12-1025bf05a06f/"
+        },
+        {
+          "src": "/images/arenas/riplay-aclimacao-sao-paulo-3-5531110bc9.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 118850,
+          "sha256": "5531110bc9472907192b2e8d7e18a32537b3050048ba5f51ea9f9a49c569a3c6",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvcXJjZDhzcDdobzFvOHRqend4YmZzZmptbWVmcm42MmF4NDl0aDc4ODZlb29oaW43OG4wazZ1Mm5tdzJj",
+          "sourcePage": "https://totalpass.com/br/academias/riplay-aclimacao-b5f37fc6-9c32-4057-8a12-1025bf05a06f/"
+        }
+      ],
+      "photoPage": "https://totalpass.com/br/academias/riplay-aclimacao-b5f37fc6-9c32-4057-8a12-1025bf05a06f/"
     },
     {
       "id": "415223fa-3b4f-5d97-9784-12db15b63966",
@@ -2111,10 +2487,45 @@
           "supports": [
             "sports"
           ]
+        },
+        {
+          "url": "https://totalpass.com/br/academias/riplay-sports-granja-viana/",
+          "kind": "venue-partner",
+          "supports": [
+            "photos"
+          ]
         }
       ],
-      "photoStatus": "pending-rights-review",
-      "photos": []
+      "photos": [
+        {
+          "src": "/images/arenas/riplay-granja-viana-cotia-3-f4c4607c08.webp",
+          "width": 960,
+          "height": 720,
+          "bytes": 98278,
+          "sha256": "f4c4607c088f6b10b5bf3771ce62285bbf0a206cf5534fa793be48dbbe19e417",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvZzcwYWdkamxsYjQ3Ym0ycHhhZWlqN3k0eHNld3hrNHNoaWQ3a3ZsMWtpdG03NWxkOXZydW5lbW5ia3B3",
+          "sourcePage": "https://totalpass.com/br/academias/riplay-sports-granja-viana/"
+        },
+        {
+          "src": "/images/arenas/riplay-granja-viana-cotia-2-7aa4c92379.webp",
+          "width": 720,
+          "height": 720,
+          "bytes": 88990,
+          "sha256": "7aa4c92379f4e7a3ee8e12b1e9a9980c01ea01d245a369432da6a67616daec54",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvYnJ3b3Nkb29zbWhvY2cwNG9ubTRhY3J6b3V3eWp6MTYxNTc2bTV0cXN4Znk1amJpaGs5Ym9vbHdieDRo",
+          "sourcePage": "https://totalpass.com/br/academias/riplay-sports-granja-viana/"
+        },
+        {
+          "src": "/images/arenas/riplay-granja-viana-cotia-4-6a4dea73a1.webp",
+          "width": 1170,
+          "height": 720,
+          "bytes": 72092,
+          "sha256": "6a4dea73a1c3ff0963f2f4021c8b3e89359025521266daa66c1b3a84cbdb991a",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvOGh4bm5lajZvdzN6ZzFzOWV5OTA4dXRjeTR4aHl6MDhmZjc3YTh6N3hiZ3lmdWhzOGV3ZHlhd29mdzBt",
+          "sourcePage": "https://totalpass.com/br/academias/riplay-sports-granja-viana/"
+        }
+      ],
+      "photoPage": "https://totalpass.com/br/academias/riplay-sports-granja-viana/"
     },
     {
       "id": "8f0b1640-b68e-5aa3-af83-f12f2e8c7683",
@@ -2176,12 +2587,41 @@
           "supports": [
             "name",
             "address",
-            "sports"
+            "sports",
+            "photos"
           ]
         }
       ],
-      "photoStatus": "pending-rights-review",
-      "photos": []
+      "photos": [
+        {
+          "src": "/images/arenas/arena-higienopolis-sao-paulo-bg1-cc6797a974.webp",
+          "width": 898,
+          "height": 676,
+          "bytes": 115378,
+          "sha256": "cc6797a9740d3ea4ccc08bfa8dd0b3b61a9e9d1704f806c5974fdd7ca4e84aa8",
+          "sourceUrl": "https://arenahigienopolis.com.br/wp-content/uploads/2024/09/arena-4-e1725221758267.jpg",
+          "sourcePage": "https://arenahigienopolis.com.br/"
+        },
+        {
+          "src": "/images/arenas/arena-higienopolis-sao-paulo-bg2-90f200a6b4.webp",
+          "width": 898,
+          "height": 676,
+          "bytes": 149142,
+          "sha256": "90f200a6b491c746a1518fe6c2179e8baf643a0c073f6f2c183747bada5ee26f",
+          "sourceUrl": "https://arenahigienopolis.com.br/wp-content/uploads/2024/09/arena-2-e1725221884224.jpg",
+          "sourcePage": "https://arenahigienopolis.com.br/"
+        },
+        {
+          "src": "/images/arenas/arena-higienopolis-sao-paulo-bg3-eb08ead392.webp",
+          "width": 898,
+          "height": 678,
+          "bytes": 78466,
+          "sha256": "eb08ead392bc2ac2ba6ab6151693c53eff053e8876d424983b100d06a5e4977d",
+          "sourceUrl": "https://arenahigienopolis.com.br/wp-content/uploads/2024/09/arena-3-e1725221817894.jpg",
+          "sourcePage": "https://arenahigienopolis.com.br/"
+        }
+      ],
+      "photoPage": "https://arenahigienopolis.com.br/"
     },
     {
       "id": "17769803-f6d0-5a51-9e7d-3b4f27596677",
@@ -2206,12 +2646,23 @@
           "supports": [
             "name",
             "address",
-            "sports"
+            "sports",
+            "photos"
           ]
         }
       ],
-      "photoStatus": "pending-rights-review",
-      "photos": []
+      "photos": [
+        {
+          "src": "/images/arenas/winner-tennis-beach-saude-sao-paulo-3-d5286ecfb5.webp",
+          "width": 1280,
+          "height": 768,
+          "bytes": 311182,
+          "sha256": "d5286ecfb55abba42250f51e3d9c360b9c4f2541b78c7499c2c910702a5f4dda",
+          "sourceUrl": "https://winnertennis.com.br/wp-content/uploads/2019/11/btok.jpg",
+          "sourcePage": "https://winnertennis.com.br/"
+        }
+      ],
+      "photoPage": "https://winnertennis.com.br/"
     },
     {
       "id": "8fdcee9e-a9df-5486-83b6-ef0e1dc44053",
@@ -2268,10 +2719,36 @@
             "address",
             "sports"
           ]
+        },
+        {
+          "url": "https://wellhub.com/pt-br/search/partners/arena-nfp-parque-sao-jorge/",
+          "kind": "venue-partner",
+          "supports": [
+            "photos"
+          ]
         }
       ],
-      "photoStatus": "pending-rights-review",
-      "photos": []
+      "photos": [
+        {
+          "src": "/images/arenas/arena-nfp-tatuape-sao-paulo-1-4792ac0469.webp",
+          "width": 540,
+          "height": 360,
+          "bytes": 36714,
+          "sha256": "4792ac0469b5702f1d6d0598e80ff5e2b5325e2e49a282dda10920ee9afc567f",
+          "sourceUrl": "https://assets-cdn.wellhub.com/images/?su=https%3A%2F%2Fimages.partners.gympass.com%2Fimage%2Fpartners%2Fv1__OarFftZ2qjkG9fvXYw-Cw%2Flg_75889db4-016c-4d78-9d80-db8d614983f2_ImagemdoWhatsAppde20240806s12.53.3554766f31.jpg&h=360",
+          "sourcePage": "https://wellhub.com/pt-br/search/partners/arena-nfp-parque-sao-jorge/"
+        },
+        {
+          "src": "/images/arenas/arena-nfp-tatuape-sao-paulo-3-11a0e00b4c.webp",
+          "width": 540,
+          "height": 360,
+          "bytes": 64612,
+          "sha256": "11a0e00b4ca38ca6d3ce4a1739327f462cf7ba565fd84a8af243d8b9aa37d646",
+          "sourceUrl": "https://assets-cdn.wellhub.com/images/?su=https%3A%2F%2Fimages.partners.gympass.com%2Fimage%2Fpartners%2Fv1__OarFftZ2qjkG9fvXYw-Cw%2Flg_668afa84-72a9-49ff-bcff-749e01b5d850_WhatsAppImage20240408at19.28.032.jpeg&h=360",
+          "sourcePage": "https://wellhub.com/pt-br/search/partners/arena-nfp-parque-sao-jorge/"
+        }
+      ],
+      "photoPage": "https://wellhub.com/pt-br/search/partners/arena-nfp-parque-sao-jorge/"
     },
     {
       "id": "2df75f61-b89e-5b34-bceb-028e50223e14",
@@ -2428,10 +2905,36 @@
             "address",
             "sports"
           ]
+        },
+        {
+          "url": "https://wellhub.com/pt-br/search/partners/ts2-brasil-parque-das-universidades/",
+          "kind": "venue-partner",
+          "supports": [
+            "photos"
+          ]
         }
       ],
-      "photoStatus": "pending-rights-review",
-      "photos": []
+      "photos": [
+        {
+          "src": "/images/arenas/ts2-brasil-campinas-1-f9a559065c.webp",
+          "width": 639,
+          "height": 359,
+          "bytes": 53914,
+          "sha256": "f9a559065c29994367054c768cfc17db67e1ee65a8c08f67a97461d1a76ea428",
+          "sourceUrl": "https://assets-cdn.wellhub.com/images/?su=https%3A%2F%2Fimages.partners.gympass.com%2Fimage%2Fpartners%2Fv1_rjtdVh8nlCFWUn5IozXIrQ%2Flg_6c7555db-b363-4506-9251-376dfa9318aa_de13312abe7f4660b88a1f52608692d7ImagemdoWhatsAppde20250714s14.52.09246a0217.jpg&h=360",
+          "sourcePage": "https://wellhub.com/pt-br/search/partners/ts2-brasil-parque-das-universidades/"
+        },
+        {
+          "src": "/images/arenas/ts2-brasil-campinas-2-832e02603b.webp",
+          "width": 639,
+          "height": 359,
+          "bytes": 52194,
+          "sha256": "832e02603b1973b2d2635a092be229f638f0a8e490381287fc77dd60f38ebd53",
+          "sourceUrl": "https://assets-cdn.wellhub.com/images/?su=https%3A%2F%2Fimages.partners.gympass.com%2Fimage%2Fpartners%2Fv1_rjtdVh8nlCFWUn5IozXIrQ%2Flg_98d5c646-78c2-48b4-86c2-ee3176ebe746_Capturadetela20250716144911.png&h=360",
+          "sourcePage": "https://wellhub.com/pt-br/search/partners/ts2-brasil-parque-das-universidades/"
+        }
+      ],
+      "photoPage": "https://wellhub.com/pt-br/search/partners/ts2-brasil-parque-das-universidades/"
     },
     {
       "id": "8ee5c8ba-551d-52bd-bcd6-00d2cc59d31e",
@@ -2608,10 +3111,45 @@
             "address",
             "sports"
           ]
+        },
+        {
+          "url": "https://totalpass.com/br/academias/operarios-beach-sports/",
+          "kind": "venue-partner",
+          "supports": [
+            "photos"
+          ]
         }
       ],
-      "photoStatus": "pending-rights-review",
-      "photos": []
+      "photos": [
+        {
+          "src": "/images/arenas/operarios-beach-sports-sao-paulo-2-841813ae8b.webp",
+          "width": 665,
+          "height": 720,
+          "bytes": 88498,
+          "sha256": "841813ae8bb02c7900256757a3d1ef66f7cd984d1c33afa2a2139da52404d4ed",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvNjcxb21kYW9zbzRsZzhxdDZjdGNqcTVnMjB6ZjcyYTh2NjJraW9yYzhiOGM3bXV5YmF1NGFmZ3FtNnRx",
+          "sourcePage": "https://totalpass.com/br/academias/operarios-beach-sports/"
+        },
+        {
+          "src": "/images/arenas/operarios-beach-sports-sao-paulo-1-40386abdcd.webp",
+          "width": 665,
+          "height": 720,
+          "bytes": 138722,
+          "sha256": "40386abdcd417fd36389759aeb40cfe9300d3447ab59ed1890e5b8fb53b1a004",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvdGQ0czJ2bjlzaHZ2a3p1cnduemk0eGRyZml4ZXMyY2loZWhjazdidmEwdGlhczlncWt3bGMxOTdmaXow",
+          "sourcePage": "https://totalpass.com/br/academias/operarios-beach-sports/"
+        },
+        {
+          "src": "/images/arenas/operarios-beach-sports-sao-paulo-3-1a06f5c91e.webp",
+          "width": 959,
+          "height": 720,
+          "bytes": 109340,
+          "sha256": "1a06f5c91ec06c6ef75b73a19bc82baa59ac20f3927bd73a5a895cd91abd5c64",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvMWphcGhiNzV6dDRzdDNvMzY1ejg5OWJteTlsOG5rb2NtOWd2N2hwdm05dmR5aGU4N2FxY2pmeHZia3cy",
+          "sourcePage": "https://totalpass.com/br/academias/operarios-beach-sports/"
+        }
+      ],
+      "photoPage": "https://totalpass.com/br/academias/operarios-beach-sports/"
     },
     {
       "id": "a5b82aad-5783-5c75-bf29-97ef9fa5b4b9",
@@ -2736,7 +3274,8 @@
           "supports": [
             "name",
             "address",
-            "sports"
+            "sports",
+            "photos"
           ]
         },
         {
@@ -2748,8 +3287,36 @@
           ]
         }
       ],
-      "photoStatus": "pending-rights-review",
-      "photos": []
+      "photos": [
+        {
+          "src": "/images/arenas/arena-nacional-caraguatatuba-caraguatatuba-3-25fbdccad6.webp",
+          "width": 680,
+          "height": 510,
+          "bytes": 71134,
+          "sha256": "25fbdccad6982849f6d0961ca5bef35d8836d894f177ea9babf4bade148c2791",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvc3EyZ3ZkaHpoZnV1YWI4dG10NG1wMWZ0d2IwODIzM3E2bHV0YjJkazkwc282ejkxZmVlenNteHBhbHhs",
+          "sourcePage": "https://totalpass.com/br/academias/arena-nacional-caraguatatuba/"
+        },
+        {
+          "src": "/images/arenas/arena-nacional-caraguatatuba-caraguatatuba-2-273582fecb.webp",
+          "width": 680,
+          "height": 510,
+          "bytes": 41298,
+          "sha256": "273582fecba13238a5c718cc5bdd23f07c7ed86269041255aa63fa378987432f",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvbW43YTlpNXdsbHY5NmhjMjF0ZzVlNHBuNWNjdWRlNjM3ZG1mbGVrdjhoZ2cweThkcW92NG5nZnRwbDR0",
+          "sourcePage": "https://totalpass.com/br/academias/arena-nacional-caraguatatuba/"
+        },
+        {
+          "src": "/images/arenas/arena-nacional-caraguatatuba-caraguatatuba-1-d8e78c6840.webp",
+          "width": 680,
+          "height": 510,
+          "bytes": 80356,
+          "sha256": "d8e78c6840f323f4ec763a92c3006ddfe7ef1870927dbd58bf58d828e52abe3d",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvczY0MXByMjVwdm11ZDRmbG5ybTVwd3UyZWxrdDluaWs1Y3NreWp3YmU5YmU1MXFybWM4bHhzc2VsMzNr",
+          "sourcePage": "https://totalpass.com/br/academias/arena-nacional-caraguatatuba/"
+        }
+      ],
+      "photoPage": "https://totalpass.com/br/academias/arena-nacional-caraguatatuba/"
     },
     {
       "id": "bec49b11-bb6a-5bc9-8912-9c1e5ae8d9ce",
@@ -2818,6 +3385,499 @@
       ],
       "photoStatus": "pending-rights-review",
       "photos": []
+    },
+    {
+      "id": "668e6be6-5bd8-5b65-a4e1-e7756cb91e7f",
+      "slug": "arena-sun7-caieiras",
+      "name": "Arena Sun7 Caieiras",
+      "city": "Caieiras",
+      "region": "Região Metropolitana",
+      "neighborhood": "Nova Caieiras",
+      "address": "Rua Maria Maderick Manoel, 60",
+      "municipalityId": "3509007",
+      "sports": [
+        "futevolei",
+        "beach-tennis",
+        "volei-praia"
+      ],
+      "description": "Esportes de areia em Nova Caieiras, Caieiras.",
+      "note": "",
+      "checkedOn": "2026-09-14",
+      "sourceUrl": "https://totalpass.com/br/academias/arena-sun7-caieiras/",
+      "sources": [
+        {
+          "url": "https://totalpass.com/br/academias/arena-sun7-caieiras/",
+          "kind": "venue-partner",
+          "supports": [
+            "name",
+            "address",
+            "sports",
+            "photos"
+          ]
+        }
+      ],
+      "photos": [
+        {
+          "src": "/images/arenas/arena-sun7-caieiras-3-be092b1a4b.webp",
+          "width": 960,
+          "height": 720,
+          "bytes": 157692,
+          "sha256": "be092b1a4b340399e7002044d5e2eeca9ccc4fedc8c322529bece5166e511e07",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvb2VyaW1sa2Z2YnUzeWhnMDY0eHg1MG4yMXExdWtvODg4YnR2eDBkM2N4eWY0NmxsY21sc2IzaHI3MTI0",
+          "sourcePage": "https://totalpass.com/br/academias/arena-sun7-caieiras/"
+        },
+        {
+          "src": "/images/arenas/arena-sun7-caieiras-4-8d41096e48.webp",
+          "width": 960,
+          "height": 720,
+          "bytes": 150464,
+          "sha256": "8d41096e48abba170efe57efe7e2f28cd11cf8f099497c087847cb2407b30e08",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvaHB2ajJna3JnZnJya2ptNWY4ZjNtMWV0aHR4amlhaHBzbXNtNHZzaGQxdnN1dGF6N2NkcWh3MHFhdzRx",
+          "sourcePage": "https://totalpass.com/br/academias/arena-sun7-caieiras/"
+        },
+        {
+          "src": "/images/arenas/arena-sun7-caieiras-1-952c3e5d4a.webp",
+          "width": 1080,
+          "height": 720,
+          "bytes": 117214,
+          "sha256": "952c3e5d4a2832339815e2bad972ce6063215a1183d762d69c688d6be7b635b6",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvOG5pbDFsMzNuYXQ5ajVsY3didnRuZ2Q0a2I0MG5meTVscXozMGRuM25jNTYzc2VlYXVnN2x2a3JhYWxq",
+          "sourcePage": "https://totalpass.com/br/academias/arena-sun7-caieiras/"
+        }
+      ],
+      "photoPage": "https://totalpass.com/br/academias/arena-sun7-caieiras/"
+    },
+    {
+      "id": "0b5e2394-107b-538f-a3cf-c7c8b46e6b2b",
+      "slug": "kanoa-beach-caieiras",
+      "name": "Kanoa Beach Caieiras",
+      "city": "Caieiras",
+      "region": "Região Metropolitana",
+      "neighborhood": "Laranjeiras",
+      "address": "Avenida Paulicéia, 737",
+      "municipalityId": "3509007",
+      "sports": [
+        "futevolei",
+        "beach-tennis",
+        "volei-praia"
+      ],
+      "description": "Esportes de areia em Laranjeiras, Caieiras.",
+      "note": "",
+      "checkedOn": "2026-09-14",
+      "sourceUrl": "https://wellhub.com/pt-br/search/partners/kanoa-beach-caieiras-laranjeiras/",
+      "sources": [
+        {
+          "url": "https://wellhub.com/pt-br/search/partners/kanoa-beach-caieiras-laranjeiras/",
+          "kind": "venue-partner",
+          "supports": [
+            "name",
+            "address",
+            "sports",
+            "photos"
+          ]
+        }
+      ],
+      "photos": [
+        {
+          "src": "/images/arenas/kanoa-beach-caieiras-2-4af78650b9.webp",
+          "width": 540,
+          "height": 360,
+          "bytes": 47636,
+          "sha256": "4af78650b976a5d6e461ffc8e5cdfdbb5e66150777ba93af9475213bce8390bd",
+          "sourceUrl": "https://assets-cdn.wellhub.com/images/?su=https%3A%2F%2Fimages.partners.gympass.com%2Fimage%2Fpartners%2Fv1_tEvdGd9ucgWn1jA4LqSD1w%2Flg_1123e057-fd54-40ce-a572-901fbba47f4b_CBF701150AC240BB86A8F08D3C6016DA.jpeg&h=360",
+          "sourcePage": "https://wellhub.com/pt-br/search/partners/kanoa-beach-caieiras-laranjeiras/"
+        }
+      ],
+      "photoPage": "https://wellhub.com/pt-br/search/partners/kanoa-beach-caieiras-laranjeiras/"
+    },
+    {
+      "id": "b944ac8d-218f-5b7a-acd0-76efba97b8d5",
+      "slug": "arena-jaragua-beach",
+      "name": "Arena Jaraguá Beach",
+      "city": "São Paulo",
+      "region": "Noroeste",
+      "neighborhood": "Jardim Santa Lucrécia",
+      "address": "Rua Francisco da Cunha Menezes, 249",
+      "municipalityId": "3550308",
+      "sports": [
+        "futevolei",
+        "beach-tennis",
+        "volei-praia"
+      ],
+      "description": "Esportes de areia em Jardim Santa Lucrécia, São Paulo.",
+      "note": "Perto da estação Vila Aurora, na região do Jaraguá.",
+      "checkedOn": "2026-09-14",
+      "sourceUrl": "https://totalpass.com/br/academias/arena-jaragua-beach/",
+      "sources": [
+        {
+          "url": "https://totalpass.com/br/academias/arena-jaragua-beach/",
+          "kind": "venue-partner",
+          "supports": [
+            "name",
+            "address",
+            "sports",
+            "photos"
+          ]
+        }
+      ],
+      "photos": [
+        {
+          "src": "/images/arenas/arena-jaragua-beach-2-ac6d322612.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 252296,
+          "sha256": "ac6d3226120c6a9945c47e5b4d12a9e0c7cdb8ae6d84488d3a0fb1bc15e1cdd3",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvOGllbWFuMzhqbmNlOGJ4cXl2aXZzMGxwbnp0bnlwMzRrYXYyN3Y4dHJxMDBqM2s0ems5c2o3YWVsdGw0",
+          "sourcePage": "https://totalpass.com/br/academias/arena-jaragua-beach/"
+        },
+        {
+          "src": "/images/arenas/arena-jaragua-beach-4-9544394d93.webp",
+          "width": 1080,
+          "height": 720,
+          "bytes": 104802,
+          "sha256": "9544394d93e29abd5c9eabac0fa05d1e892462c940c0466f99f543692767ffb3",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvbGZnd2F3dmk1MXBuYjlqYTc5bzIxeHUweGR3Zm8wdjBvamFxOHBmbDZmNnoxeWMxdDBpcWIxeThrcGE5",
+          "sourcePage": "https://totalpass.com/br/academias/arena-jaragua-beach/"
+        }
+      ],
+      "photoPage": "https://totalpass.com/br/academias/arena-jaragua-beach/"
+    },
+    {
+      "id": "fe7b6a7d-eba5-593f-ae53-2ac20064fd06",
+      "slug": "pirituba-beach-sports",
+      "name": "Pirituba Beach Sports",
+      "city": "São Paulo",
+      "region": "Noroeste",
+      "neighborhood": "Vila Mangalot",
+      "address": "Rua Joaquim Oliveira Freitas, 2109",
+      "municipalityId": "3550308",
+      "sports": [
+        "futevolei",
+        "beach-tennis",
+        "volei-praia"
+      ],
+      "description": "Esportes de areia em Vila Mangalot, São Paulo.",
+      "note": "Região de Pirituba.",
+      "checkedOn": "2026-09-14",
+      "sourceUrl": "https://totalpass.com/br/academias/pirituba-beach-sports/",
+      "sources": [
+        {
+          "url": "https://totalpass.com/br/academias/pirituba-beach-sports/",
+          "kind": "venue-partner",
+          "supports": [
+            "name",
+            "address",
+            "sports",
+            "photos"
+          ]
+        }
+      ],
+      "photos": [
+        {
+          "src": "/images/arenas/pirituba-beach-sports-3-6d8ead9859.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 170598,
+          "sha256": "6d8ead985971432314924c4294bac510b34e546ed92a8844392fa860137b8837",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvMjY3OGxqb2l2cjd2Ym5wcTJlNXFrdm51YjEyZzk4ejNpNnRpOGRueXV5dzh4eno2b25zN3gyZ2ZuYmhl",
+          "sourcePage": "https://totalpass.com/br/academias/pirituba-beach-sports/"
+        },
+        {
+          "src": "/images/arenas/pirituba-beach-sports-4-2b193cb0a0.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 222576,
+          "sha256": "2b193cb0a084c537b81db38cf722386c15d6eac603e41774b1e71cb6b76127e7",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvZXo1dWJiZmR1ZHNjemR1a3V2ZHNtd2pzYTQ4ZDl2cGszODAzajRmaGpzM2xrdTJ0cTE3bmt3ZnNsaWw4",
+          "sourcePage": "https://totalpass.com/br/academias/pirituba-beach-sports/"
+        },
+        {
+          "src": "/images/arenas/pirituba-beach-sports-2-784e8a786f.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 286236,
+          "sha256": "784e8a786f0bb506d5668797fd3102cd0d904c348f113b81d37659b239afae78",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvNHJvNG44ZDZ4OHVsdmV1czRldDExMjNmZTU3b2d6dDFqb3Z3MDV3bW9jODc4cHNwN2Jpcm92aGN6aHc0",
+          "sourcePage": "https://totalpass.com/br/academias/pirituba-beach-sports/"
+        }
+      ],
+      "photoPage": "https://totalpass.com/br/academias/pirituba-beach-sports/"
+    },
+    {
+      "id": "ab7772b4-9855-5acb-af0d-07d4ca39ba64",
+      "slug": "arena-360-beach",
+      "name": "Arena 360 Beach",
+      "city": "São Paulo",
+      "region": "Noroeste",
+      "neighborhood": "Jardim Cidade Pirituba",
+      "address": "Rua Sumagre, 219",
+      "municipalityId": "3550308",
+      "sports": [
+        "futevolei"
+      ],
+      "description": "Esportes de areia em Jardim Cidade Pirituba, São Paulo.",
+      "note": "Região de Pirituba.",
+      "checkedOn": "2026-09-14",
+      "sourceUrl": "https://wellhub.com/pt-br/search/partners/arena-360-beach-sao-paulo/",
+      "sources": [
+        {
+          "url": "https://wellhub.com/pt-br/search/partners/arena-360-beach-sao-paulo/",
+          "kind": "venue-partner",
+          "supports": [
+            "name",
+            "address",
+            "sports",
+            "photos"
+          ]
+        }
+      ],
+      "photos": [
+        {
+          "src": "/images/arenas/arena-360-beach-1-cf0e95f260.webp",
+          "width": 639,
+          "height": 359,
+          "bytes": 92332,
+          "sha256": "cf0e95f26000e11aeb58efe235441fbd0b7b8a78d857a0f3baee5c97f334db0a",
+          "sourceUrl": "https://assets-cdn.wellhub.com/images/?su=https%3A%2F%2Fimages.partners.gympass.com%2Fimage%2Fpartners%2Fv1_Jb4yA2z6oF8ppqNarV9V2g%2Flg_91ba640f-28cf-4a90-924e-bc48c4713811_WhatsAppImage20260821at10.30.113.jpeg&h=360",
+          "sourcePage": "https://wellhub.com/pt-br/search/partners/arena-360-beach-sao-paulo/"
+        },
+        {
+          "src": "/images/arenas/arena-360-beach-2-826cc6e250.webp",
+          "width": 540,
+          "height": 360,
+          "bytes": 51612,
+          "sha256": "826cc6e250db185d8323e342be451cedbbf66865269714bcb26d948a6210134f",
+          "sourceUrl": "https://assets-cdn.wellhub.com/images/?su=https%3A%2F%2Fimages.partners.gympass.com%2Fimage%2Fpartners%2F514548%2Flg_6242e71c-9ee7-481e-877b-7a54285d1a69_aeabaaeccaebeWhatsAppImageat...jpeg&h=360",
+          "sourcePage": "https://wellhub.com/pt-br/search/partners/arena-360-beach-sao-paulo/"
+        }
+      ],
+      "photoPage": "https://wellhub.com/pt-br/search/partners/arena-360-beach-sao-paulo/"
+    },
+    {
+      "id": "7e9300fb-635e-5351-ac43-ce2de166caf5",
+      "slug": "arena-cfr-franco-da-rocha",
+      "name": "Arena CFR",
+      "city": "Franco da Rocha",
+      "region": "Região Metropolitana",
+      "neighborhood": "Vila Ramos",
+      "address": "Estrada do Governo, 1500",
+      "municipalityId": "3516408",
+      "sports": [
+        "futevolei",
+        "beach-tennis",
+        "volei-praia"
+      ],
+      "description": "Esportes de areia em Vila Ramos, Franco da Rocha.",
+      "note": "",
+      "checkedOn": "2026-09-14",
+      "sourceUrl": "https://wellhub.com/pt-br/search/partners/arena-cfr-centro/",
+      "sources": [
+        {
+          "url": "https://wellhub.com/pt-br/search/partners/arena-cfr-centro/",
+          "kind": "venue-partner",
+          "supports": [
+            "name",
+            "address",
+            "sports",
+            "photos"
+          ]
+        }
+      ],
+      "photos": [
+        {
+          "src": "/images/arenas/arena-cfr-franco-da-rocha-1-bb94bdf02f.webp",
+          "width": 639,
+          "height": 359,
+          "bytes": 20038,
+          "sha256": "bb94bdf02f431135dbdf568ca136c466e4c607884546c7133ed7a1c02dd568ba",
+          "sourceUrl": "https://assets-cdn.wellhub.com/images/?su=https%3A%2F%2Fimages.partners.gympass.com%2Fimage%2Fpartners%2Fv1_3tehtXnf0heR-bpSyOOxPA%2Flg_45a5bb87-30e3-4356-81dd-02430c577f26_Capturadetela20260210114614.png&h=360",
+          "sourcePage": "https://wellhub.com/pt-br/search/partners/arena-cfr-centro/"
+        },
+        {
+          "src": "/images/arenas/arena-cfr-franco-da-rocha-3-9cd0c60172.webp",
+          "width": 639,
+          "height": 359,
+          "bytes": 41716,
+          "sha256": "9cd0c601725c6cc869e2b0e96105310502df4a96c8057ee9d61a08802a10a449",
+          "sourceUrl": "https://assets-cdn.wellhub.com/images/?su=https%3A%2F%2Fimages.partners.gympass.com%2Fimage%2Fpartners%2Fv1_3tehtXnf0heR-bpSyOOxPA%2Flg_a89e99f4-32a9-4bf3-9a6a-81887c41d9e6_WhatsAppImage20260209.jpeg&h=360",
+          "sourcePage": "https://wellhub.com/pt-br/search/partners/arena-cfr-centro/"
+        },
+        {
+          "src": "/images/arenas/arena-cfr-franco-da-rocha-2-eef9093dc9.webp",
+          "width": 639,
+          "height": 359,
+          "bytes": 27728,
+          "sha256": "eef9093dc9c0c54e2cf209b4b47acd661f7a6a697203546a8d47e407850ed528",
+          "sourceUrl": "https://assets-cdn.wellhub.com/images/?su=https%3A%2F%2Fimages.partners.gympass.com%2Fimage%2Fpartners%2Fv1_3tehtXnf0heR-bpSyOOxPA%2Flg_00fbc9e9-10ba-41d2-8690-a38dbc94af53_WhatsAppImage20260209at12.55..jpeg&h=360",
+          "sourcePage": "https://wellhub.com/pt-br/search/partners/arena-cfr-centro/"
+        }
+      ],
+      "photoPage": "https://wellhub.com/pt-br/search/partners/arena-cfr-centro/"
+    },
+    {
+      "id": "543d1f37-818b-5831-a76b-cbae7d33942d",
+      "slug": "porto-maya-beach-sports",
+      "name": "Porto Maya Beach Sports",
+      "city": "São Paulo",
+      "region": "Noroeste",
+      "neighborhood": "Parque São Domingos",
+      "address": "Rua Inácio Luís da Costa, 688",
+      "municipalityId": "3550308",
+      "sports": [
+        "futevolei",
+        "beach-tennis",
+        "volei-praia"
+      ],
+      "description": "Esportes de areia em Parque São Domingos, São Paulo.",
+      "note": "Região de Pirituba e Parque São Domingos.",
+      "checkedOn": "2026-09-14",
+      "sourceUrl": "https://wellhub.com/pt-br/search/partners/porto-maya-beach-sports/",
+      "sources": [
+        {
+          "url": "https://wellhub.com/pt-br/search/partners/porto-maya-beach-sports/",
+          "kind": "venue-partner",
+          "supports": [
+            "name",
+            "address",
+            "sports",
+            "photos"
+          ]
+        }
+      ],
+      "photos": [
+        {
+          "src": "/images/arenas/porto-maya-beach-sports-1-70982821b3.webp",
+          "width": 540,
+          "height": 360,
+          "bytes": 18784,
+          "sha256": "70982821b385f24d173c21efc43398541140c09b1c725f993a67f37cacc10ea1",
+          "sourceUrl": "https://assets-cdn.wellhub.com/images/?su=https%3A%2F%2Fimages.partners.gympass.com%2Fimage%2Fpartners%2Fv1_1BW3q6VehrWiwB6MK2e9Ag%2Flg_7d9c6516-251e-478e-8a9d-6e3739f1babc_fotoquadra1.PNG&h=360",
+          "sourcePage": "https://wellhub.com/pt-br/search/partners/porto-maya-beach-sports/"
+        },
+        {
+          "src": "/images/arenas/porto-maya-beach-sports-2-5fc3a85f6d.webp",
+          "width": 540,
+          "height": 360,
+          "bytes": 17336,
+          "sha256": "5fc3a85f6d7662be85a28b74d1e3918d1bcea59a40b08a145e9513fbc403cf82",
+          "sourceUrl": "https://assets-cdn.wellhub.com/images/?su=https%3A%2F%2Fimages.partners.gympass.com%2Fimage%2Ffilename%2F4994438%2Flg_11oP1EZdS9XsELlaCDzJ1vZi2ykt8xg6.png&h=360",
+          "sourcePage": "https://wellhub.com/pt-br/search/partners/porto-maya-beach-sports/"
+        }
+      ],
+      "photoPage": "https://wellhub.com/pt-br/search/partners/porto-maya-beach-sports/"
+    },
+    {
+      "id": "2ed28ca8-58a2-59ac-ab3d-80d727d3e4b6",
+      "slug": "portela-beach-club",
+      "name": "Portela Beach Club",
+      "city": "São Paulo",
+      "region": "Noroeste",
+      "neighborhood": "Vila Cavaton",
+      "address": "Avenida Ministro Petrônio Portela, 767",
+      "municipalityId": "3550308",
+      "sports": [
+        "futevolei",
+        "beach-tennis",
+        "volei-praia"
+      ],
+      "description": "Esportes de areia em Vila Cavaton, São Paulo.",
+      "note": "Região da Freguesia do Ó. Também identificado como Moinho Velho pela TotalPass.",
+      "checkedOn": "2026-09-14",
+      "sourceUrl": "https://totalpass.com/br/academias/portela-beach-club/",
+      "sources": [
+        {
+          "url": "https://totalpass.com/br/academias/portela-beach-club/",
+          "kind": "venue-partner",
+          "supports": [
+            "name",
+            "address",
+            "sports",
+            "photos"
+          ]
+        }
+      ],
+      "photos": [
+        {
+          "src": "/images/arenas/portela-beach-club-2-ff92c2e4c7.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 169240,
+          "sha256": "ff92c2e4c7777929c7e92109edfb02b914e760aa71a2cb253dd05a23841433fb",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvM25pcXl5anEweTJoanFsM3lpODd6OHA5bjE1YTlubDhvZnVjOGt6am5kOHp5ZXd5dHZocTFpdDI4djZ5",
+          "sourcePage": "https://totalpass.com/br/academias/portela-beach-club/"
+        },
+        {
+          "src": "/images/arenas/portela-beach-club-4-1c3311de65.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 233954,
+          "sha256": "1c3311de6510cca5c253966a83221afb824325d3306b7c76a26758cb8889b032",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvY2N2ejI4OTNhYmxmanU3ZjA1ZHNhcTE2eGs5cDVzZ2FpNncxaG0xMWdocTgxdms1dzRrYXUzN3J2MjFk",
+          "sourcePage": "https://totalpass.com/br/academias/portela-beach-club/"
+        },
+        {
+          "src": "/images/arenas/portela-beach-club-1-6a3bfa26ea.webp",
+          "width": 959,
+          "height": 720,
+          "bytes": 105300,
+          "sha256": "6a3bfa26ea3bf39a48d360299cb3ee0291ad8909659eab15ba868b9c24005861",
+          "sourceUrl": "https://images.totalpass.com/public/1280x720/czM6Ly90cC1pbWFnZS1hZG1pbi1wcm9kL2d5bXMvOWF1dnhxNGg3YmNhcWhvbndsMm04emxqYXB3MmZtbjEwYndncnp0MjB4OHY3Y2p2NXNtdG5jMnFia2Nn",
+          "sourcePage": "https://totalpass.com/br/academias/portela-beach-club/"
+        }
+      ],
+      "photoPage": "https://totalpass.com/br/academias/portela-beach-club/"
+    },
+    {
+      "id": "42a0f285-95fb-5042-a7f3-dd0d7df04109",
+      "slug": "frega-beach",
+      "name": "Frega Beach",
+      "city": "São Paulo",
+      "region": "Noroeste",
+      "neighborhood": "Itaberaba",
+      "address": "Rua dos Sitiantes, 755",
+      "municipalityId": "3550308",
+      "sports": [
+        "futevolei",
+        "beach-tennis",
+        "volei-praia"
+      ],
+      "description": "Esportes de areia em Itaberaba, São Paulo.",
+      "note": "Região da Freguesia do Ó.",
+      "checkedOn": "2026-09-14",
+      "sourceUrl": "https://wellhub.com/pt-br/search/partners/frega-beach/",
+      "sources": [
+        {
+          "url": "https://wellhub.com/pt-br/search/partners/frega-beach/",
+          "kind": "venue-partner",
+          "supports": [
+            "name",
+            "address",
+            "sports",
+            "photos"
+          ]
+        }
+      ],
+      "photos": [
+        {
+          "src": "/images/arenas/frega-beach-1-4145eae539.webp",
+          "width": 540,
+          "height": 360,
+          "bytes": 23628,
+          "sha256": "4145eae539aa7c6aa02a53905eed50db7e19539058d476ebd647d1aaf8450008",
+          "sourceUrl": "https://assets-cdn.wellhub.com/images/?su=https%3A%2F%2Fimages.partners.gympass.com%2Fimage%2Ffilename%2F4449084%2Flg_KAxFxpPJnlXCQnRHUYShkcpyj8xKMwq8.jpeg&h=360",
+          "sourcePage": "https://wellhub.com/pt-br/search/partners/frega-beach/"
+        },
+        {
+          "src": "/images/arenas/frega-beach-3-e0d7da0fb1.webp",
+          "width": 540,
+          "height": 360,
+          "bytes": 41742,
+          "sha256": "e0d7da0fb18040c660ce296298955ec7b529a78a61276e95953c4a09faf8a294",
+          "sourceUrl": "https://assets-cdn.wellhub.com/images/?su=https%3A%2F%2Fimages.partners.gympass.com%2Fimage%2Ffilename%2F4449082%2Flg_vvNVIxX3fEnpi_RpXMxyRqUq26cwKnOY.jpeg&h=360",
+          "sourcePage": "https://wellhub.com/pt-br/search/partners/frega-beach/"
+        }
+      ],
+      "photoPage": "https://wellhub.com/pt-br/search/partners/frega-beach/"
     }
   ],
   "state": "SP"
