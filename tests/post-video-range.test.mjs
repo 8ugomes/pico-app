@@ -21,3 +21,11 @@ test('video ranges support seeking, suffix requests and bounded private chunks',
   for (const invalid of ['bytes=-0', 'bytes=-', 'bytes=200-', 'bytes=25-10', 'bytes=0-1,5-6'])
     assert.throws(() => exports.videoRange(invalid, 200), error => error.status === 416);
 });
+
+test('post video size accepts a larger MP4 but rejects anything above the 45 MiB ceiling', () => {
+  const limit = 45 * 1024 * 1024;
+  assert.equal(exports.postVideoSize(31 * 1024 * 1024), 31 * 1024 * 1024);
+  assert.equal(exports.postVideoSize(limit), limit);
+  for (const invalid of [0, limit + 1, 100 * 1024 * 1024])
+    assert.throws(() => exports.postVideoSize(invalid), error => error.status === 413);
+});

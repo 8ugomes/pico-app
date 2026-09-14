@@ -1,3 +1,11 @@
+## Vídeos maiores · critérios antes de codar · 14/09/2026
+
+O compositor deve mostrar o novo limite real em português e rejeitar excedentes antes de reservar espaço ou começar a rede. Progresso, prévia, audiência e publicação continuam distinguíveis; maior duração do envio não pode sugerir que o post já foi publicado. Erro recuperável conserva texto/destinos e permite escolher novamente. Não adicionar opção de compressão fictícia ou prometer suporte a todos os codecs MP4. Revisar mensagem e espera numa largura móvel, tema claro/escuro, sem redesenhar o editor.
+
+### Aprendizado da revisão
+
+O texto “45 MB” cabe no editor a 320/390/1280 px, nos dois temas, sem competir com a audiência ou deslocar a ação. A opção de vídeo continua desabilitada durante o envio; a prévia aparece após a confirmação real do arquivo, antes da ação Publicar. O arquivo de teste acima de 30 MiB usou uma caixa MP4 `free` válida para exercitar o transporte, não foi apresentado como gravação longa de câmera. A amostra não substitui um Android físico.
+
 ## Arenas, notificações e vídeo · critérios antes de codar · 14/09/2026
 
 Identidade no aviso é a pessoa que entrou, não a capa da comunidade: avatar atual circular, fallback humano sem foto, nome e comunidade legíveis; não ocultar a identidade em 320 px. Na arena, “Acompanhar” e “Já joguei” são ações distintas, com consequência clara e reversível; marcar experiência não registra data, não publica nem indica presença. O perfil distingue lugares acompanhados dos declarados como já jogados e não expõe `Meus jogos` privado. Remover uma declaração deve continuar disponível na conta quando a arena sair do catálogo público e mesmo após o limite de novas marcações; sem exibir a arena oculta no perfil de outra pessoa. No compositor, escolher vídeo concorre com foto, mostra prévia/limite/remoção e mantém audiência e destinos à vista; o post reproduz sob controle do jogador, sem autoplay. Estados de espera, erro e tentativa novamente não devem sugerir envio confirmado. Conferir reflow, foco, alvos de 44 px, texto longo, claro/escuro e uma amostra de 320/390/1280 px; corrigir em lote e registrar limites.

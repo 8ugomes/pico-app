@@ -1,6 +1,6 @@
 import { MutationError } from './mutations';
 
-export const POST_VIDEO_LIMIT = 30 * 1024 * 1024;
+export const POST_VIDEO_LIMIT = 45 * 1024 * 1024;
 export const VIDEO_CHUNK_SIZE = 1024 * 1024;
 
 export function postVideoPath(value: unknown): string {
@@ -11,7 +11,7 @@ export function postVideoPath(value: unknown): string {
 
 export function postVideoSize(value: unknown): number {
   if (typeof value !== 'number' || !Number.isSafeInteger(value) || value < 1 || value > POST_VIDEO_LIMIT)
-    throw new MutationError(413, 'Escolha um vídeo MP4 de até 30 MB.');
+    throw new MutationError(413, 'Escolha um vídeo MP4 de até 45 MB.');
   return value;
 }
 

@@ -49,7 +49,13 @@ try{
  check(!(await api(member,'/api/activity?kind=played&player='+owner.id)).some(item=>item.id===catalogArena),'played arena unmark is visible');
  // Select the file in a real browser with the app's CSP active. A Node TUS
  // client bypasses CSP and cannot detect a blocked direct Storage origin.
- const videoBytes=await realMp4Fixture();check(videoBytes.length>32&&videoBytes.subarray(4,8).toString()==='ftyp','real browser-recorded MP4 fixture');
+ const recordedVideo=await realMp4Fixture();
+ // A valid trailing MP4 free box increases transfer size without inventing a
+ // fake header or committing a large binary fixture to the repository.
+ const freeBox=Buffer.alloc(31*1024*1024);freeBox.writeUInt32BE(freeBox.length,0);freeBox.write('free',4);
+ const videoBytes=Buffer.concat([recordedVideo,freeBox]);
+ check(videoBytes.length>30*1024*1024&&videoBytes.length<45*1024*1024&&videoBytes.subarray(4,8).toString()==='ftyp','real browser-recorded MP4 exceeds the former 30 MiB limit');
+ await api(owner,'/api/post-video',{action:'reserve',size:45*1024*1024+1},413);
  const uploadBrowser=await chromium.launch({channel:'chrome',headless:true});let videoReserved;
  try{
   const context=await uploadBrowser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
@@ -79,7 +85,7 @@ try{
  await http(member,'/api/post-video?path='+encodeURIComponent(videoReserved.path),'GET',undefined,404);
  const videoPost=await api(owner,'/api/posts',{action:'publish',key:randomUUID(),body:'Vídeo C9 @'+member.username,imagePath:null,videoPath:videoReserved.path,audience:'private',groups:[privateGroup.id],mentionCommunity:privateGroup.id,mentionPeople:[member.id],mentionEveryone:false});
  const videoRead=await http(member,'/api/post-video?path='+encodeURIComponent(videoReserved.path),'GET',undefined,206);
- check(videoRead.headers.get('content-range')===`bytes 0-${videoBytes.length-1}/${videoBytes.length}`&&Buffer.compare(Buffer.from(await videoRead.arrayBuffer()),videoBytes)===0,'private video streamed by authorized range');
+ check(videoRead.headers.get('content-range')===`bytes 0-${1024*1024-1}/${videoBytes.length}`&&Buffer.compare(Buffer.from(await videoRead.arrayBuffer()),videoBytes.subarray(0,1024*1024))===0,'large private video streamed by bounded authorized range');
  const tail=await http(member,'/api/post-video?path='+encodeURIComponent(videoReserved.path),'GET',undefined,206,'application/json',{Range:'bytes=-8'});
  check(tail.headers.get('content-range')===`bytes ${videoBytes.length-8}-${videoBytes.length-1}/${videoBytes.length}`&&Buffer.compare(Buffer.from(await tail.arrayBuffer()),videoBytes.subarray(-8))===0,'video suffix seeking returns tail');
  await http(other,'/api/post-video?path='+encodeURIComponent(videoReserved.path),'GET',undefined,404);
