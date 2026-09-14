@@ -16,6 +16,10 @@ Integração preparada sobre 7cc4352: busca e avatar reais, OwnProfileProvider, 
 
 Depois da publicação, leitura autorizada da base para quantidades, completude de cadastro e vínculos, sem alterar contas, disparar avisos retroativos ou criar atividade de teste no principal. Achados agregados no relatório; nomes individuais apenas no inventário privado local se necessários à conferência. Corrigir falhas comprovadas de funcionamento dentro do escopo e registrar limites.
 
+### Publicação e revisão concluídas
+
+PR #23 integrado com CI aprovada; principal serve `a4aa9628fbcb`. Migrations e deployment preservaram os 15 registros acompanhados, sem perdas ou edições. Base revisada em leitura: 2 pessoas com perfis completos e participação oficial, 2 publicações e 60 arenas. Catálogo tem 76 fotos em 17 arenas; 43 aguardam imagem. Nenhuma inconsistência nos controles de perfil/admissão/vínculos verificados. Notificações começam nas próximas entradas, sem retroatividade. [Relatório, evidências e limites](notifications-review/release.md).
+
 ## Instalação visual do Pico Club · 13/09/2026
 
 ### Implementação

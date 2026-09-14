@@ -1,6 +1,6 @@
-## Release autorizado · 14/09/2026
+## Publicado no principal · 14/09/2026
 
-Responsável solicitou publicação principal e revisão da base. Integração sobre a main 7cc4352 preserva busca, avatar real, configuração inicial e instalação. Checks atuais: lint/typecheck/build, 140 testes locais e 85 verificações hospedadas incluindo limpeza; [registro da integração](notifications-review/integration-hosted.json). O estado publicado será registrado no fechamento; as notas abaixo preservam a entrega inicial em desenvolvimento.
+Responsável solicitou publicação principal e revisão da base. Integração sobre a main 7cc4352 preserva busca, avatar real, configuração inicial e instalação. Checks atuais: lint/typecheck/build, 140 testes locais e 85 verificações hospedadas incluindo limpeza; [registro da integração](notifications-review/integration-hosted.json). Publicado pelo PR #23 no artefato `a4aa9628fbcb`, com migrations aplicadas e conteúdo preservado. [Publicação e revisão da base](notifications-review/release.md). As notas abaixo preservam a entrega inicial em desenvolvimento.
 
 # Notificações de comunidades
 
