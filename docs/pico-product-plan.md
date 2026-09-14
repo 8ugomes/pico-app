@@ -1,4 +1,4 @@
-## Vídeos acima de 30 MB · VALIDADO NO DESENVOLVIMENTO · 14/09/2026
+## Vídeos acima de 30 MB · PUBLICADO · 14/09/2026
 
 Pedido: o limite atual de 30 MiB é insuficiente para publicar vídeos. Aumentar o tamanho aceito em publicações normais e compartilhamentos voluntários de jogos, preservando upload TUS assinado, bucket privado, autoria, audiência, rascunho, revogação de leitura e remoção. Conferir antes o plano e o limite global efetivos do Supabase nos projetos de desenvolvimento e principal; não contratar plano nem ultrapassar a cota sem autorização.
 
@@ -13,6 +13,10 @@ Rollback: se o upload ou a leitura privada falhar após a promoção, voltar o a
 ### Evidência antes da publicação
 
 Os testes de tamanho e bucket falharam no teto anterior e passaram com 45 MiB. A migration nova `20260914230000_post_video_limit_45mib.sql` passou no banco descartável e no desenvolvimento exclusivo após dry-run de uma única pendência; inventário 76→76, sem linha perdida ou editada. O gate hospedado selecionou no compositor Chrome móvel emulado um MP4 H.264 capturado no navegador, ampliado para mais de 30 MiB por uma caixa `free` válida, e comprovou TUS, finalização, prévia, publicação privada explícita, faixas autenticadas, bloqueio de outra conta e reprodução. Um pedido acima de 45 MiB recebeu 413 antes da reserva; 253 verificações hospedadas passaram e fixtures foram removidas. Lint, typecheck, build, 162 testes locais e audit sem vulnerabilidades passaram. A revisão amostral do compositor a 320/390/1280 px, claro/escuro, não mostrou overflow; o texto mudou, sem redesenho. Não é medição de câmera real ou Android físico, nem prova do limite já aplicado no principal.
+
+### Recibo da publicação
+
+[PR #39](https://github.com/8ugomes/pico-app/pull/39) integrado após CI de código e navegador verdes; main `bda869824b428a94089e98ce5dd6cedb48e36c40`. No principal, o dry-run mostrou somente a migration nova; inventário protegido 124→124 sem falta, troca de identidade ou edição. O bucket privado `post-videos` permaneceu MP4 e passou a 47.185.920 bytes, com restrição correspondente na tabela e ledger aplicado. `scripts/deploy.mjs --stage` gerou `dpl_5UhvvdzsJPTBKNK38paD6ZBfKcHN` no projeto `pico-app`: stage respondeu `bda869824b42`, saúde banco/Auth OK, feed 200, API privada anônima 401 e CSP permitindo a origem exata do Storage. Promovido, `https://pico-app-sepia.vercel.app` respondeu a mesma versão e estados. Nenhuma conta/post de teste foi criada no principal; o exercício autenticado >30 MiB ocorreu no desenvolvimento exclusivo. Arquivo longo gravado por Android físico e variedade de codecs permanecem sem teste.
 
 ## Arenas, identidade nas notificações e vídeo nos posts · PUBLICADO · 14/09/2026
 
