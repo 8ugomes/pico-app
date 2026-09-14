@@ -416,4 +416,4 @@ Após autenticação do responsável, rulesets 22706380 e 22706456 salvos como a
 
 - A CSP agora permite a origem exata do Storage Supabase usada pelo TUS assinado; mantém bloqueio para origens não autorizadas. O defeito impedia o envio no navegador, embora a reserva e o teste TUS em Node funcionassem.
 - Gate conectado passou a selecionar MP4 real no compositor Chrome móvel emulado com CSP ativa, confirmar envio/prévia e preservar o texto sem publicar. 251 verificações hospedadas, 160 testes locais, lint, typecheck, build e audit passaram; fixtures do desenvolvimento removidas. Android físico ainda não testado.
-- Publicação em produção pendente de PR/CI, stage e promoção; sem migration ou conteúdo de teste no principal.
+- [PR #37](https://github.com/8ugomes/pico-app/pull/37) integrado com CI verde. Stage `dpl_BEAmg2pDbMN2ENinDYyYKMSyBtpU` foi promovido ao `pico-app-sepia.vercel.app` na versão `8b93147f07b3`; saúde, acesso e CSP confirmados, inventário 122/122 preservado. Sem migration ou conteúdo de teste no principal.

@@ -584,3 +584,5 @@ A correção é de conectividade: manter o compositor, a prévia, a escolha de a
 ### Aprendizado da rodada
 
 O controle de vídeo e sua mensagem de erro estavam corretos visualmente, mas o documento bloqueava o destino efetivo do upload; uma revisão só da tela ou um TUS em Node não perceberia isso. O navegador móvel emulado confirmou a seleção, a prévia e o rascunho intacto após o envio, sem publicar. A apresentação não mudou nesta correção; tema e geometria existentes foram preservados. Ainda falta exercício em Android físico e com vídeos de câmera variados.
+
+O stage e o domínio principal serviram a CSP corrigida sem ampliar outras origens; o deploy preservou os 122 registros acompanhados. Não se atribui a essa conferência read-only um envio de vídeo real no principal.
