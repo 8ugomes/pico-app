@@ -4,7 +4,13 @@
 - Busca no servidor antes de paginar, com nome, bairro, endereço, cidade e esporte; rótulos de cidade substituem o recorte fixo Sul/Oeste.
 - Seletores pesquisáveis em jogos, publicações, pessoas e vínculo de comunidades, mantendo a escolha durante novas buscas.
 - Migration aditiva com admissão/RLS e 401 para acesso sem login; importação preserva arenas anteriores, modalidades, conteúdo e 76 fotos. Novas imagens pendentes usam estado neutro.
-- 122 testes locais, lint/typecheck/build e 50 verificações hospedadas aprovados. [Pesquisa, operação e limites](arena-state-research/validacao.md). Publicação autorizada via PR/CI/main e script oficial.
+- 132 testes locais, lint/typecheck/build e 50 verificações hospedadas aprovados. [Pesquisa, operação e limites](arena-state-research/validacao.md). Publicação autorizada via PR/CI/main e script oficial.
+
+## 2026-09-13 — checagem de saúde para monitor gratuito na nuvem
+
+- Nova rota `/api/health`: verifica identidade do banco e disponibilidade de Auth com chave pública, sem sessão, dados pessoais ou gravações.
+- HTTP 503 em falha/timeout/configuração inválida; leituras paralelas limitadas a seis segundos, coalescência e snapshot local de até 30 segundos; sem cache HTTP.
+- Dez testes novos e 130 testes totais aprovados, lint/typecheck/build conectado. Monitor UptimeRobot Free documentado para cinco minutos, sem cartão/SMTP/IA periódica; ativação pendente do e-mail confirmado. Heartbeat local só será pausado após ativação comprovada. [Operação e limitações](AVAILABILITY.md).
 
 ## 2026-09-13 — Fluxo, senha e saída da conta
 

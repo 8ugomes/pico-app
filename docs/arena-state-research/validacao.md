@@ -4,11 +4,13 @@
 
 ## Evidências
 
-- Lint, typecheck, 122 testes locais e build conectado aprovados. Testes PGlite exercitam busca antes da paginação, acentos, caracteres literais, esporte, limites, arenas ocultas/arquivadas e contas não admitidas. O importador preserva histórico/edições e é idempotente.
+- Lint, typecheck, 132 testes locais e build conectado aprovados. Testes PGlite exercitam busca antes da paginação, acentos, caracteres literais, esporte, limites, arenas ocultas/arquivadas e contas não admitidas. O importador preserva histórico/edições e é idempotente.
 - 50 verificações hospedadas com Auth, API, RPC, Storage e Chrome no app compilado conectado ao desenvolvimento. Conta temporária, avatar e jogo privado removidos ao terminar. [Resultado](hosted.json). Não foram criadas contas nem conteúdo de teste em produção.
 - As três páginas contêm 24/24/12 arenas, sem duplicatas. Busca por Vinhedo alcança RS Sand Sports fora da primeira página; busca sem acentos encontra Ribeirão Preto. Trocar a pesquisa reinicia a paginação.
 - Jogos e local de publicação alcançam o catálogo inteiro. Pesquisar Campinas preserva RS Sand Sports quando já escolhida. O registro é salvo em Meus jogos, sem gerar publicação automática. Leitura sem login retorna 401; erros não viram demo nem resultado vazio.
 - Revisão representativa em 390px/claro e 1280px/escuro: cidade legível, ausência de overflow horizontal, foto indisponível explícita e imagens anteriores preservadas. Nenhum erro de execução no navegador; sem teste em aparelho físico.
+
+Integração com a main `d112b76` preserva a rota de saúde e sua documentação. Conflitos restritos aos registros de plano, revisão e changelog foram resolvidos mantendo ambas as entregas; lint/typecheck/build e os 132 testes passaram na versão integrada.
 
 ## Aplicação no banco
 
