@@ -7,6 +7,7 @@ import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 
 const root = process.cwd(), output = resolve('.vercel/composition-review');
+const developmentUrl = JSON.parse(readFileSync(join(root, 'config/environments.json'), 'utf8')).development.url;
 mkdirSync(output, { recursive: true });
 const shell = `import React from 'react'; import {createRoot} from 'react-dom/client'; import {PublicationComposer} from '${root}/src/components/pico/connected/PublicationComposer'; import {ConnectedGames} from '${root}/src/components/pico/connected/ConnectedGames'; createRoot(document.getElementById('root')).render(<main className="social-main">{location.search.includes('games') ? <ConnectedGames /> : <PublicationComposer viewerId="11111111-1111-4111-8111-111111111111" communityId="33333333-3333-4333-8333-333333333333" onDone={()=>{}} />}</main>);`;
 const stubs = {
@@ -15,7 +16,7 @@ const stubs = {
   'next/dynamic': `import React,{Suspense,lazy} from 'react'; export default function dynamic(load,options={}){const C=lazy(load);return function Dynamic(props){return <Suspense fallback={options.loading?.()||null}><C {...props}/></Suspense>}}`,
   'next/navigation': `export const useRouter=()=>({push(){},replace(){},refresh(){}}); export const usePathname=()=>'/feed';`,
 };
-await build({ stdin: { contents: shell, loader: 'tsx', resolveDir: root }, outdir: join(output, 'app'), entryNames: 'app', bundle: true, splitting: true, format: 'esm', jsx: 'automatic', platform: 'browser', target: 'es2022', alias: { '@': join(root, 'src') }, plugins: [{ name: 'next-stubs', setup(api) { api.onResolve({ filter: /^next\/(link|image|dynamic|navigation)$/ }, args => ({ path: args.path, namespace: 'next-stub' })); api.onLoad({ filter: /.*/, namespace: 'next-stub' }, args => ({ contents: stubs[args.path], loader: 'tsx', resolveDir: root })); } }], define: { 'process.env.NODE_ENV': '"development"', 'process.env.NEXT_PUBLIC_PICO_ENV': '"development"', 'process.env.NEXT_PUBLIC_SUPABASE_URL': 'undefined', 'process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY': 'undefined' } });
+await build({ stdin: { contents: shell, loader: 'tsx', resolveDir: root }, outdir: join(output, 'app'), entryNames: 'app', bundle: true, splitting: true, format: 'esm', jsx: 'automatic', platform: 'browser', target: 'es2022', alias: { '@': join(root, 'src') }, plugins: [{ name: 'next-stubs', setup(api) { api.onResolve({ filter: /^next\/(link|image|dynamic|navigation)$/ }, args => ({ path: args.path, namespace: 'next-stub' })); api.onLoad({ filter: /.*/, namespace: 'next-stub' }, args => ({ contents: stubs[args.path], loader: 'tsx', resolveDir: root })); } }], define: { 'process.env.NODE_ENV': '"development"', 'process.env.NEXT_PUBLIC_PICO_ENV': '"development"', 'process.env.NEXT_PUBLIC_SUPABASE_URL': JSON.stringify(developmentUrl), 'process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY': '"sb_publishable_fixture"' } });
 const css = ['globals.css', 'social.css', 'social-pages.css', 'forms.css', 'journey.css'].map(file => readFileSync(join(root, 'src/app', file), 'utf8').replace(/^@import.*$/gm, '').replace(/@theme inline\s*\{[^}]*\}/g, '')).join('\n');
 writeFileSync(join(output, 'style.css'), css + '\nbody{max-width:680px;margin:auto}#root{padding:20px}');
 const html = '<!doctype html><html lang="pt-BR"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/style.css"><div id="root"></div><script type="module" src="/app/app.js"></script></html>';
@@ -27,7 +28,10 @@ const arena = { id: '22222222-2222-4222-8222-222222222222', slug: 'areia', name:
 const wallArenas = [{ id: '77777777-7777-4777-8777-777777777777', name: 'Zênite Beach' }, { id: arena.id, name: arena.name }, { id: '88888888-8888-4888-8888-888888888888', name: 'Água Clara' }];
 const posts = [], games = [], errors = [];
 let failGame = true;
-const browser = await chromium.launch();
+let releaseReserve;
+let signalReserve;
+const reserveStarted = new Promise(resolve => { signalReserve = resolve; });
+const browser = await chromium.launch({ channel: process.env.PLAYWRIGHT_CHANNEL || 'chrome' });
 try {
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' });
   const page = await context.newPage();
@@ -40,6 +44,10 @@ try {
       return reply({ data: { arenas: wallArenas, communities: [{ id: communityId, name: 'Turma da Areia', visibility: 'beta' }] } });
     }
     if (url.pathname === '/api/communities') return reply({ data: 'paula'.includes(url.searchParams.get('search')?.toLowerCase() ?? '') ? [{ id: personId, name: 'Paula Silva', username: 'paula' }] : [] });
+    if (url.pathname === '/api/post-video') {
+      await new Promise(resolve => { releaseReserve = resolve; signalReserve(); });
+      return reply({ message: 'Falha de rede controlada.' }, 503);
+    }
     if (url.pathname === '/api/games') {
       if (request.method() === 'GET') return reply({ data: games });
       if (failGame) { failGame = false; return reply({ message: 'Falha controlada.' }, 503); }
@@ -106,6 +114,26 @@ try {
   await page.getByRole('button', { name: 'Fechar editor' }).click();
   await page.waitForFunction(() => document.activeElement?.classList.contains('composer-trigger'));
   assert.equal(await page.getByRole('button', { name: 'O que aconteceu na areia?' }).evaluate(element => element === document.activeElement), true);
+
+  await page.getByRole('button', { name: 'O que aconteceu na areia?' }).click();
+  const photoChoice = page.getByRole('radio', { name: 'Foto' }), videoChoice = page.getByRole('radio', { name: 'Vídeo' });
+  await videoChoice.click();
+  for (const [width, scheme] of [[320, 'light'], [390, 'dark'], [1280, 'light']]) {
+    await page.setViewportSize({ width, height: 844 }); await page.emulateMedia({ colorScheme: scheme });
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true);
+    await page.screenshot({ path: join(output, `composer-video-${width}-${scheme}.png`), fullPage: true });
+  }
+  const bytes = Buffer.alloc(32); bytes.write('ftyp', 4); bytes.write('isom', 8);
+  await page.getByLabel('Vídeo da publicação (opcional)').setInputFiles({ name: 'fixture.mp4', mimeType: 'video/mp4', buffer: bytes });
+  await reserveStarted;
+  await page.waitForFunction(() => document.querySelector('.video-upload [role="status"]')?.textContent?.includes('Preparando vídeo'));
+  assert.equal(await photoChoice.isDisabled(), true, 'media choice is locked during video upload');
+  assert.equal(await videoChoice.isChecked(), true);
+  releaseReserve();
+  await page.getByRole('alert').filter({ hasText: 'Falha de rede controlada.' }).waitFor();
+  assert.equal(await photoChoice.isEnabled(), true, 'media choice recovers after upload failure');
+  await photoChoice.click();
+  await page.getByRole('button', { name: 'Fechar editor' }).click();
 
   await page.goto(origin + '/?games');
   await page.getByRole('button', { name: 'Registrar jogo' }).click();

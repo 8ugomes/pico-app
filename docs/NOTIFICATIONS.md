@@ -1,3 +1,5 @@
+> 14/09/2026: a leitura agora inclui `actor_avatar_path` atual para entradas e menções. A central mostra a foto da pessoa que causou o aviso, não a capa da comunidade; sem foto usa símbolo humano. A migration aditiva posterior às menções preserva `post_id`, RLS e revogação de audiência. Testes SQL e o gate hospedado conferiram o campo; amostra de navegador a 320 px e texto ampliado preserva o avatar.
+
 ## Publicado no principal · 14/09/2026
 
 Responsável solicitou publicação principal e revisão da base. Integração sobre a main 7cc4352 preserva busca, avatar real, configuração inicial e instalação. Checks atuais: lint/typecheck/build, 140 testes locais e 85 verificações hospedadas incluindo limpeza; [registro da integração](notifications-review/integration-hosted.json). Publicado pelo PR #23 no artefato `a4aa9628fbcb`, com migrations aplicadas e conteúdo preservado. [Publicação e revisão da base](notifications-review/release.md). As notas abaixo preservam a entrega inicial em desenvolvimento.

@@ -48,3 +48,7 @@ next-env.d.ts
 
 # Isolated local verification builds
 /.next-*/
+
+# Local creative reference and generated campaign exports
+/.reference/
+/output/instagram/

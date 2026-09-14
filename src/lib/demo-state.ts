@@ -8,6 +8,7 @@ export type DemoAction =
   | { type: "repost"; postId: string; reposted: boolean; now: number }
   | { type: "connect"; playerId: string }
   | { type: "follow"; arenaId: string }
+  | { type: "mark_played"; arenaId: string }
   | { type: "post"; input: PostInput; id: string; now: number }
   | { type: "comment"; postId: string; content: string; id: string; now: number }
   | { type: "edit_content"; target: 'post' | 'comment'; id: string; content: string }
@@ -18,7 +19,7 @@ export type DemoAction =
   | { type: "profile"; input: ProfileInput };
 
 export function createDemoState(seed: DemoSeed): DemoState {
-  return { ...structuredClone(seed), reposts: [], deletedGameIds: [], likedPostIds: [], connectedPlayerIds: ["marina", "lucas"], followedArenaIds: [...(seed.players.find(p => p.id === seed.currentUserId)?.arenaIds ?? [])] };
+  return { ...structuredClone(seed), reposts: [], deletedGameIds: [], likedPostIds: [], connectedPlayerIds: ["marina", "lucas"], followedArenaIds: [...(seed.players.find(p => p.id === seed.currentUserId)?.arenaIds ?? [])], playedArenaIds: [] };
 }
 function toggle(items: string[], id: string) { return items.includes(id) ? items.filter(item => item !== id) : [...items, id]; }
 export function validArenaSport(state: DemoState, arenaId: string, sportId: SportId) {
@@ -63,6 +64,7 @@ export function demoReducer(state: DemoState, action: DemoAction): DemoState {
     case "like": return state.posts.some(p => p.id === action.postId) ? { ...state, likedPostIds: toggle(state.likedPostIds, action.postId) } : state;
     case "connect": return action.playerId !== state.currentUserId && state.players.some(p => p.id === action.playerId) ? { ...state, connectedPlayerIds: toggle(state.connectedPlayerIds, action.playerId) } : state;
     case "follow": return state.arenas.some(a => a.id === action.arenaId) ? { ...state, followedArenaIds: toggle(state.followedArenaIds, action.arenaId) } : state;
+    case "mark_played": return state.arenas.some(a => a.id === action.arenaId) ? { ...state, playedArenaIds: toggle(state.playedArenaIds, action.arenaId) } : state;
     case "post":
       if (validatePost(state, action.input) || state.posts.some(p => p.id === action.id)) return state;
       return { ...state, posts: [{ ...action.input, content: action.input.content.trim() || `Joguei em ${state.arenas.find(a => a.id === action.input.arenaId)?.name} em ${state.games.find(g => g.id === action.input.gameId)?.playedOn}.`, gamePlayedOn: state.games.find(g => g.id === action.input.gameId)?.playedOn, id: action.id, authorId: state.currentUserId, createdAt: action.now, likes: 0 }, ...state.posts] };

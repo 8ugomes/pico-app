@@ -10,6 +10,8 @@ const eslintConfig = defineConfig([
     ".vercel/**",
     // Vendored, pinned agent skills are third-party tooling, not application code.
     ".agents/skills/**",
+    ".reference/**",
+    "output/instagram/**",
     // Default ignores of eslint-config-next:
     ".next/**",
     ".next-*/**",

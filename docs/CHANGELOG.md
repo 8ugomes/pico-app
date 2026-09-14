@@ -1,3 +1,11 @@
+## 2026-09-14: fotos nas notificações, arenas e vídeo em publicações
+
+- Notificações mostram a foto atual da pessoa que entrou ou foi mencionada, com fallback humano e as mesmas regras de audiência.
+- R7 Academia, Arena Xfield e Jaraguá Clube Campestre entram no catálogo verificado; Arena Jaraguá Beach já existia. Nossa Ksa e Estação Sal Beach aguardam dados confiáveis. “Já joguei” é declaração pública optativa e reversível, separada de acompanhar, do diário privado e de publicar.
+- A revogação de “Já joguei” agora funciona mesmo após o limite de novas marcações; a conta permite remover também uma declaração de arena que ficou privada ou inativa, sem torná-la pública no perfil. Migration complementar e tela da conta passaram em desenvolvimento conectado.
+- Posts e compartilhamentos voluntários de jogos aceitam MP4 de até 30 MB, com TUS assinado, bucket privado, leitura por faixa reautorizada e mídia única por post. Menções, moderação, exportação e exclusão de conta foram mantidas.
+- Seis migrations aditivas passaram em desenvolvimento sem alterar registros anteriores. Lint, typecheck, build, 160 testes locais, audit e 247 verificações hospedadas passaram, inclusive reprodução de MP4 real no Chrome; fixture e mídia de teste removidas. Amostra de navegador cobriu 320/390/1280 px, temas, notificações, arena/perfil/conta e compositor. Backup cifrado novo do principal verificado antes de aplicar migrations. PR/CI, stage e promoção ainda pendentes neste registro. [Plano e evidências](pico-product-plan.md).
+
 ## 2026-09-14: Agent Harness Kit e CSS por rota
 
 - Analisado o Kit v0.7.2 e adaptadas três skills locais de planejamento, teste e conferência visual; não instalada a CLI nem substituídas as regras do Pico. [Procedência e critérios](AGENT_HARNESS_KIT_REVIEW.md).

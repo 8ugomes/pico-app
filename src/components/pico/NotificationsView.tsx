@@ -1,8 +1,10 @@
 'use client';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Bell, Check, CheckCheck, ChevronLeft, ChevronRight, RefreshCw, UsersRound } from 'lucide-react';
+import Image from 'next/image';
+import { Bell, Check, CheckCheck, ChevronLeft, ChevronRight, RefreshCw, UserRound } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
+import { mediaUrl } from '@/lib/supabase/media';
 import { useNotifications } from './NotificationsProvider';
 import { MutationNotice } from './connected/useMutation';
 
@@ -21,7 +23,9 @@ export function NotificationsView() {
     {data && data.items.length === 0 && <div className="social-empty"><Bell size={28} aria-hidden="true" /><h2>{cursor ? 'Fim das notificações.' : 'Nenhuma notificação por enquanto.'}</h2><p>{demo ? 'Na demonstração, ninguém entra ou marca pessoas de verdade. Suas notificações aparecem quando você usa sua conta.' : 'Entradas e menções nas suas comunidades aparecem aqui.'}</p></div>}
     {data && data.items.length > 0 && <ul className="notifications-list" aria-label="Atividade nas suas comunidades">
       {data.items.map(item => <li key={item.id} className={`notification-row ${item.read_at ? '' : 'notification-unread'}`}>
-        <span className="notification-person" aria-hidden="true"><UsersRound size={22} /></span>
+        <span className="notification-person" aria-hidden="true">{item.actor_avatar_path
+          ? <Image unoptimized src={mediaUrl('avatars', item.actor_avatar_path)!} width={44} height={44} alt="" />
+          : <UserRound size={22} />}</span>
         <div className="notification-content"><p><strong>{item.actor_name}</strong> {item.kind === 'community_join' ? <>entrou na comunidade <Link href={'/comunidades/' + item.community_slug}>{item.community_name}</Link>.</> : <>{item.kind === 'community_mention_all' ? 'marcou @todos' : 'marcou você'} em <Link href={'/publicacoes/' + item.post_id}>{item.community_name}</Link>.</>}</p>
           <div className="notification-meta"><time dateTime={item.created_at}>{new Date(item.created_at).toLocaleString('pt-BR', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</time><span>{item.read_at ? 'Lida' : 'Não lida'}</span></div>
           {!item.read_at && <Button variant="quiet" size="small" disabled={busy || refreshing} onClick={() => void markRead([item.id])} aria-label={`Marcar como lida: ${item.actor_name} em ${item.community_name}`}><Check size={16} aria-hidden="true" />Marcar como lida</Button>}

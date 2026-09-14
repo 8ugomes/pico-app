@@ -73,6 +73,39 @@ export type Database = {
           },
         ]
       }
+      arena_played_marks: {
+        Row: {
+          arena_id: string
+          created_at: string
+          player_id: string
+        }
+        Insert: {
+          arena_id: string
+          created_at?: string
+          player_id: string
+        }
+        Update: {
+          arena_id?: string
+          created_at?: string
+          player_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "arena_played_marks_arena_id_fkey"
+            columns: ["arena_id"]
+            isOneToOne: false
+            referencedRelation: "arenas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "arena_played_marks_player_id_fkey"
+            columns: ["player_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       arena_requests: {
         Row: {
           arena_id: string | null
@@ -987,6 +1020,41 @@ export type Database = {
           },
         ]
       }
+      post_video_assets: {
+        Row: {
+          byte_size: number | null
+          created_at: string
+          deleting: boolean
+          path: string
+          player_id: string
+          ready: boolean
+        }
+        Insert: {
+          byte_size?: number | null
+          created_at?: string
+          deleting?: boolean
+          path: string
+          player_id: string
+          ready?: boolean
+        }
+        Update: {
+          byte_size?: number | null
+          created_at?: string
+          deleting?: boolean
+          path?: string
+          player_id?: string
+          ready?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "post_video_assets_player_id_fkey"
+            columns: ["player_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       posts: {
         Row: {
           arena_id: string | null
@@ -1002,6 +1070,7 @@ export type Database = {
           private_community_id: string | null
           request_digest: string | null
           sport_id: string | null
+          video_path: string | null
         }
         Insert: {
           arena_id?: string | null
@@ -1017,6 +1086,7 @@ export type Database = {
           private_community_id?: string | null
           request_digest?: string | null
           sport_id?: string | null
+          video_path?: string | null
         }
         Update: {
           arena_id?: string | null
@@ -1032,6 +1102,7 @@ export type Database = {
           private_community_id?: string | null
           request_digest?: string | null
           sport_id?: string | null
+          video_path?: string | null
         }
         Relationships: [
           {
@@ -1075,6 +1146,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "sports"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "posts_video_path_fkey"
+            columns: ["video_path"]
+            isOneToOne: false
+            referencedRelation: "post_video_assets"
+            referencedColumns: ["path"]
           },
         ]
       }
@@ -1237,11 +1315,13 @@ export type Database = {
         Args: { p_bucket: string; p_path: string }
         Returns: boolean
       }
+      can_read_post_video: { Args: { p_path: string }; Returns: boolean }
       claim_entity_media: { Args: { p_path: string }; Returns: undefined }
       claim_unused_media: {
         Args: { p_bucket: string; p_path: string }
         Returns: undefined
       }
+      claim_unused_post_video: { Args: { p_path: string }; Returns: undefined }
       community_directory: {
         Args: {
           p_arena?: string
@@ -1316,6 +1396,7 @@ export type Database = {
         Returns: undefined
       }
       export_account_data: { Args: { p_user: string }; Returns: Json }
+      export_account_media_extra: { Args: { p_user: string }; Returns: Json }
       invite_arena_manager: {
         Args: { p_arena: string; p_email: string; p_role: string }
         Returns: Json
@@ -1370,6 +1451,20 @@ export type Database = {
         }
         Returns: string
       }
+      publish_post_media: {
+        Args: {
+          p_arena?: string
+          p_audience?: string
+          p_body: string
+          p_groups?: string[]
+          p_image_path?: string
+          p_key: string
+          p_sport?: string
+          p_video_path?: string
+          p_wall_arena?: string
+        }
+        Returns: string
+      }
       publish_post_with_mentions: {
         Args: {
           p_arena?: string
@@ -1382,6 +1477,23 @@ export type Database = {
           p_mention_community?: string
           p_people?: string[]
           p_sport?: string
+          p_wall_arena?: string
+        }
+        Returns: string
+      }
+      publish_post_with_mentions_media: {
+        Args: {
+          p_arena?: string
+          p_audience?: string
+          p_body: string
+          p_everyone?: boolean
+          p_groups?: string[]
+          p_image_path?: string
+          p_key: string
+          p_mention_community?: string
+          p_people?: string[]
+          p_sport?: string
+          p_video_path?: string
           p_wall_arena?: string
         }
         Returns: string
@@ -1409,6 +1521,8 @@ export type Database = {
         }[]
       }
       read_notifications: { Args: { p_before?: string }; Returns: Json }
+      read_own_played_arena_marks: { Args: never; Returns: Json }
+      read_played_arena_marks: { Args: { p_player?: string }; Returns: Json }
       read_played_games: { Args: { p_offset?: number }; Returns: Json }
       read_repost_feed: {
         Args: {
@@ -1431,11 +1545,13 @@ export type Database = {
         }
         Returns: Json
       }
+      read_unused_post_videos: { Args: never; Returns: Json }
       remove_distribution: {
         Args: { p_arena?: string; p_community?: string; p_post: string }
         Returns: undefined
       }
       report_media: { Args: { p_report: string }; Returns: string }
+      report_video: { Args: { p_report: string }; Returns: string }
       request_arena: {
         Args: { p_arena?: string; p_data?: Json; p_kind: string }
         Returns: string
@@ -1445,6 +1561,7 @@ export type Database = {
         Returns: string
       }
       reserve_media: { Args: { p_bucket: string }; Returns: string }
+      reserve_post_video: { Args: never; Returns: string }
       review_arena_and_group: {
         Args: { p_approve: boolean; p_official?: boolean; p_request: string }
         Returns: string
@@ -1546,6 +1663,10 @@ export type Database = {
         Args: { p_id: string; p_kind: string; p_path?: string; p_slot: string }
         Returns: undefined
       }
+      set_played_arena_mark: {
+        Args: { p_arena: string; p_mark: boolean }
+        Returns: undefined
+      }
       set_post_repost: {
         Args: { p_post: string; p_reposted: boolean }
         Returns: boolean
@@ -1559,6 +1680,20 @@ export type Database = {
           p_image_path?: string
           p_key: string
           p_version: number
+          p_wall_arena?: string
+        }
+        Returns: string
+      }
+      share_played_game_media: {
+        Args: {
+          p_audience?: string
+          p_body?: string
+          p_groups?: string[]
+          p_id: string
+          p_image_path?: string
+          p_key: string
+          p_version: number
+          p_video_path?: string
           p_wall_arena?: string
         }
         Returns: string
