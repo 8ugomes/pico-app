@@ -1,3 +1,3 @@
-import{InstallPico}from'@/components/pico/PwaExperience';
-export const metadata={title:'Instalar o Pico'};
-export default function InstallPage(){return <InstallPico/>}
+import { InstallGuide } from '@/components/pico/InstallGuide';
+export const metadata = { title: 'Pico Club na tela inicial' };
+export default function InstallPage() { return <InstallGuide />; }

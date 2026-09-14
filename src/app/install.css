@@ -1,0 +1,121 @@
+/* The native controls are a diagram; the surrounding page follows Aura Manteiga. */
+.install-guide { max-width: 980px; margin: 0 auto; padding: max(24px, env(safe-area-inset-top)) max(24px, env(safe-area-inset-right)) max(48px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left)); }
+.install-back { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: var(--text-secondary); font-size: .875rem; }
+.install-guide-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 64px; align-items: start; padding-top: 42px; }
+.install-guide-intro { padding-top: 40px; }
+.install-guide-intro h1 { font-family: var(--font-heading); font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 600; line-height: 1.08; letter-spacing: -.035em; text-wrap: balance; }
+.install-platforms { display: flex; gap: 6px; margin-top: 28px; }
+.install-platforms button, .install-safari-options button { min-height: 44px; padding: 9px 18px; border: 1px solid var(--border-control); border-radius: var(--radius-pill); font-size: .875rem; cursor: pointer; }
+.install-platforms button[aria-pressed=true], .install-safari-options button[aria-pressed=true] { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
+.install-platforms button:hover, .install-safari-options button:hover { border-color: var(--foreground); }
+.install-player { grid-column: 2; grid-row: 1 / 3; display: flex; flex-direction: column; align-items: center; min-width: 0; }
+.install-phone { width: 270px; height: 412px; position: relative; overflow: hidden; border: 5px solid var(--brand-cacau); border-radius: 36px; background: #f4f3f0; color: #292728; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 12px; line-height: 1.4; isolation: isolate; }
+.install-phone-status { position: absolute; inset: 0 0 auto; height: 34px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; font-size: 10px; font-weight: 600; z-index: 5; background: #f4f3f0; }
+.install-phone-status > span:last-child { display: flex; align-items: center; gap: 3px; }
+.install-phone-screen { position: absolute; inset: 34px 0 0; overflow: hidden; }
+.install-browser-page { display: flex; flex-direction: column; gap: 14px; align-items: center; padding: 46px 22px 0; color: var(--brand-cacau); }
+.install-browser-page img { border-radius: 16px; }
+.install-browser-page > span { font-size: 19px; font-weight: 600; }
+.install-browser-lines { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-top: 16px; width: 100%; }
+.install-browser-lines i { height: 5px; width: 75%; border-radius: 4px; background: #e1dbd1; }
+.install-browser-lines i:last-child { width: 50%; }
+.install-safari-bar { position: absolute; bottom: 24px; left: 12px; right: 12px; display: flex; align-items: center; gap: 4px; }
+.install-address { display: flex; align-items: center; gap: 12px; padding: 12px; flex: 1; border-radius: 22px; background: #e5e2dd; }
+.install-safari-bar > span:last-child { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: #e5e2dd; }
+.install-chrome-bar { display: flex; align-items: center; gap: 8px; padding: 9px 15px; background: #e5e2dd; }
+.install-chrome-bar > span:first-of-type { flex: 1; }
+.install-chrome-bar > span:last-child { display: grid; place-items: center; width: 30px; height: 30px; }
+.install-native-menu { background: #fff; border-radius: 14px; box-shadow: 0 8px 26px rgb(40 33 33 / 14%); overflow: visible; }
+.install-native-menu > span { min-height: 43px; padding: 12px; display: flex; align-items: center; justify-content: space-between; gap: 8px; border-bottom: 1px solid #eae8e3; }
+.install-native-menu > span:last-child { border-bottom: 0; color: #68615a; }
+.install-native-menu .install-target { color: #292728; }
+.install-safari-menu { position: absolute; bottom: 76px; left: 18px; right: 18px; }
+.install-chrome-menu { position: absolute; top: 48px; right: 12px; left: 24px; }
+.install-target { position: relative; background: var(--brand-manteiga); }
+.install-native-menu .install-target { border-radius: 6px; }
+.install-touch { position: absolute; right: 4px; top: 50%; width: 32px; height: 32px; margin-top: -16px; border: 2px solid var(--brand-cacau); border-radius: 50%; background: transparent; box-shadow: 0 2px 6px rgb(40 33 33 / 12%); pointer-events: none; }
+.install-phone[data-playing=true] .install-touch { animation: install-tap 1.7s ease-out infinite; }
+.install-share-sheet, .install-add-sheet { position: absolute; inset: 34px 0 0; padding: 12px 12px 30px; border-radius: 22px 22px 0 0; background: #efeeeb; }
+.install-phone[data-playing=true] .install-share-sheet, .install-phone[data-playing=true] .install-add-sheet, .install-phone[data-playing=true] .install-native-menu { animation: install-reveal 220ms cubic-bezier(.22, 1, .36, 1); }
+.install-sheet-handle { display: block; margin: -4px auto 18px; width: 30px; height: 4px; border-radius: 4px; background: #b0aba4; }
+.install-shared-site { display: flex; align-items: center; gap: 10px; }
+.install-shared-site img { border-radius: 8px; }
+.install-share-scroll { display: flex; justify-content: center; align-items: center; gap: 6px; margin: 25px 0; color: #68615a; font-size: 11px; }
+.install-share-sheet .install-native-menu { box-shadow: none; }
+.install-share-sheet .install-native-menu .install-target { font-size: 11px; white-space: nowrap; padding-right: 8px; }
+.install-add-sheet { inset-block-start: 12px; }
+.install-add-sheet header { display: flex; justify-content: space-between; align-items: center; gap: 4px; font-size: 10px; }
+.install-add-sheet header > strong { text-align: center; font-size: 11px; }
+.install-add-sheet header > span { color: #075aaa; padding: 8px 3px; border-radius: 5px; }
+.install-add-sheet header .install-touch, .install-android-confirm footer .install-touch { inset: 3px; width: auto; height: auto; margin: 0; border-radius: inherit; }
+.install-add-name { display: flex; align-items: center; gap: 13px; padding: 25px 0; font-size: 15px; }
+.install-add-name img { border-radius: 12px; }
+.install-toggle-row { background: #fff; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; padding: 13px 9px; font-size: 11px; gap: 5px; }
+.install-toggle { display: block; flex-shrink: 0; width: 35px; height: 22px; background: #24803c; border-radius: 14px; padding: 2px; }
+.install-toggle i { display: block; width: 18px; height: 18px; border-radius: 50%; background: white; margin-left: 13px; }
+.install-toggle .install-touch { inset: -4px; width: auto; height: auto; margin: 0; border-radius: 999px; }
+.install-chrome-bar .install-touch { right: 1px; width: 28px; height: 28px; margin-top: -14px; }
+.install-android-confirm { position: absolute; inset: 95px 16px auto; border-radius: 22px; padding: 20px 17px; background: #fff; box-shadow: 0 14px 44px rgb(40 33 33 / 25%); }
+.install-android-confirm > strong { font-size: 20px; font-weight: 500; }
+.install-android-confirm footer { display: flex; align-items: center; justify-content: flex-end; gap: 15px; color: #075aaa; }
+.install-android-confirm footer > span { padding: 9px 8px; border-radius: 18px; }
+.install-home-screen { height: 100%; padding: 40px 27px; background: var(--brand-lavanda); }
+.install-home-app { display: flex; flex-direction: column; align-items: center; gap: 7px; width: 65px; color: var(--brand-cacau); font-size: 11px; }
+.install-home-app img { border-radius: 15px; }
+.install-phone[data-playing=true] .install-home-app { animation: install-reveal 220ms cubic-bezier(.22, 1, .36, 1); }
+.install-home-dock { display: flex; position: absolute; bottom: 27px; left: 18px; right: 18px; justify-content: space-around; padding: 12px; background: #ded1e9; border-radius: 24px; }
+.install-home-dock > span { width: 38px; height: 38px; border: 1px solid #a08bae; border-radius: 10px; }
+.install-home-indicator { position: absolute; bottom: 8px; width: 80px; height: 4px; left: calc(50% - 40px); background: #44342f; border-radius: 4px; }
+.install-caption { display: flex; align-items: baseline; justify-content: center; gap: 10px; margin-top: 22px; width: 100%; }
+.install-caption > span { color: var(--text-secondary); font-size: .8125rem; font-variant-numeric: tabular-nums; flex-shrink: 0; }
+.install-caption h2 { min-width: 0; font-family: var(--font-body); font-size: 1rem; font-weight: 600; line-height: 1.45; }
+.install-player-controls { display: grid; grid-template-columns: 44px minmax(0, 1fr) 44px; align-items: center; gap: 8px; width: 100%; max-width: 320px; margin-top: 16px; }
+.install-player-controls > .button { padding: 12px 10px; white-space: nowrap; overflow-wrap: normal; }
+.install-player-controls > .button-secondary { min-width: 0; }
+.install-example { font-size: .75rem; color: var(--text-secondary); margin-top: 14px; text-align: center; }
+.install-guide-help { grid-column: 1; padding-top: 30px; align-self: end; }
+.install-guide-help details { border-bottom: 1px solid var(--border-subtle); padding: 8px 0; }
+.install-guide-help summary { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 44px; font-size: .875rem; cursor: pointer; list-style: none; }
+.install-guide-help summary::-webkit-details-marker { display: none; }
+.install-guide-help details[open] summary svg { transform: rotate(180deg); }
+.install-guide-help details p { color: var(--text-secondary); font-size: .875rem; line-height: 1.6; padding: 8px 0 16px; }
+.install-guide-help details a { color: var(--foreground); text-decoration: underline; }
+.install-safari-options { display: flex; flex-wrap: wrap; gap: 8px; padding: 8px 0 18px; }
+.install-safari-options button { display: flex; align-items: center; gap: 8px; padding: 8px 12px; }
+.install-guide-help > a { margin: 20px 0 0 -12px; }
+.install-browser-help { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 24px; font-size: .875rem; }
+.install-native-button { margin-top: 24px; }
+.install-copy-link { width: 100%; margin-top: 12px; padding: 10px; border: 1px solid var(--border-control); background: var(--surface-input); border-radius: 8px; }
+.install-feedback, .install-installed { margin-top: 18px; font-size: .875rem; line-height: 1.5; }
+.install-installed { display: flex; align-items: center; gap: 8px; }
+.install-invitation { display: flex; align-items: center; gap: 14px; padding: 22px 0; margin-top: 32px; border-top: 1px solid var(--border-subtle); }
+.install-invitation > img { border-radius: 12px; flex-shrink: 0; }
+.install-invitation > div { flex: 1; }
+.install-invitation h2 { font-family: var(--font-body); font-size: .875rem; line-height: 1.5; font-weight: 600; }
+.install-invitation a { display: inline-flex; align-items: center; gap: 5px; min-height: 44px; font-size: .875rem; text-decoration: underline; }
+.install-invitation > button { padding-inline: 8px; flex-shrink: 0; }
+@keyframes install-tap { 0%, 65%, 100% { transform: scale(1); opacity: 1; } 35% { transform: scale(1.28); opacity: .65; } }
+.install-phone[data-playing=true] .install-chrome-menu { animation-name: install-menu-reveal; }
+@keyframes install-menu-reveal { from { transform: translateY(-8px); } to { transform: translateY(0); } }
+@keyframes install-reveal { from { transform: translateY(12px); } to { transform: translateY(0); } }
+@media (max-width: 700px) {
+  .install-guide { padding: max(12px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(30px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left)); }
+  .install-guide-layout { display: flex; flex-direction: column; padding-top: 18px; gap: 24px; }
+  .install-guide-intro { padding-top: 0; width: 100%; }
+  .install-guide-intro h1 { font-size: 2rem; }
+  .install-platforms { margin-top: 18px; }
+  .install-player { width: 100%; }
+  .install-phone { height: 384px; }
+  .install-caption { margin-top: 18px; }
+  .install-caption h2 { font-size: .9375rem; }
+  .install-player-controls { margin-top: 12px; }
+  .install-guide-help { padding-top: 0; width: 100%; }
+}
+@media (max-width: 360px) {
+  .install-guide { padding-right: max(16px, env(safe-area-inset-right)); padding-left: max(16px, env(safe-area-inset-left)); }
+  .install-invitation { flex-wrap: wrap; }
+  .install-invitation > button { margin-left: 62px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .install-guide *, .install-guide *::after { animation: none !important; transition: none !important; }
+}

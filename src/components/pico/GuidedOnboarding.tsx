@@ -1,14 +1,17 @@
 'use client';
 
-import { createContext, useContext, useEffect, useId, useRef, useState, type ReactNode } from 'react';
+import { createContext, useCallback, useContext, useEffect, useId, useRef, useState, type ReactNode } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { ArrowLeft, ArrowRight, ChevronDown, Compass, LocateFixed, X } from 'lucide-react';
 import { Button, buttonVariants } from '@/components/ui/Button';
 import { parseTourProgress, tourSteps, tourStepAt, tourStorageKey, type TourProgress } from '@/lib/onboarding';
 import { useOwnProfile } from './connected/OwnProfile';
+import { profileSetupComplete } from '@/lib/profile-setup';
+import { installationJourneyReady } from '@/lib/install-guide';
+import { InstallInvitation } from './InstallInvitation';
 
-type TourContext = { progress: TourProgress | null; start: (step?: number) => void };
+type TourContext = { progress: TourProgress | null; start: (step?: number) => void; reportWelcomeSettled: (settled: boolean) => void };
 const Tour = createContext<TourContext | null>(null);
 
 // The connected boundary lives inside AccessGate. This read identifies the
@@ -24,8 +27,10 @@ function ConnectedTour({ children }: { children: ReactNode }) {
   // A real switch between two known accounts still discards the old subtree.
   const [scope, setScope] = useState<{ id: string | null; generation: number }>({ id: null, generation: 0 });
   if (identity && scope.id !== identity) setScope({ id: identity, generation: scope.id ? scope.generation + 1 : scope.generation });
-  return <TourProvider key={scope.generation} identity={identity ? `account:${identity}` : null}>{children}</TourProvider>;
+  return <TourProvider key={scope.generation} identity={identity ? `account:${identity}` : null} profileReady={state.status === 'success' && state.data.kind === 'profile' && profileSetupComplete(state.data.profile)}>{children}</TourProvider>;
 }
+
+export function useWelcomeProgress() { return useContext(Tour)?.reportWelcomeSettled; }
 
 export function TourLauncher() {
   const tour = useContext(Tour);
@@ -52,13 +57,15 @@ function visibleTarget(ids: readonly string[]) {
   return null;
 }
 
-function TourProvider({ children, identity, demo = false }: { children: ReactNode; identity: string | null; demo?: boolean }) {
+function TourProvider({ children, identity, demo = false, profileReady = false }: { children: ReactNode; identity: string | null; demo?: boolean; profileReady?: boolean }) {
   const path = usePathname();
   const router = useRouter();
   const [progress, setProgress] = useState<TourProgress | null>(null);
   const [loadedKey, setLoadedKey] = useState<string | null>(null);
   const [collapsed, setCollapsed] = useState(false);
   const [finished, setFinished] = useState(false);
+  const [welcomeSettled, setWelcomeSettled] = useState(false);
+  const reportWelcomeSettled = useCallback((settled: boolean) => setWelcomeSettled(settled), []);
   const [targetAvailable, setTargetAvailable] = useState(false);
   const [editing, setEditing] = useState(false);
   const boundary = useRef<HTMLDivElement>(null);
@@ -199,7 +206,8 @@ function TourProvider({ children, identity, demo = false }: { children: ReactNod
   if (stepIndex === 2 && path !== '/comunidades') instruction = 'Confira as condições deste grupo. Um pedido em análise ainda não libera conteúdo privado. Participar é uma escolha sua.';
   if (demo && stepIndex === 1) instruction = 'Nesta demonstração, busque por nome, bairro ou esporte. Na conta conectada, você também pode filtrar pela arena acompanhada.';
 
-  const context = ready && identity ? { progress, start } : null;
+  const context = identity ? { progress, start, reportWelcomeSettled } : null;
+  const offerInstallation = path === '/feed' && ready && !demo && installationJourneyReady({ profileReady, welcomeSettled, tourStatus: progress?.status, finishing: finished, editing });
   return <Tour.Provider value={context}><div ref={boundary} className="tour-boundary">
     {ready && !progress && path === '/feed' && <section className="tour-welcome" aria-labelledby={titleId}>
       <h2 id={titleId}>Quer uma mão?</h2>
@@ -233,5 +241,6 @@ function TourProvider({ children, identity, demo = false }: { children: ReactNod
       <div className="tour-welcome-actions"><Link href="/arenas" className={buttonVariants()} onClick={() => setFinished(false)}>Explorar arenas <ArrowRight size={17} aria-hidden="true" /></Link><Button variant="quiet" onClick={() => setFinished(false)}>Ficar no perfil</Button></div>
     </section>}
     {children}
+    {offerInstallation && <InstallInvitation eligible identity={identity} />}
   </div></Tour.Provider>;
 }
