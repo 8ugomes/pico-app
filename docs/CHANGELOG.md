@@ -402,4 +402,5 @@ Após autenticação do responsável, rulesets 22706380 e 22706456 salvos como a
 
 - Editor inline mais curto nos modos conectado e demonstração, com escrita prioritária, foto e publicação no rodapé; audiência e destinos continuam disponíveis antes do envio.
 - “Mural de arena” oferece busca por nome sem exigir acentos, resultados em ordem alfabética, seleção explícita e remoção do destino.
-- Teste de navegador para ordenação, busca, persistência da seleção e destino publicado; 148 testes locais, lint, tipagem e build aprovados. Publicação principal registrada separadamente após CI.
+- Teste de navegador para ordenação, busca, persistência da seleção e destino publicado; 148 testes locais, lint, tipagem, build e CI aprovados.
+- [PR #33](https://github.com/8ugomes/pico-app/pull/33) integrado e artefato `dpl_DZ7g7hgJetngRm2x7wNveVJYoHCT` promovido ao endereço principal, versão pública `46b3b1c81c3e`; 104 registros acompanhados preservados no deploy.
