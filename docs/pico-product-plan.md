@@ -10,6 +10,10 @@ Três skills adaptadas e validadas, sem CLI upstream. CSS social movido ao layou
 
 `npm ci`, audit sem vulnerabilidades reportadas, lint, typecheck e build em demo, e 148/148 testes locais aprovados. Login, instalação e feed revisados em 390 px, feed em 1280 px no tema escuro; sem overflow horizontal. Tema claro compilado mas não inspecionado visualmente nesta sessão. A [análise completa](AGENT_HARNESS_KIT_REVIEW.md) separa medição local, limites e gates externos ainda exigidos para publicar. Nenhuma migration ou dado real alterado nesta etapa.
 
+### Publicação e acompanhamento
+
+PR #31 integrado após CI verde; main `71b754993ace` publicada em stage e promovida no projeto principal. Build conectado, saúde, login, instalação, negação anônima de notificações e versão foram conferidos antes/depois da promoção. O inventário privado preservou 104/104 registros, sem perdas ou edições. O monitor existente de dez minutos permanece ativo; fluxo social autenticado e tema claro não foram exercitados em produção nesta rodada. [Recibo e limites](AGENT_HARNESS_KIT_REVIEW.md#recibo-de-publicação--14092026).
+
 ## Arenas de Caieiras e eixo noroeste/oeste — PLAN · 14/09/2026
 
 Revisar o catálogo conectado e pesquisar arenas de Caieiras, Vila Aurora, Jaraguá, Pirituba e arredores, com fontes públicas verificáveis e fotografias do próprio local. Conferir a busca global já implementada na main e corrigir a prioridade/recuperação das fotos reais. Registrar cobertura, pendências e procedência em relatório próprio; não afirmar censo completo sem evidência.

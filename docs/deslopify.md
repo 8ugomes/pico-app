@@ -6,6 +6,8 @@ A mudança de CSS deve ser invisível na interface: preservar Aura Manteiga, lei
 
 Login, instalação e feed continuam legíveis em 390 px; feed em 1280 px conserva menu, conteúdo e barra lateral, sem overflow. A inspeção estava no tema escuro. A regra genérica do editor aplicava `flex: 1` também ao avatar ilustrativo, achatando-o no feed; restringir ao segundo `span` preservou texto flexível e círculo 38×38 px. Tema claro permaneceu no CSS compilado, mas a revisão visual dele fica como limite explícito, sem presumir aprovação. Separar CSS por layout reduziu a entrada pública sem retirar rótulos de demo, privacidade ou ações.
 
+Na versão publicada, login e guia de instalação foram revistos em 390 px; não surgiu quebra de layout na primeira carga. O login abriu com sessão existente, então não foi usado como teste de autenticação nova. A redução de CSS em produção é apenas observação de payload, não afirmação sobre LCP ou experiência em rede lenta.
+
 ## Arenas — critérios antes de codar · 14/09/2026
 
 Busca por nome/bairro/cidade deve considerar o catálogo inteiro, com modalidades e paginação coerentes. Foto reconhecível do lugar na lista e no perfil, preservando foto enviada pela gestão e origem verificável da alternativa de catálogo. Falha de uma imagem deve tentar outra foto verificada do mesmo local; nenhuma foto sintética/genérica pode se passar pela arena real. Evitar blocos grandes de “foto indisponível”; manter leitura, nome, localização e ação úteis. Revisar amostra móvel/desktop e temas existentes, sem alterar contratos de audiência, admissão ou histórico.

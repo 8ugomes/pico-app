@@ -3,6 +3,7 @@
 - Analisado o Kit v0.7.2 e adaptadas três skills locais de planejamento, teste e conferência visual; não instalada a CLI nem substituídas as regras do Pico. [Procedência e critérios](AGENT_HARNESS_KIT_REVIEW.md).
 - CSS social passa a carregar no layout social. Primeira carga de login/cadastro/instalação: −53.531 B de CSS não comprimido no build demo da main atual; rotas sociais preservadas. O avatar ilustrativo do editor voltou ao formato circular.
 - Audit, lint, typecheck, build e 148 testes locais passaram. Smoke visual amostral mobile/desktop no tema escuro; publicação condicionada a PR/CI, stage e verificação da beta.
+- PR #31 integrado com CI aprovada; versão `71b754993ace` promovida ao Pico principal. Stage e domínio público confirmaram saúde 200, login/instalação 200 e notificações anônimas 401; 104 registros acompanhados preservados. [Recibo e limites](AGENT_HARNESS_KIT_REVIEW.md#recibo-de-publicação--14092026).
 
 ## 2026-09-14: composição direta
 
