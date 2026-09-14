@@ -55,6 +55,8 @@ Todas as nove inclusões regionais e a Ma Kai têm fotos. **Ainda há 21 arenas 
 
 ## Validação e publicação
 
+[Publicação no principal e comparação final dos registros/mídias](release.md).
+
 - Lint, typecheck e build de produção: aprovados, sem a rota temporária de QA.
 - Suíte local: 142 testes aprovados; importação idempotente, capa da gestão e inventário de participações reconfirmados após ajustar as fixtures de mídia às restrições reais do banco.
 - Desenvolvimento conectado: importação preservou 64 linhas anteriores, acrescentou nove e não editou nenhuma. Busca HTTP autenticada com conta controlada confirmou Caieiras (duas inclusões), Vila Aurora (Jaraguá), Pirituba (incluindo Ma Kai) e Freguesia do Ó (duas inclusões). A conta temporária foi removida pelo ID criado pelo ensaio.
