@@ -1,3 +1,15 @@
+## Monitoramento gratuito na nuvem — PLAN · 13/09/2026
+
+### Implementação e validação local
+
+Rota implementada com duas leituras paralelas, timeout de seis segundos, HTTP 200/503, corpo mínimo e resultado compartilhado por até 30 segundos. Dez testes novos aprovados; suíte completa com 130 testes, lint, typecheck e build conectado aprovados. Smoke do build conectado: health/HEAD 200, POST 405, login 200 e feed anônimo 401; banco/Auth principal saudáveis. Ativação externa depende do e-mail e da confirmação do responsável; o monitor local continua ativo até comprovar a substituição. [Operação e limites](AVAILABILITY.md).
+
+### Critérios registrados antes da implementação
+
+Pedido autoriza publicar uma rota de saúde e migrar o monitor local para o UptimeRobot Free, sem contratação, cartão ou execução periódica de IA. Base main 9372a51, worktree isolado. A rota /api/health deve verificar identidade do banco principal e disponibilidade de Auth com chave pública, timeout, leitura somente e resposta mínima. Configuração ausente/demo, identidade cruzada ou dependência indisponível retornam 503; sucesso real retorna 200. Compartilhar consultas simultâneas e reutilizar o resultado por no máximo 30 segundos para limitar trabalho repetido.
+
+Validar falhas, timeout, recuperação, ausência de segredos e leituras reais; lint/typecheck/build, testes pertinentes, PR/CI/main e deploy oficial com preservação de conteúdo. Ativar monitor externo de cinco minutos pelo fluxo gratuito com e-mail confirmado do responsável. Somente desativar o heartbeat do Codex após comprovar ativação. Não alterar banco, Auth, SMTP, planos, conteúdo ou interface dos jogadores.
+
 ## Fluxo claro, conta e senhas — PLAN · 13/09/2026
 
 Pedido autoriza implementar e publicar no Pico principal. Base: main 2cc0a32, em worktree próprio, preservando landing e materiais em outras branches. Prioridades: saída visível no Perfil e Conta; mostrar/ocultar senha no login, cadastro, recuperação e confirmação sensível; duas senhas iguais antes de enviar cadastro. Preservar a política de Auth vigente, credenciais legadas e mensagens sobre recuperação indisponível.

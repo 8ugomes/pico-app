@@ -1,3 +1,13 @@
+## Monitoramento na nuvem — revisão · 13/09/2026
+
+### Implementação e aprendizados
+
+Nenhuma mudança visual ou mensagem técnica foi acrescentada às telas. A saúde usa estados booleanos e HTTP sem encaminhar erros internos. Timeout e falhas produzem 503 em vez de sucesso aparente; a documentação diferencia solicitação enviada de ativação confirmada. Testes de resposta, falha, recuperação e carga simultânea restrita aprovados; revisão visual não se aplica à rota operacional.
+
+### Critérios registrados antes da implementação
+
+Operação invisível ao jogador: não acrescentar cards, avisos ou texto técnico ao app. Endpoint devolve apenas saúde geral e verificações booleanas, sem e-mail, token, ID de usuário ou mensagens internas. Alertas externos de queda/recuperação ficam com o responsável. Separar rota publicada, solicitação enviada e monitor efetivamente ativo; não apresentar confirmação por e-mail pendente como serviço em execução. O histórico do monitor deve existir no provedor e a retirada do agendamento local depende da ativação comprovada.
+
 ## Fluxo claro, conta e senhas — PLAN · 13/09/2026
 
 Feedback de uso pesado: excesso de texto e próxima ação pouco clara. Simplificar a tela de entrada e a abertura do Início mantendo Aura Manteiga. A saída da conta deve estar escrita e visível, sem depender da tela de login. Olho acessível em cada senha, confirmação obrigatória no cadastro e erro junto ao campo; não limpar o formulário quando houver divergência.
