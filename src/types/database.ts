@@ -1400,6 +1400,33 @@ export type Database = {
         }
         Returns: undefined
       }
+      search_arenas: {
+        Args: { p_offset?: number; p_search?: string; p_sport_id?: string }
+        Returns: {
+          avatar_path: string | null
+          city: string
+          cover_path: string | null
+          created_at: string
+          description: string
+          id: string
+          image_path: string | null
+          is_demo: boolean
+          is_public: boolean
+          name: string
+          neighborhood: string
+          owner_id: string | null
+          public_info: string
+          slug: string
+          status: string
+          version: number
+        }[]
+        SetofOptions: {
+          from: "*"
+          to: "arenas"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
       search_players: {
         Args: {
           p_arena_id?: string

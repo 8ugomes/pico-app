@@ -1,3 +1,15 @@
+## Importação estadual — implementação e validação · 13/09/2026
+
+Executar o levantamento para o estado de São Paulo, registrar fontes e pendências por município e importar somente unidades identificadas com endereço e modalidade comprovados. Nenhuma chave Places configurada no ambiente atual; a pesquisa pública não comprova inventário exaustivo do Google. Preservar identidades, edições da gestão e conteúdo do catálogo existente. Fotos sem autorização documentada permanecem ausentes com apresentação neutra.
+
+Antes de ampliar o catálogo, buscar nome/bairro/cidade no servidor antes da paginação e tornar os seletores de arenas pesquisáveis. Validar importador idempotente, pesquisa além da primeira página, ausência de alterações no histórico e autorização existente. Aplicar primeiro no desenvolvimento, conferir principal com inventários privados, concluir lint/typecheck/build e smoke, commit, PR/CI, merge e publicação pela main em pico-app-sepia.vercel.app.
+
+### Resultado da execução
+
+43 novas unidades revisadas e importadas em desenvolvimento e principal; catálogo de 60 arenas em 25 municípios. Fontes e divergências documentadas; 37 municípios com pesquisa parcial, 645 mantidos na fila, sem afirmar cobertura de todas as arenas Google. 76 fotos anteriores preservadas; novas fotos pendentes.
+
+Busca no banco antes da paginação, por cidade/nome/bairro/endereço e esporte. Seletores pesquisáveis em jogos, publicações, pessoas e vínculo de comunidades preservam a escolha. Migration aditiva, Auth/RLS vigentes; 122 testes, lint/typecheck/build e 50 verificações reais em desenvolvimento passaram. Principal mantém todas as linhas anteriores de arenas/modalidades e os 15 registros de conteúdo acompanhados. [Pesquisa e evidências](arena-state-research/validacao.md). Release autorizado via PR/CI/main e script oficial, com versão/preservação conferidas no recibo de publicação.
+
 ## Fluxo claro, conta e senhas — PLAN · 13/09/2026
 
 Pedido autoriza implementar e publicar no Pico principal. Base: main 2cc0a32, em worktree próprio, preservando landing e materiais em outras branches. Prioridades: saída visível no Perfil e Conta; mostrar/ocultar senha no login, cadastro, recuperação e confirmação sensível; duas senhas iguais antes de enviar cadastro. Preservar a política de Auth vigente, credenciais legadas e mensagens sobre recuperação indisponível.

@@ -1,8 +1,8 @@
 # Expansão de arenas — estado de São Paulo
 
-Preparação solicitada e recorte confirmado em 13/09/2026. A fila cobre os **645 municípios**, com cinco consultas por município (3.225 links). Os links são um roteiro de pesquisa, não resultados coletados nem arenas cadastradas. O catálogo atual permanece com 17 unidades revisadas da capital.
+Execução autorizada em 13/09/2026 para todo o estado. O primeiro lote revisado acrescenta **43 arenas**, totalizando **60 unidades em 25 municípios**. Pesquisa pública parcial em 37 municípios; a fila preserva os **645 municípios** e 3.225 links de consulta. Esses links não representam resultados Google coletados, e a cobertura estadual ainda está incompleta.
 
-[Municípios e fila](municipios.csv) · [Proveniência e consultas](provenance.json) · [Ficha de candidatos](candidatos.csv) · [Catálogo vigente](../arena-catalog-review/README.md).
+[Lote, fontes e pendências](lote-publicado.md) · [Validação e operação](validacao.md) · [Municípios e fila](municipios.csv) · [Proveniência e consultas](provenance.json) · [Ficha de candidatos](candidatos.csv) · [Catálogo vigente](../arena-catalog-review/README.md).
 
 ## Como executar o levantamento
 
@@ -19,13 +19,12 @@ A documentação do [Text Search](https://developers.google.com/maps/documentati
 
 Para automatizar, usar um projeto Google Cloud com Places API habilitada, chave somente no servidor e limites de consumo explícitos. Esta preparação não cria projeto, ativa cobrança ou executa consultas pagas. [Políticas do Places](https://developers.google.com/maps/documentation/places/web-service/policies) restringem armazenamento/reutilização, com exceção para Place IDs; a implementação deve separar referências Google dos fatos conferidos independentemente. [Place Photos](https://developers.google.com/maps/documentation/places/web-service/place-photos) exige atribuição quando retornada e referências de foto não devem ser tratadas como URLs permanentes. Não descarregar em massa o conteúdo do Google para o catálogo estático.
 
-## Antes de ampliar o catálogo no produto
+## Suporte no produto
 
-- Migrar busca/filtros de arenas para o servidor, antes da paginação, com cidade e município; hoje os filtros operam nos 24 registros carregados, com rótulo explícito.
-- Substituir o recorte fixo Sul/Oeste por localidades disponíveis. Zonas da capital não representam as regiões do estado.
-- Remover os limites de primeira página dos seletores de arena em publicação e jogos conforme o catálogo cresça; manter leitura/autorização existentes.
-- Documentar suporte de foto/autorização e atualizar fontes com data. Uma arena aparecer no diretório não significa parceria ou gestão verificada.
+Busca por nome, bairro, endereço e cidade no servidor, antes de paginar. Modalidade combina com a busca. A cidade substitui o rótulo fixo Sul/Oeste nos resultados. Seletores de jogos, local de publicação, filtro de pessoas e vínculo de comunidade usam o mesmo catálogo pesquisável e preservam a seleção durante pesquisa/paginação. Fontes e datas ficam na ficha; diretório não significa parceria ou gestão verificada.
+
+As 76 fotos existentes foram preservadas. Novas imagens continuam pendentes de revisão: o app mostra “Foto indisponível” e não usa imagem de outra unidade.
 
 ## Origem da fila
 
-Municípios obtidos na [API de localidades do IBGE](https://servicodados.ibge.gov.br/api/docs/localidades), endpoint da UF 35 registrado em `provenance.json`. `scripts/prepare-arena-research.mjs` gera uma fila nova e recusa sobrescrever pesquisa existente. A coluna de resultados fica vazia até consulta real: zero pesquisas Google executadas e zero novas arenas importadas nesta preparação.
+Municípios obtidos na [API de localidades do IBGE](https://servicodados.ibge.gov.br/api/docs/localidades), endpoint da UF 35 registrado em `provenance.json`. `scripts/prepare-arena-research.mjs` gera uma fila nova e recusa sobrescrever pesquisa existente. Colunas de andamento distinguem a pesquisa pública executada da varredura Google ainda não realizada. A ficha de candidatos e o manifesto registram o lote validado; divergências de endereço/unidade permanecem pendentes no relatório.

@@ -1,3 +1,5 @@
+> Catálogo estadual · 13/09/2026: `20260913230000_arena_directory_search.sql` adiciona busca autorizada antes da paginação por local/modalidade. Aplicada em desenvolvimento e principal; tipos gerados, importação aditiva e histórico preservado. [Validação](arena-state-research/validacao.md).
+
 > Histórico · 13/09/2026: `20260913210000_preserve_retired_arena_posts.sql` corrige visibilidade de originais/republicações ligados somente às três arenas demonstrativas conhecidas, arquivadas e não públicas. Nenhuma linha de conteúdo é alterada; catálogo, grupos privados, bloqueios, moderação e admissão permanecem protegidos. Validada/aplicada no desenvolvimento; principal pendente. [Evidências](social-refinement-review/README.md).
 
 > Busca de pessoas/comunidades · 13/09/2026: `20260913200000_people_community_search.sql` adiciona `search_players` com RLS/admissão, preserva o leitor antigo e normaliza a busca literal no diretório de comunidades sem ampliar a ficha privada. [Contrato e validação](SEARCH.md). Aplicação por ambiente registrada na revisão da busca e no recibo de release.

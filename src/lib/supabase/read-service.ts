@@ -52,7 +52,10 @@ export function parseReadRequest(params: URLSearchParams): ReadRequest {
   if (resource === 'arenas') {
     const value = params.get('offset') ?? '0';
     if (!/^\d{1,5}$/.test(value) || Number(value) > 10000) throw new ReadError('invalid_request', 400);
-    return { resource, offset: Number(value) };
+    const search = (params.get('search') ?? '').trim();
+    const sportId = params.get('sportId') || undefined;
+    if (search.length > 100 || (sportId && !uuidPattern.test(sportId))) throw new ReadError('invalid_request', 400);
+    return { resource, offset: Number(value), ...(search ? { search } : {}), ...(sportId ? { sportId } : {}) };
   }
   if (resource === 'arena') {
     const slug = params.get('slug') ?? '';
@@ -115,7 +118,8 @@ export async function readSocial(client: SupabaseClient<Database>, request: Read
     return { kind: 'sports', sports: data };
   }
   if (request.resource === 'arenas') {
-    const [arenas, sports] = await Promise.all([listPublicArenas(client, request.offset), listSports(client)]);
+    await requireUser(client);
+    const [arenas, sports] = await Promise.all([listPublicArenas(client, request.offset, request.search, request.sportId), listSports(client)]);
     if (arenas.error || sports.error || !arenas.data || !sports.data) throw new ReadError('unavailable');
     return { kind: 'arenas', arenas: arenas.data.slice(0, ARENA_PAGE_SIZE).map(arenaDto), sports: sports.data, hasMore: arenas.data.length > ARENA_PAGE_SIZE, offset: request.offset };
   }

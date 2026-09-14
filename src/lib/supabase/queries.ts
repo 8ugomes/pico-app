@@ -9,9 +9,10 @@ export const ARENA_PAGE_SIZE = 24;
 export function listSports(client: SupabaseClient<Database>) {
   return client.from('sports').select('id, slug, name').order('name');
 }
-export function listPublicArenas(client: SupabaseClient<Database>, offset = 0) {
+export function listPublicArenas(client: SupabaseClient<Database>, offset = 0, search = '', sportId?: string) {
   if (!Number.isSafeInteger(offset) || offset < 0 || offset > 10000) throw new ReadError('invalid_request', 400);
-  return client.from('arenas').select(arenaFields).eq('is_public', true).order('name').order('id').range(offset, offset + ARENA_PAGE_SIZE);
+  if (search.length > 100) throw new ReadError('invalid_request', 400);
+  return client.rpc('search_arenas', { p_search: search, p_offset: offset, ...(sportId ? { p_sport_id: sportId } : {}) }).select(arenaFields);
 }
 export function getArenaBySlug(client: SupabaseClient<Database>, slug: string) {
   return client.from('arenas').select(arenaFields).eq('slug', slug).eq('is_public', true).maybeSingle();
