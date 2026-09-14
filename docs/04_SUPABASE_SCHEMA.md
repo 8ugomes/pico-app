@@ -1,3 +1,5 @@
+> Notificações · 13/09/2026: migrations `20260914010000_community_notifications.sql` e `20260914011000_notification_recipient_scope.sql` aplicadas somente em desenvolvimento. Tabela `notifications` com RLS, trigger de participação e RPCs de leitura/estado lido; tipos gerados. [Contrato e validação](NOTIFICATIONS.md).
+
 > Revisão editorial · 13/09/2026: `20260913233000_natural_product_copy.sql` renomeia a comunidade institucional mantendo sua identidade e ajusta pontuação em dois textos originais do catálogo. Sem mudança de schema, tipos, RLS ou permissões. Aplicada e verificada em desenvolvimento; execução principal e preservação registradas no recibo de publicação. [Evidências](editorial-review/README.md).
 
 > Catálogo estadual · 13/09/2026: `20260913230000_arena_directory_search.sql` adiciona busca autorizada antes da paginação por local/modalidade. Aplicada em desenvolvimento e principal; tipos gerados, importação aditiva e histórico preservado. [Validação](arena-state-research/validacao.md).

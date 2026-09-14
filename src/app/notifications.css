@@ -1,0 +1,21 @@
+.mobile-header-actions { display: flex; align-items: center; gap: .25rem; }
+.notification-icon { display: inline-flex; position: relative; flex-shrink: 0; }
+.notification-count { position: absolute; top: -.55rem; right: -.7rem; display: grid; place-items: center; min-width: 1.15rem; height: 1.15rem; padding-inline: .2rem; background: var(--accent); color: var(--accent-ink); border-radius: var(--radius-pill); font-size: .625rem; font-weight: 700; border: 2px solid var(--background); }
+.notifications-page .page-heading { flex-wrap: wrap; }
+.notifications-page h1 { overflow-wrap: anywhere; min-width: 0; }
+.notifications-intro { margin: -.5rem 0 1.5rem; color: var(--text-secondary); line-height: 1.6; }
+.notifications-toolbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .5rem; padding-bottom: 1rem; color: var(--text-secondary); font-size: var(--text-caption); }
+.notifications-list { list-style: none; margin: 0; padding: 0; container-type: inline-size; }
+.notification-row { display: flex; gap: .85rem; padding: 1.25rem .75rem; border-bottom: 1px solid var(--border-subtle); }
+.notification-unread { background: var(--accent-soft); border-radius: var(--radius-control); }
+.notification-person { width: 44px; height: 44px; display: grid; place-items: center; flex-shrink: 0; border-radius: 50%; color: var(--text-secondary); background: var(--surface); }
+.notification-content { min-width: 0; flex: 1; }
+.notification-content p { margin: 0; line-height: 1.6; overflow-wrap: anywhere; }
+.notification-content p a { font-weight: 600; text-decoration: underline; text-underline-offset: .18em; }
+.notification-content p a:hover { text-decoration-thickness: 2px; }
+.notification-meta { display: flex; flex-wrap: wrap; gap: .3rem .75rem; margin: .5rem 0; font-size: var(--text-caption); color: var(--text-secondary); line-height: 1.5; }
+.notification-unread .notification-meta > span { font-weight: 700; }
+.notification-content button { text-align: left; white-space: normal; justify-content: flex-start; padding-inline: 0; }
+.notifications-page .social-empty h2 { font-size: var(--text-section); color: var(--foreground); margin-block: 1rem; }
+.notifications-pagination { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem; margin-top: 1.5rem; }
+@container (max-width: 20em) { .notification-person { display: none; } }

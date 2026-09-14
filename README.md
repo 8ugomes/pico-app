@@ -48,6 +48,7 @@ Demonstração exige `NEXT_PUBLIC_PICO_ENV=demo` e `PICO_ENV=demo`, sem chaves S
 | /admin | Administração global: acesso beta, papéis, pedidos, catálogo/custódia e moderação auditada |
 | /arenas e /arenas/[slug] | Catálogo permitido pela admissão, participação reversível, perfil do local, mural e comunidades |
 | /arenas/[slug]/gestao | Edição versionada, imagens, modalidades, equipe, convites e transferência conforme papel |
+| /notificacoes | Novas participações nas suas comunidades, contador e leitura individual/todas. [Contrato e publicação](docs/NOTIFICATIONS.md) |
 | /comunidades | Buscar por nome em Explorar ou Minhas comunidades; grupos independentes ou vinculados, com entrada aberta, aprovada ou por convite |
 | /comunidades/[slug]/gestao | Informações, participantes, papéis, fotos, convites e vínculo de arena |
 | /feed | Início com atalhos aos próprios grupos/arenas e estado inicial orientado à descoberta. Post canônico: perfil, mural e grupos selecionados; audiência explícita, curtidas/comentários/denúncia; sem sugestão derivada de presença |

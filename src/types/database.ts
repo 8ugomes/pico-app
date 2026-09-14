@@ -706,6 +706,58 @@ export type Database = {
           },
         ]
       }
+      notifications: {
+        Row: {
+          actor_id: string
+          community_id: string
+          created_at: string
+          id: string
+          kind: string
+          read_at: string | null
+          recipient_id: string
+        }
+        Insert: {
+          actor_id: string
+          community_id: string
+          created_at?: string
+          id?: string
+          kind?: string
+          read_at?: string | null
+          recipient_id: string
+        }
+        Update: {
+          actor_id?: string
+          community_id?: string
+          created_at?: string
+          id?: string
+          kind?: string
+          read_at?: string | null
+          recipient_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notifications_actor_id_fkey"
+            columns: ["actor_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notifications_community_id_fkey"
+            columns: ["community_id"]
+            isOneToOne: false
+            referencedRelation: "communities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notifications_recipient_id_fkey"
+            columns: ["recipient_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       played_games: {
         Row: {
           arena_id: string
@@ -1259,6 +1311,8 @@ export type Database = {
         Returns: Json
       }
       management_context: { Args: never; Returns: Json }
+      mark_all_notifications_read: { Args: never; Returns: undefined }
+      mark_notifications_read: { Args: { p_ids: string[] }; Returns: undefined }
       moderate_report: {
         Args: { p_action: string; p_report: string }
         Returns: undefined
@@ -1324,6 +1378,7 @@ export type Database = {
           username: string
         }[]
       }
+      read_notifications: { Args: { p_before?: string }; Returns: Json }
       read_played_games: { Args: { p_offset?: number }; Returns: Json }
       read_repost_feed: {
         Args: {

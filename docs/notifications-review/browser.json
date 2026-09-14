@@ -1,0 +1,37 @@
+{
+  "layouts": [
+    {
+      "theme": "light",
+      "width": 390,
+      "scale": 1,
+      "viewport": 390,
+      "document": 390,
+      "main": 390
+    },
+    {
+      "theme": "dark",
+      "width": 320,
+      "scale": 1,
+      "viewport": 320,
+      "document": 320,
+      "main": 320
+    },
+    {
+      "theme": "light",
+      "width": 1280,
+      "scale": 1,
+      "viewport": 1280,
+      "document": 1280,
+      "main": 620
+    },
+    {
+      "theme": "light",
+      "width": 320,
+      "scale": 2,
+      "viewport": 320,
+      "document": 320,
+      "main": 320
+    }
+  ],
+  "errors": []
+}

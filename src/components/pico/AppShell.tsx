@@ -9,6 +9,7 @@ import { useDemo } from "./DemoProvider";
 import { PlayerAvatar } from "./PlayerAvatar";
 import { useOwnProfile } from './connected/OwnProfile';
 import { RemoteAvatar } from './connected/Media';
+import { NotificationLink } from './NotificationLink';
 
 function ConnectedIdentity({ details = false }: { details?: boolean }) {
   const { state } = useOwnProfile();
@@ -22,7 +23,7 @@ export function AppShell({ children, environment = 'demo' }: { children: ReactNo
   return <div className="social-app">
     <aside className="app-sidebar"><Brand /><p className="sidebar-tagline">O ponto de encontro<br />da areia.</p><BottomNav desktop /><Link className="sidebar-profile" href="/perfil">{connected ? <ConnectedIdentity details /> : <><PlayerAvatar player={me} /><span><strong>{me.name}</strong><small>Seu perfil de demonstração</small></span></>}</Link></aside>
     <div className="app-center">
-      <header className="mobile-app-header"><Brand /><Link className="header-search" href="/descobrir" aria-label="Buscar pessoas e comunidades"><Search size={19} aria-hidden="true" /><span>Buscar</span></Link><Link href="/perfil" aria-label="Abrir meu perfil">{connected ? <ConnectedIdentity /> : <PlayerAvatar player={me} size="small" />}</Link></header>
+      <header className="mobile-app-header"><Brand /><Link className="header-search" href="/descobrir" aria-label="Buscar pessoas e comunidades"><Search size={19} aria-hidden="true" /><span>Buscar</span></Link><div className="mobile-header-actions"><NotificationLink /><Link href="/perfil" className="icon-button" aria-label="Abrir meu perfil">{connected ? <ConnectedIdentity /> : <PlayerAvatar player={me} size="small" />}</Link></div></header>
       {!connected && <div className="demo-banner"><span className="demo-indicator" />Demonstração <span>· pessoas fictícias, ações nesta sessão</span></div>}
       <PwaStatus/><main id="main-content" className="social-main">{children}</main>
     </div>
