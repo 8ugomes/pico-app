@@ -63,6 +63,20 @@ test('individual and @todos mentions notify only eligible current members and ar
   } finally { await db.close(); }
 });
 
+test('selected mentions stay where they were written and notify once', async () => {
+  const db = await createTestDatabase();
+  try {
+    const group = await create(db, 'Texto com menções');
+    await join(db, BOB, group.id);
+    await asUser(db, BOB, () => db.query("update public.profiles set username='bob_teste' where id=$1", [BOB]));
+    const post = await publish(db, randomUUID(), 'Vamos com @bob_teste jogar amanhã?', group.id, [BOB]);
+    assert.equal((await db.query('select body from public.posts where id=$1', [post])).rows[0].body, 'Vamos com @bob_teste jogar amanhã?');
+    assert.equal((await inbox(db, BOB)).items.filter(item => item.post_id === post).length, 1);
+    const everyone = await publish(db, randomUUID(), 'Ei @todos, sábado tem jogo', group.id, [], true);
+    assert.equal((await db.query('select body from public.posts where id=$1', [everyone])).rows[0].body, 'Ei @todos, sábado tem jogo');
+  } finally { await db.close(); }
+});
+
 test('current membership, blocks, destination and post access govern mention delivery', async () => {
   const db = await createTestDatabase();
   try {

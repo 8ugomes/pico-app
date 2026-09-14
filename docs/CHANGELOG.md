@@ -1,3 +1,10 @@
+## 2026-09-14: composição direta
+
+- Publicações começam na escrita, com foto e audiência compactas, em vez de um diálogo de formulário; o mesmo padrão atende feed, comunidades, arenas, perfil, demonstração e compartilhamento de jogo.
+- `@` busca participantes no próprio texto e permite escolher pessoa ou `@todos`; nova migration preserva a posição escrita e os avisos existentes.
+- O registro privado de jogo abre no diário, com arena, modalidade e data, sem postagem automática.
+- Lint, typecheck, build, 148 testes locais e 73 verificações hospedadas de desenvolvimento passaram; identidades e publicações de teste foram removidas.
+
 ## 2026-09-14: arenas de Caieiras, Jaraguá e Pirituba
 
 - PR #25 publicado no principal: versão 46795683d0e5. Conferência final preservou 89 linhas e sete mídias anteriores, acrescentando somente nove arenas; 149 arquivos e nove miniaturas regionais validados. [Publicação](arena-regional-review/release.md).

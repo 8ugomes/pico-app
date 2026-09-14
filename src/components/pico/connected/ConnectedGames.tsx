@@ -30,15 +30,13 @@ export function ConnectedGames({ initialSlug }: { initialSlug?: string }) {
     <PageHeading title="Meus jogos" />
     <p className="page-intro">Guarde a arena e a data dos seus jogos.</p>
     <JournalPrivacy />
-    <Button data-tour="register-game" onClick={() => { setMessage(''); setForm(previous => previous && !previous.game ? previous : {}); setEditorOpen(true); }}>Registrar jogo</Button>
+    {!editorOpen && <Button data-tour="register-game" onClick={() => { setMessage(''); setForm(previous => previous && !previous.game ? previous : {}); setEditorOpen(true); }}>Registrar jogo</Button>}
+    {editorOpen && form && <section className="game-capture" aria-label={form.game ? 'Corrigir jogo' : 'Registrar jogo'}><div className="game-capture-heading"><div><span>Meu diário</span><h2>{form.game ? 'Corrigir este jogo' : 'Joguei aqui'}</h2></div><Button variant="quiet" size="small" disabled={busy} onClick={() => setEditorOpen(false)}>Cancelar</Button></div><GameForm key={form.game?.id ?? form.slug ?? 'new'} initialSlug={form.slug} game={form.game} onBusy={setBusy} onDone={() => { setEditorOpen(false); setForm(null); setOffset(0); reload(); setMessage(form.game ? 'Jogo corrigido. Seu registro continua privado.' : 'Jogo registrado. Só você pode ver.'); }} /></section>}
     {message && <p role="status" className="inline-success">{message}</p>}
     {loading && <p role="status">Carregando seus jogos…</p>}
     {error && <div className="connected-panel"><p role="alert">{error}</p><Button variant="secondary" onClick={reload}>Tentar novamente</Button></div>}
-    {data && <GameEntries games={data.slice(0, 20)} onShare={game => { setShare(game); setShareOpen(true); setPublished(null); }} onEdit={game => { setForm({game, slug: game.arena_slug}); setEditorOpen(true); }} onDelete={game => { setDeleteError(''); setDeleting(game); }} />}
+    {data && (!editorOpen || data.length > 0) && <GameEntries games={data.slice(0, 20)} onShare={game => { setShare(game); setShareOpen(true); setPublished(null); }} onEdit={game => { setForm({game, slug: game.arena_slug}); setEditorOpen(true); }} onDelete={game => { setDeleteError(''); setDeleting(game); }} />}
     {(offset > 0 || (data?.length ?? 0) > 20) && <nav className="read-pagination" aria-label="Páginas dos seus jogos"><Button variant="secondary" disabled={!offset} onClick={() => setOffset(offset - 20)}>Anterior</Button><span>Página {offset / 20 + 1}</span><Button variant="secondary" disabled={!data || data.length <= 20} onClick={() => setOffset(offset + 20)}>Próxima</Button></nav>}
-    <Modal open={editorOpen} onClose={() => { if (!busy) setEditorOpen(false); }} title={form?.game ? 'Corrigir jogo' : 'Joguei aqui'}>
-      {form && <GameForm key={form.game?.id ?? form.slug ?? 'new'} initialSlug={form.slug} game={form.game} onBusy={setBusy} onDone={() => { setEditorOpen(false); setForm(null); setOffset(0); reload(); setMessage(form.game ? 'Jogo corrigido. Seu registro continua privado.' : 'Jogo registrado. Só você pode ver.'); }} />}
-    </Modal>
     {published && <p className="inline-success" role="status">Jogo compartilhado. <Link className="journey-text-link" href={`/publicacoes/${published}`}>Ver publicação</Link></p>}
     <Modal open={shareOpen} onClose={() => { if (!busy) setShareOpen(false); }} title="Compartilhar jogo">
       {share && <PublicationDraft key={`${share.id}:${share.version}`} game={share} onBusy={setBusy} onDone={id => { setShareOpen(false); setShare(null); setPublished(id); }} />}
@@ -71,9 +69,8 @@ function GameForm({ game, initialSlug, onBusy, onDone }: { game?: PlayedGame; in
     } catch (e) { setError(e instanceof Error ? e.message : 'Não foi possível confirmar.'); }
     finally { setBusy(false); onBusy(false); }
   }}><fieldset disabled={busy}>
-    <JournalPrivacy /><ArenaSportPicker initialSlug={initialSlug} value={selection} onChange={setSelection} />
+    <ArenaSportPicker initialSlug={initialSlug} value={selection} onChange={setSelection} />
     <GameDateField value={date} onChange={setDate} />
-    <p className="form-note">Este registro é declarado por você. Não comprova presença física e não avisa outras pessoas.</p>
     {error && <p role="alert" className="form-error">{error} Seus campos foram mantidos.</p>}
     <Button type="submit" disabled={!selection?.sportId || !date || date > gameToday()}>{busy ? 'Salvando…' : game ? 'Salvar correção' : 'Guardar só para mim'}</Button>
   </fieldset></form>;
