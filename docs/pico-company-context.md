@@ -38,7 +38,7 @@ O onboarding assistido deve ajudar a entender e usar controles reais, com pausa,
 
 Cadastro com e-mail e senha, sem confirmação e com admissão automática não restaura contas suspensas, revogadas ou excluídas. Audiências, papéis e RLS continuam vigentes. Demo é explicitamente rotulado e local; fotografia sintética do estudo não representa pessoas ou arenas reais. Decisão expressa da rodada de estabilidade: beta sem SMTP e sem confirmação. O endereço informado não comprova titularidade; recuperação por e-mail fica indisponível e isso deve ser informado na entrada.
 
-Fora do escopo atual: reservas, pagamentos, B2B, anúncios, IA/voz, ranking avançado, presença ou mapa em tempo real, localização contínua e app nativo. Um redesign integral pode reorganizar a apresentação e a assistência da jornada; não autoriza ampliar esse escopo.
+Pedido explícito de 18/09/2026: avançar mensagens diretas, push e preparação para lojas a partir da base existente. A ativação desses recursos e o lançamento devem ter evidência própria; não confundir código preparado com serviço publicado. Fora desta rodada: reservas, pagamentos, B2B, anúncios, IA/voz, ranking avançado, presença ou mapa em tempo real e localização contínua. A mudança de escopo vem do pedido atual, não de um redesign.
 
 ## Contexto de empresa disponível
 

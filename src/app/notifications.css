@@ -19,4 +19,10 @@
 .notification-content button { text-align: left; white-space: normal; justify-content: flex-start; padding-inline: 0; }
 .notifications-page .social-empty h2 { font-size: var(--text-section); color: var(--foreground); margin-block: 1rem; }
 .notifications-pagination { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem; margin-top: 1.5rem; }
+.push-settings { margin-block: 0 1.5rem; padding: 1rem; border: 1px solid var(--border-subtle); border-radius: var(--radius-control); background: var(--surface); }
+.push-settings-heading { display: flex; align-items: center; gap: .5rem; }
+.push-settings h2 { margin: 0; font-family: var(--font-manrope), sans-serif; font-size: var(--text-body); font-weight: 650; }
+.push-settings p { margin-block: .6rem; color: var(--text-secondary); font-size: var(--text-caption); line-height: 1.6; overflow-wrap: anywhere; }
+.push-settings a { text-decoration: underline; text-underline-offset: .18em; }
+.push-settings .button { white-space: normal; text-align: left; }
 @container (max-width: 20em) { .notification-row { gap: .5rem; padding-inline: .25rem; } .notification-person { width: 36px; height: 36px; } }

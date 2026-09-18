@@ -1,3 +1,11 @@
+## Conversas e notificações no dispositivo · revisão de 18/09/2026
+
+Critérios registrados antes de codar: preservar Aura Manteiga; caixa com pessoa, contexto e estado não lido; conversa com autoria, data e confirmação real; entrada por perfil/cabeçalho/lateral sem sexto destino inferior. Conferir toque, foco, quebra de texto, teclado, estados e temas. Permissão por gesto contextual, revogável; instalação, caixa interna e push são estados distintos. Não usar presença, envio ou funcionamento offline fictícios.
+
+Resultado: componentes e CSS usam a base existente, sem novo branding; texto e chave de tentativa incerta são preservados até confirmação. A pausa por acompanhamento deixa o motivo explícito; leitura é ação própria e não vira recibo público para o interlocutor. Preferências de push distinguem vínculo e permissão. A revisão de corridas mostrou a importância de tratar retorno do diálogo de permissão, conta trocada e resposta atrasada como estados diferentes.
+
+Limite visual: fixture reproduzível com componentes reais compila e atende HTTP, mas o navegador disponível não acessa o servidor local. Não há aprovação de layout móvel, teclado ou leitor de tela nesta rodada. Esses pontos permanecem critérios explícitos no prompt de continuidade; build e testes de estado não são substitutos da observação. O novo produto está desligado e não foi publicado.
+
 ## Vídeos maiores · critérios antes de codar · 14/09/2026
 
 O compositor deve mostrar o novo limite real em português e rejeitar excedentes antes de reservar espaço ou começar a rede. Progresso, prévia, audiência e publicação continuam distinguíveis; maior duração do envio não pode sugerir que o post já foi publicado. Erro recuperável conserva texto/destinos e permite escolher novamente. Não adicionar opção de compressão fictícia ou prometer suporte a todos os codecs MP4. Revisar mensagem e espera numa largura móvel, tema claro/escuro, sem redesenhar o editor.

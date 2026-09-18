@@ -1,6 +1,6 @@
 import 'server-only';
 import { createClient } from '@supabase/supabase-js';
-import type { Database } from '@/types/database';
+import type { Database } from '@/types/app-database';
 import { getSupabaseEnvironment } from './config';
 import { MutationError } from './mutations';
 

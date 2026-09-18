@@ -1,3 +1,12 @@
+## 2026-09-18: checkpoint de mensagens, push e continuidade para lojas
+
+- Preparadas conversas 1:1 com acompanhamento mútuo, histórico paginado, não lidas, envio idempotente, bloqueio/suspensão e exportação das próprias mensagens. UI em `/mensagens`, perfil e cabeçalho/lateral preserva Aura Manteiga e cinco destinos inferiores; rascunho fica em memória e troca de conta descarta o estado anterior.
+- Preparado Web Push por adesão explícita: assinaturas privadas, fila, leases, retry/cooldown por aparelho, revalidação de acesso, payload genérico e executor POST protegido. Logout, sessão inicial/expirada, troca de identidade e ativação tardia fazem reconciliação; worker não armazena conteúdo privado offline.
+- Duas migrations aditivas e gates independentes no servidor/banco, **desligados por padrão**. Tipos RPC pendentes gerados do catálogo PostgreSQL local e conferidos em CI; tipos hospedados preservados. Não houve migration remota, ativação, deploy ou mensagem/notificação para usuários nesta rodada.
+- Corrigidos textos de acesso/privacidade que ainda prometiam confirmação de e-mail, incompatível com a decisão vigente da beta.
+- Lint, typecheck/build demo, 187 testes locais, verificação de 12 RPCs e audit sem vulnerabilidades passaram. Fixture UI compilada e smoke HTTP; inspeção visual nova bloqueada por indisponibilidade de acesso do navegador ao localhost. Integração hospedada, concorrência multissessão e aparelhos reais seguem pendentes.
+- Entregues [avaliação das 18 frentes](PICO_PRODUCT_ASSESSMENT_2026-09-18.md), [diagnóstico técnico](PICO_DEVELOPMENT_REVIEW_2026-09-18.md) e [prompt de continuidade até a preparação para lojas](CODEX_CONTINUE_TO_STORE_READY.md). O próximo ciclo deve fechar intenção de conexão, denúncia de mensagem, recuperação, serviços reais, qualidade móvel e distribuição.
+
 ## 2026-09-14: fotos nas notificações, arenas e vídeo em publicações
 
 - Notificações mostram a foto atual da pessoa que entrou ou foi mencionada, com fallback humano e as mesmas regras de audiência.

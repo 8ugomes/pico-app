@@ -2,7 +2,9 @@
 
 > Atualização da beta de 13/09/2026: o responsável decidiu cadastro com e-mail e senha, sem confirmação e sem SMTP. Recuperação por e-mail indisponível. A política explícita está em `config/auth-policy.json`; configuração auditável em `scripts/configure-beta-access.mjs`. [Revisão atual de estabilidade](docs/STABILITY_REVIEW.md). A restrição SMTP dos registros anteriores foi substituída por essa decisão.
 
-> Preparação para beta: [segurança, testes e pendências de abertura](docs/BETA_SECURITY.md). As correções podem ser publicadas; novos cadastros dependem de SMTP e da definição operacional de privacidade.
+> Estado de desenvolvimento em 18/09/2026: [diagnóstico, mensagens, push e sequência para lojas](docs/PICO_DEVELOPMENT_REVIEW_2026-09-18.md). Mensagens e push são implementações sob ativação explícita, ainda sem publicação desta rodada. O cadastro da beta continua sem confirmação e sem SMTP; recuperação por e-mail e operação para distribuição ampla permanecem pendentes.
+
+> Continuidade: [avaliação das 18 frentes do produto](docs/PICO_PRODUCT_ASSESSMENT_2026-09-18.md) e [prompt completo para o Codex preparar a versão de loja](docs/CODEX_CONTINUE_TO_STORE_READY.md). O prompt preserva a base existente e exige evidências de integração, aparelhos e operação antes de chamar a versão de pronta.
 
 # Pico
 
@@ -10,7 +12,7 @@
 
 **O ponto de encontro da areia. Me acha no Pico.**
 
-Rede social PWA mobile-first para futevôlei, beach tennis e vôlei de praia. O Ciclo 9 implementa comunidades próprias, gestão de arenas, papéis no banco, publicação com destinos, histórico privado e fotos recortadas. O Ciclo 10 organiza o perfil, elimina a duplicação do editor e acrescenta conversão HEIC/HEIF local. O editor aceita foto ou vídeo MP4, nunca ambos; “Já joguei” é uma declaração optativa no perfil, não um post nem o histórico privado. O conjunto de tutorial, comunidade oficial e cadastro aberto foi autorizado para publicação coordenada no ambiente principal; o acesso exige e-mail confirmado e conta ativa. [Registro da entrega e verificação da versão](docs/ONBOARDING_RELEASE.md).
+Rede social PWA mobile-first para futevôlei, beach tennis e vôlei de praia. O Ciclo 9 implementa comunidades próprias, gestão de arenas, papéis no banco, publicação com destinos, histórico privado e fotos recortadas. O Ciclo 10 organiza o perfil, elimina a duplicação do editor e acrescenta conversão HEIC/HEIF local. O editor aceita foto ou vídeo MP4, nunca ambos; “Já joguei” é uma declaração optativa no perfil, não um post nem o histórico privado. O conjunto de tutorial, comunidade oficial e cadastro aberto foi autorizado para publicação coordenada no ambiente principal; o acesso exige conta ativa; a beta atual não exige confirmação de e-mail. [Registro da entrega e verificação da versão](docs/ONBOARDING_RELEASE.md).
 
 [Perfil/HEIC: implementação, testes e limites do Ciclo 10](docs/CYCLE10_PROFILE.md). O código foi validado em CI e em Chromium/WebKit com ambiente de teste isolado; esta rodada não executou novo deploy nem teste em aparelhos físicos.
 
@@ -20,7 +22,7 @@ Rede social PWA mobile-first para futevôlei, beach tennis e vôlei de praia. O 
 
 Endereço principal: [Pico](https://pico-app-sepia.vercel.app). O Ciclo 9 está integrado à `main`; publicação por `npm run deploy` no projeto Vercel `pico-app`. O endereço antigo `pico-internal.vercel.app` encaminha ao principal. [Ambientes](docs/ENVIRONMENTS.md) descreve a configuração, [operação](docs/BETA_OPERATIONS.md) explica publicação e rollback e [contratos](docs/CYCLE9_CONTRACTS.md) define permissões. A versão efetivamente servida pode ser consultada em [/api/version](https://pico-app-sepia.vercel.app/api/version). O relatório [INTERNAL_REVIEW.md](docs/INTERNAL_REVIEW.md) preserva a validação anterior à unificação.
 
-**Comunidade oficial e autenticação (13/09):** cadastro aberto após confirmação de e-mail, comunidade geral automática após o perfil, três mensagens oficiais e aviso por conta. 87 testes locais + 303 verificações hospedadas + UI real aprovados. Migration e política de senha aplicadas nos dois ambientes; publicação desta revisão autorizada. Domínio e SMTP ainda precisam ser configurados. [Auditoria e estado por ambiente](docs/OFFICIAL_COMMUNITY_AUTH.md) · [Configuração de e-mail](docs/EMAIL_SETUP.md).
+**Comunidade oficial e autenticação (histórico de 13/09):** o fluxo foi entregue inicialmente com confirmação, depois substituída pelo cadastro sem confirmação descrito no topo; comunidade geral automática após o perfil, três mensagens oficiais e aviso por conta. 87 testes locais + 303 verificações hospedadas + UI real aprovados. Migration e política de senha aplicadas nos dois ambientes; publicação desta revisão autorizada. Domínio e SMTP ainda precisam ser configurados. [Auditoria e estado por ambiente](docs/OFFICIAL_COMMUNITY_AUTH.md) · [Configuração de e-mail](docs/EMAIL_SETUP.md).
 
 **Tutorial guiado (incremento local):** convite opcional no Início, seis etapas nas telas reais e retomada pelo Perfil. Preferência por conta neste navegador; sem ações sociais automáticas. [Especificação](docs/ONBOARDING.md) · [Capturas e verificação](docs/onboarding-review/README.md). Incluído na publicação coordenada desta revisão.
 
@@ -44,7 +46,7 @@ Demonstração exige `NEXT_PUBLIC_PICO_ENV=demo` e `PICO_ENV=demo`, sem chaves S
 
 | Caminho | Comportamento |
 | --- | --- |
-| /signup, /login, /acesso | Cadastro aberto com e-mail confirmado e admissão automática; suspensão/revogação/exclusão preservadas. Ver pendência SMTP no contrato oficial. |
+| /signup, /login, /acesso | Cadastro por senha sem confirmação de e-mail, com admissão automática; suspensão/revogação/exclusão preservadas. Recuperação por e-mail indisponível nesta beta. |
 | /admin | Administração global: acesso beta, papéis, pedidos, catálogo/custódia e moderação auditada |
 | /arenas e /arenas/[slug] | Catálogo permitido pela admissão, participação reversível, perfil do local, mural e comunidades |
 | /arenas/[slug]/gestao | Edição versionada, imagens, modalidades, equipe, convites e transferência conforme papel |
@@ -64,7 +66,7 @@ Arenas de demonstração continuam rotuladas mesmo após renomear. Comunidade pr
 
 ## Banco e comandos
 
-21 migrations versionadas no código local. As novas migrations `20260912090000_played_games.sql` e `20260912091000_game_sharing.sql` não foram aplicadas a nenhum banco remoto nesta rodada. O backfill histórico de posts não se aplica aos jogos: o legado de presença é preservado sem conversão. O Ciclo 10 não acrescentou migrations. Tipos são gerados, não editados manualmente. Não recriar projetos corretos, reaplicar SQL registrado nem resetar banco remoto.
+O inventário corrente de migrations está em `supabase/migrations`; os recibos de aplicação ficam no plano e changelog. As migrations de jogos e vídeos já têm recibo de publicação; as novas migrations de mensagens/push desta revisão continuam somente no código até aplicação explícita. O legado de presença é preservado sem conversão. Tipos são gerados, não editados manualmente. Não recriar projetos corretos, reaplicar SQL registrado nem resetar banco remoto.
 
 ```bash
 node --env-file=.env.local --env-file=.env.hosted-admin scripts/database.mjs dry-run
@@ -96,7 +98,7 @@ RLS, grants mínimos e RPCs consultam papéis/admissão vigentes, inclusive com 
 
 Buckets privados: `avatars`, `post-media`, `entity-media`, `post-videos`. Sem download direto ou URL assinada de leitura no cliente: cada trecho de vídeo é reautorizado no servidor e responde `private, no-store`. Vídeos MP4 de até 45 MiB são enviados diretamente ao Storage com token assinado de upload e conferidos antes de publicar; no plano Supabase Free o limite global é 50 MB por arquivo. Fotos: original até 20 MiB/25 MP, recorte real no navegador e saída até 3 MiB, normalizada sem metadados no servidor. JPEG/PNG/WebP estáticos e HEIC/HEIF decodificável: conversão local nativa ou fallback sob demanda antes do recorte, sem serviço externo; variantes incompatíveis apresentam erro. [Suporte e licença](docs/THIRD_PARTY_HEIC.md). Fotos de arenas/grupos pertencem ao recurso, não à conta do uploader.
 
-[Operação](docs/BETA_OPERATIONS.md), [schema](docs/04_SUPABASE_SCHEMA.md), [backup/restauração](docs/CONTINUITY.md), [PWA](docs/pwa-roadmap.md) e [checklist](docs/BETA_CHECKLIST.md). SMTP/caixa de teste, contato público e aparelhos físicos ainda exigem trabalho externo. Não há service worker, fila de posts offline, chat, reservas, pagamentos, anúncios, IA, ranking ou app nativo.
+[Operação](docs/BETA_OPERATIONS.md), [schema](docs/04_SUPABASE_SCHEMA.md), [backup/restauração](docs/CONTINUITY.md), [PWA](docs/pwa-roadmap.md) e [checklist](docs/BETA_CHECKLIST.md). Recuperação por e-mail, contato público e aparelhos físicos ainda exigem trabalho externo; não ativar SMTP ou confirmação automaticamente contra a decisão atual da beta. A versão pública auditada não tem chat nem push. A nova fatia acrescenta mensagens diretas e um service worker exclusivo para push, sem interceptação de navegação ou cache privado, sob ativação explícita. Não há fila de posts offline, reservas, pagamentos, anúncios, IA, ranking ou binário nativo.
 
 Leia [AGENTS.md](AGENTS.md), [plano](docs/pico-product-plan.md), [Deslopify](docs/deslopify.md), [changelog](docs/CHANGELOG.md), [Ciclo 10](docs/CYCLE10_PROFILE.md) e [loop](docs/CODEX_AUTONOMOUS_LOOP.md). Documentos numerados antigos preservam a evolução; requisitos atuais do Ciclo 9 prevalecem sobre as antigas restrições a comunidades. O registro do Ciclo 10 substitui as limitações anteriores de perfil e HEIC.
 
