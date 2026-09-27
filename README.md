@@ -8,7 +8,7 @@
 
 > Continuidade: [avaliação das 18 frentes do produto](docs/PICO_PRODUCT_ASSESSMENT_2026-09-18.md) e [prompt completo para o Codex preparar a versão de loja](docs/CODEX_CONTINUE_TO_STORE_READY.md). O prompt preserva a base existente e exige evidências de integração, aparelhos e operação antes de chamar a versão de pronta.
 
-> Integração de 26/09/2026: as sete migrations móveis/mensagens/push foram aplicadas somente no Supabase principal após dry-run e inventário; 131 identidades de conteúdo foram preservadas. Mensagens diretas e Web Push continuam desligados no banco e na aplicação. Os tipos foram regenerados do schema hospedado. Os PRs [#42](https://github.com/8ugomes/pico-app/pull/42) e [#43](https://github.com/8ugomes/pico-app/pull/43) passaram pela CI e a revisão `66194b1a57db` foi promovida no domínio principal; versão, banco e Auth responderam saudáveis e a comparação do deploy preservou 131/131 registros.
+> Integração de 26/09/2026: as sete migrations móveis/mensagens/push foram aplicadas somente no Supabase principal após dry-run e inventário; 131 identidades de conteúdo foram preservadas. Mensagens diretas e Web Push continuam desligados no banco e na aplicação, com zero conversa, mensagem, assinatura Web Push ou item de fila. Os tipos foram regenerados do schema hospedado. Os PRs [#42](https://github.com/8ugomes/pico-app/pull/42) e [#43](https://github.com/8ugomes/pico-app/pull/43) passaram pela CI e a revisão `66194b1a57db` foi promovida no domínio principal; versão, banco e Auth responderam saudáveis e a comparação do deploy preservou 131/131 registros.
 
 # Pico Social
 
