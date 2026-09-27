@@ -10,6 +10,7 @@ import { PlayerAvatar } from "./PlayerAvatar";
 import { useOwnProfile } from './connected/OwnProfile';
 import { RemoteAvatar } from './connected/Media';
 import { NotificationLink } from './NotificationLink';
+import { usePicoNativePackage } from '@/lib/native-runtime';
 
 function ConnectedIdentity({ details = false }: { details?: boolean }) {
   const { state } = useOwnProfile();
@@ -19,6 +20,7 @@ function ConnectedIdentity({ details = false }: { details?: boolean }) {
 
 export function AppShell({ children, environment = 'demo' }: { children: ReactNode; environment?: 'demo' | 'configured' | 'invalid' }) {
   const { me } = useDemo();
+  const nativePackage = usePicoNativePackage();
   const connected = environment !== 'demo';
   return <div className="social-app">
     <aside className="app-sidebar"><Brand /><p className="sidebar-tagline">O ponto de encontro<br />da areia.</p><BottomNav desktop /><Link className="sidebar-profile" href="/perfil">{connected ? <ConnectedIdentity details /> : <><PlayerAvatar player={me} /><span><strong>{me.name}</strong><small>Seu perfil de demonstração</small></span></>}</Link></aside>
@@ -28,8 +30,8 @@ export function AppShell({ children, environment = 'demo' }: { children: ReactNo
       <PwaStatus/><main id="main-content" className="social-main">{children}</main>
     </div>
     <aside className="community-sidebar">
-      <section className="journey-rail"><h2>Meus jogos</h2><p>Seu histórico privado da areia.</p><Link href="/jogos">Abrir Meus jogos <ArrowUpRight size={17} aria-hidden="true" /></Link></section>
-      <div className="rail-footer"><span>Me acha no Pico.</span><Link href="/privacidade">Sobre seus dados <ArrowUpRight size={13} aria-hidden="true" /></Link><Link href="/instalar">Instalar o Pico</Link></div>
+      <section className="journey-rail"><h2>Meus jogos</h2><p>Só você vê.</p><Link href="/jogos">Abrir Meus jogos <ArrowUpRight size={17} aria-hidden="true" /></Link></section>
+      <div className="rail-footer"><Link href="/privacidade">Sobre seus dados <ArrowUpRight size={13} aria-hidden="true" /></Link>{!nativePackage && <Link href="/instalar">Instalar o Pico</Link>}</div>
     </aside>
     <BottomNav />
   </div>;

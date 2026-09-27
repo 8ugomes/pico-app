@@ -1,3 +1,97 @@
+## Cliente iOS local · critérios antes de codar · 18/09/2026
+
+O cliente empacotado deve parecer um aplicativo do Pico desde o primeiro quadro, sem reproduzir a moldura do site nem explicar a arquitetura. A entrada usa marca, uma frase de valor e Criar conta/Entrar. Depois da sessão válida, Início abre no conteúdo; a navegação mantém cinco destinos e Perfil reúne Meus jogos, conta e ajuda sem criar uma sexta aba.
+
+Cada tela mostra uma próxima ação. Carregamento mantém geometria; vazio explica o que aparece ali; offline preserva o que a pessoa digitou e oferece tentar novamente; sessão expirada volta à entrada com mensagem concreta; atualização incompatível bloqueia somente o conteúdo que não pode operar com segurança. Nenhum spinner permanente, toast de sucesso antecipado, frase de infraestrutura ou métrica inventada.
+
+O gesto nativo entra onde resolve uma tarefa: câmera/biblioteca só após escolher foto, share sheet apenas após a ação Compartilhar, teclado sem cobrir campos e links abrindo no destino certo. Haptic leve acompanha seleção ou confirmação já efetivada, nunca navegação comum, carregamento ou validação repetida. Background pausa novas escritas; retorno confere rede/sessão e não repete a tentativa silenciosamente.
+
+Aura Manteiga continua no campo de entrada, Syne nos títulos e Manrope na operação. Safe areas participam do layout; botões e abas mantêm 44 px; foco, rótulo, estado e contraste não dependem de cor. Texto ampliado pode aumentar a altura da navegação e o conteúdo segue rolável. Movimento de 160/220 ms usa opacidade/transformação mínima e some quando a pessoa reduz movimento.
+
+A amostra de criação cobre entrada, sessão restaurada, Início, Pessoas, Comunidades, Arenas, Perfil/Meus jogos, editor de perfil, publicação, offline e atualização obrigatória em iPhone estreito e largo, claro/escuro e texto ampliado. Corrigir em lote e confirmar uma vez. Simulador comprova layout e integração básica; somente iPhone físico comprova câmera, mídia, Keychain, gestos, VoiceOver e desempenho.
+
+### Aprendizados do cliente local
+
+Persistência útil não precisa virar uma promessa de uso offline. Publicação, perfil e jogo retomam um rascunho por conta no aparelho, mostram essa retomada e esperam uma nova ação da pessoa; não existe fila que envie sozinha quando a rede volta. Preferences guarda somente esse conteúdo e o ponto do guia. Senha e tokens continuam fora dessa camada, com refresh token exclusivo do Keychain.
+
+As ações sociais ficaram compreensíveis quando permaneceram junto do conteúdo: comentários abrem leitura/escrita contextual, republicar mostra estado reversível, e a lista de pessoas bloqueadas oferece **Desbloquear** com a consequência escrita. Em Meus jogos, **Editar**, **Compartilhar** e **Excluir** são separadas; compartilhar abre outra confirmação de audiência e nunca altera o registro privado nem o post já criado.
+
+O desenho do futuro envio de vídeo distingue arquivo escolhido, envio em andamento e post confirmado. Progresso e **Cancelar** ficam no próprio compositor; uma interrupção orienta escolher o mesmo MP4 para retomar. Essa implementação permanece atrás de feature gate: a `1.0` não mostra criação/publicação de vídeo até sanitização/transcoding e validação física, e não promete suporte a MOV/HEVC. Vídeos já autorizados abrem o player do iPhone por ação, sem autoplay. A validação de Range, seek, memória e interrupções em mídia real continua reservada ao aparelho físico.
+
+Deep link não é sinônimo de Universal Link. O roteador local aceita somente HTTPS da origem prevista e abre publicação, jogador, comunidade, arena ou seção do perfil; endereços estranhos não mudam a tela. Só depois de domínio e bundle finais entram entitlement e AASA. O guia de três passos permanece opcional, retomável e separado da configuração de perfil.
+
+Contraste, Dynamic Type, nomes/hints de controles e status bar foram tratados no código e no Simulator, mas isso ainda é uma revisão assistida. VoiceOver, câmera, Keychain, safe areas em hardware e mídia longa precisam do passe físico antes de qualquer alegação de acessibilidade ou prontidão de loja.
+
+### Aprendizados do fechamento de segurança e direitos da conta
+
+Logout não termina quando a tela muda: respostas autenticadas e refresh iniciados antes da saída também precisam perder validade. A geração de sessão tornou essa fronteira explícita, e a limpeza Keychain-first conserva um tombstone até apagar o conteúdo local da conta. Na retomada, a cobertura de privacidade só sai depois de o estado revalidado chegar à tela, evitando um quadro privado intermediário.
+
+Suspensão, revogação e perfil ainda incompleto não devem virar um beco sem saída. A tela curta **Acesso e privacidade** conserva apenas exportar dados, excluir conta, sair, suporte e textos legais, sem abrir o social. Na conta normal, denúncias e uploads sem uso ficaram visíveis e removíveis; posts e comentários próprios ganharam exclusão confirmada. Tentativas de comentário e compartilhamento de jogo sobrevivem a relançamento com a mesma chave e o mesmo payload até confirmação, sem fila automática ou falso sucesso.
+
+O manifesto do app precisou agregar o uso real do SDK de câmera: além de `UserDefaults`/`CA92.1`, o archive agora contém `FileTimestamp` com `C617.1` e `3B52.1`. O detector Impeccable terminou sem achados. A amostra final no iPhone 18 Pro simulado, em claro/escuro e texto grande, preservou hierarquia, contraste, alvos e rolagem no splash e no estado de falha de rede; continua sendo evidência de Simulator, não de acessibilidade, mídia ou hardware real.
+
+## Refino final do app iOS · critérios antes de codar · 18/09/2026
+
+A primeira tela não deve mostrar uma navegação que a pessoa ainda não pode usar. Antes da admissão, manter somente marca, uma frase de valor e duas escolhas inequívocas: criar conta ou entrar. Os três esportes ajudam no reconhecimento, mas não precisam de outra promessa, slogan ou parágrafo.
+
+O tutorial deixa de enumerar seis áreas. Em três passos, deve ensinar o modelo mental do Pico: encontrar um lugar, reconhecer sua turma e guardar um jogo privado. Feed, comunidades e perfil continuam acessíveis na navegação e ganham ajuda no próprio contexto, sem obrigar uma visita didática a cada destino. Cada dica terá uma ideia, um verbo e uma consequência; privacidade não será cortada para parecer minimalista.
+
+Fluidez significa continuidade e resposta, não espetáculo. A aba tocada deve reagir enquanto a rota carrega; a superfície seguinte entra em até 220 ms, usando opacidade e deslocamento mínimo. O indicador ativo mantém geometria estável. Sem bounce, loader girando na aba, haptic no simulador ou movimento que atrase o conteúdo. Com movimento reduzido, a troca é imediata e o estado continua evidente por forma, peso e texto.
+
+Revisão representativa: entrada anônima, cadastro/login, convite do guia, três passos e conclusão; Início mais uma rota vizinha; 320/390 px e desktop; claro/escuro; texto ampliado; teclado/foco e redução de movimento. Preservar perfil obrigatório, aviso institucional, audiência, jogo privado, demonstração e todos os contratos de acesso.
+
+### Aprendizado da implementação
+
+Retirar o shell do estado anônimo foi mais claro do que tentar explicar abas ainda inacessíveis. Uma frase de valor, os três esportes e duas ações bastam para a decisão inicial nos dois temas. Dentro do produto, ensinar o encadeamento arena → pessoas → jogo privado preservou o modelo mental e retirou três paradas que só repetiam a navegação.
+
+O estado pendente no próprio ícone dá resposta sem inserir loader, e manter a pílula com 44 px em todos os estados evita o salto da aba ativa. A entrada de rota de 3 px/220 ms é suficiente no navegador; movimento reduzido a remove. Em texto a 200%, a navegação cresce e a página continua rolável, sem esconder a saída do guia. A auditoria Impeccable encontrou um único acento lateral antigo nos balões de comentário; a borda uniforme conservou separação e retirou o ornamento desnecessário.
+
+## Pico Social no iOS primeiro · critérios antes de preparar · 17/09/2026
+
+O primeiro contato nativo deve continuar parecendo Pico Social, sem transformar a tela de fundação em promessa de aplicativo pronto. O shell local pode comprovar splash, ícone, barra de status e safe areas; não deve fingir feed, sessão, atividade social, uso offline, aparelho físico ou aprovação da Apple.
+
+Priorizar iOS significa reduzir a superfície operacional, não redesenhar o produto para convenções genéricas da Apple. Manter Aura Manteiga, o ativo de instalação vigente e o nome **Pico Social Preview** nesta etapa reversível. Distinguir com clareza instalação do Xcode, compilação, execução no Simulator, execução em iPhone, assinatura, TestFlight e loja.
+
+Na amostra do Simulator, conferir que a marca não é recortada no splash, o conteúdo respeita as áreas seguras, o fundo não pisca com material padrão e as barras do sistema mantêm contraste. Movimento, haptics, login conectado e mídia real ficam para seus gates; uma animação ou um simulador não substituem a validação em iPhone físico. Android permanece pausado, sem mensagem que sugira abandono da plataforma ou conclusão do gate N1 completo.
+
+### Aprendizado da execução no Simulator
+
+A primeira abertura confirmou que `scaleAspectFill` não servia ao mestre quadrado: o wordmark ficava cortado em telas altas. `scaleAspectFit` preserva a assinatura inteira e é o hotfix vigente; uma composição futura com fundo Aura separado e logo transparente pode retirar as faixas sem reabrir o ícone aprovado. No preview conectado, a tela real de entrada e as cinco abas respeitaram as áreas seguras no iPhone 18 Pro simulado em tema claro. Tema escuro conectado, texto ampliado e movimento reduzido ainda não foram aprovados.
+
+O caminho `/feed` deve fazer parte da URL HTTPS do preview. Separá-lo em `server.appStartPath` fez o Capacitor 8 procurar um arquivo local e encerrar o aplicativo antes de mostrar qualquer estado recuperável. A correção mantém uma origem exata, sem credenciais, consulta ou fragmento, e não transforma o preview remoto em build de loja.
+
+## Ambiente e nomenclatura do Pico Social · critérios antes de preparar · 15/09/2026
+
+Ferramenta instalada não é sinônimo de aplicativo pronto. Distinguir download, instalação, configuração, sync, compilação, simulador, aparelho, assinatura e loja em todo diagnóstico. Mensagens e documentos novos usam **Pico Social**; `Pico Club` só permanece quando for necessário identificar o ativo histórico existente, sem virar um segundo nome do produto.
+
+Instaladores e shells não devem inventar sucesso, conta conectada ou licença aceita. Quando houver uma ação pessoal, explicar o motivo em uma frase e deixar o próximo passo visível, sem pedir senha ou token no chat. A skill móvel deve ser curta, descobrir o gate vigente e apontar para as fontes canônicas em vez de repetir um manual que possa divergir.
+
+No Mac com 16 GiB, privilegiar uma ferramenta pesada por vez e evitar configurar emuladores redundantes. Não adicionar CocoaPods, JDK paralelo, Gradle global, Rosetta, fastlane ou serviços de loja só para parecer que o ambiente está completo; cada dependência precisa resolver um requisito observável do Pico Social.
+
+### Aprendizado da preparação independente
+
+Pico Social Preview virou o nome operacional do pacote sem apagar a procedência do ativo Pico Club. Android Studio e JDK puderam ser instalados e verificados sem abrir o wizard; manter Xcode em **Obter** e o SDK Android sem licença aceita tornou visível o limite entre preparação técnica e decisão pessoal. O JBR 25 atual do Studio não combina com o Gradle 8.14.3; um JDK 21 LTS separado evita uma falha futura sem introduzir Gradle global ou CocoaPods.
+
+A skill móvel curta funcionou melhor do que importar uma skill genérica: ela aponta para os gates e contratos existentes, usa os scripts reais e impede que sync seja narrado como build. O validador revelou a falta de PyYAML e passou depois da instalação no usuário; essa dependência agora faz parte do ambiente de autoria de skills, não do aplicativo. O diagnóstico por camada evita o falso estado “SDK pronto” quando existe apenas uma pasta. Oito testes nativos, lint, tipos, 170 testes e build demo passaram; nenhuma dessas provas substitui abrir as IDEs ou compilar os projetos.
+
+## Pico em aplicativo · critérios antes de codar · 15/09/2026
+
+O pacote deve parecer Pico desde a abertura, mas não pode usar splash, barra nativa ou animação para esconder uma página remota lenta ou uma navegação quebrada. Preservar Aura Manteiga, conteúdo social e próxima ação; distinguir claramente shell local, preview conectado e futuro build de loja. Nenhum estado interno pode sugerir instalação pública, suporte offline ou aprovação das lojas.
+
+Movimento tem causa e consequência. Pressão e seleção respondem em 160 ms; superfície, diálogo e troca contextual em 220 ms; gesto editorial opcional em até 280 ms, com a curva já definida. Animar principalmente opacidade e transformação, manter posição/foco e evitar bouncing, parallax, rotação da marca, blur animado e transição que atrase uma ação. `prefers-reduced-motion` remove deslocamento decorativo e mantém texto/estado imediatos.
+
+Ícones permanecem na família Lucide, 20–24 px, com traço 1,7 e 2 no estado ativo. Ícone sozinho exige nome acessível. Haptic deve ser raro e semântico: seleção leve, confirmação real ou aviso relevante; nunca a única pista, nunca em carregamento contínuo e nunca antes do retorno confirmado quando representa sucesso. Web e app compartilham a mesma gramática visual; barras do sistema, safe areas, teclado e gesto de voltar não podem cobrir conteúdo ou criar uma sexta navegação concorrente.
+
+A primeira revisão cobre shell sem rede, preview interno conectado e pelo menos uma rota social vizinha. A validação definitiva exige iPhone e Android reais para abertura, retorno do background, teclado, galeria/câmera quando acionadas, temas, texto ampliado e movimento reduzido. Simulador, WebView e build gerado devem ser nomeados como tais.
+
+### Aprendizado da fundação
+
+A navegação atual já usa links clientes; a sensação de corte seco vem da ausência de continuidade entre estados, não de recarga completa em toda troca. O empacotamento por si só não cria movimento nem melhora esse comportamento. Por isso a fundação preserva a gramática 160/220/280 ms como próximo lote e não espalha haptics antes do ensaio em aparelho.
+
+O shell padrão diz apenas que a estrutura foi sincronizada; o preview hospedado mantém nome e ID de laboratório. O marcador de runtime remove o convite redundante de instalação sem renomear a PWA ou esconder seus estados de rede/versão. Ícone e splash usam o mestre Pico Club; no Android, a palavra fica em foreground adaptativo com área segura e o fundo Aura separado. Quantizar o splash reduziu o peso sem trocar composição ou texto.
+
+Na rodada original da fundação, lint, tipos, 168 testes, configuração nativa, sync e build demo passaram. O shell local foi aberto no navegador interno no tema escuro e manteve marca, hierarquia e limite de estado; o favicon ausente observado nessa conferência foi corrigido. Splash e foreground também foram inspecionados como arquivos. Naquele momento Xcode completo, Android Studio, Java, Android SDK, simuladores e aparelhos não existiam no host. A preparação posterior instalou Studio/JDK, mas ainda não executou uma tela nativa; o resultado permanece descrito como fundação e preview interno, nunca como aplicativo pronto ou publicado.
+
 ## Vídeos maiores · critérios antes de codar · 14/09/2026
 
 O compositor deve mostrar o novo limite real em português e rejeitar excedentes antes de reservar espaço ou começar a rede. Progresso, prévia, audiência e publicação continuam distinguíveis; maior duração do envio não pode sugerir que o post já foi publicado. Erro recuperável conserva texto/destinos e permite escolher novamente. Não adicionar opção de compressão fictícia ou prometer suporte a todos os codecs MP4. Revisar mensagem e espera numa largura móvel, tema claro/escuro, sem redesenhar o editor.

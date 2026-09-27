@@ -1,0 +1,134 @@
+import sharp from 'sharp';
+import {
+  MOBILE_API_VERSION,
+  mobileCorsHeaders,
+  mobileError,
+  mobileJson,
+  mobileOptions,
+  readMobileJson,
+  validateMobileRequest,
+} from '@/lib/mobile/api-contract';
+import { asMobileError } from '@/lib/mobile/errors';
+import { createMobileDataClient, requireMobileUser } from '@/lib/mobile/supabase';
+import { createAdminClient } from '@/lib/supabase/admin';
+import { limitedBody } from '@/lib/supabase/api';
+import { exactKeys, MutationError, mutationFailure, textField, uuid } from '@/lib/supabase/mutations';
+import { MEDIA_LIMIT, mediaBucket, mediaPath, removeUnusedMedia, type MediaBucket } from '@/lib/supabase/media';
+
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
+async function actor(request: Request) {
+  const { accessToken } = validateMobileRequest(request);
+  const client = createMobileDataClient(accessToken!);
+  const user = await requireMobileUser(client, accessToken!);
+  return { client, user };
+}
+
+export function OPTIONS(request: Request) {
+  return mobileOptions(request);
+}
+
+export async function GET(request: Request) {
+  try {
+    const { client } = await actor(request);
+    const params = new URL(request.url).searchParams;
+    const bucket = mediaBucket(params.get('bucket'));
+    const path = mediaPath(params.get('path'));
+    const allowed = bucket === 'entity-media'
+      ? await client.rpc('can_read_entity_media', { p_path: path })
+      : await client.rpc('can_read_media', { p_bucket: bucket, p_path: path });
+    if (allowed.error) throw new MutationError(503, 'Não foi possível conferir o acesso à foto.');
+    if (!allowed.data) throw new MutationError(404, 'Foto indisponível.');
+    const { data, error } = await createAdminClient().storage.from(bucket).download(path, { cacheNonce: crypto.randomUUID() });
+    if (error || !data) throw new MutationError(404, 'Foto indisponível.');
+    return new Response(data, {
+      headers: {
+        ...mobileCorsHeaders(request.headers.get('origin')),
+        'Content-Disposition': 'inline; filename="pico.webp"',
+        'Content-Type': 'image/webp',
+        'Cross-Origin-Resource-Policy': 'cross-origin',
+      },
+    });
+  } catch (error) {
+    return mobileError(request, asMobileError(error));
+  }
+}
+
+export async function POST(request: Request) {
+  let path: string | undefined;
+  let reservedBucket: MediaBucket | undefined;
+  let ownerId: string | undefined;
+  try {
+    const { client, user } = await actor(request);
+    const admin = createAdminClient();
+    const params = new URL(request.url).searchParams;
+    const bucket = mediaBucket(params.get('bucket'));
+    const slot = bucket === 'entity-media'
+      ? textField(params.get('slot'), 5, 6)
+      : bucket === 'avatars' ? 'avatar' : 'post';
+    if (!['image/jpeg', 'image/png', 'image/webp'].includes(request.headers.get('content-type') ?? '')) {
+      throw new MutationError(415, 'Escolha uma foto JPG, PNG ou WebP de até 3 MB.');
+    }
+    const bytes = await limitedBody(request, MEDIA_LIMIT);
+    const reserved = bucket === 'entity-media'
+      ? await client.rpc('reserve_entity_media', {
+          p_kind: textField(params.get('kind'), 5, 9),
+          p_id: uuid(params.get('id')),
+          p_slot: slot,
+        })
+      : await client.rpc('reserve_media', { p_bucket: bucket });
+    if (reserved.error) mutationFailure(reserved.error);
+    path = reserved.data!;
+    reservedBucket = bucket;
+    ownerId = user.id;
+
+    let normalized: Buffer;
+    try {
+      const decoder = sharp(bytes, { limitInputPixels: 25_000_000, animated: false });
+      const metadata = await decoder.metadata();
+      if (!['jpeg', 'png', 'webp'].includes(metadata.format ?? '') || (metadata.pages ?? 1) > 1) throw new Error();
+      normalized = await decoder
+        .rotate()
+        .resize({ width: slot === 'avatar' ? 512 : 1600, height: slot === 'avatar' ? 512 : 1600, fit: 'inside', withoutEnlargement: true })
+        .webp({ quality: 82 })
+        .toBuffer();
+      if (normalized.length > MEDIA_LIMIT) throw new Error();
+    } catch {
+      throw new MutationError(400, 'Não foi possível ler essa foto. Use JPG, PNG ou WebP com até 25 megapixels.');
+    }
+
+    const uploaded = await admin.storage.from(bucket).upload(path, normalized, { contentType: 'image/webp', cacheControl: '0', upsert: false });
+    if (uploaded.error) throw new MutationError(503, 'Não foi possível enviar a foto. Tente novamente.');
+    const ready = bucket === 'entity-media'
+      ? await admin.from('entity_media_assets').update({ ready: true }).eq('path', path).eq('uploaded_by', user.id).eq('deleting', false).select('path').single()
+      : await admin.from('media_assets').update({ ready: true }).eq('path', path).eq('player_id', user.id).select('path').single();
+    if (ready.error) mutationFailure(ready.error);
+    return mobileJson(request, { data: { path, bucket }, apiVersion: MOBILE_API_VERSION }, { status: 201 });
+  } catch (error) {
+    if (path && reservedBucket && ownerId) {
+      const admin = createAdminClient();
+      const removed = await admin.storage.from(reservedBucket).remove([path]).catch(() => ({ error: true }));
+      if (!removed.error) {
+        if (reservedBucket === 'entity-media') {
+          await admin.from('entity_media_assets').delete().eq('path', path).eq('uploaded_by', ownerId).eq('ready', false);
+        } else {
+          await admin.from('media_assets').delete().eq('path', path).eq('player_id', ownerId).eq('ready', false);
+        }
+      }
+    }
+    return mobileError(request, asMobileError(error));
+  }
+}
+
+export async function DELETE(request: Request) {
+  try {
+    const body = await readMobileJson(request);
+    exactKeys(body, ['path', 'bucket']);
+    const { client, user } = await actor(request);
+    await removeUnusedMedia(client, createAdminClient(), user.id, mediaBucket(body.bucket), mediaPath(body.path));
+    return mobileJson(request, { data: { deleted: true }, apiVersion: MOBILE_API_VERSION });
+  } catch (error) {
+    return mobileError(request, asMobileError(error));
+  }
+}

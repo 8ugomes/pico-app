@@ -7,12 +7,14 @@ import { usePathname } from 'next/navigation';
 import { ArrowUpRight } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { installDevice, installInvitationKey } from '@/lib/install-guide';
+import { usePicoNativePackage } from '@/lib/native-runtime';
 
 export function InstallInvitation({ eligible, identity }: { eligible: boolean; identity: string | null }) {
   const path = usePathname();
+  const nativePackage = usePicoNativePackage();
   const [visibleFor, setVisibleFor] = useState<string | null>(null);
   useEffect(() => {
-    if (!eligible || !identity || path !== '/feed') return;
+    if (nativePackage || !eligible || !identity || path !== '/feed') return;
     const key = installInvitationKey(identity);
     const mode = matchMedia('(display-mode: standalone)');
     const standalone = () => mode.matches || Boolean((navigator as Navigator & { standalone?: boolean }).standalone);
@@ -49,8 +51,8 @@ export function InstallInvitation({ eligible, identity }: { eligible: boolean; i
       window.removeEventListener('online', defer); window.removeEventListener('offline', defer);
       window.removeEventListener('appinstalled', installed); window.removeEventListener('storage', changed); mode.removeEventListener('change', installed);
     };
-  }, [eligible, identity, path]);
-  if (!eligible || !identity || path !== '/feed' || visibleFor !== identity) return null;
+  }, [eligible, identity, nativePackage, path]);
+  if (nativePackage || !eligible || !identity || path !== '/feed' || visibleFor !== identity) return null;
   const dismiss = () => { try { localStorage.setItem(installInvitationKey(identity), 'dismissed'); } catch {} setVisibleFor(null); };
   return <aside className="install-invitation" aria-label="Pico Club na tela inicial">
     <Image src="/icons/pico-club-192.png" width={48} height={48} alt="" />

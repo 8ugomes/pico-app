@@ -37,7 +37,7 @@ export function TourLauncher() {
   if (!tour) return null;
   const resume = tour.progress?.status === 'paused';
   return <div className="tour-launcher">
-    <Button variant="quiet" size="small" onClick={() => tour.start(resume ? tour.progress?.step : 0)}><Compass size={18} aria-hidden="true" />{resume ? 'Retomar tutorial' : 'Conhecer o Pico'}</Button>
+    <Button variant="quiet" size="small" onClick={() => tour.start(resume ? tour.progress?.step : 0)}><Compass size={18} aria-hidden="true" />{resume ? 'Retomar guia' : 'Guia de 3 passos'}</Button>
     {resume && <Button variant="quiet" size="small" onClick={() => tour.start(0)}>Recomeçar</Button>}
   </div>;
 }
@@ -106,7 +106,7 @@ function TourProvider({ children, identity, demo = false, profileReady = false }
 
   useEffect(() => {
     if (!active || !key || routeStep === null || routeStep === progress?.step) return;
-    const next: TourProgress = { version: 1, status: 'active', step: routeStep };
+    const next: TourProgress = { version: 2, status: 'active', step: routeStep };
     queueMicrotask(() => setProgress(next));
     try { localStorage.setItem(key, JSON.stringify(next)); } catch { /* Preference only. */ }
   }, [active, key, routeStep, progress?.step]);
@@ -137,8 +137,9 @@ function TourProvider({ children, identity, demo = false, profileReady = false }
     function mark() {
       if (!live) return;
       const arenaDetail = stepIndex === 0 && path !== '/arenas';
-      const communityDetail = stepIndex === 2 && path !== '/comunidades';
-      const ids = arenaDetail ? ['arena-follow'] : communityDetail ? ['community-conditions'] : demo && stepIndex === 1 ? ['people-search'] : step.targets;
+      const communityDetail = stepIndex === 1 && /^\/comunidades\/[^/]+$/.test(path);
+      const communityList = stepIndex === 1 && path === '/comunidades';
+      const ids = arenaDetail ? ['arena-follow'] : communityDetail ? ['community-conditions'] : communityList ? ['community-explore'] : demo && stepIndex === 1 ? ['people-search'] : step.targets;
       const next = visibleTarget(ids);
       if (next !== current) {
         clear();
@@ -174,12 +175,12 @@ function TourProvider({ children, identity, demo = false, profileReady = false }
     focusNext.current = true;
     setCollapsed(false);
     setFinished(false);
-    save({ version: 1, status: 'active', step: index });
+    save({ version: 2, status: 'active', step: index });
     router.push(tourSteps[index].path);
   }
 
   function pause() {
-    save({ version: 1, status: 'paused', step: stepIndex });
+    save({ version: 2, status: 'paused', step: stepIndex });
     setFinished(false);
     // The close control is removed. Give keyboard users a stable destination.
     const main = document.getElementById('main-content');
@@ -202,22 +203,22 @@ function TourProvider({ children, identity, demo = false, profileReady = false }
   }
 
   let instruction: string = step.instruction;
-  if (stepIndex === 0 && path !== '/arenas') instruction = '“Acompanhar arena” cria um vínculo com esse lugar. “Joguei aqui” registra uma experiência passada, só para você. Nenhuma dessas ações indica presença ao vivo.';
-  if (stepIndex === 2 && path !== '/comunidades') instruction = 'Confira as condições deste grupo. Um pedido em análise ainda não libera conteúdo privado. Participar é uma escolha sua.';
-  if (demo && stepIndex === 1) instruction = 'Nesta demonstração, busque por nome, bairro ou esporte. Na conta conectada, você também pode filtrar pela arena acompanhada.';
+  if (stepIndex === 0 && path !== '/arenas') instruction = 'Acompanhar cria um vínculo com a arena. “Joguei aqui” registra uma experiência passada. Nenhuma ação indica presença ao vivo.';
+  if (stepIndex === 1 && path.startsWith('/comunidades/')) instruction = 'Confira como entrar. Um pedido em análise ainda não libera conteúdo privado e participar continua sendo uma escolha sua.';
+  if (demo && stepIndex === 1) instruction = 'Busque por nome, bairro ou esporte. Na conta conectada, você também pode filtrar por uma arena acompanhada.';
 
   const context = identity ? { progress, start, reportWelcomeSettled } : null;
   const offerInstallation = path === '/feed' && ready && !demo && installationJourneyReady({ profileReady, welcomeSettled, tourStatus: progress?.status, finishing: finished, editing });
   return <Tour.Provider value={context}><div ref={boundary} className="tour-boundary">
     {ready && !progress && path === '/feed' && <section className="tour-welcome" aria-labelledby={titleId}>
-      <h2 id={titleId}>Quer uma mão?</h2>
-      <div className="tour-welcome-actions"><Button variant="secondary" size="small" onClick={() => start()}>Conhecer o Pico <ArrowRight size={17} aria-hidden="true" /></Button><Button variant="quiet" onClick={() => save({ version: 1, status: 'dismissed', step: 0 })}>Agora não</Button></div>
-      <small>Guia opcional. Retome no Perfil.</small>
+      <h2 id={titleId}>Comece por aqui.</h2>
+      <div className="tour-welcome-actions"><Button variant="secondary" size="small" onClick={() => start()}>Ver 3 passos <ArrowRight size={17} aria-hidden="true" /></Button><Button variant="quiet" onClick={() => save({ version: 2, status: 'dismissed', step: 0 })}>Explorar sozinho</Button></div>
+      <small>Guia opcional. Retome pelo Perfil.</small>
     </section>}
     {active && <aside ref={panel} className="tour-guide" aria-labelledby={titleId} data-testid="guided-tour" onKeyDown={event => {
       if (event.key === 'Escape') { event.stopPropagation(); pause(); }
     }}>
-      <header className="tour-guide-header"><span className="tour-eyebrow">GUIA · {stepIndex + 1}/{tourSteps.length}</span><div>
+      <header className="tour-guide-header"><span className="tour-eyebrow">PASSO {stepIndex + 1} DE {tourSteps.length}</span><div>
         <button type="button" className="icon-button" aria-label={collapsed ? 'Expandir tutorial' : 'Recolher tutorial'} aria-expanded={!collapsed} onClick={() => setCollapsed(!collapsed)}><ChevronDown size={18} className={collapsed ? 'tour-chevron-up' : ''} aria-hidden="true" /></button>
         <Button variant="quiet" size="small" className="tour-pause" aria-label="Pausar tutorial" onClick={pause}><X size={16} aria-hidden="true" />Pausar</Button>
       </div></header>
@@ -231,14 +232,13 @@ function TourProvider({ children, identity, demo = false, profileReady = false }
         {!editing && <footer className="tour-guide-actions">
           {onTourRoute && targetAvailable && <Button variant="quiet" size="small" className="tour-point" onClick={pointToTarget}><LocateFixed size={18} aria-hidden="true" />Mostrar onde</Button>}
           {stepIndex > 0 && <Link href={tourSteps[stepIndex - 1].path} className={buttonVariants({ variant: 'quiet', size: 'small' })} aria-label={`Voltar: ${tourSteps[stepIndex - 1].label}`} onClick={() => { focusNext.current = true; }}><ArrowLeft size={16} aria-hidden="true" /></Link>}
-          {!onTourRoute ? <Link href={step.path} className={buttonVariants({ size: 'small' })}>Voltar ao passeio</Link> : stepIndex < tourSteps.length - 1 ? <Link href={tourSteps[stepIndex + 1].path} className={buttonVariants({ size: 'small' })} onClick={() => { focusNext.current = true; }}>Próxima: {tourSteps[stepIndex + 1].label}<ArrowRight size={16} aria-hidden="true" /></Link> : <Button size="small" onClick={() => { save({ version: 1, status: 'complete', step: stepIndex }); setFinished(true); }}>Concluir tutorial</Button>}
+          {!onTourRoute ? <Link href={step.path} className={buttonVariants({ size: 'small' })}>Voltar ao guia</Link> : stepIndex < tourSteps.length - 1 ? <Link href={tourSteps[stepIndex + 1].path} className={buttonVariants({ size: 'small' })} onClick={() => { focusNext.current = true; }}>Próximo: {tourSteps[stepIndex + 1].label}<ArrowRight size={16} aria-hidden="true" /></Link> : <Button size="small" onClick={() => { save({ version: 2, status: 'complete', step: stepIndex }); setFinished(true); }}>Concluir guia</Button>}
         </footer>}
       </>}
     </aside>}
     {ready && finished && <section className="tour-welcome tour-finish" aria-labelledby={titleId}>
-      <p className="tour-eyebrow" role="status">PASSEIO CONCLUÍDO</p><h2 id={titleId}>Agora, encontre seu Pico.</h2>
-      <p>Comece por uma arena que faz parte da sua história. Conhecer pessoas, participar e compartilhar ficam no seu ritmo.</p>
-      <div className="tour-welcome-actions"><Link href="/arenas" className={buttonVariants()} onClick={() => setFinished(false)}>Explorar arenas <ArrowRight size={17} aria-hidden="true" /></Link><Button variant="quiet" onClick={() => setFinished(false)}>Ficar no perfil</Button></div>
+      <p className="tour-eyebrow" role="status">GUIA CONCLUÍDO</p><h2 id={titleId}>Você já sabe por onde começar.</h2>
+      <div className="tour-welcome-actions"><Link href="/arenas" className={buttonVariants()} onClick={() => setFinished(false)}>Encontrar uma arena <ArrowRight size={17} aria-hidden="true" /></Link><Button variant="quiet" onClick={() => setFinished(false)}>Ficar aqui</Button></div>
     </section>}
     {children}
     {offerInstallation && <InstallInvitation eligible identity={identity} />}

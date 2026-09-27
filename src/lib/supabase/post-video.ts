@@ -1,4 +1,4 @@
-import { MutationError } from './mutations';
+import { MutationError } from './mutations.ts';
 
 export const POST_VIDEO_LIMIT = 45 * 1024 * 1024;
 export const VIDEO_CHUNK_SIZE = 1024 * 1024;

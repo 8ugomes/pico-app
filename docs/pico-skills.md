@@ -1,6 +1,6 @@
 # Pico — skills do projeto
 
-Conjunto local em `.agents/skills`: **16 skills**, sendo oito referências externas contextualizadas e oito skills próprias. A revisão de 13/09/2026 consolida Aura Manteiga, empresa/produto e redesign com onboarding assistido; a de 14/09/2026 acrescenta três adaptações operacionais do Agent Harness Kit. Não atualiza skills globais, plugins de outros projetos ou as revisões upstream das oito referências.
+Conjunto local em `.agents/skills`: **17 skills**, sendo oito referências externas contextualizadas e nove skills próprias. A revisão de 13/09/2026 consolida Aura Manteiga, empresa/produto e redesign com onboarding assistido; a de 14/09/2026 acrescenta três adaptações operacionais do Agent Harness Kit; a de 15/09/2026 acrescenta a entrada móvel do Pico Social. Não atualiza skills globais, plugins de outros projetos ou as revisões upstream das oito referências.
 
 ## Entrada principal
 
@@ -12,6 +12,7 @@ Para redesenhar o app inteiro, use **[pico-redesign](../.agents/skills/pico-rede
 | [pico-context](../.agents/skills/pico-context/SKILL.md) | Empresa, propósito, público, voz, marca, fatos conhecidos e lacunas. |
 | [pico-product-plan](../.agents/skills/pico-product-plan/SKILL.md) | Plano corrente, prioridades, dependências, aceite e estado de entrega. |
 | [pico-dev](../.agents/skills/pico-dev/SKILL.md) | Implementação na stack e preservação dos contratos. |
+| [pico-mobile](../.agents/skills/pico-mobile/SKILL.md) | Toolchains, Capacitor, builds, simuladores, aparelhos e gates do aplicativo Pico Social. |
 | [pico-deslopify](../.agents/skills/pico-deslopify/SKILL.md) | Clareza, densidade, personalidade, acessibilidade e revisão proporcional. |
 | [pico-slice-plan](../.agents/skills/pico-slice-plan/SKILL.md) | Delimita uma mudança verificável no plano corrente, sem grafo de tarefas paralelo. |
 | [pico-test-cycle](../.agents/skills/pico-test-cycle/SKILL.md) | Caracteriza/refina testes locais e regressão proporcional, distinguindo ambiente real. |

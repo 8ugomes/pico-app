@@ -1,5 +1,9 @@
 > Segurança de documentos: HTML dinâmico com nonce único e `no-store`; assets de build continuam cacheáveis. Sem service worker ou armazenamento offline privado. [Revisão do beta](BETA_SECURITY.md).
 
+## Transição para aplicativo · 15/09/2026
+
+A regra do Ciclo 9 que deixava aplicativo nativo fora da rodada foi superada pelo pedido de iniciar o empacotamento iOS/Android. A PWA continua sendo o produto publicado e não será removida. A primeira entrega é uma fundação Capacitor e um preview interno; não é um pacote de loja. Arquitetura, comandos e gates estão em [Pico em aplicativo](MOBILE_APP.md). Push, geolocalização contínua e cache offline social permanecem fora.
+
 ## Guia visual depois do onboarding · 13/09/2026
 
 `/instalar` agora usa figuras de iPhone/Safari e Android/Chrome, com animação controlável, variantes de Safari e alternativa estática. O convite imediato foi retirado: perfil completo, boas-vindas conferidas e tutorial concluído/dispensado liberam uma chamada discreta após 15 segundos de pausa no Início. Edição, formulário, diálogo, aba oculta, offline e modo instalado suspendem a oferta. Recusa e abertura ficam registradas por conta/navegador. Instalar continua opcional e a página pode ser aberta manualmente. [Implementação, fontes e evidências](install-guide-review/README.md).
@@ -19,7 +23,7 @@ Notificações internas de comunidade disponíveis no principal em `/notificacoe
 
 ## Base implementada
 
-Implementado: manifesto com id estável, nome Pico Club no principal e identificação distinta no desenvolvimento, ícones 192/512/maskable/apple, standalone, safe areas, alvos de toque e navegação móvel. `/instalar` orienta Chrome/Android, Safari/iOS e saída de navegadores internos. O convite de instalação é dispensável e o prompt nativo só aparece quando disponível.
+Implementado: manifesto com id estável, nome Pico Club no principal e identificação distinta no desenvolvimento, ícones 192/512/maskable/apple, standalone, safe areas, alvos de toque e navegação móvel. `/instalar` orienta Chrome/Android, Safari/iOS e saída de navegadores internos. O convite de instalação é dispensável e o prompt de instalação do navegador só aparece quando disponível. O pacote interno se identifica e não oferece instalar a PWA dentro dele.
 
 Versão compilada é exposta por endpoint sem dados pessoais; foco/retomada verificam versão e sessão. Atualizar exige ação explícita e avisa sobre edição não salva. Identidade trocada/logout descartam a árvore anterior; bfcache recarrega. Falha temporária preserva rascunho e indica rede indisponível, sem anunciar sucesso nem agendar publicação.
 
@@ -31,9 +35,9 @@ Chromium móvel emulado em 320/390/430 px: login, grupos, feed/perfil/admin, rec
 
 ## Pendências físicas
 
-Validar em Android/Chrome e iPhone/Safari reais: instalação pela tela inicial, teclado/câmera/galeria, orientação EXIF real, safe areas, zoom, relançamento, retomada de sessão e atualização entre versões. Emulação não comprova estes itens. Navegador e PWA podem manter sessões distintas; links externos não transportam sessão entre eles.
+Validar em Android/Chrome e iPhone/Safari reais: instalação pela tela inicial, teclado/câmera/galeria, orientação EXIF real, safe areas, zoom, relançamento, retomada de sessão e atualização entre versões. Emulação não comprova estes itens. Navegador, PWA e pacote podem manter sessões distintas; links externos não transportam sessão entre eles.
 
-Fora da rodada: app nativo, push, geolocalização contínua e estratégia de cache offline social. Avaliar service worker futuro somente com modelo explícito de privacidade e invalidação.
+Decisão histórica superada: o app nativo estava fora do Ciclo 9 e entrou no escopo em 15/09/2026. Continuam fora desta rodada: push, geolocalização contínua e estratégia de cache offline social. Avaliar service worker futuro somente com modelo explícito de privacidade e invalidação.
 
 ## Pós-jogo · 2026-09-12
 

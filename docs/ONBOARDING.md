@@ -12,11 +12,19 @@ O aviso da comunidade oficial e o tutorial opcional aparecem depois da configura
 
 # Conheça o Pico — tutorial guiado
 
-## Próxima direção — redesign Aura Manteiga
+## Atualização para o aplicativo · 18/09/2026
+
+O guia vigente ensina o essencial em três passos: **Arenas**, **Pessoas** e **Meus jogos**. Comunidades continuam encontráveis ao lado de Pessoas; Início e Perfil permanecem na navegação e não exigem uma visita didática. O percurso anterior de seis etapas foi substituído para reduzir leitura e tempo até a exploração.
+
+O payload local agora usa `version: 2`. O mesmo namespace `pico.tour.v1:account:<id>` ou `pico.tour.v1:demo` é mantido apenas para localizar e migrar preferências existentes sem misturar contas. Um payload v1 válido é convertido para a etapa equivalente; estados concluído, dispensado e pausado são preservados. Não há migration de banco nem novo estado remoto.
+
+Entrada anônima, tutorial e shell são estados separados. Antes de entrar, a pessoa vê somente marca, proposta curta, esportes, cadastro e login. Depois do acesso, o convite continua opcional, pode ser dispensado, pausado, retomado ou reiniciado no Perfil e nunca executa uma ação social.
+
+## Redesign Aura Manteiga
 
 Aura Manteiga aplicada ao convite, guia, formulário inicial e aviso institucional. O perfil inicial mostra quantos dos três dados essenciais estão preenchidos (nome, usuário e esporte), links às seções e dados opcionais separados. Isso indica preenchimento, sem afirmar salvamento. Textos do guia foram encurtados; “Mostrar onde” e “Pausar” têm rótulos visíveis. Em altura curta o painel entra no fluxo da página; a navegação reserva sua altura medida quando o texto cresce.
 
-As seis etapas, IDs e ordem foram preservados: `pico.tour.v1:account:<id>` e `pico.tour.v1:demo` continuam compatíveis, sem migration nem novo estado remoto. Pausa/dispensa, retomada voluntária, isolamento entre contas/origem/demo e suspensão durante edição/diálogo permanecem. Perfil inicial e aviso oficial confirmado no servidor continuam separados do tutorial. [Oito grupos de regressão e oito layouts](aura-redesign-review/onboarding/checks.json), incluindo armazenamento negado, múltiplas abas, falhas/vazios e nenhuma gravação social; [demo compilado](aura-redesign-review/onboarding/demo-checks.json) completou as seis etapas sem APIs sociais.
+Pausa/dispensa, retomada voluntária, isolamento entre contas/origem/demo e suspensão durante edição/diálogo permanecem. Perfil inicial e aviso oficial confirmado no servidor continuam separados do tutorial. O histórico do redesign de seis etapas permanece em [oito grupos de regressão e oito layouts](aura-redesign-review/onboarding/checks.json); a versão atual migra essas preferências e reduz o percurso sem APIs sociais.
 
 ## Problema e resultado esperado
 
@@ -30,12 +38,9 @@ Objetivos: reconhecer a proposta social, conseguir localizar pessoas ligadas a u
 | --- | --- | --- |
 | Arenas | Buscar e abrir uma arena; acompanhar no detalhe | Vínculo com um lugar conhecido, sem presença ao vivo |
 | Pessoas | Abrir filtros e selecionar uma arena acompanhada | Afinidade por esporte, nível e vínculos visíveis; acompanhar não envia convite |
-| Comunidades | Explorar e conhecer as condições do grupo | Propósito, regras, entrada aberta/aprovação/convite e limite do pedido pendente |
-| Início | Abrir o compositor | Relações e publicações; audiência e destinos antes de enviar |
 | Meus jogos | Abrir Registrar jogo | Arena/modalidade/data, registro retrospectivo privado e compartilhamento separado |
-| Perfil | Editar e localizar os vínculos/controles pessoais | Identidade, Meus Picos, Meus jogos, privacidade e retomada do tutorial |
 
-Os números indicam a posição no passeio, não a conclusão de ações sociais. Navegar por uma aba acompanha a etapa correspondente; detalhes de arena e comunidade adaptam a instrução. “Mostrar onde” recolhe a dica, destaca, rola e foca o controle real. Não clica em botões de gravação. A pessoa pode explorar, voltar, avançar, recolher ou pausar sem seguir ninguém, entrar em um grupo ou enviar conteúdo. A tela permanece utilizável; não há máscara bloqueando o aplicativo.
+Os números indicam a posição no passeio, não a conclusão de ações sociais. Detalhes de arena mantêm a primeira etapa; Pessoas e detalhes de perfis/comunidades mantêm a segunda; Jogos mantém a terceira. Início, Perfil e publicações não mudam o passo. “Mostrar onde” recolhe a dica, destaca, rola e foca o controle real. Não clica em botões de gravação. A pessoa pode explorar, voltar, avançar, recolher ou pausar sem seguir ninguém, entrar em um grupo ou enviar conteúdo. A tela permanece utilizável; não há máscara bloqueando o aplicativo.
 
 ## Requisitos e aceite
 
@@ -63,7 +68,7 @@ Hipóteses para um teste futuro com cinco praticantes: pelo menos quatro devem e
 
 ## Entrega e verificação
 
-Implementação local concluída. Lint, typecheck, builds conectado/demo e 84 testes locais aprovados. Percurso Chromium no app compilado com APIs isoladas passou sem gravações sociais; demo percorreu as seis etapas. Oito medições cobrem 320–1280 px, altura reduzida e texto 200%. [Capturas, checks e reprodução](onboarding-review/README.md). Não houve publicação, exercício de Supabase hospedado, teste físico ou pesquisa com jogadores nesta rodada.
+Implementação local concluída. Lint, typecheck, build demo e 172 testes locais aprovados. Percursos Chromium com APIs isoladas e em demo passaram pelos três passos sem gravações sociais. Oito medições cobrem 320–1280 px, altura reduzida e texto 200%; a entrada sem sessão também foi conferida nos temas claro e escuro sem navegação social. Não houve publicação, exercício de Supabase hospedado, teste físico ou pesquisa com jogadores nesta rodada.
 
 ## Comunidade inicial
 

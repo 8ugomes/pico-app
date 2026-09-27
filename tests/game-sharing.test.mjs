@@ -82,4 +82,5 @@ test('sharing rejects forged author/date, missing version and excessive destinat
  const input={id:randomUUID(),key:randomUUID(),version:1,body:'',audience:'beta',groups:[]};
  assert.equal(parseGameShare(input).body,'');
  for(const change of [{playerId:BOB},{playedOn:'2026-01-01'},{version:0},{version:undefined},{groups:Array(6).fill(randomUUID())},{audience:'public'}]) assert.throws(()=>parseGameShare({...input,...change}));
+ assert.throws(()=>parseGameShare({...input,body:'Eu vou te matar depois do jogo'}));
 });

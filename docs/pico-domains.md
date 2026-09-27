@@ -25,13 +25,14 @@ Apresentação Aura Manteiga aplicada em 13/09/2026; [cobertura por domínio/rot
 | Fotos e mídia | [Perfil/HEIC](CYCLE10_PROFILE.md), [contratos](CYCLE9_CONTRACTS.md), `photos/PhotoCropper`, `connected/EntityPhotos`, `src/lib/photos`, `src/lib/supabase/media.ts` | Dono, limites, recorte, remoção e acesso à mídia; não usar fotos sintéticas como pessoas reais. |
 | Conta, segurança e gestão | [Contratos](CYCLE9_CONTRACTS.md), [contrato oficial](OFFICIAL_COMMUNITY_AUTH.md), `connected/ConnectedAccount`, `SafetyActions`, `Management`, `ScopeInvitation` | Bloqueio, denúncia, convites, exclusão e confirmações sensíveis continuam claros e funcionais. |
 | PWA e retomada | [Roadmap](pwa-roadmap.md), `PwaExperience`, `AppShell`, `BottomNav`, `src/app/manifest.ts` | Identidade estável de instalação, safe areas, sessão/versão e rascunhos; sem promessa offline ou sincronização inexistente. |
+| Aplicativo e distribuição | [Plano mobile](MOBILE_APP.md), `capacitor.config.ts`, `native-shell/`, `ios/`, `android/`, `scripts/native-*` | PWA em paralelo, shell local por padrão, URL hospedada só em preview, sessão/mídia privadas e contratos intactos; não declarar build, assinatura ou loja sem comprovação. |
 | Dados e operação | [Schema](04_SUPABASE_SCHEMA.md), [ambientes](ENVIRONMENTS.md), [governança](GITHUB_GOVERNANCE.md), `src/lib/supabase`, `src/app/api`, `supabase/migrations` | RLS/autoria/audiência, segredos e dados existentes. Uma atualização visual não exige migrations. Publicação depende do pedido em execução. |
 
 Os nomes de componentes acima são relativos a `src/components/pico/`, salvo caminho explícito. Os contratos históricos de convite/admissão foram substituídos pela abertura documentada em `OFFICIAL_COMMUNITY_AUTH.md`; as demais permissões continuam vigentes.
 
 ## Dimensões do redesign integral
 
-Cruzar cada domínio com: arquitetura de informação e próxima ação; hierarquia visual; claro/escuro; conteúdo e voz; controles e estados; acessibilidade e responsividade; assistência e continuidade; privacidade e confiança; desempenho e PWA. Usar apenas dimensões aplicáveis, sem criar telas ou estados artificiais para preencher uma matriz.
+Cruzar cada domínio com: arquitetura de informação e próxima ação; hierarquia visual; claro/escuro; conteúdo e voz; controles e estados; acessibilidade e responsividade; assistência e continuidade; privacidade e confiança; desempenho, PWA e plataforma empacotada quando aplicável. Usar apenas dimensões aplicáveis, sem criar telas ou estados artificiais para preencher uma matriz.
 
 Inventariar **todas** as superfícies existentes e registrar o que mudou, já estava conforme ou ficou bloqueado. A cobertura do projeto é integral; a amostra visual durante a criação pode ser pequena. Começar por entrada/onboarding, Início, perfil e um fluxo de criação; propagar os componentes aprovados e verificar exceções. Ampliar a amostra se um defeito indicar alcance maior.
 

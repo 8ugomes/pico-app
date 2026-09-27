@@ -395,24 +395,30 @@ export type Database = {
           body: string
           created_at: string
           id: string
+          idempotency_key: string | null
           moderated_at: string | null
           post_id: string
+          request_digest: string | null
         }
         Insert: {
           author_id?: string
           body: string
           created_at?: string
           id?: string
+          idempotency_key?: string | null
           moderated_at?: string | null
           post_id: string
+          request_digest?: string | null
         }
         Update: {
           author_id?: string
           body?: string
           created_at?: string
           id?: string
+          idempotency_key?: string | null
           moderated_at?: string | null
           post_id?: string
+          request_digest?: string | null
         }
         Relationships: [
           {
@@ -1358,6 +1364,11 @@ export type Database = {
         Returns: Json
       }
       community_page: { Args: { p_slug: string }; Returns: Json }
+      create_comment_idempotent: {
+        Args: { p_body: string; p_key: string; p_post: string }
+        Returns: string
+      }
+      mobile_account_access_state: { Args: never; Returns: string }
       create_community: { Args: { p_data: Json }; Returns: Json }
       create_official_community: { Args: { p_arena: string }; Returns: string }
       delete_played_game: { Args: { p_id: string }; Returns: undefined }

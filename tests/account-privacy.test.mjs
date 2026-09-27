@@ -53,3 +53,15 @@ test('oversized account archives fail explicitly instead of silently omitting re
   await db.exec('reset role');
  }finally{await db.close();}
 });
+
+test('account export supplement includes the subject notification inbox', async () => {
+ const db=await createTestDatabase();try{
+  const community=await asUser(db,ALICE,async()=>(await db.query('select public.create_community($1) data',[{name:'Turma da exportação',description:'',rules:'',entry_mode:'open',visibility:'beta',sports:[]}])).rows[0].data.id);
+  await asUser(db,BOB,()=>db.query("select public.community_membership($1,'join')",[community]));
+  await db.exec('set role service_role');
+  const extra=(await db.query('select public.export_account_media_extra($1) data',[ALICE])).rows[0].data;
+  assert.equal(extra.notifications_received.length,1);
+  assert.equal(extra.notifications_received[0].actor_id,BOB);
+  await db.exec('reset role');
+ }finally{await db.close();}
+});
