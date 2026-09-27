@@ -36,6 +36,8 @@
 .messages-log { display: flex; flex-direction: column; gap: .85rem; list-style: none; margin: 0; padding: 0; }
 .messages-bubble { align-self: flex-start; min-width: 0; max-width: 90%; padding: .8rem 1rem .65rem; border-radius: 20px 20px 20px 6px; background: var(--surface); border: 1px solid var(--border-subtle); }
 .messages-bubble-own { align-self: flex-end; border-radius: 20px 20px 6px 20px; background: var(--accent-soft); }
+.messages-message-heading { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
+.messages-message-heading .content-menu-trigger { flex-shrink: 0; }
 .messages-author { font-size: var(--text-caption); font-weight: 700; overflow-wrap: anywhere; }
 .messages-bubble p { margin: .4rem 0 .5rem; font-size: 1rem; line-height: 1.6; white-space: pre-wrap; overflow-wrap: anywhere; }
 .messages-message-meta { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem .65rem; font-size: .75rem; color: var(--text-secondary); line-height: 1.5; }

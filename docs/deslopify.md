@@ -1,3 +1,23 @@
+## Frente 1 · intenção de conexão e denúncia de mensagem · critérios antes de codar · 26/09/2026
+
+O aviso de acompanhamento deve parecer uma intenção humana, não uma métrica social. Mostrar foto, nome e a frase concreta “começou a acompanhar você”. Sem contagem de seguidores, urgência ou aceitação automática. A próxima ação fica junto do aviso: abrir o perfil, acompanhar de volta ou ignorar por agora; bloquear permanece num menu de segurança com consequência explícita.
+
+Reciprocidade precisa de texto, não só de cor ou troca de botão. Antes do retorno: “Você decide se quer acompanhar de volta.” Depois: “Vocês se acompanham.” A conversa só aparece como ação quando o recurso realmente estiver habilitado; com os gates fechados, a interface não promete um canal disponível. Deixar de acompanhar não apaga o histórico de conversa já existente, enquanto bloquear revoga o acesso conforme o contrato atual.
+
+Na conversa, denunciar pertence à mensagem recebida. O menu deve ficar associado ao balão sem disputar com o texto, a data ou o envio. O diálogo informa que a denúncia é privada e que o conteúdo não some automaticamente. Não oferecer denúncia da própria mensagem nem chamar armazenamento de “entrega” ou “leitura”. Em 320 px e texto ampliado, o alvo continua com 44 px, o menu não alarga o histórico e as ações seguem acessíveis por teclado.
+
+A moderação mostra somente a mensagem referenciada e registra a inspeção. Para mensagem, as medidas desta fatia são arquivar o caso ou suspender o autor; não exibir “Ocultar conteúdo” se o sistema ainda não tem ocultação individual de mensagem. Nenhum operador ganha navegação pela conversa inteira.
+
+Amostra prevista: notificação unilateral, retorno confirmado, estado lido/ignorado, menu de bloqueio, conversa com mensagem própria/alheia e diálogo de denúncia; 320/390 px e desktop, claro/escuro e texto ampliado. Corrigir em lote. Fixture local e banco descartável não equivalem a usuário real, transporte push ou aparelho físico.
+
+### Aprendizado da implementação e inspeção
+
+O aviso ficou mais legível quando a intenção, o estado da relação e as ações ocuparam blocos distintos. O avatar/perfil mantém alvo de 44 × 44 px; em largura estreita, título e botões usam tamanho/padding próprios para preservar palavras inteiras com texto a 200%. A ação “Ignorar por agora” marca somente o aviso como lido. Nenhuma escolha acompanha, conversa ou bloqueia por consequência implícita.
+
+A denúncia funciona melhor no cabeçalho do balão recebido: o menu não aparece na mensagem própria e a evidência do operador preserva quebras de linha e tokens longos sem alargar o diálogo. Bloquear pela conversa agora avisa que o histórico deixará de ser acessível e orienta denunciar primeiro. Isso não resolve o caso em que o remetente bloqueia antes da denúncia; com DMs desligadas, essa lacuna permanece gate de ativação, não acabamento omitido.
+
+A inspeção local percorreu 54 combinações iniciais e os cenários corrigidos em 320/390/1280 px, claro/escuro e texto a 200%, sem overflow horizontal nem erro de console. O modal permaneceu rolável, com foco e envio alcançável. Chromium e fixtures não comprovam VoiceOver/TalkBack, aparelho físico, transporte push ou backend hospedado.
+
 ## Cliente iOS local · critérios antes de codar · 18/09/2026
 
 O cliente empacotado deve parecer um aplicativo do Pico desde o primeiro quadro, sem reproduzir a moldura do site nem explicar a arquitetura. A entrada usa marca, uma frase de valor e Criar conta/Entrar. Depois da sessão válida, Início abre no conteúdo; a navegação mantém cinco destinos e Perfil reúne Meus jogos, conta e ajuda sem criar uma sexta aba.

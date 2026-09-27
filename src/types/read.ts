@@ -27,7 +27,7 @@ export type ReadData =
   | { kind: 'profile'; profile: ReadProfile }
   | { kind: 'account'; viewerId: string; deletionPending: boolean; blocks: { blocked_id: string; blocked_name: string }[]; reports: { id: string; reason: string; status: string; created_at: string }[]; media: { path: string; bucket: string; ready: boolean; inUse: boolean }[] }
   | { kind: 'discover'; players: DiscoveryRow[]; hasMore: boolean }
-  | { kind: 'player'; profile: ReadProfile; own: boolean; connected: boolean }
+  | { kind: 'player'; profile: ReadProfile; own: boolean; connected: boolean; followsYou: boolean; mutual: boolean }
   | { kind: 'feed'; posts: FeedRow[]; hasMore: boolean; viewerId: string }
   | { kind: 'comments'; comments: ReadComment[]; hasMore: boolean; viewerId: string }
   | { kind: 'sports'; sports: ReadSport[] };

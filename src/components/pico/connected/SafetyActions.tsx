@@ -8,9 +8,9 @@ import { ContentMenu, type ContentMenuItem } from '../ContentMenu';
 import { useMutation, MutationNotice } from './useMutation';
 
 type EditableContent = { body: string; maxLength: number; save: (body: string) => Promise<void> };
-export function SafetyActions({ target, id, own = false, playerId, name, edit, onRemoveFromWall, onChange }: {
-  target: 'player' | 'post' | 'comment'; id: string; own?: boolean; playerId?: string; name?: string;
-  edit?: EditableContent; onRemoveFromWall?: () => void; onChange: () => void;
+export function SafetyActions({ target, id, own = false, playerId, name, edit, onRemoveFromWall, onChange, redirectOnBlock = false }: {
+  target: 'player' | 'post' | 'comment' | 'message'; id: string; own?: boolean; playerId?: string; name?: string;
+  edit?: EditableContent; onRemoveFromWall?: () => void; onChange: () => void; redirectOnBlock?: boolean;
 }) {
   const [mode, setMode] = useState<'report' | 'block' | 'delete' | 'edit' | null>(null);
   const [reason, setReason] = useState<'spam' | 'harassment' | 'unsafe' | 'other'>('spam');
@@ -20,7 +20,10 @@ export function SafetyActions({ target, id, own = false, playerId, name, edit, o
   const [editError, setEditError] = useState('');
   const mutation = useMutation();
   const router = useRouter();
-  const noun = target === 'player' ? 'perfil' : target === 'post' ? 'publicação' : 'comentário';
+  const noun = target === 'player' ? 'perfil' : target === 'post' ? 'publicação' : target === 'comment' ? 'comentário' : 'mensagem';
+  const blockNote = target === 'message'
+    ? 'Bloquear encerra seu acesso ao histórico. Se também quiser denunciar esta mensagem, cancele e envie a denúncia primeiro. As conexões serão removidas e você pode desbloquear em Privacidade e conta.'
+    : 'Vocês deixarão de ver os perfis, publicações e fotos um do outro. As conexões serão removidas. Você pode desbloquear em Privacidade e conta.';
   const items: ContentMenuItem[] = [];
   const chooseMode = (next: typeof mode) => { mutation.clearMessage(); setMode(next); };
   if (own && target !== 'player') {
@@ -33,7 +36,7 @@ export function SafetyActions({ target, id, own = false, playerId, name, edit, o
   if (onRemoveFromWall) items.push({ label: 'Retirar deste mural', icon: <PanelTopClose size={19} aria-hidden="true" />, onSelect: onRemoveFromWall });
   const title = mode === 'edit' ? `Editar ${noun}` : mode === 'report' ? 'Denunciar' : mode === 'block' ? 'Bloquear jogador?' : `Excluir ${noun}?`;
   return <>
-    <ContentMenu label={`Opções ${target === 'post' ? 'da' : 'do'} ${noun}${name ? ` de ${name}` : ''}`} items={items} />
+    <ContentMenu label={`Opções ${target === 'post' || target === 'message' ? 'da' : 'do'} ${noun}${name ? ` de ${name}` : ''}`} items={items} />
     <Modal open={mode !== null} onClose={() => { if (!mutation.busy && !saving) setMode(null); }} title={title}>
       {mode === 'edit' && edit ? <form className="connected-form" onSubmit={async e => {
         e.preventDefault(); if (saving || !draft.trim() || draft.trim().length > edit.maxLength) return;
@@ -53,10 +56,10 @@ export function SafetyActions({ target, id, own = false, playerId, name, edit, o
         <label className="input-group">O que aconteceu? (opcional)<textarea className="input" maxLength={500} rows={3} value={details} onChange={e => setDetails(e.target.value)} /></label>
         <p className="form-note">A denúncia é privada. Não inclua senhas ou dados sensíveis.</p><Button type="submit">{mutation.busy ? 'Enviando…' : 'Enviar denúncia'}</Button>
       </fieldset></form> : <>
-        <p className="form-note">{mode === 'block' ? 'Vocês deixarão de ver os perfis, publicações e fotos um do outro. As conexões serão removidas. Você pode desbloquear em Privacidade e conta.' : 'O conteúdo será removido e não poderá ser recuperado.'}</p>
+        <p className="form-note">{mode === 'block' ? blockNote : 'O conteúdo será removido e não poderá ser recuperado.'}</p>
         <div className="content-edit-actions"><Button variant="secondary" disabled={mutation.busy} onClick={() => setMode(null)}>Cancelar</Button><Button disabled={mutation.busy} onClick={async () => {
           const input = mode === 'block' && playerId ? { action: 'set_block' as const, playerId, blocked: true } : { action: (target === 'post' ? 'delete_post' : 'delete_comment') as 'delete_post' | 'delete_comment', id };
-          if (await mutation.run(input, mode === 'block' ? 'Jogador bloqueado.' : 'Conteúdo excluído.')) { setMode(null); onChange(); if (mode === 'block' && target === 'player') router.replace('/descobrir'); }
+          if (await mutation.run(input, mode === 'block' ? 'Jogador bloqueado.' : 'Conteúdo excluído.')) { setMode(null); onChange(); if (mode === 'block' && redirectOnBlock) router.replace('/descobrir'); }
         }}>{mutation.busy ? 'Aguarde…' : mode === 'block' ? 'Bloquear' : 'Excluir definitivamente'}</Button></div>
       </>}
       <MutationNotice message={mutation.message} />

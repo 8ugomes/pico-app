@@ -8,6 +8,9 @@ import { mediaUrl } from '@/lib/supabase/media';
 import { useNotifications } from './NotificationsProvider';
 import { MutationNotice } from './connected/useMutation';
 import { PushSettings } from './PushSettings';
+import { ConnectionButton } from './connected/ConnectedDiscovery';
+import { SafetyActions } from './connected/SafetyActions';
+import { OpenMessageButton } from './MessageLink';
 
 export function NotificationsView() {
   const { data, error, loading, refreshing, busy, demo, notice, refresh, markRead, cursor, setCursor } = useNotifications();
@@ -16,21 +19,27 @@ export function NotificationsView() {
   const unread = data?.unreadCount ?? 0;
   return <section className="notifications-page" aria-labelledby="notifications-title">
     <div className="page-heading"><h1 id="notifications-title">Notificações</h1><Button variant="quiet" size="small" onClick={refresh} disabled={refreshing || demo} aria-label="Atualizar notificações"><RefreshCw size={18} aria-hidden="true" /></Button></div>
-    <p className="notifications-intro">Entradas e menções nas suas comunidades.</p>
+    <p className="notifications-intro">Acompanhamentos, entradas e menções nas suas comunidades.</p>
     <PushSettings demo={demo} />
     {unread > 0 && <div className="notifications-toolbar"><span>{unread} não {unread === 1 ? 'lida' : 'lidas'}</span><Button variant="quiet" size="small" disabled={busy || refreshing} onClick={() => void markRead()}><CheckCheck size={18} aria-hidden="true" />Marcar todas como lidas</Button></div>}
     <MutationNotice message={notice} />
     {loading && <p className="read-source" role="status">Carregando notificações…</p>}
     {error && <div className="read-message" role="alert"><h2>Não deu para carregar.</h2><p>{error}</p><Button onClick={refresh}>Tentar novamente</Button></div>}
     {data && data.items.length === 0 && <div className="social-empty"><Bell size={28} aria-hidden="true" /><h2>{cursor ? 'Fim das notificações.' : 'Nenhuma notificação por enquanto.'}</h2><p>{demo ? 'Na demonstração, ninguém entra ou marca pessoas de verdade. Suas notificações aparecem quando você usa sua conta.' : 'Entradas e menções nas suas comunidades aparecem aqui.'}</p></div>}
-    {data && data.items.length > 0 && <ul className="notifications-list" aria-label="Atividade nas suas comunidades">
+    {data && data.items.length > 0 && <ul className="notifications-list" aria-label="Sua atividade recente">
       {data.items.map(item => <li key={item.id} className={`notification-row ${item.read_at ? '' : 'notification-unread'}`}>
-        <span className="notification-person" aria-hidden="true">{item.actor_avatar_path
+        {item.kind === 'new_follower' ? <Link className="notification-person" href={'/perfil/' + encodeURIComponent(item.actor_username)} aria-label={`Abrir perfil de ${item.actor_name}`}>{item.actor_avatar_path
           ? <Image unoptimized src={mediaUrl('avatars', item.actor_avatar_path)!} width={44} height={44} alt="" />
-          : <UserRound size={22} />}</span>
-        <div className="notification-content"><p><strong>{item.actor_name}</strong> {item.kind === 'community_join' ? <>entrou na comunidade <Link href={'/comunidades/' + item.community_slug}>{item.community_name}</Link>.</> : <>{item.kind === 'community_mention_all' ? 'marcou @todos' : 'marcou você'} em <Link href={'/publicacoes/' + item.post_id}>{item.community_name}</Link>.</>}</p>
+          : <UserRound size={22} aria-hidden="true" />}</Link> : <span className="notification-person" aria-hidden="true">{item.actor_avatar_path
+          ? <Image unoptimized src={mediaUrl('avatars', item.actor_avatar_path)!} width={44} height={44} alt="" />
+          : <UserRound size={22} />}</span>}
+        <div className="notification-content">{item.kind === 'new_follower' ? <>
+          <p><Link href={'/perfil/' + encodeURIComponent(item.actor_username)}><strong>{item.actor_name}</strong></Link> começou a acompanhar você.</p>
+          <p className="notification-context">{item.recipient_follows_actor ? 'Vocês se acompanham.' : 'Você decide se quer acompanhar de volta.'}</p>
+          <div className="notification-actions"><ConnectionButton playerId={item.actor_id} connected={item.recipient_follows_actor} followsYou refresh={refresh} />{item.recipient_follows_actor && <OpenMessageButton playerId={item.actor_id} />}<SafetyActions target="player" id={item.actor_id} playerId={item.actor_id} name={item.actor_name} onChange={refresh} /></div>
+        </> : <p><strong>{item.actor_name}</strong> {item.kind === 'community_join' ? <>entrou na comunidade <Link href={'/comunidades/' + item.community_slug}>{item.community_name}</Link>.</> : <>{item.kind === 'community_mention_all' ? 'marcou @todos' : 'marcou você'} em <Link href={'/publicacoes/' + item.post_id}>{item.community_name}</Link>.</>}</p>}
           <div className="notification-meta"><time dateTime={item.created_at}>{new Date(item.created_at).toLocaleString('pt-BR', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</time><span>{item.read_at ? 'Lida' : 'Não lida'}</span></div>
-          {!item.read_at && <Button variant="quiet" size="small" disabled={busy || refreshing} onClick={() => void markRead([item.id])} aria-label={`Marcar como lida: ${item.actor_name} em ${item.community_name}`}><Check size={16} aria-hidden="true" />Marcar como lida</Button>}
+          {!item.read_at && <Button variant="quiet" size="small" disabled={busy || refreshing} onClick={() => void markRead([item.id])} aria-label={item.kind === 'new_follower' ? `Ignorar por agora: ${item.actor_name}` : `Marcar como lida: ${item.actor_name} em ${item.community_name}`}><Check size={16} aria-hidden="true" />{item.kind === 'new_follower' ? 'Ignorar por agora' : 'Marcar como lida'}</Button>}
         </div>
       </li>)}
     </ul>}

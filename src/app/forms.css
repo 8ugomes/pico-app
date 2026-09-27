@@ -62,14 +62,16 @@ select.input option { background: var(--surface-overlay); color: var(--foregroun
 .pico-dialog[open] { display: flex; flex-direction: column; }
 .pico-dialog::backdrop { background: rgb(40 33 33 / 60%); }
 .dialog-heading { display: flex; flex-shrink: 0; align-items: center; justify-content: space-between; gap: var(--space-3); padding: var(--space-4) var(--space-5) var(--space-3) var(--space-6); }
-.dialog-heading h2 { font-size: var(--text-dialog); line-height: 1.3; letter-spacing: -.02em; font-weight: 600; margin: 0; overflow-wrap: anywhere; }
-.dialog-heading .icon-button { background: var(--glass); }
+.dialog-heading h2 { flex: 1; min-width: 0; font-size: var(--text-dialog); line-height: 1.3; letter-spacing: -.02em; font-weight: 600; margin: 0; overflow-wrap: break-word; word-break: normal; hyphens: none; }
+.dialog-heading .icon-button { flex-shrink: 0; background: var(--glass); }
 .dialog-body { min-height: 0; padding: var(--space-2) var(--space-6) var(--space-6); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--border-control-raised) transparent; scroll-padding-block: var(--space-4); }
 .dialog-body > .connected-form, .dialog-body > .social-form { margin-top: 0; }
 .dialog-body > form:not(.connected-form):not(.social-form) { display: grid; gap: var(--space-4); }
 .dialog-body > p { color: var(--text-secondary); line-height: 1.6; margin: 0 0 var(--space-5); font-size: var(--text-body); }
 .dialog-body > .input-group { margin-bottom: var(--space-5); }
 .dialog-body > .button { margin-block: var(--space-3); }
+.pico-dialog .button { overflow-wrap: break-word; word-break: normal; hyphens: none; }
+.reported-message-evidence { margin: var(--space-3) 0; padding: var(--space-3) var(--space-4); border-inline-start: 3px solid var(--border-control); color: var(--foreground); white-space: pre-wrap; overflow-wrap: anywhere; }
 .dialog-body .photo-upload { margin-block: var(--space-2); }
 .dialog-body [role=alert] { color: var(--error); }
 .publication-composer { margin: 0 0 var(--space-6); }

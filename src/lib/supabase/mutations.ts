@@ -15,7 +15,7 @@ export type Mutation = { action: 'save_profile'; name: string; username: string;
   | { action: 'delete_post'; id: string } | { action: 'delete_comment'; id: string }
   | { action: 'edit_comment'; id: string; body: string }
   | { action: 'set_block'; playerId: string; blocked: boolean }
-  | { action: 'report'; target: 'player' | 'post' | 'comment'; id: string; reason: 'spam' | 'harassment' | 'unsafe' | 'other'; details: string };
+  | { action: 'report'; target: 'player' | 'post' | 'comment' | 'message'; id: string; reason: 'spam' | 'harassment' | 'unsafe' | 'other'; details: string };
 export function invalid(): never { throw new MutationError(400, 'Confira os campos e tente novamente.'); }
 export function textField(value: unknown, min: number, max: number): string {
   if (typeof value !== 'string') return invalid();
@@ -83,8 +83,8 @@ export function parseMutation(value: unknown): Mutation {
   }
   if (body.action === 'report') {
     exactKeys(body, ['action','target','id','reason','details']);
-    if (!['player','post','comment'].includes(String(body.target)) || !['spam','harassment','unsafe','other'].includes(String(body.reason))) return invalid();
-    return { action: body.action, target: body.target as 'player' | 'post' | 'comment', id: uuid(body.id), reason: body.reason as 'spam' | 'harassment' | 'unsafe' | 'other', details: textField(body.details,0,500) };
+    if (!['player','post','comment','message'].includes(String(body.target)) || !['spam','harassment','unsafe','other'].includes(String(body.reason))) return invalid();
+    return { action: body.action, target: body.target as 'player' | 'post' | 'comment' | 'message', id: uuid(body.id), reason: body.reason as 'spam' | 'harassment' | 'unsafe' | 'other', details: textField(body.details,0,500) };
   }
   if (body.action === 'set_connection') {
     exactKeys(body, ['action', 'playerId', 'connected']);
@@ -148,6 +148,15 @@ export async function mutateSocial(client: SupabaseClient<Database>, input: Muta
     return;
   }
   if (input.action === 'report') {
+    if (input.target === 'message') {
+      const { error } = await client.rpc('report_direct_message', {
+        p_message: input.id,
+        p_reason: input.reason,
+        p_details: input.details,
+      });
+      if (error) mutationFailure(error);
+      return;
+    }
     const { error } = await client.from('reports').insert({ reason: input.reason, details: input.details,
       ...(input.target === 'player' ? { player_id: input.id } : input.target === 'post' ? { post_id: input.id } : { comment_id: input.id }) });
     if (error?.code === '23505') throw new MutationError(409,'Você já denunciou esse conteúdo. A denúncia está registrada.');

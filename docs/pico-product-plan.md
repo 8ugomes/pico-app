@@ -1,3 +1,52 @@
+## Frente 1 · conexão consentida e segurança da conversa · PLAN · 26/09/2026
+
+### Linha de base revalidada
+
+Branch de trabalho: `codex/front-1-social-safety`, criada sobre `cdcc76cc2075aa5e1043d2ba0651c9e3d58ffaef`. A árvore estava limpa e `main` coincidia com `origin/main` antes da abertura da branch. O baseline local passou em ESLint, 262 testes e build Next.js 16.3.4 no modo demo. O primeiro `typecheck` recusou corretamente um shell sem identidade de ambiente; repetido em ambiente deliberadamente neutro com `NEXT_PUBLIC_PICO_ENV=demo`, passou. Isso é configuração de execução, não falha de TypeScript.
+
+O código e as migrations de mensagens, Web Push e cliente móvel estão integrados na linha de base, mas mensagens e Web Push permanecem desligados no servidor e no banco. A aplicação hospedada e o schema principal são evidência de integração/publicação, não de conversa, push ou aparelho físico. Nenhuma migration, flag, configuração de Auth, deploy ou envio externo será alterado nesta fatia.
+
+| ID | escopo | implementado | integrado | publicado | habilitado | testes locais | integração real | aparelho físico | evidência/versão | próxima ação |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | Inventário da versão | Código, migrations, scripts e documentação presentes | Sim, `main` e schema principal | Web/API em `cdcc76c` | Recursos estáveis sim; DMs/push não | Lint, 262 testes, typecheck demo e build demo verdes | Saúde/schema/flags precisam permanecer separados das jornadas | Não se aplica | baseline local de 26/09/2026; release anterior `cdcc76c` | reconciliar PR/CI/versão/flags e registrar o fechamento |
+| 2 | Conexão entre pessoas | Descoberta e acompanhamento unilateral existem; aviso de novo acompanhamento e estado de reciprocidade ausentes | Parcial | Fluxo básico publicado | Acompanhamento sim | Cobertura de RLS, descoberta e bloqueio existente | Acompanhamento hospedado histórico; novo aviso ainda não existe | Não | `connections`, `discover_players`, perfil publicado | entregar aviso deduplicado, retorno, seguir de volta/ignorar/bloquear e explicação da conversa |
+| 3 | Mensagens e notificações | DMs web e Web Push implementados; cliente móvel ainda sem conversa; Web Push não é APNs | Código e migrations integrados | API/UI publicadas atrás de gates | Não; flags servidor/banco `false` | Paginação, idempotência, leitura explícita, bloqueio e fila cobertos | Schema aplicado, tabelas vazias; sem conversa ou transporte real | Não | migrations `20260918140000` e `20260918150000` | permitir denúncia da mensagem exata; manter gates fechados; depois validar serviço/aparelho controlado |
+| 4 | Conta e segurança social | Bloqueio, exportação, exclusão e moderação de perfil/post/comentário existem; recuperação sem entrega e denúncia de mensagem ausente | Parcial | Controles atuais publicados | Recuperação real não | Testes de conta, RLS e moderação verdes | E-mail/operador real não comprovados nesta linha de base | Não | conta/moderação em `cdcc76c` | entregar denúncia mínima de mensagem e trilha; manter recuperação bloqueada até provedor autorizado |
+| 5 | Qualidade móvel e premium | PWA e cliente iOS local cobrem o núcleo; conversa móvel e validação física faltam | Parcial | PWA/API publicadas; binário não | Vídeo móvel 1.0 não; DMs não | Build web verde; gates nativos serão repetidos no fechamento | Simulator histórico, sem sessão física atual | Não | cliente Capacitor e API móvel integrados | revisar visualmente esta fatia em 320/390/desktop e manter roteiro físico aberto |
+| 6 | Operação confiável | Saúde, inventário, deploy com rollback, limites e scripts de backup existem | Parcial | Ferramentas integradas | Monitor/alerta e rotina humana precisam reconfirmação | Health/guardas cobertos por testes | Saúde não comprova restauração, alertas ou jornadas | Não | `/api/health`, scripts operacionais e release anterior | inventariar monitor, restauração, pacote e custos sem mutação remota |
+| 7 | Instrumentação e convites | Convites contextuais existem em partes; funil autoritativo e painéis não | Parcial | Parcial | Sem analytics de produto confirmado | Sem baseline de eventos da jornada | Nenhuma coorte madura ou métrica real confirmada | Não se aplica | avaliação de 18/09 e código atual | definir eventos privados/autoritativos e implementar em fatia posterior, sem coletar conteúdo |
+| 8 | Cliente para lojas | Capacitor, API Bearer, Keychain, build/sync/preflight e pacote editorial existem | Código integrado | API publicada; app não distribuído | Candidata não assinada; Android pausado | Preflight anterior 7/16; checks nativos serão repetidos | Simulator/archive sem assinatura históricos | Não | `apps/mobile`, `docs/MOBILE_APP.md`, ADR 0001 | manter iPhone retrato, repetir build/archive e listar gates humanos; não retomar Android |
+
+### Resultado observável desta fatia
+
+Quando A acompanha B, B recebe uma única notificação interna que identifica A e leva ao perfil. B pode ignorar por agora, acompanhar de volta ou bloquear. O texto distingue acompanhamento unilateral de reciprocidade e explica que a conversa depende de acompanhamento mútuo e dos gates de mensagens. Deixar de acompanhar e acompanhar novamente não pode produzir uma sequência de alertas.
+
+Dentro de uma conversa já autorizada, uma pessoa pode denunciar exatamente uma mensagem recebida. A denúncia guarda a referência e uma cópia privada somente daquele corpo enquanto o caso está pendente, nunca a conversa. Um moderador autorizado abre apenas a mensagem denunciada, com inspeção auditada, e pode arquivar o caso ou suspender o autor; resolver o caso apaga o corpo e conserva remetente/data privados como procedência. O autor da própria mensagem e um terceiro não podem forjar essa denúncia.
+
+### Área afetada, não objetivos e aceite
+
+Área afetada: `connections`, caixa interna de notificações, mensagens diretas, denúncias, leitura restrita de moderação, tipos, interface web e testes SQL/API. A migration será aditiva e compatível com a versão publicada; não edita migrations aplicadas.
+
+Não objetivos: habilitar DMs ou Web Push, criar APNs, aplicar schema hospedado, promover deploy, enviar avisos reais, criar conversa no cliente móvel, resolver recuperação de conta, implantar analytics ou mudar Aura Manteiga.
+
+Aceite:
+
+1. Exemplo aceito: A acompanha B; B vê `A começou a acompanhar você`, abre o perfil e escolhe acompanhar de volta. O estado passa a explicar que há reciprocidade; se o gate de mensagens estiver fechado, nenhum botão promete conversa ativa.
+2. Exemplo rejeitado: A alterna acompanhar/deixar de acompanhar para gerar vários avisos. O banco mantém no máximo um aviso recente por par e aplica uma janela explícita antes de renovar um aviso já lido.
+3. Falha e recuperação: um aviso cujo vínculo ou acesso foi revogado some da leitura autorizada; bloquear remove as conexões e impede leitura. Marcar como lido ou ignorar não cria outro vínculo.
+4. Exemplo aceito: B denuncia uma mensagem recebida, com motivo e detalhe opcional. O operador vê somente aquela mensagem e a inspeção entra na auditoria.
+5. Exemplo rejeitado: B denuncia a própria mensagem, C denuncia uma mensagem da conversa A/B, ou um cliente insere `reporter_id`. RLS/função do banco recusam a operação mesmo fora da interface.
+6. Falha e recuperação: repetição da mesma denúncia não duplica o caso; bloqueio ou gate fechado não expõe histórico. Arquivar a denúncia ou suspender o autor atualiza o caso sem apagar a conversa por suposição.
+7. Verificação: teste focado deve falhar pela ausência dos contratos antes da migration e passar depois; em seguida lint, typecheck, suíte, build e amostra visual proporcional. Publicação, integração hospedada e aparelho físico ficam explicitamente separados.
+
+### Resultado local da fatia · 27/09/2026
+
+- A migration aditiva cria o aviso de acompanhamento atrás de `social_intent_settings.enabled=false`, sem backfill. Relação exata, deduplicação por par, janela de 30 dias, revogação por vínculo/bloqueio/suspensão e rollback por gate foram exercitados num PostgreSQL descartável.
+- A denúncia de mensagem é exclusiva do RPC transacional. Repetição devolve o mesmo caso; mensagem própria, terceiro e insert direto falham. Pausar DMs ou bloquear depois do envio não remove a autorização pelo ID já recebido. O caminho genérico legado `review_report` foi revogado/bloqueado e uma trigger impede que resolução administrativa retenha o corpo.
+- A exclusão do acusado não apaga um caso já aberto: a evidência exata sobrevive até decisão e o corpo é nulificado ao resolver. Em sentido oposto, excluir o denunciante ainda apaga caso/evidência pelo FK legado; prazo de pendência e retenção dos metadados também não têm política aprovada. DMs permanecem desligadas até essas decisões e até existir caminho recuperável quando o remetente bloqueia primeiro.
+- ESLint, typecheck demo, 270 testes e build Next demo passaram; `npm audit --omit=dev` encontrou zero vulnerabilidades. A revisão visual percorreu 54 combinações e rechecks focados em 320/390/1280, claro/escuro e texto a 200%, sem overflow/console; avatar ficou em 44 × 44 e modal rolável/operável. Não houve backend real, push, VoiceOver/TalkBack ou aparelho físico.
+- Nenhuma migration foi aplicada, nenhuma flag foi ligada e nenhum deploy/configuração remota foi feito. Implementado localmente não significa integrado à `main`, publicado ou habilitado.
+
 > Atualização operacional de 26/09/2026: o Supabase principal foi retomado, validado por `/api/health` e recebeu as sete migrations aditivas móveis/mensagens/push listadas no dry-run. O inventário preservou 131/131 identidades, os tipos foram regenerados do schema hospedado e os switches de mensagens/Web Push continuaram desligados, com tabelas novas vazias. A revisão integrada ainda precisa passar por PR/CI e deploy da `main`; DMs não podem ser ativadas sem denúncia de mensagem/evidência e operação de moderação, e a candidata iOS continua bloqueada pelos gates humanos e pelo aparelho físico.
 
 ## Cliente iOS local e preparação para distribuição · IMPLEMENTADO E VALIDADO LOCALMENTE · 18/09/2026
