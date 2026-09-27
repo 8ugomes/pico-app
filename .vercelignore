@@ -1,6 +1,13 @@
 .env*
 .npm-cache
 .next*
+node_modules
+build
+coverage
+android
+ios
+native-shell
+output
 supabase/.temp
 tests
 docs
