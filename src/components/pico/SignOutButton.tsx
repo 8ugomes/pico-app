@@ -5,6 +5,7 @@ import { LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { createClient } from '@/lib/supabase/client';
 import { resetAccountView } from '@/lib/auth/navigation';
+import { clearPushBeforeSignOut } from '@/lib/push/client';
 
 export function SignOutButton() {
   const [busy, setBusy] = useState(false);
@@ -17,6 +18,7 @@ export function SignOutButton() {
     try {
       const client = createClient();
       if (!client) throw new Error('unavailable');
+      await clearPushBeforeSignOut();
       const { error } = await client.auth.signOut({ scope: 'local' });
       if (error) throw error;
       resetAccountView();

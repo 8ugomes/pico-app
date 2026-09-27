@@ -1,6 +1,6 @@
 # Aplicativo Pico Social: fundação, arquitetura e plano
 
-Status em 18/09/2026: **cliente React local, API móvel versionada, sessão iOS em Keychain e jornadas essenciais implementados e validados localmente. Aparelho físico, backend/migrations publicados, identidade final, assinatura e distribuição continuam pendentes**.
+Status atualizado em 26/09/2026: **cliente React local, API móvel versionada, sessão iOS em Keychain e jornadas essenciais implementados e validados localmente. As sete migrations aditivas foram publicadas no banco principal com preservação confirmada, mas o deployment integrado, o aparelho físico, a identidade final, a assinatura e a distribuição continuam pendentes**.
 
 A primeira versão distribuível foi delimitada a **iPhone em retrato** (`TARGETED_DEVICE_FAMILY = 1`). O projeto Android permanece preservado, sem ser regenerado ou ampliado nesta rodada. iPad só volta ao escopo depois de uma validação própria de layout, rotação, acessibilidade e metadata.
 
@@ -23,7 +23,7 @@ O teste da PWA justificou iniciar a transição para iOS e Android. A decisão �
 - Ícone, foreground adaptativo e splash reproduzíveis a partir dos mestres Pico Club, sem placeholder do Capacitor.
 - Identificação do pacote por `PicoNativeApp/1` no user agent para não oferecer instalação da PWA dentro do próprio aplicativo, sem marcador de Preview na candidata.
 - Diagnóstico local, testes estruturais e preflight que falham se o pacote iOS voltar a depender de `server.url`, contiver logs/segredos conhecidos ou perder o PrivacyInfo/scheme.
-- Cinco migrations aditivas foram versionadas: exportação com notificações recebidas; moderação textual também contra escrita direta que contorne o BFF; remoção da policy genérica de leitura de `storage.objects`; leitura própria do estado de admissão da conta; e criação idempotente de comentários com fingerprint. Elas ainda não foram aplicadas no Supabase nem validadas contra Storage hospedado; nenhuma base, RLS, storage ou conteúdo existente foi alterado externamente nesta rodada.
+- Cinco migrations aditivas do cliente móvel cobrem exportação com notificações recebidas; moderação textual também contra escrita direta que contorne o BFF; remoção da policy genérica de leitura de `storage.objects`; leitura própria do estado de admissão da conta; e criação idempotente de comentários com fingerprint. Duas migrations adicionais preparam mensagens diretas e Web Push. As sete foram aplicadas no Supabase principal após dry-run; o inventário confirmou 131/131 identidades preservadas, sem remoção ou troca de autoria. Mensagens e push permaneceram desligados por feature flag e configuração do banco, com zero conversa, mensagem, assinatura ou item de fila criado.
 
 Esta entrega ainda não contém um `.ipa` assinado, não usa identidade ou provisionamento Apple e não está pronta para TestFlight. Compilar ou abrir no Simulator não comprova Keychain, câmera, HEIC, upload/reprodução de MP4, permissões, Universal Links, ciclo de vida, VoiceOver, desempenho ou rede em iPhone físico.
 
@@ -71,7 +71,7 @@ Abrir o projeto iOS:
 npm run native:open:ios
 ```
 
-`native:verify` mantém as verificações dos ativos Android existentes, mas a sincronização desta missão é deliberadamente `cap sync ios`. O trabalho Android e Google Play fica para depois da submissão iOS.
+`native:verify` mantém as verificações dos ativos Android versionados, mas exige configuração sincronizada somente do iOS porque a sincronização desta missão é deliberadamente `cap sync ios`. `native:verify:all` sincroniza e exige as duas plataformas quando o Android voltar ao escopo. O trabalho Android e Google Play fica para depois da submissão iOS.
 
 Para um preview interno hospedado, usar uma origem HTTPS controlada e não incluir tokens na URL:
 
@@ -105,7 +105,7 @@ As cinco abas mantêm geometria estável, mostram resposta pendente no ícone ac
 
 ### N4 · Cliente distribuível — implementado localmente, gates conectado e físico abertos
 
-O cliente local, a fronteira `/api/mobile/v1`, Bearer, CORS exato, compatibilidade de versão, Keychain, rascunhos por conta, comentários, republicações, desbloqueio, jogos editáveis/compartilháveis, mídia privada, player Range, exportação e exclusão retomável estão implementados. A leitura direta do Storage foi fechada em migration local; bytes devem sair somente do BFF após autorização. A infraestrutura TUS existe e foi testada isoladamente, mas a capacidade móvel não oferece criação/publicação de vídeo na `1.0`: metadata bruta e fluxo MOV/HEVC ainda exigem sanitização/transcoding e iPhone físico. Ainda faltam publicar o backend e as migrations pelo processo oficial, testar a build candidata contra Supabase configurado e provar os fluxos em aparelho. Universal Links aguardam domínio e identificadores definitivos.
+O cliente local, a fronteira `/api/mobile/v1`, Bearer, CORS exato, compatibilidade de versão, Keychain, rascunhos por conta, comentários, republicações, desbloqueio, jogos editáveis/compartilháveis, mídia privada, player Range, exportação e exclusão retomável estão implementados. A leitura direta do Storage foi fechada no banco principal; bytes devem sair somente do BFF após autorização. A infraestrutura TUS existe e foi testada isoladamente, mas a capacidade móvel não oferece criação/publicação de vídeo na `1.0`: metadata bruta e fluxo MOV/HEVC ainda exigem sanitização/transcoding e iPhone físico. Ainda faltam publicar o backend integrado pela `main`, testar a build candidata contra esse deployment e provar os fluxos em aparelho. Universal Links aguardam domínio e identificadores definitivos.
 
 ### N5 · Hardening e beta fechado — preparado, bloqueado por decisões humanas
 
@@ -164,8 +164,8 @@ O repositório já contém PrivacyInfo agregado com `CA92.1`, `C617.1` e `3B52.1
 
 ## Evidência desta rodada e limite do registro
 
-Na árvore final passaram ESLint, typecheck, os **235 testes**, build Next.js de produção, build do cliente móvel, `native:verify` com sync somente do iOS, build Debug para iOS Simulator e `npm audit --omit=dev` sem vulnerabilidades. O bundle `native-shell/app.js` e sua cópia no target têm o mesmo SHA-256. O archive Release sem assinatura terminou com `ARCHIVE SUCCEEDED`; o `.app` resultante é iPhone-only, usa a identidade provisória, não está assinado e contém o PrivacyInfo agregado. `native:preflight:ios` concluiu **7/16 checks**, com **9 gates humanos e 0 falhas técnicas**. `git diff --check`, `plutil` e o detector Impeccable também passaram.
+Na árvore integrada passaram ESLint, typecheck, os **262 testes**, build Next.js de produção em modo demo e com a configuração da beta, build do cliente móvel, `native:verify` com sync somente do iOS, build Debug para iOS Simulator e `npm audit --omit=dev` sem vulnerabilidades. O bundle `native-shell/app.js` e sua cópia no target têm o mesmo SHA-256. O archive Release sem assinatura terminou com `ARCHIVE SUCCEEDED`; o `.app` resultante é iPhone-only, usa a identidade provisória, não está assinado e contém o PrivacyInfo agregado. `native:preflight:ios` concluiu **7/16 checks**, com **9 gates humanos e 0 falhas técnicas**. `git diff --check`, `plutil` e o audit de segredos também passaram.
 
-O smoke final instalou o Debug recém-gerado no iPhone 18 Pro simulado com iOS 27.0 e conferiu splash e estado de rede em claro/escuro com Dynamic Type grande, sem truncamento. Como o backend e as cinco migrations desta rodada não foram publicados, esse smoke não autentica nem comprova as jornadas conectadas. Keychain, câmera/HEIC, permissões, Range/TUS com mídia real, VoiceOver, desempenho e ciclo de vida continuam exigindo iPhone físico.
+O smoke final instalou o Debug recém-gerado no iPhone 18 Pro simulado com iOS 27.0 e conferiu splash e estado de rede em claro/escuro com Dynamic Type grande, sem truncamento. As migrations já estão no banco principal, mas o deployment integrado e uma sessão controlada no binário ainda não foram exercitados; portanto esse smoke não comprova as jornadas conectadas. Keychain, câmera/HEIC, permissões, Range/TUS com mídia real, VoiceOver, desempenho e ciclo de vida continuam exigindo iPhone físico.
 
-Não houve deploy, aplicação das migrations, alteração de Supabase, assinatura, upload, TestFlight ou submissão. Cadastro segue sem confirmação e sem SMTP por decisão vigente; novos cadastros não dependem de SMTP. Recuperação por e-mail continua indisponível até decisão e configuração humana.
+O Supabase principal foi retomado, respondeu saudável e recebeu somente as sete migrations listadas pelo dry-run. O inventário 131→131 foi preservado, os tipos foram regenerados e os switches de mensagens/push continuam `false`. Ainda não houve deploy do frontend/API desta integração, assinatura, upload, TestFlight ou submissão. Cadastro segue sem confirmação e sem SMTP por decisão vigente; novos cadastros não dependem de SMTP. Recuperação por e-mail continua indisponível até decisão e configuração humana.

@@ -62,6 +62,9 @@ Substituir todos os campos e validar os rótulos contra a build candidata. O cam
 > PLATFORM AND PERMISSIONS
 > The submitted binary contains its local client assets and connects to our HTTPS API; it does not load the product through a remote `server.url`. The refresh credential is stored in iOS Keychain and the access token is kept in memory. Account-scoped drafts and optional tour progress are stored locally without credentials. Camera or photo access is requested only after the user chooses to add media. The app does not request continuous location, Contacts, microphone, tracking, or push notification access in this version.
 >
+> DISABLED FUTURE CAPABILITIES
+> Direct messages and remote notifications are not enabled in this build. Both server-side and database feature switches remain off. The iOS client does not register with APNs, does not include the Push Notifications capability, and does not request notification permission. These flows are not part of this version's review path.
+>
 > BUSINESS MODEL
 > This version is free and includes no in-app purchases, subscriptions, advertising, paid boosts, reservations, or external purchase calls to action.
 >
@@ -83,6 +86,7 @@ Remover qualquer afirmação técnica, permissão ou fluxo que o archive final n
 - [ ] A nota de vídeo corresponde à build: somente reprodução autorizada; remover o parágrafo se o player não fechar o gate físico da candidata.
 - [ ] O caminho de exclusão não termina em “mande um e-mail”.
 - [ ] Não há feature flag, função oculta ou endpoint de debug sem explicação específica.
+- [ ] Mensagens e notificações remotas continuam desligadas no servidor e no banco; o target não tem capability de Push Notifications nem registro APNs.
 - [ ] A nota diz exatamente o que há no binário e nenhuma função futura.
 - [ ] O contato de review monitora telefone/e-mail e pode responder em inglês durante a janela.
 

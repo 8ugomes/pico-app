@@ -44,3 +44,8 @@ Decisão histórica superada: o app nativo estava fora do Ciclo 9 e entrou no es
 `/jogos` precisa de conexão no ambiente conectado. Não há fila de registros, sincronização em segundo plano ou publicação automática. A navegação aposentou presença ao vivo; versão/sessão ainda são verificadas ao retomar o app. Esta rodada local não comprova instalação, teclado ou safe areas em aparelho físico.
 
 Compartilhar um jogo também exige confirmação online e usa chave de tentativa preservada. Fechar/reabrir o diálogo mantém o rascunho enquanto a tela/sessão permanece montada. Recarregar ou trocar de identidade descarta esse estado; não há promessa de armazenamento offline. Na demonstração, jogos/grupos/posts são locais e identificados; o link canônico deixa de encontrar o post ao recarregar a sessão.
+## Evolução de 18/09/2026
+
+O pedido atual amplia o escopo para mensagens, push e preparação para lojas. A versão pública auditada continua sem esses novos recursos. Nesta branch, um service worker exclusivo de notificações e a entrega por fila estão implementados sob ativação explícita de servidor e banco; não há cache de páginas/conteúdo privado nem fila offline de escrita. [Configuração e limites](PUSH_NOTIFICATIONS.md). [Diagnóstico e sequência para aparelhos/lojas](PICO_DEVELOPMENT_REVIEW_2026-09-18.md).
+
+As afirmações abaixo de ausência de service worker/push descrevem a versão pública anterior. Instalar não habilita avisos automaticamente; o jogador precisa escolher ativar no dispositivo. Cadastro sem confirmação/SMTP continua a política atual da beta. Nada nesta revisão comprova build nativo, recebimento push ou funcionamento em aparelho físico.

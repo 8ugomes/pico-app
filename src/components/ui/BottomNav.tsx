@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, type ReactNode } from "react";
 import { House, UsersRound, Compass, UserRound, MapPin } from "lucide-react";
 import { NotificationLink } from '@/components/pico/NotificationLink';
+import { MessageLink } from '@/components/pico/MessageLink';
 
 export const socialLinks = [
   { href: "/feed", label: "Início", icon: House },
@@ -39,5 +40,6 @@ export function BottomNav({ desktop = false }: { desktop?: boolean }) {
       </Link>;
     })}
     {desktop && <NotificationLink desktop />}
+    {desktop && <MessageLink desktop />}
   </nav>;
 }

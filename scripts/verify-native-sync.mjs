@@ -3,9 +3,12 @@ import { existsSync, readFileSync } from 'node:fs';
 
 import sharp from 'sharp';
 
+const platform = process.argv[2] ?? 'all';
+if (!['all', 'ios', 'android'].includes(platform)) throw new Error('Plataforma esperada: all, ios ou android.');
+
 const paths = [
-  'android/app/src/main/assets/capacitor.config.json',
-  'ios/App/App/capacitor.config.json',
+  ...(platform !== 'ios' ? ['android/app/src/main/assets/capacitor.config.json'] : []),
+  ...(platform !== 'android' ? ['ios/App/App/capacitor.config.json'] : []),
 ];
 
 for (const path of paths) {
@@ -51,4 +54,4 @@ if (adaptiveForeground.info.width > 264 || adaptiveForeground.info.height > 264)
   throw new Error(`Foreground adaptativo ultrapassa a área segura: ${adaptiveForeground.info.width}x${adaptiveForeground.info.height}`);
 }
 
-process.stdout.write('Configurações e ativos nativos conferidos, sem server.url remoto.\n');
+process.stdout.write(`Configuração ${platform} e ativos nativos conferidos, sem server.url remoto.\n`);

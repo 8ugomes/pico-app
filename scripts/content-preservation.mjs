@@ -18,12 +18,37 @@ const tables = [
   ['communities', 'id', "jsonb_build_array(t.id,t.created_at)"],
   ['community_members', ['community_id','player_id'], "jsonb_build_array(t.community_id,t.player_id,t.created_at)"],
   ['community_arena_links', 'community_id', "jsonb_build_array(t.community_id,t.arena_id)"],
+  ['direct_conversations', 'id', "jsonb_build_array(t.participant_low,t.participant_high,t.created_at)", true],
+  ['direct_messages', 'id', "jsonb_build_array(t.conversation_id,t.sender_id,t.sequence,t.client_key,t.created_at)", true],
+  ['direct_message_reads', ['conversation_id','player_id'], "jsonb_build_array(t.conversation_id,t.player_id)", true],
 ];
-export const snapshotSql = `begin read only;
-set local statement_timeout = '30s';
-${tables.map(([table,key,identity]) => `select '${table}' as entity, ${Array.isArray(key) ? `jsonb_build_array(${key.map(column=>`t.${column}`).join(',')})` : `t.${key}`}::text as key,
+
+const inventorySelect = ([table,key,identity]) => `select '${table}' as entity, ${Array.isArray(key) ? `jsonb_build_array(${key.map(column=>`t.${column}`).join(',')})` : `t.${key}`}::text as key,
   md5((${identity})::text) as identity, md5(row_to_json(t)::text) as digest
-  from public.${table} t`).join('\nunion all\n')} order by entity,key;
+  from public.${table} t`;
+const sqlLiteral = value => `'${value.replaceAll("'", "''")}'`;
+const requiredInventory = tables.filter(([, , , optional]) => !optional).map(inventorySelect).join('\nunion all\n');
+const optionalInventory = tables.filter(([, , , optional]) => optional).map(table => `  if to_regclass('public.${table[0]}') is not null then
+    return query execute ${sqlLiteral(inventorySelect(table))};
+  end if;`).join('\n');
+
+// The session-local helper lets one receipt query both the schema immediately
+// before an additive migration and the schema after it. User content is still
+// read only inside the explicit transaction; the helper disappears with the session.
+export const snapshotSql = `create or replace function pg_temp.pico_content_inventory()
+returns table(entity text, key text, identity text, digest text)
+language plpgsql
+set search_path = ''
+as $inventory$
+begin
+  return query
+${requiredInventory};
+${optionalInventory}
+end
+$inventory$;
+begin read only;
+set local statement_timeout = '30s';
+select * from pg_temp.pico_content_inventory() order by entity,key;
 commit;`;
 
 export function compareContentSnapshots(before, after) {

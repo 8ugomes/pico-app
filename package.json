@@ -19,7 +19,8 @@
     "native:sync": "cap sync",
     "native:sync:ios": "npm run mobile:build && cap sync ios",
     "native:preflight:ios": "node scripts/ios-release-preflight.mjs",
-    "native:verify": "node --test tests/native-package.test.mjs && npm run native:sync:ios && node scripts/verify-native-sync.mjs",
+    "native:verify": "node --test tests/native-package.test.mjs && npm run native:sync:ios && node scripts/verify-native-sync.mjs ios",
+    "native:verify:all": "node --test tests/native-package.test.mjs && npm run mobile:build && cap sync && node scripts/verify-native-sync.mjs all",
     "native:build:ios": "xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' -derivedDataPath build/native-ios -onlyUsePackageVersionsFromResolvedFile CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO build",
     "native:open:ios": "cap open ios",
     "native:open:android": "cap open android",
@@ -53,7 +54,8 @@
     "react-easy-crop": "6.2.3",
     "sharp": "^0.35.4",
     "tailwind-merge": "^3.6.0",
-    "tus-js-client": "^4.3.1"
+    "tus-js-client": "^4.3.1",
+    "web-push": "^3.6.7"
   },
   "devDependencies": {
     "@capacitor/cli": "8.5.2",
@@ -63,6 +65,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/web-push": "^3.6.4",
     "esbuild": "^0.28.2",
     "eslint": "^9",
     "eslint-config-next": "16.3.4",

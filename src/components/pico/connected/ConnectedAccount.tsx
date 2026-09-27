@@ -15,6 +15,7 @@ import { SignOutButton } from '../SignOutButton';
 import { removeVideo } from './VideoUpload';
 import { AccountExport } from '../AccountExport';
 import { entityAction, useEntity } from './useEntity';
+import { clearPushBeforeSignOut } from '@/lib/push/client';
 
 type OwnPlayedArenaMark = { id: string; name: string; visible: boolean };
 
@@ -52,6 +53,7 @@ function DeleteAccount() {
       const response=await fetch('/api/account',{method:'DELETE',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:form.get('password'),confirmation:form.get('confirmation')}),cache:'no-store',credentials:'same-origin',signal:AbortSignal.timeout(60000)});
       const result=await response.json();
       if(!response.ok)throw new Error(result.message);
+      await clearPushBeforeSignOut();
       await createClient()?.auth.signOut({scope:'local'});
       window.location.replace('/login?account=deleted');
     }catch(failure){setError(failure instanceof Error?failure.message:'Não foi possível concluir. Tente novamente.');}finally{setBusy(false);}

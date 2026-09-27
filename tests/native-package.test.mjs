@@ -124,6 +124,8 @@ test('native doctor reports every required mobile toolchain layer', () => {
 test('native package exposes a locked iOS Simulator build without Apple provisioning', () => {
   const packageJson = JSON.parse(readFileSync('package.json', 'utf8'));
   const script = packageJson.scripts?.['native:build:ios'];
+  const verifyIos = packageJson.scripts?.['native:verify'];
+  const verifyAll = packageJson.scripts?.['native:verify:all'];
   const resolvedPackages = JSON.parse(
     readFileSync('ios/App/App.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved', 'utf8'),
   );
@@ -135,6 +137,10 @@ test('native package exposes a locked iOS Simulator build without Apple provisio
   assert.match(script, /CODE_SIGNING_ALLOWED=NO/);
   assert.match(script, /build\/native-ios/);
   assert.match(script, /onlyUsePackageVersionsFromResolvedFile/);
+  assert.match(verifyIos, /native:sync:ios/);
+  assert.match(verifyIos, /verify-native-sync\.mjs ios/);
+  assert.match(verifyAll, /cap sync/);
+  assert.match(verifyAll, /verify-native-sync\.mjs all/);
   assert.equal(capacitorPackage?.state?.version, packageJson.dependencies['@capacitor/ios']);
   assert.match(capacitorPackage?.state?.revision || '', /^[0-9a-f]{40}$/);
 });

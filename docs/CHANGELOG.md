@@ -1,3 +1,14 @@
+## 2026-09-26: fundação móvel recuperada e recursos pendentes integrados com gates fechados
+
+- A cadeia local do cliente móvel foi recuperada sobre a `main` atual, incluindo Capacitor, cliente React/TypeScript local, API móvel Bearer, Keychain, direitos da conta, mídia privada e pacote editorial da App Store.
+- O trabalho de mensagens diretas e Web Push do PR de desenvolvimento foi reconciliado com a fundação móvel. As migrations receberam prefixos novos e únicos; mensagens e push continuam desligados por feature flag e configuração do banco. Web Push da PWA não foi tratado como APNs do aplicativo iOS.
+- O estado de não lidas passou a vir da resposta autoritativa do banco e é zerado depois de marcar a conversa como lida, evitando reabrir uma conversa com contador incorreto.
+- A política pública e a matriz de privacidade agora descrevem explicitamente os dados condicionais de mensagens e Web Push, sem declará-los como recursos ativos da primeira candidata.
+- `native:verify` passou a sincronizar e exigir somente a configuração iOS nesta missão; `native:verify:all` preserva a verificação das duas plataformas quando Android voltar ao escopo.
+- A exportação web e móvel agora compartilha o mesmo contrato: inclui mensagens próprias mesmo após rollback do flag e aplica o limite agregado de 8 MiB. A política pública também distingue desfazer conexão, que preserva o histórico, de bloquear, que revoga acesso enquanto ativo.
+- A validação integrada passou em ESLint, typecheck, 262 testes, builds Next.js demo e beta, build móvel, sync iOS, build Debug do Simulator, archive Release sem assinatura, audit de segredos e audit de dependências de produção sem vulnerabilidades. O preflight iOS permaneceu em 7/16, com nove gates humanos e zero falha técnica.
+- Depois da retomada humana, `/api/health` voltou a confirmar banco/Auth. O dry-run listou somente as sete migrations desta integração; elas foram aplicadas no Supabase principal com 131/131 identidades preservadas. Mensagens e push permaneceram `false`, sem conversas, inscrições ou fila. Os tipos canônicos foram regenerados do banco hospedado. O deployment web continua separado e condicionado a PR/CI/main limpa.
+
 ## 2026-09-18: cliente iOS local e pacote de submissão preparados
 
 - O Pico Social ganhou um cliente React/TypeScript empacotado localmente pelo Capacitor e uma API móvel v1. Rotas móveis usam Bearer, rejeitam cookies, preservam RLS e deixam o access token em memória; somente o refresh token fica no Keychain.
@@ -43,7 +54,14 @@
 - Ícones, foreground adaptativo e splash são reproduzíveis a partir dos mestres Pico Club; placeholders do Capacitor foram removidos. Scripts diagnosticam toolchains, geram assets, sincronizam e impedem `server.url` no gate local/CI.
 - Plano em gates, arquitetura de autenticação/API, gramática 160/220/280 ms, haptics semânticos e matriz de aparelho registrados em [MOBILE_APP.md](MOBILE_APP.md).
 - Na verificação inicial, seis testes nativos focados, sync iOS/Android, lint, typecheck, 168 testes locais e build demo passaram; audit sem vulnerabilidade alta e com três moderadas no CLI de desenvolvimento. Naquele momento o host não tinha Xcode completo, Android Studio, Java ou Android SDK, então não houve build nativo, assinatura, aparelho, Supabase ou publicação.
+## 2026-09-18: checkpoint de mensagens, push e continuidade para lojas
 
+- Preparadas conversas 1:1 com acompanhamento mútuo, histórico paginado, não lidas, envio idempotente, bloqueio/suspensão e exportação das próprias mensagens. UI em `/mensagens`, perfil e cabeçalho/lateral preserva Aura Manteiga e cinco destinos inferiores; rascunho fica em memória e troca de conta descarta o estado anterior.
+- Preparado Web Push por adesão explícita: assinaturas privadas, fila, leases, retry/cooldown por aparelho, revalidação de acesso, payload genérico e executor POST protegido. Logout, sessão inicial/expirada, troca de identidade e ativação tardia fazem reconciliação; worker não armazena conteúdo privado offline.
+- Duas migrations aditivas e gates independentes no servidor/banco, **desligados por padrão**. Tipos RPC pendentes gerados do catálogo PostgreSQL local e conferidos em CI; tipos hospedados preservados. Não houve migration remota, ativação, deploy ou mensagem/notificação para usuários nesta rodada.
+- Corrigidos textos de acesso/privacidade que ainda prometiam confirmação de e-mail, incompatível com a decisão vigente da beta.
+- Lint, typecheck/build demo, 187 testes locais, verificação de 12 RPCs e audit sem vulnerabilidades passaram. Fixture UI compilada e smoke HTTP; inspeção visual nova bloqueada por indisponibilidade de acesso do navegador ao localhost. Integração hospedada, concorrência multissessão e aparelhos reais seguem pendentes.
+- Entregues [avaliação das 18 frentes](PICO_PRODUCT_ASSESSMENT_2026-09-18.md), [diagnóstico técnico](PICO_DEVELOPMENT_REVIEW_2026-09-18.md) e [prompt de continuidade até a preparação para lojas](CODEX_CONTINUE_TO_STORE_READY.md). O próximo ciclo deve fechar intenção de conexão, denúncia de mensagem, recuperação, serviços reais, qualidade móvel e distribuição.
 ## 2026-09-14: fotos nas notificações, arenas e vídeo em publicações
 
 - Notificações mostram a foto atual da pessoa que entrou ou foi mencionada, com fallback humano e as mesmas regras de audiência.

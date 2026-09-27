@@ -1,3 +1,5 @@
+> Atualização operacional de 26/09/2026: o Supabase principal foi retomado, validado por `/api/health` e recebeu as sete migrations aditivas móveis/mensagens/push listadas no dry-run. O inventário preservou 131/131 identidades, os tipos foram regenerados do schema hospedado e os switches de mensagens/Web Push continuaram desligados, com tabelas novas vazias. A revisão integrada ainda precisa passar por PR/CI e deploy da `main`; DMs não podem ser ativadas sem denúncia de mensagem/evidência e operação de moderação, e a candidata iOS continua bloqueada pelos gates humanos e pelo aparelho físico.
+
 ## Cliente iOS local e preparação para distribuição · IMPLEMENTADO E VALIDADO LOCALMENTE · 18/09/2026
 
 ### Problema e resultado observável
@@ -208,7 +210,23 @@ Na fundação inicial, o diagnóstico encontrou Node 24, configuração e projet
 4. **Cliente distribuível:** retirar a dependência de `server.url`, resolver autenticação/API do bundle e fechar a arquitetura de produção.
 5. **Hardening:** mídia, rede, sessão, privacidade, acessibilidade, desempenho e aparelhos representativos.
 6. **Beta fechado e lojas:** assinatura, TestFlight/Play interno, metadados, suporte, privacidade, revisão e rollout gradual.
+## Evolução para conversas, notificações no dispositivo e lojas · CHECKPOINT LOCAL · 18/09/2026
 
+Pedido atual do responsável: auditar todo o Pico e os commits/publicações e avançar para um aplicativo consistente, com mensagens entre pessoas, notificações, acabamento premium e futuro lançamento nas lojas. Este pedido amplia expressamente o escopo histórico que deixava chat/push e preparação mobile de fora. Preservar Aura Manteiga, os projetos existentes, contas, conteúdos, jogos privados e audiência; não retomar presença ao vivo.
+
+Base revisada: `e3a64926e4b28bbf9483aeabd3f6981b1c824743`. A entrega anterior funcional de vídeos é `bda869824b42`; commits posteriores registram recibos. Cruzar código, CI, endpoint de versão e histórico para distinguir implementado, testado e publicado. Não inferir atividade real de usuários a partir de fixtures ou documentos.
+
+Fatia executável: mensagens diretas de texto com conversa 1:1, autorização por participante/conta ativa, bloqueio bilateral, envio idempotente, paginação, não lidos e recuperação após erro; interface móvel/desktop alinhada ao sistema atual. Recursos novos dependentes de migrations ficam desabilitados por configuração até a validação conectada e aplicação revisada no banco existente. Preparar notificações no dispositivo por adesão explícita, sem conteúdo privado em cache e sem envio a usuários reais nesta auditoria. Atualizar a avaliação de lojas e o roteiro de aquisição/retencão com critérios observáveis, sem prometer viralização.
+
+Aceite: A e B conseguem conversar após autorização de contato; C não pode ler/enviar/marcar a conversa deles; bloqueio e suspensão revogam leitura e novas mensagens; retry da mesma tentativa não duplica. Não exibir mensagem como enviada antes da confirmação. Erro de rede preserva rascunho em memória e permite retry; troca de conta descarta dados. Notificações dependem de permissão contextual, revogável, e entrega realmente configurada. Demonstração é identificada e não envia mensagens. Testes locais SQL/API, lint, typecheck, build e amostra visual mobile estreito/desktop nos dois temas; distinguir simulação local de teste hospedado/aparelho físico.
+
+Entrega: usar branch de trabalho/PR exigidos pela proteção da main, sem criar outro app ou ambiente. Não publicar alteração de schema sem os acessos e evidências de preservação necessários. Registrar blockers concretos e continuidade no repositório.
+
+Resultado local: fundação 1:1 e push implementada com gates independentes no banco e na aplicação, desligados. Inclui UI Aura Manteiga, API privada, RLS/RPCs, idempotência, leitura explícita, exportação de mensagens próprias, fila de push, endpoints restritos, consentimento e limpeza/reconciliação de sessão. Revisão independente corrigiu ordem de locks e corridas de assinatura/retry. O catálogo local gerou e conferiu 12 assinaturas RPC sem editar os tipos hospedados para simular aplicação remota.
+
+Verificações: lint, typecheck demo, build demo, 187 testes locais e audit sem vulnerabilidades. Rotas compiladas e smoke HTTP com recurso desligado, CSRF e executor protegido passaram. Fixture reproduzível de UI compila e responde HTTP, mas o navegador disponível bloqueia localhost; a amostra visual das novas telas não foi concluída. Não houve migration hospedada, teste de concorrência multissessão, push em aparelho, deploy, postagem ou envio a usuários reais. A versão pública auditada permanece `bda869824b42`.
+
+O pedido final desta sessão priorizou avaliar todas as melhorias e entregar um prompt para o Codex continuar até a preparação de publicação. [Avaliação de 18 frentes](PICO_PRODUCT_ASSESSMENT_2026-09-18.md), [prompt executável](CODEX_CONTINUE_TO_STORE_READY.md), [diagnóstico técnico](PICO_DEVELOPMENT_REVIEW_2026-09-18.md) e [contrato push](PUSH_NOTIFICATIONS.md) formam o handoff. Próximos gates: ciclo de intenção de conexão, denúncia específica de mensagem, recuperação de conta/política futura, serviços reais, aparelhos, operação e cliente de loja. Publicação final fica depois da revisão da entrega, salvo autorização explícita posterior.
 ## Vídeos acima de 30 MB · PUBLICADO · 14/09/2026
 
 Pedido: o limite atual de 30 MiB é insuficiente para publicar vídeos. Aumentar o tamanho aceito em publicações normais e compartilhamentos voluntários de jogos, preservando upload TUS assinado, bucket privado, autoria, audiência, rascunho, revogação de leitura e remoção. Conferir antes o plano e o limite global efetivos do Supabase nos projetos de desenvolvimento e principal; não contratar plano nem ultrapassar a cota sem autorização.

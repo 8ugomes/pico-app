@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/Button';
 import { mediaUrl } from '@/lib/supabase/media';
 import { useNotifications } from './NotificationsProvider';
 import { MutationNotice } from './connected/useMutation';
+import { PushSettings } from './PushSettings';
 
 export function NotificationsView() {
   const { data, error, loading, refreshing, busy, demo, notice, refresh, markRead, cursor, setCursor } = useNotifications();
@@ -16,6 +17,7 @@ export function NotificationsView() {
   return <section className="notifications-page" aria-labelledby="notifications-title">
     <div className="page-heading"><h1 id="notifications-title">Notificações</h1><Button variant="quiet" size="small" onClick={refresh} disabled={refreshing || demo} aria-label="Atualizar notificações"><RefreshCw size={18} aria-hidden="true" /></Button></div>
     <p className="notifications-intro">Entradas e menções nas suas comunidades.</p>
+    <PushSettings demo={demo} />
     {unread > 0 && <div className="notifications-toolbar"><span>{unread} não {unread === 1 ? 'lida' : 'lidas'}</span><Button variant="quiet" size="small" disabled={busy || refreshing} onClick={() => void markRead()}><CheckCheck size={18} aria-hidden="true" />Marcar todas como lidas</Button></div>}
     <MutationNotice message={notice} />
     {loading && <p className="read-source" role="status">Carregando notificações…</p>}

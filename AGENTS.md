@@ -18,7 +18,7 @@ Pico é uma rede social mobile-first para futevôlei, beach tennis e vôlei de p
 
 Responder quem joga onde o usuário joga, quais comunidades combinam com o usuário e o que acontece nas suas arenas.
 Priorizar pessoas, perfis de arenas, comunidades próprias, registro privado depois do jogo, feed e descoberta. Ciclo 9 amplia expressamente o escopo: comunidades independentes ou vinculadas a arenas, com papéis e audiência próprios.
-Manter fora do MVP: IA, voz, reservas, pagamentos, B2B, anúncios, ranking avançado e mapa em tempo real. O empacotamento iOS/Android está no escopo a partir de 15/09/2026, preservando a PWA; isso não autoriza reescrita integral nem submissão às lojas sem os gates do plano.
+O empacotamento iOS/Android está no escopo a partir de 15/09/2026, preservando a PWA, e o pedido de 18/09/2026 acrescentou fundações desativadas de mensagens diretas e push. Implementar incrementalmente no projeto existente; ativação conectada depende das migrations, configuração, moderação e verificações próprias. Manter fora do MVP: IA, voz, reservas, pagamentos, B2B, anúncios, ranking avançado e mapa em tempo real. Isso não autoriza reescrita integral nem submissão às lojas sem os gates do plano.
 
 ## Leia antes de desenvolver
 

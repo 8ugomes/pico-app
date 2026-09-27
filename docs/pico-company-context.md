@@ -46,7 +46,7 @@ O onboarding assistido deve ajudar a entender e usar controles reais, com pausa,
 
 Cadastro com e-mail e senha, sem confirmação e com admissão automática não restaura contas suspensas, revogadas ou excluídas. Audiências, papéis e RLS continuam vigentes. Demo é explicitamente rotulado e local; fotografia sintética do estudo não representa pessoas ou arenas reais. Decisão expressa da rodada de estabilidade: beta sem SMTP e sem confirmação. O endereço informado não comprova titularidade; recuperação por e-mail fica indisponível e isso deve ser informado na entrada.
 
-Fora do escopo atual: reservas, pagamentos, B2B, anúncios, IA/voz, ranking avançado, presença ou mapa em tempo real e localização contínua. O empacotamento entrou no escopo; a PWA continua, enquanto reescrita integral e publicação em lojas exigem decisão e gates próprios. Um redesign pode reorganizar a apresentação e a assistência da jornada; não autoriza ampliar os demais limites.
+O empacotamento entrou no escopo e a PWA continua. O pedido explícito de 18/09/2026 também autorizou preparar mensagens diretas e push a partir da base existente, mas esses recursos permanecem desativados até terem moderação, privacidade, banco hospedado e aparelhos validados. Não confundir código preparado com serviço publicado. Reescrita integral e publicação em lojas exigem decisão e gates próprios. Permanecem fora do escopo: reservas, pagamentos, B2B, anúncios, IA/voz, ranking avançado, presença ou mapa em tempo real e localização contínua. Um redesign pode reorganizar a apresentação e a assistência da jornada; não amplia esses limites.
 
 ## Contexto de empresa disponível
 
