@@ -1,3 +1,232 @@
+> Atualização operacional de 26/09/2026: o Supabase principal foi retomado, validado por `/api/health` e recebeu as sete migrations aditivas móveis/mensagens/push listadas no dry-run. O inventário preservou 131/131 identidades, os tipos foram regenerados do schema hospedado e os switches de mensagens/Web Push continuaram desligados, com tabelas novas vazias. A revisão integrada ainda precisa passar por PR/CI e deploy da `main`; DMs não podem ser ativadas sem denúncia de mensagem/evidência e operação de moderação, e a candidata iOS continua bloqueada pelos gates humanos e pelo aparelho físico.
+
+## Cliente iOS local e preparação para distribuição · IMPLEMENTADO E VALIDADO LOCALMENTE · 18/09/2026
+
+### Problema e resultado observável
+
+O pacote iOS atual abre apenas um placeholder local ou, em ensaio interno, o site por `server.url`. Esta rodada deve estabelecer o gate N4 real: um cliente React/TypeScript servido por arquivos do próprio binário, uma API móvel versionada e deliberada, autenticação por Bearer sem cookies, renovação segura com refresh token no Keychain e os percursos essenciais do Pico sem depender da aplicação Next renderizada dentro do WebView.
+
+Resultado para a pessoa: abrir o Pico Social com conteúdo local, criar conta ou entrar, restaurar a sessão com segurança, navegar por Início, Pessoas, Comunidades, Arenas e Perfil, registrar um jogo privado e compreender estados de carregamento, vazio, erro e offline. Perda de rede, background ou toque repetido não pode anunciar sucesso nem duplicar escrita.
+
+### Decisão, área afetada e não objetivos
+
+A decisão de arquitetura está em [ADR 0001](adr/0001-ios-local-client.md). O cliente fica em `apps/mobile/` e é compilado com esbuild para o `webDir` do Capacitor; Next.js/Vercel permanece PWA e BFF. A API móvel usa `/api/mobile/v1`, tokens de acesso apenas em memória, refresh token somente numa ponte Keychain própria e pequena, CORS por origem exata e negociação explícita de versão mínima. Endpoints web continuam exclusivos de cookie/origem e não passam a aceitar Bearer implicitamente.
+
+Esta fatia cobre autenticação, restauração, leitura dos cinco destinos, perfil/configuração, vínculos essenciais, comentários, republicações, bloqueio/desbloqueio, registro privado de jogo com edição e compartilhamento separado, publicação idempotente de texto/foto, seleção nativa de foto, player privado por Range, infraestrutura TUS resumível/cancelável atrás de feature gate, share sheet, ciclo de vida, rede, safe areas, teclado, barras, deep links roteados e tela de atualização obrigatória. Inclui rascunhos por conta no Preferences, guia opcional, `PrivacyInfo.xcprivacy`, guardas de release e documentação de loja. Android é preservado e continua fora da execução até a submissão iOS.
+
+Não entram antes das decisões humanas: nome público definitivo, bundle ID final, troca do ícone histórico Pico Club, domínio próprio/Universal Links publicados, assinatura, criação do registro App Store Connect, envio, TestFlight e lançamento. Push também não bloqueia a primeira submissão. Cinco migrations aditivas foram escritas para exportação, moderação, fechamento da leitura direta de mídia no Storage, leitura própria do estado de acesso e comentário idempotente, mas nenhuma migration, seed, reset, migração de contas ou deploy foi executado remotamente. Cache offline social, background sync e ação social automática continuam fora desta fatia.
+
+### Contratos de aceite e recuperação
+
+1. `native:verify` compila e sincroniza o cliente local, e os artefatos iOS não contêm `server.url`, segredo ou credencial persistida em armazenamento web.
+2. Login/cadastro/refresh usam a API móvel v1. A API rejeita cookie em rotas móveis, Bearer ausente/inválido, origem não permitida e cliente abaixo da versão mínima; a aplicação mostra atualização obrigatória em HTTP 426.
+3. Exemplo aceito: token de acesso válido consulta somente dados autorizados por RLS; refresh válido é rotacionado no Keychain e o anterior deixa de ser usado. Rejeitado: cookie web, token em query, `localStorage`, Preferences ou log. Falha/recuperação: refresh expirado limpa o Keychain e retorna à entrada sem reaproveitar dados de outra conta.
+4. Exemplo aceito: registrar jogo ou publicar uma vez com chave estável durante a tentativa e confirmação do servidor. Rejeitado: data futura, identidade forjada, compartilhamento automático ou reenvio silencioso. Falha/recuperação: rede perdida preserva o rascunho isolado por conta e permite nova tentativa sem anunciar salvamento.
+5. Os cinco destinos, configuração do perfil, vazios, carregamento, erro/offline e sucesso usam Aura Manteiga, alvos de 44 px, foco/VoiceOver, texto ampliado, claro/escuro e movimento reduzido. Tutorial permanece opcional, contextual e separado do perfil e do aviso institucional.
+6. Share sheet, seletor de câmera/biblioteca, barras, teclado, abertura fria/quente e retorno do background têm integração explícita. Permissão só é solicitada pela ação que a precisa; haptic ocorre somente depois de confirmação semântica. Links válidos abrem o conteúdo exato; associação Universal Link permanece bloqueada até domínio e bundle ID finais.
+7. Vídeo já autorizado usa player nativo por Range autenticado, sem colocar o access token em URL ou disco. O transporte TUS resumível/cancelável para MP4 de até 45 MiB está implementado, mas criação/publicação móvel fica desabilitada na `1.0` até sanitização/transcoding e validação em iPhone físico. MOV/HEVC não são aceitos.
+8. Fechamento local: teste focado antes/depois, lint, typecheck, suíte proporcional, build Next, build do cliente, `native:verify`, build iOS Simulator, smoke visual e auditoria de segredos/configuração. Evidência física, assinatura e loja permanecem separadas.
+
+### Dependências e gates humanos conhecidos
+
+Antes do archive distribuível, o responsável precisa escolher nome final, bundle ID e ícone; informar Apple Developer/team e entidade vendedora; definir domínio, suporte e contato de privacidade; aprovar política de recuperação, bases/retenção jurídicas e classificação etária. Cadastro continua sem confirmação e sem SMTP; isso não bloqueia novos cadastros, mas recuperação permanece indisponível até decisão humana. O cadastro aberto também exige Turnstile configurado diretamente no Supabase Auth ou admissão controlada. A execução depende de um iPhone confiado para câmera, Keychain, HEIC, MP4/TUS/Range, memória, links, VoiceOver e desempenho. A autorização final de lançamento público continua separada da submissão e deve usar lançamento manual ou gradual.
+
+### Resultado desta execução
+
+O cliente local React/Capacitor agora usa a API móvel por Bearer, conserva somente o refresh token no Keychain e cobre as jornadas sociais necessárias sem carregar o produto por `server.url`. Uma geração de sessão impede respostas tardias ou refresh concorrente de restaurarem dados depois de logout/expiração; o tombstone de limpeza permanece até o Keychain e o conteúdo local da conta terem sido apagados. Preferências guardam rascunhos e tentativas idempotentes por conta, nunca credenciais. Comentários, republicar/desfazer, desbloqueio, edição/compartilhamento de jogo, exportação, exclusão de posts/comentários e exclusão de conta estão expostos. Conta suspensa/revogada e perfil inicial incompleto conservam exportação, exclusão, logout, ajuda e textos legais; uma exclusão parcial é retomada antes de qualquer perfil social.
+
+Deep links HTTPS da origem confiável são roteados para publicação, jogador, comunidade, arena e áreas do perfil. Isso não equivale a Universal Links: entitlement, AASA e associação ficam abertos até domínio/bundle final. Vídeo privado já autorizado usa player nativo com Bearer em memória e faixas reautorizadas. O transporte TUS para MP4 de até 45 MiB mostra progresso, permite cancelamento e retoma quando o mesmo arquivo é escolhido, mas fica atrás de feature gate; novo upload/publicação de vídeo não entra na `1.0`. MOV/HEVC, sanitização/transcoding e validação física permanecem pendentes.
+
+O manifesto de privacidade agrega `UserDefaults`/`CA92.1` e `FileTimestamp`/`C617.1`/`3B52.1`; o preflight torna antiabuso de cadastro um gate humano. A árvore final passou em ESLint, typecheck, **235 testes**, build Next.js, build móvel, `native:verify`, build Debug do iOS Simulator, archive Release sem assinatura, `npm audit --omit=dev`, `plutil`, `git diff --check` e detector Impeccable. O archive contém o manifesto agregado e foi confirmado como não assinado. O preflight encerrou em **7/16 checks, 9 gates humanos e 0 falhas técnicas**. O smoke no iPhone 18 Pro simulado/iOS 27.0 conferiu splash e estado de rede em claro/escuro com texto grande; não houve sessão conectada porque backend e migrations não foram publicados.
+
+Uma migration local remove a policy genérica de leitura de mídia no Storage; a intenção é deixar os bytes somente atrás do BFF e das checagens `can_read_media`/`can_read_post_video`. A mudança recebeu inspeção estática, mas não foi aplicada nem validada em Supabase hospedado. Não houve deploy, aplicação de migration, alteração de banco/storage/Auth, assinatura, upload ao App Store Connect, TestFlight ou submissão. As páginas jurídicas e o pacote de loja são rascunhos: faltam controlador/contatos reais, aprovação jurídica, recuperação, moderação, direitos, metadata final e credenciais Apple.
+
+## Refino iOS para candidata à loja · IMPLEMENTADO E VALIDADO LOCALMENTE · 18/09/2026
+
+### Problema e resultado observável
+
+O preview no iOS Simulator comprovou o pacote, mas a primeira leitura ainda apresenta explicação demais, mantém a navegação social atrás de uma barreira de acesso e usa um tutorial de seis destinos como catálogo de recursos. Nesta fatia, a entrada deve levar a **Criar conta** ou **Entrar** sem distrações, o guia opcional deve ensinar o essencial em três passos reais e a troca entre as cinco áreas deve responder imediatamente e chegar com continuidade discreta.
+
+Resultado para a pessoa: entender em uma tela que o Pico reúne pessoas, comunidades e arenas; entrar por uma ação clara; e aprender o percurso essencial como **lugar → turma → registro privado**, sem precisar atravessar todo o produto antes de explorá-lo.
+
+### Fatia, cobertura e não objetivos
+
+| Área de domínio | Tratamento desta fatia |
+| --- | --- |
+| Entrada e autenticação | Retirar a navegação social do estado anônimo, reduzir a abertura e manter cadastro/login e mensagens reais de acesso. |
+| Configuração e assistência | Preservar o perfil inicial e o aviso institucional; reduzir o tutorial de seis para três passos, migrando a preferência local sem misturar contas. |
+| Shell e navegação | Manter as cinco áreas; acrescentar resposta de carregamento no item acionado e uma entrada de rota breve, com alternativa sem deslocamento. |
+| Início, pessoas, comunidades, arenas, jogos e perfil | Reusar controles e rotas reais. Nenhum contrato, conteúdo ou permissão muda; as áreas deixam de ser ensinadas uma a uma no tutorial. |
+| Aplicativo e distribuição | Sincronizar e recompilar o preview iOS para conferência. Cliente local distribuível, assinatura, TestFlight e submissão continuam nos gates N4/N5. |
+
+Não entram nesta fatia: migration, mudança de Auth/RLS/audiência, telemetria, haptic antes de aparelho físico, cliente nativo reescrito, Android, novo conteúdo social, deploy ou submissão à App Store.
+
+### Critérios de aceite e verificação prevista
+
+1. A pessoa anônima vê apenas marca, proposta curta, esportes e as ações **Criar conta** e **Entrar**; as cinco abas aparecem somente depois do acesso autorizado ou na demonstração identificada.
+2. O guia opcional tem três passos, saída e retomada, continua apontando controles reais e nunca acompanha, participa, registra ou publica automaticamente. Preferências v1 concluídas/dispensadas e pausadas migram para v2 sem herança entre identidades.
+3. A navegação mantém os cinco destinos, alvo de toque, `aria-current`, prefetch e foco; o destino acionado mostra resposta imediata e a nova superfície entra em até 220 ms. Movimento reduzido remove deslocamento e animação de rota.
+4. Entrada, login/cadastro, Início, guia e uma rota vizinha funcionam em 320/390 px e desktop, claro/escuro e texto ampliado, sem esconder privacidade, audiência ou recuperação indisponível.
+5. Teste focado observa primeiro a incompatibilidade da estrutura antiga do tutorial. Depois: teste de onboarding, lint, typecheck, build, verificação nativa, build iOS Simulator e smoke visual proporcional.
+
+### Resultado e limites
+
+A entrada sem sessão agora vive fora do shell social e apresenta somente marca, proposta, esportes, **Criar conta** e **Entrar**. O guia opcional passou de seis destinos para três passos reais: arenas, pessoas e jogos privados. Preferências antigas válidas são migradas do payload v1 para v2 no mesmo armazenamento isolado por identidade, sem reabrir um guia já concluído ou dispensado.
+
+As cinco áreas continuam disponíveis depois do acesso. A aba acionada responde enquanto o Link navega e a superfície de rota entra em 220 ms, com geometria estável e remoção de animação em movimento reduzido. O texto de autenticação e a coluna lateral foram reduzidos sem retirar privacidade, audiência ou recuperação. O detector visual apontou apenas o acento lateral antigo dos comentários; ele foi removido sem alterar autoria ou hierarquia.
+
+Passaram 172 testes locais, lint, tipos, build Next.js em demo, dez testes e sincronização nativa e build Debug para iOS Simulator. Os percursos conectados por fixture e demo completaram os três passos sem gravações, cobrindo 320–1280 px, altura curta, texto a 200%, teclado, temas claro/escuro, falhas, armazenamento negado e múltiplas abas. Esta é a primeira camada do gate N3; iPhone físico, haptics, cliente local distribuível, assinatura, TestFlight, ficha jurídica e submissão continuam pendentes. Não houve deploy, Supabase, conteúdo de teste ou envio à loja.
+
+## Pico Social no iOS primeiro · EXECUTADO LOCALMENTE · 18/09/2026
+
+### Pedido e resultado observável
+
+Priorizar a criação do aplicativo para iPhone antes de continuar a preparação Android. Nesta fatia, instalar e preparar o Xcode oficial compatível com o macOS deste host, disponibilizar um runtime de iOS Simulator e transformar o scaffold já sincronizado em uma compilação debug reproduzível do **Pico Social Preview**. Android Studio e JDK permanecem instalados, mas Android SDK, emulador e licenças ficam pausados.
+
+O resultado mínimo é `native:doctor` reconhecer Xcode e simulador, o projeto iOS listar seu scheme e `xcodebuild` concluir para um destino de simulador sem identidade ou provisionamento Apple. Quando o runtime permitir, abrir o shell local no Simulator e registrar abertura fria, splash, barras e safe areas. Compilação, simulador, aparelho físico, assinatura de distribuição, TestFlight e App Store continuam evidências separadas.
+
+### Fatia, dependências e limites
+
+1. concluir a instalação do Xcode pela App Store e os componentes iniciais oficiais, sem solicitar ou registrar credenciais;
+2. selecionar o toolchain completo e baixar um runtime iOS compatível, deixando qualquer senha, aceite jurídico ou login para ação direta do responsável;
+3. executar `native:verify`, listar projeto/scheme/destinos, compilar Debug para Simulator com code signing desativado e sem identidade/provisionamento Apple e, se houver destino disponível, instalar e abrir o shell local;
+4. preservar o identificador reversível `com.picosocial.preview`, sem criar certificado, profile, App Store Connect, bundle ID definitivo ou artefato de distribuição;
+5. usar a origem principal apenas como preview interno anônimo quando necessário para provar o produto real, sem criar contas/conteúdo e sem alterar PWA, Supabase, Auth, RLS ou mídia.
+
+### Verificação prevista
+
+Registrar versões/caminhos reais de `xcodebuild`, SDK e runtime; manter `native:doctor` e `native:verify` honestos; executar a compilação nativa em destino de simulador e distinguir qualquer bloqueio humano. No fechamento, rodar lint, typecheck e build web, testes pertinentes, atualizar o plano, o Deslopify, o guia móvel e o changelog, e fazer commit sem push ou publicação.
+
+### Resultado e limites
+
+Xcode 27.0 e o runtime iOS 27.0 foram instalados; o projeto e o lock do Swift Package Manager ficaram reproduzíveis, e o build Debug passou sem identidade ou provisionamento Apple. O **Pico Social Preview** foi instalado e aberto pelo Xcode no iPhone 18 Pro simulado. Primeiro, o shell local comprovou o pacote; depois, o preview HTTPS explícito carregou `/feed` do endereço principal e exibiu a interface real do Pico Social em estado anônimo, sem cadastro, postagem, upload ou mudança remota.
+
+O ensaio revelou dois defeitos e ambos foram corrigidos: o splash quadrado recortava o wordmark em telas altas, e `server.appStartPath` fazia o Capacitor 8 validar `/feed` como arquivo local e encerrar o app. O splash agora preserva a arte completa e a URL do preview inclui o caminho diretamente em `server.url`. A configuração padrão continua sendo o shell local; `native:verify` remove a URL remota. Android, iPhone físico, login, mídia, background/foreground, assinatura, TestFlight e App Store permanecem fora desta evidência.
+
+## Ambiente móvel do Pico Social · PLAN · 15/09/2026
+
+### Pedido e resultado observável
+
+Preparar este Mac para desenvolver, compilar e testar o Pico Social em iOS e Android, pesquisar skills pertinentes e transformar a documentação móvel já existente em uma entrada operacional descoberta pelo Codex. O resultado esperado é um ambiente diagnosticável e reproduzível, com toolchains instaladas até o limite que não exija credencial pessoal, aceite jurídico ou confiança física do responsável.
+
+O nome operacional do produto e do aplicativo é **Pico Social**. `Pico Club` permanece somente como registro histórico e caminho do mestre visual já aprovado; novos nomes de projeto, shell, preview, documentação e comunicação usam Pico Social. O identificador reversível de laboratório continua `com.picosocial.preview` até a decisão externa do bundle/application ID definitivo.
+
+### Estado inicial e fatia
+
+O MacBook Air Apple M5 usa macOS 26.6.2, 16 GiB de memória, 297 GiB livres e Node 24.18.0. As Command Line Tools 26.6 estão presentes, mas faltam Xcode completo, simulador, Android Studio, Android SDK, emulador e Java/JBR acessível no terminal. Homebrew também não está instalado.
+
+Nesta fatia:
+
+1. instalar o Xcode estável compatível pela fonte oficial, completar os componentes que puderem ser automatizados e manter explícita qualquer etapa de Apple Account/senha;
+2. instalar Android Studio para Apple Silicon, usar seu JBR, instalar Platform/Build Tools 36, Platform Tools, Emulator e imagem ARM64 somente após aceite explícito das licenças;
+3. configurar caminhos de terminal sem sobrescrever preferências pessoais e sem instalar CocoaPods, JDK separado, Gradle global, Rosetta ou fastlane sem necessidade comprovada;
+4. criar uma única skill local `pico-mobile`, roteando para `docs/MOBILE_APP.md`, scripts existentes e gates N0–N5, sem copiar o manual técnico;
+5. atualizar diagnósticos, documentação e nomenclatura; sincronizar e compilar o que as toolchains realmente permitirem.
+
+### Aceite e limites
+
+- `native:doctor` distingue ferramenta instalada, componente pendente e gate humano.
+- Xcode/Android Studio vêm de distribuição oficial; versões e caminhos ficam registrados.
+- Android usa API 36, build tools compatíveis, platform tools e imagem ARM64; iOS tem ao menos um runtime compatível quando o download puder ser concluído.
+- A skill `pico-mobile` é válida, aparece no catálogo local e preserva PWA, Auth, audiência, RLS e mídia privada.
+- `native:verify`, lint, typecheck, testes e build web permanecem verdes; build nativo só é declarado quando `xcodebuild`/Gradle terminarem com sucesso.
+- Não entrar em Apple/Google Account, aceitar contrato em nome do responsável, habilitar Developer Mode, confiar em aparelho, assinar, publicar, fazer deploy ou alterar Supabase por suposição.
+- Com 16 GiB, não manter simuladores iOS e Android pesados em paralelo durante a validação.
+
+### Verificação prevista
+
+Registrar versões e caminhos com `native:doctor`, `xcodebuild`, `simctl`, Java, `sdkmanager`, `adb` e `emulator`; conferir a skill com o validador oficial. Rodar sync e os checks obrigatórios do Pico Social. Se um instalador exigir senha, login ou aceite de licença, deixar a ação pronta no aplicativo/terminal e pedir somente essa interação ao responsável, sem solicitar credenciais no chat.
+
+### Preparação concluída antes dos gates pessoais
+
+Android Studio Quail 4 2026.1.4 para Apple Silicon foi baixado da origem oficial, conferido pelo SHA-256 publicado, instalado em `~/Applications` e validado por assinatura/notarização. Como o JBR 25 embutido não executa oficialmente o Gradle 8.14.3 do projeto, Temurin 21.0.12.1 LTS foi instalado no usuário e configurado para os terminais; o wrapper Gradle abriu com Java 21. PyYAML 6.0.3 foi instalado no usuário para tornar operacional o validador oficial de skills.
+
+A skill local `pico-mobile` foi criada e validada; o catálogo oficial não oferece uma skill específica de Capacitor/iOS/Android, e o catálogo experimental consultado não existe na origem atual. A configuração, shell e nomes nativos passaram a usar Pico Social Preview. O diagnóstico agora separa Xcode, runtime iOS, Studio, Java, SDK manager, API 36, Build Tools 36, `adb`, emulador e imagem ARM64. Oito testes nativos e `native:verify` passaram depois da mudança.
+
+A App Store está autenticada e parada na página oficial do Xcode, antes do botão **Obter**. Android Studio está instalado, mas ainda não foi aberto. Instalar/executar esses aplicativos pela interface e aceitar as licenças do SDK exigem confirmação no momento da ação; nenhuma senha, contrato, telemetria ou conta foi assumida. Android SDK/API 36, imagem ARM64, Xcode completo e runtime iOS continuam pendentes desse gate.
+
+Lint, typecheck, 170 testes locais e build Next.js em demo também passaram nesta preparação. A validação não acessou Supabase, não publicou e não transformou a instalação das IDEs em evidência de build nativo.
+
+## Pico em aplicativo · PLAN · 15/09/2026
+
+### Problema e decisão vigente
+
+O teste PWA validou adesão suficiente para iniciar a transição do Pico para um aplicativo instalado. O empacotamento para iOS e Android passa a fazer parte do escopo corrente e substitui a regra anterior que mantinha aplicativo fora do MVP. A PWA publicada continua disponível e funcional durante a transição; este pedido não autoriza reescrita integral em React Native/Swift/Kotlin, submissão imediata às lojas, novos dados ou flexibilização de admissão, autoria, audiência e RLS.
+
+Movimento de interface e ícones também pode ser entregue na web. O aplicativo acrescenta o que depende da plataforma: pacote assinado, ciclo de vida, barras do sistema, links universais, resposta tátil e futura distribuição pelas lojas. Regras de domínio, Next.js/Vercel e Supabase permanecem compartilhados.
+
+### Resultado para o jogador
+
+Uma versão interna instalável abre o Pico com a identidade Aura Manteiga, mantém a mesma conta e os contratos sociais, retoma a sessão com segurança e dá continuidade às ações com transições e respostas proporcionais. Fechar, alternar ou perder a rede não publica, duplica nem anuncia sucesso.
+
+### Arquitetura e primeira fatia
+
+A hipótese inicial é Capacitor 8 por aproveitar o cliente web validado e oferecer bridge nativa. O código atual não admite cópia direta por `output: export`: usa 23 Route Handlers, cookies, proxy/headers, rotas dinâmicas e renderização por requisição, recursos que a documentação local do Next.js 16.3.4 declara incompatíveis com exportação estática. Por isso:
+
+1. criar agora uma fundação reproduzível de Capacitor para iOS e Android, com dependências fixadas, shell local seguro, ativos Pico Club e comandos de conferência;
+2. permitir a URL hospedada somente por configuração explícita de **preview interno**, nunca como configuração padrão ou artefato de loja, pois `server.url` é destinado a live reload e não a produção;
+3. provar em aparelhos reais autenticação, sessão, navegação, mídia, teclado, safe areas, retomada e falhas de rede;
+4. antes de beta de loja, decidir com evidência entre extrair um cliente web empacotável com API/autenticação próprias ou avançar para cliente nativo progressivo. Expo/React Native permanece alternativa se o shell híbrido não atender os gates; TWA não cobre iOS.
+
+Esta primeira fatia usa identificador e nome de **preview** reversíveis. Nome público, bundle/application ID definitivo, domínio próprio, contas Apple/Google, entidade responsável, suporte e política de loja dependem de decisão externa antes de assinar ou publicar.
+
+### Não objetivos desta fatia
+
+- Publicar na App Store, TestFlight ou Google Play.
+- Tratar um WebView remoto como build de produção.
+- Reescrever telas ou duplicar regras de domínio.
+- Push, offline social, fila de escrita, background sync, geolocalização, presença, mapa em tempo real, IA, voz, reservas, pagamentos, B2B, anúncios ou ranking avançado.
+- Alterar banco, migrar contas, copiar conteúdo ou solicitar permissões nativas sem uma ação que precise delas.
+- Remover ou degradar a PWA existente.
+
+### Critérios de aceite da primeira fatia
+
+1. Capacitor, iOS e Android estão versionados e sincronizam a partir de comandos documentados, sem segredo ou chave administrativa.
+2. A configuração padrão contém apenas o shell local e recusa URL externa; o preview aceita somente a origem HTTPS autorizada do Pico e fica identificado como interno.
+3. Ícones e splash partem dos mestres Pico Club, não de placeholders ou imagens inventadas.
+4. O diagnóstico informa honestamente a ausência/presença de Xcode, Android Studio/JDK e SDK, sem afirmar build não executado.
+5. A PWA mantém lint, typecheck, build e testes pertinentes; nenhum contrato social ou dado muda.
+6. O plano de dispositivo cobre cadastro/login, perfil inicial, logout, retomada/troca de identidade, navegação principal, links internos/externos, foto/HEIC, vídeo de até 45 MiB, rede, teclado, temas, safe areas, texto ampliado e movimento reduzido.
+7. Pressão, seleção, ícones, camadas e rotas seguem 160/220/280 ms; haptic ou animação de sucesso só ocorre após confirmação real.
+8. O resultado é chamado de fundação ou preview interno. Pacote assinado, aparelho real e aprovação de loja não são presumidos.
+
+### Verificação proporcional
+
+Caracterizar a configuração nativa antes/depois, validar que o modo padrão não carrega URL remota e que entradas inseguras falham. Rodar sincronização de plataformas, lint, typecheck, testes e build do Next.js. Inspecionar os projetos gerados e ativos por arquivo/dimensão. Builds de iOS/Android e testes físicos ficam pendentes enquanto Xcode 26+, Android Studio 2025.2.1+, SDK/JDK e aparelhos não estiverem disponíveis neste host.
+
+### Implementação e verificação local
+
+A fundação Capacitor 8 foi criada na branch de trabalho com `core/ios/android/cli` 8.5.2 e plugins App 8.1.1, Haptics 8.0.2, Status Bar 8.0.3 e Splash Screen 8.0.2. `ios/` e `android/` estão versionados com nome/ID de preview, shell local como padrão, HTTPS remoto condicionado a flag explícita e ativos gerados dos mestres Pico Club. O foreground adaptativo Android preserva a assinatura dentro da área segura; splash e ícones padrão do Capacitor foram removidos. A UI reconhece o sufixo do pacote e não oferece instalar a PWA dentro dele.
+
+Oito testes focados cobrem configuração local, opt-in/HTTPS, rejeição de URL com credenciais/query/fragmento, projetos/ativos, nome Pico Social, identificação do runtime e camadas do diagnóstico. `native:verify` sincronizou as duas plataformas, confirmou dimensões/hash do ícone e ausência de `server.url`; lint, typecheck, 170 testes locais e build Next.js em demo passaram. A guarda recusou corretamente a primeira tentativa de demo enquanto variáveis locais de backend estavam presentes; o build passou com backend explicitamente vazio. `npm audit --audit-level=high` passou, com três avisos moderados no encadeamento de desenvolvimento `@capacitor/cli → xcode → uuid`, sem correção segura indicada na versão estável usada. A CI passa a executar o gate nativo, mas a execução remota ainda depende do commit/PR.
+
+Na fundação inicial, o diagnóstico encontrou Node 24, configuração e projetos, mas somente Xcode Command Line Tools, sem Xcode completo, Android Studio, Java ou Android SDK. Por isso aquela rodada não teve compilação nativa, simulador, aparelho, assinatura ou contato com Supabase. A preparação seguinte instalou Studio/JDK e preservou os gates pessoais restantes. O plano operacional e a matriz física estão em [Aplicativo Pico Social](MOBILE_APP.md); o próximo gate continua N1, não submissão às lojas.
+
+### Fases seguintes
+
+1. **Preview em aparelho:** toolchains, simuladores/aparelhos e matriz funcional no Supabase de desenvolvimento.
+2. **Fundação de plataforma:** ciclo de vida, links, barras, splash, bridge de capacidades e compatibilidade de versões.
+3. **Movimento e resposta:** transições compartilhadas, ícones com estado e haptics proporcionais com redução de movimento.
+4. **Cliente distribuível:** retirar a dependência de `server.url`, resolver autenticação/API do bundle e fechar a arquitetura de produção.
+5. **Hardening:** mídia, rede, sessão, privacidade, acessibilidade, desempenho e aparelhos representativos.
+6. **Beta fechado e lojas:** assinatura, TestFlight/Play interno, metadados, suporte, privacidade, revisão e rollout gradual.
+## Evolução para conversas, notificações no dispositivo e lojas · CHECKPOINT LOCAL · 18/09/2026
+
+Pedido atual do responsável: auditar todo o Pico e os commits/publicações e avançar para um aplicativo consistente, com mensagens entre pessoas, notificações, acabamento premium e futuro lançamento nas lojas. Este pedido amplia expressamente o escopo histórico que deixava chat/push e preparação mobile de fora. Preservar Aura Manteiga, os projetos existentes, contas, conteúdos, jogos privados e audiência; não retomar presença ao vivo.
+
+Base revisada: `e3a64926e4b28bbf9483aeabd3f6981b1c824743`. A entrega anterior funcional de vídeos é `bda869824b42`; commits posteriores registram recibos. Cruzar código, CI, endpoint de versão e histórico para distinguir implementado, testado e publicado. Não inferir atividade real de usuários a partir de fixtures ou documentos.
+
+Fatia executável: mensagens diretas de texto com conversa 1:1, autorização por participante/conta ativa, bloqueio bilateral, envio idempotente, paginação, não lidos e recuperação após erro; interface móvel/desktop alinhada ao sistema atual. Recursos novos dependentes de migrations ficam desabilitados por configuração até a validação conectada e aplicação revisada no banco existente. Preparar notificações no dispositivo por adesão explícita, sem conteúdo privado em cache e sem envio a usuários reais nesta auditoria. Atualizar a avaliação de lojas e o roteiro de aquisição/retencão com critérios observáveis, sem prometer viralização.
+
+Aceite: A e B conseguem conversar após autorização de contato; C não pode ler/enviar/marcar a conversa deles; bloqueio e suspensão revogam leitura e novas mensagens; retry da mesma tentativa não duplica. Não exibir mensagem como enviada antes da confirmação. Erro de rede preserva rascunho em memória e permite retry; troca de conta descarta dados. Notificações dependem de permissão contextual, revogável, e entrega realmente configurada. Demonstração é identificada e não envia mensagens. Testes locais SQL/API, lint, typecheck, build e amostra visual mobile estreito/desktop nos dois temas; distinguir simulação local de teste hospedado/aparelho físico.
+
+Entrega: usar branch de trabalho/PR exigidos pela proteção da main, sem criar outro app ou ambiente. Não publicar alteração de schema sem os acessos e evidências de preservação necessários. Registrar blockers concretos e continuidade no repositório.
+
+Resultado local: fundação 1:1 e push implementada com gates independentes no banco e na aplicação, desligados. Inclui UI Aura Manteiga, API privada, RLS/RPCs, idempotência, leitura explícita, exportação de mensagens próprias, fila de push, endpoints restritos, consentimento e limpeza/reconciliação de sessão. Revisão independente corrigiu ordem de locks e corridas de assinatura/retry. O catálogo local gerou e conferiu 12 assinaturas RPC sem editar os tipos hospedados para simular aplicação remota.
+
+Verificações: lint, typecheck demo, build demo, 187 testes locais e audit sem vulnerabilidades. Rotas compiladas e smoke HTTP com recurso desligado, CSRF e executor protegido passaram. Fixture reproduzível de UI compila e responde HTTP, mas o navegador disponível bloqueia localhost; a amostra visual das novas telas não foi concluída. Não houve migration hospedada, teste de concorrência multissessão, push em aparelho, deploy, postagem ou envio a usuários reais. A versão pública auditada permanece `bda869824b42`.
+
+O pedido final desta sessão priorizou avaliar todas as melhorias e entregar um prompt para o Codex continuar até a preparação de publicação. [Avaliação de 18 frentes](PICO_PRODUCT_ASSESSMENT_2026-09-18.md), [prompt executável](CODEX_CONTINUE_TO_STORE_READY.md), [diagnóstico técnico](PICO_DEVELOPMENT_REVIEW_2026-09-18.md) e [contrato push](PUSH_NOTIFICATIONS.md) formam o handoff. Próximos gates: ciclo de intenção de conexão, denúncia específica de mensagem, recuperação de conta/política futura, serviços reais, aparelhos, operação e cliente de loja. Publicação final fica depois da revisão da entrega, salvo autorização explícita posterior.
 ## Vídeos acima de 30 MB · PUBLICADO · 14/09/2026
 
 Pedido: o limite atual de 30 MiB é insuficiente para publicar vídeos. Aumentar o tamanho aceito em publicações normais e compartilhamentos voluntários de jogos, preservando upload TUS assinado, bucket privado, autoria, audiência, rascunho, revogação de leitura e remoção. Conferir antes o plano e o limite global efetivos do Supabase nos projetos de desenvolvimento e principal; não contratar plano nem ultrapassar a cota sem autorização.

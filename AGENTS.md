@@ -10,7 +10,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # Pico — orientações do projeto
 
-Pico é uma rede social PWA mobile-first para futevôlei, beach tennis e vôlei de praia.
+Pico é uma rede social mobile-first para futevôlei, beach tennis e vôlei de praia, hoje publicada como PWA e em transição controlada para aplicativo iOS/Android.
 
 **O ponto de encontro da areia. Me acha no Pico.**
 
@@ -18,7 +18,7 @@ Pico é uma rede social PWA mobile-first para futevôlei, beach tennis e vôlei 
 
 Responder quem joga onde o usuário joga, quais comunidades combinam com o usuário e o que acontece nas suas arenas.
 Priorizar pessoas, perfis de arenas, comunidades próprias, registro privado depois do jogo, feed e descoberta. Ciclo 9 amplia expressamente o escopo: comunidades independentes ou vinculadas a arenas, com papéis e audiência próprios.
-Manter fora do MVP: IA, voz, reservas, pagamentos, B2B, anúncios, ranking avançado, mapa em tempo real e app nativo.
+O empacotamento iOS/Android está no escopo a partir de 15/09/2026, preservando a PWA, e o pedido de 18/09/2026 acrescentou fundações desativadas de mensagens diretas e push. Implementar incrementalmente no projeto existente; ativação conectada depende das migrations, configuração, moderação e verificações próprias. Manter fora do MVP: IA, voz, reservas, pagamentos, B2B, anúncios, ranking avançado e mapa em tempo real. Isso não autoriza reescrita integral nem submissão às lojas sem os gates do plano.
 
 ## Leia antes de desenvolver
 
@@ -49,7 +49,7 @@ Os documentos numerados anteriores preservam a evolução histórica.
 
 ## Stack e estrutura
 
-Next.js App Router, TypeScript strict, Tailwind CSS 4, Supabase/Postgres/Auth/Storage, Vercel e PWA.
+Next.js App Router, TypeScript strict, Tailwind CSS 4, Supabase/Postgres/Auth/Storage, Vercel, PWA e fundação Capacitor 8 para iOS/Android.
 Preservar npm e package-lock.json. O cache npm local em .npmrc resolve EACCES do cache global; não usar sudo npm install.
 Rotas em src/app, UI em src/components/ui, domínio em src/components/pico e integrações em src/lib.
 Server Components por padrão; manter interação no menor componente cliente necessário.
@@ -57,7 +57,7 @@ Tokens em src/app/globals.css. Reutilizar os componentes existentes.
 
 ## Produto e apresentação
 
-Identidade escolhida: **Pico Social / Aura Manteiga**, editorial de moda jovem, artística, premium e refinada. Manteiga #F2E3B5, Cacau #44342F, Papel #F8F3E7, Lavanda de apoio #CBBBE0; Syne em títulos e Manrope na operação. Logo e tokens canônicos em docs/brand-exploration/aura-manteiga. Claro editorial e escuro próprio, curvas pontuais, superfícies calmas e movimento reduzível. Capa de instalação atual: Pico Club, com wordmark Pico e Clube fino abaixo sobre grão Manteiga/Lavanda; mestres em docs/brand-exploration/aura-manteiga/pico-club. Essa aplicação substitui o monograma P/ponto no ícone do app. O código legado ainda será migrado; consultar docs/pico-design-system.md para distinguir decisão e implementação.
+Identidade escolhida: **Pico Social / Aura Manteiga**, editorial de moda jovem, artística, premium e refinada. Manteiga #F2E3B5, Cacau #44342F, Papel #F8F3E7, Lavanda de apoio #CBBBE0; Syne em títulos e Manrope na operação. Logo e tokens canônicos em docs/brand-exploration/aura-manteiga. Claro editorial e escuro próprio, curvas pontuais, superfícies calmas e movimento reduzível. Produto, aplicativo, projetos e comunicação nova usam **Pico Social**. A capa de instalação histórica Pico Club, com wordmark Pico e Clube fino abaixo sobre grão Manteiga/Lavanda, permanece como ativo vigente até revisão visual explícita; mestres em docs/brand-exploration/aura-manteiga/pico-club. Esses mestres alimentam separadamente os ativos PWA e os derivados nativos; não trocar um pelo outro manualmente. Essa aplicação substitui o monograma P/ponto no ícone do app. O código legado ainda será migrado; consultar docs/pico-design-system.md para distinguir decisão e implementação.
 Redesign integral usa a skill pico-redesign, o manual completo e os contratos dos domínios. Incluir onboarding assistido opcional, contextual e retomável; manter perfil inicial, aviso institucional e tutorial como etapas distintas. Assistência não significa IA/voz nem ações sociais automáticas.
 Texto em pt-BR, curto, próximo e concreto. Uma ação principal por contexto. Sem travessões decorativos em nomes e textos de interface, slogans empilhados ou frases artificiais. Reescrever com naturalidade; preservar conteúdo de usuários, nomes oficiais de terceiros e hífens ortográficos/técnicos. Critério permanente em docs/deslopify.md.
 Dados ilustrativos precisam de rótulo; não fingir cadastro, presença, salvamento ou métricas.

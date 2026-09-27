@@ -1,4 +1,4 @@
-> Referência histórica. O Ciclo 9 amplia o escopo para comunidades próprias e gestão de arenas. Para comportamento/configuração atuais, consulte README, CYCLE9_CONTRACTS e ENVIRONMENTS; preserve as regras de segurança deste documento.
+> Referência histórica. O Ciclo 9 amplia o escopo para comunidades próprias e gestão de arenas; em 15/09/2026, a exclusão de aplicativo nativo também foi superada pela fundação descrita em `MOBILE_APP.md`. Para comportamento/configuração atuais, consulte README, CYCLE9_CONTRACTS, MOBILE_APP e ENVIRONMENTS; preserve as regras de segurança deste documento.
 
 # Plano de ação — Pico MVP
 

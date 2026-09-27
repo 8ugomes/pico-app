@@ -1,3 +1,67 @@
+## 2026-09-26: fundação móvel recuperada e recursos pendentes integrados com gates fechados
+
+- A cadeia local do cliente móvel foi recuperada sobre a `main` atual, incluindo Capacitor, cliente React/TypeScript local, API móvel Bearer, Keychain, direitos da conta, mídia privada e pacote editorial da App Store.
+- O trabalho de mensagens diretas e Web Push do PR de desenvolvimento foi reconciliado com a fundação móvel. As migrations receberam prefixos novos e únicos; mensagens e push continuam desligados por feature flag e configuração do banco. Web Push da PWA não foi tratado como APNs do aplicativo iOS.
+- O estado de não lidas passou a vir da resposta autoritativa do banco e é zerado depois de marcar a conversa como lida, evitando reabrir uma conversa com contador incorreto.
+- A política pública e a matriz de privacidade agora descrevem explicitamente os dados condicionais de mensagens e Web Push, sem declará-los como recursos ativos da primeira candidata.
+- `native:verify` passou a sincronizar e exigir somente a configuração iOS nesta missão; `native:verify:all` preserva a verificação das duas plataformas quando Android voltar ao escopo.
+- A exportação web e móvel agora compartilha o mesmo contrato: inclui mensagens próprias mesmo após rollback do flag e aplica o limite agregado de 8 MiB. A política pública também distingue desfazer conexão, que preserva o histórico, de bloquear, que revoga acesso enquanto ativo.
+- A validação integrada passou em ESLint, typecheck, 262 testes, builds Next.js demo e beta, build móvel, sync iOS, build Debug do Simulator, archive Release sem assinatura, audit de segredos e audit de dependências de produção sem vulnerabilidades. O preflight iOS permaneceu em 7/16, com nove gates humanos e zero falha técnica.
+- Depois da retomada humana, `/api/health` voltou a confirmar banco/Auth. O dry-run listou somente as sete migrations desta integração; elas foram aplicadas no Supabase principal com 131/131 identidades preservadas. Mensagens e push permaneceram `false`, sem conversas, inscrições ou fila. Os tipos canônicos foram regenerados do banco hospedado. O deployment web continua separado e condicionado a PR/CI/main limpa.
+
+## 2026-09-18: cliente iOS local e pacote de submissão preparados
+
+- O Pico Social ganhou um cliente React/TypeScript empacotado localmente pelo Capacitor e uma API móvel v1. Rotas móveis usam Bearer, rejeitam cookies, preservam RLS e deixam o access token em memória; somente o refresh token fica no Keychain.
+- Feed, comentários, republicações, pessoas, comunidades, arenas, perfil, bloqueio/desbloqueio e jogos privados com edição, exclusão e compartilhamento separado foram ligados ao cliente. Rascunhos de publicação, perfil e jogo e o guia opcional ficam no Preferences por conta, sem credenciais e sem reenvio automático.
+- O bootstrap confere exclusão pendente antes de abrir o perfil e permite retomar a confirmação após falha parcial. Geração de sessão invalida requests/refresh tardios; logout usa limpeza Keychain-first com tombstone persistente e apaga conteúdo local mesmo se a revogação remota falhar. O cover de privacidade só sai após o estado revalidado ser renderizado.
+- Contas suspensas/revogadas e perfis iniciais incompletos mantêm uma saída segura para exportar, excluir, sair, suporte e textos legais sem liberar o social. Conta também lista denúncias e mídia sem uso; posts e comentários próprios podem ser excluídos com confirmação.
+- Comentários e compartilhamentos de jogo conservam chave/payload idempotentes até confirmação, inclusive após relançamento, sem reenvio automático ou falso sucesso.
+- Deep links HTTPS confiáveis abrem publicações, jogadores, comunidades, arenas e seções do perfil. Universal Links, entitlement e AASA aguardam domínio e bundle ID finais.
+- Vídeos privados já autorizados abrem em player nativo por Range autenticado. O transporte TUS resumível/cancelável de MP4 até 45 MiB foi implementado, mas novo upload/publicação fica desabilitado na `1.0` até sanitização/transcoding e validação física. MOV/HEVC continuam fora do contrato.
+- `PrivacyInfo.xcprivacy` declara ausência de tracking e agrega `UserDefaults`/`CA92.1` com o `FileTimestamp`/`C617.1`/`3B52.1` exigido pelo SDK de câmera. O preflight também trata Turnstile no Supabase Auth ou admissão controlada como gate humano do cadastro aberto.
+- Cinco migrations locais aditivas cobrem exportação/notificações, moderação textual, fechamento da leitura direta de `storage.objects`, leitura própria do estado de acesso e comentários idempotentes. Elas tiveram teste local, mas não foram aplicadas nem validadas em Supabase hospedado.
+- Páginas públicas e pacote em `docs/app-store/` foram preparados sem inventar controlador, contato ou credencial. A decisão vigente continua sendo cadastro sem confirmação e sem SMTP; recuperação por e-mail permanece indisponível até decisão humana.
+- O fechamento passou em ESLint, typecheck, 235 testes, build Next.js, build móvel, sync/verificação nativa, build Debug do iOS Simulator, audit sem vulnerabilidades, `plutil`, `git diff --check` e detector Impeccable. O archive Release sem assinatura compilou, contém o manifesto agregado e foi confirmado como não assinado. O preflight terminou em 7/16, com nove gates humanos e zero falha técnica; o smoke claro/escuro com texto grande passou no iPhone 18 Pro simulado.
+- Uma auditoria final independente releu fontes, migrations, testes e manifestos, passou 79 testes focados e não encontrou P0, P1 ou P2. O audit completo registrou apenas três avisos moderados no toolchain de desenvolvimento do Capacitor, sem código embarcado no runtime; `npm audit --omit=dev` permaneceu em zero vulnerabilidades.
+- Não houve deploy, aplicação de migration, mudança remota de Auth/banco/storage, assinatura, upload, TestFlight, App Review ou submissão.
+
+## 2026-09-18: jornada final mais curta e navegação fluida
+
+- A entrada sem sessão saiu do shell social e agora apresenta somente marca, proposta curta, esportes, **Criar conta** e **Entrar**, nos temas claro e escuro.
+- O guia opcional foi reduzido de seis para três passos: Arenas, Pessoas e Meus jogos. Preferências locais v1 válidas migram para o payload v2 sem misturar identidades ou reabrir estados concluídos/dispensados.
+- As cinco abas ganharam resposta pendente com geometria estável e entrada de rota em 220 ms; movimento reduzido remove a animação. Textos redundantes da autenticação e da lateral foram cortados.
+- Percursos conectado por fixture e demo passaram sem gravações sociais, com oito layouts, texto a 200%, teclado, falhas e armazenamento negado. Lint, tipos, build demo, 172 testes, sync nativo e build Debug para iOS Simulator passaram.
+- Não houve deploy, Supabase, iPhone físico, assinatura, TestFlight ou submissão. Cliente local distribuível e gates jurídicos da App Store continuam pendentes.
+
+## 2026-09-18: Pico Social executado como app no iOS Simulator
+
+- Xcode 27.0, runtime iOS 27.0, Swift Package Manager travado e comando reproduzível de build Debug foram validados; o Pico Social Preview abriu pelo Xcode no iPhone 18 Pro simulado.
+- O preview HTTPS explícito carregou a interface real de `/feed` do endereço principal em estado anônimo. O caminho passou para a própria `server.url`, evitando o encerramento do Capacitor 8 ao procurar `public/feed` localmente.
+- O splash deixou de recortar o wordmark em telas altas. Teste focado protege configuração, lock do SPM, build sem provisionamento Apple e modo de escala da abertura.
+- Android permanece pausado. Não houve cadastro, conteúdo, upload, mudança em Supabase, assinatura, TestFlight, App Store, deploy ou push.
+
+## 2026-09-15: preparação do Mac para o aplicativo Pico Social
+
+- Android Studio Quail 4 2026.1.4 ARM foi baixado da origem oficial, teve SHA-256, assinatura e notarização conferidos e foi instalado em `~/Applications`; Temurin JDK 21.0.12.1 LTS foi instalado no usuário e abriu o Gradle 8.14.3 do projeto.
+- A skill local `pico-mobile` roteia toolchains, Capacitor, builds, simuladores, aparelhos e distribuição para o plano canônico. PyYAML foi instalado no usuário e o validador oficial aprovou a 17ª skill do projeto.
+- Preview, shell e nomes dos projetos nativos usam Pico Social; Pico Club permanece somente como procedência do ativo de capa existente. O diagnóstico separa todas as camadas iOS/Android. Oito testes nativos, sync seguro, lint, typecheck, 170 testes e build demo passaram.
+- Xcode está preparado na App Store antes de **Obter**; Android Studio ainda não foi aberto e o SDK não teve licença aceita. Xcode completo, API 36, emulador e runtimes continuam aguardando interação pessoal; sem build nativo, assinatura, deploy ou Supabase.
+
+## 2026-09-15: fundação do aplicativo iOS/Android
+
+- Capacitor 8, projetos iOS/Android e nome/ID reversíveis de preview foram adicionados sem remover a PWA ou alterar banco, Auth, RLS e conteúdo.
+- A configuração padrão abre um shell local honesto; URL hospedada exige opt-in e HTTPS, rejeita credenciais/query/fragmento e é proibida como artefato de loja. A interface reconhece o pacote e não oferece instalar a PWA dentro dele.
+- Ícones, foreground adaptativo e splash são reproduzíveis a partir dos mestres Pico Club; placeholders do Capacitor foram removidos. Scripts diagnosticam toolchains, geram assets, sincronizam e impedem `server.url` no gate local/CI.
+- Plano em gates, arquitetura de autenticação/API, gramática 160/220/280 ms, haptics semânticos e matriz de aparelho registrados em [MOBILE_APP.md](MOBILE_APP.md).
+- Na verificação inicial, seis testes nativos focados, sync iOS/Android, lint, typecheck, 168 testes locais e build demo passaram; audit sem vulnerabilidade alta e com três moderadas no CLI de desenvolvimento. Naquele momento o host não tinha Xcode completo, Android Studio, Java ou Android SDK, então não houve build nativo, assinatura, aparelho, Supabase ou publicação.
+## 2026-09-18: checkpoint de mensagens, push e continuidade para lojas
+
+- Preparadas conversas 1:1 com acompanhamento mútuo, histórico paginado, não lidas, envio idempotente, bloqueio/suspensão e exportação das próprias mensagens. UI em `/mensagens`, perfil e cabeçalho/lateral preserva Aura Manteiga e cinco destinos inferiores; rascunho fica em memória e troca de conta descarta o estado anterior.
+- Preparado Web Push por adesão explícita: assinaturas privadas, fila, leases, retry/cooldown por aparelho, revalidação de acesso, payload genérico e executor POST protegido. Logout, sessão inicial/expirada, troca de identidade e ativação tardia fazem reconciliação; worker não armazena conteúdo privado offline.
+- Duas migrations aditivas e gates independentes no servidor/banco, **desligados por padrão**. Tipos RPC pendentes gerados do catálogo PostgreSQL local e conferidos em CI; tipos hospedados preservados. Não houve migration remota, ativação, deploy ou mensagem/notificação para usuários nesta rodada.
+- Corrigidos textos de acesso/privacidade que ainda prometiam confirmação de e-mail, incompatível com a decisão vigente da beta.
+- Lint, typecheck/build demo, 187 testes locais, verificação de 12 RPCs e audit sem vulnerabilidades passaram. Fixture UI compilada e smoke HTTP; inspeção visual nova bloqueada por indisponibilidade de acesso do navegador ao localhost. Integração hospedada, concorrência multissessão e aparelhos reais seguem pendentes.
+- Entregues [avaliação das 18 frentes](PICO_PRODUCT_ASSESSMENT_2026-09-18.md), [diagnóstico técnico](PICO_DEVELOPMENT_REVIEW_2026-09-18.md) e [prompt de continuidade até a preparação para lojas](CODEX_CONTINUE_TO_STORE_READY.md). O próximo ciclo deve fechar intenção de conexão, denúncia de mensagem, recuperação, serviços reais, qualidade móvel e distribuição.
 ## 2026-09-14: fotos nas notificações, arenas e vídeo em publicações
 
 - Notificações mostram a foto atual da pessoa que entrou ou foi mencionada, com fallback humano e as mesmas regras de audiência.

@@ -2,12 +2,12 @@
 
 ## Capa Pico Club · 13/09/2026
 
-Ícone de instalação atualizado por pedido do responsável: wordmark Pico original + Clube em Manrope leve, sobre grão Manteiga/Lavanda. Os arquivos antigos do monograma no manual preservam a edição anterior; a versão corrente do app está em [pico-club](brand-exploration/aura-manteiga/pico-club/README.md). Manifesto com nome Pico Club e ícones em URLs novas; ícones antigos públicos também recebem a nova arte para consumidores existentes. Favicon mantém apenas o wordmark, sem a linha secundária ilegível em 16/32px. Marca no cabeçalho e tokens operacionais preservados.
+Ícone de instalação atualizado por pedido do responsável: wordmark Pico original + Clube em Manrope leve, sobre grão Manteiga/Lavanda. Os arquivos antigos do monograma no manual preservam a edição anterior; os mestres correntes estão em [pico-club](brand-exploration/aura-manteiga/pico-club/README.md). Manifesto e ícones da PWA usam URLs novas; derivados de iOS/Android são gerados separadamente pelos scripts nativos. Ícones antigos públicos também recebem a nova arte para consumidores existentes. Favicon mantém apenas o wordmark, sem a linha secundária ilegível em 16/32px. Marca no cabeçalho e tokens operacionais preservados.
 
 
 Refino social de 13/09/2026: posts usam contorno funcional; a área de comentários e os balões têm superfícies distintas. Nome forte, avatar e pequeno acento por pessoa orientam a autoria; Você identifica a própria participação sem depender da cor. Ações contextuais ficam no ••• de 44 px e no diálogo acessível compartilhado. A solicitação explícita de mais separação prevalece sobre a orientação genérica de reduzir caixas. [Revisão](social-refinement-review/README.md).
 
-**Aura Manteiga está implementada no aplicativo em 13/09/2026.** Este documento traduz a identidade escolhida em decisões presentes no código. A [cobertura](aura-redesign-review/coverage.md) e a [revisão local](aura-redesign-review/README.md) registram superfícies e evidências. Publicação e CI remota não são comprovadas por esta consolidação.
+**Aura Manteiga está implementada no cliente web/PWA em 13/09/2026.** Este documento traduz a identidade escolhida em decisões presentes no código. A [cobertura](aura-redesign-review/coverage.md) e a [revisão local](aura-redesign-review/README.md) registram superfícies e evidências. A fundação nativa posterior deriva os ativos desses mestres, mas ainda não comprova telas em aparelho ou distribuição.
 
 ## Escrita no produto
 
@@ -84,7 +84,11 @@ O ritmo usa base de 4px; os tokens reutilizados cobrem 4/8/12/16/20/24/32px. Esp
 
 Fundos são sólidos. Posts não usam sombra; perfis e pessoas usam espaço e divisórias. Diálogos e guia sobreposto usam `shadow-elevated`, com backdrop escuro no diálogo. Não há blur obrigatório ou material de vidro por causa dos nomes legados das classes.
 
-Estados de toque e seleção usam 160ms; transições de superfície/fotografia usam 220ms; o token de marca prevê 280ms. A curva compartilhada é `cubic-bezier(.22, 1, .36, 1)`. O CSS global remove animações e transições com movimento reduzido. Tempos definidos não são medição de fluidez em aparelho físico.
+Estados de toque e seleção usam 160ms; transições de superfície/fotografia usam 220ms; o token de marca prevê 280ms. A curva compartilhada é `cubic-bezier(.22, 1, .36, 1)`. As rotas sociais entram com opacidade e deslocamento de 3 px em 220 ms; o Link acionado mostra um ponto de espera no próprio ícone sem alterar seus 44 px. O CSS remove a animação de rota e o deslocamento do indicador com movimento reduzido. Tempos definidos não são medição de fluidez em aparelho físico.
+
+### Camada do aplicativo
+
+O pacote deve conservar safe areas, contraste e foco ao integrar barras do sistema, teclado, gesto/botão de voltar, abertura externa e ciclo de vida. Estado de ícone precisa de forma, rótulo ou indicador além da cor. Haptic é semântico e raro: seleção confirmada pode receber resposta leve; sucesso só depois da confirmação real; navegação comum, validação repetida e erro em loop não vibram. Movimento reduzido retira translação/escala e autoplay sem esconder mudança de estado. A gramática e a ordem de implementação estão em [Pico em aplicativo](MOBILE_APP.md).
 
 ## Componentes e jornadas
 
@@ -107,7 +111,7 @@ Registro de jogo não indica presença ou disponibilidade. Compartilhamento pres
 
 ## Assistência e estados
 
-Configuração inicial, aviso institucional e tutorial continuam separados. O progresso do perfil mostra preenchimento real; o aviso institucional mantém reconhecimento por conta no servidor. O tutorial tem seis etapas, convite curto e retomada voluntária, com persistência isolada por conta/demo. “Mostrar onde” recolhe a dica antes de focar o controle; “Pausar” permanece visível. Nenhuma gravação social é executada pelo passeio.
+Configuração inicial, aviso institucional e tutorial continuam separados. O progresso do perfil mostra preenchimento real; o aviso institucional mantém reconhecimento por conta no servidor. O tutorial tem três etapas essenciais, convite curto e retomada voluntária, com persistência isolada por conta/demo. O payload v2 migra preferências válidas do percurso anterior sem reabrir estados concluídos ou dispensados. “Mostrar onde” recolhe a dica antes de focar o controle; “Pausar” permanece visível. Nenhuma gravação social é executada pelo passeio.
 
 O guia acompanha a rolagem, tem corpo rolável em sua composição padrão e se torna relativo em altura curta. Diálogos abertos o ocultam; editores suspendem avanço. Foco contextual usa o token de foco. [ONBOARDING.md](ONBOARDING.md) conserva o contrato completo.
 
@@ -121,7 +125,7 @@ As capturas usam o app Next compilado com fixtures locais e rede externa bloquea
 
 O sistema anterior permanece no histórico Git e nas capturas `before-*` da revisão Aura, além de [visual-review](visual-review/README.md) e [journey-review](journey-review/README.md). A antiga paleta, a fonte única e o material anterior não são especificação vigente. Os contratos funcionais preservados continuam descritos nos documentos de domínio.
 
-Esta consolidação não comprova Supabase real, entrega de e-mail, instalação PWA em aparelho físico, teclado/safe areas de hardware ou pesquisa com jogadores. O check remoto de perfil e a publicação dependem do PR/CI e do recibo operacional; não foram comprovados nesta etapa. Verificar a revisão pública em `/api/version` após a publicação autorizada; não inferir deploy de documentação ou screenshot.
+Esta consolidação não comprova Supabase real, entrega de e-mail, instalação PWA em aparelho físico, teclado/safe areas de hardware ou pesquisa com jogadores. A fundação nativa já compila e abre no iOS Simulator, mas não comprova assinatura, instalação em aparelho físico ou loja. O check remoto de perfil e a publicação dependem do PR/CI e do recibo operacional; não foram comprovados nesta etapa. Verificar a revisão pública em `/api/version` após a publicação autorizada; não inferir deploy de documentação ou screenshot.
 
 ## Avatar e configuração do perfil
 

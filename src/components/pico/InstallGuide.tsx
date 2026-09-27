@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 import { ArrowUp, ArrowLeft, ArrowRight, BatteryFull, Check, ChevronDown, Copy, Ellipsis, EllipsisVertical, Globe, Pause, Play, PlusSquare, RotateCcw, Share, Signal, Wifi } from 'lucide-react';
 import { Button, buttonVariants } from '@/components/ui/Button';
 import { installDevice, installationScenes, type InstallScene, type SafariLayout } from '@/lib/install-guide';
+import { usePicoNativePackage } from '@/lib/native-runtime';
 
 type Platform = 'ios' | 'android';
 type InstallPrompt = Event & { prompt: () => Promise<void>; userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }> };
@@ -45,6 +46,7 @@ function Phone({ platform, scene, safari, playing }: { platform: Platform; scene
 }
 
 export function InstallGuide() {
+  const nativePackage = usePicoNativePackage();
   const [platform, setPlatform] = useState<Platform>('ios');
   const [safari, setSafari] = useState<SafariLayout>('compact');
   const [index, setIndex] = useState(0);
@@ -110,6 +112,17 @@ export function InstallGuide() {
     catch { setCopyFallback(url); setMessage('Copie o endereço abaixo e abra no navegador.'); }
   }
   const animated = playing && visible && !last;
+  if (nativePackage) return <main className="install-guide" id="main-content">
+    <Link href="/feed" className="install-back"><ArrowLeft size={18} aria-hidden="true" />Voltar ao Pico</Link>
+    <div className="install-guide-layout">
+      <header className="install-guide-intro">
+        <ClubIcon size={72} />
+        <h1>Você já está no Pico Club</h1>
+        <p>Esta versão já está aberta como aplicativo. O guia abaixo é só para instalar a PWA pelo navegador.</p>
+        <Link href="/feed" className={buttonVariants()}>Continuar no Pico <ArrowRight size={16} aria-hidden="true" /></Link>
+      </header>
+    </div>
+  </main>;
   return <main className="install-guide" id="main-content">
     <Link href="/feed" className="install-back"><ArrowLeft size={18} aria-hidden="true" />Voltar ao Pico</Link>
     <div className="install-guide-layout">

@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { PasswordInput } from '@/components/ui/PasswordInput';
 import { emailDeliveryEnabled } from '../../../config/auth-policy.json';
+import { clearPushBeforeSignOut } from '@/lib/push/client';
 
 export function RecoveryForm({ reset = false }: { reset?: boolean }) {
   const [client] = useState(createClient);
@@ -29,6 +30,7 @@ export function RecoveryForm({ reset = false }: { reset?: boolean }) {
         if (result.error) { setNotice({error:true,text:'Não foi possível alterar a senha. Use uma senha diferente e mais forte ou peça um novo link.'}); return; }
         setChanged(true); form.reset();
         }
+        await clearPushBeforeSignOut();
         const logout = await client.auth.signOut();
         if (logout.error) { setNotice({error:true,text:'Sua senha foi alterada, mas não foi possível encerrar as sessões. Tente encerrar novamente.'}); return; }
         window.location.replace('/login?password=updated');

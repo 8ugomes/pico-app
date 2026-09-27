@@ -189,11 +189,24 @@ button, a { -webkit-tap-highlight-color: transparent; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
-.privacy-page { max-width: 720px; margin: 32px auto; padding: 20px; line-height: 1.7; overflow-wrap: anywhere; }
-.privacy-page h1 { font-size: var(--text-title); font-weight: 600; margin-bottom: 20px; }
-.privacy-page h2 { font-size: var(--text-dialog); font-weight: 600; margin: 28px 0 8px; }
-.privacy-page p { margin-bottom: 16px; color: var(--text-secondary); }
-.privacy-page a { color: var(--accent); text-decoration: underline; }
+.policy-shell { min-height: 100svh; padding-bottom: max(3rem, env(safe-area-inset-bottom)); }
+.policy-site-header { max-width: 74ch; margin-inline: auto; }
+.policy-page { max-width: 74ch; margin: 1rem auto 0; overflow-wrap: anywhere; }
+.policy-intro { padding: clamp(1.5rem, 5vw, 3rem); border-radius: var(--radius-feature); background: var(--brand-manteiga); color: var(--brand-cacau); }
+.policy-intro h1 { max-width: 14ch; margin: 0; font-size: var(--text-title); line-height: 1.15; font-weight: 650; letter-spacing: -.025em; }
+.policy-updated { margin: 1rem 0 0; font-size: var(--text-label); color: color-mix(in srgb, var(--brand-cacau) 78%, transparent); }
+.policy-lead { max-width: 62ch; margin-top: 1.5rem; font-size: 1.0625rem; line-height: 1.7; }
+.policy-lead p { margin: 0; }
+.policy-body { padding: clamp(1.5rem, 4vw, 2.5rem); line-height: 1.75; }
+.policy-body section + section, .policy-body > h2:not(:first-child) { margin-top: 2.5rem; }
+.policy-body h2 { margin: 0 0 .75rem; font-size: var(--text-dialog); line-height: 1.3; font-weight: 650; }
+.policy-body p { margin: 0 0 1rem; color: var(--text-secondary); }
+.policy-body p:last-child { margin-bottom: 0; }
+.policy-body a, .policy-links a { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .22em; }
+.policy-body a:hover, .policy-links a:hover { color: var(--accent-hover); }
+.policy-body strong { color: var(--foreground); }
+.policy-links { display: flex; flex-wrap: wrap; gap: .25rem 1.5rem; padding: 1.5rem clamp(1.5rem, 4vw, 2.5rem) 0; border-top: 1px solid var(--border-subtle); font-size: var(--text-label); }
+.policy-links a { display: inline-flex; align-items: center; min-height: 44px; }
 
 .pwa-notice { padding: 12px 20px; background: var(--info-bg); color: var(--info); font-size: var(--text-label); }
 
@@ -207,11 +220,15 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .official-editorial article { padding: 1.25rem; border-radius: 1rem; background: var(--surface); }
 
 /* The public arrival keeps the brand field in either system appearance. */
+.access-entry { min-height: 100svh; display: grid; place-items: center; padding: max(1.25rem, env(safe-area-inset-top)) max(1.25rem, env(safe-area-inset-right)) max(1.25rem, env(safe-area-inset-bottom)) max(1.25rem, env(safe-area-inset-left)); }
+.access-entry > :is(.arrival, .read-message) { width: min(100%, 34rem); margin: 0; }
 .arrival { margin-block: 1rem 2rem; padding: clamp(1.5rem, 5vw, 3rem); border-radius: var(--radius-feature); background: var(--brand-manteiga); color: var(--brand-cacau); --accent: var(--brand-cacau); --accent-ink: var(--brand-papel); --accent-hover: #59453D; --focus: var(--brand-cacau); }
-.arrival h1 { font-size: var(--text-hero); line-height: 1.08; margin: 2rem 0 1rem; max-width: 10ch; }
+.arrival .brand { display: inline-flex; color: var(--brand-cacau); }
+.arrival .brand svg { width: 100px; height: auto; }
+.arrival h1 { font-size: var(--text-hero); line-height: 1.08; margin: 1.5rem 0 .75rem; max-width: 10ch; }
 .arrival p { max-width: 35ch; margin-block: 1rem; }
-.arrival .arrival-sports { font-size: var(--text-label); padding-top: 1.5rem; border-top: 1px solid var(--brand-cacau); }
-.arrival-actions { display: grid; gap: .5rem; margin-top: 2rem; }
+.arrival .arrival-sports { font-size: var(--text-label); padding-top: 1rem; border-top: 1px solid color-mix(in srgb, var(--brand-cacau) 42%, transparent); }
+.arrival-actions { display: grid; gap: .5rem; margin-top: 1.5rem; }
 .arrival-actions > a:last-child { display: inline-flex; justify-content: center; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: 4px; font-size: var(--text-label); }
 .arrival-symbol { width: 48px; height: 48px; }
 .auth-story { color: var(--text-secondary); max-width: 36rem; }

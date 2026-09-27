@@ -1,5 +1,13 @@
 # Pico Social — contexto institucional, produto e marca
 
+## Nome operacional · 15/09/2026
+
+Produto, aplicativo, projetos novos, previews, documentação e comunicação usam **Pico Social**. Pico é a assinatura curta. `Pico Club` não é uma segunda marca: permanece somente em registros históricos e no caminho/composição da capa de instalação existente até uma revisão visual explícita.
+
+## Transição para aplicativo · 15/09/2026
+
+Após a adesão ao teste PWA, o responsável colocou no escopo o início do empacotamento iOS/Android e o plano de movimento, ícones e respostas de plataforma. A PWA permanece publicada durante a transição. A decisão não equivale a autorizar reescrita integral, submissão imediata ou promessa de aprovação nas lojas. Fundação, arquitetura, gates e lacunas estão em [Pico em aplicativo](MOBILE_APP.md).
+
 ## Atualização da capa do app: Pico Club · 13/09/2026
 
 Por pedido do responsável, a apresentação de instalação passa a **Pico Club**. O ícone usa o wordmark Pico original em destaque e a palavra **Clube** abaixo, em Manrope 300, sobre fundo Manteiga/Lavanda granulado. Essa grafia na arte segue o pedido literal. Substitui o P com ponto na capa do aplicativo, Apple e favicon. O cabeçalho continua com a assinatura curta Pico; publicações, comunidades e outros conteúdos existentes não são renomeados. Mestres e uso em [Pico Club](brand-exploration/aura-manteiga/pico-club/README.md).
@@ -9,7 +17,7 @@ Referência vigente desde 13/09/2026. Usar em estratégia, design, conteúdo, pl
 
 ## Quem somos
 
-**Pico Social**, com assinatura curta **Pico**, é uma rede social PWA mobile-first para quem pratica futevôlei, beach tennis e vôlei de praia. Aproxima pessoas por modalidades, arenas e comunidades, e dá continuidade à experiência depois do jogo.
+**Pico Social**, com assinatura curta **Pico**, é uma rede social mobile-first para quem pratica futevôlei, beach tennis e vôlei de praia. Hoje é publicada como PWA e inicia uma transição controlada para aplicativo iOS/Android. Aproxima pessoas por modalidades, arenas e comunidades, e dá continuidade à experiência depois do jogo.
 
 **O ponto de encontro da areia.** É a assinatura institucional. **Me acha no Pico.** É a expressão de campanha e convite. Aura Manteiga é o nome interno da identidade visual escolhida, não outra empresa, produto ou plano pago.
 
@@ -38,11 +46,11 @@ O onboarding assistido deve ajudar a entender e usar controles reais, com pausa,
 
 Cadastro com e-mail e senha, sem confirmação e com admissão automática não restaura contas suspensas, revogadas ou excluídas. Audiências, papéis e RLS continuam vigentes. Demo é explicitamente rotulado e local; fotografia sintética do estudo não representa pessoas ou arenas reais. Decisão expressa da rodada de estabilidade: beta sem SMTP e sem confirmação. O endereço informado não comprova titularidade; recuperação por e-mail fica indisponível e isso deve ser informado na entrada.
 
-Fora do escopo atual: reservas, pagamentos, B2B, anúncios, IA/voz, ranking avançado, presença ou mapa em tempo real, localização contínua e app nativo. Um redesign integral pode reorganizar a apresentação e a assistência da jornada; não autoriza ampliar esse escopo.
+O empacotamento entrou no escopo e a PWA continua. O pedido explícito de 18/09/2026 também autorizou preparar mensagens diretas e push a partir da base existente, mas esses recursos permanecem desativados até terem moderação, privacidade, banco hospedado e aparelhos validados. Não confundir código preparado com serviço publicado. Reescrita integral e publicação em lojas exigem decisão e gates próprios. Permanecem fora do escopo: reservas, pagamentos, B2B, anúncios, IA/voz, ranking avançado, presença ou mapa em tempo real e localização contínua. Um redesign pode reorganizar a apresentação e a assistência da jornada; não amplia esses limites.
 
 ## Contexto de empresa disponível
 
-O nome de marca, o propósito, os esportes, a direção estética e a comunidade oficial estão documentados. Razão social, CNPJ, composição societária, equipe, história de fundação, modelo de receita, preços, parceiros, dimensão da base e métricas comerciais **não foram informados neste contexto**. Não preencher essas lacunas com suposições ou depoimentos. Consultar o responsável quando algum dado for necessário a uma peça institucional ou documento jurídico.
+O nome de marca, o propósito, os esportes, a direção estética e a comunidade oficial estão documentados. Razão social, CNPJ, composição societária, equipe, história de fundação, modelo de receita, preços, parceiros, dimensão da base e métricas comerciais **não foram informados neste contexto**. Para distribuição também faltam nome e ID finais do pacote, contas Apple/Google, entidade publicadora, domínio próprio, contato de suporte e documentos públicos. Não preencher essas lacunas com suposições ou depoimentos. Consultar o responsável quando algum dado for necessário a uma peça institucional, jurídica ou de loja.
 
 O endereço operacional conhecido é o projeto Vercel `pico-app`, em `pico-app-sepia.vercel.app`; isso não comprova domínio comercial registrado. Detalhes de ambiente e publicação ficam em [ENVIRONMENTS.md](ENVIRONMENTS.md), sem segredos neste documento.
 

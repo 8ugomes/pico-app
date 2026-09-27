@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { randomUUID } from 'node:crypto';
 import { after, before, test } from 'node:test';
 import { createClient } from '@supabase/supabase-js';
 import { createTestDatabase, asUser, ALICE, BOB, VILA, FUTEVOLEI, PRIVATE } from './helpers/database.mjs';
@@ -36,6 +37,16 @@ test('feed paginates with lookahead, filters arena and rejects invalid offset', 
     assert.equal((await db.query('select * from read_feed(0,$1)', [PRIVATE])).rows.length, 0);
     await assert.rejects(db.query('select * from read_feed(-1)'), e => e.code === '23514');
   });
+});
+test('comment retry key returns one canonical row and rejects payload drift', async () => {
+  const key = randomUUID();
+  await asUser(db, BOB, async () => {
+    const first = (await db.query('select public.create_comment_idempotent($1,$2,$3) id', [postId, 'Uma resposta só', key])).rows[0].id;
+    const retry = (await db.query('select public.create_comment_idempotent($1,$2,$3) id', [postId, 'Uma resposta só', key])).rows[0].id;
+    assert.equal(retry, first);
+    await assert.rejects(db.query('select public.create_comment_idempotent($1,$2,$3)', [postId, 'Outro texto', key]), error => error.code === 'P0409');
+  });
+  assert.equal((await db.query('select count(*)::int n from public.comments where idempotency_key=$1', [key])).rows[0].n, 1);
 });
 test('social mutation parser rejects forged author, oversized and blank content', () => {
   const post = { action: 'create_post', arenaId: VILA, sportId: FUTEVOLEI, body: ' Bora ' };

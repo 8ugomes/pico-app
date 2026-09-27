@@ -395,24 +395,30 @@ export type Database = {
           body: string
           created_at: string
           id: string
+          idempotency_key: string | null
           moderated_at: string | null
           post_id: string
+          request_digest: string | null
         }
         Insert: {
           author_id?: string
           body: string
           created_at?: string
           id?: string
+          idempotency_key?: string | null
           moderated_at?: string | null
           post_id: string
+          request_digest?: string | null
         }
         Update: {
           author_id?: string
           body?: string
           created_at?: string
           id?: string
+          idempotency_key?: string | null
           moderated_at?: string | null
           post_id?: string
+          request_digest?: string | null
         }
         Relationships: [
           {
@@ -643,6 +649,129 @@ export type Database = {
           {
             foreignKeyName: "connections_follower_id_fkey"
             columns: ["follower_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      direct_conversations: {
+        Row: {
+          created_at: string
+          id: string
+          last_message_at: string | null
+          last_sequence: number
+          participant_high: string
+          participant_low: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          last_message_at?: string | null
+          last_sequence?: number
+          participant_high: string
+          participant_low: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          last_message_at?: string | null
+          last_sequence?: number
+          participant_high?: string
+          participant_low?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "direct_conversations_participant_high_fkey"
+            columns: ["participant_high"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "direct_conversations_participant_low_fkey"
+            columns: ["participant_low"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      direct_message_reads: {
+        Row: {
+          conversation_id: string
+          last_read_sequence: number
+          player_id: string
+          read_at: string
+        }
+        Insert: {
+          conversation_id: string
+          last_read_sequence: number
+          player_id: string
+          read_at?: string
+        }
+        Update: {
+          conversation_id?: string
+          last_read_sequence?: number
+          player_id?: string
+          read_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "direct_message_reads_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "direct_conversations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "direct_message_reads_player_id_fkey"
+            columns: ["player_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      direct_messages: {
+        Row: {
+          body: string
+          client_key: string
+          conversation_id: string
+          created_at: string
+          id: string
+          sender_id: string
+          sequence: number
+        }
+        Insert: {
+          body: string
+          client_key: string
+          conversation_id: string
+          created_at?: string
+          id?: string
+          sender_id: string
+          sequence: number
+        }
+        Update: {
+          body?: string
+          client_key?: string
+          conversation_id?: string
+          created_at?: string
+          id?: string
+          sender_id?: string
+          sequence?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "direct_messages_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "direct_conversations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "direct_messages_sender_id_fkey"
+            columns: ["sender_id"]
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
@@ -1317,6 +1446,13 @@ export type Database = {
       }
       can_read_post_video: { Args: { p_path: string }; Returns: boolean }
       claim_entity_media: { Args: { p_path: string }; Returns: undefined }
+      claim_push_batch: {
+        Args: { p_limit?: number }
+        Returns: {
+          job_id: string
+          lease_token: string
+        }[]
+      }
       claim_unused_media: {
         Args: { p_bucket: string; p_path: string }
         Returns: undefined
@@ -1358,9 +1494,17 @@ export type Database = {
         Returns: Json
       }
       community_page: { Args: { p_slug: string }; Returns: Json }
+      create_comment_idempotent: {
+        Args: { p_body: string; p_key: string; p_post: string }
+        Returns: string
+      }
       create_community: { Args: { p_data: Json }; Returns: Json }
       create_official_community: { Args: { p_arena: string }; Returns: string }
       delete_played_game: { Args: { p_id: string }; Returns: undefined }
+      delete_push_subscription: {
+        Args: { p_endpoint: string }
+        Returns: undefined
+      }
       discover_common_players: { Args: { p_offset?: number }; Returns: Json }
       discover_players: {
         Args: {
@@ -1397,6 +1541,16 @@ export type Database = {
       }
       export_account_data: { Args: { p_user: string }; Returns: Json }
       export_account_media_extra: { Args: { p_user: string }; Returns: Json }
+      export_account_messages: { Args: { p_user: string }; Returns: Json }
+      finish_push_delivery: {
+        Args: {
+          p_job: string
+          p_lease: string
+          p_outcome: string
+          p_retry_after?: number
+        }
+        Returns: undefined
+      }
       invite_arena_manager: {
         Args: { p_arena: string; p_email: string; p_role: string }
         Returns: Json
@@ -1407,11 +1561,17 @@ export type Database = {
       }
       management_context: { Args: never; Returns: Json }
       mark_all_notifications_read: { Args: never; Returns: undefined }
+      mark_direct_messages_read: {
+        Args: { p_conversation: string; p_through: string }
+        Returns: undefined
+      }
       mark_notifications_read: { Args: { p_ids: string[] }; Returns: undefined }
+      mobile_account_access_state: { Args: never; Returns: string }
       moderate_report: {
         Args: { p_action: string; p_report: string }
         Returns: undefined
       }
+      open_direct_conversation: { Args: { p_player: string }; Returns: Json }
       operator_action: {
         Args: {
           p_action: string
@@ -1499,6 +1659,11 @@ export type Database = {
         Returns: string
       }
       read_checkin_history: { Args: { p_offset?: number }; Returns: Json }
+      read_direct_conversations: { Args: { p_before?: string }; Returns: Json }
+      read_direct_messages: {
+        Args: { p_before?: string; p_conversation: string }
+        Returns: Json
+      }
       read_feed: {
         Args: { p_arena_id?: string; p_offset?: number }
         Returns: {
@@ -1524,6 +1689,11 @@ export type Database = {
       read_own_played_arena_marks: { Args: never; Returns: Json }
       read_played_arena_marks: { Args: { p_player?: string }; Returns: Json }
       read_played_games: { Args: { p_offset?: number }; Returns: Json }
+      read_push_delivery: {
+        Args: { p_job: string; p_lease: string }
+        Returns: Json
+      }
+      read_push_subscription: { Args: { p_endpoint?: string }; Returns: Json }
       read_repost_feed: {
         Args: {
           p_arena?: string
@@ -1602,6 +1772,10 @@ export type Database = {
         }
         Returns: undefined
       }
+      save_push_subscription: {
+        Args: { p_auth: string; p_endpoint: string; p_p256dh: string }
+        Returns: undefined
+      }
       search_arenas: {
         Args: { p_offset?: number; p_search?: string; p_sport_id?: string }
         Returns: {
@@ -1654,6 +1828,10 @@ export type Database = {
           sport_slug: Database["public"]["Enums"]["sport_slug"]
           username: string
         }[]
+      }
+      send_direct_message: {
+        Args: { p_body: string; p_conversation: string; p_key: string }
+        Returns: Json
       }
       set_arena_membership: {
         Args: { p_arena: string; p_join: boolean }

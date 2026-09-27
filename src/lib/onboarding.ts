@@ -1,19 +1,22 @@
 export const tourSteps = [
-  { id: 'arenas', path: '/arenas', label: 'Arenas', title: 'Encontre suas arenas.', description: 'Acompanhe as arenas onde você joga.', instruction: 'Toque na busca e abra uma arena. Não encontrou a sua? Pode continuar o passeio.', targets: ['arena-search'] },
-  { id: 'people', path: '/descobrir', label: 'Pessoas', title: 'Conheça quem joga por perto.', description: 'Busque pessoas por esporte, nível e arena. Acompanhar não envia convite.', instruction: 'Abra “Filtrar pessoas” e escolha “Arena acompanhada”. São vínculos com o lugar, não presença ao vivo.', targets: ['people-arena', 'people-filters'] },
-  { id: 'communities', path: '/comunidades', label: 'Comunidades', title: 'Encontre a sua turma.', description: 'Grupos independentes ou de arenas, cada um com sua proposta.', instruction: 'Toque em “Explorar” e abra um grupo. A entrada pode ser aberta, por aprovação ou por convite.', targets: ['community-explore'] },
-  { id: 'feed', path: '/feed', label: 'Início', title: 'Veja as publicações da turma.', description: 'O que sua turma compartilha aparece aqui.', instruction: '“Compartilhe com sua turma” abre o editor. Confira quem pode ver e onde o post vai aparecer antes de publicar.', targets: ['publish'] },
-  { id: 'games', path: '/jogos', label: 'Meus jogos', title: 'Registre um jogo que já aconteceu.', description: 'Arena, modalidade e data ficam só para você. Compartilhar é outra ação, com audiência escolhida por você.', instruction: 'Abra “Registrar jogo”. Pode fechar sem salvar. Depois, encontre Meus jogos no Perfil.', targets: ['register-game'] },
-  { id: 'profile', path: '/perfil', label: 'Perfil', title: 'Edite seu perfil.', description: 'Seu perfil apresenta você. Meus Picos reúne seus vínculos.', instruction: 'Use “Editar perfil”. Aqui também ficam Meus jogos, Privacidade e conta e o acesso a este tutorial.', targets: ['edit-profile'] },
+  { id: 'arenas', path: '/arenas', label: 'Arenas', title: 'Encontre seus lugares.', description: 'Busque uma arena e acompanhe o que acontece por lá.', instruction: 'Use a busca para abrir uma arena. Acompanhar cria um vínculo com o lugar, sem indicar presença ao vivo.', targets: ['arena-search'] },
+  { id: 'people', path: '/descobrir', label: 'Pessoas', title: 'Encontre sua turma.', description: 'Veja quem compartilha seu esporte e seus lugares.', instruction: 'Use os filtros para chegar às pessoas certas. Comunidades ficam na aba ao lado e participar é sempre uma escolha.', targets: ['people-arena', 'people-filters'] },
+  { id: 'games', path: '/jogos', label: 'Meus jogos', title: 'Guarde o que você jogou.', description: 'Registre um jogo só para você.', instruction: 'Registrar não publica no Início. Compartilhar é outra ação, com a audiência escolhida por você.', targets: ['register-game'] },
 ] as const;
 
-export type TourProgress = { version: 1; status: 'active' | 'paused' | 'dismissed' | 'complete'; step: number };
+type TourStatus = 'active' | 'paused' | 'dismissed' | 'complete';
+export type TourProgress = { version: 2; status: TourStatus; step: number };
+const tourStatuses: TourStatus[] = ['active', 'paused', 'dismissed', 'complete'];
+const legacyStepToCurrent = [0, 1, 1, 1, 2, 2] as const;
+
 export function parseTourProgress(raw: string | null): TourProgress | null {
   if (!raw) return null;
   try {
     const value = JSON.parse(raw);
-    if (value?.version !== 1 || !['active', 'paused', 'dismissed', 'complete'].includes(value.status) || !Number.isInteger(value.step) || value.step < 0 || value.step >= tourSteps.length) return null;
-    return { version: 1, status: value.status, step: value.step };
+    if (!tourStatuses.includes(value?.status) || !Number.isInteger(value.step) || value.step < 0) return null;
+    if (value.version === 2 && value.step < tourSteps.length) return { version: 2, status: value.status, step: value.step };
+    if (value.version === 1 && value.step < legacyStepToCurrent.length) return { version: 2, status: value.status, step: legacyStepToCurrent[value.step] };
+    return null;
   } catch { return null; }
 }
 
@@ -22,8 +25,7 @@ export function tourStepAt(path: string): number | null {
   if (exact >= 0) return exact;
   if (/^\/arenas\/[^/]+$/.test(path)) return 0;
   if (/^\/perfil\/[^/]+$/.test(path)) return 1;
-  if (/^\/comunidades\/[^/]+$/.test(path)) return 2;
-  if (/^\/publicacoes\/[^/]+$/.test(path)) return 3;
+  if (path === '/comunidades' || /^\/comunidades\/[^/]+$/.test(path)) return 1;
   return null;
 }
 

@@ -10,6 +10,9 @@ import { PlayerAvatar } from "./PlayerAvatar";
 import { useOwnProfile } from './connected/OwnProfile';
 import { RemoteAvatar } from './connected/Media';
 import { NotificationLink } from './NotificationLink';
+import { usePicoNativePackage } from '@/lib/native-runtime';
+import { MessageLink } from './MessageLink';
+import { useMessages } from './MessagesProvider';
 
 function ConnectedIdentity({ details = false }: { details?: boolean }) {
   const { state } = useOwnProfile();
@@ -19,17 +22,19 @@ function ConnectedIdentity({ details = false }: { details?: boolean }) {
 
 export function AppShell({ children, environment = 'demo' }: { children: ReactNode; environment?: 'demo' | 'configured' | 'invalid' }) {
   const { me } = useDemo();
+  const nativePackage = usePicoNativePackage();
+  const { enabled: messagesEnabled, demo: messagesDemo } = useMessages();
   const connected = environment !== 'demo';
   return <div className="social-app">
     <aside className="app-sidebar"><Brand /><p className="sidebar-tagline">O ponto de encontro<br />da areia.</p><BottomNav desktop /><Link className="sidebar-profile" href="/perfil">{connected ? <ConnectedIdentity details /> : <><PlayerAvatar player={me} /><span><strong>{me.name}</strong><small>Seu perfil de demonstração</small></span></>}</Link></aside>
     <div className="app-center">
-      <header className="mobile-app-header"><Brand /><Link className="header-search" href="/descobrir" aria-label="Buscar pessoas e comunidades"><Search size={19} aria-hidden="true" /><span>Buscar</span></Link><div className="mobile-header-actions"><NotificationLink /><Link href="/perfil" className="icon-button" aria-label="Abrir meu perfil">{connected ? <ConnectedIdentity /> : <PlayerAvatar player={me} size="small" />}</Link></div></header>
+      <header className={`mobile-app-header${messagesEnabled && !messagesDemo ? ' app-header-messages' : ''}`}><Brand /><Link className="header-search" href="/descobrir" aria-label="Buscar pessoas e comunidades"><Search size={19} aria-hidden="true" /><span>Buscar</span></Link><div className="mobile-header-actions"><MessageLink /><NotificationLink /><Link href="/perfil" className="icon-button" aria-label="Abrir meu perfil">{connected ? <ConnectedIdentity /> : <PlayerAvatar player={me} size="small" />}</Link></div></header>
       {!connected && <div className="demo-banner"><span className="demo-indicator" />Demonstração <span>· pessoas fictícias, ações nesta sessão</span></div>}
       <PwaStatus/><main id="main-content" className="social-main">{children}</main>
     </div>
     <aside className="community-sidebar">
-      <section className="journey-rail"><h2>Meus jogos</h2><p>Seu histórico privado da areia.</p><Link href="/jogos">Abrir Meus jogos <ArrowUpRight size={17} aria-hidden="true" /></Link></section>
-      <div className="rail-footer"><span>Me acha no Pico.</span><Link href="/privacidade">Sobre seus dados <ArrowUpRight size={13} aria-hidden="true" /></Link><Link href="/instalar">Instalar o Pico</Link></div>
+      <section className="journey-rail"><h2>Meus jogos</h2><p>Só você vê.</p><Link href="/jogos">Abrir Meus jogos <ArrowUpRight size={17} aria-hidden="true" /></Link></section>
+      <div className="rail-footer"><Link href="/privacidade">Sobre seus dados <ArrowUpRight size={13} aria-hidden="true" /></Link>{!nativePackage && <Link href="/instalar">Instalar o Pico</Link>}</div>
     </aside>
     <BottomNav />
   </div>;

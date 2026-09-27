@@ -2,6 +2,7 @@ import type { SupabaseClient } from '@supabase/supabase-js';
 import type { Database } from '../../types/app-database';
 import type { Level } from '../../types/social';
 import { requireUser } from './queries.ts';
+import { ContentModerationError, ensurePublishableCommunity, ensurePublishableFields, ensurePublishableText } from '../moderation/text-filter.ts';
 
 export class MutationError extends Error {
   status: number;
@@ -9,7 +10,7 @@ export class MutationError extends Error {
 }
 export const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 export const levels: Level[] = ['Iniciante', 'Intermediário', 'Avançado'];
-export type Mutation = { action: 'save_profile'; name: string; username: string; bio: string; city: string; neighborhood: string; sportId: string; level: Level; available: boolean } | { action: 'set_connection'; playerId: string; connected: boolean } | { action: 'create_post'; arenaId: string; sportId: string; body: string; imagePath?: string | null } | { action: 'set_like'; postId: string; liked: boolean } | { action: 'create_comment'; postId: string; body: string }
+export type Mutation = { action: 'save_profile'; name: string; username: string; bio: string; city: string; neighborhood: string; sportId: string; level: Level; available: boolean } | { action: 'set_connection'; playerId: string; connected: boolean } | { action: 'create_post'; arenaId: string; sportId: string; body: string; imagePath?: string | null } | { action: 'set_like'; postId: string; liked: boolean } | { action: 'create_comment'; postId: string; body: string; key?: string }
   | { action: 'set_avatar'; path: string | null }
   | { action: 'delete_post'; id: string } | { action: 'delete_comment'; id: string }
   | { action: 'edit_comment'; id: string; body: string }
@@ -21,6 +22,37 @@ export function textField(value: unknown, min: number, max: number): string {
   const result = value.trim();
   if (result.length < min || result.length > max) return invalid();
   return result;
+}
+export function contentField(value: unknown, min: number, max: number): string {
+  const result = textField(value, min, max);
+  try {
+    return ensurePublishableText(result);
+  } catch (error) {
+    if (error instanceof ContentModerationError) {
+      throw new MutationError(400, error.message);
+    }
+    throw error;
+  }
+}
+export function communityContent(value: unknown) {
+  try {
+    return ensurePublishableCommunity(value);
+  } catch (error) {
+    if (error instanceof ContentModerationError) {
+      throw new MutationError(400, error.message);
+    }
+    throw error;
+  }
+}
+export function arenaContent(value: unknown) {
+  try {
+    return ensurePublishableFields(value, ['name', 'description', 'public_info', 'details', 'city', 'neighborhood']);
+  } catch (error) {
+    if (error instanceof ContentModerationError) {
+      throw new MutationError(400, error.message);
+    }
+    throw error;
+  }
 }
 export function uuid(value: unknown): string {
   if (typeof value !== 'string' || !uuidPattern.test(value)) return invalid();
@@ -42,7 +74,7 @@ export function parseMutation(value: unknown): Mutation {
   }
   if (body.action === 'edit_comment') {
     exactKeys(body, ['action', 'id', 'body']);
-    return { action: body.action, id: uuid(body.id), body: textField(body.body, 1, 280) };
+    return { action: body.action, id: uuid(body.id), body: contentField(body.body, 1, 280) };
   }
   if (body.action === 'set_block') {
     exactKeys(body, ['action','playerId','blocked']);
@@ -62,7 +94,7 @@ export function parseMutation(value: unknown): Mutation {
   if (body.action === 'create_post') {
     exactKeys(body, ['action', 'arenaId', 'sportId', 'body', 'imagePath']);
     if (body.imagePath != null && (typeof body.imagePath !== 'string' || !/^[0-9a-f-]{36}\/[0-9a-f-]{36}\.webp$/.test(body.imagePath))) return invalid();
-    return { action: body.action, arenaId: uuid(body.arenaId), sportId: uuid(body.sportId), body: textField(body.body, 1, 500), ...(body.imagePath !== undefined ? { imagePath: body.imagePath as string | null } : {}) };
+    return { action: body.action, arenaId: uuid(body.arenaId), sportId: uuid(body.sportId), body: contentField(body.body, 1, 500), ...(body.imagePath !== undefined ? { imagePath: body.imagePath as string | null } : {}) };
   }
   if (body.action === 'set_like') {
     exactKeys(body, ['action', 'postId', 'liked']);
@@ -70,14 +102,14 @@ export function parseMutation(value: unknown): Mutation {
     return { action: body.action, postId: uuid(body.postId), liked: body.liked };
   }
   if (body.action === 'create_comment') {
-    exactKeys(body, ['action', 'postId', 'body']);
-    return { action: body.action, postId: uuid(body.postId), body: textField(body.body, 1, 280) };
+    exactKeys(body, ['action', 'postId', 'body', 'key']);
+    return { action: body.action, postId: uuid(body.postId), body: contentField(body.body, 1, 280), ...(body.key === undefined ? {} : { key: uuid(body.key) }) };
   }
   if (body.action === 'save_profile') {
     exactKeys(body, ['action', 'name', 'username', 'bio', 'city', 'neighborhood', 'sportId', 'level', 'available']);
     const username = textField(body.username, 3, 40).toLowerCase();
     if (!/^[a-z0-9_]+$/.test(username) || !levels.includes(body.level as Level) || typeof body.available !== 'boolean') return invalid();
-    return { action: body.action, name: textField(body.name, 2, 60), username, bio: textField(body.bio, 0, 160), city: textField(body.city, 0, 80), neighborhood: textField(body.neighborhood, 0, 80), sportId: uuid(body.sportId), level: body.level as Level, available: body.available };
+    return { action: body.action, name: contentField(body.name, 2, 60), username, bio: contentField(body.bio, 0, 160), city: contentField(body.city, 0, 80), neighborhood: contentField(body.neighborhood, 0, 80), sportId: uuid(body.sportId), level: body.level as Level, available: body.available };
   }
   return invalid();
 }
@@ -136,7 +168,9 @@ export async function mutateSocial(client: SupabaseClient<Database>, input: Muta
     if (error && !(input.liked && error.code === '23505')) mutationFailure(error); return;
   }
   if (input.action === 'create_comment') {
-    const { error } = await client.from('comments').insert({ post_id: input.postId, body: input.body });
+    const { error } = input.key
+      ? await client.rpc('create_comment_idempotent', { p_post: input.postId, p_body: input.body, p_key: input.key })
+      : await client.from('comments').insert({ post_id: input.postId, body: input.body });
     if (error) mutationFailure(error); return;
   }
   const { data: profile, error: profileError } = await client.from('profiles').select('avatar_path').eq('id', user.id).maybeSingle();

@@ -122,6 +122,46 @@ test('likes/comments are own-only, reject duplicates and inherit post visibility
   });
 });
 
+test('database rejects prohibited social text even when the API layer is bypassed', async () => {
+  await asUser(db, ALICE, async () => {
+    await db.query(
+      'insert into posts(arena_id,sport_id,body) values ($1,$2,$3)',
+      [VILA, FUTEVOLEI, 'Vamos matar a saudade e jogar amanhã'],
+    );
+    await invalid(db.query(
+      'insert into posts(arena_id,sport_id,body) values ($1,$2,$3)',
+      [VILA, FUTEVOLEI, 'Eu vou te matar depois do jogo'],
+    ));
+    await invalid(db.query(
+      'insert into comments(post_id,body) values ($1,$2)',
+      [postId, 'https://a.example https://b.example https://c.example'],
+    ));
+    await invalid(db.query('update profiles set bio=$1 where id=$2', ['manda nude de menor', ALICE]));
+    await invalid(db.query('update profiles set city=$1 where id=$2', ['Eu vou te matar', ALICE]));
+    await invalid(db.query('update profiles set neighborhood=$1 where id=$2', ['https://a.example https://b.example https://c.example', ALICE]));
+    await invalid(db.query(
+      'select public.create_community($1::jsonb)',
+      [JSON.stringify({
+        name: 'Grupo seguro',
+        description: 'Eu vou te agredir',
+        rules: '',
+        entry_mode: 'open',
+        visibility: 'beta',
+        sports: [FUTEVOLEI],
+      })],
+    ));
+    await invalid(db.query(
+      "select public.request_arena('create',null,$1::jsonb)",
+      [JSON.stringify({
+        name: 'Arena segura',
+        city: 'Recife',
+        neighborhood: 'Boa Viagem',
+        details: 'Eu vou te agredir',
+      })],
+    ));
+  });
+});
+
 test('making an arena private hides its posts, comments, likes, membership and sports', async () => {
   await db.query('update arenas set is_public=false where id=$1',[VILA]);
   await asUser(db, BOB, async () => {

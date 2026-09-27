@@ -3,7 +3,9 @@
 
 ## Platform
 
-PWA mobile-first em Next.js App Router, TypeScript strict, Tailwind CSS 4 e Supabase. Código do produto em `src/`; protótipos de marca em `docs/brand-exploration/`.
+adaptive
+
+Produto mobile-first publicado como PWA em Next.js App Router, TypeScript strict, Tailwind CSS 4 e Supabase, com cliente local React/DOM empacotado pelo Capacitor 8 para iOS e fundação Android preservada. Código web em `src/`; cliente distribuível em `apps/mobile/`; projetos nativos em `ios/` e `android/`; protótipos de marca em `docs/brand-exploration/`.
 
 ## Users
 
@@ -15,7 +17,7 @@ O ponto de encontro da areia. Aproximar pessoas por esportes e lugares, encontra
 
 ## Constraints
 
-Preservar contratos, dados, permissões e audiência. Demo identificado, separado de contas reais. Onboarding assistido opcional, contextual e retomável, sem ações sociais automáticas ou IA. Fora do MVP: reservas, pagamentos, B2B, anúncios, voz, ranking avançado, presença ao vivo e app nativo. Não confundir documentação de marca com estado publicado.
+Preservar contratos, dados, permissões e audiência. Demo identificado, separado de contas reais. Onboarding assistido opcional, contextual e retomável, sem ações sociais automáticas ou IA. Fora do MVP: reservas, pagamentos, B2B, anúncios, voz, ranking avançado e presença ao vivo. Empacotamento iOS/Android está no escopo; PWA permanece e reescrita integral ou submissão às lojas depende dos gates do plano. Não confundir fundação nativa com estado publicado.
 
 ## Confirmed Direction
 
