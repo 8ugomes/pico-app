@@ -39,7 +39,7 @@ const query=new URLSearchParams(location.search),demo=query.has('demo'),enabled=
 const screen=location.pathname.startsWith('/mensagens/')?<MessageThreadView conversationId={cid}/>:location.pathname==='/descobrir'?<section><div className="page-heading"><h1>{peer.name}</h1></div><p>Perfil fictício para verificar o início de uma conversa.</p><OpenMessageButton playerId={peer.id}/></section>:<MessagesView/>;
 createRoot(document.getElementById('root')).render(<React.StrictMode><Controls/><DemoProvider><NotificationsProvider demo><MessagesProvider enabled={enabled} demo={demo}><AppShell environment={demo?'demo':'configured'}>{screen}</AppShell></MessagesProvider></NotificationsProvider></DemoProvider></React.StrictMode>);`;
 const framework = {
-  'next/link': `import React from 'react';export default function Link({href,children,prefetch,...props}){return <a href={href} {...props}>{children}</a>}`,
+  'next/link': `import React from 'react';export const useLinkStatus=()=>({pending:false});export default function Link({href,children,prefetch,...props}){return <a href={href} {...props}>{children}</a>}`,
   'next/image': `import React from 'react';export default function Image({unoptimized,fill,priority,...props}){return <img {...props}/>}`,
   'next/dynamic': `import React,{lazy,Suspense}from'react';export default function dynamic(load,options={}){const Component=lazy(load);return props=><Suspense fallback={options.loading?.()||null}><Component {...props}/></Suspense>}`,
   'next/navigation': `export const usePathname=()=>location.pathname;export const useRouter=()=>({push:url=>location.assign(url),replace:url=>location.replace(url),refresh:()=>location.reload()});`,

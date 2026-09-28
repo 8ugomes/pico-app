@@ -4,10 +4,10 @@ import { useRef, useState } from 'react';
 import { LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { createClient } from '@/lib/supabase/client';
-import { resetAccountView } from '@/lib/auth/navigation';
+import { cancelInvitationAccountSwitch, prepareInvitationAccountSwitch, resetAccountView } from '@/lib/auth/navigation';
 import { clearPushBeforeSignOut } from '@/lib/push/client';
 
-export function SignOutButton() {
+export function SignOutButton({ invitationNext = null }: { invitationNext?: string | null }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   const pending = useRef(false);
@@ -15,6 +15,7 @@ export function SignOutButton() {
     if (pending.current) return;
     pending.current = true;
     setBusy(true); setError('');
+    const preservingInvitation = prepareInvitationAccountSwitch(invitationNext);
     try {
       const client = createClient();
       if (!client) throw new Error('unavailable');
@@ -23,6 +24,7 @@ export function SignOutButton() {
       if (error) throw error;
       resetAccountView();
     } catch {
+      if (preservingInvitation) cancelInvitationAccountSwitch();
       setError('Não foi possível sair. Confira sua conexão e tente de novo.');
       pending.current = false; setBusy(false);
     }

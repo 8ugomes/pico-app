@@ -8,7 +8,8 @@ const origin = process.env.PICO_TEST_ORIGIN || 'http://localhost:3002', output =
 mkdirSync(output, { recursive: true });
 const id = '30000000-0000-4000-8000-000000000001';
 const avatarPath = '30000000-0000-4000-8000-000000000002/33333333-3333-4333-8333-333333333333.webp';
-const item = { id, kind: 'community_join', created_at: '2026-09-13T19:30:00Z', read_at: null, actor_name: 'Camila · exemplo', actor_avatar_path: avatarPath, community_name: 'Turma do fim de tarde · exemplo', community_slug: 'grupo-exemplo' };
+const followerItem = { id, kind: 'new_follower', created_at: '2026-09-13T19:30:00Z', read_at: null, actor_id: '30000000-0000-4000-8000-000000000002', actor_name: 'Camila · exemplo', actor_username: 'camila_exemplo', actor_avatar_path: avatarPath, recipient_follows_actor: false, post_id: null, community_name: null, community_slug: null };
+const communityItem = { ...followerItem, kind: 'community_join', actor_name: 'Bruno · exemplo', actor_username: 'bruno_exemplo', actor_avatar_path: null, community_name: 'Turma do fim de tarde · exemplo', community_slug: 'grupo-exemplo' };
 const context = await browser.newContext({ viewport: { width: 320, height: 844 }, reducedMotion: 'reduce' });
 if (process.env.PICO_TEST_USE_FIXTURE === '1') {
   const fixture = JSON.parse(readFileSync('.vercel/cycle9-fixture.json', 'utf8'));
@@ -35,13 +36,16 @@ await context.route('**/*', async route => {
   if (url.pathname === '/api/notifications') {
     if (mode === 'error') return send({ message: 'Falha de conexão de teste.' }, 503);
     if (mode === 'slow') await new Promise(resolve => setTimeout(resolve, 800));
-    return send({ data: { items: mode === 'empty' ? [] : [{ ...item, actor_name: url.searchParams.has('before') ? 'Bruno · exemplo' : item.actor_name, actor_avatar_path: url.searchParams.has('before') ? null : avatarPath }], unreadCount: mode === 'empty' ? 0 : 2, nextCursor: mode !== 'empty' && !url.searchParams.has('before') ? id : null } });
+    return send({ data: { items: mode === 'empty' ? [] : [url.searchParams.has('before') ? communityItem : followerItem], unreadCount: mode === 'empty' ? 0 : 2, nextCursor: mode !== 'empty' && !url.searchParams.has('before') ? id : null } });
   }
   return send({ data: null });
 });
 try {
   await page.goto(origin + '/notificacoes');
   await page.locator('.notification-row').waitFor();
+  await page.getByRole('button', { name: 'Acompanhar de volta', exact: true }).waitFor();
+  await page.getByRole('button', { name: 'Ignorar por agora: Camila · exemplo', exact: true }).waitFor();
+  assert.ok((await page.getByRole('link', { name: 'Abrir perfil de Camila · exemplo' }).getAttribute('href'))?.endsWith('/perfil/camila_exemplo'));
   await page.waitForFunction(() => { const image = document.querySelector('.notification-person img'); return image instanceof HTMLImageElement && image.complete && image.naturalWidth > 0; });
   for (const [theme, scale] of [['dark', 1], ['light', 2]]) {
     await page.emulateMedia({ colorScheme: theme });

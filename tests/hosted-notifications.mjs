@@ -29,7 +29,7 @@ async function user(name) {
   const account = { id: created.user.id, name, email, jar, client };
   users.push(account); track();
   ok(await client.auth.signInWithPassword({ email, password }), 'real Auth login');
-  ok(await client.from('profiles').update({ display_name: name, onboarding_completed: true }).eq('id', account.id), 'controlled profile');
+  account.username = ok(await client.from('profiles').update({ display_name: name, onboarding_completed: true }).eq('id', account.id).select('username').single(), 'controlled profile').username;
   return account;
 }
 async function api(account, path = '/api/notifications', body, status = 200, from = origin) {
@@ -124,8 +124,8 @@ try {
   await join(alice, approval, 'approve', bob);
   check((await api(alice)).items.length === before + 1, 'approval notification in hosted database');
   const inviteGroup = await group(alice, 'invite');
-  const invitation = await api(alice, '/api/communities', { action: 'invite', id: inviteGroup.id, email: bob.email });
-  await api(bob, '/api/communities', { action: 'accept', token: invitation.token });
+  const invitation = await api(alice, '/api/communities', { action: 'invite', id: inviteGroup.id, username: bob.username });
+  await api(bob, '/api/communities', { action: 'accept', token: new URL(invitation.url).hash.slice(1) });
   check((await api(alice)).items.length === before + 2, 'accepted invitation notification in hosted database');
   ok(await alice.client.from('blocks').insert({ blocked_id: bob.id }), 'controlled block');
   check(!(await api(alice)).items.some(n => n.actor_name === bob.name), 'current block conceals actor notifications');

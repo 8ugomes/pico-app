@@ -14,14 +14,16 @@ import { MutationError, mutateSocial, parseMutation } from '@/lib/supabase/mutat
 import { requireUser } from '@/lib/supabase/queries';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { removeUnusedMedia } from '@/lib/supabase/media';
+import { productMeasurementEnabled } from '@/lib/features';
+import { recordProductEvent } from '@/lib/product-measurement';
 
 export const dynamic = 'force-dynamic';
 
 async function context(request: Request) {
   const { accessToken } = validateMobileRequest(request);
   const client = createMobileDataClient(accessToken!);
-  await requireMobileUser(client, accessToken!);
-  return client;
+  const user = await requireMobileUser(client, accessToken!);
+  return { client, user };
 }
 
 export function OPTIONS(request: Request) {
@@ -31,8 +33,13 @@ export function OPTIONS(request: Request) {
 export async function GET(request: Request) {
   try {
     const input = parseReadRequest(new URL(request.url).searchParams);
-    const client = await context(request);
-    return mobileJson(request, { data: sanitizeMobileReadData(await readSocial(client, input)), apiVersion: MOBILE_API_VERSION });
+    const { client, user } = await context(request);
+    const data = await readSocial(client, input);
+    if (productMeasurementEnabled()) {
+      recordProductEvent({ actorId: user.id, eventType: 'return_active' });
+      if (data.kind === 'player' && !data.own) recordProductEvent({ actorId: user.id, eventType: 'discovery_opened', contextType: 'profile' });
+    }
+    return mobileJson(request, { data: sanitizeMobileReadData(data), apiVersion: MOBILE_API_VERSION });
   } catch (error) {
     return mobileError(request, asMobileError(error));
   }
@@ -44,7 +51,7 @@ export async function POST(request: Request) {
     if (input.action === 'create_comment' && !input.key) {
       throw new MutationError(400, 'Atualize o aplicativo antes de comentar.');
     }
-    const client = await context(request);
+    const { client } = await context(request);
     let photo: string | null = null;
     let ownerId: string | null = null;
     if (input.action === 'delete_post') {

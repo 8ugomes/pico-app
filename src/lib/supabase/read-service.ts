@@ -9,6 +9,17 @@ import { mediaUrl } from './media.ts';
 import { getArenaDirectory } from '../arena-catalog.ts';
 
 type ArenaResult = NonNullable<Awaited<ReturnType<typeof getArenaBySlug>>['data']>;
+type ConnectionState = { following: boolean; followsYou: boolean; mutual: boolean };
+
+function isConnectionState(value: unknown): value is ConnectionState {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
+  const state = value as Record<string, unknown>;
+  return typeof state.following === 'boolean'
+    && typeof state.followsYou === 'boolean'
+    && typeof state.mutual === 'boolean'
+    && state.mutual === (state.following && state.followsYou);
+}
+
 // Legacy artwork is demo-only. Real covers use the authorized media endpoint.
 export function safeArenaImage(path: string | null, isDemo: boolean) {
   return isDemo && path === '/images/urban-court.webp' ? path : null;
@@ -96,9 +107,25 @@ export async function readSocial(client: SupabaseClient<Database>, request: Read
     const { data, error } = await getPublicProfile(client, request.username);
     if (error) throw new ReadError('unavailable');
     if (!data) throw new ReadError('not_found', 404);
-    const connection = await client.from('connections').select('followed_id').eq('follower_id', user.id).eq('followed_id', data.id).maybeSingle();
-    if (connection.error) throw new ReadError('unavailable');
-    return { kind: 'player', profile: profileDto(data), own: user.id === data.id, connected: Boolean(connection.data) };
+    const own = user.id === data.id;
+    if (own) return { kind: 'player', profile: profileDto(data), own, connected: false, followsYou: false, mutual: false };
+    const connection = await client.rpc('read_connection_state', { p_player: data.id });
+    if (connection.error && ['PGRST202', '42883'].includes(connection.error.code ?? '')) {
+      // Schema-first is the normal rollout. This conservative fallback also
+      // keeps a preview or N-1 database usable without guessing inbound state.
+      const outgoing = await client.from('connections').select('followed_id').eq('follower_id', user.id).eq('followed_id', data.id).maybeSingle();
+      if (outgoing.error) throw new ReadError('unavailable');
+      return { kind: 'player', profile: profileDto(data), own, connected: Boolean(outgoing.data), followsYou: false, mutual: false };
+    }
+    if (connection.error || !isConnectionState(connection.data)) throw new ReadError('unavailable');
+    return {
+      kind: 'player',
+      profile: profileDto(data),
+      own,
+      connected: connection.data.following,
+      followsYou: connection.data.followsYou,
+      mutual: connection.data.mutual,
+    };
   }
   if (request.resource === 'feed') {
     const user = await requireUser(client);

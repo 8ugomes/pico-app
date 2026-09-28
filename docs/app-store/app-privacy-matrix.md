@@ -26,6 +26,7 @@ Esta é uma resposta conservadora baseada nos contratos atuais. `Propósito` usa
 | User Content · Other User Content | Bio, posts, comentários, menções, denúncias e detalhes livres. | Sim | Sim | Não | App Functionality | Texto livre não exige adivinhar cada dado sensível que alguém possa escrever. |
 | Identifiers · User ID | UUID da conta, username e identificadores de autoria. | Sim | Sim | Não | App Functionality | Confirmar que não existe IDFA/device fingerprint. |
 | Usage Data · Product Interaction | Curtidas, republicações, conexões, participação, bloqueios, audiência e ações persistidas. | Sim | Sim | Não | App Functionality; Product Personalization | Não incluir simples taps efêmeros se não forem retidos. |
+| Usage Data · Product Interaction (medição própria dormente) | A capacidade está no código candidato: eventos privados e retidos de conclusão de perfil e primeira ativação social, sem identidade do par, mais eventos categóricos de descoberta, retorno diário, link preparado e convite aberto foram preparados atrás de gates desligados. Não há campo público de horário de conclusão. | Não enquanto todos os gates permanecerem desligados | Não enquanto não houver coleta | Não | Reavaliar antes de ativar | A migration local não foi aplicada; não existe retenção aprovada nem purga diária monitorada. Ativar exige atualizar esta declaração e o aviso público antes da coleta. |
 
 ## Tipos condicionais que bloqueiam a certificação
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { newPasswordError, passwordConfirmationError } from '@/lib/auth/password';
-import { afterLogin } from '@/lib/auth/navigation';
+import { afterLogin, authDestination, safeNext } from '@/lib/auth/navigation';
 import { useEffect, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -31,7 +31,7 @@ function authError(code?: string) {
   }
 }
 
-export function AuthForm({ mode }: { mode: AuthMode }) {
+export function AuthForm({ mode, next = null }: { mode: AuthMode; next?: string | null }) {
   const router = useRouter();
   const [client] = useState(createClient);
   const [notice, setNotice] = useState<Notice | null>(null);
@@ -89,7 +89,7 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
       if (error) { if (error.code === "email_not_confirmed") setConfirmationEmail(address); setNotice({ kind: "error", text: authError(error.code) }); return; }
       if (result.session) {
         setEmail(result.user?.email ?? address);
-        router.replace(afterLogin());
+        router.replace(afterLogin(next));
         router.refresh();
       } else {
         setConfirmationEmail(address);
@@ -121,8 +121,8 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
       <h2>Você entrou no Pico.</h2>
       <p>Sessão iniciada com <strong>{email}</strong>.</p>
 
-      <Link className={buttonVariants()} href="/perfil">Ver meu perfil <ArrowUpRight size={18} aria-hidden="true" /></Link>
-      <SignOutButton />
+      <Link className={buttonVariants()} href={safeNext(next)}>Continuar no Pico <ArrowUpRight size={18} aria-hidden="true" /></Link>
+      <SignOutButton invitationNext={safeNext(next)} />
       {notice && <p className="auth-notice notice-error" role="alert">{notice.text}</p>}
     </div>
   );
@@ -144,7 +144,7 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
       </form>
       {signup && !emailDeliveryEnabled && <p className="form-note">Recuperação por e-mail indisponível nesta beta. Guarde sua senha.</p>}
       {confirmationEmail && emailDeliveryEnabled && <Button variant="quiet" disabled={busy} onClick={resendConfirmation}>Reenviar confirmação</Button>}
-      <p className="auth-switch">{signup ? "Já tá no Pico?" : "Ainda não tá no Pico?"} <Link href={signup ? "/login" : "/signup"}>{signup ? "Entrar" : "Criar conta"}</Link></p>
+      <p className="auth-switch">{signup ? "Já tá no Pico?" : "Ainda não tá no Pico?"} <Link href={authDestination(signup ? 'login' : 'signup',next)}>{signup ? "Entrar" : "Criar conta"}</Link></p>
       <nav className="auth-help" aria-label="Ajuda com sua conta">{!signup && <Link href="/recuperar">Esqueci minha senha</Link>}<Link href="/privacidade">Privacidade</Link></nav>
     </>
   );

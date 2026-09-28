@@ -1,3 +1,20 @@
+## 2026-09-28: compartilhamento contextual e medição própria preparados com coleta desligada
+
+- Perfil próprio, arenas públicas, comunidades beta abertas/por aprovação e posts beta elegíveis ganharam copiar link, Web Share e QR local. O servidor revalida audiência, estado e conteúdo demo e usa somente `PICO_PUBLIC_ORIGIN`; não existe token de campanha, auto-follow, entrada automática ou aceite de convite.
+- Login e cadastro preservam somente destinos internos permitidos, inclusive o retorno a convites individuais. URL externa, query, fragmento, traversal e parâmetro repetido caem no perfil.
+- A medição própria ganhou schema privado, deduplicação, exclusão de demo/teste, exportação, cascade na exclusão, purga condicionada e relatório agregado com supressão para base menor que cinco. O fluxo operacional de heartbeat usa o endpoint e a versão compilada do deployment; um lease request-edge de 15 minutos e lacunas por fonte impedem escrita/relatório completo quando env, release ou manutenção divergem. Env, banco, lease e retenção começam desligados/ausentes; nenhum dado real foi coletado.
+- Consultas separam conclusão de perfil, ativação por conexão mútua até D7, reciprocidade semanal, conversas com/sem resposta, tempo até primeira resposta, retorno D7 em `America/Sao_Paulo` e funil de convite sem confundir denominadores. Link preparado não é envio.
+- Convites por `@username` revalidam bloqueio bilateral, autoridade e suspensão na emissão/abertura/aceite; substituições respeitam a ACL de `admin`, deixam auditoria e as listas limitam o histórico e neutralizam contas bloqueadas. A revogação dos RPCs antigos exige rollout coordenado e forward-fix, sem promessa de rollback N−1 para essas ações.
+- Nenhuma migration, flag, origem pública, deploy ou configuração remota foi alterada nesta execução.
+
+## 2026-09-27: intenção de conexão e denúncia da mensagem exata preparadas
+
+- A caixa interna ganhou aviso de novo acompanhamento com perfil, retorno explícito, ignorar, bloquear e estado textual de reciprocidade. O banco deduplica por par, só renova um aviso lido depois de 30 dias e mantém o recurso atrás de um gate privado desligado, sem backfill.
+- O perfil passou a consultar somente o vínculo exato entre duas pessoas; conversa aparece apenas quando o acompanhamento é mútuo e o gate próprio de DMs permite. Preview com banco N-1 conserva um fallback unilateral seguro, sem adivinhar quem acompanha o usuário.
+- Cada mensagem recebida pode ser denunciada por RPC transacional e idempotente. O operador recebe somente aquela mensagem, com inspeção auditada; o corpo privado é apagado ao resolver o caso e apenas remetente/data ficam como procedência privada. A ação genérica antiga de revisão foi bloqueada para não contornar essa limpeza.
+- Denúncia continua possível pelo ID exato se o remetente bloquear depois ou se o gate de DMs for pausado. A interface alerta para denunciar antes de bloquear, porque o histórico deixa de ser legível. Fluxo recuperável quando o remetente bloqueia primeiro, custódia após exclusão do denunciante, prazo do caso pendente e retenção dos metadados seguem como decisões obrigatórias antes de ativar DMs.
+- Validação local: ESLint, typecheck demo, 270 testes, build Next demo, audit de produção sem vulnerabilidades e revisão visual em 320/390/1280, claro/escuro e texto a 200%. Nenhuma migration, flag, configuração de Auth, deploy, push, mensagem real ou mudança remota foi executada.
+
 ## 2026-09-26: fundação móvel recuperada e recursos pendentes integrados com gates fechados
 
 - A cadeia local do cliente móvel foi recuperada sobre a `main` atual, incluindo Capacitor, cliente React/TypeScript local, API móvel Bearer, Keychain, direitos da conta, mídia privada e pacote editorial da App Store.

@@ -40,7 +40,7 @@ Status: **aberto**. Marcar somente com evidência da mesma build candidata.
 - [ ] Se o upload for reaberto numa versão futura: MP4/TUS progride, cancela, retoma e limpa reserva/metadata; sanitização/transcoding e MOV/HEVC têm contrato e evidência física próprios.
 - [ ] Publicação idempotente, audiência pública/privada, comentário, curtida e republicação.
 - [ ] Jogos privados, correção/exclusão e compartilhamento separado.
-- [ ] Denúncia, bloqueio/desbloqueio, exportação e exclusão da conta.
+- [ ] Denúncia de perfil/publicação e, se DMs entrarem na build, da mensagem recebida exata; bloqueio/desbloqueio, exportação e exclusão da conta.
 - [ ] Exclusão interrompida reaparece antes do perfil e pode continuar limpeza de Storage/RPC/Auth com nova confirmação.
 - [ ] Rascunhos de publicação, perfil e jogo retomam somente na mesma conta, não enviam sozinhos e são apagados no logout/exclusão local.
 - [ ] Buckets privados não permitem leitura direta; foto/vídeo só chega pelo BFF depois de `can_read_media`/`can_read_post_video`, inclusive após revogação.

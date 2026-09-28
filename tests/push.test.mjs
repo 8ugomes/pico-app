@@ -6,7 +6,14 @@ import vm from 'node:vm';
 import { authorizedPushDispatch, getPushConfig, parsePushSubscription, pushEndpoint } from '../src/lib/push/policy.ts';
 import { deliverPush } from '../src/lib/push/delivery.ts';
 
-function keys() { const pair = createECDH('prime256v1'); pair.generateKeys(); return { publicKey: pair.getPublicKey().toString('base64url'), privateKey: pair.getPrivateKey().toString('base64url') }; }
+function keys() {
+  const pair = createECDH('prime256v1');
+  pair.generateKeys();
+  const scalar = pair.getPrivateKey();
+  const privateKey = Buffer.alloc(32);
+  scalar.copy(privateKey, privateKey.length - scalar.length);
+  return { publicKey: pair.getPublicKey().toString('base64url'), privateKey: privateKey.toString('base64url') };
+}
 const vapid = keys();
 const receiver = keys();
 const subscription = { endpoint: 'https://fcm.googleapis.com/fcm/send/device:APA91_example', keys: { p256dh: receiver.publicKey, auth: randomBytes(16).toString('base64url') } };
