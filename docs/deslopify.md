@@ -1,5 +1,7 @@
 ## Frente 1 · intenção de conexão e denúncia de mensagem · critérios antes de codar · 26/09/2026
 
+> Verificação de publicação em 28/09/2026: o artefato `7d5a7afd17a6` passou em compartilhamento e notificações com 320/390/1280 px, claro/escuro, movimento reduzido e texto a 200%. Não houve overflow horizontal, erro de console ou controle abaixo de 44 px. O teste usou APIs locais simuladas; conta real, VoiceOver/TalkBack e aparelho físico permanecem evidências separadas.
+
 O aviso de acompanhamento deve parecer uma intenção humana, não uma métrica social. Mostrar foto, nome e a frase concreta “começou a acompanhar você”. Sem contagem de seguidores, urgência ou aceitação automática. A próxima ação fica junto do aviso: abrir o perfil, acompanhar de volta ou ignorar por agora; bloquear permanece num menu de segurança com consequência explícita.
 
 Compartilhar deve continuar sendo uma ação pequena e contextual. Mostrar um único diálogo com endereço, folha do sistema, copiar e QR. Explicar que abrir o link não acompanha, não entra em grupo e não aceita convite. Não exibir contagem, campanha, “viral”, confirmação de envio ou QR externo. Perfil alheio e contexto privado não ganham o controle. Se o domínio canônico ainda não existe, dizer isso como indisponibilidade operacional em vez de fabricar uma URL do navegador.

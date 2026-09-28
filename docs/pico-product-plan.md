@@ -1,3 +1,5 @@
+> Fechamento operacional de 28/09/2026: o PR #45 foi integrado e `7d5a7afd17a6` está publicado no domínio principal. As duas migrations pendentes foram aplicadas após backup cifrado e os inventários preservaram 131/131 identidades. Origem canônica configurada; mensuração, intenção social, DMs e push seguem desligados. A validação autenticada com duas contas controladas continua como próximo gate, sem habilitar coleta. [Recibo](PRODUCT_MEASUREMENT.md#recibo-da-janela-de-28092026).
+
 ## Frente 1 · conexão consentida e segurança da conversa · PLAN · 26/09/2026
 
 ### Linha de base revalidada

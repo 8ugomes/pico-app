@@ -98,4 +98,12 @@ O compartilhamento privado já existente no cliente móvel é outro contrato: el
 
 Para trocar a versão coletora, não altere `expected_edge_release` enquanto o gate estiver aberto. Primeiro faça o endpoint atual reportar env desligado, desligue `product_measurement_settings.enabled`, atualize a versão esperada, promova o novo artefato ainda com o env desligado, valide seu heartbeat e só então ligue env e gate novamente. O intervalo permanece registrado; tentar trocar a versão com coleta ativa é recusado pelo banco.
 
-Esta execução não realizou nenhum desses passos remotos.
+## Recibo da janela de 28/09/2026
+
+O [PR #45](https://github.com/8ugomes/pico-app/pull/45) foi integrado pela revisão `7d5a7afd17a65040e7b7639590aea35870028da4`. Antes da migration, `PICO_PUBLIC_ORIGIN` foi configurada como `https://pico-app-sepia.vercel.app` e um backup cifrado do banco, configuração e 14 objetos de Storage teve hash e autenticação AES-GCM conferidos; a exportação parcial de uma primeira tentativa foi removida sem deixar payload em claro.
+
+As migrations `20260926120000_social_intent_safety.sql` e `20260927130000_product_measurement.sql` foram aplicadas no projeto `bxjhqxdfknspxezgftyz`. Os inventários de migration, stage e pós-promoção preservaram 131/131 identidades, sem ausência, troca de identidade ou edição. O ledger terminou com 49 migrations e os quatro RPCs antigos de convite por e-mail permaneceram sem `EXECUTE` para `authenticated`; os substitutos vinculados a `@username` ficaram disponíveis.
+
+O deployment Production `dpl_BKVhni4SUsWTXV3gy5NTYoYd63Zs` foi validado em stage e promovido ao domínio principal. `/api/version` retornou `7d5a7afd17a6`, `/api/health` confirmou banco/Auth e o endereço anterior continuou encaminhando ao principal. `product_measurement_settings.enabled`, o gate request-edge, intenção social, DMs e push permaneceram `false`; retenção, release esperada e lease continuaram nulos. Nenhum heartbeat, purga, cron ou coleta foi ativado.
+
+A verificação local do artefato publicado cobriu compartilhamento em 320/390/1280 px, temas claro/escuro, movimento reduzido e texto a 200%, além da rota vizinha de notificações, sem overflow ou erro de console. A validação autenticada de compartilhamento, convites, exportação e exclusão ainda requer duas contas controladas; não criar contas ou conteúdo no principal apenas para completar o recibo.
