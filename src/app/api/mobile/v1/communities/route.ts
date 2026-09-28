@@ -11,6 +11,7 @@ import { asMobileError } from '@/lib/mobile/errors';
 import { createMobileDataClient, requireMobileUser } from '@/lib/mobile/supabase';
 import { parseCommunitySearch } from '@/lib/supabase/community-search';
 import { communityContent, exactKeys, mutationFailure, textField, uuid } from '@/lib/supabase/mutations';
+import { configuredPublicOrigin, scopeInvitationLink } from '@/lib/sharing/targets';
 import type { Json } from '@/types/database';
 
 export const dynamic = 'force-dynamic';
@@ -53,7 +54,8 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const body = await readMobileJson(request);
-    exactKeys(body, ['action', 'id', 'version', 'data', 'memberAction', 'target', 'role', 'arena', 'linkAction', 'official', 'email', 'token', 'inviteId']);
+    exactKeys(body, ['action', 'id', 'version', 'data', 'memberAction', 'target', 'role', 'arena', 'linkAction', 'official', 'username', 'token', 'inviteId']);
+    const origin = body.action === 'invite' ? configuredPublicOrigin() : null;
     const client = await context(request);
     let result;
     switch (body.action) {
@@ -84,10 +86,10 @@ export async function POST(request: Request) {
         result = await client.rpc('create_official_community', { p_arena: uuid(body.arena) });
         break;
       case 'invite':
-        result = await client.rpc('invite_community_member', { p_id: uuid(body.id), p_email: textField(body.email, 3, 254) });
+        result = await client.rpc('invite_community_player', { p_id: uuid(body.id), p_username: textField(body.username, 3, 40).toLowerCase() });
         break;
       case 'accept':
-        result = await client.rpc('accept_community_invite', { p_token: textField(body.token, 64, 64) });
+        result = await client.rpc('accept_community_player_invite', { p_token: textField(body.token, 64, 64) });
         break;
       case 'revoke':
         result = await client.rpc('community_invitations', { p_id: uuid(body.id), p_revoke: uuid(body.inviteId) });
@@ -96,7 +98,10 @@ export async function POST(request: Request) {
         throw new MobileRequestError(400, 'invalid_action', 'A ação enviada não é válida.');
     }
     if (result.error) mutationFailure(result.error);
-    return mobileJson(request, { data: result.data, apiVersion: MOBILE_API_VERSION });
+    return mobileJson(request, {
+      data: body.action === 'invite' ? scopeInvitationLink(origin!, 'community', result.data) : result.data,
+      apiVersion: MOBILE_API_VERSION,
+    });
   } catch (error) {
     return mobileError(request, asMobileError(error));
   }

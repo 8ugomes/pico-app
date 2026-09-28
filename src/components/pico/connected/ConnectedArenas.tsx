@@ -14,6 +14,7 @@ import { mediaUrl } from '@/lib/supabase/media';
 import { useRemoteRead } from './useRemoteRead';
 import { ReadFailure, ReadLoading } from './ReadState';
 import { ArenaGallery, ArenaImage } from './ArenaGallery';
+import { ShareActions } from '../ShareActions';
 
 export function ReadSports({ sports }: { sports: ReadSport[] }) {
   return <div className="arena-sports">{sports.map(s => <span className="sport-label" key={s.id}><SportIcon sport={s.slug} />{s.name}</span>)}</div>;
@@ -55,7 +56,7 @@ export function ConnectedArena({ slug }: { slug: string }) {
     {(state.status === 'error' || state.status === 'demo') && <ReadFailure state={state} retry={retry} />}
     {arena && <>
       <ArenaGallery key={arena.id} arena={arena} cover={profile.data?.cover_path ? mediaUrl('entity-media', profile.data.cover_path) : null} />
-      <header className="arena-detail-header"><p className="location-line"><MapPin size={14} aria-hidden="true" />{arena.neighborhood} · {arena.city}</p><h1>{arena.name}</h1><ReadSports sports={arena.sports} />{arena.directory && <div className="arena-address"><p>{arena.directory.address}</p><a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${arena.name}, ${arena.directory.address}, ${arena.city}`)}`} target="_blank" rel="noopener noreferrer">Como chegar <ArrowRight size={15} aria-hidden="true" /></a></div>}</header>
+      <header className="arena-detail-header"><p className="location-line"><MapPin size={14} aria-hidden="true" />{arena.neighborhood} · {arena.city}</p><h1>{arena.name}</h1><ReadSports sports={arena.sports} />{arena.directory && <div className="arena-address"><p>{arena.directory.address}</p><a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${arena.name}, ${arena.directory.address}, ${arena.city}`)}`} target="_blank" rel="noopener noreferrer">Como chegar <ArrowRight size={15} aria-hidden="true" /></a></div>}{!arena.isDemo && <ShareActions target={{ kind: 'arena', slug: arena.slug }} label="Compartilhar arena" />}</header>
       {profile.data && <ArenaExtras data={profile.data} directory={arena.directory} reload={profile.reload} />}
       {profile.error && <div className="read-message"><p role="alert">{profile.error}</p><Button variant="secondary" onClick={profile.reload}>Tentar novamente</Button></div>}
       <ArenaCommunities arenaId={arena.id} />

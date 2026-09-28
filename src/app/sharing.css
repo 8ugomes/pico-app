@@ -1,0 +1,6 @@
+.share-actions { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-4); }
+.share-actions .button { min-height: 44px; }
+.share-status { min-height: 1.5rem; display: flex; align-items: center; gap: var(--space-2); color: var(--text-secondary); font-size: var(--text-label); line-height: 1.5; overflow-wrap: anywhere; }
+.share-qr { margin: var(--space-4) auto 0; text-align: center; }
+.share-qr img { display: block; width: min(100%, 320px); height: auto; margin-inline: auto; border-radius: var(--radius-control); }
+.share-qr figcaption { margin-top: var(--space-2); color: var(--text-muted); font-size: var(--text-caption); line-height: 1.5; }

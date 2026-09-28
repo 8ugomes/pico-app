@@ -1,3 +1,12 @@
+## 2026-09-28: compartilhamento contextual e medição própria preparados com coleta desligada
+
+- Perfil próprio, arenas públicas, comunidades beta abertas/por aprovação e posts beta elegíveis ganharam copiar link, Web Share e QR local. O servidor revalida audiência, estado e conteúdo demo e usa somente `PICO_PUBLIC_ORIGIN`; não existe token de campanha, auto-follow, entrada automática ou aceite de convite.
+- Login e cadastro preservam somente destinos internos permitidos, inclusive o retorno a convites individuais. URL externa, query, fragmento, traversal e parâmetro repetido caem no perfil.
+- A medição própria ganhou schema privado, deduplicação, exclusão de demo/teste, exportação, cascade na exclusão, purga condicionada e relatório agregado com supressão para base menor que cinco. O fluxo operacional de heartbeat usa o endpoint e a versão compilada do deployment; um lease request-edge de 15 minutos e lacunas por fonte impedem escrita/relatório completo quando env, release ou manutenção divergem. Env, banco, lease e retenção começam desligados/ausentes; nenhum dado real foi coletado.
+- Consultas separam conclusão de perfil, ativação por conexão mútua até D7, reciprocidade semanal, conversas com/sem resposta, tempo até primeira resposta, retorno D7 em `America/Sao_Paulo` e funil de convite sem confundir denominadores. Link preparado não é envio.
+- Convites por `@username` revalidam bloqueio bilateral, autoridade e suspensão na emissão/abertura/aceite; substituições respeitam a ACL de `admin`, deixam auditoria e as listas limitam o histórico e neutralizam contas bloqueadas. A revogação dos RPCs antigos exige rollout coordenado e forward-fix, sem promessa de rollback N−1 para essas ações.
+- Nenhuma migration, flag, origem pública, deploy ou configuração remota foi alterada nesta execução.
+
 ## 2026-09-27: intenção de conexão e denúncia da mensagem exata preparadas
 
 - A caixa interna ganhou aviso de novo acompanhamento com perfil, retorno explícito, ignorar, bloquear e estado textual de reciprocidade. O banco deduplica por par, só renova um aviso lido depois de 30 dias e mantém o recurso atrás de um gate privado desligado, sem backfill.

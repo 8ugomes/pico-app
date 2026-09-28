@@ -1,4 +1,4 @@
-import { directMessagesEnabled } from '@/lib/features';
+import { directMessagesEnabled, productMeasurementEnabled } from '@/lib/features';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { MutationError, mutationFailure } from '@/lib/supabase/mutations';
 
@@ -37,6 +37,16 @@ export async function buildAccountArchive(user: AccountExportUser) {
   }
   if (!messageExport.error) messages = messageExport.data as Record<string, unknown>;
 
+  let measurement: Record<string, unknown> = {};
+  const measurementExport = await admin.rpc('export_product_measurement', { p_user: user.id });
+  if (measurementExport.error?.code === 'P0413') throw new MutationError(413, ACCOUNT_ARCHIVE_TOO_LARGE);
+  // Migration-first rollout is additive. Before measurement is activated, an
+  // N-1 database may omit this empty section without breaking privacy export.
+  if (measurementExport.error && (productMeasurementEnabled() || !['PGRST202', '42883'].includes(measurementExport.error.code))) {
+    mutationFailure(measurementExport.error);
+  }
+  if (!measurementExport.error) measurement = measurementExport.data as Record<string, unknown>;
+
   const archive = {
     format: 'pico-account-v1',
     exportedAt: new Date().toISOString(),
@@ -50,6 +60,7 @@ export async function buildAccountArchive(user: AccountExportUser) {
       ...(account.data as Record<string, unknown>),
       ...(media.data as Record<string, unknown>),
       ...messages,
+      ...measurement,
     },
     media: 'Referências de fotos e vídeos; este arquivo não contém os bytes dos arquivos.',
   };

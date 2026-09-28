@@ -2,6 +2,10 @@
 
 O aviso de acompanhamento deve parecer uma intenção humana, não uma métrica social. Mostrar foto, nome e a frase concreta “começou a acompanhar você”. Sem contagem de seguidores, urgência ou aceitação automática. A próxima ação fica junto do aviso: abrir o perfil, acompanhar de volta ou ignorar por agora; bloquear permanece num menu de segurança com consequência explícita.
 
+Compartilhar deve continuar sendo uma ação pequena e contextual. Mostrar um único diálogo com endereço, folha do sistema, copiar e QR. Explicar que abrir o link não acompanha, não entra em grupo e não aceita convite. Não exibir contagem, campanha, “viral”, confirmação de envio ou QR externo. Perfil alheio e contexto privado não ganham o controle. Se o domínio canônico ainda não existe, dizer isso como indisponibilidade operacional em vez de fabricar uma URL do navegador.
+
+A medição permanece invisível para a interface e não vira placar. “Link preparado” não significa “enviado”; “aberto” não significa “aceito”; curtida não vira reciprocidade. Sem base suficiente, o relatório mostra ausência/supressão, nunca zero decorativo ou projeção. Antes de ativar, prazo e finalidade precisam estar aprovados e explicados no aviso de privacidade.
+
 Reciprocidade precisa de texto, não só de cor ou troca de botão. Antes do retorno: “Você decide se quer acompanhar de volta.” Depois: “Vocês se acompanham.” A conversa só aparece como ação quando o recurso realmente estiver habilitado; com os gates fechados, a interface não promete um canal disponível. Deixar de acompanhar não apaga o histórico de conversa já existente, enquanto bloquear revoga o acesso conforme o contrato atual.
 
 Na conversa, denunciar pertence à mensagem recebida. O menu deve ficar associado ao balão sem disputar com o texto, a data ou o envio. O diálogo informa que a denúncia é privada e que o conteúdo não some automaticamente. Não oferecer denúncia da própria mensagem nem chamar armazenamento de “entrega” ou “leitura”. Em 320 px e texto ampliado, o alvo continua com 44 px, o menu não alarga o histórico e as ações seguem acessíveis por teclado.

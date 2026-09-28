@@ -5,7 +5,7 @@ import { AuthForm } from "./AuthForm";
 import { GlassPanel } from "@/components/ui/GlassPanel";
 import { emailConfirmationRequired } from '../../../config/auth-policy.json';
 
-export function AuthPage({ mode, confirmationError = false, passwordUpdated = false }: { mode: "login" | "signup"; confirmationError?: boolean; passwordUpdated?: boolean }) {
+export function AuthPage({ mode, confirmationError = false, passwordUpdated = false, next = null }: { mode: "login" | "signup"; confirmationError?: boolean; passwordUpdated?: boolean; next?: string | null }) {
   const signup = mode === "signup";
   return (
     <div className="landing-shell auth-shell">
@@ -17,7 +17,7 @@ export function AuthPage({ mode, confirmationError = false, passwordUpdated = fa
           <p className="auth-description">{signup ? emailConfirmationRequired ? "Crie sua conta e confirme seu e-mail para encontrar sua turma." : "Encontre sua turma na areia." : "Bom te ver por aqui."}</p>
           {confirmationError && <p className="auth-notice notice-error" role="alert">Não conseguimos confirmar seu e-mail. O link pode ter expirado ou ter sido aberto em outro navegador. Abra o link mais recente no navegador em que fez o cadastro.</p>}
           {passwordUpdated && <p className="auth-notice notice-success" role="status">Senha alterada. Entre com sua nova senha.</p>}
-          <AuthForm mode={mode} />
+          <AuthForm mode={mode} next={next} />
         </GlassPanel>
       </main></div>
     </div>

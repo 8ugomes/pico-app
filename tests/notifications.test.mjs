@@ -63,9 +63,9 @@ test('approval and invitation notify only on activation, never on pending, roles
     await asUser(db, ALICE, () => db.query("select public.community_membership($1,'role',$2,'moderator')", [g.id, BOB]));
     assert.equal((await asUser(db, ALICE, () => read(db))).unreadCount, 1);
     const inviteGroup = await group(db, 'invite');
-    const invite = await asUser(db, ALICE, async () => (await db.query("select public.invite_community_member($1,'bob@example.invalid') r", [inviteGroup.id])).rows[0].r);
+    const invite = await asUser(db, ALICE, async () => (await db.query("select public.invite_community_player($1,'pico_30000000000040008000000000000002') r", [inviteGroup.id])).rows[0].r);
     assert.equal((await asUser(db, ALICE, () => read(db))).unreadCount, 1);
-    await asUser(db, BOB, () => db.query('select public.accept_community_invite($1)', [invite.token]));
+    await asUser(db, BOB, () => db.query('select public.accept_community_player_invite($1)', [invite.token]));
     assert.equal((await asUser(db, ALICE, () => read(db))).unreadCount, 2);
   } finally { await db.close(); }
 });

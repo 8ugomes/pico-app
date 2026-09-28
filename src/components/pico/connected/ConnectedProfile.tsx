@@ -16,6 +16,7 @@ import { SportIcon } from '../SocialUI';
 import { useOwnProfile } from './OwnProfile';
 import { useEntity } from './useEntity';
 import { ReadFailure, ReadLoading } from './ReadState';
+import { ShareActions } from '../ShareActions';
 
 export function ConnectedProfile() {
   const { state, retry, refresh, refreshError } = useOwnProfile();
@@ -84,6 +85,7 @@ function ProfileWorkspace({ profile, refresh }: { profile: ReadProfile; refresh:
       </span>)}</div>
       <div className="profile-v2-actions">
         <Button data-tour="edit-profile" variant="secondary" onClick={() => { setEditing(true); setSaved(false); }}><Pencil size={16} aria-hidden="true" />{profile.onboardingCompleted ? 'Editar perfil' : 'Completar perfil'}</Button>
+        {!profile.isDemo && profile.onboardingCompleted && <ShareActions target={{ kind: 'profile', username: profile.username }} label="Compartilhar perfil" />}
       </div>
     </section>
     {saved && <p className="auth-notice notice-success" role="status">Perfil atualizado.</p>}

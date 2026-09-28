@@ -24,6 +24,10 @@ const server=createServer(async(req,res)=>{
   if(mode==='error')return send({status:'error',code:'unavailable',message:'Não foi possível carregar agora. Confira sua conexão e tente novamente.'},503);
   if(req.method==='POST'){
    writes.push({path:url.pathname,body});
+   if(url.pathname==='/api/shares'){
+    if(body.kind!=='community'||body.slug!==community.slug)return send({message:'Este conteúdo não pode ser compartilhado.'},403);
+    return send({data:{title:community.name,url:`https://pico.example/comunidades/${community.slug}`}});
+   }
    if(url.pathname==='/api/communities'&&['create','edit'].includes(body.action)){
     const found=body.action==='edit'?groups.find(g=>g.id===body.id):null;
     const next={...community,...body.data,id:found?.id||'40000000-0000-4000-8000-'+String(groups.length+1).padStart(12,'0'),slug:found?.slug||'comunidade-visual-'+groups.length,sports:sports.filter(s=>body.data.sports.includes(s.id)),version:(found?.version||0)+1};
