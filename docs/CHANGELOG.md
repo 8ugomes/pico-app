@@ -1,11 +1,14 @@
-## 2026-09-28: compartilhamento contextual e medição própria preparados com coleta desligada
+## 2026-09-28: compartilhamento contextual e medição própria publicados com coleta desligada
 
 - Perfil próprio, arenas públicas, comunidades beta abertas/por aprovação e posts beta elegíveis ganharam copiar link, Web Share e QR local. O servidor revalida audiência, estado e conteúdo demo e usa somente `PICO_PUBLIC_ORIGIN`; não existe token de campanha, auto-follow, entrada automática ou aceite de convite.
 - Login e cadastro preservam somente destinos internos permitidos, inclusive o retorno a convites individuais. URL externa, query, fragmento, traversal e parâmetro repetido caem no perfil.
 - A medição própria ganhou schema privado, deduplicação, exclusão de demo/teste, exportação, cascade na exclusão, purga condicionada e relatório agregado com supressão para base menor que cinco. O fluxo operacional de heartbeat usa o endpoint e a versão compilada do deployment; um lease request-edge de 15 minutos e lacunas por fonte impedem escrita/relatório completo quando env, release ou manutenção divergem. Env, banco, lease e retenção começam desligados/ausentes; nenhum dado real foi coletado.
 - Consultas separam conclusão de perfil, ativação por conexão mútua até D7, reciprocidade semanal, conversas com/sem resposta, tempo até primeira resposta, retorno D7 em `America/Sao_Paulo` e funil de convite sem confundir denominadores. Link preparado não é envio.
 - Convites por `@username` revalidam bloqueio bilateral, autoridade e suspensão na emissão/abertura/aceite; substituições respeitam a ACL de `admin`, deixam auditoria e as listas limitam o histórico e neutralizam contas bloqueadas. A revogação dos RPCs antigos exige rollout coordenado e forward-fix, sem promessa de rollback N−1 para essas ações.
-- Nenhuma migration, flag, origem pública, deploy ou configuração remota foi alterada nesta execução.
+- O PR #45 passou por CI e revisão independente e foi integrado em `7d5a7afd17a65040e7b7639590aea35870028da4`. `PICO_PUBLIC_ORIGIN` foi configurada antes da migration; backup cifrado e inventários de migration/deploy/pós-promoção preservaram 131/131 identidades e 14 objetos de Storage foram incluídos no pacote.
+- As duas migrations foram aplicadas e o ledger principal terminou com 49 entradas. Os RPCs antigos de convite por e-mail ficaram revogados para `authenticated` e os novos contratos por `@username` ficaram disponíveis. O stage READY foi promovido ao domínio principal; versão, saúde de banco/Auth, redirecionamento anterior e headers de segurança passaram.
+- Mensuração, request-edge, intenção social, DMs e push permaneceram desligados; retenção, release esperada e lease ficaram nulos. Nenhum heartbeat, purga, cron, evento de medição, mensagem ou push foi ativado. O smoke autenticado com duas contas controladas continua pendente.
+- Fechamento: 296/296 testes, lint, typecheck, build, CI `verify`/`browser`, revisão visual de compartilhamento e notificações em 320/390/1280 px, claro/escuro e texto a 200%, sem overflow ou erro de console.
 
 ## 2026-09-27: intenção de conexão e denúncia da mensagem exata preparadas
 
