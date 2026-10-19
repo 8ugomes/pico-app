@@ -51,12 +51,12 @@
     "framer-motion": "^13.2.0",
     "heic-to": "1.5.2",
     "lucide-react": "^1.43.0",
-    "next": "16.3.4",
+    "next": "16.4.2",
     "qrcode": "^1.5.4",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "react-easy-crop": "6.2.3",
-    "sharp": "^0.35.4",
+    "sharp": "^0.35.5",
     "tailwind-merge": "^3.6.0",
     "tus-js-client": "^4.3.1",
     "web-push": "^3.6.7"
@@ -73,7 +73,7 @@
     "@types/web-push": "^3.6.4",
     "esbuild": "^0.28.2",
     "eslint": "^9",
-    "eslint-config-next": "16.3.4",
+    "eslint-config-next": "16.4.2",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

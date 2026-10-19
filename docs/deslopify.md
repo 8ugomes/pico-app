@@ -1,3 +1,27 @@
+## Pico local no iPhone · critérios antes de codar · 18/10/2026
+
+O modo local precisa abrir como produto, não como tela de falha do serviço. A escolha **Usar só neste iPhone** aparece junto da entrada conectada e funciona imediatamente, sem spinner de rede. O texto explica em uma frase que jogos, arenas e perfil ficam apenas no aparelho e não são enviados para outras pessoas.
+
+Depois da escolha, a interface deve assumir esse recorte com honestidade. O cabeçalho usa **Só neste iPhone**; não mostrar “Conectado”, conta, comunidade, feed, seguidores, curtidas ou dados ilustrativos. A navegação local tem apenas Início, Jogos, Arenas e Perfil. Início oferece uma ação principal, **Registrar jogo**, e resume dados que a própria pessoa criou. Vazio não ganha arena, partida ou métrica inventada.
+
+O diário mantém o contrato do Pico: jogo passado ou de hoje, privado por padrão, sem presença ao vivo e sem publicação automática. Data, modalidade e arena são legíveis; observação é opcional. Editar e excluir permanecem ações distintas. Exclusão usa confirmação e nunca apaga silenciosamente a arena ou outro jogo.
+
+Arenas locais são referências pessoais, não catálogo ou parceria. Nome é obrigatório; bairro e cidade são opcionais. Se uma arena referenciada for excluída, o registro histórico continua compreensível. Perfil local pede nome e modalidade, sem e-mail, senha, username ou foto obrigatória. Exportar abre a folha do sistema com uma cópia legível; apagar o espaço local exige digitar `APAGAR` e explica que a ação não afeta a futura conta conectada.
+
+Aura Manteiga aparece na abertura, títulos, superfícies calmas e tipografia. Evitar uma grade de cards igual para tudo: resumo editorial no Início, cronologia em Jogos, linhas de lugar em Arenas e formulário em Perfil. Alvos mantêm 44 px, campos 16 px, safe areas, claro/escuro, texto ampliado, foco e movimento reduzido. O aviso local não deve competir com a ação principal nem virar faixa técnica permanente.
+
+Amostra prevista: primeira abertura sem rede, configuração, Início vazio, criação/edição/exclusão de jogo, criação/edição/exclusão de arena, perfil, exportação e confirmação de apagamento; 320/390 px, claro/escuro e texto ampliado no bundle compilado. Simulator comprova fluxo e layout básico. Persistência, share sheet e ciclo de vida ainda precisam de iPhone físico antes de serem chamados de validação em aparelho.
+
+### Aprendizado da implementação
+
+O recorte ficou legível quando o estado local passou a ser identidade permanente, não aviso de erro: uma pílula curta no cabeçalho, quatro destinos e uma única próxima ação por vazio bastaram. O percurso real no bundle confirmou que perfil → arena → jogo é compreensível sem inventar feed, pessoas ou números. “Nada é enviado automaticamente” é mais preciso que “nada é enviado”, porque exportar continua sendo uma ação deliberada da pessoa.
+
+Dynamic Type em tamanho de acessibilidade expôs quebra no cabeçalho e na grade de resumo. Bases flexíveis intrínsecas, rótulos sem teto fixo em pixels, wrap e conteúdo rolável corrigiram o conjunto sem reduzir o texto operacional. Em 320 e 390 px não houve overflow horizontal; claro, escuro e texto ampliado mantiveram a hierarquia. A troca de aba leva o foco ao novo título; diálogos priorizam o campo de edição e voltam a um destino sobrevivente quando a ação anterior foi removida. A leitura por VoiceOver real continua gate de aparelho.
+
+Privacidade local também é parte da interface. Um payload ilegível não pode reaparecer como diário vazio: o app preserva o arquivo, explica o estado e permite sair sem apagar; somente corrupção confirmada oferece exclusão com `APAGAR`. No iOS, o diário saiu de Preferences para um arquivo com Data Protection completo e sem backup. Isso sustenta a frase “neste iPhone”; o Simulator comprova integração e atributos, não substitui o ensaio físico de bloqueio, share sheet ou ciclo de vida.
+
+A revisão final mostrou que conservação de dados também precisa ser visível: quando a última arena é apagada, o histórico não pode sumir atrás do vazio de cadastro. Os jogos órfãos permanecem listados, editáveis e excluíveis; apenas um registro novo pede outra arena. A escolha local também não pode disputar com um refresh conectado: a entrada aparece antes da espera de rede e invalida respostas tardias sem transformar falha remota em modo local. Ao iniciar outro login, a tentativa visual anterior também precisa ser encerrada para que uma conta antiga não reapareça; o foco inicial e os nomes de ações repetidas precisam carregar contexto para o VoiceOver, não apenas texto genérico como “Editar”.
+
 ## Frente 1 · intenção de conexão e denúncia de mensagem · critérios antes de codar · 26/09/2026
 
 > Verificação de publicação em 28/09/2026: o artefato `7d5a7afd17a6` passou em compartilhamento e notificações com 320/390/1280 px, claro/escuro, movimento reduzido e texto a 200%. Não houve overflow horizontal, erro de console ou controle abaixo de 44 px. O teste usou APIs locais simuladas; conta real, VoiceOver/TalkBack e aparelho físico permanecem evidências separadas.

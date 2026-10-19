@@ -89,7 +89,7 @@ test('fim de sessão preserva aviso global e ignora respostas autenticadas tardi
   ]);
   assert.match(api, /const generation = this\.#sessionGeneration\.capture\(\);[\s\S]*this\.#requireGeneration\(generation\)/);
   assert.match(app, /event instanceof CustomEvent[\s\S]*event\.detail\?\.notice/);
-  assert.match(app, /<AuthScreen notice=\{state\.notice\}/);
+  assert.match(app, /<AuthScreen\s+notice=\{state\.notice\}/);
   assert.match(auth, /notice && <Notice tone="warning">\{notice\}<\/Notice>/);
   assert.match(app, /cause\.code === 'session_ended'\) return/);
 });

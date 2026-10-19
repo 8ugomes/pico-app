@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Children, cloneElement, isValidElement, useEffect, useId, useRef, useState, type ButtonHTMLAttributes, type ImgHTMLAttributes, type ReactNode } from 'react';
+import { Children, cloneElement, isValidElement, useEffect, useId, useLayoutEffect, useRef, useState, type ButtonHTMLAttributes, type ImgHTMLAttributes, type ReactNode } from 'react';
 import { AlertCircle, ImageOff, LoaderCircle, RotateCw, X } from 'lucide-react';
 import { api } from './api';
 
@@ -82,14 +82,14 @@ export function Modal({ open, title, children, onClose }: { open: boolean; title
   const sheet = useRef<HTMLElement>(null);
   const close = useRef(onClose);
   useEffect(() => { close.current = onClose; }, [onClose]);
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!open) return;
     const previous = document.activeElement as HTMLElement | null;
     document.documentElement.classList.add('modal-open');
-    const frame = requestAnimationFrame(() => {
-      const preferred = sheet.current?.querySelector<HTMLElement>('[autofocus], input, textarea, select, button');
-      preferred?.focus({ preventScroll: true });
-    });
+    const preferred = sheet.current?.querySelector<HTMLElement>('[autofocus]')
+      ?? sheet.current?.querySelector<HTMLElement>('input:not(:disabled), textarea:not(:disabled), select:not(:disabled)')
+      ?? sheet.current?.querySelector<HTMLElement>('button:not(:disabled), [href], [tabindex]:not([tabindex="-1"])');
+    preferred?.focus({ preventScroll: true });
     function keydown(event: KeyboardEvent) {
       if (event.key === 'Escape') {
         event.preventDefault();
@@ -100,7 +100,7 @@ export function Modal({ open, title, children, onClose }: { open: boolean; title
       const focusable = [...sheet.current.querySelectorAll<HTMLElement>('button:not(:disabled), input:not(:disabled), textarea:not(:disabled), select:not(:disabled), [href], [tabindex]:not([tabindex="-1"])')];
       if (!focusable.length) return;
       const first = focusable[0];
-      const last = focusable.at(-1)!;
+      const last = focusable[focusable.length - 1];
       if (event.shiftKey && document.activeElement === first) {
         event.preventDefault();
         last.focus();
@@ -111,10 +111,15 @@ export function Modal({ open, title, children, onClose }: { open: boolean; title
     }
     document.addEventListener('keydown', keydown);
     return () => {
-      cancelAnimationFrame(frame);
       document.removeEventListener('keydown', keydown);
       document.documentElement.classList.remove('modal-open');
-      requestAnimationFrame(() => previous?.focus());
+      queueMicrotask(() => {
+        const previousSurvived = previous?.isConnected && previous !== document.body && previous !== document.documentElement
+          ? previous
+          : null;
+        const fallback = document.querySelector<HTMLElement>('#main-content h1[tabindex], #main-content[tabindex], main h1[tabindex], main[tabindex]');
+        (previousSurvived ?? fallback)?.focus({ preventScroll: true });
+      });
     };
   }, [open]);
   if (!open) return null;

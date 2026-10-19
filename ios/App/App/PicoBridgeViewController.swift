@@ -9,6 +9,7 @@ final class PicoBridgeViewController: CAPBridgeViewController {
     override func capacitorDidLoad() {
         guard let bridge, usesLocalContent else { return }
         bridge.registerPluginInstance(PicoSecureSessionPlugin())
+        bridge.registerPluginInstance(PicoLocalWorkspacePlugin())
         bridge.registerPluginInstance(PicoVideoPlayerPlugin())
     }
 }

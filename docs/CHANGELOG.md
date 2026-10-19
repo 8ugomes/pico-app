@@ -1,3 +1,15 @@
+## 2026-10-18: Pico privado e utilizável no iPhone sem nuvem
+
+- A entrada do binário ganhou **Usar só neste iPhone**, avaliado antes da sessão remota. O modo persiste um workspace versionado num arquivo protegido do sandbox e não depende de banco, Auth, API ou `server.url`; Preferences guarda apenas a escolha de abertura.
+- Perfil mínimo, arenas próprias e diário de jogos retrospectivos podem ser criados, editados e excluídos; nota, bairro e cidade são opcionais. Excluir uma arena preserva seu snapshot nos jogos. Sair mantém o workspace, exportar usa a folha nativa e apagar exige `APAGAR`.
+- A navegação local tem apenas Início, Jogos, Arenas e Perfil, com identificação permanente **Só neste iPhone**, nenhum dado social ilustrativo e nenhuma publicação ou sincronização implícita. A entrada conectada e seus contratos de Keychain/Bearer permanecem separados.
+- No iOS, o diário usa Application Support, escrita atômica, `NSFileProtectionComplete` e exclusão de backup. Migração legada só limpa a origem depois da escrita confirmada; temporários interrompidos são removidos na leitura, escrita e exclusão; corrupção, versão futura, excesso de tamanho e recuo do relógio não produzem reset silencioso.
+- A restauração conectada passou a rodar sem bloquear a escolha local e é invalidada quando a pessoa entra no espaço privado ou inicia outro login. Jogos preservados continuam visíveis depois de apagar a última arena; diálogos priorizam o campo esperado e recuperam um foco sobrevivente. Tetos fixos que impediam Dynamic Type foram removidos.
+- O cliente deixou de depender de `crypto.randomUUID`, `Array.at`, viewport estável e `color-mix` sem fallback no baseline iOS 15. Listeners nativos descartam registros tardios e a troca de aba move o foco ao título. Testes novos cobrem modelo, armazenamento protegido, recuperação, entrada local, concorrência de sessão e runtime.
+- Next.js e `eslint-config-next` foram fixados em 16.4.2 e Sharp atualizado para a linha corrigida. `npm audit --omit=dev` ficou em zero; o audit completo mantém oito avisos restritos ao toolchain de Capacitor/ESLint, cujas sugestões automáticas são downgrades incompatíveis.
+- Fechamento: ESLint, typecheck demo, **328/328 testes**, build Next.js de 27 páginas, `native:verify` 12/12, build Debug iOS, audit de segredos, `plutil` e `git diff --check` passaram. A migração no iPhone 18 Pro simulado preservou perfil, arena e jogo em arquivo protegido/fora de backup; o bundle passou em 320/390 px, tema escuro e sem overflow. O preflight terminou em 7/16, com nove gates humanos e zero falha técnica.
+- A instalação física continua bloqueada pela ausência de iPhone pareado e identidade de assinatura neste Mac; não houve deploy, Supabase, TestFlight ou App Store.
+
 ## 2026-09-28: compartilhamento contextual e medição própria publicados com coleta desligada
 
 - Perfil próprio, arenas públicas, comunidades beta abertas/por aprovação e posts beta elegíveis ganharam copiar link, Web Share e QR local. O servidor revalida audiência, estado e conteúdo demo e usa somente `PICO_PUBLIC_ORIGIN`; não existe token de campanha, auto-follow, entrada automática ou aceite de convite.
