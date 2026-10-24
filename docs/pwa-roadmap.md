@@ -1,3 +1,5 @@
+> Estado consolidado em 23/10/2026: a PWA permanece publicada; o código de Web Push foi integrado sob gates desligados, sem cache privado ou fila de escrita offline. O espaço privado sem conta é exclusivo do cliente iPhone. Consulte [estado atual](PROJECT_STATUS.md) e [contrato de push](PUSH_NOTIFICATIONS.md); afirmações abaixo de ausência de service worker descrevem etapas anteriores.
+
 > Segurança de documentos: HTML dinâmico com nonce único e `no-store`; assets de build continuam cacheáveis. Sem service worker ou armazenamento offline privado. [Revisão do beta](BETA_SECURITY.md).
 
 ## Transição para aplicativo · 15/09/2026

@@ -48,6 +48,11 @@ class PicoApi {
     return Boolean(this.#accessToken && this.#user);
   }
 
+  async cancelPendingRestore() {
+    const pendingAccepts = this.#invalidateSession();
+    await Promise.allSettled(pendingAccepts);
+  }
+
   async restore() {
     const generation = this.#sessionGeneration.capture();
     try {
@@ -82,6 +87,7 @@ class PicoApi {
   }
 
   async signIn(email: string, password: string) {
+    await this.cancelPendingRestore();
     const generation = this.#sessionGeneration.capture();
     const session = await this.#auth({ action: 'sign_in', email, password });
     if (!await this.#accept(session, generation)) throw sessionEndedError();
@@ -89,6 +95,7 @@ class PicoApi {
   }
 
   async signUp(name: string, email: string, password: string) {
+    await this.cancelPendingRestore();
     const generation = this.#sessionGeneration.capture();
     const session = await this.#auth({ action: 'sign_up', name, email, password });
     if (!await this.#accept(session, generation)) throw sessionEndedError();

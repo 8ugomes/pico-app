@@ -1,5 +1,66 @@
 > Fechamento operacional de 28/09/2026: o PR #45 foi integrado e `7d5a7afd17a6` está publicado no domínio principal. As duas migrations pendentes foram aplicadas após backup cifrado e os inventários preservaram 131/131 identidades. Origem canônica configurada; mensuração, intenção social, DMs e push seguem desligados. A validação autenticada com duas contas controladas continua como próximo gate, sem habilitar coleta. [Recibo](PRODUCT_MEASUREMENT.md#recibo-da-janela-de-28092026).
 
+## Consolidação do repositório e continuidade · PLAN · 23/10/2026
+
+O responsável pediu publicar no GitHub todo o trabalho existente e o contexto necessário para colaboradores continuarem em outros ambientes. A comparação com `origin/main` (`fb85d7c`) identificou o commit local `ded13ea`, com o espaço privado do iPhone e dependências atualizadas, ainda sem publicação. A árvore inicial estava limpa. A consolidação parte dessa cadeia, preservando o histórico e os arquivos protegidos.
+
+Escopo: integrar o trabalho local por PR/CI, reconciliar decisões verificáveis das conversas com as fontes canônicas, criar uma entrada de contribuição e um resumo datado do estado, corrigir o início demo sem credenciais e explicitar os requisitos de cada plataforma. A CI de perfil deve usar o lockfile, sem reinstalar versões antigas de ferramentas. O audit atual encontrou uma dependência transitiva corrigível (`zod`) com severidade alta; atualizar somente a resolução compatível antes do gate obrigatório, sem downgrade do Capacitor.
+
+Aceite: um clone limpo instala pelo lockfile e executa demo/checks sem arquivos deste Mac; código, documentação, assets necessários e skills locais ficam alcançáveis pela `main`; segredos, conteúdo de usuários, backups e assinatura permanecem privados. Verificar lint, typecheck, testes pertinentes, build, pacote móvel, auditoria de segredos e CI. Registrar separadamente GitHub, versão web servida e gates iOS. Esta rodada não aplica migrations, não habilita recursos, não publica Vercel nem distribui binários.
+
+A auditoria do commit também reproduziu uma regressão no diário local: editar somente a nota depois de renomear a arena substituía o snapshot histórico do lugar. Corrigir o modelo para conservar esse snapshot quando o ID da arena não mudar e acrescentar teste focado antes de integrar.
+
+### Resultado da consolidação
+
+- `README.md`, `CONTRIBUTING.md` e `docs/PROJECT_STATUS.md` agora orientam um clone novo, distinguem demo/web/iOS, registram Node 24/npm 11 e ligam decisões, contratos, evidências e pendências. Schema/PWA/mensuração receberam notas de estado para evitar que contagens ou flags históricas pareçam atuais. Pedidos de interromper relatórios/monitoramento foram preservados, sem reativação.
+- A auditoria local de todas as refs encontrou somente `ded13ea` fora dos remotes; a recuperação móvel anterior já era equivalente à cadeia integrada. Fontes textuais de quatro campanhas foram recuperadas em `docs/marketing/archive`; `docs/EXTERNAL_MATERIALS.md` identifica fontes ausentes da landing, renderizadores e commits antigos não localizados. Binários de campanha não foram importados; segredos e dados pessoais continuam fora do Git.
+- O diário conserva o snapshot do lugar ao editar nota/modalidade/data com a mesma arena. Trocar explicitamente de arena atualiza o snapshot. O teste novo passou; `native-shell` foi reconstruído e comparado ao bundle gerado no clone separado.
+- Clone independente sem arquivos ignorados, somente `.env.local` demo: `npm ci`, `env:check`, ESLint, typecheck, **329/329 testes**, `native:verify` **12/12** com sync iOS sem `server.url`, build Next.js 16.4.2 e smoke HTTP de cinco rotas, manifesto e versão passaram. Saúde demo respondeu 503 esperado, sem backend. Windows, aparelho físico, assinatura e jornadas hospedadas não foram revalidados.
+- Audit completo passou no gate `--audit-level=high`, com três avisos moderados transitivos de `uuid`/`xcode`/Capacitor CLI; produção (`--omit=dev`) teve zero vulnerabilidades. A correção compatível de `zod` removeu o achado alto sem downgrade. Auditoria de segredos passou em 1.444 caminhos versionados, 56 arquivos públicos do build e 2.662 blobs históricos; links locais e `git diff --check` passaram. CI de perfil usa as versões do lockfile; integração pela proteção da `main` exige checks remotos aprovados, cujos resultados ficam no PR desta rodada.
+- Consulta pública pontual confirmou revisão servida `7d5a7afd17a6` e saúde 503 com banco/Auth indisponíveis. Nenhum deploy, migration, ativação de flags, escrita em Supabase ou distribuição foi executado. GitHub atualizado não equivale a infraestrutura restaurada.
+
+## Pico local no iPhone, sem dependência da nuvem · PLAN · 18/10/2026
+
+### Problema e linha de base
+
+O responsável quer usar hoje um aplicativo real do Pico no próprio iPhone, mesmo sem o serviço conectado. A base já contém um cliente React/TypeScript empacotado pelo Capacitor 8 e um projeto Xcode funcional, mas a abertura atual consulta `/api/mobile/v1/capabilities` antes de oferecer qualquer jornada útil. Em 18/10/2026, o domínio ainda entrega os arquivos públicos e a versão `7d5a7afd17a6`, porém `/api/health` responde `503` com banco e Auth indisponíveis. Portanto, o cliente local existente não atende sozinho ao pedido de uso sem nuvem.
+
+O host tem Xcode 27.0, runtime iOS 27.0 e Simulator disponíveis. Não há iPhone físico pareado nem identidade de assinatura de código instalada. Esses dois itens são gates externos para colocar uma build no aparelho, mas não impedem concluir, compilar e validar o produto local nem deixar o projeto pronto para a assinatura pessoal no Xcode.
+
+### Resultado observável desta fatia
+
+Na primeira tela, a pessoa pode escolher **Usar só neste iPhone** sem aguardar nem consultar o backend. O Pico cria um espaço local explicitamente privado, pede apenas nome e modalidade, e passa a oferecer quatro destinos coerentes com esse escopo: Início, Jogos, Arenas e Perfil. É possível registrar, editar e excluir jogos retrospectivos; cadastrar e editar arenas próprias; atualizar o perfil; exportar uma cópia pela folha nativa; apagar os dados locais com confirmação; fechar e reabrir o app conservando o estado.
+
+O modo local funciona em modo avião e não contém perfis de terceiros, métricas, comunidades, publicações ou confirmações sociais simuladas. Nada é sincronizado automaticamente. A entrada conectada existente permanece disponível como escolha separada para quando a infraestrutura voltar.
+
+### Área afetada, não objetivos e aceite
+
+Área afetada: `apps/mobile`, arquivo versionado e protegido no sandbox iOS, preferência leve de abertura, bundle `native-shell`, projeto iOS já existente, testes móveis e documentação operacional. Não há migration, mudança de Supabase, deploy, seed, reset, reescrita em SwiftUI/React Native ou alteração da PWA.
+
+Não objetivos: cache offline do conteúdo social, sincronização futura automática, fila de escrita, pessoas/comunidades fictícias, publicação, mensagens, push, vídeo, Android, iPad, App Store ou TestFlight. A instalação física não pode ser declarada enquanto faltarem iPhone pareado, Developer Mode e assinatura Apple configurada pelo responsável.
+
+Aceite:
+
+1. Exemplo aceito: sem rede, a pessoa toca **Usar só neste iPhone**, cria o perfil local e registra um jogo de hoje ou de uma data passada. O registro reaparece depois de encerrar e abrir o processo.
+2. Exemplo rejeitado: data futura, jogo sem arena/modalidade, objeto local malformado, conteúdo acima dos limites ou dado com versão incompatível não entra no diário.
+3. Falha e recuperação: somente a ausência real cria um workspace vazio. Conteúdo corrompido, grande demais ou de versão futura bloqueia a abertura, preserva o arquivo e oferece tentar novamente ou sair do modo local sem apagar. Exclusão de arquivo corrompido exige `APAGAR`. Falha de gravação mantém o formulário aberto e não anuncia sucesso.
+4. Arena criada ou editada continua local e pode ser usada nos jogos. Excluir uma arena já referenciada preserva o texto histórico do jogo e apenas a remove das novas escolhas.
+5. O cabeçalho identifica **Só neste iPhone**; a interface nunca chama esse estado de conta, cadastro, sincronizado ou conectado. Sair para a entrada não apaga dados. Apagar exige confirmação específica e remove somente o espaço local.
+6. O modo conectado continua usando Bearer/Keychain e não recebe credenciais por Preferences. O novo armazenamento local não contém senha, access token nem refresh token e não é lido por jornadas sociais.
+7. Fechamento técnico: teste focado antes/depois, lint, typecheck, suíte, build Next.js, build móvel, `native:verify`, build Debug para Simulator, smoke em Simulator, auditoria de segredos e preflight iOS. Build, instalação física, assinatura e distribuição permanecem evidências distintas.
+
+### Resultado da execução
+
+O cliente local foi implementado no app Capacitor existente, sem duplicar a PWA. A escolha aparece antes de qualquer espera remota; entrar no modo local invalida restaurações conectadas pendentes para que uma resposta tardia nunca substitua a interface privada. Perfil, arenas e jogos ficam num JSON validado em `Library/Application Support/PicoSocial/LocalWorkspace`. A escrita prepara e protege um arquivo temporário antes da substituição atômica, usa `NSFileProtectionComplete` e exclui o diretório/arquivo do backup. `Preferences` conserva apenas a escolha de abertura; uma eventual chave legada só é removida depois de uma migração validada e confirmada no arquivo protegido.
+
+O modelo recusa data nova futura, referências quebradas, duplicidade e limites, mas não reinterpreta um jogo válido como futuro se o relógio do aparelho recuar. Leitura inválida nunca vira workspace vazio. Excluir a última arena mantém todos os jogos históricos visíveis e operáveis. A interface ganhou recuperação não destrutiva, compatibilidade de viewport para iOS 15, foco determinístico em abas/diálogos e listeners nativos sem corrida de registro tardio.
+
+O fechamento passou em ESLint, typecheck demo, **328/328 testes**, build Next.js 16.4.2 com 27 páginas, `native:verify` 12/12 sem `server.url`, build Debug do Simulator com `BUILD SUCCEEDED`, audit de segredos em 1.414 caminhos versionados e 56 arquivos públicos, `plutil`, `git diff --check` e `npm audit --omit=dev` com zero vulnerabilidades. O audit completo ainda lista oito avisos no toolchain de desenvolvimento de Capacitor/ESLint; os fixes automáticos exigiriam downgrades incompatíveis e não foram aplicados. O preflight permaneceu em **7/16**, com nove decisões humanas e zero falha técnica.
+
+No iPhone 18 Pro simulado, a migração preservou semanticamente um perfil, uma arena e um jogo; o arquivo final manteve a marca de exclusão de backup e reabriu depois de remover a cópia legada. O bundle compilado foi revisto em 320 e 390 px no tema escuro, sem overflow horizontal, e o foco inicial/retorno do diálogo foi conferido. O tema claro e a persistência foram conferidos no Simulator. Não houve chamada social, migration, deploy ou alteração no Supabase.
+
+O limite externo permanece objetivo: este Mac não possui iPhone físico pareado nem identidade de assinatura. Portanto, a entrega termina pronta e compilada para abrir no Xcode, com smoke no Simulator, mas não declara instalação no aparelho, `.ipa`, TestFlight ou App Store.
+
 ## Frente 1 · conexão consentida e segurança da conversa · PLAN · 26/09/2026
 
 ### Linha de base revalidada

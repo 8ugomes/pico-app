@@ -1,5 +1,5 @@
 /** Isolated component/browser regressions. No real account, API or Storage.
- * npm ci; npm install --no-save --package-lock=false esbuild@0.25.12 @playwright/test@1.58.2
+ * npm ci (esbuild and Playwright come from package-lock.json)
  * npx playwright install --with-deps chromium webkit
  * python tests/helpers/make-heic.py (requires pillow-heif 1.1.1)
  * node tests/browser-profile.mjs

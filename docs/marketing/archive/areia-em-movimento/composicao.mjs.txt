@@ -1,0 +1,213 @@
+import { readFile, writeFile, mkdir, cp } from 'node:fs/promises';
+import { createRequire } from 'node:module';
+import { existsSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { join, dirname } from 'node:path';
+import { execFileSync } from 'node:child_process';
+import sharp from 'sharp';
+
+const require = createRequire(import.meta.url);
+const fontFromBuffer = require('next/dist/compiled/@next/font/dist/fontkit').default;
+const root = fileURLToPath(new URL('../', import.meta.url));
+const out = join(root, 'output/instagram/pico-areia-em-movimento');
+const brand = join(root, 'docs/brand-exploration/aura-manteiga');
+const B = '#F2E3B5', C = '#44342F', P = '#F8F3E7', L = '#CBBBE0', M = '#73665F';
+const fonts = {}, photos = {}, wordmarks = {}, textAudit = [], index = [];
+let current = '', serial = 0;
+await mkdir(join(out, 'fontes'), { recursive: true });
+await mkdir(join(out, 'assets'), { recursive: true });
+for (const family of ['syne', 'manrope']) {
+  const base = fontFromBuffer(await readFile(join(brand, `fonts/${family}.ttf`)));
+  fonts[family] = {};
+  for (const weight of [400, 500, 600, 700]) fonts[family][weight] = base.getVariation({ wght: weight });
+  await cp(join(brand, `fonts/${family}.ttf`), join(out, `fontes/${family}.ttf`));
+  await writeFile(join(out, `fontes/${family}-OFL.txt`), (await readFile(join(brand, `fonts/${family}-OFL.txt`), 'utf8')).replace(/[ \t]+$/gm, ''));
+}
+for (const name of ['encontro', 'equipamento', 'memoria']) {
+  const buffer = await sharp(join(out, `assets/${name}-original.png`)).jpeg({ quality: 96 }).toBuffer();
+  await writeFile(join(out, `assets/${name}.jpg`), buffer);
+  photos[name] = `data:image/jpeg;base64,${buffer.toString('base64')}`;
+}
+for (const [name, source] of Object.entries({ arena: 'public/images/urban-court.webp', court: 'public/images/pico-court.webp', people: 'public/images/players.webp', gesto: 'output/instagram/pico-apresentacao/assets/gesto-original.png' })) {
+  const buffer = await sharp(join(root, source)).jpeg({ quality: 94 }).toBuffer();
+  photos[name] = `data:image/jpeg;base64,${buffer.toString('base64')}`;
+  await writeFile(join(out, `assets/${name}.jpg`), buffer);
+}
+for (const tone of ['cacau', 'manteiga']) wordmarks[tone] = await readFile(join(brand, `logo/wordmark-${tone}.svg`), 'utf8');
+const grain = await readFile(join(root, 'public/images/landing/sand-grain.png'));
+const grainTile = await sharp(grain).resize(192, 192).toBuffer();
+await writeFile(join(out, 'assets/sand-grain.png'), grain);
+
+const escape = s => String(s).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('"', '&quot;');
+function text(str, x, y, size = 30, color = C, weight = 400, family = 'manrope', max = 952) {
+  const font = fonts[family][weight], run = font.layout(str);
+  const advance = run.positions.reduce((n, p) => n + p.xAdvance, 0);
+  const finalSize = Math.min(size, max * font.unitsPerEm / advance), scale = finalSize / font.unitsPerEm;
+  let cursor = 0;
+  const paths = run.glyphs.map((g, i) => {
+    const position = run.positions[i];
+    const path = `<path d="${g.path.toSVG()}" transform="translate(${cursor + position.xOffset} ${position.yOffset})"/>`;
+    cursor += position.xAdvance;
+    return path;
+  }).join('');
+  textAudit.push({ asset: current, text: str, x, y, size: finalSize, width: advance * scale });
+  return `<g aria-label="${escape(str)}" fill="${color}" transform="translate(${x} ${y}) scale(${scale} ${-scale})">${paths}</g>`;
+}
+const title = (lines, { x = 64, y = 249, size = 100, gap = 108, color = C, max = 952 } = {}) => lines.map((s, i) => text(s, x, y + i * gap, size, color, 700, 'syne', max)).join('');
+const rect = (x, y, w, h, fill, r = 0, stroke = 'none', sw = 0) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${r}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"/>`;
+const line = (x1, y1, x2, y2, color = C, sw = 2) => `<path d="M${x1} ${y1}L${x2} ${y2}" fill="none" stroke="${color}" stroke-width="${sw}" stroke-linecap="round"/>`;
+const circle = (x, y, r, fill, stroke = 'none', sw = 0) => `<circle cx="${x}" cy="${y}" r="${r}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"/>`;
+const svg = (body, height = 1350, width = 1080) => `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">${body}</svg>`;
+const bitmap = (data, x = 0, y = 0, w = 1080, h = 1350, position = 'xMidYMid', fit = 'slice') => `<image x="${x}" y="${y}" width="${w}" height="${h}" href="${data}" preserveAspectRatio="${position} ${fit}"/>`;
+function logo(x = 64, y = 65, w = 205, dark = false) {
+  const original = wordmarks[dark ? 'manteiga' : 'cacau'];
+  const box = original.match(/viewBox="([^"]+)"/)[1];
+  return `<svg x="${x}" y="${y}" width="${w}" height="${w * 963 / 3319}" viewBox="${box}" fill="${dark ? B : C}">${original.replace(/^<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '')}</svg>`;
+}
+function photo(name, x, y, w, h, { radius = 24, curve = 0, position = 'xMidYMid' } = {}) {
+  const id = `crop-${serial++}`;
+  const shape = curve ? `<path d="M${x + curve} ${y}H${x + w - 24}Q${x + w} ${y} ${x + w} ${y + 24}V${y + h - curve / 2}Q${x + w} ${y + h} ${x + w - curve / 2} ${y + h}H${x + 24}Q${x} ${y + h} ${x} ${y + h - 24}V${y + curve}Q${x} ${y} ${x + curve} ${y}Z"/>` : rect(x, y, w, h, P, radius);
+  return `<defs><clipPath id="${id}">${shape}</clipPath></defs><g clip-path="url(#${id})">${bitmap(photos[name], x, y, w, h, position)}</g>`;
+}
+function portrait(x, y, d, person = 0) {
+  const id = `person-${serial++}`, col = person % 3, row = Math.floor(person / 3);
+  return `<defs><clipPath id="${id}">${circle(x + d / 2, y + d / 2, d / 2, P)}</clipPath></defs><g clip-path="url(#${id})"><image x="${x - col * d}" y="${y - row * d}" width="${d * 3}" height="${d * 2}" href="${photos.people}" preserveAspectRatio="none"/></g>`;
+}
+const icons = {
+  arrow: 'M5 19L19 5M5 5H19V19', right: 'M4 12H20M14 6L20 12L14 18',
+  lock: 'M7 10V7A5 5 0 0 1 17 7V10M6 10H18Q20 10 20 12V20Q20 22 18 22H6Q4 22 4 20V12Q4 10 6 10M12 15V17',
+  pin: 'M20 10C20 16 12 22 12 22S4 16 4 10A8 8 0 0 1 20 10M15 10A3 3 0 1 1 9 10A3 3 0 1 1 15 10',
+  users: 'M16 21V19A4 4 0 0 0 12 15H6A4 4 0 0 0 2 19V21M13 7A4 4 0 1 1 5 7A4 4 0 1 1 13 7M22 21V19A4 4 0 0 0 19 15M16 3A4 4 0 0 1 16 11',
+  heart: 'M20.8 4.6C18 1.8 14.8 3 12 5.4C9.2 3 6 1.8 3.2 4.6C.4 7.4 2 11 4 13L12 21L20 13C22 11 23.6 7.4 20.8 4.6Z',
+  comment: 'M21 11A9 9 0 0 1 12 20H4L2 22V11A9 9 0 0 1 21 11',
+  repost: 'M4 7H17L20 10M4 7L7 4M4 7V13M20 17H7L4 14M20 17L17 20M20 17V11',
+};
+const icon = (name, x, y, size = 42, color = C) => `<svg x="${x}" y="${y}" width="${size}" height="${size}" viewBox="0 0 24 24"><path d="${icons[name]}" fill="none" stroke="${color}" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+function frame(n, { dark = false, note = 'Prévia ilustrativa', footer = false, footerTop = 1210 } = {}) {
+  const color = dark ? P : C;
+  return (footer ? `<defs><linearGradient id="footer-${serial}" x2="0" y2="1"><stop stop-color="${P}" stop-opacity="0"/><stop offset=".5" stop-color="${P}"/></linearGradient></defs>` + rect(0, footerTop, 1080, 1350-footerTop, `url(#footer-${serial++})`) : '') + logo(64, 65, 205, dark) + (n ? text(`${n} / 5`, 945, 107, 24, color, 500, 'manrope', 74) : '') + text(note, 64, 1286, 21, color) + (n && n < 5 ? icon('right', 976, 1254, 40, color) : '');
+}
+function fieldSvg(variant = 0, width = 1080, height = 1350, dark = false) {
+  const variants = [[.15,.56,.81,.72],[.8,.26,.35,.8],[.4,.8,.78,.2],[.18,.32,.67,.71],[.82,.75,.26,.43]];
+  const v = variants[variant % variants.length];
+  return svg(`<defs><radialGradient id="lav"><stop stop-color="${dark ? '#876C93' : '#BBA6CE'}"/><stop offset=".44" stop-color="${dark ? '#6B536E' : L}" stop-opacity=".94"/><stop offset="1" stop-color="${dark ? C : B}" stop-opacity="0"/></radialGradient><radialGradient id="warm"><stop stop-color="${dark ? '#86614A' : '#DABD7E'}"/><stop offset=".4" stop-color="${dark ? '#654D40' : B}"/><stop offset="1" stop-color="${dark ? C : B}" stop-opacity="0"/></radialGradient></defs>${rect(0,0,width,height,dark?C:B)}<ellipse cx="${width*v[0]}" cy="${height*v[1]}" rx="${width*.81}" ry="${height*.77}" fill="url(#lav)"/><ellipse cx="${width*v[2]}" cy="${height*v[3]}" rx="${width*.65}" ry="${height*.6}" fill="url(#warm)"/>`, height, width);
+}
+const backgrounds = {};
+async function background(variant = 0, height = 1350, dark = false) {
+  const key = `${variant}-${height}-${dark}`;
+  if (!backgrounds[key]) {
+    const buffer = await sharp(Buffer.from(fieldSvg(variant, 1080, height, dark))).composite([{ input: grainTile, tile: true, blend: 'soft-light' }]).jpeg({ quality: 96 }).toBuffer();
+    backgrounds[key] = `data:image/jpeg;base64,${buffer.toString('base64')}`;
+    await writeFile(join(out, `assets/campo-${key}.jpg`), buffer);
+  }
+  return bitmap(backgrounds[key], 0, 0, 1080, height);
+}
+function feed(x, y, w = 804) {
+  return rect(x,y,w,717,P,34) + logo(x+34,y+28,132) + text('Seu Pico.',x+34,y+145,58,C,600,'syne',w-68) + portrait(x+34,y+178,62,1) + text('Marina Costa',x+114,y+207,28,C,600,'manrope',w-165) + text('Na comunidade Turma da areia',x+114,y+246,23,M,400,'manrope',w-155) + photo('court',x+24,y+282,w-48,329,{radius:20}) + icon('heart',x+36,y+644,40) + icon('comment',x+111,y+644,40) + icon('repost',x+w-77,y+644,40);
+}
+function arena(x, y, w = 916) {
+  return rect(x,y,w,672,P,32) + photo('arena',x,y,w,408,{curve:145}) + icon('pin',x+34,y+441,36) + text('Areia da Vila',x+88,y+476,49,C,600,'syne',w-140) + text('Beach tennis · Futevôlei',x+34,y+528,28,M,400,'manrope',w-68) + line(x+34,y+565,x+w-34,y+565,'#D8D0C0') + text('Mural',x+34,y+622,28,C,600) + text('Comunidades',x+239,y+622,28,C) + text('Pessoas',x+w-162,y+622,28,C,400,'manrope',140);
+}
+function community(x, y, w = 870) {
+  return rect(x,y,w,584,P,32) + text('Comunidades',x+38,y+72,46,C,600,'syne',w-76) + rect(x+28,y+110,w-56,255,L,22) + icon('users',x+68,y+160,85) + title(['Turma','da areia'],{x:x+190,y:y+206,size:65,gap:73,max:w-238}) + text('Beach tennis',x+40,y+416,29,C,600) + text('Comunidade aberta',x+40,y+460,26,M) + portrait(x+40,y+483,66,0) + portrait(x+92,y+483,66,1) + portrait(x+144,y+483,66,5) + icon('right',x+w-83,y+491,43);
+}
+function journal(x, y, w = 886, rows = 3) {
+  return rect(x,y,w,164+rows*143,P,30) + text('Meus jogos',x+38,y+75,49,C,600,'syne',w-145) + icon('lock',x+w-84,y+28,42) + text('Só você vê.',x+38,y+124,29,M) + ['Beach tennis','Futevôlei','Vôlei de praia'].slice(0,rows).map((sport,i)=>line(x+38,y+161+i*143,x+w-38,y+161+i*143,'#D8D0C0')+text(['12','08','05'][i],x+38,y+222+i*143,48,C,600,'syne',84)+text('SET',x+41,y+259+i*143,21,M)+text(sport,x+165,y+220+i*143,35,C,500,'manrope',w-265)+text('Areia da Vila',x+165,y+265+i*143,27,M,400,'manrope',w-265)+icon('lock',x+w-69,y+200+i*143,28)).join('');
+}
+function people() {
+  return `<path d="M227 615C427 601 331 940 538 930M845 576C800 880 580 860 538 930" stroke="${C}" stroke-width="3" fill="none"/>` + portrait(77,465,300,1) + portrait(700,431,290,0) + portrait(361,753,354,5) + circle(534,630,70,P) + icon('users',493,587,83);
+}
+function cta(dark = false, n = 5) {
+  const ink = dark ? P : C;
+  return frame(n,{dark,note:'Pico · O ponto de encontro da areia.'}) + title(['Instale','o Pico.'],{y:304,size:132,gap:143,color:ink}) + text('Crie sua conta para começar.',64,520,32,ink) + rect(354,644,372,372,B,83) + logo(390,786,300) + text('Link na bio',64,1172,55,ink,600,'syne',720) + line(64,1192,465,1192,ink) + icon('arrow',502,1117,62,ink);
+}
+
+const sets = [
+  { id: '01-a-areia-aproxima', name: 'A areia aproxima.', slides: [
+    { photo: 'encontro', draw:()=>frame(1,{note:'Fotografia ilustrativa · IA',footer:true})+title(['A areia','aproxima.'],{size:111,gap:119})+text('Conheça o Pico.',64,422,33,C), alt:'Três jogadores adultos conversam na areia. O fundo fotográfico encontra campos granulados de manteiga e lavanda. Texto: A areia aproxima. Conheça o Pico.' },
+    { photo: 'equipamento', draw:()=>frame(2,{note:'Fotografia ilustrativa · IA',footer:true})+title(['Três esportes.','Um encontro.'],{size:86,gap:96})+text('Futevôlei',64,463,33,C,600)+text('Beach tennis',64,515,33,C,600)+text('Vôlei de praia',64,567,33,C,600), alt:'Raquete de beach tennis e bola sobre areia, em uma composição granulada. Texto: Três esportes. Um encontro. Futevôlei, beach tennis e vôlei de praia.' },
+    { v:2, draw:()=>frame(3)+title(['Seu Pico.','Sua rede.'],{size:108,gap:116})+feed(138,430)+text('A rede social de quem vive a areia.',64,1210,32,C), alt:'Prévia ilustrativa do feed do Pico com uma publicação de comunidade e fotografia de quadra. Texto: Seu Pico. Sua rede. A rede social de quem vive a areia.' },
+    { v:3, draw:()=>frame(4,{note:'Pessoas e conexões ilustrativas'})+title(['Gente do','seu esporte.'],{size:101,gap:110})+people()+text('Encontre pessoas no Pico.',64,1203,34,C), alt:'Três retratos ilustrativos ligados por duas linhas curvas sobre pigmentos granulados. Texto: Gente do seu esporte. Encontre pessoas no Pico.' },
+    { v:4, draw:()=>cta(), alt:'Logo pico por extenso em bloco manteiga sobre campos granulados de manteiga e lavanda. Texto: Instale o Pico. Crie sua conta para começar. Link na bio.' },
+  ]},
+  { id:'02-o-lugar-e-o-comeco', name:'O lugar é o começo.', slides:[
+    { v:1, draw:()=>frame(1,{note:'Fotografia ilustrativa · IA'})+title(['O lugar é','o começo.'],{size:108,gap:115})+photo('gesto',64,431,952,730,{curve:165})+text('A turma faz o resto.',64,1220,35,C), alt:'Jogadores se cumprimentam depois da partida, em fotografia recortada sobre campos de cor granulados. Texto: O lugar é o começo. A turma faz o resto.' },
+    { v:2, draw:()=>frame(2)+title(['Acompanhe','suas arenas.'],{size:94,gap:104})+arena(82,450)+text('O que acontece no seu lugar.',64,1216,34,C), alt:'Prévia de uma arena ilustrativa chamada Areia da Vila, com foto da quadra e referências a mural, comunidades e pessoas. Texto: Acompanhe suas arenas.' },
+    { v:3, draw:()=>frame(3)+title(['Encontre','sua turma.'],{size:108,gap:116})+community(105,493)+text('Comunidades para fazer parte.',64,1210,34,C), alt:'Prévia ilustrativa da comunidade aberta Turma da areia, com modalidade beach tennis e retratos de participantes fictícios. Texto: Encontre sua turma.' },
+    { v:4, draw:()=>frame(4)+title(['A conversa','continua.'],{size:103,gap:111})+feed(138,433)+text('Publique. Comente. Republique.',64,1210,32,C), alt:'Feed ilustrativo com uma foto de jogo e símbolos de curtir, comentar e republicar. Texto: A conversa continua. Publique. Comente. Republique.' },
+    { v:0, draw:()=>cta(), alt:'Logo pico por extenso em bloco manteiga sobre campos granulados. Texto: Instale o Pico. Crie sua conta para começar. Link na bio.' },
+  ]},
+  { id:'03-o-que-fica-do-jogo', name:'O que fica do jogo.', slides:[
+    { photo:'memoria', draw:()=>frame(1,{note:'Fotografia ilustrativa · IA',footer:true})+title(['O jogo passa.','A história fica.'],{size:83,gap:94})+text('Guarde o que você viveu na areia.',64,422,30,C), alt:'Uma mão deixa escorrer areia no campo inferior da imagem, integrado a pigmentos manteiga e lavanda. Texto: O jogo passa. A história fica.' },
+    { v:2, draw:()=>frame(2,{note:'Registros ilustrativos'})+title(['Guarde','seus jogos.'],{size:113,gap:121})+journal(97,489)+text('Seu esporte, no seu tempo.',64,1210,35,C), alt:'Diário ilustrativo Meus jogos com três registros datados de esportes de areia. Texto: Guarde seus jogos. Seu esporte, no seu tempo.' },
+    { v:3, dark:true, draw:()=>frame(3,{dark:true,note:'Representação de privacidade'})+title(['Seu registro.','Só seu.'],{size:102,gap:113,color:P})+circle(540,786,243,B)+icon('lock',402,632,275,C)+text('Registrar não publica no feed.',64,1197,34,P), alt:'Um grande cadeado em campo manteiga sobre fundo cacau e lavanda granulado. Texto: Seu registro. Só seu. Registrar não publica no feed.' },
+    { v:4, draw:()=>frame(4,{note:'Prévia de compartilhamento ilustrativa'})+title(['Compartilhe','se quiser.'],{size:99,gap:110})+journal(64,455,736,1)+`<path d="M324 787C324 864 560 793 672 914M650 908L672 914L670 891" stroke="${C}" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`+rect(420,924,596,201,P,26)+icon('users',460,965,46)+text('Sua turma',532,1004,42,C,600,'syne',432)+text('Você escolhe a audiência.',460,1067,27,C,400,'manrope',520)+text('Compartilhar é outra escolha.',64,1210,34,C), alt:'Um registro privado ilustrativo se conecta por seta a uma área Sua turma. Texto: Compartilhe se quiser. Você escolhe a audiência. Compartilhar é outra escolha.' },
+    { v:1, dark:true, draw:()=>cta(true), alt:'Logo pico por extenso em bloco manteiga sobre pigmentos cacau e lavanda. Texto em papel: Instale o Pico. Crie sua conta para começar. Link na bio.' },
+  ]},
+];
+async function render(id, body, height = 1350, alt = '') {
+  const markup = svg(`<title>${escape(alt || id)}</title>${body}`, height);
+  await mkdir(dirname(join(out,id)),{recursive:true});
+  await writeFile(join(out,`${id}.svg`),markup);
+  await sharp(Buffer.from(markup)).png().toFile(join(out,`${id}.png`));
+  index.push({id,width:1080,height,alt});
+}
+for (const set of sets) {
+  for (let i=0;i<set.slides.length;i++) {
+    current=`carrosseis/${set.id}/${String(i+1).padStart(2,'0')}`;
+    const s=set.slides[i];
+    const bg=s.photo?bitmap(photos[s.photo]):await background(s.v,1350,s.dark);
+    await render(current,bg+s.draw(),1350,s.alt);
+  }
+  console.log(`Carrossel pronto: ${set.name}`);
+}
+
+const feeds=[
+  {id:'01-me-acha-no-pico',name:'Me acha no Pico.',photo:'encontro',draw:()=>frame(null,{note:'Fotografia ilustrativa · IA',footer:true,footerTop:1060})+title(['Me acha','no Pico.'],{size:114,gap:123})+text('A rede social de quem vive a areia.',64,435,31,C)+text('Instale o Pico · Link na bio',64,1211,30,C,600),alt:'Três jogadores na areia e campos granulados. Texto: Me acha no Pico. A rede social de quem vive a areia. Instale o Pico, link na bio.'},
+  {id:'02-seu-ponto-de-encontro',name:'Seu ponto de encontro.',v:3,draw:()=>frame(null)+title(['Seu ponto','de encontro.'],{size:104,gap:114})+community(105,477)+text('Instale o Pico · Link na bio',64,1211,32,C,600),alt:'Uma prévia da comunidade Turma da areia sobre grão manteiga e lavanda. Texto: Seu ponto de encontro. Instale o Pico, link na bio.'},
+  {id:'03-leve-o-jogo-com-voce',name:'Leve o jogo com você.',v:0,draw:()=>frame(null,{note:'Registro privado ilustrativo'})+title(['Leve o jogo','com você.'],{size:105,gap:114})+journal(97,490)+text('Instale o Pico · Link na bio',64,1211,32,C,600),alt:'Diário ilustrativo de jogos com cadeados sobre campos granulados. Texto: Leve o jogo com você. Instale o Pico, link na bio.'},
+];
+for(const f of feeds){current=`feed/${f.id}`;await render(current,(f.photo?bitmap(photos[f.photo]):await background(f.v))+f.draw(),1350,f.alt);}
+
+const stories=[
+  {id:'01-me-acha-no-pico',v:0,title:['Me acha','no Pico.'],visual:()=>photo('encontro',64,752,952,604,{curve:170,position:'xMidYMax'}),note:'Fotografia ilustrativa · IA',alt:'Story de apresentação com foto de jogadores e pigmentos de areia. Me acha no Pico. Instale o Pico. Toque no link.'},
+  {id:'02-encontre-sua-turma',v:3,title:['Encontre','sua turma.'],visual:()=>community(105,757),note:'Prévia ilustrativa',alt:'Story com prévia de comunidade em campo granulado. Encontre sua turma. Instale o Pico. Toque no link.'},
+  {id:'03-guarde-seus-jogos',v:4,title:['Guarde','seus jogos.'],visual:()=>journal(97,742),note:'Registros privados ilustrativos',alt:'Story com diário privado de jogos em campo granulado. Guarde seus jogos. Instale o Pico. Toque no link.'},
+];
+await mkdir(join(out,'assets/motion'),{recursive:true});
+for(const s of stories){
+  current=`stories/${s.id}`;
+  const foreground=logo(64,264,220)+title(s.title,{y:482,size:112,gap:121})+s.visual()+text('Instale o Pico',64,1461,49,C,600,'syne')+text('Toque no link',64,1522,31,C)+icon('arrow',886,1441,62,C)+text(s.note,64,1704,21,C);
+  await render(current,await background(s.v,1920)+foreground,1920,s.alt);
+  await sharp(Buffer.from(svg(foreground,1920))).png().toFile(join(out,`assets/motion/${s.id}-frente.png`));
+  await sharp(Buffer.from(fieldSvg(s.v,1512,1920))).png().toFile(join(out,`assets/motion/${s.id}-cores.png`));
+}
+await sharp({create:{width:1080,height:1920,channels:3,background:'#808080'}}).composite([{input:grainTile,tile:true}]).png().toFile(join(out,'assets/motion/grao.png'));
+if(process.env.PICO_FFMPEG){
+  for(const s of stories){
+    const filter="[0:v]crop=1080:1920:x='216+130*sin(t*2*PI/12)':y=0,format=gbrp[c];[c][1:v]blend=all_mode=softlight:all_opacity=0.65[b];[b][2:v]overlay=0:0:format=auto,format=yuv420p[v]";
+    execFileSync(process.env.PICO_FFMPEG,['-y','-loglevel','error','-loop','1','-framerate','24','-i',join(out,`assets/motion/${s.id}-cores.png`),'-loop','1','-framerate','24','-i',join(out,'assets/motion/grao.png'),'-loop','1','-framerate','24','-i',join(out,`assets/motion/${s.id}-frente.png`),'-filter_complex',filter,'-map','[v]','-t','12','-r','24','-c:v','libx264','-preset','fast','-crf','22','-pix_fmt','yuv420p','-movflags','+faststart','-an',join(out,`stories/${s.id}.mp4`)],{stdio:'inherit'});
+    console.log(`Story animado pronto: ${s.id}`);
+  }
+}
+
+const motionStories = stories.filter(s => existsSync(join(out, `stories/${s.id}.mp4`)));
+
+async function overview(items,filename,{columns=5,thumb=216,header=0}={}){
+  const gap=18,w=columns*thumb+(columns-1)*gap,rows=Math.ceil(items.length/columns),h=rows*thumb*1.25+(rows-1)*gap+header;
+  const composites=[];
+  for(let i=0;i<items.length;i++) composites.push({input:await sharp(join(out,`${items[i].id}.png`)).resize(thumb,Math.round(thumb*1.25),{fit:'contain',background:P}).png().toBuffer(),left:(i%columns)*(thumb+gap),top:Math.floor(i/columns)*(thumb*1.25+gap)+header});
+  await sharp({create:{width:w,height:h,channels:3,background:P}}).composite(composites).png().toFile(join(out,filename));
+}
+await overview(index.filter(s=>s.id.startsWith('carrosseis/')),'visao-geral-carrosseis.png');
+await overview(index.filter(s=>s.id.startsWith('feed/')),'visao-geral-feed.png',{columns:3,thumb:324});
+await overview(index.filter(s=>s.id.startsWith('stories/')),'visao-geral-stories.png',{columns:3,thumb:324});
+for(const set of sets)await overview(index.filter(s=>s.id.startsWith(`carrosseis/${set.id}/`)),`carrosseis/${set.id}/visao-geral.png`);
+const outliers=textAudit.filter(t=>t.x<60||t.x+t.width>1020||t.size<20||t.y>(t.asset.startsWith('stories/')?1730:1300));
+await writeFile(join(out,'verificacao.json'),JSON.stringify({assets:index,staticCount:index.length,motionCount:motionStories.length,textOutliers:outliers,text:textAudit},null,2));
+if(outliers.length)throw new Error(`Há ${outliers.length} textos fora das margens/escala. Veja verificacao.json.`);
+await writeFile(join(out,'textos-alternativos.md'),'# Textos alternativos: Areia em movimento\n\n'+index.map(s=>`## ${s.id}\n\n${s.alt}\n`).join('\n'));
+const itemsHtml=items=>items.map(s=>`<a class="piece" href="${s.id}.png" download><img src="${s.id}.png" width="${s.width}" height="${s.height}" alt="${escape(s.alt)}" loading="lazy"><span>${escape(s.id.split('/').at(-1))} · baixar PNG</span></a>`).join('');
+const html=`<!doctype html><html lang="pt-BR"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Pico: Areia em movimento</title><style>@font-face{font-family:Syne;src:url(fontes/syne.ttf)}@font-face{font-family:Manrope;src:url(fontes/manrope.ttf)}*{box-sizing:border-box}body{margin:0;padding:48px;background:${P};color:${C};font:16px Manrope,sans-serif}header{max-width:950px;margin-bottom:64px}h1{font:700 clamp(40px,6vw,86px)/1 Syne,sans-serif;letter-spacing:-.04em;margin:0 0 25px}h2{font:600 32px Syne,sans-serif;margin:0 0 12px}p{max-width:680px;line-height:1.7}a{color:inherit;text-underline-offset:5px}.slides{display:flex;gap:20px;overflow-x:auto;padding:16px 0 24px;scroll-snap-type:x mandatory}.piece{display:block;width:270px;min-width:270px;scroll-snap-align:start;text-decoration:none}.piece img{display:block;width:100%;height:auto}.piece span{display:block;padding-top:12px;font-size:12px}section{margin:64px 0}.stories .piece{width:270px}.motion{display:flex;gap:20px;flex-wrap:wrap}.motion figure{margin:0;width:270px}.motion video{width:270px;display:block}.motion a{display:inline-block;margin-top:12px}footer{border-top:1px solid #D8D0C0;margin-top:64px;padding-top:24px}@media(max-width:600px){body{padding:24px}.piece{width:78vw;min-width:78vw}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}</style><header><h1>Areia em<br>movimento.</h1><p>A nova coleção de divulgação do Pico. Três carrosséis, três peças de feed e três Stories, com pigmentos granulados, fotografia e produto.</p><p><a href="legendas.md">Legendas e links</a> · <a href="textos-alternativos.md">Textos alternativos</a> · <a href="README.md">Guia dos arquivos</a></p></header>${sets.map(set=>`<section><h2>${escape(set.name)}</h2><p>Carrossel · cinco slides · 1080 × 1350</p><div class="slides">${itemsHtml(index.filter(s=>s.id.startsWith(`carrosseis/${set.id}/`)))}</div></section>`).join('')}<section><h2>Criativos de feed</h2><div class="slides">${itemsHtml(index.filter(s=>s.id.startsWith('feed/')))}</div></section><section class="stories"><h2>Stories</h2><p>1080 × 1920. Adicione o adesivo real de link na área livre abaixo do convite.</p><div class="slides">${itemsHtml(index.filter(s=>s.id.startsWith('stories/')))}</div></section>${motionStories.length?`<section><h2>Stories em movimento</h2><p>12 segundos · sem áudio · reprodução por escolha</p><div class="motion">${motionStories.map(s=>`<figure><video controls playsinline preload="metadata" poster="stories/${s.id}.png"><source src="stories/${s.id}.mp4" type="video/mp4"></video><a href="stories/${s.id}.mp4" download>Baixar MP4</a></figure>`).join('')}</div></section>`:''}<footer><p>Fotografias e prévias ilustrativas. Arquivos preparados para postagem pelo responsável; esta galeria não publica no Instagram.</p></footer></html>`;
+await writeFile(join(out,'index.html'),html);
+console.log(`Coleção pronta: ${index.length} PNGs; ${outliers.length} textos fora das margens.`);

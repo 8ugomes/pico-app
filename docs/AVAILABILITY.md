@@ -16,9 +16,9 @@ Volume nominal: 288 chamadas à aplicação por dia, com até 576 leituras Supab
 
 Fluxo documentado do provedor: desafio de proof-of-work associado ao e-mail e URL, solicitação para `/agentic/agent-monitor`, link por e-mail e confirmação **Activate** pelo responsável. HTTP 200 na solicitação é resposta antienumeração e **não comprova** envio, criação ou ativação. O monitor só existe após confirmação bem-sucedida; verificar no painel a URL, intervalo, contato e primeiro resultado. Não registrar e-mail nem link/token de ativação no Git.
 
-Enquanto a ativação não for comprovada, o heartbeat local `verificar-disponibilidade-do-pico` permanece ativo para evitar lacuna. Após confirmar a checagem externa, pausar esse heartbeat pelo gerenciamento de automações do Codex. O monitor externo segue independente do computador e do aplicativo Codex abertos. Não usar este chat como retransmissor dos alertas.
+O roteiro original previa um heartbeat local enquanto a ativação externa não fosse comprovada. Posteriormente, o responsável pediu interromper as requisições periódicas no chat **Revisar segurança e estabilidade** e cancelar o relatório diário no chat **Report Pico**. A consolidação de 23/10/2026 preserva essas decisões: não presumir heartbeat ativo nem reativá-lo automaticamente. A ativação atual de monitor externo não foi verificada. Quando autorizado e configurado, ele funciona independente do computador/Codex; este chat não é retransmissor de alertas.
 
-Estado nesta revisão: rota implementada; ativação externa pendente do e-mail e da confirmação do responsável. Evidência final de publicação/ativação fica no recibo operacional privado e na comunicação da entrega. Não interpretar o presente roteiro como comprovação de monitor já ativo.
+Estado do roteiro original: rota implementada; ativação externa então pendente do e-mail e da confirmação do responsável. Em 23/10/2026, a ativação atual não foi conferida. Evidência de publicação/ativação deve ficar no recibo operacional privado e na comunicação da entrega; este roteiro não comprova monitor ativo.
 
 ## Verificação e retorno
 

@@ -1,11 +1,11 @@
 import { useState, type FormEvent } from 'react';
-import { ArrowLeft, ArrowRight, CalendarDays, LoaderCircle, MapPin, ShieldCheck, UsersRound } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CalendarDays, LoaderCircle, MapPin, ShieldCheck, Smartphone, UsersRound } from 'lucide-react';
 import { api } from './api';
 import { legalUrls } from './config';
 import { openExternal, successHaptic } from './native';
 import { Button, ErrorState, Field, Notice } from './ui';
 
-export function AuthScreen({ notice, onAuthenticated, onGuest }: { notice?: string; onAuthenticated: () => void; onGuest: () => void }) {
+export function AuthScreen({ notice, onAuthenticationStart, onAuthenticated, onGuest, onLocal }: { notice?: string; onAuthenticationStart: () => void; onAuthenticated: () => void; onGuest: () => void; onLocal: () => void }) {
   const [mode, setMode] = useState<'sign_in' | 'sign_up'>('sign_in');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
@@ -13,6 +13,7 @@ export function AuthScreen({ notice, onAuthenticated, onGuest }: { notice?: stri
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (busy) return;
+    onAuthenticationStart();
     const values = new FormData(event.currentTarget);
     setBusy(true);
     setError('');
@@ -53,7 +54,8 @@ export function AuthScreen({ notice, onAuthenticated, onGuest }: { notice?: stri
       </form>
       {error && <ErrorState message={error} />}
       {mode === 'sign_up' && <Notice>Ao criar a conta, você aceita os <button type="button" className="text-button" onClick={() => void openExternal(legalUrls.terms)}>Termos</button> e as <button type="button" className="text-button" onClick={() => void openExternal(legalUrls.guidelines)}>Diretrizes</button>.</Notice>}
-      <div className="guest-entry"><span>Quer conhecer primeiro?</span><Button type="button" variant="secondary" className="full-width" onClick={onGuest}>Ver como o Pico funciona</Button><small>Visita informativa, sem perfis ou conteúdo da comunidade.</small></div>
+      <div className="local-entry"><span>Quer usar sem a nuvem?</span><Button type="button" variant="secondary" className="full-width" disabled={busy} onClick={onLocal}><Smartphone size={18} aria-hidden="true" />Usar só neste iPhone</Button><small>Seu perfil, suas arenas e seus jogos ficam neste aparelho. Nada é enviado automaticamente.</small></div>
+      <div className="guest-entry"><span>Quer conhecer primeiro?</span><Button type="button" variant="secondary" className="full-width" disabled={busy} onClick={onGuest}>Ver como o Pico funciona</Button><small>Visita informativa, sem perfis ou conteúdo da comunidade.</small></div>
       <button type="button" className="help-link" onClick={() => void openExternal(legalUrls.support)}>Precisa de ajuda?</button>
     </section>
   </main>;

@@ -1,16 +1,6 @@
-**Monitoramento:** rota de saúde e configuração gratuita externa em [Disponibilidade](docs/AVAILABILITY.md).
-
-> Atualização da beta de 13/09/2026: o responsável decidiu cadastro com e-mail e senha, sem confirmação e sem SMTP. Recuperação por e-mail indisponível. A política explícita está em `config/auth-policy.json`; configuração auditável em `scripts/configure-beta-access.mjs`. [Revisão atual de estabilidade](docs/STABILITY_REVIEW.md). A restrição SMTP dos registros anteriores foi substituída por essa decisão.
-
-> Preparação para beta: [segurança, testes e pendências de abertura](docs/BETA_SECURITY.md). O cadastro vigente não depende de SMTP nem de confirmação de e-mail. Antes do beta externo, ainda é obrigatório ativar proteção antiabuso diretamente no Supabase Auth, aprovar a política pública de recuperação e fechar contatos, privacidade e operação de moderação.
-
-> Estado de desenvolvimento em 18/09/2026: [diagnóstico, mensagens, push e sequência para lojas](docs/PICO_DEVELOPMENT_REVIEW_2026-09-18.md). Mensagens e push são implementações sob ativação explícita, ainda sem publicação desta rodada. O cadastro da beta continua sem confirmação e sem SMTP; recuperação por e-mail e operação para distribuição ampla permanecem pendentes.
-
-> Continuidade: [avaliação das 18 frentes do produto](docs/PICO_PRODUCT_ASSESSMENT_2026-09-18.md) e [prompt completo para o Codex preparar a versão de loja](docs/CODEX_CONTINUE_TO_STORE_READY.md). O prompt preserva a base existente e exige evidências de integração, aparelhos e operação antes de chamar a versão de pronta.
-
-> Integração de 26/09/2026: as sete migrations móveis/mensagens/push foram aplicadas somente no Supabase principal após dry-run e inventário; 131 identidades de conteúdo foram preservadas. Mensagens diretas e Web Push continuam desligados no banco e na aplicação, com zero conversa, mensagem, assinatura Web Push ou item de fila. Os tipos foram regenerados do schema hospedado. Os PRs [#42](https://github.com/8ugomes/pico-app/pull/42) e [#43](https://github.com/8ugomes/pico-app/pull/43) passaram pela CI e a revisão `66194b1a57db` foi promovida no domínio principal; versão, banco e Auth responderam saudáveis e a comparação do deploy preservou 131/131 registros.
-
 # Pico Social
+
+**Comece aqui:** [estado consolidado em 23/10/2026](docs/PROJECT_STATUS.md) · [guia para contribuir em outro ambiente](CONTRIBUTING.md) · [plano corrente](docs/pico-product-plan.md). O código e as decisões necessárias à continuidade ficam neste repositório; os recibos distinguem implementação, publicação e validação real.
 
 **Republicações:** publicações alheias podem aparecer no seu perfil e no Início de quem acompanha você, com autoria, curtidas, comentários e audiência originais preservados. É possível desfazer; grupos privados continuam restritos. [Contrato e verificação](docs/REPOSTS.md).
 
@@ -20,7 +10,7 @@ Rede social PWA mobile-first para futevôlei, beach tennis e vôlei de praia. O 
 
 [Perfil/HEIC: implementação, testes e limites do Ciclo 10](docs/CYCLE10_PROFILE.md). O código foi validado em CI e em Chromium/WebKit com ambiente de teste isolado; esta rodada não executou novo deploy nem teste em aparelhos físicos.
 
-**Aplicativo em transição:** o cliente React local do Pico Social já é empacotado pelo Capacitor, usa API móvel por Bearer e guarda somente o refresh token no Keychain. O fluxo iOS cobre feed, comentários, republicações, bloqueio/desbloqueio, jogos privados, compartilhamento, direitos da conta, rascunhos e tentativas idempotentes por conta, deep links internos e reprodução autorizada de vídeo privado. A validação integrada passou com 262 testes, builds web/móvel/iOS e archive Release sem assinatura; o preflight ficou sem falhas técnicas. O transporte TUS de MP4 está implementado, mas criar/publicar vídeo fica desligado na 1.0 até sanitização/transcoding e validação física. Mensagens diretas e Web Push também permanecem desligados até privacidade, moderação e aparelhos serem validados; Web Push não substitui APNs no iOS. As migrations e a API integrada já estão no ambiente principal; Universal Links, sessão controlada no binário, aparelho físico, identidade/assinatura, TestFlight e App Store continuam pendentes. A PWA permanece sendo o produto público. [Arquitetura, comandos, gates e matriz física](docs/MOBILE_APP.md).
+**Aplicativo iPhone:** o cliente React local do Pico Social é empacotado pelo Capacitor e agora oferece **Usar só neste iPhone** sem conta, servidor ou internet. Nesse espaço privado, perfil, arenas próprias e jogos retrospectivos ficam num arquivo do sandbox protegido pelo iOS e excluído de backup; sair preserva os dados, exportar usa a folha nativa e apagar exige confirmação. O modo conectado continua separado, usa API móvel por Bearer e guarda somente o refresh token no Keychain. A build Debug foi instalada no iPhone 18 Pro simulado e percorrida em claro, escuro e texto de acessibilidade; o bundle também foi conferido em 320/390 px. Instalação em iPhone físico continua dependendo de aparelho pareado, Developer Mode e uma equipe de assinatura Apple disponíveis no Xcode deste Mac. Universal Links, TestFlight e App Store também permanecem pendentes. A PWA continua em paralelo. [Arquitetura, comandos, gates e matriz física](docs/MOBILE_APP.md).
 
 **Identidade escolhida: Aura Manteiga.** Pico Social adota a direção editorial jovem, artística e refinada, com Syne/Manrope e Manteiga/Cacau/Papel/Lavanda. [Manual completo e ativos](docs/brand-exploration/aura-manteiga/README.md) aplicados ao aplicativo: temas claro/escuro, duas fontes locais, marca em contornos, controles, composições por domínio e onboarding assistido. [Cobertura, capturas e verificações](docs/aura-redesign-review/README.md). [Design system e estado](docs/pico-design-system.md).
 
@@ -36,19 +26,24 @@ Endereço principal: [Pico](https://pico-app-sepia.vercel.app). O Ciclo 9 está 
 
 ## Executar
 
-Node.js 24, npm 11 e dependências do lockfile:
+Use Git, Node.js 24 e npm 11 (`.nvmrc` e `package.json`). Para um **clone novo**, a demonstração web não exige Supabase, conta Apple nem arquivos deste Mac. Os comandos de setup abaixo usam Node e funcionam em shells POSIX e PowerShell:
 
 ```bash
+git clone https://github.com/8ugomes/pico-app.git
+cd pico-app
 npm ci
+node -e "require('node:fs').writeFileSync('.env.local', 'NEXT_PUBLIC_PICO_ENV=demo\nPICO_ENV=demo\n', {flag:'wx'})"
 npm run env:check
 npm run dev
 ```
 
-`.env.local` deve conter a finalidade `development`, ref, URL e publishable key do desenvolvimento exclusivo, conforme `.env.example`. Recursos de mídia e exclusão requerem `SUPABASE_SECRET_KEY` somente no servidor. Arquivos locais são ignorados e protegidos; não use sudo npm nem registre segredos em logs.
+Abra `http://localhost:3000`. A criação de `.env.local` recusa sobrescrever um arquivo existente. Dados fictícios são identificados e ficam em memória. Não misture chaves Supabase com demo. O espaço privado do iPhone é outra jornada, persistente no sandbox iOS, descrita abaixo.
 
-Demonstração exige `NEXT_PUBLIC_PICO_ENV=demo` e `PICO_ENV=demo`, sem chaves Supabase. Dados fictícios são identificados e ficam em memória. Configuração conectada ausente, cruzada ou indisponível falha de forma explícita; nunca troca silenciosamente para mock.
+Para desenvolvimento conectado, configure `.env.local` a partir de `.env.example` com acesso autorizado ao projeto exclusivo de desenvolvimento. Mídia e exclusão exigem `SUPABASE_SECRET_KEY` somente no servidor. A identidade dos ambientes é verificada; outro projeto exige configuração deliberada, nunca remoção das guardas. Arquivos locais são ignorados e protegidos. Veja [plataformas, checks, acesso e fluxo de PR](CONTRIBUTING.md).
 
 ### Fundação nativa
+
+Compilação e execução iOS exigem **macOS e Xcode**. O desenvolvimento web pode ocorrer em macOS, Linux ou Windows; CI Linux cobre os checks comuns. Android permanece pausado.
 
 ```bash
 npm run native:doctor
@@ -62,7 +57,11 @@ npm run native:preflight:ios
 
 `native:verify` confere o shell local e falha se restar `server.url`; nesta rodada, a sincronização de trabalho é somente iOS para preservar Android. `native:preflight:ios` separa falhas técnicas de decisões humanas e não assina nem envia nada. O preview hospedado exige configuração HTTPS explícita e serve somente para ensaio interno; consulte [MOBILE_APP.md](docs/MOBILE_APP.md) antes de abrir Xcode.
 
-Neste Mac, Xcode 27.0 e o runtime iOS 27.0 estão prontos; Android Studio Quail 4 e Temurin JDK 21 também estão instalados. O app foi executado no iOS Simulator. Android SDK/API 36 e emulador permanecem pausados.
+Na primeira abertura, **Usar só neste iPhone** entra no produto sem consultar a API. O perfil local pede nome e modalidade; cidade, bairro e notas são opcionais. Esse modo não cria conta, feed, comunidade, publicação ou sincronização e não mistura seus registros com uma futura sessão conectada.
+
+Para colocar a build em um aparelho próprio, conecte e confie no iPhone, ative o Developer Mode solicitado pelo iOS, execute `npm run native:open:ios`, selecione o aparelho e uma Personal Team em **Signing & Capabilities** e rode o target `App`. Esses passos dependem da conta Apple e do aparelho do responsável; não devem ser confundidos com o build sem assinatura do Simulator.
+
+Evidência histórica de 18/10/2026: Xcode 27.0 e runtime iOS 27.0 foram usados no Mac da implementação, com execução no Simulator. Isso não instala toolchains em outro ambiente; siga [MOBILE_APP.md](docs/MOBILE_APP.md) e `native:doctor` na sua máquina. Android SDK/API 36 e emulador permanecem pausados.
 
 ## Jornadas conectadas
 
@@ -88,7 +87,7 @@ Arenas de demonstração continuam rotuladas mesmo após renomear. Comunidade pr
 
 ## Banco e comandos
 
-O inventário corrente de migrations está em `supabase/migrations`; os recibos de aplicação ficam no plano e changelog. As sete migrations desta integração foram aplicadas no banco principal e seus tipos regenerados do schema hospedado; os switches de mensagens e push permaneceram `false`. O desenvolvimento hospedado estava inativo e não foi alterado. O legado de presença é preservado sem conversão. Tipos são gerados, não editados manualmente. Não recriar projetos corretos, reaplicar SQL registrado nem resetar banco remoto.
+O inventário corrente de migrations está em `supabase/migrations`; os recibos de aplicação ficam no plano e changelog. O último recibo hospedado, de 28/09/2026, registra 49 migrations no principal, com intenção social, medição, mensagens e push desligados. O desenvolvimento não foi declarado sincronizado; confirme o ledger antes de operar. [Estado e limites da verificação atual](docs/PROJECT_STATUS.md). O legado de presença é preservado sem conversão. Tipos são gerados, não editados manualmente. Não recriar projetos corretos, reaplicar SQL registrado nem resetar banco remoto.
 
 ```bash
 node --env-file=.env.local --env-file=.env.hosted-admin scripts/database.mjs dry-run

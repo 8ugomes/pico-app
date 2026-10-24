@@ -1,5 +1,6 @@
 import { Preferences } from '@capacitor/preferences';
 import type { DraftStorage } from './drafts';
+import { createId } from './id.ts';
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
@@ -64,7 +65,7 @@ export function createAttemptRepository(storage: DraftStorage = Preferences) {
       const storageKey = commentKey(accountId);
       const current = parseComment((await storage.get({ key: storageKey })).value);
       if (current?.postId === postId && current.body === body) return current;
-      const next = { key: crypto.randomUUID(), postId, body };
+      const next = { key: createId(), postId, body };
       await storage.set({ key: storageKey, value: JSON.stringify(next) });
       return next;
     },

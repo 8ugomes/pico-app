@@ -27,6 +27,7 @@ import { api, PicoApiError, query } from './api';
 import { attempts } from './attempts';
 import { legalUrls, mobileConfig } from './config';
 import { drafts, type GameDraft, type PublicationDraft } from './drafts';
+import { createId } from './id.ts';
 import { choosePhoto, openExternal, selectionHaptic, shareExport, sharePost, successHaptic } from './native';
 import { CommentsAction, RepostAction } from './social-actions';
 import { MobileVideoUpload, removeMobileVideo } from './video-upload';
@@ -253,7 +254,7 @@ function PublicationComposer({ open, options, optionsError, reloadOptions, onlin
 }
 
 function newPublicationDraft(): PublicationDraft {
-  return { idempotencyKey: crypto.randomUUID(), body: '', audience: 'beta', wallArena: '', groups: [], mediaKind: 'photo', imagePath: null, videoPath: null };
+  return { idempotencyKey: createId(), body: '', audience: 'beta', wallArena: '', groups: [], mediaKind: 'photo', imagePath: null, videoPath: null };
 }
 
 function PostItem({ post, online, onChanged }: { post: Post; online: boolean; onChanged: () => void }) {
@@ -625,7 +626,7 @@ function GameForm({ open, online, arenas, onClose, onDone }: { open: boolean; on
 }
 
 function newGameDraft(): GameDraft {
-  return { idempotencyKey: crypto.randomUUID(), arenaId: '', sportId: '', playedOn: new Date().toISOString().slice(0, 10) };
+  return { idempotencyKey: createId(), arenaId: '', sportId: '', playedOn: new Date().toISOString().slice(0, 10) };
 }
 
 function GameRow({ game, online, arenas, options, optionsError, onDone }: { game: PlayedGame; online: boolean; arenas: Arena[]; options: PublicationOptions | null; optionsError: string; onDone: () => void }) {
@@ -666,7 +667,7 @@ function EditGameDialog({ open, game, arenas, online, onClose, onDone }: { open:
 
 function GameShareDialog({ open, game, options, optionsError, online, onClose }: { open: boolean; game: PlayedGame; options: PublicationOptions | null; optionsError: string; online: boolean; onClose: () => void }) {
   const accountId = api.user?.id || '';
-  const [key, setKey] = useState(() => crypto.randomUUID());
+  const [key, setKey] = useState(createId);
   const [body, setBody] = useState('');
   const [audience, setAudience] = useState<'beta' | 'private'>('beta');
   const [wallArena, setWallArena] = useState(game.arena_id);
@@ -708,7 +709,7 @@ function GameShareDialog({ open, game, options, optionsError, online, onClose }:
       await api.request('/games', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'share', id: game.id, version: game.version, key, body: body.trim(), imagePath: null, videoPath: null, audience, wallArena: audience === 'beta' ? wallArena || null : null, groups }) });
       const cleared = await attempts.confirmGameShare(accountId, key);
       if (!cleared) throw new Error('O compartilhamento foi confirmado, mas a tentativa local ainda precisa ser limpa. Tente novamente; a publicação não será duplicada.');
-      setKey(crypto.randomUUID()); setRestored(false); setDone(true); await successHaptic();
+      setKey(createId()); setRestored(false); setDone(true); await successHaptic();
     } catch (cause) { setError(errorMessage(cause)); }
     finally { setBusy(false); }
   }
