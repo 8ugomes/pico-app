@@ -1,5 +1,24 @@
 > Fechamento operacional de 28/09/2026: o PR #45 foi integrado e `7d5a7afd17a6` está publicado no domínio principal. As duas migrations pendentes foram aplicadas após backup cifrado e os inventários preservaram 131/131 identidades. Origem canônica configurada; mensuração, intenção social, DMs e push seguem desligados. A validação autenticada com duas contas controladas continua como próximo gate, sem habilitar coleta. [Recibo](PRODUCT_MEASUREMENT.md#recibo-da-janela-de-28092026).
 
+## Consolidação do repositório e continuidade · PLAN · 23/10/2026
+
+O responsável pediu publicar no GitHub todo o trabalho existente e o contexto necessário para colaboradores continuarem em outros ambientes. A comparação com `origin/main` (`fb85d7c`) identificou o commit local `ded13ea`, com o espaço privado do iPhone e dependências atualizadas, ainda sem publicação. A árvore inicial estava limpa. A consolidação parte dessa cadeia, preservando o histórico e os arquivos protegidos.
+
+Escopo: integrar o trabalho local por PR/CI, reconciliar decisões verificáveis das conversas com as fontes canônicas, criar uma entrada de contribuição e um resumo datado do estado, corrigir o início demo sem credenciais e explicitar os requisitos de cada plataforma. A CI de perfil deve usar o lockfile, sem reinstalar versões antigas de ferramentas. O audit atual encontrou uma dependência transitiva corrigível (`zod`) com severidade alta; atualizar somente a resolução compatível antes do gate obrigatório, sem downgrade do Capacitor.
+
+Aceite: um clone limpo instala pelo lockfile e executa demo/checks sem arquivos deste Mac; código, documentação, assets necessários e skills locais ficam alcançáveis pela `main`; segredos, conteúdo de usuários, backups e assinatura permanecem privados. Verificar lint, typecheck, testes pertinentes, build, pacote móvel, auditoria de segredos e CI. Registrar separadamente GitHub, versão web servida e gates iOS. Esta rodada não aplica migrations, não habilita recursos, não publica Vercel nem distribui binários.
+
+A auditoria do commit também reproduziu uma regressão no diário local: editar somente a nota depois de renomear a arena substituía o snapshot histórico do lugar. Corrigir o modelo para conservar esse snapshot quando o ID da arena não mudar e acrescentar teste focado antes de integrar.
+
+### Resultado da consolidação
+
+- `README.md`, `CONTRIBUTING.md` e `docs/PROJECT_STATUS.md` agora orientam um clone novo, distinguem demo/web/iOS, registram Node 24/npm 11 e ligam decisões, contratos, evidências e pendências. Schema/PWA/mensuração receberam notas de estado para evitar que contagens ou flags históricas pareçam atuais. Pedidos de interromper relatórios/monitoramento foram preservados, sem reativação.
+- A auditoria local de todas as refs encontrou somente `ded13ea` fora dos remotes; a recuperação móvel anterior já era equivalente à cadeia integrada. Fontes textuais de quatro campanhas foram recuperadas em `docs/marketing/archive`; `docs/EXTERNAL_MATERIALS.md` identifica fontes ausentes da landing, renderizadores e commits antigos não localizados. Binários de campanha não foram importados; segredos e dados pessoais continuam fora do Git.
+- O diário conserva o snapshot do lugar ao editar nota/modalidade/data com a mesma arena. Trocar explicitamente de arena atualiza o snapshot. O teste novo passou; `native-shell` foi reconstruído e comparado ao bundle gerado no clone separado.
+- Clone independente sem arquivos ignorados, somente `.env.local` demo: `npm ci`, `env:check`, ESLint, typecheck, **329/329 testes**, `native:verify` **12/12** com sync iOS sem `server.url`, build Next.js 16.4.2 e smoke HTTP de cinco rotas, manifesto e versão passaram. Saúde demo respondeu 503 esperado, sem backend. Windows, aparelho físico, assinatura e jornadas hospedadas não foram revalidados.
+- Audit completo passou no gate `--audit-level=high`, com três avisos moderados transitivos de `uuid`/`xcode`/Capacitor CLI; produção (`--omit=dev`) teve zero vulnerabilidades. A correção compatível de `zod` removeu o achado alto sem downgrade. Auditoria de segredos passou em 1.444 caminhos versionados, 56 arquivos públicos do build e 2.662 blobs históricos; links locais e `git diff --check` passaram. CI de perfil usa as versões do lockfile; integração pela proteção da `main` exige checks remotos aprovados, cujos resultados ficam no PR desta rodada.
+- Consulta pública pontual confirmou revisão servida `7d5a7afd17a6` e saúde 503 com banco/Auth indisponíveis. Nenhum deploy, migration, ativação de flags, escrita em Supabase ou distribuição foi executado. GitHub atualizado não equivale a infraestrutura restaurada.
+
 ## Pico local no iPhone, sem dependência da nuvem · PLAN · 18/10/2026
 
 ### Problema e linha de base

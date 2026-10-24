@@ -1,3 +1,12 @@
+## 2026-10-23: consolidação do GitHub e continuidade em outros ambientes
+
+- Trabalho local do iPhone (`ded13ea`) reunido à linha de integração, preservando histórico, PWA e contratos conectados. O diário agora conserva o snapshot da arena quando a edição muda somente nota/data/modalidade; trocar de arena continua explícito e possui regressão comportamental.
+- README com clone/demo sem credenciais; novo `CONTRIBUTING.md`, `.nvmrc` e engines Node 24/npm 11. A CI de perfil deixou de reinstalar esbuild/Playwright antigos após `npm ci`. `zod` transitivo atualizado para 4.6.7; demais versões do commit móvel preservadas.
+- `docs/PROJECT_STATUS.md` consolida decisões, evidências e próximos gates. Notas históricas de schema, PWA, medição e disponibilidade foram reconciliadas; cancelamento de relatórios/requests periódicos preservado sem reativação.
+- Recuperados textos de quatro campanhas, prompts, manifestos e um fonte histórico em `docs/marketing/archive`. O inventário de materiais externos registra landing/renderizadores/commits não localizados e binários não importados. Não foram copiados segredos, dados pessoais, painéis privados ou transcrições de chats.
+- Clone independente demo passou em instalação, ambiente, lint, typecheck, **329 testes**, `native:verify` **12/12**, build web e smoke HTTP. Bundle móvel reconstruído e idêntico entre os diretórios. Auditoria de segredos passou no código, bundle público e histórico; links locais e whitespace conferidos. Audit de produção sem vulnerabilidades; três avisos moderados no toolchain, sem achado alto/crítico.
+- A consulta pontual ao domínio confirmou versão `7d5a7afd17a6` e saúde 503 para banco/Auth. Esta rodada atualiza código/contexto no GitHub por PR/CI; não publica Vercel, não altera Supabase/flags e não comprova Windows, iPhone físico ou distribuição nas lojas.
+
 ## 2026-10-18: Pico privado e utilizável no iPhone sem nuvem
 
 - A entrada do binário ganhou **Usar só neste iPhone**, avaliado antes da sessão remota. O modo persiste um workspace versionado num arquivo protegido do sandbox e não depende de banco, Auth, API ou `server.url`; Preferences guarda apenas a escolha de abertura.

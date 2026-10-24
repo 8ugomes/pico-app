@@ -1,3 +1,15 @@
+## Continuidade do repositório · critérios antes de editar · 23/10/2026
+
+A entrada para colaboradores deve começar pelo que é o Pico, como executar uma demonstração e onde encontrar o estado vigente. Identificar cada evidência por data e distinguir código implementado, versão publicada, recursos habilitados e validação em aparelho. Instruções não podem depender de caminhos, credenciais ou ferramentas pessoais deste Mac. Manter os contratos nas fontes canônicas e apontar para elas, evitando copiar conversas ou criar um segundo plano.
+
+Revisão prevista: clone limpo com demo explícita, links locais, comandos reproduzíveis, limites macOS/Linux/Windows e distinção entre demonstração web e diário privado iOS. Não há mudança visual de telas nesta consolidação; ampliar a revisão somente se a auditoria encontrar regressão funcional.
+
+### Aprendizados e verificação
+
+A entrada ficou mais clara com um resumo datado e um guia de contribuição, enquanto plano e contratos mantêm sua autoridade. “Implementado”, “publicado”, “habilitado” e “testado em aparelho” precisam de evidências próprias; a saúde 503 do serviço não apaga a entrega local e o commit não resolve a infraestrutura. A demo abriu em clone independente sem credenciais. O arquivo de campanhas distingue texto recuperado, referências históricas e fontes ausentes, corrigindo promessas antigas de confirmação de e-mail sem fabricar uma nova publicação.
+
+A revisão independente de portabilidade confirmou links, 49 migrations e 17 skills; a documentação explicita Windows não ensaiado, iOS dependente de Xcode e `native-shell` gerado/versionado. A correção do snapshot histórico não mudou telas e foi verificada por comportamento e bundle reconstruído; não se repetiu revisão visual cosmética.
+
 ## Pico local no iPhone · critérios antes de codar · 18/10/2026
 
 O modo local precisa abrir como produto, não como tela de falha do serviço. A escolha **Usar só neste iPhone** aparece junto da entrada conectada e funciona imediatamente, sem spinner de rede. O texto explica em uma frase que jogos, arenas e perfil ficam apenas no aparelho e não são enviados para outras pessoas.

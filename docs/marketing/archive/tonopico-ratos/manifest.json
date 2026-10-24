@@ -1,0 +1,257 @@
+{
+  "campaign": "ToNoPico · nova coleção CCOS",
+  "generatedAt": "2026-09-14T19:06:06.939Z",
+  "publicationZipOmits": "Os nove PNGs intermediários em stories/*/cenas/ ficam na pasta completa; seus SVGs, capas e MP4s acompanham o ZIP.",
+  "carousels": [
+    {
+      "slug": "01-o-encontro-fica",
+      "name": "O encontro fica",
+      "slides": 5
+    },
+    {
+      "slug": "02-qual-o-seu-pico",
+      "name": "Qual o seu Pico?",
+      "slides": 5
+    },
+    {
+      "slug": "03-o-que-fica-do-jogo",
+      "name": "O que fica do jogo",
+      "slides": 5
+    }
+  ],
+  "stories": [
+    {
+      "slug": "01-futevolei",
+      "name": "Futevôlei",
+      "durationSeconds": 12
+    },
+    {
+      "slug": "02-beach-tennis",
+      "name": "Beach tennis",
+      "durationSeconds": 12
+    },
+    {
+      "slug": "03-volei-de-praia",
+      "name": "Vôlei de praia",
+      "durationSeconds": 12
+    }
+  ],
+  "assets": [
+    {
+      "id": "carrosseis/01-o-encontro-fica/01",
+      "width": 1080,
+      "height": 1350,
+      "photo": "futevolei-encontro",
+      "title": "A partida acaba. A turma fica.",
+      "hashtag": "#ToNoPico",
+      "alt": "Duas pessoas se cumprimentam após jogar futevôlei. Texto: A partida acaba. A turma fica."
+    },
+    {
+      "id": "carrosseis/01-o-encontro-fica/02",
+      "width": 1080,
+      "height": 1350,
+      "photo": "beach-tennis-acao",
+      "title": "Um ponto chama outro ponto.",
+      "hashtag": null,
+      "alt": "Jogadora rebate uma bola de beach tennis. Texto: Um ponto chama outro ponto."
+    },
+    {
+      "id": "carrosseis/01-o-encontro-fica/03",
+      "width": 1080,
+      "height": 1350,
+      "photo": "beach-tennis-encontro",
+      "title": "E a conversa começa ali.",
+      "hashtag": null,
+      "alt": "Duas jogadoras conversam e sorriem na quadra de beach tennis. Texto: E a conversa começa ali."
+    },
+    {
+      "id": "carrosseis/01-o-encontro-fica/04",
+      "width": 1080,
+      "height": 1350,
+      "photo": "volei-turma",
+      "title": "O encontro vira turma.",
+      "hashtag": null,
+      "alt": "Quatro pessoas caminham juntas depois do vôlei de praia. Texto: O encontro vira turma."
+    },
+    {
+      "id": "carrosseis/01-o-encontro-fica/05",
+      "width": 1080,
+      "height": 1350,
+      "photo": "volei-encontro",
+      "title": "Me acha no Pico.",
+      "hashtag": "#ToNoPico",
+      "alt": "Duas jogadoras de vôlei se cumprimentam. Texto: Me acha no Pico. #ToNoPico. Conheça o Pico."
+    },
+    {
+      "id": "carrosseis/02-qual-o-seu-pico/01",
+      "width": 1080,
+      "height": 1350,
+      "photo": "arena-comunidade",
+      "title": "Qual é o seu Pico?",
+      "hashtag": "#QualOPico?",
+      "alt": "Grupo conversa numa arena de areia. Texto: Qual é o seu Pico? #QualOPico?"
+    },
+    {
+      "id": "carrosseis/02-qual-o-seu-pico/02",
+      "width": 1080,
+      "height": 1350,
+      "photo": "beach-tennis-encontro",
+      "title": "A arena de sempre.",
+      "hashtag": null,
+      "alt": "Duas pessoas conversam depois do beach tennis. Texto: A arena de sempre."
+    },
+    {
+      "id": "carrosseis/02-qual-o-seu-pico/03",
+      "width": 1080,
+      "height": 1350,
+      "photo": "futevolei-acao",
+      "title": "Ou um lugar pra conhecer.",
+      "hashtag": null,
+      "alt": "Jogador controla a bola em quadra de futevôlei. Texto: Ou um lugar pra conhecer."
+    },
+    {
+      "id": "carrosseis/02-qual-o-seu-pico/04",
+      "width": 1080,
+      "height": 1350,
+      "photo": "volei-turma",
+      "title": "A comunidade que combina.",
+      "hashtag": null,
+      "alt": "Grupo de vôlei de praia conversa depois da partida. Texto: A comunidade que combina."
+    },
+    {
+      "id": "carrosseis/02-qual-o-seu-pico/05",
+      "width": 1080,
+      "height": 1350,
+      "photo": "beach-tennis-acao",
+      "title": "Encontre o seu ponto de encontro.",
+      "hashtag": "#QualOPico?",
+      "alt": "Jogadora em quadra de beach tennis. Texto: Encontre o seu ponto de encontro. #QualOPico? Conheça o Pico."
+    },
+    {
+      "id": "carrosseis/03-o-que-fica-do-jogo/01",
+      "width": 1080,
+      "height": 1350,
+      "photo": "pos-jogo",
+      "title": "O jogo termina. E depois?",
+      "hashtag": "#ToNoPico",
+      "alt": "Duas pessoas descansam depois do vôlei, com um telefone de tela ilegível. Texto: O jogo termina. E depois?"
+    },
+    {
+      "id": "carrosseis/03-o-que-fica-do-jogo/02",
+      "width": 1080,
+      "height": 1350,
+      "photo": "volei-encontro",
+      "title": "Guarde a partida que aconteceu.",
+      "hashtag": null,
+      "alt": "Duas jogadoras de vôlei se cumprimentam. Texto: Guarde a partida que aconteceu."
+    },
+    {
+      "id": "carrosseis/03-o-que-fica-do-jogo/03",
+      "width": 1080,
+      "height": 1350,
+      "photo": "futevolei-acao",
+      "title": "Seu jogo fica privado.",
+      "hashtag": null,
+      "alt": "Jogador de futevôlei em ação. Texto: Seu jogo fica privado."
+    },
+    {
+      "id": "carrosseis/03-o-que-fica-do-jogo/04",
+      "width": 1080,
+      "height": 1350,
+      "photo": "futevolei-encontro",
+      "title": "Compartilhe se quiser.",
+      "hashtag": null,
+      "alt": "Duas pessoas se cumprimentam depois do futevôlei. Texto: Compartilhe se quiser."
+    },
+    {
+      "id": "carrosseis/03-o-que-fica-do-jogo/05",
+      "width": 1080,
+      "height": 1350,
+      "photo": "volei-turma",
+      "title": "A história continua.",
+      "hashtag": "#ToNoPico",
+      "alt": "Grupo de vôlei de praia caminha junto. Texto: A história continua. #ToNoPico. Conheça o Pico."
+    },
+    {
+      "id": "stories/01-futevolei/cenas/01",
+      "width": 1080,
+      "height": 1920,
+      "photo": "futevolei-acao",
+      "title": "Tem toque.",
+      "hashtag": null,
+      "alt": "Cena de Futevôlei: Tem toque."
+    },
+    {
+      "id": "stories/01-futevolei/cenas/02",
+      "width": 1080,
+      "height": 1920,
+      "photo": "futevolei-encontro",
+      "title": "Tem encontro.",
+      "hashtag": null,
+      "alt": "Cena de Futevôlei: Tem encontro."
+    },
+    {
+      "id": "stories/01-futevolei/cenas/03",
+      "width": 1080,
+      "height": 1920,
+      "photo": "arena-comunidade",
+      "title": "Me acha no Pico.",
+      "hashtag": "#ToNoPico",
+      "alt": "Cena de Futevôlei: Me acha no Pico. #ToNoPico"
+    },
+    {
+      "id": "stories/02-beach-tennis/cenas/01",
+      "width": 1080,
+      "height": 1920,
+      "photo": "beach-tennis-acao",
+      "title": "Tem jogo.",
+      "hashtag": null,
+      "alt": "Cena de Beach tennis: Tem jogo."
+    },
+    {
+      "id": "stories/02-beach-tennis/cenas/02",
+      "width": 1080,
+      "height": 1920,
+      "photo": "beach-tennis-encontro",
+      "title": "Tem turma.",
+      "hashtag": null,
+      "alt": "Cena de Beach tennis: Tem turma."
+    },
+    {
+      "id": "stories/02-beach-tennis/cenas/03",
+      "width": 1080,
+      "height": 1920,
+      "photo": "arena-comunidade",
+      "title": "Qual é o seu Pico?",
+      "hashtag": "#QualOPico?",
+      "alt": "Cena de Beach tennis: Qual é o seu Pico? #QualOPico?"
+    },
+    {
+      "id": "stories/03-volei-de-praia/cenas/01",
+      "width": 1080,
+      "height": 1920,
+      "photo": "volei-encontro",
+      "title": "O ponto passa.",
+      "hashtag": null,
+      "alt": "Cena de Vôlei de praia: O ponto passa."
+    },
+    {
+      "id": "stories/03-volei-de-praia/cenas/02",
+      "width": 1080,
+      "height": 1920,
+      "photo": "volei-turma",
+      "title": "A conversa fica.",
+      "hashtag": null,
+      "alt": "Cena de Vôlei de praia: A conversa fica."
+    },
+    {
+      "id": "stories/03-volei-de-praia/cenas/03",
+      "width": 1080,
+      "height": 1920,
+      "photo": "pos-jogo",
+      "title": "Me acha no Pico.",
+      "hashtag": "#ToNoPico",
+      "alt": "Cena de Vôlei de praia: Me acha no Pico. #ToNoPico"
+    }
+  ]
+}

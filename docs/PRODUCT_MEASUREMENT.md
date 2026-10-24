@@ -1,6 +1,6 @@
 # Medição de produto e compartilhamento contextual
 
-Estado em 28/09/2026: **implementado localmente, coleta desligada e não aplicada ao banco hospedado**.
+Estado após a janela de 28/09/2026: **código publicado e migration aplicada no principal, com coleta desligada**. O [recibo da janela](#recibo-da-janela-de-28092026) registra preservação, gates e limites; desenvolvimento e jornadas autenticadas não foram declarados validados. A consolidação de 23/10 não habilitou coleta nem repetiu a auditoria hospedada.
 
 ## Fronteira de privacidade
 

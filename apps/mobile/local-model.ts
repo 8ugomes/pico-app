@@ -357,7 +357,7 @@ export function updateLocalGame(
     selectedArenaId = normalizeId(patch.arenaId, 'Identificador da arena');
     const arena = current.arenas.find((item) => item.id === selectedArenaId);
     if (!arena) throw new Error('Arena local não encontrada.');
-    snapshot = arenaSnapshot(arena);
+    if (selectedArenaId !== previous.arenaId) snapshot = arenaSnapshot(arena);
   }
   const timestamp = mutationTimestamp(context.now);
   const requestedPlayedOn = patch.playedOn ?? previous.playedOn;

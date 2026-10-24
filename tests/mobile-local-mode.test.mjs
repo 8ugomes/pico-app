@@ -206,6 +206,52 @@ test('cria, edita e exclui jogos privados com data civil válida', () => {
   assert.equal(edited.games.length, 1);
 });
 
+test('edição conserva o lugar histórico até escolher outra arena', () => {
+  const originalArenaId = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
+  const withArena = createLocalArena(configuredWorkspace(), {
+    id: originalArenaId,
+    name: 'Arena original',
+    city: 'Santos',
+  }, NOW);
+  const withGame = createLocalGame(withArena, {
+    id: GAME_ID,
+    arenaId: originalArenaId,
+    sport: 'Futevôlei',
+    playedOn: TODAY,
+    notes: 'Nota original',
+  }, { now: NOW, today: TODAY });
+  const renamed = updateLocalArena(withGame, originalArenaId, {
+    name: 'Arena renomeada',
+    city: 'Outra cidade',
+  }, LATER);
+  const edited = updateLocalGame(renamed, GAME_ID, {
+    arenaId: originalArenaId.toUpperCase(),
+    sport: 'Beach tennis',
+    playedOn: '2026-10-17',
+    notes: 'Nota editada',
+  }, { now: LATER, today: TODAY });
+
+  assert.equal(edited.games[0].arenaId, originalArenaId);
+  assert.equal(edited.games[0].arenaSnapshot, 'Arena original, Santos');
+  assert.equal(edited.games[0].sport, 'Beach tennis');
+  assert.equal(edited.games[0].playedOn, '2026-10-17');
+  assert.equal(edited.games[0].notes, 'Nota editada');
+
+  const withAnotherArena = createLocalArena(edited, {
+    id: SECOND_ARENA_ID,
+    name: 'Arena escolhida',
+    neighborhood: 'Centro',
+    city: 'São Vicente',
+  }, LATER);
+  const moved = updateLocalGame(withAnotherArena, GAME_ID, {
+    arenaId: SECOND_ARENA_ID,
+  }, { now: LATER, today: TODAY });
+
+  assert.equal(moved.games[0].arenaId, SECOND_ARENA_ID);
+  assert.equal(moved.games[0].arenaSnapshot, 'Arena escolhida, Centro, São Vicente');
+  assert.equal(edited.games[0].arenaSnapshot, 'Arena original, Santos');
+});
+
 test('rejeita limites, identificadores, referências e datas inválidas ou futuras', () => {
   const configured = configuredWorkspace();
   const withArena = workspaceWithArena();

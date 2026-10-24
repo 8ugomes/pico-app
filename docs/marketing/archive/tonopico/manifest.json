@@ -1,0 +1,206 @@
+{
+  "edition": 2,
+  "campaign": "#ToNoPico",
+  "question": "#QualOPico?",
+  "movement": "Em movimento",
+  "date": "2026-09-14",
+  "assets": [
+    {
+      "id": "carrosseis/01-o-jogo-e-o-comeco/01",
+      "group": "O jogo aproxima",
+      "name": "O jogo aproxima · 1/4",
+      "width": 1080,
+      "height": 1350,
+      "hashtag": "#ToNoPico",
+      "alt": "Duas jogadoras de vôlei se cumprimentam na areia. Sobre a fotografia: O jogo aproxima. #ToNoPico."
+    },
+    {
+      "id": "carrosseis/01-o-jogo-e-o-comeco/02",
+      "group": "O jogo aproxima",
+      "name": "O jogo aproxima · 2/4",
+      "width": 1080,
+      "height": 1350,
+      "hashtag": null,
+      "alt": "Jogadora de beach tennis com raquete e bola. Sobre a fotografia: Mais gente no seu esporte."
+    },
+    {
+      "id": "carrosseis/01-o-jogo-e-o-comeco/03",
+      "group": "O jogo aproxima",
+      "name": "O jogo aproxima · 3/4",
+      "width": 1080,
+      "height": 1350,
+      "hashtag": null,
+      "alt": "Jogador de futevôlei recebe bola com a coxa. Sobre a fotografia: Encontre sua turma."
+    },
+    {
+      "id": "carrosseis/01-o-jogo-e-o-comeco/04",
+      "group": "O jogo aproxima",
+      "name": "O jogo aproxima · 4/4",
+      "width": 1080,
+      "height": 1350,
+      "hashtag": "#ToNoPico",
+      "alt": "Duas parceiras em quadra, sob texto: Me acha no Pico. #ToNoPico."
+    },
+    {
+      "id": "carrosseis/02-tres-esportes-um-pico/01",
+      "group": "Qual o Pico?",
+      "name": "Qual o Pico? · 1/4",
+      "width": 1080,
+      "height": 1350,
+      "hashtag": "#QualOPico?",
+      "alt": "Jogador de futevôlei em quadra. Sobre a foto: Onde você se encontra? #QualOPico?"
+    },
+    {
+      "id": "carrosseis/02-tres-esportes-um-pico/02",
+      "group": "Qual o Pico?",
+      "name": "Qual o Pico? · 2/4",
+      "width": 1080,
+      "height": 1350,
+      "hashtag": null,
+      "alt": "Jogadora de beach tennis, raquete e bola visíveis. Sobre a foto: A quadra de sempre."
+    },
+    {
+      "id": "carrosseis/02-tres-esportes-um-pico/03",
+      "group": "Qual o Pico?",
+      "name": "Qual o Pico? · 3/4",
+      "width": 1080,
+      "height": 1350,
+      "hashtag": null,
+      "alt": "Duas jogadoras celebram um ponto. Sobre a foto: A turma que fica."
+    },
+    {
+      "id": "carrosseis/02-tres-esportes-um-pico/04",
+      "group": "Qual o Pico?",
+      "name": "Qual o Pico? · 4/4",
+      "width": 1080,
+      "height": 1350,
+      "hashtag": "#QualOPico?",
+      "alt": "Jogador em quadra de futevôlei. Sobre a foto: Seu lugar é com gente. #QualOPico?"
+    },
+    {
+      "id": "carrosseis/03-o-jogo-continua/01",
+      "group": "Em movimento",
+      "name": "Em movimento · 1/4",
+      "width": 1080,
+      "height": 1350,
+      "hashtag": "#ToNoPico",
+      "alt": "Beach tennis em quadra. Sobre a foto: Tem jogo. Tem encontro. #ToNoPico."
+    },
+    {
+      "id": "carrosseis/03-o-jogo-continua/02",
+      "group": "Em movimento",
+      "name": "Em movimento · 2/4",
+      "width": 1080,
+      "height": 1350,
+      "hashtag": null,
+      "alt": "Jogador de futevôlei em ação. Sobre a foto: Tem toque. Tem história."
+    },
+    {
+      "id": "carrosseis/03-o-jogo-continua/03",
+      "group": "Em movimento",
+      "name": "Em movimento · 3/4",
+      "width": 1080,
+      "height": 1350,
+      "hashtag": null,
+      "alt": "Duas parceiras de vôlei de praia se cumprimentam. Sobre a foto: Tem ponto. Tem turma."
+    },
+    {
+      "id": "carrosseis/03-o-jogo-continua/04",
+      "group": "Em movimento",
+      "name": "Em movimento · 4/4",
+      "width": 1080,
+      "height": 1350,
+      "hashtag": "#ToNoPico",
+      "alt": "Duas parceiras em quadra. Sobre a foto: A areia não para. #ToNoPico."
+    },
+    {
+      "id": "stories/01-o-jogo-e-o-comeco",
+      "group": "Stories",
+      "name": "O jogo aproxima.",
+      "width": 1080,
+      "height": 1920,
+      "hashtag": "#ToNoPico",
+      "alt": "Duas jogadoras de vôlei se cumprimentam na areia. Sobre a fotografia: O jogo aproxima. #ToNoPico."
+    },
+    {
+      "id": "stories/02-tem-gente-do-seu-esporte",
+      "group": "Stories",
+      "name": "Mais gente no seu esporte.",
+      "width": 1080,
+      "height": 1920,
+      "hashtag": "#ToNoPico",
+      "alt": "Jogadora de beach tennis com raquete e bola. Sobre a fotografia: Mais gente no seu esporte. #ToNoPico."
+    },
+    {
+      "id": "stories/03-seu-esporte-seu-pico",
+      "group": "Stories",
+      "name": "Onde você se encontra?",
+      "width": 1080,
+      "height": 1920,
+      "hashtag": "#QualOPico?",
+      "alt": "Jogador de futevôlei em quadra. Sobre a foto: Onde você se encontra? #QualOPico?"
+    },
+    {
+      "id": "em-movimento/feed/01-beach-tennis",
+      "group": "Em movimento · Feed",
+      "name": "Em movimento · Beach tennis",
+      "width": 1080,
+      "height": 1350,
+      "hashtag": "#ToNoPico",
+      "alt": "Jogadora de beach tennis em quadra. Texto sobre a foto: Seu jeito de jogar. #ToNoPico."
+    },
+    {
+      "id": "em-movimento/stories/01-beach-tennis",
+      "group": "Em movimento · Stories",
+      "name": "Em movimento · Beach tennis",
+      "width": 1080,
+      "height": 1920,
+      "hashtag": "#ToNoPico",
+      "alt": "Jogadora de beach tennis em quadra. Texto sobre a foto: Seu jeito de jogar. #ToNoPico."
+    },
+    {
+      "id": "em-movimento/feed/02-futevolei",
+      "group": "Em movimento · Feed",
+      "name": "Em movimento · Futevôlei",
+      "width": 1080,
+      "height": 1350,
+      "hashtag": "#ToNoPico",
+      "alt": "Jogador de futevôlei em quadra. Texto sobre a foto: O toque é seu. #ToNoPico."
+    },
+    {
+      "id": "em-movimento/stories/02-futevolei",
+      "group": "Em movimento · Stories",
+      "name": "Em movimento · Futevôlei",
+      "width": 1080,
+      "height": 1920,
+      "hashtag": "#ToNoPico",
+      "alt": "Jogador de futevôlei em quadra. Texto sobre a foto: O toque é seu. #ToNoPico."
+    },
+    {
+      "id": "em-movimento/feed/03-volei-de-praia",
+      "group": "Em movimento · Feed",
+      "name": "Em movimento · Vôlei de praia",
+      "width": 1080,
+      "height": 1350,
+      "hashtag": "#ToNoPico",
+      "alt": "Duas parceiras se cumprimentam em quadra. Texto sobre a foto: O encontro também conta. #ToNoPico."
+    },
+    {
+      "id": "em-movimento/stories/03-volei-de-praia",
+      "group": "Em movimento · Stories",
+      "name": "Em movimento · Vôlei de praia",
+      "width": 1080,
+      "height": 1920,
+      "hashtag": "#ToNoPico",
+      "alt": "Duas parceiras se cumprimentam em quadra. Texto sobre a foto: O encontro também conta. #ToNoPico."
+    }
+  ],
+  "video": {
+    "id": "stories/04-em-movimento",
+    "seconds": 12,
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "audio": false
+  }
+}

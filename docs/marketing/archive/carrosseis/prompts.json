@@ -1,0 +1,20 @@
+{
+  "mode": "built-in image_gen",
+  "assets": [
+    {
+      "name": "encontro",
+      "original": "assets/encontro-original.png",
+      "prompt": "Use case: photorealistic-natural. Create one editorial campaign photograph, portrait 4:5, for Pico Social, a Brazilian community app for beach tennis, footvolley and beach volleyball. Four clearly adult friends of different Brazilian skin tones in their mid twenties to late thirties, two women and two men, candidly talking and smiling naturally beside a sand court after a friendly game. A perforated matte dark beach tennis racket held low, a volleyball resting on sand, loosely visible net behind. Medium wide relational shot, whole heads and natural hands, no posed lineup, no looking at camera. Sportswear in muted lavender, cocoa brown, cream and burnt clay. Soft diffused late-afternoon natural light, truthful skin texture, light film grain, rich but restrained color. Premium youthful editorial lifestyle photography, intimate and welcoming, without luxury props. Keep all subjects in central 75% of frame with calm sandy edges for editorial cropping. No lettering, no logos, no brand marks, no UI, no watermarks. Avoid fitness stock photo poses, medals, stadium crowds, excessive yellow grading, extra fingers, implausible rackets."
+    },
+    {
+      "name": "objetos",
+      "original": "assets/objetos-original.png",
+      "prompt": "Use case: photorealistic-natural. Create one premium editorial still-life photograph for Pico Social, portrait 4:5. On softly textured pale sand are exactly three sports objects: one unbranded matte cocoa perforated beach-tennis paddle with a muted lavender grip, one cream and lavender volleyball, and one classic black-and-cream footvolley football. A small section of white court boundary line makes one elegant diagonal through the scene. Top-down camera, natural quiet asymmetrical arrangement, all three objects fully visible, generous clean sand around them. Restrained creamy paper, butter, cocoa and muted lavender palette; natural sunlight diffused through thin clouds with gentle believable shadows, detailed sand and authentic materials. Art magazine sports still life, warm, tactile, refined and minimal. No people, no hands, no text, no logos, no diagrams, no extra balls, no extra rackets, no plastic-looking 3D rendering."
+    },
+    {
+      "name": "gesto",
+      "original": "assets/gesto-original.png",
+      "prompt": "Use case: photorealistic-natural. Create one portrait 4:5 editorial photograph for Pico Social, a Brazilian sand-sports community app. Close, candid scene of two clearly adult beach volleyball teammates, a Black woman and a tan man, in a relaxed low-five gesture after a game, natural hands correctly formed meeting at waist height. Frame from shoulders to knees with the gesture central and fully visible, not faces; woman in cocoa brown sports top and warm cream shorts, man in muted lavender athletic shirt and dark cocoa shorts. A volleyball held naturally under the man's other arm, sand court and soft net in background. The photograph is about companionship and small rituals, not competition. Soft diffused afternoon light, realistic skin and sand texture, cream/butter/cocoa/lavender art direction, modern premium editorial fashion-sports sensibility, restrained warmth, natural color. No text, no logos, no UI, no medals, no dramatic stadium, no stock photo pose. Keep the hands and ball within central 65% for flexible use in a graphic layout."
+    }
+  ]
+}
