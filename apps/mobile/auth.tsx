@@ -20,7 +20,7 @@ export function AuthScreen({ notice, onAuthenticationStart, onAuthenticated, onG
     try {
       const email = String(values.get('email') || '');
       const password = String(values.get('password') || '');
-      if (mode === 'sign_up') await api.signUp(String(values.get('name') || ''), email, password);
+      if (mode === 'sign_up') await api.signUp(String(values.get('name') || ''), email, password, values.get('terms') === 'accepted');
       else await api.signIn(email, password);
       await successHaptic();
       onAuthenticated();
@@ -49,16 +49,25 @@ export function AuthScreen({ notice, onAuthenticationStart, onAuthenticated, onG
           {mode === 'sign_up' && <Field label="Seu nome"><input name="name" required minLength={2} maxLength={60} autoComplete="name" /></Field>}
           <Field label="E-mail"><input name="email" required type="email" inputMode="email" autoCapitalize="none" autoCorrect="off" autoComplete="email" /></Field>
           <Field label="Senha" hint={mode === 'sign_up' ? 'Use pelo menos 12 caracteres.' : undefined}><input name="password" required minLength={mode === 'sign_up' ? 12 : 1} maxLength={128} type="password" autoComplete={mode === 'sign_up' ? 'new-password' : 'current-password'} /></Field>
+          {mode === 'sign_up' && <label className="terms-consent"><input type="checkbox" name="terms" value="accepted" required /><span>Li e aceito os <button type="button" className="text-button" onClick={() => void openExternal(legalUrls.terms)}>Termos</button> e as <button type="button" className="text-button" onClick={() => void openExternal(legalUrls.guidelines)}>Diretrizes da comunidade</button>.</span></label>}
           <Button type="submit" disabled={busy} className="full-width">{busy && <LoaderCircle className="spinner" size={18} aria-hidden="true" />}{busy ? 'Só um instante…' : mode === 'sign_in' ? 'Entrar' : 'Criar minha conta'}{!busy && <ArrowRight size={18} aria-hidden="true" />}</Button>
         </fieldset>
       </form>
       {error && <ErrorState message={error} />}
-      {mode === 'sign_up' && <Notice>Ao criar a conta, você aceita os <button type="button" className="text-button" onClick={() => void openExternal(legalUrls.terms)}>Termos</button> e as <button type="button" className="text-button" onClick={() => void openExternal(legalUrls.guidelines)}>Diretrizes</button>.</Notice>}
       <div className="local-entry"><span>Quer usar sem a nuvem?</span><Button type="button" variant="secondary" className="full-width" disabled={busy} onClick={onLocal}><Smartphone size={18} aria-hidden="true" />Usar só neste iPhone</Button><small>Seu perfil, suas arenas e seus jogos ficam neste aparelho. Nada é enviado automaticamente.</small></div>
       <div className="guest-entry"><span>Quer conhecer primeiro?</span><Button type="button" variant="secondary" className="full-width" disabled={busy} onClick={onGuest}>Ver como o Pico funciona</Button><small>Visita informativa, sem perfis ou conteúdo da comunidade.</small></div>
-      <button type="button" className="help-link" onClick={() => void openExternal(legalUrls.support)}>Precisa de ajuda?</button>
+      <LegalLinks />
     </section>
   </main>;
+}
+
+export function LegalLinks() {
+  return <nav className="guest-links" aria-label="Informações públicas">
+    <button type="button" onClick={() => void openExternal(legalUrls.privacy)}>Privacidade</button>
+    <button type="button" onClick={() => void openExternal(legalUrls.terms)}>Termos</button>
+    <button type="button" onClick={() => void openExternal(legalUrls.guidelines)}>Diretrizes</button>
+    <button type="button" onClick={() => void openExternal(legalUrls.support)}>Suporte</button>
+  </nav>;
 }
 
 export function GuestScreen({ onExit }: { onExit: () => void }) {
@@ -72,7 +81,7 @@ export function GuestScreen({ onExit }: { onExit: () => void }) {
       <div className="guest-feature"><CalendarDays size={22} aria-hidden="true" /><div><h3>Jogos só seus</h3><p>Registre partidas depois que acontecerem. Compartilhar é sempre uma ação separada.</p></div></div>
       <div className="guest-feature"><ShieldCheck size={22} aria-hidden="true" /><div><h3>Controle e privacidade</h3><p>Fotos privadas exigem acesso autorizado. Você pode denunciar, bloquear, exportar dados e excluir a conta.</p></div></div>
       <Button className="full-width" onClick={onExit}>Entrar ou criar conta<ArrowRight size={18} aria-hidden="true" /></Button>
-      <nav className="guest-links" aria-label="Informações públicas"><button type="button" onClick={() => void openExternal(legalUrls.privacy)}>Privacidade</button><button type="button" onClick={() => void openExternal(legalUrls.terms)}>Termos</button><button type="button" onClick={() => void openExternal(legalUrls.guidelines)}>Diretrizes</button><button type="button" onClick={() => void openExternal(legalUrls.support)}>Suporte</button></nav>
+      <LegalLinks />
     </section>
   </main>;
 }

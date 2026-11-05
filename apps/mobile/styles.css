@@ -437,3 +437,9 @@ form fieldset, .setup-form fieldset { display: grid; gap: 1rem; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
 }
+
+.terms-consent { display: flex; align-items: flex-start; gap: .65rem; margin: .25rem 0 1rem; font-size: .9rem; line-height: 1.4; }
+.terms-consent input { flex: none; width: 1.4rem; height: 1.4rem; margin-top: .1rem; accent-color: var(--primary, currentColor); }
+
+.terms-consent { display: flex; align-items: flex-start; gap: .65rem; margin: .25rem 0 1rem; font-size: .9rem; line-height: 1.4; }
+.terms-consent input { flex: none; width: 1.4rem; height: 1.4rem; margin-top: .1rem; }
