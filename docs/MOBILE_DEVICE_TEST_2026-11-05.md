@@ -51,3 +51,21 @@ Registro da primeira execução da matriz de `docs/MOBILE_APP.md` com o build De
 ## O que este registro não comprova
 
 Keychain, câmera/HEIC, permissões, Range/TUS com mídia real, VoiceOver, desempenho, Data Protection com aparelho bloqueado e ciclo de vida continuam exigindo execução no iPhone. As imagens do Simulator não substituem o aparelho.
+
+## Correções aplicadas (apps/mobile)
+
+| # | Achado | Correção | Verificação |
+| --- | --- | --- | --- |
+| 1 | Data vaza do diálogo | `input[type="date"]` sem largura intrínseca do iOS, `min-width: 0`, `max-width: 100%` e overflow horizontal contido | Simulator: campo alinhado aos outros |
+| 2 | Rolagem herdada entre abas | `window.scrollTo(0, 0)` ao trocar de aba | Simulator: Arenas abre no topo |
+| 3 | Teclado cobre ações | Sem foco automático no nome do perfil inicial; com teclado aberto, o diálogo usa a altura real do contêiner (`max-height: 100%`) e a barra do botão fica fixa no fim | Simulator: três campos e o botão acima do teclado |
+| 4 | Adicionar arena/Registrar jogo do Início | A ação principal abre o formulário na aba de destino | Simulator: Registrar jogo abre direto |
+| 5 | Pílula da aba na borda | Padding lateral `max(.6rem, safe-area)` na barra | Simulator: margem visível nas duas pontas |
+| 6 | Margens mudam | Provável efeito do item 1 (conteúdo mais largo que a tela). Não reproduziu depois da correção | Simulator |
+| 7 | Contraste | Avatar com `color` próprio (a regra do cartão sobrescrevia); arco do auth atrás do texto; barra de status volta a texto claro quando o hero Manteiga sai da tela | Simulator (avatar, arco). Barra de status só por leitura de código |
+| 8 | Splash curto | Não alterado: a arte é ativo de marca. A imagem aparece como faixa com margens Papel, não preenche a tela. Decisão de marca pendente | Simulator |
+| extra | Moldura de foco no título após abrir | `outline: none` para `h1/h2[tabindex="-1"]` (foco programático para VoiceOver, sem anel) | Simulator |
+
+Descoberta durante a correção: o WebView já encolhe quando o teclado abre, então descontar a altura do teclado contava duas vezes. O problema original era `svh` ignorar o teclado.
+
+Validação: lint, `tsc --noEmit` (os avisos TS2688 vêm de pastas duplicadas "… 2" no `node_modules` do checkout principal, não do código), 329 testes e `native:verify` 12/12. O build Debug corrigido foi instalado e aberto no iPhone 15; o responsável ainda não confirmou visualmente as correções no aparelho.
