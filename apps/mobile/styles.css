@@ -78,7 +78,7 @@
 }
 
 * { box-sizing: border-box; }
-html { min-width: 280px; background: var(--background); font-size: 100%; font: -apple-system-body; font-family: var(--font-body); -webkit-text-size-adjust: 100%; }
+html { min-width: 280px; max-width: 100%; overflow-x: clip; background: var(--background); font-size: 100%; font: -apple-system-body; font-family: var(--font-body); -webkit-text-size-adjust: 100%; }
 body { min-height: 100vh; min-height: 100svh; margin: 0; overflow-wrap: anywhere; background: var(--background); color: var(--foreground); font-family: var(--font-body); font-size: 1rem; font-weight: 400; line-height: 1.55; -webkit-font-smoothing: antialiased; }
 button, input, textarea, select { font: inherit; }
 button, a, summary, select { -webkit-tap-highlight-color: transparent; }
@@ -114,6 +114,8 @@ svg { flex: 0 0 auto; stroke-width: 1.75; }
 .field { display: grid; gap: .4rem; min-width: 0; font-size: .9rem; font-weight: 700; }
 .field > small { color: var(--secondary); font-weight: 500; }
 input, textarea, select { width: 100%; min-height: 3rem; border: 1px solid var(--control); border-radius: .9rem; padding: .72rem .85rem; color: var(--foreground); background: var(--surface); caret-color: var(--accent); }
+input[type="date"], input[type="time"] { display: block; min-width: 0; max-width: 100%; -webkit-appearance: none; appearance: none; text-align: start; }
+input[type="date"]::-webkit-date-and-time-value { min-width: 0; text-align: start; }
 textarea { min-height: 5.75rem; resize: vertical; }
 select { appearance: none; padding-right: 2.25rem; background-image: linear-gradient(45deg, transparent 50%, var(--foreground) 50%), linear-gradient(135deg, var(--foreground) 50%, transparent 50%); background-position: calc(100% - 17px) 21px, calc(100% - 12px) 21px; background-size: 5px 5px; background-repeat: no-repeat; }
 fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
@@ -153,6 +155,7 @@ form fieldset, .setup-form fieldset { display: grid; gap: 1rem; }
 .auth-brand { position: relative; min-height: 37vh; min-height: 37svh; overflow: hidden; padding: max(3rem, calc(env(safe-area-inset-top) + 2rem)) 1.5rem 2rem; color: var(--cacau); background: var(--manteiga); }
 .auth-brand::after { content: ""; position: absolute; right: -4rem; bottom: -6rem; width: 15rem; height: 15rem; border: 2rem solid var(--lavanda); border: 2rem solid color-mix(in srgb, var(--lavanda) 65%, transparent); border-radius: 52% 48% 40% 60%; transform: rotate(-16deg); }
 .auth-brand .pico-mark { font-size: 2.5rem; }
+.auth-brand > * { position: relative; z-index: 1; }
 .auth-brand > p { margin: 2.25rem 0 .5rem; font-size: .77rem; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
 .auth-brand h1 { position: relative; z-index: 1; max-width: 9ch; margin: 0; font-size: clamp(2.25rem, 12vw, 3.6rem); line-height: .98; }
 .auth-form-panel { width: min(100%, 34rem); margin-inline: auto; padding: 1.25rem 1.25rem max(2rem, env(safe-area-inset-bottom)); }
@@ -202,7 +205,7 @@ form fieldset, .setup-form fieldset { display: grid; gap: 1rem; }
 @keyframes settle { from { opacity: 0; transform: translateY(8px); } }
 .screen-heading { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
 .screen-heading h1 { margin: .25rem 0 0; font-size: clamp(2rem, 10vw, 3rem); line-height: 1; }
-.tab-bar { position: fixed; z-index: 20; right: 0; bottom: 0; left: 0; min-height: calc(var(--tab-height) + env(safe-area-inset-bottom)); display: grid; grid-template-columns: repeat(5, 1fr); align-items: start; padding: .35rem .25rem env(safe-area-inset-bottom); border-top: 1px solid var(--border); background: var(--surface); background: color-mix(in srgb, var(--surface) 94%, transparent); backdrop-filter: blur(22px); }
+.tab-bar { position: fixed; z-index: 20; right: 0; bottom: 0; left: 0; min-height: calc(var(--tab-height) + env(safe-area-inset-bottom)); display: grid; grid-template-columns: repeat(5, 1fr); align-items: start; padding: .35rem max(.6rem, env(safe-area-inset-right)) env(safe-area-inset-bottom) max(.6rem, env(safe-area-inset-left)); border-top: 1px solid var(--border); background: var(--surface); background: color-mix(in srgb, var(--surface) 94%, transparent); backdrop-filter: blur(22px); }
 .tab-bar button { min-width: 0; min-height: 3.625rem; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .18rem; border: 0; border-radius: .8rem; color: var(--secondary); background: transparent; font-size: clamp(.58rem, 2.6vw, .7rem); line-height: 1.2; }
 .tab-bar button svg { width: 1.375rem; height: 1.375rem; }
 .tab-bar button[aria-current="page"] { color: var(--foreground); background: var(--soft); font-weight: 750; }
@@ -394,6 +397,7 @@ form fieldset, .setup-form fieldset { display: grid; gap: 1rem; }
 .local-profile-card h2, .local-profile-card p { margin: 0; }
 .local-profile-card h2 { font-size: 1.35rem; }
 .local-profile-card p, .local-profile-card span { color: var(--secondary); }
+.local-profile-card .local-avatar { color: var(--cacau); }
 .local-profile-card > .button { grid-column: 1 / -1; justify-self: start; }
 .local-data-section { display: grid; gap: .65rem; }
 .local-data-section h2 { margin: 0; font-size: 1.1rem; }
@@ -412,6 +416,9 @@ form fieldset, .setup-form fieldset { display: grid; gap: 1rem; }
 .modal-open { overflow: hidden; }
 .modal-layer { position: fixed; z-index: 50; inset: 0; display: flex; align-items: flex-end; justify-content: center; padding-top: max(1rem, env(safe-area-inset-top)); background: rgb(20 14 12 / 48%); backdrop-filter: blur(3px); animation: scrim-in var(--motion-standard) var(--motion-ease); }
 .modal-sheet { width: min(100%, 42rem); max-height: 94vh; max-height: 94svh; overflow: auto; padding: 1rem 1.15rem max(1.25rem, env(safe-area-inset-bottom)); border-radius: 1.5rem 1.5rem 0 0; background: var(--raised); box-shadow: var(--shadow); animation: sheet-in var(--motion-standard) var(--motion-ease); }
+.keyboard-open .modal-sheet { max-height: 100%; }
+.keyboard-open .modal-sheet .form-actions { position: sticky; z-index: 1; bottom: calc(-1 * max(1.25rem, env(safe-area-inset-bottom))); margin-inline: -1.15rem; padding: .6rem 1.15rem .75rem; border-top: 1px solid var(--border); background: var(--raised); }
+h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
 @keyframes sheet-in { from { transform: translateY(22px); opacity: .7; } }
 @keyframes scrim-in { from { opacity: 0; } }
 @keyframes sheet-out { to { transform: translateY(22px); opacity: 0; } }

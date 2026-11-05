@@ -1,3 +1,13 @@
+## 2026-11-05: correções de layout do cliente iOS local
+
+- Data do jogo não vaza mais do diálogo; abas abrem no topo; o diálogo cabe acima do teclado com o botão fixo; o perfil inicial não abre o teclado sozinho; a ação principal do Início abre o formulário; abas ganham margem lateral; avatar e arco do login com contraste correto; sem anel de foco nos títulos. Splash (arte de marca) segue como decisão pendente. Validado em Simulator; iPhone físico instalado, sem confirmação visual ainda.
+
+## 2026-11-05: primeiro teste em iPhone físico e achados de layout
+
+- Build Debug assinado com Personal Team instalado e aberto num iPhone 15; pacote sem `server.url`. O ID da Team não foi gravado no repositório. Registro em `docs/MOBILE_DEVICE_TEST_2026-11-05.md` com aparelho e Simulator separados e oito achados de layout a corrigir. Sem deploy, upload ou alteração de Supabase.
+
+
+
 ## 2026-11-05: ajuda para recuperar a senha
 
 - Suporte ganhou "Esqueci minha senha" com passo a passo e "O e-mail não chegou"; o login ganhou "Precisa de ajuda?". `/redefinir-senha` agora diz 12 caracteres e `/recuperar` aponta para o Suporte quando o envio está desligado.

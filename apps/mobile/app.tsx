@@ -177,12 +177,17 @@ export function MobileApp() {
   useEffect(() => {
     const darkMode = matchMedia('(prefers-color-scheme: dark)');
     const sync = () => {
-      const butterAtTop = state.status === 'signed_out' || state.status === 'guest';
-      void setStatusBarContrast(butterAtTop || !darkMode.matches);
+      const butterHero = state.status === 'signed_out' || state.status === 'guest';
+      const heroVisible = window.scrollY < window.innerHeight * 0.28;
+      void setStatusBarContrast((butterHero && heroVisible) || !darkMode.matches);
     };
     sync();
     darkMode.addEventListener('change', sync);
-    return () => darkMode.removeEventListener('change', sync);
+    window.addEventListener('scroll', sync, { passive: true });
+    return () => {
+      darkMode.removeEventListener('change', sync);
+      window.removeEventListener('scroll', sync);
+    };
   }, [state.status]);
 
   useEffect(() => {
