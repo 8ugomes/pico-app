@@ -12,7 +12,7 @@ import {
   Trash2,
   UserRound,
 } from 'lucide-react';
-import { PicoMark } from './auth';
+import { LegalLinks, PicoMark } from './auth';
 import { createId } from './id';
 import {
   LOCAL_SPORTS,
@@ -450,6 +450,7 @@ function LocalProfile({ workspace, busy, error, onClearError, onPersist, onExpor
       <p>Remove seu perfil, {workspace.arenas.length === 1 ? 'uma arena' : `${workspace.arenas.length} arenas`} e {workspace.games.length === 1 ? 'um jogo' : `${workspace.games.length} jogos`} deste iPhone.</p>
       <Button type="button" variant="danger" disabled={busy} onClick={() => { onClearError(); setConfirmation(''); setEraseOpen(true); }}><Trash2 size={18} aria-hidden="true" />Apagar tudo</Button>
     </section>
+    <LegalLinks />
     <Modal open={editing} title="Editar perfil local" onClose={() => { if (!busy) { setEditing(false); onClearError(); } }}>
       <ProfileEditor key={`${workspace.profile.name}-${workspace.profile.sport}-${workspace.profile.city}`} profile={workspace.profile} busy={busy} error={error} onClearError={onClearError} onPersist={onPersist} onDone={() => setEditing(false)} />
     </Modal>

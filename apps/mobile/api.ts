@@ -1,4 +1,5 @@
 import { mobileConfig } from './config';
+import { MOBILE_TERMS_VERSION } from '../../src/lib/mobile/terms.ts';
 import {
   clearAccountDeletionIntent,
   clearAccountLocalContent,
@@ -94,10 +95,11 @@ class PicoApi {
     return session.user;
   }
 
-  async signUp(name: string, email: string, password: string) {
+  async signUp(name: string, email: string, password: string, termsAccepted: boolean) {
+    if (!termsAccepted) throw new Error('Para criar a conta, aceite os Termos e as Diretrizes.');
     await this.cancelPendingRestore();
     const generation = this.#sessionGeneration.capture();
-    const session = await this.#auth({ action: 'sign_up', name, email, password });
+    const session = await this.#auth({ action: 'sign_up', name, email, password, termsAccepted: true, termsVersion: MOBILE_TERMS_VERSION });
     if (!await this.#accept(session, generation)) throw sessionEndedError();
     return session.user;
   }

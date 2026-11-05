@@ -1106,6 +1106,18 @@ O teste da CSP falhou antes da correção e passou depois, confirmando a origem 
 
 [PR #37](https://github.com/8ugomes/pico-app/pull/37) integrado após CI verde; main `8b93147f07b3`. O primeiro pedido de deploy recebeu uma falha transitória de autorização na Vercel, sem mudar dados (inventário 122/122). A repetição do mesmo `scripts/deploy.mjs --stage` criou `dpl_BEAmg2pDbMN2ENinDYyYKMSyBtpU` no projeto `pico-app`; o inventário preservou 122/122 linhas, sem perda ou edição. Stage respondeu versão `8b93147f07b3`, saúde banco/Auth 200, login 200, acesso anônimo 401 e CSP com `https://bxjhqxdfknspxezgftyz.storage.supabase.co` em `connect-src`. Após promoção, `https://pico-app-sepia.vercel.app` respondeu os mesmos sinais. Não houve migration ou conteúdo de teste no principal. Uma nova tentativa de upload no Android físico ainda depende da pessoa que relatou a falha; a validação conectada ocorreu em Chrome móvel emulado no desenvolvimento exclusivo.
 
+## Frente 2: iPhone pronto para as lojas · 05/11/2026
+
+Resultado: código e documentos prontos para App Store, sem submeter. Área: `apps/mobile`, `/api/mobile/v1/auth`, skills, `docs/STORE_READINESS.md`. Não objetivos: deploy, migration, Auth/flags, assinatura, upload, DMs/push/métricas, decisões jurídicas ou de identidade.
+
+Aceite e evidência:
+- Cadastro só com aceite explícito: aceito `termsAccepted:true` + versão vigente; rejeitado ausência, `'true'`, versão antiga, chaves extras; falha mostra mensagem pt-BR. Evidência: `tests/mobile-store-readiness.test.mjs`.
+- Links legais visíveis em entrada, visita, modo local e Conta (URLs vêm de `legalUrls`, sem inventar domínio/contato).
+- Denúncia, bloqueio e exclusão: contrato cliente/servidor e UI sem e-mail/chat testados; fluxo real exige backend conectado (pendente).
+- Matriz de requisitos com fonte e data; decisões do dono listadas, nenhuma tomada.
+
+Limites: Supabase real, aparelho e contas Apple/Google continuam gates humanos; preflight permanece 7/16.
+
 ## Gramática de movimento · FRENTE 1 · PLAN · 2026-11-05
 
 Resultado observável: o cliente iPhone (`apps/mobile`) e a PWA usam uma só gramática de movimento, derivada de `DESIGN.md` (160/220/280 ms e a curva `motion-ease`), com tokens, entrada de listas, folhas e diálogos com saída, menus, abas e seleção, e estados de carregamento. Movimento reduzido remove deslocamento e animação e o estado continua legível por texto, cor e `aria-*`.

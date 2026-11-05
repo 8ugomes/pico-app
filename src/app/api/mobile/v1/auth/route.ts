@@ -8,6 +8,7 @@ import {
   readMobileJson,
   validateMobileRequest,
 } from '@/lib/mobile/api-contract';
+import { parseMobileSignUp } from '@/lib/mobile/signup';
 import { createMobileAuthClient } from '@/lib/mobile/supabase';
 
 export const dynamic = 'force-dynamic';
@@ -84,12 +85,8 @@ export async function POST(request: Request) {
     }
 
     if (action === 'sign_up') {
-      exactKeys(body, ['action', 'email', 'password', 'name']);
-      const email = text(body.email, 3, 254).toLowerCase();
-      const password = secret(body.password, 12, 128);
-      const name = text(body.name, 2, 60);
-      if (!emailPattern.test(email)) throw new MobileRequestError(400, 'invalid_input', 'Confira o e-mail e tente de novo.');
-      const { data, error } = await client.auth.signUp({ email, password, options: { data: { display_name: name } } });
+      const signUp = parseMobileSignUp(body);
+      const { data, error } = await client.auth.signUp({ email: signUp.email, password: signUp.password, options: { data: signUp.metadata } });
       authFailure(error);
       return mobileJson(request, { data: sessionData(data.session), apiVersion: MOBILE_API_VERSION }, { status: 201 });
     }

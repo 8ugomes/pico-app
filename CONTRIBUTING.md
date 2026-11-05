@@ -23,7 +23,7 @@ Instale com `npm ci`, sem `sudo`, usando o cache local definido em `.npmrc`. Nã
 3. Confira `git status` e preserve trabalho existente. Crie uma branch `codex/<assunto>` ou outra solicitada pelo responsável a partir de uma `main` atualizada.
 4. Leia a documentação da versão instalada do Next em `node_modules/next/dist/docs/` antes de alterar APIs/convenções. Não assumir comportamento de versões anteriores.
 
-As [17 skills locais](docs/pico-skills.md) estão em `.agents/skills`, com referências e procedência. São arquivos portáteis, legíveis por qualquer editor/agente; não exigem plugins pessoais do Codex. [PRODUCT.md](PRODUCT.md), [BRIEF.md](BRIEF.md) e [DESIGN.md](DESIGN.md) dão entradas curtas para produto e design.
+As [18 skills locais](docs/pico-skills.md) estão em `.agents/skills`, com referências e procedência (a `mobile-submission` apoia a auditoria de submissão; não executa as CLIs das lojas). São arquivos portáteis, legíveis por qualquer editor/agente; não exigem plugins pessoais do Codex. [PRODUCT.md](PRODUCT.md), [BRIEF.md](BRIEF.md) e [DESIGN.md](DESIGN.md) dão entradas curtas para produto e design.
 
 ## Configuração e dados
 

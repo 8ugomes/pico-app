@@ -95,6 +95,10 @@ Depois do ensaio, `npm run native:verify` sincroniza novamente a configuração 
 
 No Capacitor 8 para iOS, o caminho inicial deve estar na própria `server.url`; `server.appStartPath` também participa da validação do arquivo local e fez o app encerrar ao procurar `public/feed`. A configuração e o teste de regressão preservam esse detalhe.
 
+## Prontidão para as lojas (05/11/2026)
+
+[STORE_READINESS](STORE_READINESS.md) compara os requisitos Apple, Google Play e ECA Digital com o estado real. Implementado: aceite explícito dos Termos no cadastro (`terms_required` no servidor) e links legais em todas as entradas. Verificado: testes locais e `native:verify`. Depende de aparelho/conta: backend real, iPhone físico, Apple Developer, revisão jurídica. Nada foi submetido.
+
 ## Plano por gates
 
 ### N0 · Fundação reproduzível — concluída localmente
