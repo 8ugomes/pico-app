@@ -1,3 +1,12 @@
+## Recuperação de senha e ajuda de acesso · PLAN · 05/11/2026
+
+Objetivo: quem esquece a senha encontra, no login e no Suporte, um caminho explicado para recuperar a conta. O fluxo `/recuperar` → e-mail → `/redefinir-senha` já existe e permanece desligado (`emailDeliveryEnabled: false`) até o envio real ser provado.
+
+1. Exemplo aceito: no login, "Esqueci minha senha" e "Precisa de ajuda?" levam a passos claros, com 12 caracteres mínimos. Rejeitado: dizer que um e-mail foi enviado sem SMTP/entrega validados. Falha/recuperação: se o e-mail não chegar, o Suporte diz que a recuperação não alcança aquele endereço agora.
+2. Entregue nesta rodada (código): Suporte com passo a passo, link de ajuda no login, cópia de 12 caracteres em `/redefinir-senha`, aviso útil em `/recuperar`.
+3. Pendente, depende do responsável: provar a entrega (SMTP padrão do Supabase só alcança membros da organização, com limite baixo), aplicar templates `token_hash` com `scripts/configure-auth.mjs`, publicar com `NEXT_PUBLIC_PICO_EMAIL_TEMPLATES=custom` e só então ligar `emailDeliveryEnabled`.
+4. Fora desta rodada: troca de senha dentro de `/conta` (não existe hoje).
+
 > Fechamento operacional de 28/09/2026: o PR #45 foi integrado e `7d5a7afd17a6` está publicado no domínio principal. As duas migrations pendentes foram aplicadas após backup cifrado e os inventários preservaram 131/131 identidades. Origem canônica configurada; mensuração, intenção social, DMs e push seguem desligados. A validação autenticada com duas contas controladas continua como próximo gate, sem habilitar coleta. [Recibo](PRODUCT_MEASUREMENT.md#recibo-da-janela-de-28092026).
 
 ## Consolidação do repositório e continuidade · PLAN · 23/10/2026
@@ -1108,3 +1117,29 @@ Aceite e evidência:
 - Matriz de requisitos com fonte e data; decisões do dono listadas, nenhuma tomada.
 
 Limites: Supabase real, aparelho e contas Apple/Google continuam gates humanos; preflight permanece 7/16.
+
+## Gramática de movimento · FRENTE 1 · PLAN · 2026-11-05
+
+Resultado observável: o cliente iPhone (`apps/mobile`) e a PWA usam uma só gramática de movimento, derivada de `DESIGN.md` (160/220/280 ms e a curva `motion-ease`), com tokens, entrada de listas, folhas e diálogos com saída, menus, abas e seleção, e estados de carregamento. Movimento reduzido remove deslocamento e animação e o estado continua legível por texto, cor e `aria-*`.
+
+Diagnóstico inicial: o CSS móvel tinha durações e curvas soltas (`160ms ease`, `.9s`, `1.3s`), sem tokens; a PWA já tinha tokens `--motion-*`, mas com literais em `journey.css`, `install.css` e no `spinner`. `framer-motion` estava nas dependências sem nenhum import. A folha móvel (`Modal`) desmontava sem animação de saída; abas, segmentos, menus e listas não tinham resposta de movimento.
+
+Decisão de ferramenta: **CSS puro**. Medida com esbuild (minificado, React 19 como base): `framer-motion` com `LazyMotion` + `domAnimation` + `AnimatePresence` soma cerca de 85 kB (30 kB gzip) ao `app.js` móvel de 447 kB (+19%); `motion` completo soma cerca de 132 kB (43 kB gzip). CSS puro soma 0 kB e cobre tudo o que o produto precisa (opacidade, translação curta, escala de toque). Saída de folha usa estado `closing` + `animationend`, sem biblioteca. A dependência não usada não foi removida nesta frente para não conflitar com `package-lock.json` da frente paralela; fica como limpeza proposta.
+
+Não objetivos: haptics novos, física/spring, animações de página inteira, gestos de arrastar para fechar, qualquer mudança de Auth, Supabase, flags, deploy ou lojas. Nenhuma animação de sucesso antes da resposta do servidor.
+
+Fatias (cada uma com commit e push da branch):
+
+1. Tokens e guarda de teste: `--motion-fast/standard/brand/ease`, `--motion-stagger`, `--motion-spin/shimmer/demo` no cliente móvel; literais da PWA trocados por tokens; teste que rejeita duração ou curva fora dos tokens e exige a regra de movimento reduzido por último.
+2. Listas e telas: entrada com atraso escalonado limitado aos primeiros itens; troca de aba com `settle` nos tokens.
+3. Folhas e diálogos: `Modal` com saída (`closing`), sem saída sob movimento reduzido; foco devolvido como hoje.
+4. Publicação: botão pendente com `aria-busy`; sucesso só depois da resposta confirmada do servidor (já é o fluxo; passa a ser coberto por teste).
+5. Menus, abas e seleção: menu `row-menu` com entrada, aba ativa e segmentos com transição de cor/fundo, `ChoiceChip` e rádios sem salto.
+
+Aceite: (a) nenhum `transition`/`animation` móvel ou da PWA usa duração ou curva fora dos tokens; (b) a última regra do CSS móvel é a de `prefers-reduced-motion: reduce` e zera animação e transição; (c) `Modal` exibe a saída e só então desmonta, e desmonta de imediato sob movimento reduzido ou se `animationend` não chegar; (d) o texto de sucesso nunca aparece antes do `await` do servidor; (e) 320/390 px, claro/escuro e texto ampliado sem corte ou salto de layout nas telas amostradas. Exemplo aceito: abrir a folha, fechar, ver 220 ms de saída. Rejeitado: `transition: all .3s ease` novo. Falha/recuperação: `animationend` ausente (aba em segundo plano) desmonta por temporizador de segurança de 400 ms.
+
+Verificação proporcional: `eslint`, `typecheck`, `npm test`, `npm run build` e `mobile:build`; conferência de tela no Browser em 320/390 px, claro/escuro, texto ampliado e movimento reduzido emulado. Dependem de aparelho ou conta: medição de fluidez em iPhone físico e Dynamic Type real do iOS.
+
+### Gramática de movimento · resultado · 2026-11-05
+
+Implementado: tokens e guarda de teste; listas escalonadas; saída de folhas e diálogos; `aria-busy` em publicação e curtida; abas, segmentos, menus e avisos; PWA com literais trocados por tokens. Verificado: critérios (a) a (d) por `tests/motion-grammar.test.mjs`; (e) por amostra do cliente compilado em 320/390 px, claro/escuro e texto a 160% (sem rolagem horizontal, abas com geometria estável). Pendente: aparelho físico (fluidez, Dynamic Type e movimento reduzido reais). Decisões do dono: manter a curtida otimista ou aguardar o servidor; remover `framer-motion` das dependências em PR próprio. Limite: o menu `<details>` não tem saída animada.

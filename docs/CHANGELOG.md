@@ -4,6 +4,29 @@
 - **Documentado:** [STORE_READINESS](STORE_READINESS.md) com matriz Apple, Google Play e Brasil (fontes e data de consulta, itens "não verificado") e decisões do dono, nenhuma decidida.
 - **Verificado:** preflight 7/16, 9 gates humanos, 0 falhas técnicas; eslint, typecheck, 334 testes e `native:verify` passam. **Depende de aparelho ou conta:** Supabase real (503 em 23/10), iPhone físico, Apple Developer, revisão jurídica. Sem deploy, migration, alteração de Auth/flags ou envio às lojas.
 
+## 2026-11-05: correções de layout do cliente iOS local
+
+- Data do jogo não vaza mais do diálogo; abas abrem no topo; o diálogo cabe acima do teclado com o botão fixo; o perfil inicial não abre o teclado sozinho; a ação principal do Início abre o formulário; abas ganham margem lateral; avatar e arco do login com contraste correto; sem anel de foco nos títulos. Splash (arte de marca) segue como decisão pendente. Validado em Simulator; iPhone físico instalado, sem confirmação visual ainda.
+
+## 2026-11-05: primeiro teste em iPhone físico e achados de layout
+
+- Build Debug assinado com Personal Team instalado e aberto num iPhone 15; pacote sem `server.url`. O ID da Team não foi gravado no repositório. Registro em `docs/MOBILE_DEVICE_TEST_2026-11-05.md` com aparelho e Simulator separados e oito achados de layout a corrigir. Sem deploy, upload ou alteração de Supabase.
+
+
+
+## 2026-11-05: ajuda para recuperar a senha
+
+- Suporte ganhou "Esqueci minha senha" com passo a passo e "O e-mail não chegou"; o login ganhou "Precisa de ajuda?". `/redefinir-senha` agora diz 12 caracteres e `/recuperar` aponta para o Suporte quando o envio está desligado.
+- O envio de e-mail continua desligado (`emailDeliveryEnabled: false`): não há SMTP próprio nem entrega comprovada. Nenhuma configuração do Supabase, deploy ou e-mail real foi feito nesta entrada.
+
+## 2026-11-05: gramática de movimento no iPhone e na PWA
+
+- Tokens `--motion-fast/standard/brand/ease`, `--motion-stagger` e laços no cliente móvel; literais de `journey.css`, `install.css` e do spinner da PWA passaram aos tokens. Novo `tests/motion-grammar.test.mjs` rejeita duração ou curva fora dos tokens, `transition: all`, exige o movimento reduzido como última regra do CSS móvel e a regra universal da PWA.
+- Listas com entrada escalonada, folhas e diálogos com saída (inertes durante a animação, desmontagem por `animationend` com limite de segurança, imediata sob movimento reduzido), menus, abas, segmentos e botões com resposta de toque, carregamento com atraso de 160 ms e avisos com entrada curta.
+- Publicação e curtida ficam `aria-busy` até a resposta; o sucesso continua só depois da confirmação do servidor e não ganhou animação de celebração.
+- CSS puro em vez de `framer-motion` (cerca de +85 kB, +30 kB gzip no `app.js` de 447 kB); a dependência segue sem uso e sua remoção ficou como limpeza proposta.
+- Fora do escopo e não feito: haptics novos, deploy, migrations, Supabase/Auth/flags, lojas. Fluidez em iPhone físico e Dynamic Type real seguem como gate N3 aberto.
+
 ## 2026-10-23: consolidação do GitHub e continuidade em outros ambientes
 
 - Trabalho local do iPhone (`ded13ea`) reunido à linha de integração, preservando histórico, PWA e contratos conectados. O diário agora conserva o snapshot da arena quando a edição muda somente nota/data/modalidade; trocar de arena continua explícito e possui regressão comportamental.
