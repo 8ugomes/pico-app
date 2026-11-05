@@ -145,11 +145,15 @@ test('native package exposes a locked iOS Simulator build without Apple provisio
   assert.match(capacitorPackage?.state?.revision || '', /^[0-9a-f]{40}$/);
 });
 
-test('iOS launch screen preserves the complete Pico Club artwork on tall displays', () => {
+test('iOS launch screen fills tall displays with the brand background and the logo arrives in the web intro', () => {
   const launchScreen = readFileSync('ios/App/App/Base.lproj/LaunchScreen.storyboard', 'utf8');
+  const shell = readFileSync('native-shell/index.html', 'utf8');
 
-  assert.match(launchScreen, /contentMode="scaleAspectFit"/);
-  assert.doesNotMatch(launchScreen, /contentMode="scaleAspectFill"/);
+  // Fundo portrait em tela cheia, sem faixa; a logo inteira fica na abertura web e na capa nativa.
+  assert.match(launchScreen, /contentMode="scaleAspectFill"/);
+  assert.doesNotMatch(launchScreen, /contentMode="scaleAspectFit"/);
+  assert.match(shell, /id="pico-intro"/);
+  assert.match(shell, /src="intro-logo\.svg"/);
 });
 
 test('the first iOS release targets iPhone until the iPad experience is validated', () => {

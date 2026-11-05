@@ -126,6 +126,7 @@ export function renderMobileIndex(settings, { hasCss = true } = {}) {
     <title>Pico Social</title>
   </head>
   <body>
+    <div id="pico-intro" aria-hidden="true"><div class="pico-intro-bg"></div><img class="pico-intro-logo" src="intro-logo.svg" alt="" width="420" height="420" /></div>
     <div id="root"><noscript>Ative o JavaScript para usar o Pico Social.</noscript></div>
     <script src="mobile-config.js"></script>
     <script type="module" src="app.js"></script>
@@ -195,7 +196,7 @@ export async function buildMobile({ root = defaultRoot, environment = process.en
     jsx: 'automatic',
     legalComments: 'none',
     logLevel: 'info',
-    loader: { '.woff2': 'file' },
+    loader: { '.woff2': 'file', '.jpg': 'file' },
     metafile: true,
     minify: settings.production,
     platform: 'browser',
@@ -223,6 +224,7 @@ export async function buildMobile({ root = defaultRoot, environment = process.en
     copyFile(resolve(brandDirectory, 'fonts/syne.woff2'), resolve(outputDirectory, 'syne.woff2')),
     copyFile(resolve(brandDirectory, 'fonts/manrope.woff2'), resolve(outputDirectory, 'manrope.woff2')),
     copyFile(resolve(brandDirectory, 'pico-club/icon-1024.png'), resolve(outputDirectory, 'pico-club.png')),
+    copyFile(resolve(root, 'apps/mobile/assets/intro-logo.svg'), resolve(outputDirectory, 'intro-logo.svg')),
     writeFile(resolve(outputDirectory, 'mobile-config.js'), renderMobileRuntimeConfig(settings), 'utf8'),
     writeFile(resolve(outputDirectory, 'index.html'), renderMobileIndex(settings, { hasCss }), 'utf8'),
     writeFile(resolve(outputDirectory, 'native-error.html'), renderNativeErrorPage(), 'utf8'),
@@ -240,6 +242,8 @@ export async function buildMobile({ root = defaultRoot, environment = process.en
       'native-error.html',
       'native-error.css',
       'pico-club.png',
+      'intro-background.jpg',
+      'intro-logo.svg',
       'syne.woff2',
       'manrope.woff2',
     ],

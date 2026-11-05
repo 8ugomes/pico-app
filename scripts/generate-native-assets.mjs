@@ -1,4 +1,4 @@
-import { copyFile, mkdir, readFile } from 'node:fs/promises';
+import { copyFile, mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import sharp from 'sharp';
@@ -73,17 +73,31 @@ async function generate() {
 
   await copyFile(iconSource, path.join(root, 'ios/App/App/Assets.xcassets/AppIcon.appiconset/AppIcon-512@2x.png'));
 
+  // O launch screen do iOS é só o fundo da marca em tela cheia: a logo entra animada
+  // pela abertura web (apps/mobile/assets) e pela capa de privacidade nativa.
   for (const name of [
     'splash-2732x2732.png',
     'splash-2732x2732-1.png',
     'splash-2732x2732-2.png',
   ]) {
     await writePng(
-      await splash(2732, 2732, logo),
+      sharp(backgroundSource).resize(1290, 2796, { fit: 'cover' }),
       path.join(root, 'ios/App/App/Assets.xcassets/Splash.imageset', name),
       { compressionLevel: 9, palette: true, quality: 88, colors: 256, effort: 10 },
     );
   }
+
+  const logoImageset = path.join(root, 'ios/App/App/Assets.xcassets/PicoLogo.imageset');
+  await writePng(sharp(logo).resize(1024, 1024), path.join(logoImageset, 'pico-logo.png'));
+  await writeFile(path.join(logoImageset, 'Contents.json'), JSON.stringify({
+    images: [{ idiom: 'universal', filename: 'pico-logo.png', scale: '1x' }],
+    info: { version: 1, author: 'xcode' },
+  }, null, 2) + '\n');
+
+  const introDirectory = path.join(root, 'apps/mobile/assets');
+  await mkdir(introDirectory, { recursive: true });
+  await sharp(backgroundSource).resize(1290, 2796, { fit: 'cover' }).jpeg({ quality: 82, mozjpeg: true }).toFile(path.join(introDirectory, 'intro-background.jpg'));
+  await writeFile(path.join(introDirectory, 'intro-logo.svg'), logo);
 
   const backgroundTarget = path.join(root, 'android/app/src/main/res/drawable-nodpi/pico_launcher_background.png');
   await writePng(sharp(backgroundSource).resize(1024, 1024), backgroundTarget);

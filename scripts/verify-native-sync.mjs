@@ -38,7 +38,7 @@ const dimensions = {
   'android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png': [432, 432],
   'android/app/src/main/res/drawable-port-xxxhdpi/splash.png': [1280, 1920],
   'android/app/src/main/res/drawable-land-xxxhdpi/splash.png': [1920, 1280],
-  'ios/App/App/Assets.xcassets/Splash.imageset/splash-2732x2732.png': [2732, 2732],
+  'ios/App/App/Assets.xcassets/Splash.imageset/splash-2732x2732.png': [1290, 2796],
 };
 for (const [path, [width, height]] of Object.entries(dimensions)) {
   const metadata = await sharp(path).metadata();

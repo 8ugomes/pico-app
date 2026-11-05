@@ -43,15 +43,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         cover.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         cover.backgroundColor = UIColor(red: 248 / 255, green: 243 / 255, blue: 231 / 255, alpha: 1)
 
-        let title = UILabel()
-        title.translatesAutoresizingMaskIntoConstraints = false
-        title.text = "Pico Social"
-        title.textColor = UIColor(red: 68 / 255, green: 52 / 255, blue: 47 / 255, alpha: 1)
-        title.font = .systemFont(ofSize: 28, weight: .semibold)
-        cover.addSubview(title)
+        // Same brand background as the launch screen, with the Pico logo, so the
+        // app switcher shows identity instead of private content.
+        let background = UIImageView(image: UIImage(named: "Splash"))
+        background.frame = cover.bounds
+        background.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        background.contentMode = .scaleAspectFill
+        background.clipsToBounds = true
+        cover.addSubview(background)
+
+        let logo = UIImageView(image: UIImage(named: "PicoLogo"))
+        logo.translatesAutoresizingMaskIntoConstraints = false
+        logo.contentMode = .scaleAspectFit
+        cover.addSubview(logo)
         NSLayoutConstraint.activate([
-            title.centerXAnchor.constraint(equalTo: cover.centerXAnchor),
-            title.centerYAnchor.constraint(equalTo: cover.centerYAnchor)
+            logo.centerXAnchor.constraint(equalTo: cover.centerXAnchor),
+            logo.centerYAnchor.constraint(equalTo: cover.centerYAnchor),
+            logo.widthAnchor.constraint(equalTo: cover.widthAnchor, multiplier: 0.9),
+            logo.heightAnchor.constraint(equalTo: logo.widthAnchor)
         ])
 
         window.addSubview(cover)

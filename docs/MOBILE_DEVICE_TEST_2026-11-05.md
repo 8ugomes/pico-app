@@ -81,3 +81,15 @@ Relato do responsável no aparelho: o splash ainda aparecia por menos de 1 s; ao
 | A meta `viewport` não bloqueava zoom | `maximum-scale=1, user-scalable=no`, `touch-action: manipulation` e `pinchGestureRecognizer` desativado no `PicoBridgeViewController`. Texto ampliado do sistema (Dynamic Type) continua funcionando |
 
 Verificação: lint, `tsc`, 340 testes e `native:verify` passam. No Simulator, uma pinça de dois dedos não alterou a escala. **A duração do splash e o piscar da capa não foram medidos no Simulator**: as capturas durante a abertura saem pretas e não são confiáveis. A confirmação fica para o iPhone, e o build desta rodada **não foi instalado no aparelho**, por pedido do responsável.
+
+## Terceira rodada: abertura animada e capa de privacidade
+
+Relato do responsável no iPhone 15 (com capturas): o splash durava cerca de 1 s, sem a animação vista no Claude Design, e a capa do seletor de apps era só o texto "Pico Social" sobre fundo liso. Pedido: algo mais bonito e com a identidade do Pico, para fechar a entrega no mesmo dia.
+
+- **Launch screen nativo:** agora é só o fundo da marca (campos Manteiga/Lavanda com grão) em tela cheia, retrato 1290x2796 e `scaleAspectFill`. A faixa quadrada com margens claras acabou.
+- **Abertura animada (web):** `#pico-intro` no `index.html`. O fundo faz um movimento lento de aproximação (2,6 s) e a logo Pico/Clube sobe e aparece (1 s, atraso de 0,18 s), com fade de saída de 0,45 s por volta de 2,3 s. Duração e curva usam tokens `--motion-intro-*`. Com movimento reduzido, não há animação: a logo aparece parada e o fade é cortado.
+- **Capa de privacidade:** mesmo fundo e a logo, em vez do texto. Continua instalada na hora e sai com fade de 0,2 s.
+- Ativos gerados por `npm run native:assets` a partir dos mestres Pico Club (`apps/mobile/assets/`, imageset `PicoLogo`). O arquivo do launch ainda se chama `splash-2732x2732.png` por compatibilidade, mas tem 1290x2796.
+- Teste `launch screen preserves the complete artwork` foi substituído: a decisão antiga (aspect fit, arte inteira) foi trocada a pedido do responsável.
+
+Verificação: lint, `tsc`, 340 testes e `native:verify` passam. A animação foi vista num navegador em largura de celular (primeiro quadro com a logo pequena e translúcida, depois inteira). Ela **não** foi vista no Simulator nem no aparelho: as capturas do Simulator durante a abertura saem pretas. A confirmação visual fica com o responsável no iPhone.

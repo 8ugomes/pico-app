@@ -1,3 +1,7 @@
+## 2026-11-05: abertura animada e capa de privacidade com a marca
+
+- Launch screen em tela cheia só com o fundo Manteiga/Lavanda; a logo entra animada pela abertura web (movimento do fundo, logo que sobe e aparece, fade de saída), com tokens de movimento e sem animação em movimento reduzido. A capa de privacidade nativa usa o mesmo fundo e a logo. Ativos regenerados dos mestres Pico Club; `native:verify` e o teste do launch screen atualizados. Visto em navegador; falta confirmar no aparelho.
+
 ## 2026-11-05: abertura e zoom no iPhone
 
 - Splash com duração mínima de 1,6 s e fade de 400 ms; capa de privacidade sai com fade de 0,2 s; zoom por pinça bloqueado (viewport, `touch-action` e gesto nativo), mantendo Dynamic Type. Validado por testes e Simulator (zoom); splash e capa pendentes de confirmação no aparelho.

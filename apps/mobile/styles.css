@@ -48,6 +48,10 @@
   --motion-stagger: 40ms;
   --motion-spin: 900ms;
   --motion-shimmer: 1300ms;
+  --motion-intro-drift: 2600ms;
+  --motion-intro-rise: 1000ms;
+  --motion-intro-delay: 180ms;
+  --motion-intro-leave: 450ms;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -483,6 +487,14 @@ h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
 .segmented button:active { transform: scale(.98); }
 .back-button, .text-button, .tour-trigger { transition: color var(--motion-fast) var(--motion-ease), background-color var(--motion-fast) var(--motion-ease), transform var(--motion-fast) var(--motion-ease); }
 .back-button:active, .text-button:active, .tour-trigger:active { transform: scale(.97); }
+
+/* Abertura animada: o launch screen nativo mostra só o fundo; a logo entra aqui. */
+#pico-intro { position: fixed; z-index: 1000; inset: 0; display: grid; place-items: center; overflow: hidden; background: var(--papel); opacity: 1; transition: opacity var(--motion-intro-leave) var(--motion-ease); }
+#pico-intro.is-leaving { opacity: 0; pointer-events: none; }
+.pico-intro-bg { position: absolute; inset: 0; background: var(--papel) url("./assets/intro-background.jpg") center / cover no-repeat; transform-origin: 62% 34%; animation: intro-drift var(--motion-intro-drift) var(--motion-ease) both; }
+.pico-intro-logo { position: relative; width: min(90vw, 26rem); height: auto; animation: intro-rise var(--motion-intro-rise) var(--motion-intro-delay) var(--motion-ease) both; }
+@keyframes intro-drift { from { transform: scale(1.12); } to { transform: scale(1); } }
+@keyframes intro-rise { from { opacity: 0; transform: translateY(18px) scale(.94); } 60% { opacity: 1; } to { opacity: 1; transform: none; } }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }

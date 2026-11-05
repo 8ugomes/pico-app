@@ -142,17 +142,30 @@ export async function selectionHaptic() {
   await Haptics.impact({ style: ImpactStyle.Light }).catch(() => undefined);
 }
 
-// The splash was leaving in well under a second. Keep it for a readable moment
-// after the web view starts, then fade it out while the first screen is ready.
-const SPLASH_MINIMUM_MS = 1600;
-const SPLASH_FADE_MS = 400;
+// O launch screen nativo é só o fundo da marca. A abertura animada (#pico-intro,
+// no index.html) assume na hora, toca por um momento legível e sai em fade.
+const INTRO_MINIMUM_MS = 2300;
+const INTRO_FADE_MS = 450;
+
+function dismissIntro(): Promise<void> {
+  const intro = document.getElementById('pico-intro');
+  if (!intro) return Promise.resolve();
+  intro.classList.add('is-leaving');
+  return new Promise((resolve) => setTimeout(() => {
+    intro.remove();
+    resolve();
+  }, INTRO_FADE_MS + 40));
+}
 
 export async function prepareNativeChrome() {
-  const remaining = Math.max(0, SPLASH_MINIMUM_MS - performance.now());
+  // A abertura web já está pintada, então o splash nativo pode sair sem lacuna.
+  const hideNativeSplash = SplashScreen.hide({ fadeOutDuration: 150 });
+  const remaining = Math.max(0, INTRO_MINIMUM_MS - performance.now());
   await Promise.allSettled([
-    new Promise<void>((resolve) => setTimeout(resolve, remaining)).then(() => SplashScreen.hide({ fadeOutDuration: SPLASH_FADE_MS })),
+    hideNativeSplash,
     StatusBar.setOverlaysWebView({ overlay: true }),
     StatusBar.setStyle({ style: Style.Light }),
+    new Promise<void>((resolve) => setTimeout(resolve, remaining)).then(dismissIntro),
   ]);
 }
 
