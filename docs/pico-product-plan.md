@@ -1096,3 +1096,25 @@ O teste da CSP falhou antes da correção e passou depois, confirmando a origem 
 ### Recibo da publicação
 
 [PR #37](https://github.com/8ugomes/pico-app/pull/37) integrado após CI verde; main `8b93147f07b3`. O primeiro pedido de deploy recebeu uma falha transitória de autorização na Vercel, sem mudar dados (inventário 122/122). A repetição do mesmo `scripts/deploy.mjs --stage` criou `dpl_BEAmg2pDbMN2ENinDYyYKMSyBtpU` no projeto `pico-app`; o inventário preservou 122/122 linhas, sem perda ou edição. Stage respondeu versão `8b93147f07b3`, saúde banco/Auth 200, login 200, acesso anônimo 401 e CSP com `https://bxjhqxdfknspxezgftyz.storage.supabase.co` em `connect-src`. Após promoção, `https://pico-app-sepia.vercel.app` respondeu os mesmos sinais. Não houve migration ou conteúdo de teste no principal. Uma nova tentativa de upload no Android físico ainda depende da pessoa que relatou a falha; a validação conectada ocorreu em Chrome móvel emulado no desenvolvimento exclusivo.
+
+## Gramática de movimento · FRENTE 1 · PLAN · 2026-11-05
+
+Resultado observável: o cliente iPhone (`apps/mobile`) e a PWA usam uma só gramática de movimento, derivada de `DESIGN.md` (160/220/280 ms e a curva `motion-ease`), com tokens, entrada de listas, folhas e diálogos com saída, menus, abas e seleção, e estados de carregamento. Movimento reduzido remove deslocamento e animação e o estado continua legível por texto, cor e `aria-*`.
+
+Diagnóstico inicial: o CSS móvel tinha durações e curvas soltas (`160ms ease`, `.9s`, `1.3s`), sem tokens; a PWA já tinha tokens `--motion-*`, mas com literais em `journey.css`, `install.css` e no `spinner`. `framer-motion` estava nas dependências sem nenhum import. A folha móvel (`Modal`) desmontava sem animação de saída; abas, segmentos, menus e listas não tinham resposta de movimento.
+
+Decisão de ferramenta: **CSS puro**. Medida com esbuild (minificado, React 19 como base): `framer-motion` com `LazyMotion` + `domAnimation` + `AnimatePresence` soma cerca de 85 kB (30 kB gzip) ao `app.js` móvel de 447 kB (+19%); `motion` completo soma cerca de 132 kB (43 kB gzip). CSS puro soma 0 kB e cobre tudo o que o produto precisa (opacidade, translação curta, escala de toque). Saída de folha usa estado `closing` + `animationend`, sem biblioteca. A dependência não usada não foi removida nesta frente para não conflitar com `package-lock.json` da frente paralela; fica como limpeza proposta.
+
+Não objetivos: haptics novos, física/spring, animações de página inteira, gestos de arrastar para fechar, qualquer mudança de Auth, Supabase, flags, deploy ou lojas. Nenhuma animação de sucesso antes da resposta do servidor.
+
+Fatias (cada uma com commit e push da branch):
+
+1. Tokens e guarda de teste: `--motion-fast/standard/brand/ease`, `--motion-stagger`, `--motion-spin/shimmer/demo` no cliente móvel; literais da PWA trocados por tokens; teste que rejeita duração ou curva fora dos tokens e exige a regra de movimento reduzido por último.
+2. Listas e telas: entrada com atraso escalonado limitado aos primeiros itens; troca de aba com `settle` nos tokens.
+3. Folhas e diálogos: `Modal` com saída (`closing`), sem saída sob movimento reduzido; foco devolvido como hoje.
+4. Publicação: botão pendente com `aria-busy`; sucesso só depois da resposta confirmada do servidor (já é o fluxo; passa a ser coberto por teste).
+5. Menus, abas e seleção: menu `row-menu` com entrada, aba ativa e segmentos com transição de cor/fundo, `ChoiceChip` e rádios sem salto.
+
+Aceite: (a) nenhum `transition`/`animation` móvel ou da PWA usa duração ou curva fora dos tokens; (b) a última regra do CSS móvel é a de `prefers-reduced-motion: reduce` e zera animação e transição; (c) `Modal` exibe a saída e só então desmonta, e desmonta de imediato sob movimento reduzido ou se `animationend` não chegar; (d) o texto de sucesso nunca aparece antes do `await` do servidor; (e) 320/390 px, claro/escuro e texto ampliado sem corte ou salto de layout nas telas amostradas. Exemplo aceito: abrir a folha, fechar, ver 220 ms de saída. Rejeitado: `transition: all .3s ease` novo. Falha/recuperação: `animationend` ausente (aba em segundo plano) desmonta por temporizador de segurança de 400 ms.
+
+Verificação proporcional: `eslint`, `typecheck`, `npm test`, `npm run build` e `mobile:build`; conferência de tela no Browser em 320/390 px, claro/escuro, texto ampliado e movimento reduzido emulado. Dependem de aparelho ou conta: medição de fluidez em iPhone físico e Dynamic Type real do iOS.
