@@ -41,6 +41,10 @@
   --motion-standard: 220ms;
   --motion-brand: 280ms;
   --motion-ease: cubic-bezier(.22, 1, .36, 1);
+  --motion-stagger: 40ms;
+  --motion-spin: 900ms;
+  --motion-shimmer: 1300ms;
+  --motion-demo: 1700ms;
   --background: #F8F3E7;
   --surface: #FCF9F3;
   --surface-raised: #FFFFFF;
@@ -181,7 +185,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .auth-success h2 { margin: 0; font-size: 1.5rem; letter-spacing: -.03em; }
 .auth-success p { color: var(--text-secondary); line-height: 1.6; font-size: 1rem; margin: 0; overflow-wrap: anywhere; }
 .success-icon { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; color: var(--accent); background: var(--accent-soft); }
-.spinner { animation: spin 1s linear infinite; flex-shrink: 0; }
+.spinner { animation: spin var(--motion-spin) linear infinite; flex-shrink: 0; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 @keyframes settle-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
