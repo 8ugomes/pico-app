@@ -1,0 +1,14 @@
+{
+  "repository": "hhushhas/mobile-skills",
+  "commit": "0813fceda960f5d876ccaded57d7cab7a153f730",
+  "path": "mobile-submission",
+  "license": "MIT (Copyright (c) 2026 Hasan Shoaib)",
+  "skill_sha256": "5e4d7ff6a3a62296501133c8efe6e5172a4ff0f099ca00da13fbe231ca69feb5",
+  "local_customization": {
+    "date": "2026-11-05",
+    "scope": "Aviso de uso do Pico Social: auditar e preparar, sem executar CLIs das lojas nem submeter",
+    "catalog": "docs/pico-skills.md",
+    "upstream_body_preserved": true,
+    "installed_skill_sha256": "112281f2b798fcaa17b8b9672d82c0d2cc3f6581fd5d5e4ec36ffe34456a3298"
+  }
+}

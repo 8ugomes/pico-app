@@ -1,6 +1,6 @@
 # Pico — skills do projeto
 
-Conjunto local em `.agents/skills`: **17 skills**, sendo oito referências externas contextualizadas e nove skills próprias. A revisão de 13/09/2026 consolida Aura Manteiga, empresa/produto e redesign com onboarding assistido; a de 14/09/2026 acrescenta três adaptações operacionais do Agent Harness Kit; a de 15/09/2026 acrescenta a entrada móvel do Pico Social. Não atualiza skills globais, plugins de outros projetos ou as revisões upstream das oito referências.
+Conjunto local em `.agents/skills`: **18 skills**, sendo nove referências externas (oito contextualizadas e a `mobile-submission`, de 05/11/2026) e nove skills próprias. A revisão de 13/09/2026 consolida Aura Manteiga, empresa/produto e redesign com onboarding assistido; a de 14/09/2026 acrescenta três adaptações operacionais do Agent Harness Kit; a de 15/09/2026 acrescenta a entrada móvel do Pico Social. Não atualiza skills globais, plugins de outros projetos ou as revisões upstream das oito referências.
 
 ## Entrada principal
 
@@ -25,6 +25,7 @@ Para redesenhar o app inteiro, use **[pico-redesign](../.agents/skills/pico-rede
 | [brand-style-guide](../.agents/skills/brand-style-guide/SKILL.md) | Mantém o manual e sua consistência com os ativos. |
 | [brandkit](../.agents/skills/brandkit/SKILL.md) | Pranchas e mockups ilustrativos quando pedidos; não substitui os ativos canônicos. |
 | [impeccable](../.agents/skills/impeccable/SKILL.md) | Design e acabamento da interface, apoiados no contexto da raiz do projeto. |
+| [mobile-submission](../.agents/skills/mobile-submission/SKILL.md) | Checklist de prontidão para App Store e Google Play (MIT, `hhushhas/mobile-skills`). Serve para auditar e preparar; no Pico não executa `asc`/`gplay`, uploads nem submissão. Ver [STORE_READINESS](STORE_READINESS.md). |
 
 ## Como as referências se conectam
 
@@ -33,6 +34,10 @@ Para redesenhar o app inteiro, use **[pico-redesign](../.agents/skills/pico-rede
 Em redesign integral, ler todo o manual em texto e inspecionar suas seções visuais, incluindo logo, cor, tipos, arte, componentes e todas as telas. Consultar tokens e ativos fornecidos. Abrir as referências internas das skills conforme a etapa; não executar todas as ferramentas de todas as skills só porque estão instaladas. O contexto aprovado substitui defaults que proponham outra estética ou repitam decisões já tomadas.
 
 Cobertura integral do produto não significa teste exaustivo a cada ajuste. Criar e inspecionar um conjunto representativo, propagar o sistema, corrigir em lote e confirmar os pontos afetados. Lint/typecheck/build no fechamento, CI e testes dos comportamentos alterados continuam. Suíte remota e novos testes precisam de relação com o risco da mudança.
+
+## Skill não instalada: app-store-review
+
+A skill `p4l4c10s/app-store-review-skill` **não foi instalada** em 05/11/2026. O clone (commit `628e59a`) traz LICENSE MIT em nome de outro autor (safaiyeh) e um README que não descreve a skill, mas empurra o download de um arquivo `rules/app_review_store_skill_v1.8.zip` (1,4 MB) como "instalador" para Windows/macOS/Linux, padrão típico de isca de malware em repositório copiado. O zip não foi aberto nem executado. As regras em Markdown parecem cópia do repositório original `safaiyeh/app-store-review-skill`; se o responsável quiser a skill, instale a partir dele, depois de nova leitura e conferência de licença.
 
 ## Manutenção e procedência
 
