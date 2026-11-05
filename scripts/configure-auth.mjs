@@ -10,10 +10,10 @@ writeFileSync(wd+'/supabase/config.toml',`project_id = "pico-${expected.purpose}
 site_url = ${JSON.stringify(origins[0])}
 additional_redirect_urls = ${JSON.stringify(redirects)}
 ${templates?`[auth.email.template.confirmation]
-subject = "Confirme seu e-mail no Pico"
+subject = "Confirme seu e-mail no Pico Social"
 content_path = "./supabase/templates/confirmation.html"
 [auth.email.template.recovery]
-subject = "Recuperar acesso ao Pico"
+subject = "Redefina sua senha do Pico Social"
 content_path = "./supabase/templates/recovery.html"`:""}
 `,{mode:0o600});
 function cli(command){const r=spawnSync('npx',['--yes','supabase@2.117.0','config',command,'--yes','--project-ref',expected.projectRef,'--workdir',resolve(wd)],{cwd:resolve(wd),encoding:'utf8',timeout:90000,maxBuffer:4e6});if(r.status!==0)throw Error('Auth configuration failed; inspect protected CLI output or provider settings');return r.stdout;}

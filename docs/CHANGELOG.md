@@ -1,3 +1,9 @@
+## 2026-11-05: templates de e-mail Aura Manteiga
+
+- Confirmação de e-mail e recuperação de senha redesenhadas (Claude Design) com a identidade Pico Social: Manteiga/Cacau/Papel/Lavanda, Syne e Manrope com fallback, modo escuro próprio, botão único e tudo na primeira tela do celular. Assuntos: "Confirme seu e-mail no Pico Social" e "Redefina sua senha do Pico Social".
+- O link mantém exatamente `{{ .RedirectTo }}#email|recovery={{ .TokenHash }}`, que `scripts/configure-auth.mjs` reescreve para origens legadas. Os marcadores de remetente, domínio e suporte foram removidos; o rodapé aponta para `/suporte`.
+- Fora do escopo: ligar envio de e-mail, aplicar templates no Supabase, SMTP e Auth de produção seguem dependendo do responsável.
+
 ## 2026-11-05: gramática de movimento no iPhone e na PWA
 
 - Tokens `--motion-fast/standard/brand/ease`, `--motion-stagger` e laços no cliente móvel; literais de `journey.css`, `install.css` e do spinner da PWA passaram aos tokens. Novo `tests/motion-grammar.test.mjs` rejeita duração ou curva fora dos tokens, `transition: all`, exige o movimento reduzido como última regra do CSS móvel e a regra universal da PWA.
