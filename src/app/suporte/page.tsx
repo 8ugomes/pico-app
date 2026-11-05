@@ -13,8 +13,19 @@ export default function SupportPage() {
       lead={<p>Comece pelos controles do próprio Pico. O canal público de suporte ainda não foi configurado; esta página não inventa um e-mail ou prazo de resposta.</p>}
     >
       <section aria-labelledby="support-access">
-        <h2 id="support-access">Não consigo entrar</h2>
-        <p>Confira o e-mail e a senha e tente novamente em uma conexão estável. O cadastro atual não confirma o e-mail informado e a recuperação por e-mail não está disponível. Sem uma sessão ativa, ainda não existe um caminho automatizado para redefinir a senha.</p>
+        <h2 id="support-access">Esqueci minha senha</h2>
+        <ol>
+          <li>Na tela <Link href="/login">Entrar</Link>, toque em <strong>Esqueci minha senha</strong> ou abra <Link href="/recuperar">Recuperar acesso</Link>.</li>
+          <li>Informe o e-mail da sua conta e peça o link.</li>
+          <li>Abra o e-mail no mesmo navegador em que fez o pedido. Confira também o spam.</li>
+          <li>Escolha uma senha nova, com pelo menos 12 caracteres. Ao salvar, o Pico encerra as sessões e você entra de novo.</li>
+        </ol>
+        <p>O link é individual e expira. Se ele não funcionar, peça outro e use sempre o mais recente.</p>
+      </section>
+
+      <section aria-labelledby="support-access-limits">
+        <h2 id="support-access-limits">O e-mail não chegou</h2>
+        <p>Durante a beta o envio de e-mails ainda está em teste e pode não alcançar todas as contas. Se o link não chegar em alguns minutos, a recuperação por e-mail não vai funcionar para o seu endereço agora. Não existe atendimento automático para trocar senha por mensagem.</p>
         <p>Contas suspensas ou revogadas mostram o estado de acesso sem liberar o conteúdo social.</p>
       </section>
 

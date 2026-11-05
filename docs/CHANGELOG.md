@@ -1,3 +1,8 @@
+## 2026-11-05: ajuda para recuperar a senha
+
+- Suporte ganhou "Esqueci minha senha" com passo a passo e "O e-mail não chegou"; o login ganhou "Precisa de ajuda?". `/redefinir-senha` agora diz 12 caracteres e `/recuperar` aponta para o Suporte quando o envio está desligado.
+- O envio de e-mail continua desligado (`emailDeliveryEnabled: false`): não há SMTP próprio nem entrega comprovada. Nenhuma configuração do Supabase, deploy ou e-mail real foi feito nesta entrada.
+
 ## 2026-11-05: gramática de movimento no iPhone e na PWA
 
 - Tokens `--motion-fast/standard/brand/ease`, `--motion-stagger` e laços no cliente móvel; literais de `journey.css`, `install.css` e do spinner da PWA passaram aos tokens. Novo `tests/motion-grammar.test.mjs` rejeita duração ou curva fora dos tokens, `transition: all`, exige o movimento reduzido como última regra do CSS móvel e a regra universal da PWA.

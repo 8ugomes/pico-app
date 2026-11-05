@@ -1,3 +1,11 @@
+## Recuperação de senha e ajuda de acesso · 05/11/2026
+
+Critério: a ajuda descreve o que o app faz hoje, sem prometer tela, e-mail ou atendimento inexistentes. Passos numerados e curtos; o limite da beta (envio de e-mail em teste) aparece onde a pessoa precisa dele.
+
+### Aprendizados e verificação
+
+Uma primeira versão do Suporte prometia trocar a senha em Privacidade e conta, que não tem essa função; a frase saiu antes do commit. A cópia de `/redefinir-senha` dizia 8 caracteres contra a regra de 12. Revisão visual não repetida: mudanças são texto e um link no menu de ajuda.
+
 ## Continuidade do repositório · critérios antes de editar · 23/10/2026
 
 A entrada para colaboradores deve começar pelo que é o Pico, como executar uma demonstração e onde encontrar o estado vigente. Identificar cada evidência por data e distinguir código implementado, versão publicada, recursos habilitados e validação em aparelho. Instruções não podem depender de caminhos, credenciais ou ferramentas pessoais deste Mac. Manter os contratos nas fontes canônicas e apontar para elas, evitando copiar conversas ou criar um segundo plano.
