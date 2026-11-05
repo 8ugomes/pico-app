@@ -1,3 +1,9 @@
+## 2026-11-05: iPhone pronto para lojas, sem submissão
+
+- **Implementado:** aceite explícito dos Termos e Diretrizes no cadastro móvel (checkbox obrigatório, validação no servidor `terms_required`, versão `2026-09-18` nos metadados do usuário, sem migration); links de Privacidade, Termos, Diretrizes e Suporte na entrada, visita, modo local e Conta; teste `mobile-store-readiness`. Skill `mobile-submission` (MIT, `hhushhas/mobile-skills@0813fce`) instalada; `app-store-review` de `p4l4c10s` **recusada** (README com isca de download e zip de 1,4 MB não aberto).
+- **Documentado:** [STORE_READINESS](STORE_READINESS.md) com matriz Apple, Google Play e Brasil (fontes e data de consulta, itens "não verificado") e decisões do dono, nenhuma decidida.
+- **Verificado:** preflight 7/16, 9 gates humanos, 0 falhas técnicas; eslint, typecheck, 334 testes e `native:verify` passam. **Depende de aparelho ou conta:** Supabase real (503 em 23/10), iPhone físico, Apple Developer, revisão jurídica. Sem deploy, migration, alteração de Auth/flags ou envio às lojas.
+
 ## 2026-10-23: consolidação do GitHub e continuidade em outros ambientes
 
 - Trabalho local do iPhone (`ded13ea`) reunido à linha de integração, preservando histórico, PWA e contratos conectados. O diário agora conserva o snapshot da arena quando a edição muda somente nota/data/modalidade; trocar de arena continua explícito e possui regressão comportamental.
