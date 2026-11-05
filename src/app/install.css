@@ -34,9 +34,9 @@
 .install-target { position: relative; background: var(--brand-manteiga); }
 .install-native-menu .install-target { border-radius: 6px; }
 .install-touch { position: absolute; right: 4px; top: 50%; width: 32px; height: 32px; margin-top: -16px; border: 2px solid var(--brand-cacau); border-radius: 50%; background: transparent; box-shadow: 0 2px 6px rgb(40 33 33 / 12%); pointer-events: none; }
-.install-phone[data-playing=true] .install-touch { animation: install-tap 1.7s ease-out infinite; }
+.install-phone[data-playing=true] .install-touch { animation: install-tap var(--motion-demo) var(--motion-ease) infinite; }
 .install-share-sheet, .install-add-sheet { position: absolute; inset: 34px 0 0; padding: 12px 12px 30px; border-radius: 22px 22px 0 0; background: #efeeeb; }
-.install-phone[data-playing=true] .install-share-sheet, .install-phone[data-playing=true] .install-add-sheet, .install-phone[data-playing=true] .install-native-menu { animation: install-reveal 220ms cubic-bezier(.22, 1, .36, 1); }
+.install-phone[data-playing=true] .install-share-sheet, .install-phone[data-playing=true] .install-add-sheet, .install-phone[data-playing=true] .install-native-menu { animation: install-reveal var(--motion-standard) var(--motion-ease); }
 .install-sheet-handle { display: block; margin: -4px auto 18px; width: 30px; height: 4px; border-radius: 4px; background: #b0aba4; }
 .install-shared-site { display: flex; align-items: center; gap: 10px; }
 .install-shared-site img { border-radius: 8px; }
@@ -62,7 +62,7 @@
 .install-home-screen { height: 100%; padding: 40px 27px; background: var(--brand-lavanda); }
 .install-home-app { display: flex; flex-direction: column; align-items: center; gap: 7px; width: 65px; color: var(--brand-cacau); font-size: 11px; }
 .install-home-app img { border-radius: 15px; }
-.install-phone[data-playing=true] .install-home-app { animation: install-reveal 220ms cubic-bezier(.22, 1, .36, 1); }
+.install-phone[data-playing=true] .install-home-app { animation: install-reveal var(--motion-standard) var(--motion-ease); }
 .install-home-dock { display: flex; position: absolute; bottom: 27px; left: 18px; right: 18px; justify-content: space-around; padding: 12px; background: #ded1e9; border-radius: 24px; }
 .install-home-dock > span { width: 38px; height: 38px; border: 1px solid #a08bae; border-radius: 10px; }
 .install-home-indicator { position: absolute; bottom: 8px; width: 80px; height: 4px; left: calc(50% - 40px); background: #44342f; border-radius: 4px; }

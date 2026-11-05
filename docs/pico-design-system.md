@@ -86,6 +86,8 @@ Fundos são sólidos. Posts não usam sombra; perfis e pessoas usam espaço e di
 
 Estados de toque e seleção usam 160ms; transições de superfície/fotografia usam 220ms; o token de marca prevê 280ms. A curva compartilhada é `cubic-bezier(.22, 1, .36, 1)`. As rotas sociais entram com opacidade e deslocamento de 3 px em 220 ms; o Link acionado mostra um ponto de espera no próprio ícone sem alterar seus 44 px. O CSS remove a animação de rota e o deslocamento do indicador com movimento reduzido. Tempos definidos não são medição de fluidez em aparelho físico.
 
+A gramática completa (listas, folhas com saída, menus, carregamento, sucesso após o servidor, movimento reduzido por último no CSS móvel) está em [DESIGN.md](../DESIGN.md#gramática-de-movimento) e é guardada por `tests/motion-grammar.test.mjs`. O cliente móvel espelha os tokens `--motion-*` da PWA em `apps/mobile/styles.css`.
+
 ### Camada do aplicativo
 
 O pacote deve conservar safe areas, contraste e foco ao integrar barras do sistema, teclado, gesto/botão de voltar, abertura externa e ciclo de vida. Estado de ícone precisa de forma, rótulo ou indicador além da cor. Haptic é semântico e raro: seleção confirmada pode receber resposta leve; sucesso só depois da confirmação real; navegação comum, validação repetida e erro em loop não vibram. Movimento reduzido retira translação/escala e autoplay sem esconder mudança de estado. A gramática e a ordem de implementação estão em [Pico em aplicativo](MOBILE_APP.md).
