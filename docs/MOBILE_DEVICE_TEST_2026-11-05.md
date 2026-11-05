@@ -69,3 +69,15 @@ Keychain, câmera/HEIC, permissões, Range/TUS com mídia real, VoiceOver, desem
 Descoberta durante a correção: o WebView já encolhe quando o teclado abre, então descontar a altura do teclado contava duas vezes. O problema original era `svh` ignorar o teclado.
 
 Validação: lint, `tsc --noEmit` (os avisos TS2688 vêm de pastas duplicadas "… 2" no `node_modules` do checkout principal, não do código), 329 testes e `native:verify` 12/12. O build Debug corrigido foi instalado e aberto no iPhone 15; o responsável ainda não confirmou visualmente as correções no aparelho.
+
+## Segunda rodada no iPhone 15: abertura e zoom
+
+Relato do responsável no aparelho: o splash ainda aparecia por menos de 1 s; ao arrastar o app para cima, "Pico Social" piscava; o zoom por pinça ficava preso e desproporcional depois de sair e voltar.
+
+| Causa | Correção |
+| --- | --- |
+| `prepareNativeChrome()` chamava `SplashScreen.hide` assim que o app iniciava, ignorando os 800 ms configurados | Duração mínima de 1,6 s desde o início do WebView e fade de 400 ms. `launchShowDuration` virou 3000 ms só como teto de segurança caso o JS não chegue a esconder o splash |
+| A capa de privacidade nativa (`SceneDelegate`) é instalada na hora ao inativar o app e removida de uma vez, o que piscava ao cancelar o gesto | Mantida na entrada (os instantâneos continuam privados); a saída ganhou fade de 0,2 s e uma nova inativação durante o fade restaura a capa opaca |
+| A meta `viewport` não bloqueava zoom | `maximum-scale=1, user-scalable=no`, `touch-action: manipulation` e `pinchGestureRecognizer` desativado no `PicoBridgeViewController`. Texto ampliado do sistema (Dynamic Type) continua funcionando |
+
+Verificação: lint, `tsc`, 340 testes e `native:verify` passam. No Simulator, uma pinça de dois dedos não alterou a escala. **A duração do splash e o piscar da capa não foram medidos no Simulator**: as capturas durante a abertura saem pretas e não são confiáveis. A confirmação fica para o iPhone, e o build desta rodada **não foi instalado no aparelho**, por pedido do responsável.

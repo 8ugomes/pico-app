@@ -142,9 +142,15 @@ export async function selectionHaptic() {
   await Haptics.impact({ style: ImpactStyle.Light }).catch(() => undefined);
 }
 
+// The splash was leaving in well under a second. Keep it for a readable moment
+// after the web view starts, then fade it out while the first screen is ready.
+const SPLASH_MINIMUM_MS = 1600;
+const SPLASH_FADE_MS = 400;
+
 export async function prepareNativeChrome() {
+  const remaining = Math.max(0, SPLASH_MINIMUM_MS - performance.now());
   await Promise.allSettled([
-    SplashScreen.hide({ fadeOutDuration: 180 }),
+    new Promise<void>((resolve) => setTimeout(resolve, remaining)).then(() => SplashScreen.hide({ fadeOutDuration: SPLASH_FADE_MS })),
     StatusBar.setOverlaysWebView({ overlay: true }),
     StatusBar.setStyle({ style: Style.Light }),
   ]);

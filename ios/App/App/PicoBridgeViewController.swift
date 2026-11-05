@@ -7,6 +7,8 @@ final class PicoBridgeViewController: CAPBridgeViewController {
     }
 
     override func capacitorDidLoad() {
+        // The interface is designed for fixed scale; pinch zoom left it stuck and out of proportion.
+        webView?.scrollView.pinchGestureRecognizer?.isEnabled = false
         guard let bridge, usesLocalContent else { return }
         bridge.registerPluginInstance(PicoSecureSessionPlugin())
         bridge.registerPluginInstance(PicoLocalWorkspacePlugin())

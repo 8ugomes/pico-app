@@ -32,7 +32,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
-        guard privacyCover == nil, let window else { return }
+        guard let window else { return }
+        if let existing = privacyCover {
+            // A fade-out may still be running when the app becomes inactive again.
+            existing.layer.removeAllAnimations()
+            existing.alpha = 1
+            return
+        }
         let cover = UIView(frame: window.bounds)
         cover.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         cover.backgroundColor = UIColor(red: 248 / 255, green: 243 / 255, blue: 231 / 255, alpha: 1)
@@ -62,7 +68,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     private func releasePrivacyCover() {
-        privacyCover?.removeFromSuperview()
-        privacyCover = nil
+        guard let cover = privacyCover else { return }
+        // A short fade keeps the cover from flashing when the user cancels the
+        // app switcher gesture. It is installed instantly, so snapshots stay private.
+        UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseOut], animations: {
+            cover.alpha = 0
+        }, completion: { [weak self] finished in
+            guard finished, let self, self.privacyCover === cover else { return }
+            self.privacyCover?.removeFromSuperview()
+            self.privacyCover = nil
+        })
     }
 }

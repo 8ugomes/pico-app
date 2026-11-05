@@ -1,3 +1,7 @@
+## 2026-11-05: abertura e zoom no iPhone
+
+- Splash com duração mínima de 1,6 s e fade de 400 ms; capa de privacidade sai com fade de 0,2 s; zoom por pinça bloqueado (viewport, `touch-action` e gesto nativo), mantendo Dynamic Type. Validado por testes e Simulator (zoom); splash e capa pendentes de confirmação no aparelho.
+
 ## 2026-11-05: correções de layout do cliente iOS local
 
 - Data do jogo não vaza mais do diálogo; abas abrem no topo; o diálogo cabe acima do teclado com o botão fixo; o perfil inicial não abre o teclado sozinho; a ação principal do Início abre o formulário; abas ganham margem lateral; avatar e arco do login com contraste correto; sem anel de foco nos títulos. Splash (arte de marca) segue como decisão pendente. Validado em Simulator; iPhone físico instalado, sem confirmação visual ainda.

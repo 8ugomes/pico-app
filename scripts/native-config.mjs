@@ -34,7 +34,7 @@ export function createNativeConfig(environment = process.env) {
       SplashScreen: {
         backgroundColor: '#F8F3E7',
         launchAutoHide: true,
-        launchShowDuration: 800,
+        launchShowDuration: 3000,
         showSpinner: false,
       },
       StatusBar: {
