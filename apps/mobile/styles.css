@@ -410,9 +410,14 @@ form fieldset, .setup-form fieldset { display: grid; gap: 1rem; }
 }
 
 .modal-open { overflow: hidden; }
-.modal-layer { position: fixed; z-index: 50; inset: 0; display: flex; align-items: flex-end; justify-content: center; padding-top: max(1rem, env(safe-area-inset-top)); background: rgb(20 14 12 / 48%); backdrop-filter: blur(3px); }
+.modal-layer { position: fixed; z-index: 50; inset: 0; display: flex; align-items: flex-end; justify-content: center; padding-top: max(1rem, env(safe-area-inset-top)); background: rgb(20 14 12 / 48%); backdrop-filter: blur(3px); animation: scrim-in var(--motion-standard) var(--motion-ease); }
 .modal-sheet { width: min(100%, 42rem); max-height: 94vh; max-height: 94svh; overflow: auto; padding: 1rem 1.15rem max(1.25rem, env(safe-area-inset-bottom)); border-radius: 1.5rem 1.5rem 0 0; background: var(--raised); box-shadow: var(--shadow); animation: sheet-in var(--motion-standard) var(--motion-ease); }
 @keyframes sheet-in { from { transform: translateY(22px); opacity: .7; } }
+@keyframes scrim-in { from { opacity: 0; } }
+@keyframes sheet-out { to { transform: translateY(22px); opacity: 0; } }
+@keyframes scrim-out { to { opacity: 0; } }
+.modal-layer[data-state="closing"] { pointer-events: none; animation: scrim-out var(--motion-standard) var(--motion-ease) forwards; }
+.modal-layer[data-state="closing"] > .modal-sheet { animation: sheet-out var(--motion-standard) var(--motion-ease) forwards; }
 .modal-sheet > header { position: sticky; z-index: 2; top: -1rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin: -1rem -1.15rem 1rem; padding: 1rem 1.15rem .7rem; background: var(--raised); background: color-mix(in srgb, var(--raised) 94%, transparent); backdrop-filter: blur(12px); }
 .modal-sheet > header h2 { margin: 0; font-size: 1.25rem; }
 
@@ -441,6 +446,19 @@ form fieldset, .setup-form fieldset { display: grid; gap: 1rem; }
   .local-welcome { align-items: start; }
   .local-next-action { padding: 1.1rem; }
 }
+
+/* Movimento: listas e abas. Entrada curta, escalonada nos primeiros itens; sem preenchimento final para não criar contexto de empilhamento permanente. */
+:is(.feed-list, .people-list, .community-list, .arena-list, .game-list) > * { --item-index: 0; animation: item-in var(--motion-standard) var(--motion-ease) backwards; animation-delay: calc(var(--item-index) * var(--motion-stagger)); }
+:is(.feed-list, .people-list, .community-list, .arena-list, .game-list) > :nth-child(2) { --item-index: 1; }
+:is(.feed-list, .people-list, .community-list, .arena-list, .game-list) > :nth-child(3) { --item-index: 2; }
+:is(.feed-list, .people-list, .community-list, .arena-list, .game-list) > :nth-child(4) { --item-index: 3; }
+:is(.feed-list, .people-list, .community-list, .arena-list, .game-list) > :nth-child(n+5) { --item-index: 4; }
+@keyframes item-in { from { opacity: 0; transform: translateY(8px); } }
+.tab-bar button { transition: background-color var(--motion-fast) var(--motion-ease), color var(--motion-fast) var(--motion-ease), transform var(--motion-fast) var(--motion-ease); }
+.tab-bar button:active { transform: scale(.96); }
+.post > footer button { transition: color var(--motion-fast) var(--motion-ease), background-color var(--motion-fast) var(--motion-ease), transform var(--motion-fast) var(--motion-ease), opacity var(--motion-fast) var(--motion-ease); }
+.post > footer button:active:not(:disabled) { transform: scale(.97); }
+.post > footer button:disabled { opacity: .6; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }

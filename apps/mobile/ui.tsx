@@ -2,6 +2,7 @@
 import { Children, cloneElement, isValidElement, useEffect, useId, useLayoutEffect, useRef, useState, type ButtonHTMLAttributes, type ImgHTMLAttributes, type ReactNode } from 'react';
 import { AlertCircle, ImageOff, LoaderCircle, RotateCw, X } from 'lucide-react';
 import { api } from './api';
+import { EXIT_SAFETY_MS, prefersReducedMotion } from './motion';
 
 export function Button({ children, variant = 'primary', className = '', ...props }: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: 'primary' | 'secondary' | 'quiet' | 'danger' }) {
   return <button className={`button button-${variant} ${className}`.trim()} {...props}>{children}</button>;
@@ -81,7 +82,16 @@ export function PrivateImage({ src, alt, className = '', ...props }: ImgHTMLAttr
 export function Modal({ open, title, children, onClose }: { open: boolean; title: string; children: ReactNode; onClose: () => void }) {
   const sheet = useRef<HTMLElement>(null);
   const close = useRef(onClose);
+  const [exited, setExited] = useState(!open);
   useEffect(() => { close.current = onClose; }, [onClose]);
+  if (open && exited) setExited(false);
+  // Saída: a folha continua montada (inerte) até o fim da animação; sem animação, desmonta já.
+  if (!open && !exited && prefersReducedMotion()) setExited(true);
+  useEffect(() => {
+    if (open) return;
+    const safety = window.setTimeout(() => setExited(true), EXIT_SAFETY_MS);
+    return () => window.clearTimeout(safety);
+  }, [open]);
   useLayoutEffect(() => {
     if (!open) return;
     const previous = document.activeElement as HTMLElement | null;
@@ -122,8 +132,8 @@ export function Modal({ open, title, children, onClose }: { open: boolean; title
       });
     };
   }, [open]);
-  if (!open) return null;
-  return <div className="modal-layer" role="presentation" onMouseDown={(event) => { if (event.currentTarget === event.target) onClose(); }}>
+  if (!open && exited) return null;
+  return <div className="modal-layer" data-state={open ? 'open' : 'closing'} inert={!open || undefined} role="presentation" onAnimationEnd={(event) => { if (!open && event.target === event.currentTarget) setExited(true); }} onMouseDown={(event) => { if (open && event.currentTarget === event.target) onClose(); }}>
     <section ref={sheet} className="modal-sheet" role="dialog" aria-modal="true" aria-labelledby="modal-title">
       <header><h2 id="modal-title">{title}</h2><IconButton label="Fechar" onClick={onClose}><X size={21} aria-hidden="true" /></IconButton></header>
       <div className="modal-body">{children}</div>

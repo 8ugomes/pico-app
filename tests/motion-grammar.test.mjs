@@ -83,3 +83,33 @@ test('PWA mantém a regra universal de movimento reduzido', async () => {
   const css = stripComments(await read('src/app/globals.css'));
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)\s*\{[^]*?\*,\s*\*::before,\s*\*::after\s*\{[^}]*animation:\s*none\s*!important;[^}]*transition:\s*none\s*!important/);
 });
+
+test('folha e diálogo móveis têm saída, inércia durante a saída e desmontagem segura', async () => {
+  const ui = await read('apps/mobile/ui.tsx');
+  const css = stripComments(await read('apps/mobile/styles.css'));
+  assert.match(ui, /data-state=\{open \? 'open' : 'closing'\}/);
+  assert.match(ui, /inert=\{!open \|\| undefined\}/);
+  assert.match(ui, /if \(!open && exited\) return null;/);
+  assert.match(ui, /onAnimationEnd=/);
+  assert.match(ui, /prefersReducedMotion\(\)/);
+  assert.match(ui, /EXIT_SAFETY_MS/);
+  // Fundo clicado durante a saída não fecha de novo.
+  assert.match(ui, /if \(open && event\.currentTarget === event\.target\) onClose\(\)/);
+  assert.match(css, /\.modal-layer\[data-state="closing"\][^{]*\{[^}]*pointer-events:\s*none[^}]*animation:\s*scrim-out var\(--motion-standard\) var\(--motion-ease\) forwards/);
+  assert.match(css, /\.modal-layer\[data-state="closing"\] > \.modal-sheet \{[^}]*animation:\s*sheet-out var\(--motion-standard\)/);
+});
+
+test('o tempo de segurança da saída cobre a duração padrão', async () => {
+  const { EXIT_SAFETY_MS, prefersReducedMotion } = await import('../apps/mobile/motion.ts');
+  assert.ok(EXIT_SAFETY_MS > 220 && EXIT_SAFETY_MS <= 600);
+  assert.equal(prefersReducedMotion({ matchMedia: () => ({ matches: true }) }), true);
+  assert.equal(prefersReducedMotion({ matchMedia: () => ({ matches: false }) }), false);
+  assert.equal(prefersReducedMotion({}), false);
+});
+
+test('entrada de listas escalona só os primeiros itens e não deixa preenchimento final', async () => {
+  const css = stripComments(await read('apps/mobile/styles.css'));
+  assert.match(css, /--item-index: 0; animation: item-in var\(--motion-standard\) var\(--motion-ease\) backwards; animation-delay: calc\(var\(--item-index\) \* var\(--motion-stagger\)\)/);
+  assert.match(css, /:nth-child\(n\+5\) \{ --item-index: 4; \}/);
+  assert.doesNotMatch(css.match(/item-in var[^;]*;/)?.[0] ?? '', /forwards|both/);
+});
