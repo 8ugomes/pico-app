@@ -2,7 +2,7 @@
 
 - Confirmação de e-mail e recuperação de senha redesenhadas (Claude Design) com a identidade Pico Social: Manteiga/Cacau/Papel/Lavanda, Syne e Manrope com fallback, modo escuro próprio, botão único e tudo na primeira tela do celular. Assuntos: "Confirme seu e-mail no Pico Social" e "Redefina sua senha do Pico Social".
 - O link mantém exatamente `{{ .RedirectTo }}#email|recovery={{ .TokenHash }}`, que `scripts/configure-auth.mjs` reescreve para origens legadas. Os marcadores de remetente, domínio e suporte foram removidos; o rodapé aponta para `/suporte`.
-- Ajuste após o teste de recebimento no Gmail: faixa Manteiga com o wordmark oficial (PNG Cacau em `public/email/`, servido do site), título e botão maiores, fallback de fonte Helvetica/Arial em vez de Georgia e link Google Fonts para clientes que o aceitam. A faixa Manteiga não muda no escuro, então um único wordmark serve aos dois modos. O wordmark depende do deploy de `/email/pico-wordmark-cacau.png`; sem ele aparece o texto alternativo.
+- Ajuste após o teste de recebimento no Gmail: faixa Manteiga com o wordmark oficial (PNG Cacau em `public/images/email/`, servido do site), título e botão maiores, fallback de fonte Helvetica/Arial em vez de Georgia e link Google Fonts para clientes que o aceitam. A faixa Manteiga não muda no escuro, então um único wordmark serve aos dois modos. O wordmark depende do deploy de `/images/email/pico-wordmark-cacau.png`; sem ele aparece o texto alternativo.
 - Fora do escopo: ligar envio de e-mail, aplicar templates no Supabase, SMTP e Auth de produção seguem dependendo do responsável.
 
 ## 2026-11-05: gramática de movimento no iPhone e na PWA
