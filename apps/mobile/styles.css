@@ -40,6 +40,14 @@
   --font-body: "Manrope", ui-rounded, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
   --font-heading: "Syne", "Arial Rounded MT Bold", -apple-system, sans-serif;
   --tab-height: 4.375rem;
+  /* Gramática de movimento (DESIGN.md): 160 ms toque, 220 ms transição, 280 ms expressão. */
+  --motion-fast: 160ms;
+  --motion-standard: 220ms;
+  --motion-brand: 280ms;
+  --motion-ease: cubic-bezier(.22, 1, .36, 1);
+  --motion-stagger: 40ms;
+  --motion-spin: 900ms;
+  --motion-shimmer: 1300ms;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -86,7 +94,7 @@ svg { flex: 0 0 auto; stroke-width: 1.75; }
 .skip-link:focus { transform: translateY(0); }
 
 .button, .icon-button, .back-button, .help-link, .text-button { border: 0; cursor: pointer; }
-.button { min-height: 3rem; min-width: 2.75rem; display: inline-flex; align-items: center; justify-content: center; gap: .5rem; padding: .72rem 1rem; border: 1px solid transparent; border-radius: 1rem; font-weight: 700; line-height: 1.25; transition: transform 160ms cubic-bezier(.22,1,.36,1), background-color 160ms ease; }
+.button { min-height: 3rem; min-width: 2.75rem; display: inline-flex; align-items: center; justify-content: center; gap: .5rem; padding: .72rem 1rem; border: 1px solid transparent; border-radius: 1rem; font-weight: 700; line-height: 1.25; transition: transform var(--motion-fast) var(--motion-ease), background-color var(--motion-fast) var(--motion-ease), opacity var(--motion-fast) var(--motion-ease); }
 .button:active:not(:disabled), .icon-button:active:not(:disabled) { transform: scale(.97); }
 .button:disabled, .icon-button:disabled { cursor: default; opacity: .5; }
 .button-primary { color: var(--accent-ink); background: var(--accent); }
@@ -100,7 +108,7 @@ svg { flex: 0 0 auto; stroke-width: 1.75; }
 .guest-entry, .local-entry { display: grid; gap: .45rem; margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--border); text-align: center; }
 .guest-entry > span, .local-entry > span { font-weight: 750; }
 .guest-entry > small, .local-entry > small { color: var(--secondary); }
-.spinner { animation: spin .9s linear infinite; }
+.spinner { animation: spin var(--motion-spin) linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 .field { display: grid; gap: .4rem; min-width: 0; font-size: .9rem; font-weight: 700; }
@@ -179,7 +187,7 @@ form fieldset, .setup-form fieldset { display: grid; gap: 1rem; }
 .avatar-small { width: 2.25rem; height: 2.25rem; }
 .avatar-medium { width: 2.875rem; height: 2.875rem; }
 .avatar-large { width: 5.5rem; height: 5.5rem; font-size: 1.5rem; }
-.image-loading { display: block; background: linear-gradient(100deg, var(--soft) 20%, var(--surface) 50%, var(--soft) 80%); background-size: 220% 100%; animation: shimmer 1.3s ease infinite; }
+.image-loading { display: block; background: linear-gradient(100deg, var(--soft) 20%, var(--surface) 50%, var(--soft) 80%); background-size: 220% 100%; animation: shimmer var(--motion-shimmer) var(--motion-ease) infinite; }
 @keyframes shimmer { to { background-position: -220% 0; } }
 .image-fallback { display: grid; place-items: center; color: var(--secondary); background: var(--soft); }
 
@@ -190,7 +198,7 @@ form fieldset, .setup-form fieldset { display: grid; gap: 1rem; }
 .app-header-actions > span { color: var(--secondary); font-size: .72rem; }
 .tour-trigger { min-height: 2.75rem; display: inline-flex; align-items: center; gap: .3rem; padding: .4rem .65rem; border: 0; border-radius: .75rem; color: var(--secondary); background: var(--soft); font-size: .72rem; font-weight: 700; }
 .app-shell > main { width: min(100%, 46rem); min-height: calc(100vh - var(--tab-height)); min-height: calc(100svh - var(--tab-height)); margin-inline: auto; padding-bottom: calc(var(--tab-height) + env(safe-area-inset-bottom) + 1.5rem); }
-.screen { padding: 1.4rem 1.1rem 2rem; animation: settle 220ms cubic-bezier(.22,1,.36,1); }
+.screen { padding: 1.4rem 1.1rem 2rem; animation: settle var(--motion-standard) var(--motion-ease); }
 @keyframes settle { from { opacity: 0; transform: translateY(8px); } }
 .screen-heading { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
 .screen-heading h1 { margin: .25rem 0 0; font-size: clamp(2rem, 10vw, 3rem); line-height: 1; }
@@ -403,7 +411,7 @@ form fieldset, .setup-form fieldset { display: grid; gap: 1rem; }
 
 .modal-open { overflow: hidden; }
 .modal-layer { position: fixed; z-index: 50; inset: 0; display: flex; align-items: flex-end; justify-content: center; padding-top: max(1rem, env(safe-area-inset-top)); background: rgb(20 14 12 / 48%); backdrop-filter: blur(3px); }
-.modal-sheet { width: min(100%, 42rem); max-height: 94vh; max-height: 94svh; overflow: auto; padding: 1rem 1.15rem max(1.25rem, env(safe-area-inset-bottom)); border-radius: 1.5rem 1.5rem 0 0; background: var(--raised); box-shadow: var(--shadow); animation: sheet-in 220ms cubic-bezier(.22,1,.36,1); }
+.modal-sheet { width: min(100%, 42rem); max-height: 94vh; max-height: 94svh; overflow: auto; padding: 1rem 1.15rem max(1.25rem, env(safe-area-inset-bottom)); border-radius: 1.5rem 1.5rem 0 0; background: var(--raised); box-shadow: var(--shadow); animation: sheet-in var(--motion-standard) var(--motion-ease); }
 @keyframes sheet-in { from { transform: translateY(22px); opacity: .7; } }
 .modal-sheet > header { position: sticky; z-index: 2; top: -1rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin: -1rem -1.15rem 1rem; padding: 1rem 1.15rem .7rem; background: var(--raised); background: color-mix(in srgb, var(--raised) 94%, transparent); backdrop-filter: blur(12px); }
 .modal-sheet > header h2 { margin: 0; font-size: 1.25rem; }
