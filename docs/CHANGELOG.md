@@ -5,6 +5,21 @@
 - Ajuste após o teste de recebimento no Gmail: faixa Manteiga com o wordmark oficial (PNG Cacau em `public/images/email/`, servido do site), título e botão maiores, fallback de fonte Helvetica/Arial em vez de Georgia e link Google Fonts para clientes que o aceitam. A faixa Manteiga não muda no escuro, então um único wordmark serve aos dois modos. O wordmark depende do deploy de `/images/email/pico-wordmark-cacau.png`; sem ele aparece o texto alternativo.
 - Fora do escopo: ligar envio de e-mail, aplicar templates no Supabase, SMTP e Auth de produção seguem dependendo do responsável.
 
+## 2026-11-05: correções de layout do cliente iOS local
+
+- Data do jogo não vaza mais do diálogo; abas abrem no topo; o diálogo cabe acima do teclado com o botão fixo; o perfil inicial não abre o teclado sozinho; a ação principal do Início abre o formulário; abas ganham margem lateral; avatar e arco do login com contraste correto; sem anel de foco nos títulos. Splash (arte de marca) segue como decisão pendente. Validado em Simulator; iPhone físico instalado, sem confirmação visual ainda.
+
+## 2026-11-05: primeiro teste em iPhone físico e achados de layout
+
+- Build Debug assinado com Personal Team instalado e aberto num iPhone 15; pacote sem `server.url`. O ID da Team não foi gravado no repositório. Registro em `docs/MOBILE_DEVICE_TEST_2026-11-05.md` com aparelho e Simulator separados e oito achados de layout a corrigir. Sem deploy, upload ou alteração de Supabase.
+
+
+
+## 2026-11-05: ajuda para recuperar a senha
+
+- Suporte ganhou "Esqueci minha senha" com passo a passo e "O e-mail não chegou"; o login ganhou "Precisa de ajuda?". `/redefinir-senha` agora diz 12 caracteres e `/recuperar` aponta para o Suporte quando o envio está desligado.
+- O envio de e-mail continua desligado (`emailDeliveryEnabled: false`): não há SMTP próprio nem entrega comprovada. Nenhuma configuração do Supabase, deploy ou e-mail real foi feito nesta entrada.
+
 ## 2026-11-05: gramática de movimento no iPhone e na PWA
 
 - Tokens `--motion-fast/standard/brand/ease`, `--motion-stagger` e laços no cliente móvel; literais de `journey.css`, `install.css` e do spinner da PWA passaram aos tokens. Novo `tests/motion-grammar.test.mjs` rejeita duração ou curva fora dos tokens, `transition: all`, exige o movimento reduzido como última regra do CSS móvel e a regra universal da PWA.

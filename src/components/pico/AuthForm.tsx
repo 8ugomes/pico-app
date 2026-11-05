@@ -145,7 +145,7 @@ export function AuthForm({ mode, next = null }: { mode: AuthMode; next?: string 
       {signup && !emailDeliveryEnabled && <p className="form-note">Recuperação por e-mail indisponível nesta beta. Guarde sua senha.</p>}
       {confirmationEmail && emailDeliveryEnabled && <Button variant="quiet" disabled={busy} onClick={resendConfirmation}>Reenviar confirmação</Button>}
       <p className="auth-switch">{signup ? "Já tá no Pico?" : "Ainda não tá no Pico?"} <Link href={authDestination(signup ? 'login' : 'signup',next)}>{signup ? "Entrar" : "Criar conta"}</Link></p>
-      <nav className="auth-help" aria-label="Ajuda com sua conta">{!signup && <Link href="/recuperar">Esqueci minha senha</Link>}<Link href="/privacidade">Privacidade</Link></nav>
+      <nav className="auth-help" aria-label="Ajuda com sua conta">{!signup && <Link href="/recuperar">Esqueci minha senha</Link>}<Link href="/suporte#support-access">Precisa de ajuda?</Link><Link href="/privacidade">Privacidade</Link></nav>
     </>
   );
 }

@@ -43,7 +43,7 @@ export function RecoveryForm({ reset = false }: { reset?: boolean }) {
     } catch { setNotice({error:true,text:'Confira sua conexão e tente novamente.'}); }
     finally { setBusy(false); }
   }
-  if (!reset && !emailDeliveryEnabled) return <><p className="auth-notice" role="status">A recuperação por e-mail ainda não está disponível nesta beta. Se você está conectado em outro aparelho, mantenha essa sessão aberta.</p><p className="auth-switch"><Link href="/login">Voltar para entrar</Link></p></>;
+  if (!reset && !emailDeliveryEnabled) return <><p className="auth-notice" role="status">A recuperação por e-mail ainda não está ativa nesta beta. Se você está conectado em outro aparelho, mantenha essa sessão aberta. Veja o passo a passo em <Link href="/suporte#support-access">Suporte</Link>.</p><p className="auth-switch"><Link href="/login">Voltar para entrar</Link></p></>;
   return <><form className="auth-form" onSubmit={submit}><fieldset disabled={busy || !client}>
     {reset ? <><PasswordInput id="password" name="password" label="Nova senha" autoComplete="new-password" disabled={changed} minLength={12} maxLength={72} required /><PasswordInput id="confirm" name="confirm" label="Repita a nova senha" autoComplete="new-password" disabled={changed} minLength={12} maxLength={72} required /></> : <Input id="email" name="email" label="E-mail da sua conta" type="email" autoComplete="email" maxLength={254} required />}
     <Button type="submit">{busy ? 'Aguarde…' : reset ? changed ? 'Encerrar sessões' : 'Salvar nova senha' : 'Enviar link'}</Button>

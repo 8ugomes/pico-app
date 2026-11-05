@@ -148,7 +148,7 @@ function LocalSetup({ workspace, busy, error, onClearError, onSave, onLeave }: {
     <Notice><Smartphone size={18} aria-hidden="true" /> Nada é enviado automaticamente. Os dados ficam neste aparelho.</Notice>
     <form className="setup-form local-form" onSubmit={submit} onChange={onClearError} aria-busy={busy}>
       <fieldset disabled={busy}>
-        <Field label="Seu nome"><input name="name" required minLength={2} maxLength={60} autoComplete="name" autoFocus /></Field>
+        <Field label="Seu nome"><input name="name" required minLength={2} maxLength={60} autoComplete="name" /></Field>
         <Field label="Modalidade principal"><select name="sport" required value={sport} onChange={(event) => setSport(event.target.value as LocalSport)}>{LOCAL_SPORTS.map((item) => <option key={item}>{item}</option>)}</select></Field>
         <Field label="Cidade" hint="Opcional"><input name="city" maxLength={80} autoComplete="address-level2" /></Field>
         {error && <ErrorState message={error} />}
@@ -171,17 +171,20 @@ function LocalShell({ workspace, busy, error, onClearError, onPersist, onExport,
   onErase: () => Promise<boolean>;
 }) {
   const [tab, setTab] = useState<LocalTab>('home');
+  const [openCreate, setOpenCreate] = useState(false);
   const mainContent = useRef<HTMLElement>(null);
   const previousTab = useRef<LocalTab | null>(null);
 
   useLayoutEffect(() => {
     if (previousTab.current === tab) return;
     previousTab.current = tab;
+    window.scrollTo(0, 0);
     mainContent.current?.querySelector<HTMLElement>('h1')?.focus({ preventScroll: true });
   }, [tab]);
 
-  function navigate(next: LocalTab) {
+  function navigate(next: LocalTab, create = false) {
     onClearError();
+    setOpenCreate(create);
     setTab(next);
     void selectionHaptic();
   }
@@ -189,9 +192,9 @@ function LocalShell({ workspace, busy, error, onClearError, onPersist, onExport,
   const screen = tab === 'home'
     ? <LocalHome workspace={workspace} onNavigate={navigate} />
     : tab === 'games'
-      ? <LocalGames workspace={workspace} busy={busy} error={error} onClearError={onClearError} onPersist={onPersist} onOpenArenas={() => navigate('arenas')} />
+      ? <LocalGames initialCreate={openCreate} workspace={workspace} busy={busy} error={error} onClearError={onClearError} onPersist={onPersist} onOpenArenas={() => navigate('arenas')} />
       : tab === 'arenas'
-        ? <LocalArenas workspace={workspace} busy={busy} error={error} onClearError={onClearError} onPersist={onPersist} />
+        ? <LocalArenas initialCreate={openCreate} workspace={workspace} busy={busy} error={error} onClearError={onClearError} onPersist={onPersist} />
         : <LocalProfile workspace={workspace} busy={busy} error={error} onClearError={onClearError} onPersist={onPersist} onExport={onExport} onLeave={onLeave} onErase={onErase} />;
 
   return <div className="app-shell local-shell">
@@ -214,7 +217,7 @@ function LocalTabButton({ active, label, icon, onClick }: { active: boolean; lab
   return <button type="button" aria-current={active ? 'page' : undefined} onClick={onClick}>{icon}<span>{label}</span></button>;
 }
 
-function LocalHome({ workspace, onNavigate }: { workspace: LocalWorkspace & { profile: LocalProfileInput }; onNavigate: (tab: LocalTab) => void }) {
+function LocalHome({ workspace, onNavigate }: { workspace: LocalWorkspace & { profile: LocalProfileInput }; onNavigate: (tab: LocalTab, create?: boolean) => void }) {
   const recentGames = sortedGames(workspace.games).slice(0, 3);
   const nextAction = workspace.arenas.length === 0 ? 'arenas' : 'games';
 
@@ -230,7 +233,7 @@ function LocalHome({ workspace, onNavigate }: { workspace: LocalWorkspace & { pr
     </div>
     <section className="local-next-action" aria-labelledby="local-next-title">
       <div><span className="eyebrow">PRÓXIMO PASSO</span><h2 id="local-next-title">{nextAction === 'arenas' ? 'Guarde seu primeiro lugar.' : 'Registre o jogo depois da partida.'}</h2><p>{nextAction === 'arenas' ? 'Cadastre uma arena para poder associá-la aos seus jogos.' : 'O registro fica privado e continua disponível sem conexão.'}</p></div>
-      <Button onClick={() => onNavigate(nextAction)}><Plus size={18} aria-hidden="true" />{nextAction === 'arenas' ? 'Adicionar arena' : 'Registrar jogo'}</Button>
+      <Button onClick={() => onNavigate(nextAction, true)}><Plus size={18} aria-hidden="true" />{nextAction === 'arenas' ? 'Adicionar arena' : 'Registrar jogo'}</Button>
     </section>
     <section className="local-recent" aria-labelledby="local-recent-title">
       <div className="local-section-heading"><h2 id="local-recent-title">Jogos recentes</h2>{workspace.games.length > 3 && <Button variant="quiet" onClick={() => onNavigate('games')}>Ver todos</Button>}</div>
@@ -241,15 +244,16 @@ function LocalHome({ workspace, onNavigate }: { workspace: LocalWorkspace & { pr
   </section>;
 }
 
-function LocalGames({ workspace, busy, error, onClearError, onPersist, onOpenArenas }: {
+function LocalGames({ initialCreate = false, workspace, busy, error, onClearError, onPersist, onOpenArenas }: {
   workspace: LocalWorkspace & { profile: LocalProfileInput };
   busy: boolean;
   error: string;
   onClearError: () => void;
   onPersist: PersistWorkspace;
   onOpenArenas: () => void;
+  initialCreate?: boolean;
 }) {
-  const [editingId, setEditingId] = useState<string | 'new' | null>(null);
+  const [editingId, setEditingId] = useState<string | 'new' | null>(initialCreate && workspace.arenas.length > 0 ? 'new' : null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const games = sortedGames(workspace.games);
   const editingGame = editingId && editingId !== 'new' ? workspace.games.find((game) => game.id === editingId) : undefined;
@@ -332,14 +336,15 @@ function LocalGameSummary({ game }: { game: LocalGame }) {
   return <div className="local-game-summary"><span className="game-date"><strong>{new Date(`${game.playedOn}T12:00:00`).getDate()}</strong><small>{new Intl.DateTimeFormat('pt-BR', { month: 'short' }).format(new Date(`${game.playedOn}T12:00:00`))}</small></span><div><h3>{game.arenaSnapshot}</h3><p>{game.sport} · {dateLabel(game.playedOn)}</p>{game.notes && <span>{game.notes}</span>}{game.arenaId === null && <small>Arena removida do cadastro</small>}</div></div>;
 }
 
-function LocalArenas({ workspace, busy, error, onClearError, onPersist }: {
+function LocalArenas({ initialCreate = false, workspace, busy, error, onClearError, onPersist }: {
   workspace: LocalWorkspace & { profile: LocalProfileInput };
   busy: boolean;
   error: string;
   onClearError: () => void;
   onPersist: PersistWorkspace;
+  initialCreate?: boolean;
 }) {
-  const [editingId, setEditingId] = useState<string | 'new' | null>(null);
+  const [editingId, setEditingId] = useState<string | 'new' | null>(initialCreate ? 'new' : null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const editingArena = editingId && editingId !== 'new' ? workspace.arenas.find((arena) => arena.id === editingId) : undefined;
   const deletingArena = workspace.arenas.find((arena) => arena.id === deletingId);
