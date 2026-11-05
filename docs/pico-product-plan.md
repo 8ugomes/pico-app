@@ -1,3 +1,12 @@
+## Recuperação de senha e ajuda de acesso · PLAN · 05/11/2026
+
+Objetivo: quem esquece a senha encontra, no login e no Suporte, um caminho explicado para recuperar a conta. O fluxo `/recuperar` → e-mail → `/redefinir-senha` já existe e permanece desligado (`emailDeliveryEnabled: false`) até o envio real ser provado.
+
+1. Exemplo aceito: no login, "Esqueci minha senha" e "Precisa de ajuda?" levam a passos claros, com 12 caracteres mínimos. Rejeitado: dizer que um e-mail foi enviado sem SMTP/entrega validados. Falha/recuperação: se o e-mail não chegar, o Suporte diz que a recuperação não alcança aquele endereço agora.
+2. Entregue nesta rodada (código): Suporte com passo a passo, link de ajuda no login, cópia de 12 caracteres em `/redefinir-senha`, aviso útil em `/recuperar`.
+3. Pendente, depende do responsável: provar a entrega (SMTP padrão do Supabase só alcança membros da organização, com limite baixo), aplicar templates `token_hash` com `scripts/configure-auth.mjs`, publicar com `NEXT_PUBLIC_PICO_EMAIL_TEMPLATES=custom` e só então ligar `emailDeliveryEnabled`.
+4. Fora desta rodada: troca de senha dentro de `/conta` (não existe hoje).
+
 > Fechamento operacional de 28/09/2026: o PR #45 foi integrado e `7d5a7afd17a6` está publicado no domínio principal. As duas migrations pendentes foram aplicadas após backup cifrado e os inventários preservaram 131/131 identidades. Origem canônica configurada; mensuração, intenção social, DMs e push seguem desligados. A validação autenticada com duas contas controladas continua como próximo gate, sem habilitar coleta. [Recibo](PRODUCT_MEASUREMENT.md#recibo-da-janela-de-28092026).
 
 ## Consolidação do repositório e continuidade · PLAN · 23/10/2026

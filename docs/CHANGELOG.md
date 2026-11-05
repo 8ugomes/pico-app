@@ -1,3 +1,8 @@
+## 2026-11-05: ajuda para recuperar a senha
+
+- Suporte ganhou "Esqueci minha senha" com passo a passo e "O e-mail não chegou"; o login ganhou "Precisa de ajuda?". `/redefinir-senha` agora diz 12 caracteres e `/recuperar` aponta para o Suporte quando o envio está desligado.
+- O envio de e-mail continua desligado (`emailDeliveryEnabled: false`): não há SMTP próprio nem entrega comprovada. Nenhuma configuração do Supabase, deploy ou e-mail real foi feito nesta entrada.
+
 ## 2026-10-23: consolidação do GitHub e continuidade em outros ambientes
 
 - Trabalho local do iPhone (`ded13ea`) reunido à linha de integração, preservando histórico, PWA e contratos conectados. O diário agora conserva o snapshot da arena quando a edição muda somente nota/data/modalidade; trocar de arena continua explícito e possui regressão comportamental.
