@@ -60,6 +60,22 @@ Superfícies sólidas e diferenças tonais organizam a leitura. Posts e perfis n
 
 Interações usam os tempos existentes de 160/220ms; 280ms fica disponível para expressão de marca. A curva é a do token `motion-ease`. `prefers-reduced-motion` remove animações e transições, mantendo feedback por estado e texto.
 
+### Gramática de movimento
+
+Tokens (PWA em `globals.css`, cliente móvel em `apps/mobile/styles.css`): `--motion-fast` 160 ms, `--motion-standard` 220 ms, `--motion-brand` 280 ms, `--motion-ease`, `--motion-stagger` 40 ms e os laços `--motion-spin`, `--motion-shimmer` e `--motion-demo`. Nenhuma duração ou curva é escrita fora deles; `transition: all` é proibido. Teste: `tests/motion-grammar.test.mjs`.
+
+- **160 ms** (toque e seleção): cor, fundo, escala 0,97 ao pressionar, abas, segmentos, menu e botões.
+- **220 ms** (superfície): entrada de tela, de itens de lista, folhas e diálogos (entrada e saída), fotografia.
+- **280 ms** (marca): reservado a entrada, vazios e capas; não usado em operação.
+- **Listas**: cada item entra com 8 px de deslocamento e opacidade; o atraso cresce 40 ms nos quatro primeiros e para aí. Sem preenchimento final, para não deixar contexto de empilhamento.
+- **Folhas e diálogos**: saem em 220 ms, ficam inertes durante a saída e desmontam no `animationend`, com limite de segurança de 400 ms. Sob movimento reduzido desmontam de imediato.
+- **Menus** `<details>`: entram em 160 ms; a saída é imediata, por limitação do elemento.
+- **Carregamento**: aparece após 160 ms de espera (sem piscar em respostas rápidas); o laço do spinner dura 900 ms.
+- **Sucesso**: nunca antes da resposta confirmada do servidor. O botão fica `aria-busy` e com texto de andamento; a confirmação é a folha fechar e o item novo entrar. Sem celebração animada.
+- **Movimento reduzido**: a última regra do CSS móvel zera animação, transição e rolagem suave; a PWA tem a regra universal em `globals.css`. Estados continuam legíveis por texto, cor e `aria-*`.
+- **Biblioteca**: CSS puro. `framer-motion` custaria cerca de 85 kB (30 kB gzip) no `app.js` móvel de 447 kB e não é usado.
+
+
 ## Shapes
 
 Controles têm raio de 16px, cards de 22px e painéis de 30px; pílulas usam 999px e avatares são circulares. A curva assimétrica de destaque aparece em entrada, convites editoriais, vazios e capas de arena. Não aplicar a mesma silhueta a todo bloco ou recortar informações essenciais. Os SVGs mestres preservam proporção, contornos e proteção.

@@ -113,3 +113,31 @@ test('entrada de listas escalona só os primeiros itens e não deixa preenchimen
   assert.match(css, /:nth-child\(n\+5\) \{ --item-index: 4; \}/);
   assert.doesNotMatch(css.match(/item-in var[^;]*;/)?.[0] ?? '', /forwards|both/);
 });
+
+test('sucesso de publicação só aparece depois da confirmação do servidor e o botão fica pendente', async () => {
+  const screens = await read('apps/mobile/screens.tsx');
+  const submit = screens.slice(screens.indexOf('async function submit(event: FormEvent<HTMLFormElement>) {'));
+  const request = submit.indexOf("await api.request('/posts'");
+  const confirmed = submit.indexOf('await drafts.confirmPublication');
+  const success = submit.indexOf('await successHaptic()');
+  const published = submit.indexOf('onPublished();');
+  assert.ok(request > 0 && request < confirmed && confirmed < success && success < published, 'ordem: requisição, confirmação local, háptico, onPublished');
+  assert.match(screens, /<Button type="submit" aria-busy=\{busy\}/);
+  assert.match(screens, /aria-pressed=\{liked\} aria-busy=\{busy\}/);
+});
+
+test('carregamento tem atraso curto e estados novos entram sem animação de sucesso', async () => {
+  const css = stripComments(await read('apps/mobile/styles.css'));
+  assert.match(css, /\.state-line \{ animation: fade-in var\(--motion-fast\) var\(--motion-ease\) var\(--motion-fast\) backwards; \}/);
+  assert.doesNotMatch(css, /@keyframes (pop|bounce|celebrate|confetti)/);
+});
+
+test('menus, segmentos e abas respondem ao toque com os tokens', async () => {
+  const css = stripComments(await read('apps/mobile/styles.css'));
+  assert.match(css, /\.row-menu\[open\] > button \{ animation: menu-in var\(--motion-fast\) var\(--motion-ease\) backwards; \}/);
+  assert.match(css, /\.segmented button \{ transition: background-color var\(--motion-fast\) var\(--motion-ease\)/);
+  assert.match(css, /\.tab-bar button \{ transition: background-color var\(--motion-fast\)/);
+  assert.match(css, /\.tab-bar button:active \{ transform: scale\(\.96\); \}/);
+  // Geometria estável: a seleção não altera tamanho de layout (sem width/height/padding em transição).
+  assert.doesNotMatch(css, /transition:[^;}]*\b(width|height|padding|margin|font-size|font-weight)\b/);
+});

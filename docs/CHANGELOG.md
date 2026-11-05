@@ -1,3 +1,11 @@
+## 2026-11-05: gramática de movimento no iPhone e na PWA
+
+- Tokens `--motion-fast/standard/brand/ease`, `--motion-stagger` e laços no cliente móvel; literais de `journey.css`, `install.css` e do spinner da PWA passaram aos tokens. Novo `tests/motion-grammar.test.mjs` rejeita duração ou curva fora dos tokens, `transition: all`, exige o movimento reduzido como última regra do CSS móvel e a regra universal da PWA.
+- Listas com entrada escalonada, folhas e diálogos com saída (inertes durante a animação, desmontagem por `animationend` com limite de segurança, imediata sob movimento reduzido), menus, abas, segmentos e botões com resposta de toque, carregamento com atraso de 160 ms e avisos com entrada curta.
+- Publicação e curtida ficam `aria-busy` até a resposta; o sucesso continua só depois da confirmação do servidor e não ganhou animação de celebração.
+- CSS puro em vez de `framer-motion` (cerca de +85 kB, +30 kB gzip no `app.js` de 447 kB); a dependência segue sem uso e sua remoção ficou como limpeza proposta.
+- Fora do escopo e não feito: haptics novos, deploy, migrations, Supabase/Auth/flags, lojas. Fluidez em iPhone físico e Dynamic Type real seguem como gate N3 aberto.
+
 ## 2026-10-23: consolidação do GitHub e continuidade em outros ambientes
 
 - Trabalho local do iPhone (`ded13ea`) reunido à linha de integração, preservando histórico, PWA e contratos conectados. O diário agora conserva o snapshot da arena quando a edição muda somente nota/data/modalidade; trocar de arena continua explícito e possui regressão comportamental.

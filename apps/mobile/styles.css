@@ -460,6 +460,23 @@ form fieldset, .setup-form fieldset { display: grid; gap: 1rem; }
 .post > footer button:active:not(:disabled) { transform: scale(.97); }
 .post > footer button:disabled { opacity: .6; }
 
+/* Estados: carregamento aparece após um instante (sem piscar em respostas rápidas); avisos entram com deslocamento curto. */
+.state-line { animation: fade-in var(--motion-fast) var(--motion-ease) var(--motion-fast) backwards; }
+.message-state, .notice { animation: item-in var(--motion-fast) var(--motion-ease) backwards; }
+@keyframes fade-in { from { opacity: 0; } }
+[aria-busy="true"] { cursor: progress; }
+
+/* Menus, segmentos e seleção. O menu <details> entra animado; a saída é imediata porque <details> não mantém o conteúdo aberto. */
+.row-menu summary { transition: background-color var(--motion-fast) var(--motion-ease), transform var(--motion-fast) var(--motion-ease); }
+.row-menu summary:active { background: var(--soft); transform: scale(.94); }
+.row-menu[open] > button { animation: menu-in var(--motion-fast) var(--motion-ease) backwards; }
+.row-menu[open] > button + button { animation-delay: var(--motion-stagger); }
+@keyframes menu-in { from { opacity: 0; transform: translateY(-6px); } }
+.segmented button { transition: background-color var(--motion-fast) var(--motion-ease), color var(--motion-fast) var(--motion-ease), box-shadow var(--motion-fast) var(--motion-ease), transform var(--motion-fast) var(--motion-ease); }
+.segmented button:active { transform: scale(.98); }
+.back-button, .text-button, .tour-trigger { transition: color var(--motion-fast) var(--motion-ease), background-color var(--motion-fast) var(--motion-ease), transform var(--motion-fast) var(--motion-ease); }
+.back-button:active, .text-button:active, .tour-trigger:active { transform: scale(.97); }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
 }
