@@ -1,13 +1,13 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-import { rankingPeriods, type RankingPeriod } from '@/lib/arena-checkin';
+import { pointsWord, rankingPeriods, type PointKind, type RankingPeriod } from '@/lib/arena-checkin';
 import { useEntity, entityAction } from './useEntity';
 import { RemoteAvatar } from './Media';
-import { CheckinAction, CheckinDays, PeriodTabs, RankingEmpty, RankingError, RankingList, RankingSkeleton, type RankingRowView } from '../ArenaRankingParts';
+import { CheckinAction, CheckinDays, LevelCard, PeriodTabs, PointBreakdown, PointRules, RankingEmpty, RankingError, RankingList, RankingSkeleton, type RankingRowView } from '../ArenaRankingParts';
 
-type Entry = { me: boolean; rank: number; player_id: string; username: string; name: string; avatar: string | null; days: number };
-type Ranking = { period: RankingPeriod; entries: Entry[]; me: { rank: number; days: number } | null; today_done: boolean; recent_days: string[]; total_players: number };
+type Entry = { me: boolean; rank: number; player_id: string; username: string; name: string; avatar: string | null; points: number };
+type Ranking = { period: RankingPeriod; entries: Entry[]; me: { rank: number | null; points: number; all_points: number } | null; breakdown: Partial<Record<PointKind, { points: number; count: number }>>; today_done: boolean; recent_days: string[]; total_players: number };
 type Activity = { period: 'week' | 'month'; arenas: { id: string; slug: string; name: string; neighborhood: string; city: string; players: number; checkins: number }[] };
 
 export function ArenaRanking({ arenaId, isDemo }: { arenaId: string; isDemo: boolean }) {
@@ -17,7 +17,7 @@ export function ArenaRanking({ arenaId, isDemo }: { arenaId: string; isDemo: boo
   const ranking = useEntity<Ranking>(`/api/arenas/ranking?arenaId=${arenaId}&period=${period}`);
   const data = ranking.data;
   const scope = rankingPeriods.find(p => p.id === period)!.scope;
-  const rows: RankingRowView[] = (data?.entries ?? []).map(e => ({ key: e.player_id, rank: e.rank, name: e.name, days: e.days, me: e.me, href: `/perfil/${e.username}`, avatar: <RemoteAvatar src={e.avatar} name={e.name} /> }));
+  const rows: RankingRowView[] = (data?.entries ?? []).map(e => ({ key: e.player_id, rank: e.rank, name: e.name, points: e.points, me: e.me, href: `/perfil/${e.username}`, avatar: <RemoteAvatar src={e.avatar} name={e.name} /> }));
   async function change(day: string | undefined, record: boolean) {
     setBusy(true); setMessage('');
     try {
@@ -28,17 +28,20 @@ export function ArenaRanking({ arenaId, isDemo }: { arenaId: string; isDemo: boo
     finally { setBusy(false); }
   }
   return <section className="arena-ranking" aria-labelledby="arena-ranking-title">
-    <h2 id="arena-ranking-title">Quem mais joga aqui</h2>
-    <p className="form-note">Cada dia em que a pessoa registra que jogou na arena conta uma vez. É um registro seu, feito depois do jogo, sem localização.</p>
+    <h2 id="arena-ranking-title">Ranking da arena</h2>
+    <p className="form-note">Pontos por check-in, publicações, fotos, vídeos e interações nesta arena, com teto por dia. O check-in é um registro seu, feito depois do jogo, sem localização.</p>
     <PeriodTabs value={period} onChange={setPeriod} />
     {ranking.loading && <RankingSkeleton />}
     {ranking.error && <RankingError message={ranking.error} retry={ranking.reload} />}
     {data && <>
-      {data.me ? <p className="ranking-summary" role="status">Você está em {data.me.rank}º lugar {scope}, com {data.me.days === 1 ? '1 dia' : `${data.me.days} dias`}.</p> : <p className="ranking-summary" role="status">Você ainda não pontuou {scope}.</p>}
+      {data.me && data.me.rank ? <p className="ranking-summary" role="status">Você está em {data.me.rank}º lugar {scope}, com {pointsWord(data.me.points)}.</p> : <p className="ranking-summary" role="status">Você ainda não pontuou {scope}.</p>}
+      <LevelCard points={data.me?.all_points ?? 0} />
+      <PointBreakdown breakdown={data.breakdown ?? {}} />
       {rows.length ? <RankingList rows={rows} /> : <RankingEmpty scope={scope} />}
       {isDemo ? <p className="form-note">Arena fictícia: não recebe check-ins.</p> : <CheckinAction doneToday={data.today_done} busy={busy} onToggleToday={() => change(undefined, !data.today_done)}>
         <details className="checkin-other"><summary>Registrar outro dia</summary><p className="form-note">Vale hoje e os seis dias anteriores. Toque de novo para remover.</p><CheckinDays checked={data.recent_days} busy={busy} onToggle={(day, back, done) => change(back === 0 ? undefined : day, !done)} /></details>
       </CheckinAction>}
+      <PointRules />
       <p role="status" className="checkin-message">{message}</p>
     </>}
   </section>;

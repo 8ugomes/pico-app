@@ -1,3 +1,8 @@
+## 2026-11-07: pontos e níveis nas arenas
+
+- **Ranking por pontos:** check-in (5), publicação (texto 2, foto 4, vídeo 6), comentário (1), curtida dada (1) e recebida (1) e republicação (3), com teto por dia, só conteúdo público e não moderado da própria arena. Pontos derivados das linhas atuais, então apagar ou moderar remove os pontos. Migration `20261107100000_arena_points.sql`, `read_arena_points` e `/api/arenas/ranking`.
+- **Gamificação:** níveis por arena (Pé na areia, Saque, Rally, Ace, Lenda do Pico), barra de progresso, origem dos pontos e "Como pontuar". Demo com o mesmo painel, rotulada.
+
 ## 2026-11-06: arenas com ranking por check-in
 
 - **Check-in retrospectivo:** a pessoa registra "joguei aqui" para hoje ou até 6 dias atrás, um por arena por dia, e pode desfazer. Não é presença ao vivo, não guarda hora nem localização e não publica nada. Migration `20261106100000_arena_checkins_ranking.sql` (tabela fechada por RLS, RPCs com limite de escrita, exportação de conta incluindo os check-ins).

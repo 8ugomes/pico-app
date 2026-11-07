@@ -157,8 +157,8 @@ test("demo arena check-ins toggle per day and feed an illustrative ranking", asy
   assert.equal(state.arenaCheckins.length, 2);
   const rows = demoRanking(state, arena, "week", "2026-11-06");
   assert.ok(rows.every((r, i) => i === 0 || rows[i - 1].rank <= r.rank));
-  assert.equal(rows.find(r => r.me)?.days, 2);
-  assert.equal(demoRanking(state, arena, "week", "2026-11-06").find(r => r.me)?.days, 2);
+  assert.equal(rows.find(r => r.me)?.points, 10);
+  assert.equal(demoRanking(state, arena, "week", "2026-11-06").find(r => r.me)?.points, 10);
   assert.equal(demoRanking(state, arena, "month", "2026-12-01").find(r => r.me), undefined);
   state = demoReducer(state, { type: "arena_checkin", arenaId: arena, day: "2026-11-06" });
   assert.equal(state.arenaCheckins.length, 1);

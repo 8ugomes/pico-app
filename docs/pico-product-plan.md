@@ -1157,3 +1157,11 @@ Aceite: registrar, repetir (idempotente), desfazer, data futura ou com mais de 6
 ### Ciclo 11 · resultado · 2026-11-06
 
 Implementado: check-in retrospectivo (7 dias, um por arena e dia, reversível), ranking por semana/mês/geral por arena, "Em movimento" na lista, dez arenas novas, entrada de listas e carregamento com os tokens de movimento na PWA, demo equivalente e rotulada. Verificado: testes SQL (limites de data, idempotência, bloqueio, RLS fechada, ordenação), reducer demo, eslint, typecheck, build demo, amostra a 390 px. Pendente: exercício com Supabase real após aplicar as migrations, iPhone físico e cliente móvel local (sem check-in por ora).
+
+## Ciclo 12 · Pontos e níveis nas arenas · 2026-11-07
+
+Pedido: o ranking da arena deixa de contar só check-in e passa a pontuar publicações, fotos, vídeos e interações, com pesos, para dar gamificação coerente.
+
+Decisão: pontos são **derivados das linhas atuais** (`pico_private.arena_scored_events`), sem tabela de pontos: apagar ou moderar um conteúdo remove seus pontos e nada fica fora de sincronia. Só conta conteúdo da própria arena, público (`audience = 'beta'`) e não moderado. Pesos e tetos por pessoa, arena, tipo e dia de São Paulo: check-in 5 (1/dia); publicação 2, com foto 4, com vídeo 6 (3/dia); comentário em post alheio 1 (5/dia); curtida dada 1 (5/dia); curtida recebida 1 (10/dia); republicação alheia 3 (2/dia). Interação com o próprio post não pontua. Níveis por pontos totais na arena: Pé na areia 0, Saque 25, Rally 100, Ace 250, Lenda do Pico 600. A tela mostra posição, nível, progresso, de onde vêm os pontos e a regra completa; bloqueios continuam ocultando pessoas.
+
+Aceite: pesos e teto diário, auto-interação ignorada, exclusão/moderação remove pontos, conteúdo privado ou de outra arena não pontua, período semana/mês/geral, função auxiliar sem acesso direto. Fora do escopo: prêmios, notificações de ranking, ranking global entre arenas, pontos no cliente móvel local. Demo: só check-ins pontuam, rotulado.

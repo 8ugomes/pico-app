@@ -124,21 +124,21 @@ export function demoFeed(state: DemoState, authorId?: string, followingOnly = fa
 }
 
 export type DemoRankingPeriod = "week" | "month" | "all";
-export type DemoRankingRow = { rank: number; id: string; name: string; days: number; me: boolean };
+export type DemoRankingRow = { rank: number; id: string; name: string; points: number; me: boolean };
 function seedNumber(text: string) { let h = 7; for (const ch of text) h = (h * 31 + ch.charCodeAt(0)) % 9973; return h; }
 // Illustrative counts for other people are deterministic and labelled in the interface. Only the current person's days come from actions.
 export function demoRanking(state: DemoState, arenaId: string, period: DemoRankingPeriod, today: string): DemoRankingRow[] {
   const week = (day: string) => { const d = new Date(today + "T00:00:00Z"); d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 6) % 7)); return day >= d.toISOString().slice(0, 10); };
   const month = (day: string) => day.slice(0, 7) === today.slice(0, 7);
-  const mine = state.arenaCheckins.filter(c => c.arenaId === arenaId && c.day <= today && (period === "all" || (period === "week" ? week(c.day) : month(c.day)))).length;
+  const mine = 5 * state.arenaCheckins.filter(c => c.arenaId === arenaId && c.day <= today && (period === "all" || (period === "week" ? week(c.day) : month(c.day)))).length;
   const others = state.players.filter(p => p.id !== state.currentUserId && p.arenaIds.includes(arenaId)).map(p => {
     const h = seedNumber(p.id + arenaId);
-    const all = 4 + (h % 17), mo = Math.min(all, 1 + (h % 8)), wk = Math.min(mo, h % 5);
-    return { id: p.id, name: p.name, days: period === "all" ? all : period === "month" ? mo : wk, me: false };
+    const all = 20 + (h % 160), mo = Math.min(all, 6 + (h % 50)), wk = Math.min(mo, h % 24);
+    return { id: p.id, name: p.name, points: period === "all" ? all : period === "month" ? mo : wk, me: false };
   });
   const me = state.players.find(p => p.id === state.currentUserId);
-  const rows = [...others, ...(mine || !others.length ? [{ id: state.currentUserId, name: me?.name ?? "Você", days: mine, me: true }] : [])].filter(r => r.days > 0);
-  rows.sort((a, b) => b.days - a.days || a.name.localeCompare(b.name, "pt-BR"));
+  const rows = [...others, ...(mine || !others.length ? [{ id: state.currentUserId, name: me?.name ?? "Você", points: mine, me: true }] : [])].filter(r => r.points > 0);
+  rows.sort((a, b) => b.points - a.points || a.name.localeCompare(b.name, "pt-BR"));
   let place = 0;
-  return rows.map((r, i) => { if (i === 0 || r.days !== rows[i - 1].days) place = i + 1; return { ...r, rank: place }; });
+  return rows.map((r, i) => { if (i === 0 || r.points !== rows[i - 1].points) place = i + 1; return { ...r, rank: place }; });
 }
