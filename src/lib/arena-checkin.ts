@@ -6,16 +6,21 @@ export const rankingPeriods: { id: RankingPeriod; label: string; scope: string }
 ];
 export const CHECKIN_WINDOW_DAYS = 7;
 const weekdays = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'];
+// The server decides check-in days in São Paulo time, so the chips use the same calendar on any device.
+const saoPaulo = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Sao_Paulo', year: 'numeric', month: '2-digit', day: '2-digit' });
 
-/** Calendar day (YYYY-MM-DD) in the device's local zone, `back` days before `from`. */
+function saoPauloDate(from: Date, back = 0) {
+  const [year, month, day] = saoPaulo.format(from).split('-').map(Number);
+  return new Date(Date.UTC(year, month - 1, day - back));
+}
+/** Calendar day (YYYY-MM-DD) in São Paulo, `back` days before the instant `from`. */
 export function dayBack(back: number, from = new Date()) {
-  const d = new Date(from.getFullYear(), from.getMonth(), from.getDate() - back);
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  return saoPauloDate(from, back).toISOString().slice(0, 10);
 }
 export function dayLabel(back: number, from = new Date()) {
   if (back === 0) return 'Hoje';
   if (back === 1) return 'Ontem';
-  return weekdays[new Date(from.getFullYear(), from.getMonth(), from.getDate() - back).getDay()];
+  return weekdays[saoPauloDate(from, back).getUTCDay()];
 }
 export function windowDays(from = new Date()) {
   return Array.from({ length: CHECKIN_WINDOW_DAYS }, (_, back) => ({ back, day: dayBack(back, from), label: dayLabel(back, from) }));

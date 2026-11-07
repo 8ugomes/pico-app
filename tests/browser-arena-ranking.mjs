@@ -17,7 +17,8 @@ const sport = ARENA.sports[0];
 const profile = { id: ME, username: 'alice_teste', name: 'Alice Teste', onboardingCompleted: true, avatar: '/icon.svg', avatarPath: 'fixture.webp', bio: 'Jogo no fim de tarde.', city: 'São Paulo', neighborhood: 'Moema', available: false, isDemo: false, sports: [{ sport, level: 'Iniciante', isPrimary: true }] };
 const state = { mode: 'ok', today: false, recent: [], pointsByPeriod: { week: 12, month: 40, all: 130 }, gate: null };
 const writes = [], checks = [], errors = [], rankingRequests = [];
-const day = back => { const d = new Date(); d.setDate(d.getDate() - back); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
+const saoPaulo = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Sao_Paulo', year: 'numeric', month: '2-digit', day: '2-digit' });
+const day = back => { const [y, m, d] = saoPaulo.format(new Date()).split('-').map(Number); return new Date(Date.UTC(y, m - 1, d - back)).toISOString().slice(0, 10); };
 
 function ranking(period) {
   const mine = state.pointsByPeriod[period] + (state.today ? 5 : 0);
@@ -28,7 +29,9 @@ function ranking(period) {
     breakdown: { checkin: { points: 10, count: 2 }, post: { points: 6, count: 3 }, like_received: { points: 4, count: 4 } }, today_done: state.today, recent_days: state.recent, total_players: 2 };
 }
 
-const browser = await chromium.launch({ headless: true, channel: process.env.PLAYWRIGHT_CHANNEL || 'chrome' });
+// PLAYWRIGHT_CHANNEL=bundled uses the Chromium installed by `npx playwright install` (CI); default is local Chrome.
+const channel = process.env.PLAYWRIGHT_CHANNEL || 'chrome';
+const browser = await chromium.launch(channel === 'bundled' ? { headless: true } : { headless: true, channel });
 const context = await browser.newContext({ viewport: { width: 390, height: 844 }, colorScheme: 'light', reducedMotion: 'reduce' });
 await context.addInitScript(() => localStorage.setItem('pico.install-dismissed', '1'));
 await context.route('**/*', async route => {

@@ -1,3 +1,7 @@
+## 2026-11-07: teste contínuo do ranking e fuso do check-in
+
+- Workflow `ranking-regression.yml` (PRs relevantes, main, diário e manual) com testes SQL/unitários, teste de navegador em Chromium e smoke de produção somente leitura. Os chips de dia do check-in usam a data de São Paulo, como o servidor.
+
 ## 2026-11-07: teste de navegador do ranking e correção do desfazer
 
 - Teste `tests/browser-arena-ranking.mjs` (24 verificações) e `tests/arena-checkin-lib.test.mjs`. Correção: desfazer o check-in de hoje agora envia a data devolvida pelo servidor (antes a API recusava por falta de data).

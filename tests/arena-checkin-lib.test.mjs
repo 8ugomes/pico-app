@@ -16,7 +16,7 @@ test('levels advance at their thresholds and cap at the highest', () => {
 });
 
 test('check-in window is today plus six days, labelled in Portuguese', () => {
-  const from = new Date(2026, 10, 7); // Saturday
+  const from = new Date('2026-11-07T15:00:00Z'); // Saturday noon in São Paulo
   const days = windowDays(from);
   assert.equal(days.length, 7);
   assert.deepEqual(days.map(d => d.day).slice(0, 3), ['2026-11-07', '2026-11-06', '2026-11-05']);
@@ -24,6 +24,12 @@ test('check-in window is today plus six days, labelled in Portuguese', () => {
   assert.equal(dayLabel(0, from), 'Hoje');
   assert.equal(dayLabel(1, from), 'Ontem');
   assert.equal(dayLabel(2, from), 'qui');
+});
+
+test('the window follows São Paulo midnight, not the device clock', () => {
+  assert.equal(dayBack(0, new Date('2026-11-07T02:59:00Z')), '2026-11-06'); // 23:59 in São Paulo
+  assert.equal(dayBack(0, new Date('2026-11-07T03:00:00Z')), '2026-11-07'); // 00:00 in São Paulo
+  assert.equal(dayBack(1, new Date('2026-03-01T12:00:00Z')), '2026-02-28');
 });
 
 test('point wording and rules stay in sync with the documented policy', () => {
