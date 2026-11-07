@@ -766,3 +766,11 @@ A correção é de conectividade: manter o compositor, a prévia, a escolha de a
 O controle de vídeo e sua mensagem de erro estavam corretos visualmente, mas o documento bloqueava o destino efetivo do upload; uma revisão só da tela ou um TUS em Node não perceberia isso. O navegador móvel emulado confirmou a seleção, a prévia e o rascunho intacto após o envio, sem publicar. A apresentação não mudou nesta correção; tema e geometria existentes foram preservados. Ainda falta exercício em Android físico e com vídeos de câmera variados.
 
 O stage e o domínio principal serviram a CSP corrigida sem ampliar outras origens; o deploy preservou os 122 registros acompanhados. Não se atribui a essa conferência read-only um envio de vídeo real no principal.
+
+## Revisão · Arenas e ranking · 2026-11-06
+
+Critérios antes de codar: texto curto e concreto ("Fiz check-in hoje", "Quem mais joga aqui"), sem promessa de presença ao vivo, sem competição agressiva (sem medalhas animadas ou frases de provocação), um destaque por tela, dados ilustrativos rotulados na demo, ranking vazio explicado em vez de preenchido. Movimento só pelos tokens existentes: entrada de itens com atraso limitado, abas em 160 ms, carregamento após 160 ms, nada de celebração ao confirmar.
+
+### Aprendizado da rodada · Arenas e ranking
+
+O ranking só funciona sem parecer competição se o texto disser o que conta ("dias com check-in") e se o vazio convidar em vez de cobrar. A linha "Você" fica destacada em vez de uma medalha. Na demo, números alheios ilustrativos precisam do rótulo em cada painel. Contagens fixas em testes de catálogo quebram a cada expansão; o comentário agora explica a soma.

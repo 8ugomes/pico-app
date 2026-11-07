@@ -73,6 +73,42 @@ export type Database = {
           },
         ]
       }
+      arena_checkins: {
+        Row: {
+          arena_id: string
+          created_at: string
+          played_on: string
+          player_id: string
+        }
+        Insert: {
+          arena_id: string
+          created_at?: string
+          played_on: string
+          player_id: string
+        }
+        Update: {
+          arena_id?: string
+          created_at?: string
+          played_on?: string
+          player_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "arena_checkins_arena_id_fkey"
+            columns: ["arena_id"]
+            isOneToOne: false
+            referencedRelation: "arenas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "arena_checkins_player_id_fkey"
+            columns: ["player_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       arena_played_marks: {
         Row: {
           arena_id: string
@@ -1686,6 +1722,10 @@ export type Database = {
         }[]
       }
       read_notifications: { Args: { p_before?: string }; Returns: Json }
+      read_arena_ranking: { Args: { p_arena: string; p_period: string }; Returns: Json }
+      read_arenas_activity: { Args: { p_period: string }; Returns: Json }
+      record_arena_checkin: { Args: { p_arena: string; p_day?: string }; Returns: undefined }
+      remove_arena_checkin: { Args: { p_arena: string; p_day: string }; Returns: undefined }
       read_own_played_arena_marks: { Args: never; Returns: Json }
       read_played_arena_marks: { Args: { p_player?: string }; Returns: Json }
       read_played_games: { Args: { p_offset?: number }; Returns: Json }
