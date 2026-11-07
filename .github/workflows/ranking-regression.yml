@@ -1,0 +1,85 @@
+name: Ranking regression
+on:
+  pull_request:
+    paths:
+      - 'src/components/pico/**'
+      - 'src/lib/arena-checkin.ts'
+      - 'src/lib/demo-state.ts'
+      - 'src/app/api/arenas/**'
+      - 'src/app/social-pages.css'
+      - 'supabase/migrations/**'
+      - 'tests/browser-arena-ranking.mjs'
+      - 'tests/arena-*.test.mjs'
+      - '.github/workflows/ranking-regression.yml'
+  push:
+    branches: [main]
+  schedule:
+    # Daily, 09:17 UTC (06:17 in São Paulo): catches regressions that arrive without a PR.
+    - cron: '17 9 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ranking-regression-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Database and unit tests for check-ins and points
+        run: node --experimental-strip-types --test tests/arena-checkins.test.mjs tests/arena-points.test.mjs tests/arena-checkin-lib.test.mjs tests/arena-catalog-expansion.test.mjs tests/demo-state.test.mjs
+        env:
+          NEXT_PUBLIC_PICO_ENV: demo
+          PICO_ENV: demo
+      - name: Build the connected UI against local fixtures
+        # Connected mode with the development identity but a fixture key: the browser test
+        # intercepts every /api call and aborts any other origin, so nothing leaves the runner.
+        run: |
+          export NEXT_PUBLIC_PICO_ENV=development PICO_ENV=development
+          export NEXT_PUBLIC_SUPABASE_URL="$(node -p "require('./config/environments.json').development.url")"
+          export PICO_PROJECT_REF="$(node -p "require('./config/environments.json').development.projectRef")"
+          export NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_local_fixture
+          PICO_BUILD_DIR=.next-ranking npm run build
+          PICO_BUILD_DIR=.next-ranking nohup npx next start --hostname 127.0.0.1 --port 3021 > ranking-server.log 2>&1 &
+          npx --yes wait-on@8 http://127.0.0.1:3021/arenas --timeout 60000
+      - name: Browser test
+        run: node tests/browser-arena-ranking.mjs
+        env:
+          PLAYWRIGHT_CHANNEL: bundled
+          RANKING_BASE_URL: http://127.0.0.1:3021
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ranking-browser-results
+          path: |
+            .vercel/ranking-review/*.png
+            .vercel/ranking-review/*.json
+            ranking-server.log
+          include-hidden-files: true
+          retention-days: 3
+  production-smoke:
+    # Read-only checks of the public site on the daily run and on demand. No sign-in, no writes.
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Health, version and protected ranking route
+        run: |
+          base=https://pico-app-sepia.vercel.app
+          health=$(curl -fsS -m 20 "$base/api/health")
+          echo "$health"
+          echo "$health" | grep -q '"database":true' && echo "$health" | grep -q '"auth":true'
+          curl -fsS -m 20 "$base/api/version"; echo
+          code=$(curl -s -o /dev/null -w '%{http_code}' -m 20 "$base/api/arenas/ranking?kind=activity&period=week")
+          echo "ranking route unauthenticated: HTTP $code"
+          test "$code" = "401"
