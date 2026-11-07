@@ -38,7 +38,7 @@ export function ArenaRanking({ arenaId, isDemo }: { arenaId: string; isDemo: boo
       <LevelCard points={data.me?.all_points ?? 0} />
       <PointBreakdown breakdown={data.breakdown ?? {}} />
       {rows.length ? <RankingList rows={rows} /> : <RankingEmpty scope={scope} />}
-      {isDemo ? <p className="form-note">Arena fictícia: não recebe check-ins.</p> : <CheckinAction doneToday={data.today_done} busy={busy} onToggleToday={() => change(undefined, !data.today_done)}>
+      {isDemo ? <p className="form-note">Arena fictícia: não recebe check-ins.</p> : <CheckinAction doneToday={data.today_done} busy={busy} onToggleToday={() => data.today_done ? change(data.recent_days[0], false) : change(undefined, true)}>
         <details className="checkin-other"><summary>Registrar outro dia</summary><p className="form-note">Vale hoje e os seis dias anteriores. Toque de novo para remover.</p><CheckinDays checked={data.recent_days} busy={busy} onToggle={(day, back, done) => change(back === 0 ? undefined : day, !done)} /></details>
       </CheckinAction>}
       <PointRules />

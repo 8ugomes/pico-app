@@ -1,3 +1,7 @@
+## 2026-11-07: teste de navegador do ranking e correção do desfazer
+
+- Teste `tests/browser-arena-ranking.mjs` (24 verificações) e `tests/arena-checkin-lib.test.mjs`. Correção: desfazer o check-in de hoje agora envia a data devolvida pelo servidor (antes a API recusava por falta de data).
+
 ## 2026-11-07: pontos e níveis nas arenas
 
 - **Ranking por pontos:** check-in (5), publicação (texto 2, foto 4, vídeo 6), comentário (1), curtida dada (1) e recebida (1) e republicação (3), com teto por dia, só conteúdo público e não moderado da própria arena. Pontos derivados das linhas atuais, então apagar ou moderar remove os pontos. Migration `20261107100000_arena_points.sql`, `read_arena_points` e `/api/arenas/ranking`.
