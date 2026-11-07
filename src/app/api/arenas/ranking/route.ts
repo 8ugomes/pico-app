@@ -8,8 +8,8 @@ export const dynamic = 'force-dynamic';
 const periods = ['week', 'month', 'all'] as const;
 const datePattern = /^\d{4}-\d{2}-\d{2}$/;
 
-type RankingRow = { rank: number; player_id: string; username: string; name: string; avatar_path: string | null; days: number; last_day: string };
-type RankingPayload = { period: string; since: string | null; entries: RankingRow[]; me: { rank: number; days: number } | null; today_done: boolean; total_players: number };
+type RankingRow = { rank: number; player_id: string; username: string; name: string; avatar_path: string | null; points: number; me: boolean };
+type RankingPayload = { period: string; since: string | null; entries: RankingRow[]; me: { rank: number | null; points: number; all_points: number } | null; breakdown: Record<string, { points: number; count: number }>; recent_days: string[]; today_done: boolean; total_players: number };
 
 // Check-ins are day-level, retrospective claims. Ranking reads go through RPCs; the table has no direct access.
 export async function GET(request: Request) {
@@ -26,7 +26,7 @@ export async function GET(request: Request) {
       if (result.error) mutationFailure(result.error);
       return Response.json({ data: result.data }, { headers: privateHeaders });
     }
-    const result = await client.rpc('read_arena_ranking', { p_arena: uuid(q.get('arenaId')), p_period: period });
+    const result = await client.rpc('read_arena_points', { p_arena: uuid(q.get('arenaId')), p_period: period });
     if (result.error) mutationFailure(result.error);
     const data = result.data as unknown as RankingPayload;
     const entries = (data.entries ?? []).map(({ avatar_path, ...entry }) => ({ ...entry, avatar: mediaUrl('avatars', avatar_path) }));

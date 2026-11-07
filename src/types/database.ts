@@ -1722,6 +1722,7 @@ export type Database = {
         }[]
       }
       read_notifications: { Args: { p_before?: string }; Returns: Json }
+      read_arena_points: { Args: { p_arena: string; p_period: string }; Returns: Json }
       read_arena_ranking: { Args: { p_arena: string; p_period: string }; Returns: Json }
       read_arenas_activity: { Args: { p_period: string }; Returns: Json }
       record_arena_checkin: { Args: { p_arena: string; p_day?: string }; Returns: undefined }

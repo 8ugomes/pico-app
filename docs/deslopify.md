@@ -774,3 +774,7 @@ Critérios antes de codar: texto curto e concreto ("Fiz check-in hoje", "Quem ma
 ### Aprendizado da rodada · Arenas e ranking
 
 O ranking só funciona sem parecer competição se o texto disser o que conta ("dias com check-in") e se o vazio convidar em vez de cobrar. A linha "Você" fica destacada em vez de uma medalha. Na demo, números alheios ilustrativos precisam do rótulo em cada painel. Contagens fixas em testes de catálogo quebram a cada expansão; o comentário agora explica a soma.
+
+### Revisão · Pontos e níveis · 2026-11-07
+
+Gamificação sem ruído: um nível e uma barra por arena, nomes do esporte (Pé na areia, Saque, Rally, Ace, Lenda do Pico) em vez de medalhas, linha "Você" destacada, regra sempre visível em "Como pontuar" com o motivo dos tetos. Nenhum confete ou contador animado; só a largura da barra transiciona. Texto diz o que conta, não cobra presença.
