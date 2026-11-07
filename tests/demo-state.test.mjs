@@ -145,3 +145,21 @@ test('demo republication cannot expose private posts and tracks follower directi
   state = { ...state, communities: state.communities.map(c => c.id === 'closed' ? { ...c, members: c.members.filter(id => id !== other.id) } : c) };
   assert.equal(demoFeed(state).find(p => p.post.id === privatePost.id).repost, undefined);
 });
+
+test("demo arena check-ins toggle per day and feed an illustrative ranking", async () => {
+  const { demoRanking } = await import("../src/lib/demo-state.ts");
+  const arena = mock.arenas[0].id;
+  let state = initial();
+  assert.equal(demoReducer(state, { type: "arena_checkin", arenaId: "missing", day: "2026-11-06" }), state);
+  assert.equal(demoReducer(state, { type: "arena_checkin", arenaId: arena, day: "amanhã" }), state);
+  state = demoReducer(state, { type: "arena_checkin", arenaId: arena, day: "2026-11-06" });
+  state = demoReducer(state, { type: "arena_checkin", arenaId: arena, day: "2026-11-02" });
+  assert.equal(state.arenaCheckins.length, 2);
+  const rows = demoRanking(state, arena, "week", "2026-11-06");
+  assert.ok(rows.every((r, i) => i === 0 || rows[i - 1].rank <= r.rank));
+  assert.equal(rows.find(r => r.me)?.days, 2);
+  assert.equal(demoRanking(state, arena, "week", "2026-11-06").find(r => r.me)?.days, 2);
+  assert.equal(demoRanking(state, arena, "month", "2026-12-01").find(r => r.me), undefined);
+  state = demoReducer(state, { type: "arena_checkin", arenaId: arena, day: "2026-11-06" });
+  assert.equal(state.arenaCheckins.length, 1);
+});

@@ -1,3 +1,11 @@
+## 2026-11-06: arenas com ranking por check-in
+
+- **Check-in retrospectivo:** a pessoa registra "joguei aqui" para hoje ou até 6 dias atrás, um por arena por dia, e pode desfazer. Não é presença ao vivo, não guarda hora nem localização e não publica nada. Migration `20261106100000_arena_checkins_ranking.sql` (tabela fechada por RLS, RPCs com limite de escrita, exportação de conta incluindo os check-ins).
+- **Rankings:** por arena (Semana, Mês, Geral; semana ISO e mês na data de São Paulo, empate pelo último dia mais antigo, bloqueios respeitados) e "Em movimento", as cinco arenas com mais pessoas na semana ou no mês. API `/api/arenas/ranking`. Demo com o mesmo fluxo, números das outras pessoas rotulados como ilustrativos.
+- **Catálogo:** dez arenas verificadas (São Paulo, Guarulhos, Santo André, São José dos Campos, Campinas) em `20261106101000_arena_catalog_expansion.sql`, fontes e ressalvas em `ARENA_CATALOG_UPDATE.md`.
+- **Movimento:** a PWA ganha a entrada escalonada de listas, o carregamento atrasado em 160 ms e o esqueleto com brilho, todos pelos tokens `--motion-*`.
+- **Verificado:** eslint, typecheck, build demo e suíte de testes; amostra visual em 390 px (demo). Fora do escopo: cliente móvel local, iPhone físico.
+
 ## 2026-11-05: iPhone pronto para lojas, sem submissão
 
 - **Implementado:** aceite explícito dos Termos e Diretrizes no cadastro móvel (checkbox obrigatório, validação no servidor `terms_required`, versão `2026-09-18` nos metadados do usuário, sem migration); links de Privacidade, Termos, Diretrizes e Suporte na entrada, visita, modo local e Conta; teste `mobile-store-readiness`. Skill `mobile-submission` (MIT, `hhushhas/mobile-skills@0813fce`) instalada; `app-store-review` de `p4l4c10s` **recusada** (README com isca de download e zip de 1,4 MB não aberto).

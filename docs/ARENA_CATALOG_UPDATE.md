@@ -18,3 +18,22 @@ Os dados novos são inseridos por slug estável com checagem adicional de nome/c
 No preflight do principal, apenas Arena Jaraguá Beach correspondia aos nomes pesquisados. Após a migration, consulta read-only confirmou as três novas fichas e a existente, sem duplicata.
 
 Uma divergência de endereço já existente ficou fora desta migration: Arena 360 Beach aparece no principal com Rua Sumagre, 219, enquanto a [página de agendamento da arena](https://arena-3602.reservio.com/) informa 213. Confirmar diretamente com a arena antes de corrigir a ficha.
+
+## Atualização de 06/11/2026 · dez arenas
+
+Migration `20261106101000_arena_catalog_expansion.sql`, idempotente (slug estável, checagem de nome e cidade, `on conflict do nothing`). Dados de localização e modalidade, sem afiliação, gestão verificada, foto ou presença. Fontes principais: fichas de parceiro na Wellhub e TotalPass, lidas em 06/11/2026. **Nove entradas têm fonte única; conferir no Maps ou no perfil da arena quando possível.**
+
+| Arena | Cidade · bairro | Modalidades | Fonte |
+| --- | --- | --- | --- |
+| Beach Arena Real Parque | São Paulo · Morumbi | futevôlei, beach tennis, vôlei de praia | [Fever](https://feverup.com/fr/sao-paulo/venue/beach-arena-sao-paulo) |
+| Perna de Pau Beach | São Paulo · Brooklin | três | [Wellhub](https://wellhub.com/pt-br/search/partners/perna-de-pau-beach/) |
+| Playa SP Beach Sports | São Paulo · Santo Amaro | futevôlei, vôlei de praia | [TotalPass](https://totalpass.com/br/academias/playa-sp-beach-sports/) e [Wellhub](https://wellhub.com/pt-br/search/partners/playa-sp-beach-sports-santo-amaro/) |
+| Prainha Beach Club | São Paulo · Lapa de Baixo | três ("Vôlei" da ficha lido como vôlei de praia) | [Wellhub](https://wellhub.com/pt-br/search/partners/prainha-beach-club/) |
+| Venice Beach Club Anália Franco | São Paulo · Vila Gomes Cardim | três | [Wellhub](https://wellhub.com/pt-br/search/partners/venice-beach-club-analia-franco/) |
+| Arena Vila Maria Beach | São Paulo · Jardim Japão | três | [Wellhub](https://wellhub.com/pt-br/search/partners/arena-vila-maria-beach-jardim-japao/) |
+| HG Beach Guarulhos | Guarulhos · Vila Moreira | três | [Wellhub](https://wellhub.com/pt-br/search/partners/hg-beach-guarulhos/) |
+| Litoral Beach Arena | Santo André · Jardim | três | [Wellhub](https://wellhub.com/pt-br/search/partners/litoral-beach-arena-jardim/) |
+| Arena Sul Sports | São José dos Campos · Jardim Sul | três | [Wellhub](https://wellhub.com/pt-br/search/partners/arena-sul-sports/) |
+| Arena Vinci Esportes na Areia | Campinas · Jardim Ipaussurama | futevôlei, beach tennis | [Wellhub](https://wellhub.com/pt-br/search/partners/arena-vinci-esportes-na-areia-jardim-ipaussurama/) |
+
+Descartadas por dúvida de duplicata, status ou modalidade: Rolley Beach (vizinha do Posto 011 Jurubatuba), Orla Beach Sports, Anália Beach, Play Tennis Santana, Fun Beach Santana, Arena BTG, Arena Naturale, Arena Beach Club (Campinas), Vila Verde Arena Beach Club e Arena Casaverdense (status não confirmado). Reservas verificadas para uma próxima rodada: Arena 08 (Guarulhos), Arena Sports Campinas e Ita Beach (Itatiba).

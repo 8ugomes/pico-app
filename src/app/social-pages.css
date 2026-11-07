@@ -218,3 +218,44 @@
 .person-preview { display: flex; flex-direction: column; align-items: center; gap: .6rem; font-size: .875rem; }
 
 .arena-photo-retry { padding: 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; color: var(--text-secondary); }
+
+/* Arenas: ranking por check-in e movimento de entrada/carregamento (tokens --motion-*, sem celebração). */
+.arena-ranking, .arena-activity { margin: 1.5rem 0; padding: 1.25rem; border-radius: var(--radius-feature); background: var(--surface); }
+.arena-ranking h2, .arena-activity h2 { margin: 0 0 .35rem; font-size: 1.25rem; font-weight: 600; letter-spacing: -.02em; }
+.arena-activity-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem; margin-bottom: .5rem; }
+.ranking-tabs { margin: .75rem 0 1rem; }
+.ranking-summary { margin: 0 0 .75rem; color: var(--text-secondary); font-size: var(--text-caption); line-height: 1.5; }
+.ranking-list { display: flex; flex-direction: column; gap: .35rem; margin: 0; padding: 0; list-style: none; }
+.ranking-row > a, .ranking-row > div { display: flex; align-items: center; gap: .75rem; min-height: 56px; padding: .45rem .65rem; border-radius: var(--radius-card); color: inherit; text-decoration: none; background: transparent; transition: background var(--motion-fast) var(--motion-ease), transform var(--motion-fast) var(--motion-ease); }
+.ranking-row > a:active { transform: scale(.98); }
+.ranking-row-me > a, .ranking-row-me > div { background: var(--accent-soft); }
+.rank-place { display: grid; place-items: center; flex-shrink: 0; width: 2rem; height: 2rem; border-radius: var(--radius-pill); background: var(--surface-raised); font-weight: 650; font-size: .875rem; font-variant-numeric: tabular-nums; }
+.rank-name { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+.rank-name strong { font-weight: 600; overflow-wrap: anywhere; }
+.rank-name small { color: var(--text-muted); font-size: var(--text-caption); overflow-wrap: anywhere; }
+.rank-days { flex-shrink: 0; color: var(--text-secondary); font-size: var(--text-caption); font-variant-numeric: tabular-nums; }
+.ranking-row .read-profile-avatar { flex-shrink: 0; width: 2.5rem; height: 2.5rem; }
+.ranking-empty { display: flex; flex-direction: column; align-items: flex-start; gap: .35rem; padding: .75rem 0; color: var(--text-secondary); }
+.ranking-empty h3 { margin: 0; font-size: 1rem; color: var(--foreground); }
+.ranking-empty p { margin: 0; line-height: 1.6; font-size: .9375rem; }
+.checkin-box { display: flex; flex-direction: column; gap: .75rem; margin-top: 1rem; }
+.checkin-box > .button { align-self: flex-start; }
+.checkin-other summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; color: var(--text-secondary); font-size: var(--text-caption); }
+.checkin-days { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .5rem; }
+.checkin-message { min-height: 1.25rem; margin: .5rem 0 0; color: var(--text-secondary); font-size: var(--text-caption); }
+.ranking-skeleton-row { height: 56px; margin-bottom: .35rem; border-radius: var(--radius-card); }
+
+/* Entrada de listas: deslocamento curto e atraso crescente nos quatro primeiros itens. */
+:is(.arena-list, .ranking-list, .people-list, .post-list, .feed-posts) > * { --item-index: 0; animation: item-in var(--motion-standard) var(--motion-ease) backwards; animation-delay: calc(var(--item-index) * var(--motion-stagger)); }
+:is(.arena-list, .ranking-list, .people-list, .post-list, .feed-posts) > :nth-child(2) { --item-index: 1; }
+:is(.arena-list, .ranking-list, .people-list, .post-list, .feed-posts) > :nth-child(3) { --item-index: 2; }
+:is(.arena-list, .ranking-list, .people-list, .post-list, .feed-posts) > :nth-child(4) { --item-index: 3; }
+:is(.arena-list, .ranking-list, .people-list, .post-list, .feed-posts) > :nth-child(n+5) { --item-index: 4; }
+@keyframes item-in { from { opacity: 0; transform: translateY(8px); } }
+
+/* Carregamento: aparece após 160 ms (sem piscar em respostas rápidas) e o esqueleto respira com o brilho padrão. */
+:is(.read-loading, .ranking-loading) { animation: loading-in var(--motion-fast) var(--motion-ease) backwards; animation-delay: var(--motion-fast); }
+@keyframes loading-in { from { opacity: 0; } }
+.read-skeleton { background: linear-gradient(100deg, var(--glass) 20%, var(--surface) 50%, var(--glass) 80%); background-size: 220% 100%; animation: skeleton-shimmer var(--motion-shimmer) var(--motion-ease) infinite; }
+@keyframes skeleton-shimmer { to { background-position: -220% 0; } }
+@media (hover: hover) { .ranking-row > a:hover { background: var(--accent-soft); } }

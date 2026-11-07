@@ -9,6 +9,7 @@ export type DemoAction =
   | { type: "connect"; playerId: string }
   | { type: "follow"; arenaId: string }
   | { type: "mark_played"; arenaId: string }
+  | { type: "arena_checkin"; arenaId: string; day: string }
   | { type: "post"; input: PostInput; id: string; now: number }
   | { type: "comment"; postId: string; content: string; id: string; now: number }
   | { type: "edit_content"; target: 'post' | 'comment'; id: string; content: string }
@@ -19,7 +20,7 @@ export type DemoAction =
   | { type: "profile"; input: ProfileInput };
 
 export function createDemoState(seed: DemoSeed): DemoState {
-  return { ...structuredClone(seed), reposts: [], deletedGameIds: [], likedPostIds: [], connectedPlayerIds: ["marina", "lucas"], followedArenaIds: [...(seed.players.find(p => p.id === seed.currentUserId)?.arenaIds ?? [])], playedArenaIds: [] };
+  return { ...structuredClone(seed), reposts: [], deletedGameIds: [], likedPostIds: [], connectedPlayerIds: ["marina", "lucas"], followedArenaIds: [...(seed.players.find(p => p.id === seed.currentUserId)?.arenaIds ?? [])], playedArenaIds: [], arenaCheckins: [] };
 }
 function toggle(items: string[], id: string) { return items.includes(id) ? items.filter(item => item !== id) : [...items, id]; }
 export function validArenaSport(state: DemoState, arenaId: string, sportId: SportId) {
@@ -65,6 +66,11 @@ export function demoReducer(state: DemoState, action: DemoAction): DemoState {
     case "connect": return action.playerId !== state.currentUserId && state.players.some(p => p.id === action.playerId) ? { ...state, connectedPlayerIds: toggle(state.connectedPlayerIds, action.playerId) } : state;
     case "follow": return state.arenas.some(a => a.id === action.arenaId) ? { ...state, followedArenaIds: toggle(state.followedArenaIds, action.arenaId) } : state;
     case "mark_played": return state.arenas.some(a => a.id === action.arenaId) ? { ...state, playedArenaIds: toggle(state.playedArenaIds, action.arenaId) } : state;
+    case "arena_checkin": {
+      if (!state.arenas.some(a => a.id === action.arenaId) || !/^\d{4}-\d{2}-\d{2}$/.test(action.day)) return state;
+      const exists = state.arenaCheckins.some(c => c.arenaId === action.arenaId && c.day === action.day);
+      return { ...state, arenaCheckins: exists ? state.arenaCheckins.filter(c => c.arenaId !== action.arenaId || c.day !== action.day) : [...state.arenaCheckins, { arenaId: action.arenaId, day: action.day }] };
+    }
     case "post":
       if (validatePost(state, action.input) || state.posts.some(p => p.id === action.id)) return state;
       return { ...state, posts: [{ ...action.input, content: action.input.content.trim() || `Joguei em ${state.arenas.find(a => a.id === action.input.arenaId)?.name} em ${state.games.find(g => g.id === action.input.gameId)?.playedOn}.`, gamePlayedOn: state.games.find(g => g.id === action.input.gameId)?.playedOn, id: action.id, authorId: state.currentUserId, createdAt: action.now, likes: 0 }, ...state.posts] };
@@ -115,4 +121,24 @@ export function demoFeed(state: DemoState, authorId?: string, followingOnly = fa
   }).filter(({ post, repost }) => authorId ? post.authorId === authorId || repost
     : !followingOnly || post.authorId === state.currentUserId || state.connectedPlayerIds.includes(post.authorId) || repost)
     .sort((a, b) => Math.max(b.post.createdAt, b.repost?.createdAt ?? 0) - Math.max(a.post.createdAt, a.repost?.createdAt ?? 0) || b.post.id.localeCompare(a.post.id));
+}
+
+export type DemoRankingPeriod = "week" | "month" | "all";
+export type DemoRankingRow = { rank: number; id: string; name: string; days: number; me: boolean };
+function seedNumber(text: string) { let h = 7; for (const ch of text) h = (h * 31 + ch.charCodeAt(0)) % 9973; return h; }
+// Illustrative counts for other people are deterministic and labelled in the interface. Only the current person's days come from actions.
+export function demoRanking(state: DemoState, arenaId: string, period: DemoRankingPeriod, today: string): DemoRankingRow[] {
+  const week = (day: string) => { const d = new Date(today + "T00:00:00Z"); d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 6) % 7)); return day >= d.toISOString().slice(0, 10); };
+  const month = (day: string) => day.slice(0, 7) === today.slice(0, 7);
+  const mine = state.arenaCheckins.filter(c => c.arenaId === arenaId && c.day <= today && (period === "all" || (period === "week" ? week(c.day) : month(c.day)))).length;
+  const others = state.players.filter(p => p.id !== state.currentUserId && p.arenaIds.includes(arenaId)).map(p => {
+    const h = seedNumber(p.id + arenaId);
+    const all = 4 + (h % 17), mo = Math.min(all, 1 + (h % 8)), wk = Math.min(mo, h % 5);
+    return { id: p.id, name: p.name, days: period === "all" ? all : period === "month" ? mo : wk, me: false };
+  });
+  const me = state.players.find(p => p.id === state.currentUserId);
+  const rows = [...others, ...(mine || !others.length ? [{ id: state.currentUserId, name: me?.name ?? "Você", days: mine, me: true }] : [])].filter(r => r.days > 0);
+  rows.sort((a, b) => b.days - a.days || a.name.localeCompare(b.name, "pt-BR"));
+  let place = 0;
+  return rows.map((r, i) => { if (i === 0 || r.days !== rows[i - 1].days) place = i + 1; return { ...r, rank: place }; });
 }

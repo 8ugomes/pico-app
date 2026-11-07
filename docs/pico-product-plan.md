@@ -1143,3 +1143,17 @@ Verificação proporcional: `eslint`, `typecheck`, `npm test`, `npm run build` e
 ### Gramática de movimento · resultado · 2026-11-05
 
 Implementado: tokens e guarda de teste; listas escalonadas; saída de folhas e diálogos; `aria-busy` em publicação e curtida; abas, segmentos, menus e avisos; PWA com literais trocados por tokens. Verificado: critérios (a) a (d) por `tests/motion-grammar.test.mjs`; (e) por amostra do cliente compilado em 320/390 px, claro/escuro e texto a 160% (sem rolagem horizontal, abas com geometria estável). Pendente: aparelho físico (fluidez, Dynamic Type e movimento reduzido reais). Decisões do dono: manter a curtida otimista ou aguardar o servidor; remover `framer-motion` das dependências em PR próprio. Limite: o menu `<details>` não tem saída animada.
+
+## Ciclo 11 · Arenas com ranking por check-in · 2026-11-06
+
+Pedido: estabilizar o app remotamente (sem iPhone físico por ora), levar a gramática de movimento aos estados de entrada e carregamento, principalmente em Arenas, ampliar o catálogo, dar nova perspectiva às arenas e criar rankings por check-in (da arena, da semana, do mês).
+
+Decisão de produto: **check-in é um registro retrospectivo e voluntário de "joguei aqui neste dia"**, nunca presença ao vivo, localização ou postagem automática. A pessoa registra hoje ou até 6 dias atrás, um por arena por dia, e pode desfazer. O ranking conta dias com check-in (não jogos, tempo ou fotos), empata por dia mais antigo do último check-in e só lista quem a pessoa que consulta pode ver (bloqueios respeitados). Demo mostra o mesmo fluxo local e rotulado. `played_games` privado continua sem inferência; "Já joguei" segue como declaração distinta.
+
+Escopo técnico: migration aditiva `arena_checkins` (RLS fechada, RPCs com limite de escrita), leitura de ranking por período (semana ISO, mês, geral) e das arenas mais movimentadas; API `/api/arenas/ranking` e ação de check-in em `/api/activity`; exportação de conta incluindo os check-ins; nova lista e detalhe de arena (destaques, ranking por abas, estados de carregamento, vazio e erro) com os tokens `--motion-*`; novas arenas verificadas por migration idempotente com fontes em `ARENA_CATALOG_UPDATE.md`.
+
+Aceite: registrar, repetir (idempotente), desfazer, data futura ou com mais de 6 dias recusada, arena privada/demo recusada, bloqueio oculta a pessoa no ranking, limite de escrita. Semana e mês usam a data de São Paulo. Estados carregando/vazio/erro legíveis em 320/390 px, claro/escuro, movimento reduzível. Fora do escopo: pontos, prêmios, localização, notificações de ranking, cliente móvel local.
+
+### Ciclo 11 · resultado · 2026-11-06
+
+Implementado: check-in retrospectivo (7 dias, um por arena e dia, reversível), ranking por semana/mês/geral por arena, "Em movimento" na lista, dez arenas novas, entrada de listas e carregamento com os tokens de movimento na PWA, demo equivalente e rotulada. Verificado: testes SQL (limites de data, idempotência, bloqueio, RLS fechada, ordenação), reducer demo, eslint, typecheck, build demo, amostra a 390 px. Pendente: exercício com Supabase real após aplicar as migrations, iPhone físico e cliente móvel local (sem check-in por ora).

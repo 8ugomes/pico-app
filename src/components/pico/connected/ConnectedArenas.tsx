@@ -15,6 +15,7 @@ import { useRemoteRead } from './useRemoteRead';
 import { ReadFailure, ReadLoading } from './ReadState';
 import { ArenaGallery, ArenaImage } from './ArenaGallery';
 import { ShareActions } from '../ShareActions';
+import { ArenaRanking, ArenasActivity } from './ArenaRanking';
 
 export function ReadSports({ sports }: { sports: ReadSport[] }) {
   return <div className="arena-sports">{sports.map(s => <span className="sport-label" key={s.id}><SportIcon sport={s.slug} />{s.name}</span>)}</div>;
@@ -30,6 +31,7 @@ export function ConnectedArenas() {
   const arenas = data?.arenas ?? [];
   return <>
     <PageHeading title="Arenas" />
+    <ArenasActivity />
     <SearchField tourId="arena-search" value={search} onChange={value => { setSearch(value); setOffset(0); }} maxLength={100} placeholder="Nome, bairro ou cidade" label="Buscar arenas" />
     {(pending || state.status === 'loading') && <ReadLoading />}
     {!pending && (state.status === 'error' || state.status === 'demo') && <ReadFailure state={state} retry={retry} />}
@@ -59,6 +61,7 @@ export function ConnectedArena({ slug }: { slug: string }) {
       <header className="arena-detail-header"><p className="location-line"><MapPin size={14} aria-hidden="true" />{arena.neighborhood} · {arena.city}</p><h1>{arena.name}</h1><ReadSports sports={arena.sports} />{arena.directory && <div className="arena-address"><p>{arena.directory.address}</p><a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${arena.name}, ${arena.directory.address}, ${arena.city}`)}`} target="_blank" rel="noopener noreferrer">Como chegar <ArrowRight size={15} aria-hidden="true" /></a></div>}{!arena.isDemo && <ShareActions target={{ kind: 'arena', slug: arena.slug }} label="Compartilhar arena" />}</header>
       {profile.data && <ArenaExtras data={profile.data} directory={arena.directory} reload={profile.reload} />}
       {profile.error && <div className="read-message"><p role="alert">{profile.error}</p><Button variant="secondary" onClick={profile.reload}>Tentar novamente</Button></div>}
+      <ArenaRanking arenaId={arena.id} isDemo={arena.isDemo} />
       <ArenaCommunities arenaId={arena.id} />
       <ConnectedFeed arenaId={arena.id} initialSlug={arena.slug} />
     </>}
